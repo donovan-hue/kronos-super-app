@@ -1,12 +1,12 @@
 const express = require('express');
 const { protect: auth } = require('../middleware/auth');
-const upload = require('../middleware/upload');
+const { uploadVideo } = require('../middleware/upload');
 const videoController = require('../controllers/videoController');
 
 const router = express.Router();
 
 // Upload video
-router.post('/', auth, upload.single('video'), videoController.uploadVideo);
+router.post('/', auth, uploadVideo.single('video'), videoController.uploadVideo);
 
 // Get videos
 router.get('/public', videoController.getPublicVideos);
