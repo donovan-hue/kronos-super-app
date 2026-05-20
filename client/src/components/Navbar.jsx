@@ -1,153 +1,163 @@
-import React from 'react';
-import { FaHome, FaShoppingBag, FaUtensils, FaUser, FaSignOutAlt, FaSearch, FaFire, FaUserShield, FaFilm, FaBolt, FaCog, FaHeadphones, FaTh } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 import NotificationCenter from './NotificationCenter';
 import TierBadge from './TierBadge';
 import useSubscription from '../hooks/useSubscription';
 
-function Navbar() {
-  const { user, logout } = useAuth();
+const NAV_LINKS = [
+  { to: '/feed',        label: 'Inicio',      icon: '🏠' },
+  { to: '/search',      label: 'Buscar',       icon: '🔍' },
+  { to: '/social/chat', label: 'Chat',         icon: '💬' },
+  { to: '/communities', label: 'Comunidades',  icon: '🏛️' },
+  { to: '/shop',        label: 'Shop',         icon: '🛍️' },
+  { to: '/food',        label: 'Food',         icon: '🍔' },
+  { to: '/wallet',      label: 'Wallet',       icon: '💳' },
+  { to: '/live',        label: 'Live',         icon: '🔴' },
+  { to: '/events',      label: 'Eventos',      icon: '⚡' },
+  { to: '/cinema',      label: 'Cine',         icon: '🎬' },
+  { to: '/portal',      label: 'Portal',       icon: '🎧' },
+  { to: '/miniapps',    label: 'Apps',         icon: '🧩' },
+];
+
+export default function Navbar() {
+  const { user, logout } = useContext(AuthContext);
   const { tier } = useSubscription();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate('/auth/login');
   };
 
+  const userId = user?._id || user?.id;
+
   return (
-    <nav className="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center py-4">
+    <>
+      <nav style={{
+        position: 'sticky', top: 0, zIndex: 200,
+        background: 'rgba(10,10,18,0.97)',
+        borderBottom: '1px solid rgba(255,255,255,0.07)',
+        backdropFilter: 'blur(16px)',
+        fontFamily: "'Outfit', sans-serif",
+      }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 16px', display: 'flex', alignItems: 'center', height: 56, gap: 16 }}>
+
           {/* Logo */}
-          <Link to="/feed" className="flex items-center space-x-2 text-2xl font-bold">
-            <span className="text-3xl">⭐</span>
-            <span>Super-App</span>
+          <Link to="/feed" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
+            <span style={{ fontSize: 22 }}>⭐</span>
+            <span style={{ color: '#fff', fontWeight: 900, fontSize: 16, letterSpacing: -0.5, background: 'linear-gradient(135deg,#a855f7,#06b6d4)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              Kronos
+            </span>
           </Link>
 
-          {/* Menu Central */}
-          <div className="flex items-center space-x-8">
-            <Link
-              to="/feed"
-              className="flex items-center space-x-2 hover:text-blue-200 transition"
-              title="Hybrid Feed"
-            >
-              <FaHome /> <span>Home</span>
-            </Link>
-            <Link
-              to="/search"
-              className="flex items-center space-x-2 hover:text-blue-200 transition"
-              title="Universal Search"
-            >
-              <FaSearch /> <span>Buscar</span>
-            </Link>
-            <Link
-              to="/social"
-              className="flex items-center space-x-2 hover:text-blue-200 transition"
-            >
-              <FaFire /> <span>Social</span>
-            </Link>
-            <Link
-              to="/shop"
-              className="flex items-center space-x-2 hover:text-blue-200 transition"
-            >
-              <FaShoppingBag /> <span>Shop</span>
-            </Link>
-            <Link
-              to="/food"
-              className="flex items-center space-x-2 hover:text-blue-200 transition"
-            >
-              <FaUtensils /> <span>Food</span>
-            </Link>
-            <Link
-              to="/cinema"
-              className="flex items-center space-x-2 hover:text-blue-200 transition"
-              title="Cine Virtual"
-            >
-              <FaFilm /> <span>Cine</span>
-            </Link>
-            <Link
-              to="/events"
-              className="flex items-center space-x-2 hover:text-blue-200 transition"
-              title="Eventos Agujero Negro"
-            >
-              <FaBolt /> <span>Eventos</span>
-            </Link>
-            <Link
-              to="/portal"
-              className="flex items-center space-x-2 hover:text-blue-200 transition"
-              title="Portal Kronos - Salas de Audio"
-            >
-              <FaHeadphones /> <span>Portal</span>
-            </Link>
-            <Link
-              to="/miniapps"
-              className="flex items-center space-x-2 hover:text-blue-200 transition"
-              title="Mini-Apps"
-            >
-              <FaTh /> <span>Apps</span>
-            </Link>
+          {/* Desktop links */}
+          <div style={{ flex: 1, display: 'flex', gap: 2, overflowX: 'auto', scrollbarWidth: 'none' }}
+            className="hide-scrollbar desktop-nav">
+            {NAV_LINKS.map(link => {
+              const active = pathname === link.to || (link.to !== '/feed' && pathname.startsWith(link.to));
+              return (
+                <Link key={link.to} to={link.to}
+                  style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '5px 10px', borderRadius: 20, textDecoration: 'none', fontSize: 12, fontWeight: 600, whiteSpace: 'nowrap', color: active ? '#fff' : 'rgba(255,255,255,0.45)', background: active ? 'rgba(124,58,237,0.25)' : 'transparent', transition: 'all 0.15s', flexShrink: 0 }}>
+                  <span style={{ fontSize: 14 }}>{link.icon}</span>
+                  <span>{link.label}</span>
+                </Link>
+              );
+            })}
             {user?.role === 'admin' && (
-              <Link
-                to="/admin"
-                className="flex items-center space-x-2 transition"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(179,68,255,0.35), rgba(0,212,255,0.35))',
-                  border: '1px solid rgba(179,68,255,0.5)',
-                  borderRadius: '8px',
-                  padding: '6px 14px',
-                  color: '#e4b0ff',
-                  fontWeight: '700',
-                  fontSize: '13px',
-                  backdropFilter: 'blur(10px)',
-                  WebkitBackdropFilter: 'blur(10px)',
-                }}
-              >
-                <FaUserShield /> <span>Admin Panel</span>
+              <Link to="/admin"
+                style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '5px 10px', borderRadius: 20, textDecoration: 'none', fontSize: 12, fontWeight: 700, whiteSpace: 'nowrap', color: '#c4b5fd', background: 'rgba(124,58,237,0.2)', border: '1px solid rgba(124,58,237,0.3)', flexShrink: 0 }}>
+                🛡️ Admin
               </Link>
             )}
           </div>
 
-          {/* User Menu */}
-          <div className="flex items-center space-x-4 border-l border-blue-400 pl-8">
+          {/* Right side */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
             {user && (
               <>
-                {/* Centro de notificaciones */}
                 <NotificationCenter />
 
-                <Link
-                  to={`/profile/${user.id}`}
-                  className="flex items-center space-x-2 hover:text-blue-200 transition"
-                >
+                <Link to={userId ? `/profile/${userId}` : '/auth/login'}
+                  style={{ display: 'flex', alignItems: 'center', gap: 6, textDecoration: 'none', padding: '4px 8px', borderRadius: 20, background: 'rgba(255,255,255,0.06)' }}>
                   <img
-                    src={user.avatar || 'https://via.placeholder.com/32'}
+                    src={user.avatar || `https://ui-avatars.com/api/?name=${user.username}&background=random&color=fff&size=32`}
                     alt={user.username}
-                    className="w-8 h-8 rounded-full"
+                    style={{ width: 28, height: 28, borderRadius: '50%', objectFit: 'cover' }}
                   />
-                  <span className="text-sm">{user.username}</span>
-                  <TierBadge tier={tier} />
+                  <span style={{ color: '#fff', fontSize: 12, fontWeight: 600, maxWidth: 80, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                    className="hidden-mobile">
+                    {user.username}
+                  </span>
+                  {tier && tier !== 'free' && <TierBadge tier={tier} />}
                 </Link>
-                <Link
-                  to="/settings"
-                  className="flex items-center space-x-1 hover:text-blue-200 transition"
-                  title="Configuracion"
-                >
-                  <FaCog />
+
+                <Link to="/settings"
+                  style={{ color: 'rgba(255,255,255,0.45)', fontSize: 18, textDecoration: 'none', padding: 4 }}
+                  title="Configuración">
+                  ⚙️
                 </Link>
-                <button
-                  onClick={handleLogout}
-                  className="flex items-center space-x-2 bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg transition"
-                >
-                  <FaSignOutAlt /> <span>Logout</span>
+
+                <button onClick={handleLogout}
+                  style={{ padding: '5px 12px', borderRadius: 20, background: 'rgba(239,68,68,0.15)', border: '1px solid rgba(239,68,68,0.3)', color: '#ef4444', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}
+                  className="hidden-mobile">
+                  Salir
                 </button>
               </>
             )}
+
+            {/* Hamburger — mobile only */}
+            <button
+              onClick={() => setMenuOpen(m => !m)}
+              className="hamburger-btn"
+              style={{ background: 'none', border: 'none', color: '#fff', fontSize: 22, cursor: 'pointer', padding: 4, lineHeight: 1 }}>
+              {menuOpen ? '✕' : '☰'}
+            </button>
           </div>
         </div>
-      </div>
-    </nav>
+
+        {/* Mobile drawer */}
+        {menuOpen && (
+          <div style={{ background: 'rgba(10,10,18,0.99)', borderTop: '1px solid rgba(255,255,255,0.06)', padding: '12px 16px 20px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 8, marginBottom: 16 }}>
+              {NAV_LINKS.map(link => {
+                const active = pathname === link.to || (link.to !== '/feed' && pathname.startsWith(link.to));
+                return (
+                  <Link key={link.to} to={link.to} onClick={() => setMenuOpen(false)}
+                    style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, padding: '10px 4px', borderRadius: 12, textDecoration: 'none', color: active ? '#fff' : 'rgba(255,255,255,0.5)', background: active ? 'rgba(124,58,237,0.25)' : 'rgba(255,255,255,0.04)', fontSize: 10, fontWeight: 600 }}>
+                    <span style={{ fontSize: 20 }}>{link.icon}</span>
+                    <span>{link.label}</span>
+                  </Link>
+                );
+              })}
+            </div>
+            <div style={{ display: 'flex', gap: 8 }}>
+              <Link to="/settings" onClick={() => setMenuOpen(false)}
+                style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'rgba(255,255,255,0.06)', color: '#fff', textDecoration: 'none', fontSize: 13, fontWeight: 600, textAlign: 'center' }}>
+                ⚙️ Configuración
+              </Link>
+              <button onClick={() => { handleLogout(); setMenuOpen(false); }}
+                style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'rgba(239,68,68,0.15)', border: '1px solid rgba(239,68,68,0.3)', color: '#ef4444', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
+                🚪 Salir
+              </button>
+            </div>
+          </div>
+        )}
+      </nav>
+
+      <style>{`
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        @media (max-width: 768px) {
+          .desktop-nav { display: none !important; }
+          .hidden-mobile { display: none !important; }
+          .hamburger-btn { display: flex !important; }
+        }
+        @media (min-width: 769px) {
+          .hamburger-btn { display: none !important; }
+        }
+      `}</style>
+    </>
   );
 }
-
-export default Navbar;

@@ -17,20 +17,32 @@ function Chat() {
   const [socket, setSocket] = useState(null);
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
+  const containerRef = useRef(null);
+
+  const isAtBottom = () => {
+    const el = containerRef.current;
+    if (!el) return true;
+    return el.scrollHeight - el.scrollTop - el.clientHeight < 80;
+  };
 
   useEffect(() => {
     // Cargar info del otro usuario
     axios.get(`${API_URL}/users/${userId}`).then(r => setOtherUser(r.data.user || r.data)).catch(() => {});
 
-    // Cargar mensajes
+    // Cargar mensajes y hacer scroll al final en carga inicial
     axios.get(`${API_URL}/messages/conversation/${userId}`)
-      .then(r => setMessages(r.data.messages || []))
+      .then(r => {
+        setMessages(r.data.messages || []);
+        setTimeout(() => messagesEndRef.current?.scrollIntoView({ behavior: 'auto' }), 50);
+      })
       .catch(() => setMessages([]));
 
     // Socket
     const sock = io(SOCKET_URL, { transports: ['websocket', 'polling'] });
     if (user?._id || user?.id) sock.emit('user_online', user._id || user.id);
-    sock.on('receive_private_message', (data) => setMessages(prev => [...prev, data]));
+    sock.on('receive_private_message', (data) => {
+      setMessages(prev => [...prev, data]);
+    });
     sock.on('user_typing', (data) => { if (data.userId === userId) setIsTyping(true); });
     sock.on('user_stopped_typing', (data) => { if (data.userId === userId) setIsTyping(false); });
     setSocket(sock);
@@ -38,8 +50,12 @@ function Chat() {
     return () => sock.close();
   }, [userId]);
 
+  // Smart auto-scroll: solo si ya estás al fondo
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messages.length === 0) return;
+    if (isAtBottom()) {
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
   }, [messages]);
 
   const handleSend = async () => {
@@ -49,7 +65,7 @@ function Chat() {
       await axios.post(`${API_URL}/messages/send`, { receiverId: userId, content: input });
       socket?.emit('send_private_message', msg);
       setMessages(prev => [...prev, msg]);
-    } catch (e) { console.error(e); }
+    } catch {}
     setInput('');
     socket?.emit('stopped_typing', { receiverId: userId, userId: user?._id || user?.id });
   };
@@ -73,7 +89,7 @@ function Chat() {
       </div>
 
       {/* Messages */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: 8, paddingBottom: 80 }}>
+      <div ref={containerRef} style={{ flex: 1, overflowY: 'auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: 8, paddingBottom: 80 }}>
         {messages.length === 0 && (
           <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.3)', padding: 40 }}>
             <div style={{ fontSize: 40, marginBottom: 8 }}>💬</div>

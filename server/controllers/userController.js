@@ -209,3 +209,21 @@ exports.getUserStats = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+exports.getSuggestions = async (req, res) => {
+  try {
+    const me = await User.findById(req.user.id).select('following');
+    const excludeIds = [...(me.following || []), req.user.id];
+
+    const users = await User.find({ _id: { $nin: excludeIds } })
+      .select('username firstName lastName avatar bio followers')
+      .sort({ followers: -1 })
+      .limit(10);
+
+    // Shuffle and return 5
+    const shuffled = users.sort(() => 0.5 - Math.random()).slice(0, 5);
+    res.json({ success: true, users: shuffled });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};

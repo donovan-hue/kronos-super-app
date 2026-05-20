@@ -7,7 +7,8 @@ const {
   updateAvatar,
   getClothingHistory,
   getFoodOrderHistory,
-  getUserStats
+  getUserStats,
+  getSuggestions,
 } = require('../controllers/userController');
 const {
   blockUser,
@@ -17,6 +18,8 @@ const {
 const { uploadProfileImage } = require('../middleware/upload');
 const User = require('../models/User');
 const pushService = require('../services/pushService');
+
+router.get('/suggestions', protect, getSuggestions);
 
 // Rutas de bloqueo (antes de /:userId para evitar conflictos de parametros)
 router.get('/blocked', protect, getBlockedUsers);         // GET  /api/users/blocked

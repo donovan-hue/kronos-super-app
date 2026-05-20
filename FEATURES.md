@@ -1,203 +1,165 @@
-# 📋 FEATURE CHECKLIST - KRONOS MERN
+# KRONOS — versión depurada
 
-## ✅ COMPLETADO - Todas las Características Integradas
+## Exclusivo
+Este proyecto solo contiene las características y la monetización descritas en este documento. Todo lo que no esté en esta lista se elimina.
 
-### 1️⃣ Sistema de Usuarios y Seguridad
-- ✅ **Autenticación JWT** - Tokens seguros, expiración 7 días
-- ✅ **Control de Roles** - user, admin, seller
-- ✅ **Perfil de Usuario Completo**
-  - ✅ Avatar (guardado en Cloudinary)
-  - ✅ Biografía personalizable
-  - ✅ Ubicación y sitio web
-  - ✅ Sistema de Seguidores/Following
-  - ✅ Historial de Posts completo
-  - ✅ Historial de Órdenes de Comida
-  - ✅ Historial de Compras de Ropa (potencial)
-  - ✅ Estadísticas (followers, following, posts, gastos)
+## ✅ Lo que se queda (15 features en 5 pilares)
 
-**Endpoints**:
-- `POST /api/auth/register` - Registrar
-- `POST /api/auth/login` - Login
-- `GET /api/auth/profile` - Mi perfil
-- `GET /api/users/:userId` - Ver perfil otro usuario
-- `PATCH /api/users` - Actualizar perfil
-- `POST /api/users/avatar` - Cambiar avatar
-- `GET /api/users/:userId/stats` - Estadísticas
+### 🔗 Social Core
+1. Feed, posts, stories, perfiles, seguir/bloquear
+2. Comunidades (canales, roles, moderación)
 
----
+### 💬 Comms
+3. Chat 1a1 y grupos con multimedia
+4. LIVE unificado (videollamadas + audio spaces + streaming + screen share)
 
-### 2️⃣ Módulo Multimedia y Social
+### 💰 Wallet
+5. Pagos, transferencias, recargas, tarjeta virtual
+6. Tokens (moneda interna + daily rewards)
 
-#### 📸 Upload Multimedia
-- ✅ **Imágenes** (JPG, PNG, GIF, WebP) - 10MB max
-- ✅ **Videos** (MP4, MOV, AVI, WebM) - 500MB max
-- ✅ **Música** (MP3, WAV, FLAC, AAC, M4A) - 100MB max
-- ✅ Almacenamiento automático Cloudinary
-- ✅ URL pública generada automáticamente
-- ✅ Barra de progreso de subida
+### 🛒 Market
+7. Shopping (tienda + carrito + checkout)
+8. Marketplace P2P con escrowY
+9. Eventos & Boletos con QR
+10. Reservaciones (restaurantes, servicios, profesionales)
 
-#### 📝 Posts Sociales
-- ✅ Crear posts con contenido texto
-- ✅ Posts con imagen
-- ✅ Posts con video
-- ✅ Posts con música
-- ✅ Posts mixtos (imagen + texto, etc)
-- ✅ Control de privacidad (Público/Seguidores/Privado)
-- ✅ Feed de usuarios que sigo
-- ✅ Ver posts por usuario
+### 🎮 Layer
+11. Gamificación (XP, niveles, badges, rachas)
+12. Avatar 3D (con tienda de items pagada con tokens)
+13. Editor de Video lite
+14. Health & Fitness (vinculado a tokens y rachas)
 
-#### 💬 Interacción
-- ✅ **Likes** en tiempo real
-  - Socket.io notifica al autor
-  - Contador de likes
-- ✅ **Comentarios**
-  - Agregar comentario
-  - Ver comentarios
-  - Socket.io en vivo
-- ✅ **Compartir** posts
-- ✅ **Notificaciones** en tiempo real
-  - Nuevo post de gente que sigo
-  - Alguien me dio like
-  - Alguien comentó en mi post
-  - Nuevo seguidor
-
-#### 💬 Chat en Tiempo Real
-- ✅ Mensajes privados Socket.io
-- ✅ Notificación "typing"
-- ✅ Historial de conversaciones
-- ✅ Marcar como leído
-- ✅ Usuario online/offline
-- ✅ Historial persistente en BD
-
-**Endpoints**:
-- `POST /api/posts` - Crear post
-- `GET /api/posts/feed` - Mi feed
-- `GET /api/posts/user/:userId` - Posts de usuario
-- `POST /api/posts/:postId/like` - Like post
-- `POST /api/posts/:postId/comment` - Comentar
-- `DELETE /api/posts/:postId` - Eliminar post
-- `POST /api/multimedia/upload/*` - Upload multimedia
-- `POST /api/multimedia/post` - Post con multimedia
-- `GET /api/multimedia/posts/media?type=...` - Posts por tipo
-- `POST /api/messages/send` - Enviar mensaje
-- `GET /api/messages/conversation/:userId` - Chat
-- `GET /api/messages/chats` - Lista de chats
+### 🛡️ Transversal (no son features, son infraestructura)
+15. Moderación IA + Impacto Social 1% + Voice-to-text en chat + i18n + accesibilidad + analytics
 
 ---
 
-### 3️⃣ Módulo E-commerce (Ropa)
+# 💰 Monetización de KRONOS
 
-#### 🏷️ Catálogo Dinámico
-- ✅ Productos con múltiples imágenes
-- ✅ Descripción detallada
-- ✅ Precio actual y precio original
-- ✅ **Filtros**:
-  - Por categoría (Shirts, Pants, Dresses, Shoes, Accessories, Outerwear)
-  - Por rango de precio (min, max)
-  - Búsqueda de texto
-- ✅ **Variantes**:
-  - Múltiples tallas con stock
-  - Múltiples colores
-- ✅ **Rating y Reviews**
-  - Puntuación promedio
-  - Reviews de clientes
-  - Agregar review con rating
+**Tesis:** un super-app no se monetiza por una vía, se monetiza por **capas compuestas**. Cada feature alimenta varias fuentes de ingreso simultáneas.
 
-#### 🛒 Carrito de Compras
-- ✅ Carrito persistente (localStorage)
-- ✅ Agregar/quitar items
-- ✅ Actualizar cantidades
-- ✅ Cálculo automático subtotal
-- ✅ Cálculo impuestos
-- ✅ Costo envío
+## 1. Comisiones transaccionales (la mina de oro)
 
-#### 💳 Checkout Stripe
-- ✅ Integración Stripe.js
-- ✅ Formulario de pago seguro
-- ✅ Manejo de múltiples items
-- ✅ Validation de tarjeta
-- ✅ RedirecttoCheckout de Stripe
-- ✅ Recibos digitales
-- ✅ **Test**: 4242 4242 4242 4242
+| Vertical | Comisión típica | Comisión KRONOS sugerida |
+|---|---|---|
+| Marketplace P2P | eBay 13% | **6–8%** + escrow fee |
+| Shopping / tienda | Amazon 15% | **8–10%** |
+| Eventos & boletos | Eventbrite 7% + $1.79 | **5%** + fee fijo bajo |
+| Reservaciones | OpenTable $0.25/persona | **3–5%** del ticket |
+| Pagos P2P entre usuarios | gratis (lock-in) | **0%** |
+| Pagos a comercios | Stripe 2.9% + $0.30 | **2.5–3%** |
+| Retiros a banco externo | — | **1–2%** o $X fijo |
 
-**Endpoints**:
-- `GET /api/products` - Listar (con filtros)
-- `GET /api/products/:id` - Detalle
-- `POST /api/products` - Crear (seller)
-- `PATCH /api/products/:id` - Actualizar
-- `POST /api/products/:id/review` - Review
-- `POST /api/products/checkout/session` - Stripe checkout
+**Por qué funciona:** vives del flujo, no del usuario. Mientras más se mueve, más ganas.
 
----
+## 2. Tokens (segunda mina, si la juegas bien)
 
-### 4️⃣ Módulo Delivery (Comida)
+Tres flujos cruzados:
+- **Compra de tokens con dinero real** → margen 5–10% en el spread
+- **Spending de tokens** en items, regalos en LIVE, boost de posts, avatar items → 100% del ingreso es tuyo
+- **Daily rewards y rachas** que cuestan poco pero anclan al usuario al ecosistema
 
-#### 🏪 Restaurantes
-- ✅ Listado de restaurantes
-- ✅ Rating por restaurante
-- ✅ Tiempo estimado de entrega
-- ✅ Costo de envío
-- ✅ Avatar/foto del restaurante
+**Regla de oro:** los tokens deben tener utilidad pero NO ser canjeables a fiat. Salida solo dentro del ecosistema.
 
-#### 🍽️ Menú Restaurante
-- ✅ Listado de platillos
-- ✅ Descripción de cada plato
-- ✅ Precio por platillo
-- ✅ Agregar extras
-- ✅ Notas especiales (sin cebolla, etc)
+## 3. LIVE & creator economy
 
-#### 🛒 Carrito de Comida
-- ✅ Items del carrito
-- ✅ Cantidad por item
-- ✅ Actualizar cantidades
-- ✅ Remover items
-- ✅ Notas especiales por item
+- **Regalos virtuales** en streaming → comisión 30–50% (TikTok/Twitch standard)
+- **Suscripciones a creadores** → 10–15%
+- **Tips directos** → 5%
+- **Paid posts / contenido bloqueado** → 10–15%
 
-#### 📍 Dirección de Entrega
-- ✅ Calle
-- ✅ Ciudad
-- ✅ Código postal
-- ✅ Notas adicionales
+Esto es el motor de retención del top 1% de usuarios que producen el 80% del contenido.
 
-#### 📦 Estados de Orden
-- ✅ Pending - Pendiente
-- ✅ Confirmed - Confirmada
-- ✅ Preparing - Preparando
-- ✅ On The Way - En Camino
-- ✅ Delivered - Entregada
+## 4. Servicios premium para creadores y negocios
 
-#### 🚗 Rastreo en Tiempo Real
-- ✅ Timeline visual de estados
-- ✅ Información del repartidor
-- ✅ Tiempo estimado entrega
-- ✅ Historial de cambios
-- ✅ Socket.io actualizaciones
-- ✅ Ubicación repartidor (futuro)
+**KRONOS Pro (creadores / $9.99/mes):**
+- Analytics avanzado
+- Sin límite de uploads en editor
+- Programación de posts
+- Badges premium
+- Acceso anticipado a features
 
-#### ⭐ Calificación de Orden
-- ✅ Rating 1-5 estrellas
-- ✅ Notas/feedback
-- ✅ Guardado en histórico
+**KRONOS Business (comercios / $29–99/mes):**
+- Tienda destacada
+- Anuncios in-feed
+- API y CRM básico
+- Soporte prioritario
+- Multi-cuenta
 
-**Endpoints**:
-- `POST /api/orders` - Crear orden
-- `GET /api/orders/my-orders` - Mis órdenes
-- `GET /api/orders/restaurant-orders` - Órdenes restaurante
-- `PATCH /api/orders/:orderId/status` - Actualizar estado
-- `GET /api/orders/:orderId/track` - Rastrear
-- `POST /api/orders/:orderId/payment` - Pagar Stripe
-- `POST /api/orders/:orderId/rate` - Calificar
+**KRONOS Plus (usuario regular / $4.99/mes):**
+- Sin anuncios
+- Avatar items exclusivos
+- Más espacio en backups
+- Badge premium
+- 2x daily rewards en tokens
+
+## 5. Publicidad nativa (controlada)
+
+**No la ignores.** Es el 95% del revenue de Meta y TikTok por algo. Pero hazlo limpio:
+
+- Posts patrocinados en feed (clearly labeled)
+- Anuncios en marketplace y reservaciones (los comercios pagan por destaque)
+- Anuncios en LIVE (preroll opcional, recompensa al usuario con tokens por verlo)
+- Cero ads en chat. Cero. **Esa es tu línea sagrada.**
+
+## 6. Servicios financieros (la cocaína del fintech)
+
+Cuando la wallet madure (mes 12+):
+- **Tarjeta virtual con cashback en tokens** → ingreso por interchange (1–2% por transacción)
+- **Préstamos micro / BNPL** (con partner bancario) → 15–25% APR, comisión por originación
+- **FX spread** en transferencias internacionales → 1–3%
+- **Yield en saldos** (te quedas con la diferencia entre lo que paga el banco partner y lo que pagas al usuario)
+- **Seguros embebidos** (vida, auto, viaje) → comisión de afiliado 10–30%
+
+## 7. Datos consentidos (data dignity)
+
+Modelo opt-in radical:
+- Usuario decide si comparte datos para investigación de mercado
+- Marcas pagan por insights agregados (no individuales)
+- Usuario recibe el 50% en tokens, plataforma 50% en cash
+- Ético, legal, defendible y diferenciador
+
+## 8. Eventos físicos y experiencias
+
+Año 2+:
+- KRONOS Fest (festival anual con creadores top)
+- Pop-ups con marcas asociadas
+- Merch oficial
+- Boletos → todo procesado dentro del propio sistema de Eventos (cobras 2 veces: comisión + ingreso del evento)
+
+## 9. Impacto Social como ventaja fiscal y narrativa
+
+**1% del revenue total a causas elegidas por la comunidad.**
+- Deducible fiscalmente en muchas jurisdicciones
+- Marketing orgánico brutal
+- Atrae usuarios y empleados de calidad
+- Diferenciador real frente a Meta/ByteDance
 
 ---
 
-### 5️⃣ Algoritmo e Integración
+## 📊 Mix de revenue proyectado (madurez, año 5)
 
-#### 🔄 Feed Híbrido
-- ✅ Intercala 2 posts + 1 producto automáticamente
-- ✅ Posts de usuarios que sigo
-- ✅ Productos recomendados trending
-- ✅ Algoritmo inteligente de mezcla
-- ✅ Paginación
+| Fuente | % del revenue total |
+|---|---|
+| Comisiones transaccionales | 35% |
+| Publicidad nativa | 25% |
+| Tokens y regalos virtuales | 15% |
+| Servicios financieros | 12% |
+| Suscripciones premium | 8% |
+| Datos consentidos + otros | 5% |
+
+**KPI clave:** ARPU objetivo **$8–15 USD/año** en mercados emergentes, **$25–50 USD/año** en mercados maduros.
+
+---
+
+## ⚠️ Reglas que NUNCA debes romper
+
+1. **Pagos P2P entre usuarios siempre gratis** — es tu lock-in.
+2. **Cero ads en chat** — destruye la confianza.
+3. **Tokens jamás canjeables a fiat directo** — regulación te mata.
+4. **Comisiones transparentes y publicadas** — los comercios huyen del que esconde fees.
+5. **Premium nunca paywallea features de seguridad o moderación** — eso es ético y legal mínimo.
+
 - ✅ Cards diferenciadas por tipo
 
 **Características**:

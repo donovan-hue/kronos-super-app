@@ -208,3 +208,38 @@ exports.deletePost = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// Toggle bookmark
+exports.bookmarkPost = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const post = await Post.findById(postId);
+    if (!post) return res.status(404).json({ message: 'Post not found' });
+
+    const user = await User.findById(req.user.id).select('bookmarks');
+    const bookmarks = user.bookmarks || [];
+    const idx = bookmarks.findIndex(b => b.toString() === postId);
+    if (idx >= 0) {
+      bookmarks.splice(idx, 1);
+    } else {
+      bookmarks.push(postId);
+    }
+    await User.findByIdAndUpdate(req.user.id, { bookmarks });
+    res.json({ success: true, bookmarked: idx < 0 });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Get bookmarked posts
+exports.getBookmarkedPosts = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('bookmarks');
+    const posts = await Post.find({ _id: { $in: user.bookmarks || [] } })
+      .populate('author', 'username avatar firstName lastName')
+      .sort({ createdAt: -1 });
+    res.json({ success: true, posts });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

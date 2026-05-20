@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
@@ -7,6 +7,13 @@ import NotificationToast from './components/NotificationToast';
 import Welcome from './pages/Welcome';
 import AdminDashboard from './admin/AdminDashboard';
 import ProtectedAdminRoute from './admin/ProtectedAdminRoute';
+import { AuthContext } from './context/AuthContext';
+
+function MyProfileRedirect() {
+  const { user } = useContext(AuthContext);
+  const id = user?._id || user?.id;
+  return id ? <Navigate to={`/profile/${id}`} replace /> : <Navigate to="/auth/login" replace />;
+}
 
 // Lazy load modules
 const SocialModule = lazy(() => import('./social/SocialModule'));
@@ -27,6 +34,11 @@ const KronosMockups = lazy(() => import('./pages/KronosMockups'));
 const Pricing = lazy(() => import('./pages/Pricing'));
 const SubscriptionSuccess = lazy(() => import('./pages/SubscriptionSuccess'));
 const SubscriptionCancel = lazy(() => import('./pages/SubscriptionCancel'));
+const Communities = lazy(() => import('./pages/Communities'));
+const CommunityDetail = lazy(() => import('./pages/CommunityDetail'));
+const Live = lazy(() => import('./pages/Live'));
+const Wallet = lazy(() => import('./pages/Wallet'));
+const NotificationsPage = lazy(() => import('./pages/Notifications'));
 
 function App() {
   return (
@@ -92,6 +104,7 @@ function App() {
             }
           />
 
+          <Route path="/profile/me" element={<ProtectedRoute><MyProfileRedirect /></ProtectedRoute>} />
           <Route
             path="/profile/:userId"
             element={
@@ -210,6 +223,59 @@ function App() {
                 >
                   <MiniAppDashboard />
                 </div>
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Wallet */}
+          <Route
+            path="/wallet"
+            element={
+              <ProtectedRoute>
+                <Navbar />
+                <Wallet />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* LIVE - Videollamadas, Streaming, Audio Spaces */}
+          <Route
+            path="/live"
+            element={
+              <ProtectedRoute>
+                <Navbar />
+                <Live />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Notifications */}
+          <Route
+            path="/notifications"
+            element={
+              <ProtectedRoute>
+                <Navbar />
+                <NotificationsPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Comunidades */}
+          <Route
+            path="/communities"
+            element={
+              <ProtectedRoute>
+                <Navbar />
+                <Communities />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/communities/:id"
+            element={
+              <ProtectedRoute>
+                <Navbar />
+                <CommunityDetail />
               </ProtectedRoute>
             }
           />

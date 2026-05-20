@@ -17,7 +17,7 @@ const StoryList = ({ userOnly = false }) => {
         const response = await axios.get(url, { params });
         setStories(response.data.data);
       } catch (error) {
-        console.error('Error fetching stories:', error);
+        // silenced;
       } finally {
         setLoading(false);
       }

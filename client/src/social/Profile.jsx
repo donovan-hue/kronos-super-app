@@ -1,61 +1,136 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useParams, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+import { GlassCard, HoloText, BottomNav } from '../components/kronos';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
+function PostGrid({ posts, onLike }) {
+  if (!posts.length) {
+    return (
+      <div style={{ textAlign: 'center', padding: 48, color: 'rgba(255,255,255,0.3)' }}>
+        <div style={{ fontSize: 40, marginBottom: 8 }}>📝</div>
+        <div>Sin publicaciones aún</div>
+      </div>
+    );
+  }
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      {posts.map(post => (
+        <GlassCard key={post._id} style={{ padding: '14px 16px' }}>
+          {post.image && (
+            <img src={post.image} alt="" style={{ width: '100%', borderRadius: 12, marginBottom: 10, maxHeight: 320, objectFit: 'cover' }} />
+          )}
+          <div style={{ color: 'rgba(255,255,255,0.85)', fontSize: 14, lineHeight: 1.55, marginBottom: 10 }}>{post.content}</div>
+          <div style={{ display: 'flex', gap: 16, color: 'rgba(255,255,255,0.35)', fontSize: 12 }}>
+            <span>❤️ {post.likes?.length || 0}</span>
+            <span>💬 {post.comments?.length || 0}</span>
+            <span style={{ marginLeft: 'auto' }}>{new Date(post.createdAt).toLocaleDateString('es-MX', { day: 'numeric', month: 'short' })}</span>
+          </div>
+        </GlassCard>
+      ))}
+    </div>
+  );
+}
+
+function BookmarksTab({ userId }) {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios.get(`${API_URL}/posts/bookmarked`)
+      .then(r => setPosts(r.data.posts || []))
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <div style={{ textAlign: 'center', padding: 40, color: 'rgba(255,255,255,0.3)' }}>Cargando...</div>;
+  if (!posts.length) {
+    return (
+      <div style={{ textAlign: 'center', padding: 48, color: 'rgba(255,255,255,0.3)' }}>
+        <div style={{ fontSize: 40, marginBottom: 8 }}>🔖</div>
+        <div>Sin guardados aún</div>
+        <div style={{ fontSize: 12, marginTop: 4 }}>Guarda posts con el botón 🔖 del feed</div>
+      </div>
+    );
+  }
+  return <PostGrid posts={posts} />;
+}
+
 function Profile() {
   const { userId } = useParams();
-  const { user: currentUser } = useAuth();
+  const navigate = useNavigate();
+  const { user: currentUser } = useContext(AuthContext);
   const [profile, setProfile] = useState(null);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isFollowing, setIsFollowing] = useState(false);
   const [isBlocked, setIsBlocked] = useState(false);
   const [blockLoading, setBlockLoading] = useState(false);
+  const [tab, setTab] = useState('posts');
+
+  const targetId = userId || currentUser?._id || currentUser?.id;
+  const isOwnProfile = !userId || userId === (currentUser?._id || currentUser?.id);
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
+        const profileEndpoint = isOwnProfile
+          ? `${API_URL}/auth/profile`
+          : `${API_URL}/users/${targetId}`;
+
         const [profileRes, postsRes] = await Promise.all([
-          axios.get(`${API_URL}/auth/profile`),
-          axios.get(`${API_URL}/posts/user/${userId}`)
+          axios.get(profileEndpoint),
+          axios.get(`${API_URL}/posts/user/${targetId}`)
         ]);
 
-        setProfile(profileRes.data.user);
-        setPosts(postsRes.data.posts);
-      } catch (error) {
-        console.error('Error fetching profile:', error);
+        const profileData = profileRes.data.user || profileRes.data;
+        setProfile(profileData);
+        setPosts(postsRes.data.posts || []);
+
+        if (!isOwnProfile && currentUser) {
+          const followed = profileData.followers?.some(
+            f => (f._id || f)?.toString() === (currentUser._id || currentUser.id)?.toString()
+          );
+          setIsFollowing(!!followed);
+        }
+      } catch (err) {
+        // silenced;
       } finally {
         setLoading(false);
       }
     };
 
     const fetchBlockStatus = async () => {
+      if (!currentUser || isOwnProfile) return;
       try {
-        const res = await axios.get(`${API_URL}/reporting/blocked-users`);
-        const blocked = res.data.data || [];
-        setIsBlocked(blocked.some((b) => b.blockedUser && b.blockedUser._id === userId));
-      } catch {
-        // silenciar
-      }
+        const res = await axios.get(`${API_URL}/users/blocked`);
+        const blocked = res.data.blocked || [];
+        setIsBlocked(blocked.some(b => (b.blockedUser?._id || b.blockedUser)?.toString() === targetId?.toString()));
+      } catch {}
     };
 
     fetchProfile();
     fetchBlockStatus();
-  }, [userId]);
+  }, [targetId]);
 
   const handleFollow = async () => {
     try {
       if (isFollowing) {
-        await axios.post(`${API_URL}/auth/unfollow/${userId}`);
+        await axios.post(`${API_URL}/auth/unfollow/${targetId}`);
       } else {
-        await axios.post(`${API_URL}/auth/follow/${userId}`);
+        await axios.post(`${API_URL}/auth/follow/${targetId}`);
       }
-      setIsFollowing(!isFollowing);
-    } catch (error) {
-      console.error('Error following/unfollowing:', error);
+      setIsFollowing(f => !f);
+      setProfile(p => ({
+        ...p,
+        followers: isFollowing
+          ? (p.followers || []).filter(f => (f._id || f)?.toString() !== (currentUser?._id || currentUser?.id)?.toString())
+          : [...(p.followers || []), currentUser?._id || currentUser?.id]
+      }));
+    } catch (err) {
+      // silenced;
     }
   };
 
@@ -63,89 +138,126 @@ function Profile() {
     setBlockLoading(true);
     try {
       if (isBlocked) {
-        await axios.delete(`${API_URL}/reporting/block/${userId}`);
+        await axios.delete(`${API_URL}/users/${targetId}/block`);
         setIsBlocked(false);
       } else {
-        await axios.post(`${API_URL}/reporting/block/${userId}`, { reason: 'user_initiated' });
+        await axios.post(`${API_URL}/users/${targetId}/block`);
         setIsBlocked(true);
       }
-    } catch (error) {
-      console.error('Error blocking/unblocking:', error);
+    } catch (err) {
+      // silenced;
     } finally {
       setBlockLoading(false);
     }
   };
 
-  if (loading) return <div className="flex justify-center py-10">Loading...</div>;
+  if (loading) {
+    return (
+      <div style={{ minHeight: '100vh', background: '#08080f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ color: 'rgba(255,255,255,0.4)' }}>Cargando perfil...</div>
+      </div>
+    );
+  }
+
+  if (!profile) {
+    return (
+      <div style={{ minHeight: '100vh', background: '#08080f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.4)' }}>
+          <div style={{ fontSize: 40, marginBottom: 8 }}>😕</div>
+          <div>Perfil no encontrado</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      {profile && (
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <div className="flex items-center space-x-6 mb-6">
-            <img
-              src={profile.avatar}
-              alt={profile.username}
-              className="w-32 h-32 rounded-full border-4 border-blue-500"
-            />
-            <div className="flex-1">
-              <h1 className="text-3xl font-bold text-gray-900">
-                {profile.firstName} {profile.lastName}
-              </h1>
-              <p className="text-gray-600">@{profile.username}</p>
-              <p className="text-gray-700 mt-2">{profile.bio}</p>
-              <div className="flex space-x-6 mt-4">
-                <div>
-                  <p className="font-bold text-lg">{profile.followers?.length || 0}</p>
-                  <p className="text-gray-600">Followers</p>
-                </div>
-                <div>
-                  <p className="font-bold text-lg">{profile.following?.length || 0}</p>
-                  <p className="text-gray-600">Following</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col space-y-2">
-              <button
-                onClick={handleFollow}
-                className={`px-6 py-2 rounded-lg font-semibold ${
-                  isFollowing
-                    ? 'bg-gray-300 text-gray-800 hover:bg-gray-400'
-                    : 'bg-blue-600 text-white hover:bg-blue-700'
-                }`}
-              >
-                {isFollowing ? 'Following' : 'Follow'}
-              </button>
-
-              {/* Boton Bloquear — solo si no es el propio perfil */}
-              {currentUser && currentUser.id !== userId && (
-                <button
-                  onClick={handleBlock}
-                  disabled={blockLoading}
-                  className={`px-6 py-2 rounded-lg font-semibold text-sm transition disabled:opacity-50 ${
-                    isBlocked
-                      ? 'bg-yellow-400 text-gray-900 hover:bg-yellow-500'
-                      : 'bg-red-500 text-white hover:bg-red-600'
-                  }`}
-                >
-                  {blockLoading ? '...' : isBlocked ? 'Desbloquear' : 'Bloquear'}
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
+    <div style={{ minHeight: '100vh', background: '#08080f', paddingBottom: 100 }}>
+      {/* Back button */}
+      {userId && (
+        <button onClick={() => navigate(-1)}
+          style={{ position: 'fixed', top: 16, left: 16, zIndex: 10, background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '50%', width: 40, height: 40, color: '#fff', fontSize: 18, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          ←
+        </button>
       )}
 
-      {/* User Posts */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold mb-4">Posts</h2>
-        {posts.map((post) => (
-          <div key={post._id} className="bg-white rounded-lg shadow-md p-4">
-            <p className="text-gray-800">{post.content}</p>
-            {post.image && <img src={post.image} alt="post" className="w-full rounded-lg mt-4" />}
-          </div>
-        ))}
+      {/* Cover + Avatar */}
+      <div style={{ position: 'relative', height: 180, background: 'linear-gradient(135deg,#1a0533,#0c1a3d,#001c2e)', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, opacity: 0.3 }}>
+          {[...Array(8)].map((_, i) => (
+            <div key={i} style={{ position: 'absolute', width: 240, height: 240, borderRadius: '50%', border: '1px solid rgba(168,85,247,0.3)', top: i * 10 - 60, left: i * 25 - 80 }} />
+          ))}
+        </div>
+        <div style={{ position: 'absolute', bottom: -40, left: '50%', transform: 'translateX(-50%)' }}>
+          <img src={profile.avatar} alt={profile.username}
+            style={{ width: 90, height: 90, borderRadius: '50%', objectFit: 'cover', border: '3px solid rgba(168,85,247,0.8)', boxShadow: '0 0 30px rgba(168,85,247,0.4)' }} />
+        </div>
       </div>
+
+      <div style={{ maxWidth: 480, margin: '0 auto', padding: '0 16px' }}>
+        {/* Profile info */}
+        <div style={{ paddingTop: 56, textAlign: 'center', marginBottom: 20 }}>
+          <div style={{ color: '#fff', fontSize: 20, fontWeight: 800, marginBottom: 2 }}>
+            {profile.firstName || ''} {profile.lastName || ''}
+            {profile.isVerified && <span style={{ marginLeft: 6, fontSize: 16 }}>✅</span>}
+          </div>
+          <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: 13, marginBottom: 8 }}>@{profile.username}</div>
+          {profile.bio && (
+            <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: 13, lineHeight: 1.5, maxWidth: 320, margin: '0 auto 12px' }}>{profile.bio}</div>
+          )}
+
+          {/* Stats row */}
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 32, marginBottom: 16 }}>
+            {[
+              { label: 'Posts', value: posts.length },
+              { label: 'Seguidores', value: profile.followers?.length || 0 },
+              { label: 'Siguiendo', value: profile.following?.length || 0 },
+            ].map(stat => (
+              <div key={stat.label} style={{ textAlign: 'center' }}>
+                <div style={{ color: '#fff', fontSize: 18, fontWeight: 800 }}>{stat.value}</div>
+                <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11 }}>{stat.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Action buttons */}
+          {!isOwnProfile && currentUser && (
+            <div style={{ display: 'flex', gap: 10, justifyContent: 'center' }}>
+              <button onClick={handleFollow}
+                style={{ padding: '9px 28px', borderRadius: 28, fontWeight: 700, fontSize: 13, border: 'none', cursor: 'pointer', background: isFollowing ? 'rgba(255,255,255,0.08)' : 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#fff' }}>
+                {isFollowing ? 'Siguiendo ✓' : 'Seguir'}
+              </button>
+              <button onClick={handleBlock} disabled={blockLoading}
+                style={{ padding: '9px 20px', borderRadius: 28, fontWeight: 700, fontSize: 13, border: `1px solid ${isBlocked ? 'rgba(251,191,36,0.5)' : 'rgba(239,68,68,0.4)'}`, background: 'transparent', color: isBlocked ? '#fbbf24' : '#ef4444', cursor: 'pointer', opacity: blockLoading ? 0.5 : 1 }}>
+                {blockLoading ? '...' : isBlocked ? 'Desbloquear' : 'Bloquear'}
+              </button>
+            </div>
+          )}
+          {isOwnProfile && (
+            <button onClick={() => navigate('/settings')}
+              style={{ padding: '9px 24px', borderRadius: 28, fontWeight: 700, fontSize: 13, border: '1px solid rgba(255,255,255,0.15)', background: 'transparent', color: '#fff', cursor: 'pointer' }}>
+              ✏️ Editar perfil
+            </button>
+          )}
+        </div>
+
+        {/* Tabs */}
+        <div style={{ display: 'flex', gap: 4, marginBottom: 16, background: 'rgba(255,255,255,0.04)', borderRadius: 14, padding: 4 }}>
+          {[
+            { id: 'posts', label: '📝 Posts' },
+            ...(isOwnProfile ? [{ id: 'bookmarks', label: '🔖 Guardados' }] : []),
+          ].map(t => (
+            <button key={t.id} onClick={() => setTab(t.id)}
+              style={{ flex: 1, padding: '9px', borderRadius: 10, fontSize: 13, fontWeight: 600, border: 'none', cursor: 'pointer', background: tab === t.id ? 'rgba(124,58,237,0.6)' : 'transparent', color: '#fff', transition: 'background 0.2s' }}>
+              {t.label}
+            </button>
+          ))}
+        </div>
+
+        {tab === 'posts' && <PostGrid posts={posts} />}
+        {tab === 'bookmarks' && isOwnProfile && <BookmarksTab userId={targetId} />}
+      </div>
+
+      <BottomNav />
     </div>
   );
 }

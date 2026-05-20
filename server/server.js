@@ -1,5 +1,7 @@
 require('dotenv').config();
 const express = require('express');
+const xss = require('xss-clean');
+const mongoSanitize = require('express-mongo-sanitize');
 const cors = require('cors');
 const http = require('http');
 const socketIo = require('socket.io');
@@ -94,6 +96,8 @@ app.post(
 );
 
 app.use(express.json());
+app.use(xss());
+app.use(mongoSanitize());
 app.use(express.urlencoded({ extended: true }));
 
 // Passport (Google & Facebook OAuth) — inicializar sin sesiones (usamos JWT)
@@ -134,6 +138,11 @@ app.use('/api/sessions', require('./routes/sessions')); // Gestion de sesiones a
 app.use('/api/analytics', require('./routes/analytics')); // Metricas de atencion e interacciones
 app.use('/api/interactions', require('./routes/interactions')); // Registro de interacciones de usuario
 app.use('/api/food', require('./routes/food')); // Food - Restaurantes y pedidos
+app.use('/api/wallet', require('./routes/wallet')); // Wallet (cash balance, transfers, virtual card)
+app.use('/api/ephemeral-stories', require('./routes/ephemeralStories')); // Instagram-style Stories 24h
+app.use('/api/communities', require('./routes/communities')); // Comunidades / Grupos
+app.use('/api/group-chats', require('./routes/groupChats')); // Chat Grupal
+app.use('/api/notifications', require('./routes/notifications')); // Centro de notificaciones
 app.use('/api/subscription', subscriptionRoutes); // Kronos Pro / Suscripciones (Stripe)
 
 // Initialize Socket.io singleton (para que controllers/routes puedan emitir eventos)
@@ -394,6 +403,88 @@ io.on('connection', (socket) => {
 
   socket.on('blackhole_update', ({ eventId, update }) => {
     io.to(`blackhole_${eventId}`).emit('blackhole_updated', update);
+  });
+
+  // ============= SOCKET.IO - CHAT GRUPAL =============
+
+  socket.on('join_group', (groupId) => {
+    socket.join(`group_${groupId}`);
+  });
+
+  socket.on('leave_group', (groupId) => {
+    socket.leave(`group_${groupId}`);
+  });
+
+  socket.on('send_group_message', (data) => {
+    const { groupId, message } = data;
+    io.to(`group_${groupId}`).emit('receive_group_message', { groupId, message });
+  });
+
+  socket.on('group_typing', (data) => {
+    const { groupId, userId, username } = data;
+    socket.to(`group_${groupId}`).emit('group_user_typing', { userId, username });
+  });
+
+  socket.on('group_stop_typing', (data) => {
+    const { groupId, userId } = data;
+    socket.to(`group_${groupId}`).emit('group_user_stop_typing', { userId });
+  });
+
+  // ============= SOCKET.IO - WEBRTC SEÑALIZACIÓN (VIDEOLLAMADAS) =============
+
+  socket.on('call_offer', ({ targetUserId, offer, callerId, callerName }) => {
+    if (users[targetUserId]) {
+      io.to(users[targetUserId]).emit('incoming_call', { callerId, callerName, offer });
+    }
+  });
+
+  socket.on('call_answer', ({ callerId, answer }) => {
+    if (users[callerId]) {
+      io.to(users[callerId]).emit('call_answered', { answer });
+    }
+  });
+
+  socket.on('call_ice_candidate', ({ targetUserId, candidate }) => {
+    if (users[targetUserId]) {
+      io.to(users[targetUserId]).emit('ice_candidate', { candidate });
+    }
+  });
+
+  socket.on('call_end', ({ targetUserId }) => {
+    if (users[targetUserId]) {
+      io.to(users[targetUserId]).emit('call_ended');
+    }
+  });
+
+  socket.on('call_rejected', ({ callerId }) => {
+    if (users[callerId]) {
+      io.to(users[callerId]).emit('call_rejected');
+    }
+  });
+
+  // ============= SOCKET.IO - STREAMING EN VIVO =============
+
+  socket.on('start_stream', ({ streamerId, streamerName }) => {
+    socket.join(`stream_${streamerId}`);
+    socket.streamerId = streamerId;
+    io.emit('stream_started', { streamerId, streamerName });
+  });
+
+  socket.on('stream_chunk', ({ streamerId, chunk }) => {
+    socket.to(`stream_${streamerId}`).emit('stream_chunk', { streamerId, chunk });
+  });
+
+  socket.on('watch_stream', ({ streamerId }) => {
+    socket.join(`stream_${streamerId}`);
+  });
+
+  socket.on('stop_stream', ({ streamerId }) => {
+    io.to(`stream_${streamerId}`).emit('stream_ended', { streamerId });
+    io.emit('stream_stopped', { streamerId });
+  });
+
+  socket.on('stream_chat', ({ streamerId, username, message }) => {
+    io.to(`stream_${streamerId}`).emit('stream_chat', { username, message, at: new Date() });
   });
 
   // Desconexión

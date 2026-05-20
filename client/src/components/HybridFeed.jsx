@@ -1,49 +1,145 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { HoloText, GlassCard, BottomNav } from './kronos';
+import { HoloText, GlassCard, BottomNav, KronosImage } from './kronos';
 import { AuthContext } from '../context/AuthContext';
+import StoriesBar from './stories/StoriesBar';
+import FollowSuggestions from './FollowSuggestions';
+import HashtagText from './HashtagText';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+
+// Renderiza solo posts cercanos al viewport usando IntersectionObserver
+function LazyFeedItem({ children }) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
+      { rootMargin: '300px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} style={{ minHeight: visible ? 'auto' : 120 }}>
+      {visible ? children : null}
+    </div>
+  );
+}
 
 function HybridFeed() {
   const [feed, setFeed] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [cursor, setCursor] = useState(null);
+  const [hasMore, setHasMore] = useState(true);
   const [postText, setPostText] = useState('');
   const [posting, setPosting] = useState(false);
   const [commentOpen, setCommentOpen] = useState(null);
   const [commentText, setCommentText] = useState('');
+  const [postImage, setPostImage] = useState(null);
+  const [postImagePreview, setPostImagePreview] = useState(null);
+  const [bookmarks, setBookmarks] = useState(new Set());
+  const sentinelRef = useRef(null);
+  const fileInputRef = useRef(null);
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
-  useEffect(() => {
-    fetchFeed();
-  }, []);
-
-  const fetchFeed = async () => {
-    setLoading(true);
+  const fetchFeed = useCallback(async (cursorId = null) => {
+    if (cursorId) setLoadingMore(true); else setLoading(true);
     try {
-      const res = await axios.get(`${API_URL}/feed/hybrid`, { params: { page: 1, limit: 20 } });
-      setFeed(res.data.feed || []);
+      const params = { limit: 20 };
+      if (cursorId) params.cursor = cursorId;
+      const res = await axios.get(`${API_URL}/feed/hybrid`, { params });
+      const items = res.data.feed || [];
+      if (cursorId) {
+        setFeed(prev => [...prev, ...items]);
+      } else {
+        setFeed(items);
+      }
+      // cursor = id del último item recibido
+      const last = items[items.length - 1];
+      setCursor(last ? (last.data?._id || null) : null);
+      setHasMore(items.length === 20);
     } catch (e) {
       console.error('Error fetching feed:', e);
-      setFeed([]);
+      if (!cursorId) setFeed([]);
     } finally {
       setLoading(false);
+      setLoadingMore(false);
     }
+  }, []);
+
+  useEffect(() => { fetchFeed(); }, [fetchFeed]);
+
+  // Infinite scroll via IntersectionObserver en el sentinel
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el || !hasMore || loadingMore) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting && cursor) fetchFeed(cursor); },
+      { rootMargin: '200px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [cursor, hasMore, loadingMore, fetchFeed]);
+
+  const handleImageSelect = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setPostImage(file);
+    setPostImagePreview(URL.createObjectURL(file));
+  };
+
+  const clearImage = () => {
+    setPostImage(null);
+    setPostImagePreview(null);
+    if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
   const handlePost = async () => {
-    if (!postText.trim()) return;
+    if (!postText.trim() && !postImage) return;
     setPosting(true);
     try {
-      await axios.post(`${API_URL}/posts`, { content: postText });
+      let imageUrl = null;
+      if (postImage) {
+        const fd = new FormData();
+        fd.append('file', postImage);
+        fd.append('upload_preset', import.meta.env.VITE_CLOUDINARY_PRESET || 'kronos_posts');
+        const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+        if (cloudName) {
+          const res = await axios.post(
+            `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, fd
+          );
+          imageUrl = res.data.secure_url;
+        }
+      }
+      await axios.post(`${API_URL}/posts`, { content: postText, image: imageUrl });
       setPostText('');
+      clearImage();
       fetchFeed();
     } catch (e) {
       console.error('Error creating post:', e);
     } finally {
       setPosting(false);
+    }
+  };
+
+  const handleBookmark = async (postId) => {
+    try {
+      await axios.post(`${API_URL}/posts/${postId}/bookmark`);
+      setBookmarks(prev => {
+        const next = new Set(prev);
+        next.has(postId) ? next.delete(postId) : next.add(postId);
+        return next;
+      });
+    } catch (e) {
+      console.error('Error bookmarking:', e);
     }
   };
 
@@ -93,34 +189,61 @@ function HybridFeed() {
 
       <div style={{ maxWidth: 680, margin: '0 auto', padding: '0 16px' }}>
 
+        {/* Stories Bar */}
+        <GlassCard style={{ marginBottom: 16, padding: '8px 16px' }}>
+          <StoriesBar />
+        </GlassCard>
+
+        {/* Follow Suggestions */}
+        <FollowSuggestions />
+
         {/* Post composer */}
         <GlassCard style={{ marginBottom: 16 }}>
           <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start', marginBottom: 10 }}>
-            <img
-              src={user?.avatar || `https://ui-avatars.com/api/?name=U&background=7c3aed&color=fff&size=40`}
-              alt="avatar"
-              style={{ width: 36, height: 36, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+            <KronosImage
+              src={user?.avatar}
+              alt={user?.username || 'U'}
+              width={36} height={36}
+              rounded
+              style={{ flexShrink: 0 }}
             />
-            <textarea
-              value={postText}
-              onChange={e => setPostText(e.target.value)}
-              placeholder="¿Qué está pasando?"
-              style={{
-                flex: 1, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: 12, padding: '10px 14px', color: '#fff', fontSize: 14, resize: 'none',
-                outline: 'none', minHeight: 70, fontFamily: 'inherit',
-              }}
-            />
+            <div style={{ flex: 1 }}>
+              <textarea
+                value={postText}
+                onChange={e => setPostText(e.target.value.slice(0, 280))}
+                placeholder="¿Qué está pasando?"
+                style={{
+                  width: '100%', background: 'rgba(255,255,255,0.06)', border: `1px solid ${postText.length > 260 ? (postText.length >= 280 ? '#ef4444' : '#f59e0b') : 'rgba(255,255,255,0.1)'}`,
+                  borderRadius: 12, padding: '10px 14px', color: '#fff', fontSize: 14, resize: 'none',
+                  outline: 'none', minHeight: 70, fontFamily: 'inherit', boxSizing: 'border-box',
+                }}
+              />
+              {postText.length > 0 && (
+                <div style={{ textAlign: 'right', fontSize: 11, marginTop: 3, color: postText.length >= 280 ? '#ef4444' : postText.length > 260 ? '#f59e0b' : 'rgba(255,255,255,0.3)' }}>
+                  {postText.length}/280
+                </div>
+              )}
+            </div>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          {postImagePreview && (
+            <div style={{ position: 'relative', marginBottom: 10 }}>
+              <img src={postImagePreview} alt="preview" style={{ width: '100%', borderRadius: 10, maxHeight: 200, objectFit: 'cover' }} />
+              <button onClick={clearImage} style={{ position: 'absolute', top: 6, right: 6, background: 'rgba(0,0,0,0.6)', border: 'none', color: '#fff', borderRadius: '50%', width: 24, height: 24, cursor: 'pointer', fontSize: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✕</button>
+            </div>
+          )}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <label style={{ cursor: 'pointer', color: 'rgba(255,255,255,0.4)', fontSize: 20, padding: '4px 8px' }} title="Agregar imagen">
+              📷
+              <input ref={fileInputRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageSelect} />
+            </label>
             <button
               onClick={handlePost}
-              disabled={posting || !postText.trim()}
+              disabled={posting || (!postText.trim() && !postImage)}
               style={{
                 padding: '8px 24px', borderRadius: 20,
-                background: postText.trim() ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(255,255,255,0.08)',
+                background: (postText.trim() || postImage) ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(255,255,255,0.08)',
                 color: '#fff', border: 'none', fontSize: 13, fontWeight: 700,
-                cursor: postText.trim() ? 'pointer' : 'default', transition: 'all 0.2s',
+                cursor: (postText.trim() || postImage) ? 'pointer' : 'default', transition: 'all 0.2s',
               }}
             >
               {posting ? 'Publicando...' : 'Publicar'}
@@ -142,17 +265,20 @@ function HybridFeed() {
             {feed.map((item) => {
               if (item.type === 'post') {
                 const post = item.data;
+                const postKey = `post-${post._id}`;
                 const isLiked = post.likes?.some(id => id === user?._id || id?.toString() === user?._id?.toString());
                 const isOpen = commentOpen === post._id;
                 return (
-                  <GlassCard key={`post-${post._id}`}>
+                  <LazyFeedItem key={postKey}>
+                  <GlassCard>
                     {/* Author */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
-                      <img
-                        src={post.author?.avatar || 'https://ui-avatars.com/api/?name=U&background=random&color=fff&size=40'}
-                        alt={post.author?.username}
-                        onClick={() => navigate(`/social/profile/${post.author?._id}`)}
-                        style={{ width: 36, height: 36, borderRadius: '50%', cursor: 'pointer', objectFit: 'cover' }}
+                      <KronosImage
+                        src={post.author?.avatar}
+                        alt={post.author?.username || 'U'}
+                        width={36} height={36}
+                        rounded
+                        style={{ cursor: 'pointer' }}
                       />
                       <div style={{ flex: 1 }}>
                         <div style={{ color: '#fff', fontSize: 14, fontWeight: 600 }}>
@@ -167,11 +293,11 @@ function HybridFeed() {
                     {/* Content */}
                     {post.content && (
                       <div style={{ color: 'rgba(255,255,255,0.8)', fontSize: 14, marginBottom: 10, lineHeight: 1.5 }}>
-                        {post.content}
+                        <HashtagText text={post.content} />
                       </div>
                     )}
                     {post.image && (
-                      <img src={post.image} alt="post" style={{ width: '100%', borderRadius: 10, maxHeight: 400, objectFit: 'cover', marginBottom: 10 }} />
+                      <KronosImage src={post.image} alt="post" style={{ width: '100%', borderRadius: 10, maxHeight: 400, objectFit: 'cover', marginBottom: 10 }} />
                     )}
 
                     {/* Actions */}
@@ -193,6 +319,12 @@ function HybridFeed() {
                         style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit' }}
                       >
                         🔄 {post.shares || 0}
+                      </button>
+                      <button
+                        onClick={() => handleBookmark(post._id)}
+                        style={{ background: 'none', border: 'none', color: bookmarks.has(post._id) ? '#a855f7' : 'rgba(255,255,255,0.5)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit', marginLeft: 'auto' }}
+                      >
+                        {bookmarks.has(post._id) ? '🔖' : '🏷️'}
                       </button>
                     </div>
 
@@ -233,19 +365,20 @@ function HybridFeed() {
                       </div>
                     )}
                   </GlassCard>
+                  </LazyFeedItem>
                 );
               }
 
               const product = item.data;
               return (
+                <LazyFeedItem key={`product-${product._id}`}>
                 <GlassCard
-                  key={`product-${product._id}`}
                   onClick={() => navigate(`/shop/product/${product._id}`)}
                   style={{ cursor: 'pointer', border: '1px solid rgba(168,85,247,0.2)', background: 'linear-gradient(135deg, rgba(124,58,237,0.08), rgba(6,182,212,0.05))' }}
                 >
                   <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
                     {product.images?.[0] && (
-                      <img src={product.images[0]} alt={product.name} style={{ width: 100, height: 100, objectFit: 'cover', borderRadius: 12 }} />
+                      <KronosImage src={product.images[0]} alt={product.name} width={100} height={100} radius={12} />
                     )}
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
@@ -263,8 +396,22 @@ function HybridFeed() {
                     </div>
                   </div>
                 </GlassCard>
+                </LazyFeedItem>
               );
             })}
+
+            {/* Sentinel para infinite scroll */}
+            <div ref={sentinelRef} style={{ height: 1 }} />
+            {loadingMore && (
+              <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.3)', padding: 16, fontSize: 13 }}>
+                Cargando más...
+              </div>
+            )}
+            {!hasMore && feed.length > 0 && (
+              <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.2)', padding: 16, fontSize: 12 }}>
+                — Fin del feed —
+              </div>
+            )}
           </div>
         )}
       </div>

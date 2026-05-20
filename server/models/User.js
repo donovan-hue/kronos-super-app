@@ -110,7 +110,8 @@ const userSchema = new mongoose.Schema(
       apiAccess: { type: Boolean, default: false },
       prioritySupport: { type: Boolean, default: false },
       customShop: { type: Boolean, default: false }
-    }
+    },
+    bookmarks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }]
   },
   { timestamps: true }
 );

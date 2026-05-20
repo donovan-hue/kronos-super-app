@@ -34,7 +34,7 @@ function Feed({ posts, setPosts, refreshFeed }) {
       setVisibility('public');
       refreshFeed();
     } catch (error) {
-      console.error('Error posting:', error);
+      // silenced;
     } finally {
       setPosting(false);
     }
@@ -45,7 +45,7 @@ function Feed({ posts, setPosts, refreshFeed }) {
       await axios.post(`${API_URL}/posts/${postId}/like`);
       refreshFeed();
     } catch (error) {
-      console.error('Error liking post:', error);
+      // silenced;
     }
   };
 

@@ -20,6 +20,9 @@ const protect = async (req, res, next) => {
       return res.status(401).json({ message: 'User not found' });
     }
 
+    // Garantizar ambas formas: req.user._id (ObjectId) y req.user.id (string)
+    if (!req.user.id) req.user.id = req.user._id.toString();
+
     next();
   } catch (error) {
     return res.status(401).json({ message: 'Not authorized to access this route' });

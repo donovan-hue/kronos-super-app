@@ -2,6 +2,7 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const emailService = require('../services/emailService');
+const { createNotification } = require('./notificationController');
 
 // Registrar usuario
 exports.register = async (req, res) => {
@@ -128,6 +129,15 @@ exports.followUser = async (req, res) => {
 
     await userToFollow.save();
     await currentUser.save();
+
+    createNotification({
+      recipient: userId,
+      sender: currentUserId,
+      type: 'follow',
+      title: `${currentUser.firstName || currentUser.username} empezó a seguirte`,
+      body: 'Ahora te sigue',
+      link: `/profile/${currentUserId}`,
+    }).catch(() => {});
 
     res.status(200).json({
       success: true,
