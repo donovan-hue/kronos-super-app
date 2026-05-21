@@ -141,9 +141,13 @@ app.use('/api/food', require('./routes/food')); // Food - Restaurantes y pedidos
 app.use('/api/wallet', require('./routes/wallet')); // Wallet (cash balance, transfers, virtual card)
 app.use('/api/ephemeral-stories', require('./routes/ephemeralStories')); // Instagram-style Stories 24h
 app.use('/api/communities', require('./routes/communities')); // Comunidades / Grupos
+app.use('/api/listings', require('./routes/listings')); // Marketplace P2P con Escrow
 app.use('/api/group-chats', require('./routes/groupChats')); // Chat Grupal
 app.use('/api/notifications', require('./routes/notifications')); // Centro de notificaciones
+app.use('/api/avatar', require('./routes/avatar')); // Avatar 3D Customizable + Tienda
 app.use('/api/subscription', subscriptionRoutes); // Kronos Pro / Suscripciones (Stripe)
+app.use('/api/reservations', require('./routes/reservations')); // Reservaciones
+app.use('/api/health', require('./routes/health')); // Health & Fitness
 
 // Initialize Socket.io singleton (para que controllers/routes puedan emitir eventos)
 const socketService = require('./services/socketService');
@@ -476,6 +480,14 @@ io.on('connection', (socket) => {
 
   socket.on('watch_stream', ({ streamerId }) => {
     socket.join(`stream_${streamerId}`);
+    const count = io.sockets.adapter.rooms.get(`stream_${streamerId}`)?.size || 1;
+    io.to(`stream_${streamerId}`).emit('viewer_count', { streamerId, count });
+  });
+
+  socket.on('leave_stream', ({ streamerId }) => {
+    socket.leave(`stream_${streamerId}`);
+    const count = io.sockets.adapter.rooms.get(`stream_${streamerId}`)?.size || 0;
+    io.to(`stream_${streamerId}`).emit('viewer_count', { streamerId, count });
   });
 
   socket.on('stop_stream', ({ streamerId }) => {
@@ -522,6 +534,14 @@ const { initializeBuiltInApps } = require('./services/miniAppInitializer');
 if (process.env.NODE_ENV !== 'test') {
   initializeBuiltInApps().catch(err => {
     console.error('Failed to initialize mini-apps:', err);
+  });
+}
+
+// Seed Avatar default items
+const { seedDefaultItems } = require('./controllers/avatarController');
+if (process.env.NODE_ENV !== 'test') {
+  seedDefaultItems().catch(err => {
+    console.error('Failed to seed avatar items:', err);
   });
 }
 

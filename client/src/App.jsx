@@ -1,4 +1,23 @@
-import React, { Suspense, lazy, useContext } from 'react';
+import React, { Suspense, lazy, useContext, Component } from 'react';
+
+class ErrorBoundary extends Component {
+  state = { hasError: false };
+  static getDerivedStateFromError() { return { hasError: true }; }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ minHeight: '100vh', background: '#08080f', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
+          <div style={{ fontSize: 48 }}>⚠️</div>
+          <div style={{ color: '#fff', fontSize: 18, fontWeight: 700 }}>Algo salió mal</div>
+          <button onClick={() => window.location.reload()} style={{ padding: '10px 28px', borderRadius: 24, background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 14, fontWeight: 700 }}>
+            Recargar
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
@@ -37,8 +56,13 @@ const SubscriptionCancel = lazy(() => import('./pages/SubscriptionCancel'));
 const Communities = lazy(() => import('./pages/Communities'));
 const CommunityDetail = lazy(() => import('./pages/CommunityDetail'));
 const Live = lazy(() => import('./pages/Live'));
+const Marketplace = lazy(() => import('./pages/Marketplace'));
 const Wallet = lazy(() => import('./pages/Wallet'));
 const NotificationsPage = lazy(() => import('./pages/Notifications'));
+const Reservations = lazy(() => import('./pages/Reservations'));
+const Health = lazy(() => import('./pages/Health'));
+const AvatarPage = lazy(() => import('./pages/Avatar'));
+const VideoEditorPage = lazy(() => import('./pages/VideoEditor'));
 
 function App() {
   return (
@@ -56,7 +80,8 @@ function App() {
           }
         }}
       />
-      <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading...</div>}>
+      <ErrorBoundary>
+      <Suspense fallback={<div style={{ minHeight: '100vh', background: '#08080f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div style={{ color: 'rgba(255,255,255,0.4)' }}>Cargando...</div></div>}>
         <Routes>
           {/* Welcome Page */}
           <Route path="/" element={<Welcome />} />
@@ -227,6 +252,17 @@ function App() {
             }
           />
 
+          {/* Marketplace P2P con Escrow */}
+          <Route
+            path="/marketplace"
+            element={
+              <ProtectedRoute>
+                <Navbar />
+                <Marketplace />
+              </ProtectedRoute>
+            }
+          />
+
           {/* Wallet */}
           <Route
             path="/wallet"
@@ -280,6 +316,50 @@ function App() {
             }
           />
 
+          {/* Reservaciones */}
+          <Route
+            path="/reservations"
+            element={
+              <ProtectedRoute>
+                <Navbar />
+                <Reservations />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Health & Fitness */}
+          <Route
+            path="/health"
+            element={
+              <ProtectedRoute>
+                <Navbar />
+                <Health />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Avatar 3D + Tienda */}
+          <Route
+            path="/avatar"
+            element={
+              <ProtectedRoute>
+                <Navbar />
+                <AvatarPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Editor de Video Lite */}
+          <Route
+            path="/video-editor"
+            element={
+              <ProtectedRoute>
+                <Navbar />
+                <VideoEditorPage />
+              </ProtectedRoute>
+            }
+          />
+
           {/* Admin Panel */}
           <Route
             path="/admin/*"
@@ -294,6 +374,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>
+      </ErrorBoundary>
     </Router>
   );
 }

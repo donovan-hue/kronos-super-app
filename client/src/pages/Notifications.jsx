@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { GlassCard, HoloText, BottomNav } from '../components/kronos';
 import { AuthContext } from '../context/AuthContext';
 
-const API = (process.env.REACT_APP_API_URL || 'http://localhost:5000/api').replace(/\/api$/, '');
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 const TYPE_META = {
   like:             { icon: '❤️', color: '#ef4444', label: 'Le dio like a tu post' },
@@ -36,7 +36,7 @@ export default function NotificationsPage() {
 
   const fetchNotifications = useCallback(async () => {
     try {
-      const { data } = await axios.get(`${API}/api/notifications`, { headers });
+      const { data } = await axios.get(`${API_URL}/notifications`, { headers });
       setNotifications(data.notifications || []);
     } catch {}
     finally { setLoading(false); }
@@ -50,7 +50,7 @@ export default function NotificationsPage() {
 
   const markAllRead = async () => {
     try {
-      await axios.put(`${API}/api/notifications/read-all`, {}, { headers });
+      await axios.put(`${API_URL}/notifications/read-all`, {}, { headers });
       setNotifications(prev => prev.map(n => ({ ...n, read: true })));
     } catch {}
   };
@@ -58,7 +58,7 @@ export default function NotificationsPage() {
   const markOneRead = async (notif) => {
     if (!notif.read) {
       try {
-        await axios.put(`${API}/api/notifications/${notif._id}/read`, {}, { headers });
+        await axios.put(`${API_URL}/notifications/${notif._id}/read`, {}, { headers });
         setNotifications(prev => prev.map(n => n._id === notif._id ? { ...n, read: true } : n));
       } catch {}
     }

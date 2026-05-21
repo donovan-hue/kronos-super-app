@@ -31,6 +31,7 @@ exports.getWallet = async (req, res) => {
         balance: cashWallet.balance,
         currency: cashWallet.currency,
         isLocked: cashWallet.isLocked,
+        kroTokens: cashWallet.kroTokens || 0,
         transactions: cashWallet.transactions.slice(-30).reverse()
       },
       kro: kroWallet ? {

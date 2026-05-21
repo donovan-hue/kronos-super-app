@@ -16,7 +16,7 @@ const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:3000';
 
 // ─── Rutas existentes ─────────────────────────────────────────────────────
 router.post('/register', register);
-router.post('/login', authLimiter,, login);
+router.post('/login', authLimiter, login);
 router.post('/forgot-password', forgotPassword);
 router.get('/profile', protect, getProfile);
 router.post('/follow/:userId', protect, followUser);
