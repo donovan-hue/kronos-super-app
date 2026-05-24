@@ -51,7 +51,6 @@ function AppLayout({ children }) {
 // Lazy load modules
 const SocialModule    = lazy(() => import('./social/SocialModule'));
 const ShopModule      = lazy(() => import('./shop/ShopModule'));
-const FoodModule      = lazy(() => import('./food/FoodModule'));
 const Login           = lazy(() => import('./components/Auth/Login'));
 const Register        = lazy(() => import('./components/Auth/Register'));
 const OAuthCallback   = lazy(() => import('./components/Auth/OAuthCallback'));
@@ -59,10 +58,6 @@ const UniversalSearch = lazy(() => import('./pages/Search'));
 const HybridFeed      = lazy(() => import('./pages/Feed'));
 const UserProfile     = lazy(() => import('./pages/Profile'));
 const Settings        = lazy(() => import('./pages/Settings'));
-const VirtualCinema   = lazy(() => import('./pages/Cinema'));
-const BlackHoleEvents = lazy(() => import('./pages/Events'));
-const PortalKronos    = lazy(() => import('./pages/Portal'));
-const MiniAppDashboard = lazy(() => import('./pages/MiniApps'));
 const KronosMockups   = lazy(() => import('./pages/KronosMockups'));
 const Pricing         = lazy(() => import('./pages/Pricing'));
 const SubscriptionSuccess = lazy(() => import('./pages/SubscriptionSuccess'));
@@ -130,7 +125,6 @@ function App() {
             <Route path="/profile/:userId"       element={<P><UserProfile /></P>} />
             <Route path="/social/*"              element={<P><SocialModule /></P>} />
             <Route path="/shop/*"                element={<P><ShopModule /></P>} />
-            <Route path="/food/*"                element={<P><FoodModule /></P>} />
             <Route path="/settings"              element={<P><Settings /></P>} />
             <Route path="/settings/:tab"         element={<P><Settings /></P>} />
             <Route path="/wallet"                element={<P><Wallet /></P>} />
@@ -143,10 +137,6 @@ function App() {
             <Route path="/health"                element={<P><Health /></P>} />
             <Route path="/avatar"                element={<P><AvatarPage /></P>} />
             <Route path="/video-editor"          element={<P><VideoEditorPage /></P>} />
-            <Route path="/miniapps"              element={<P><MiniAppDashboard /></P>} />
-            <Route path="/portal"                element={<P><PortalKronos /></P>} />
-            <Route path="/cinema"                element={<P><VirtualCinema /></P>} />
-            <Route path="/events"                element={<P><BlackHoleEvents /></P>} />
             <Route path="/subscription/success"  element={<ProtectedRoute><SubscriptionSuccess /></ProtectedRoute>} />
 
             {/* Admin */}

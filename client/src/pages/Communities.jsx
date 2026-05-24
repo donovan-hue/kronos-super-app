@@ -14,7 +14,6 @@ const CATEGORIES = [
   { value: 'sports', label: '⚽ Deportes' },
   { value: 'music', label: '🎵 Música' },
   { value: 'gaming', label: '🎮 Gaming' },
-  { value: 'food', label: '🍕 Comida' },
   { value: 'travel', label: '✈️ Viajes' },
   { value: 'fashion', label: '👗 Moda' },
   { value: 'health', label: '💪 Salud' },

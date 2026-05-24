@@ -6,11 +6,8 @@ const screens = [
   "feed",
   "chat",
   "shop",
-  "food",
-  "cinema",
   "profile",
   "admin",
-  "miniapps",
 ];
 
 const screenNames = {
@@ -19,11 +16,8 @@ const screenNames = {
   feed: "Feed Social",
   chat: "Chat",
   shop: "Tienda",
-  food: "Food Delivery",
-  cinema: "Cinema",
   profile: "Perfil",
   admin: "Admin",
-  miniapps: "Mini Apps",
 };
 
 function Phone({ children, label }) {
@@ -474,96 +468,6 @@ function ShopScreen() {
   );
 }
 
-function FoodScreen() {
-  const restaurants = [
-    { name: "Sushi Kronos", time: "25 min", rating: 4.8, cat: "Japonés" },
-    { name: "Burger Lab", time: "15 min", rating: 4.5, cat: "Burgers" },
-    { name: "Taco Nebula", time: "20 min", rating: 4.9, cat: "Mexicano" },
-  ];
-  return (
-    <div style={{ height: "100%", background: "#08080f", position: "relative" }}>
-      <div style={{ padding: "8px 16px" }}>
-        <HoloText size={18}>Food Delivery</HoloText>
-        <div style={{ color: "rgba(255,255,255,0.3)", fontSize: 11, marginTop: 2, fontFamily: "'Outfit', sans-serif" }}>📍 Tu ubicación</div>
-      </div>
-      <div style={{ display: "flex", gap: 8, padding: "8px 16px" }}>
-        {["🍣 Sushi", "🍔 Burgers", "🌮 Tacos", "🍕 Pizza"].map((c, i) => (
-          <div key={i} style={{
-            padding: "10px 12px", borderRadius: 12, fontSize: 11, fontFamily: "'Outfit', sans-serif",
-            background: i === 0 ? "rgba(124,58,237,0.15)" : "rgba(255,255,255,0.03)",
-            border: `1px solid ${i === 0 ? "rgba(124,58,237,0.3)" : "rgba(255,255,255,0.05)"}`,
-            color: i === 0 ? "#c084fc" : "rgba(255,255,255,0.4)", whiteSpace: "nowrap",
-          }}>{c}</div>
-        ))}
-      </div>
-      <div style={{ padding: "8px 16px", display: "flex", flexDirection: "column", gap: 10 }}>
-        {restaurants.map((r, i) => (
-          <GlassCard key={i} style={{ display: "flex", gap: 12, alignItems: "center" }}>
-            <div style={{
-              width: 64, height: 64, borderRadius: 12, flexShrink: 0,
-              background: `linear-gradient(135deg, hsl(${250+i*30},40%,18%), hsl(${200+i*20},50%,14%))`,
-              display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28,
-            }}>
-              {i === 0 ? "🍣" : i === 1 ? "🍔" : "🌮"}
-            </div>
-            <div style={{ flex: 1 }}>
-              <div style={{ color: "#fff", fontSize: 14, fontWeight: 600, fontFamily: "'Outfit', sans-serif" }}>{r.name}</div>
-              <div style={{ color: "rgba(255,255,255,0.35)", fontSize: 11, fontFamily: "'Outfit', sans-serif" }}>{r.cat}</div>
-              <div style={{ display: "flex", gap: 10, marginTop: 4, fontSize: 11 }}>
-                <span style={{ color: "#facc15" }}>⭐ {r.rating}</span>
-                <span style={{ color: "rgba(255,255,255,0.3)" }}>🕐 {r.time}</span>
-              </div>
-            </div>
-          </GlassCard>
-        ))}
-      </div>
-      <BottomNav active={3} />
-    </div>
-  );
-}
-
-function CinemaScreen() {
-  return (
-    <div style={{ height: "100%", background: "#08080f", position: "relative" }}>
-      <div style={{ padding: "8px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <HoloText size={18}>Cinema</HoloText>
-        <span style={{ fontSize: 18 }}>🎬</span>
-      </div>
-      <div style={{ padding: "0 16px" }}>
-        <GlassCard style={{ padding: 0, overflow: "hidden" }}>
-          <div style={{
-            height: 160,
-            background: "linear-gradient(135deg, #1a0a3e, #0d1f3d, #0a2530)",
-            display: "flex", alignItems: "center", justifyContent: "center", position: "relative",
-          }}>
-            <div style={{ fontSize: 48 }}>▶</div>
-            <div style={{ position: "absolute", bottom: 10, left: 14, right: 14 }}>
-              <div style={{ color: "#fff", fontSize: 15, fontWeight: 700, fontFamily: "'Outfit', sans-serif" }}>Sala: Sci-Fi Night</div>
-              <div style={{ color: "rgba(255,255,255,0.4)", fontSize: 11 }}>12 personas viendo · En vivo</div>
-            </div>
-          </div>
-        </GlassCard>
-      </div>
-      <div style={{ padding: "12px 16px" }}>
-        <div style={{ color: "rgba(255,255,255,0.5)", fontSize: 12, marginBottom: 8, fontFamily: "'Outfit', sans-serif" }}>Salas activas</div>
-        {["Anime Marathon · 8 👥", "Música en vivo · 23 👥", "Documentales · 5 👥"].map((s, i) => (
-          <div key={i} style={{
-            display: "flex", justifyContent: "space-between", padding: "12px 0",
-            borderBottom: "1px solid rgba(255,255,255,0.04)",
-            color: "rgba(255,255,255,0.6)", fontSize: 13, fontFamily: "'Outfit', sans-serif",
-          }}>
-            <span>{s}</span>
-            <span style={{
-              padding: "4px 12px", borderRadius: 8, fontSize: 10,
-              background: "rgba(124,58,237,0.15)", color: "#a855f7",
-            }}>Unirse</span>
-          </div>
-        ))}
-      </div>
-      <BottomNav active={0} />
-    </div>
-  );
-}
 
 function ProfileScreen() {
   return (
@@ -647,36 +551,6 @@ function AdminScreen() {
   );
 }
 
-function MiniAppsScreen() {
-  const apps = [
-    { icon: "🧮", name: "Calculadora" },
-    { icon: "📝", name: "Notas" },
-    { icon: "📈", name: "Stocks" },
-    { icon: "⏱", name: "Timer" },
-    { icon: "🌐", name: "Traductor" },
-    { icon: "🌤", name: "Clima" },
-    { icon: "🤖", name: "IA Chat" },
-    { icon: "👁", name: "AR View" },
-    { icon: "🪙", name: "Tokens" },
-  ];
-  return (
-    <div style={{ height: "100%", background: "#08080f", position: "relative" }}>
-      <div style={{ padding: "8px 16px" }}>
-        <HoloText size={18}>Mini Apps</HoloText>
-        <div style={{ color: "rgba(255,255,255,0.3)", fontSize: 11, fontFamily: "'Outfit', sans-serif" }}>Herramientas integradas</div>
-      </div>
-      <div style={{ padding: "8px 16px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
-        {apps.map((a, i) => (
-          <GlassCard key={i} style={{ textAlign: "center", padding: "18px 8px" }}>
-            <div style={{ fontSize: 28 }}>{a.icon}</div>
-            <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 11, marginTop: 6, fontFamily: "'Outfit', sans-serif" }}>{a.name}</div>
-          </GlassCard>
-        ))}
-      </div>
-      <BottomNav active={0} />
-    </div>
-  );
-}
 
 const screenComponents = {
   splash: SplashScreen,
@@ -684,11 +558,8 @@ const screenComponents = {
   feed: FeedScreen,
   chat: ChatScreen,
   shop: ShopScreen,
-  food: FoodScreen,
-  cinema: CinemaScreen,
   profile: ProfileScreen,
   admin: AdminScreen,
-  miniapps: MiniAppsScreen,
 };
 
 export default function KronosMockups() {

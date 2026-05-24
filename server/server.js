@@ -115,30 +115,20 @@ app.use('/api/feed', require('./routes/feed'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/multimedia', require('./routes/multimedia'));
 app.use('/api/checkout', require('./routes/checkout')); // Stripe payment routes
-app.use('/api/audio', require('./routes/audio')); // Portal Kronos - Spatial Audio
-app.use('/api/translation', require('./routes/translation')); // Real-time Translation
-app.use('/api/miniapps', require('./routes/miniApps')); // Mini-Apps Plugin System
-app.use('/api/web3', require('./routes/web3')); // Web3 MetaMask Authentication
-app.use('/api/tokens', require('./routes/tokens')); // Kronos Token - Attention Economy
-app.use('/api/ar', require('./routes/ar')); // Augmented Reality
-app.use('/api/delivery', require('./routes/delivery')); // Delivery Prediction & Optimization
-app.use('/api/securechat', require('./routes/securechat')); // Secure Encrypted Chat
-app.use('/api/stories', require('./routes/stories')); // Interactive Stories - Choose Your Own Adventure
+app.use('/api/tokens', require('./routes/tokens')); // Kronos Token
+app.use('/api/stories', require('./routes/stories')); // Stories 24h
 app.use('/api/admin', require('./routes/admin')); // Admin Dashboard
 app.use('/api/reporting', require('./routes/reporting')); // Report & Block System
 app.use('/api/refunds', require('./routes/refunds')); // Refund Management
 app.use('/api/twofactor', require('./routes/twofactor')); // 2FA Authentication
 app.use('/api/videos', require('./routes/videos')); // Video Upload & Streaming
-app.use('/api/recommendations', require('./routes/recommendations')); // Recommendation Engine + Virality
-app.use('/api/tips', require('./routes/tips')); // Propinas Directas (Micro-transacciones)
+app.use('/api/recommendations', require('./routes/recommendations')); // Recommendation Engine
+app.use('/api/tips', require('./routes/tips')); // Propinas Directas
 app.use('/api/ai', require('./routes/ai')); // IA Generativa (OpenAI)
-app.use('/api/blackhole', require('./routes/blackhole')); // Eventos Agujero Negro
-app.use('/api/cinema', require('./routes/cinema')); // Cine Virtual Sincronizado
-app.use('/api/sessions', require('./routes/sessions')); // Gestion de sesiones activas
-app.use('/api/analytics', require('./routes/analytics')); // Metricas de atencion e interacciones
-app.use('/api/interactions', require('./routes/interactions')); // Registro de interacciones de usuario
-app.use('/api/food', require('./routes/food')); // Food - Restaurantes y pedidos
-app.use('/api/wallet', require('./routes/wallet')); // Wallet (cash balance, transfers, virtual card)
+app.use('/api/sessions', require('./routes/sessions')); // Sesiones activas
+app.use('/api/analytics', require('./routes/analytics')); // Métricas
+app.use('/api/interactions', require('./routes/interactions')); // Interacciones
+app.use('/api/wallet', require('./routes/wallet')); // Wallet
 app.use('/api/ephemeral-stories', require('./routes/ephemeralStories')); // Instagram-style Stories 24h
 app.use('/api/communities', require('./routes/communities')); // Comunidades / Grupos
 app.use('/api/listings', require('./routes/listings')); // Marketplace P2P con Escrow
@@ -529,13 +519,6 @@ if (process.env.NODE_ENV !== 'test') {
   scheduleRewardDistribution();
 }
 
-// Initialize Built-in Mini-Apps
-const { initializeBuiltInApps } = require('./services/miniAppInitializer');
-if (process.env.NODE_ENV !== 'test') {
-  initializeBuiltInApps().catch(err => {
-    console.error('Failed to initialize mini-apps:', err);
-  });
-}
 
 // Seed Avatar default items
 const { seedDefaultItems } = require('./controllers/avatarController');

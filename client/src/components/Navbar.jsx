@@ -6,18 +6,17 @@ import TierBadge from './TierBadge';
 import useSubscription from '../hooks/useSubscription';
 
 const NAV_LINKS = [
-  { to: '/feed',        label: 'Inicio',      icon: '🏠' },
-  { to: '/search',      label: 'Buscar',       icon: '🔍' },
-  { to: '/social/chat', label: 'Chat',         icon: '💬' },
-  { to: '/communities', label: 'Comunidades',  icon: '🏛️' },
-  { to: '/shop',        label: 'Shop',         icon: '🛍️' },
-  { to: '/food',        label: 'Food',         icon: '🍔' },
-  { to: '/wallet',      label: 'Wallet',       icon: '💳' },
-  { to: '/live',        label: 'Live',         icon: '🔴' },
-  { to: '/events',      label: 'Eventos',      icon: '⚡' },
-  { to: '/cinema',      label: 'Cine',         icon: '🎬' },
-  { to: '/portal',      label: 'Portal',       icon: '🎧' },
-  { to: '/miniapps',    label: 'Apps',         icon: '🧩' },
+  { to: '/feed',         label: 'Inicio',       icon: '🏠' },
+  { to: '/search',       label: 'Buscar',        icon: '🔍' },
+  { to: '/social/chat',  label: 'Chat',          icon: '💬' },
+  { to: '/communities',  label: 'Comunidades',   icon: '🏛️' },
+  { to: '/marketplace',  label: 'Marketplace',   icon: '🛍️' },
+  { to: '/wallet',       label: 'Wallet',        icon: '💳' },
+  { to: '/live',         label: 'Live',          icon: '🔴' },
+  { to: '/health',       label: 'Health',        icon: '❤️' },
+  { to: '/avatar',       label: 'Avatar',        icon: '🎭' },
+  { to: '/reservations', label: 'Reservaciones', icon: '📅' },
+  { to: '/video-editor', label: 'Video Editor',  icon: '🎬' },
 ];
 
 export default function Navbar() {
