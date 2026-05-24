@@ -16,9 +16,9 @@ class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div style={{ minHeight: '100vh', background: '#08080f', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
+        <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
           <div style={{ fontSize: 48 }}>⚠️</div>
-          <div style={{ color: '#fff', fontSize: 18, fontWeight: 700 }}>Algo salió mal</div>
+          <div style={{ color: '#0a0a14', fontSize: 18, fontWeight: 700 }}>Algo salió mal</div>
           <button onClick={() => window.location.reload()} style={{ padding: '10px 28px', borderRadius: 24, background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 14, fontWeight: 700 }}>
             Recargar
           </button>
@@ -74,8 +74,8 @@ const AvatarPage      = lazy(() => import('./pages/Avatar'));
 const VideoEditorPage = lazy(() => import('./pages/VideoEditor'));
 
 const LOADING = (
-  <div style={{ minHeight: '100vh', background: '#08080f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-    <div style={{ color: 'rgba(255,255,255,0.4)' }}>Cargando...</div>
+  <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ color: 'rgba(10,10,20,0.4)' }}>Cargando...</div>
   </div>
 );
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+﻿import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
@@ -9,7 +9,7 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 function PostGrid({ posts, onLike }) {
   if (!posts.length) {
     return (
-      <div style={{ textAlign: 'center', padding: 48, color: 'rgba(255,255,255,0.3)' }}>
+      <div style={{ textAlign: 'center', padding: 48, color: 'rgba(10,10,20,0.35)' }}>
         <div style={{ fontSize: 40, marginBottom: 8 }}>📝</div>
         <div>Sin publicaciones aún</div>
       </div>
@@ -45,10 +45,10 @@ function BookmarksTab({ userId }) {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <div style={{ textAlign: 'center', padding: 40, color: 'rgba(255,255,255,0.3)' }}>Cargando...</div>;
+  if (loading) return <div style={{ textAlign: 'center', padding: 40, color: 'rgba(10,10,20,0.35)' }}>Cargando...</div>;
   if (!posts.length) {
     return (
-      <div style={{ textAlign: 'center', padding: 48, color: 'rgba(255,255,255,0.3)' }}>
+      <div style={{ textAlign: 'center', padding: 48, color: 'rgba(10,10,20,0.35)' }}>
         <div style={{ fontSize: 40, marginBottom: 8 }}>🔖</div>
         <div>Sin guardados aún</div>
         <div style={{ fontSize: 12, marginTop: 4 }}>Guarda posts con el botón 🔖 del feed</div>
@@ -153,16 +153,16 @@ function Profile() {
 
   if (loading) {
     return (
-      <div style={{ minHeight: '100vh', background: '#08080f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: 'rgba(255,255,255,0.4)' }}>Cargando perfil...</div>
+      <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ color: 'rgba(10,10,20,0.5)' }}>Cargando perfil...</div>
       </div>
     );
   }
 
   if (!profile) {
     return (
-      <div style={{ minHeight: '100vh', background: '#08080f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.4)' }}>
+      <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.5)' }}>
           <div style={{ fontSize: 40, marginBottom: 8 }}>😕</div>
           <div>Perfil no encontrado</div>
         </div>
@@ -171,11 +171,11 @@ function Profile() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#08080f', paddingBottom: 100 }}>
+    <div style={{ minHeight: '100vh', background: '#ffffff', paddingBottom: 100 }}>
       {/* Back button */}
       {userId && (
         <button onClick={() => navigate(-1)}
-          style={{ position: 'fixed', top: 16, left: 16, zIndex: 10, background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '50%', width: 40, height: 40, color: '#fff', fontSize: 18, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          style={{ position: 'fixed', top: 16, left: 16, zIndex: 10, background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(79,172,254,0.18)', borderRadius: '50%', width: 40, height: 40, color: '#fff', fontSize: 18, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           ←
         </button>
       )}
@@ -214,7 +214,7 @@ function Profile() {
             ].map(stat => (
               <div key={stat.label} style={{ textAlign: 'center' }}>
                 <div style={{ color: '#fff', fontSize: 18, fontWeight: 800 }}>{stat.value}</div>
-                <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11 }}>{stat.label}</div>
+                <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11 }}>{stat.label}</div>
               </div>
             ))}
           </div>
@@ -241,7 +241,7 @@ function Profile() {
         </div>
 
         {/* Tabs */}
-        <div style={{ display: 'flex', gap: 4, marginBottom: 16, background: 'rgba(255,255,255,0.04)', borderRadius: 14, padding: 4 }}>
+        <div style={{ display: 'flex', gap: 4, marginBottom: 16, background: 'rgba(79,172,254,0.04)', borderRadius: 14, padding: 4 }}>
           {[
             { id: 'posts', label: '📝 Posts' },
             ...(isOwnProfile ? [{ id: 'bookmarks', label: '🔖 Guardados' }] : []),

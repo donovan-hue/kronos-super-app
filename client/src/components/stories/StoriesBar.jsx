@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
@@ -19,7 +19,7 @@ function StoryRing({ group, onOpen, isMine }) {
       style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, cursor: 'pointer', minWidth: 64 }}
     >
       <div style={{ ...ringStyle, borderRadius: '50%' }}>
-        <div style={{ width: 52, height: 52, borderRadius: '50%', background: '#08080f', padding: 2 }}>
+        <div style={{ width: 52, height: 52, borderRadius: '50%', background: '#ffffff', padding: 2 }}>
           <img
             src={author.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=7c3aed&color=fff&size=52`}
             alt={name}
@@ -43,7 +43,7 @@ function AddStoryButton({ onAdd }) {
       <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'rgba(124,58,237,0.2)', border: '2px dashed rgba(124,58,237,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22 }}>
         +
       </div>
-      <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 10 }}>Añadir</span>
+      <span style={{ color: 'rgba(10,10,20,0.5)', fontSize: 10 }}>Añadir</span>
     </div>
   );
 }
@@ -153,7 +153,7 @@ function StoryViewer({ group, onClose, currentUser }) {
         />
         <div>
           <div style={{ color: '#fff', fontSize: 13, fontWeight: 700 }}>{group.author.firstName} {group.author.lastName}</div>
-          <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 11 }}>
+          <div style={{ color: 'rgba(10,10,20,0.65)', fontSize: 11 }}>
             {new Date(story.createdAt).toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' })}
           </div>
         </div>
@@ -283,7 +283,7 @@ function StoryCreator({ onClose, onCreated }) {
           onChange={e => setText(e.target.value)}
           placeholder="Escribe algo..."
           maxLength={300}
-          style={{ width: '100%', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 10, padding: '10px 14px', color: '#fff', fontSize: 14, resize: 'none', outline: 'none', minHeight: 60, fontFamily: 'inherit', boxSizing: 'border-box', marginBottom: 12 }}
+          style={{ width: '100%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.18)', borderRadius: 10, padding: '10px 14px', color: '#fff', fontSize: 14, resize: 'none', outline: 'none', minHeight: 60, fontFamily: 'inherit', boxSizing: 'border-box', marginBottom: 12 }}
         />
 
         <div style={{ display: 'flex', gap: 8, marginBottom: 12, flexWrap: 'wrap' }}>
@@ -293,7 +293,7 @@ function StoryCreator({ onClose, onCreated }) {
           ))}
         </div>
 
-        <label style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'rgba(255,255,255,0.6)', fontSize: 13, cursor: 'pointer', marginBottom: 16 }}>
+        <label style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'rgba(10,10,20,0.65)', fontSize: 13, cursor: 'pointer', marginBottom: 16 }}>
           <span>📷</span> Subir imagen/video
           <input type="file" accept="image/*,video/*" style={{ display: 'none' }} onChange={e => setFile(e.target.files[0])} />
         </label>
