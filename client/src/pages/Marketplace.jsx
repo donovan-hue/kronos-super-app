@@ -237,14 +237,6 @@ function ListingDetailModal({ listing: initialListing, user, onClose, onUpdate }
   const isSeller = myId && sellerId && myId.toString() === sellerId.toString();
   const isBuyer = myId && buyerId && myId.toString() === buyerId.toString();
 
-  const refreshListing = async () => {
-    try {
-      const { data } = await axios.get(`${API_URL}/listings/${listing._id}`);
-      setListing(data.listing);
-      onUpdate();
-    } catch {}
-  };
-
   const handleBuy = async () => {
     setLoading(true);
     setMsg('');

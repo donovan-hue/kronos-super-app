@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
-import { GlassCard, HoloText, BottomNav } from '../components/kronos';
+import { GlassCard, BottomNav } from '../components/kronos';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
@@ -115,7 +115,7 @@ function AvatarCanvas({ avatar }) {
 }
 
 export default function AvatarPage() {
-  const { user } = useContext(AuthContext);
+  useContext(AuthContext);
   const [activeTab, setActiveTab] = useState('avatar');
   const [avatar, setAvatar] = useState(null);
   const [shopItems, setShopItems] = useState([]);

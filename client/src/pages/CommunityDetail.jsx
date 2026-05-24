@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { GlassCard, HoloText, BottomNav, HashtagText } from '../components/kronos';
+import { GlassCard, BottomNav, HashtagText } from '../components/kronos';
 import { AuthContext } from '../context/AuthContext';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
@@ -279,7 +279,7 @@ export default function CommunityDetail() {
               const member = entry.user || entry;
               const memberId = member._id || member;
               const role = entry.role || 'member';
-              const isCreator = community.creator?._id?.toString() === memberId?.toString();
+              void (community.creator?._id?.toString() === memberId?.toString());
               const roleBadge = role === 'admin'
                 ? { label: 'Admin', bg: 'linear-gradient(135deg,#f59e0b,#ef4444)' }
                 : role === 'mod'

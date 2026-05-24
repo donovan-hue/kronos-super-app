@@ -5,13 +5,6 @@ import { AuthContext } from '../../context/AuthContext';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
-const BG_GRADIENTS = [
-  'linear-gradient(135deg,#7c3aed,#ec4899)',
-  'linear-gradient(135deg,#06b6d4,#7c3aed)',
-  'linear-gradient(135deg,#f59e0b,#ef4444)',
-  'linear-gradient(135deg,#10b981,#06b6d4)',
-  'linear-gradient(135deg,#8b5cf6,#3b82f6)',
-];
 
 function StoryRing({ group, onOpen, isMine }) {
   const { author, hasUnviewed } = group;

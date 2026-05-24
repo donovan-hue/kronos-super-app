@@ -1,4 +1,3 @@
-import { SkeletonWalletCard, SkeletonList } from '../components/kronos';
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { GlassCard, HoloText, BottomNav } from '../components/kronos';
@@ -321,7 +320,7 @@ function DailyRewardCard({ onClaimed }) {
 
 // ── Main Wallet Page ──────────────────────────────────────────────────────────
 export default function Wallet() {
-  const { user } = useContext(AuthContext);
+  useContext(AuthContext);
   const [data, setData] = useState(null);
   const [card, setCard] = useState(null);
   const [loading, setLoading] = useState(true);

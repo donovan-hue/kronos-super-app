@@ -124,7 +124,7 @@ function IncomingCallModal({ callerName, onAccept, onReject }) {
 function LiveStreamer({ socket, streamerId, streamerName, onStop }) {
   const videoRef = useRef(null);
   const recorderRef = useRef(null);
-  const [viewers, setViewers] = useState(0);
+  const [, setViewers] = useState(0);
   const [chatMessages, setChatMessages] = useState([]);
   const [chatInput, setChatInput] = useState('');
   const [live, setLive] = useState(false);

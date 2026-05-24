@@ -25,7 +25,7 @@ function timeAgo(date) {
 }
 
 export default function NotificationsPage() {
-  const { user } = useContext(AuthContext);
+  useContext(AuthContext);
   const navigate = useNavigate();
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
