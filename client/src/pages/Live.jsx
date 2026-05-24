@@ -231,7 +231,7 @@ function LiveViewer({ socket, stream, currentUser }) {
       try {
         const sb = ms.addSourceBuffer('video/webm;codecs=vp8,opus');
         sbRef.current = sb;
-      } catch (e) { // silenced; }
+      } catch { }
     });
 
     socket.on('viewer_count', ({ streamerId, count }) => {

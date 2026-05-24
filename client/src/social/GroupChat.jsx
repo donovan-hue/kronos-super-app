@@ -57,7 +57,7 @@ export default function GroupChat() {
       const message = res.data.data;
       setMessages(prev => [...prev, message]);
       socket?.emit('send_group_message', { groupId, message });
-    } catch (e) { // silenced; }
+    } catch { }
     setInput('');
     clearTimeout(typingTimeout.current);
     socket?.emit('group_stop_typing', { groupId, userId: myId });

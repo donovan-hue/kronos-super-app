@@ -337,7 +337,7 @@ export default function Wallet() {
       ]);
       setData(walletRes.data);
       setCard(cardRes.data.data);
-    } catch (e) { // silenced; }
+    } catch { }
     finally { setLoading(false); }
   };
 
@@ -353,7 +353,7 @@ export default function Wallet() {
       const res = await axios.post(`${API_URL}/wallet/card/freeze`);
       setCard(c => ({ ...c, frozen: res.data.frozen }));
       showToast(res.data.message);
-    } catch (e) { // silenced; }
+    } catch { }
   };
 
   const txIcon = { deposit: '⬇️', withdrawal: '⬆️', transfer_in: '📥', transfer_out: '📤', payment: '🛍️', refund: '↩️' };
