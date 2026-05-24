@@ -1,40 +1,39 @@
 # ScriptDrop ⚡
-
 Generador de scripts virales para TikTok y Reels con IA.
 
 ## Stack
-- React + Vite + Tailwind CSS
-- Supabase (auth + base de datos)
-- Anthropic API (generación con IA)
-- Vercel (deploy)
+React + Vite · Supabase (auth + DB + Edge Functions) · Anthropic API · Vercel
 
 ## Setup local
-
-1. Clona el repo:
 ```bash
 git clone https://github.com/donovan-hue/scriptdrop.git
 cd scriptdrop
 npm install
 ```
-
-2. Crea `.env.local` en la raíz:
+Crea `.env.local`:
 ```
-VITE_SUPABASE_URL=tu_supabase_url
-VITE_SUPABASE_ANON_KEY=tu_supabase_anon_key
+VITE_SUPABASE_URL=https://akvrbjhixggzynydlzwp.supabase.co
+VITE_SUPABASE_ANON_KEY=sb_publishable_IPz-0nEi3ZS_7QfQl23gsg_gEX34Awb
 ```
-
-3. Corre la app:
 ```bash
 npm run dev
 ```
 
-4. Abre `http://localhost:5173`
+## Planes
+| | Gratis | Pro | Agencia |
+|---|---|---|---|
+| Precio | $0 | $9.99/mes | $24.99/mes |
+| Scripts/día | 3 | ∞ | ∞ |
+| Modos | Script+Hook+Hashtags | +Bio+Ideas | Todo |
+| Historial | 5 | 30 días | Ilimitado |
+| Exportar TXT | ❌ | ✅ | ✅ |
+| Cuentas | 1 | 1 | 5 |
 
-## Fases completadas
-- [x] Fase 1 — Definición
+## Estado de fases
+- [x] Fase 1 — Definición del producto
 - [x] Fase 2 — Setup técnico + estructura
-- [x] Fase 3 — Auth + Supabase
-- [x] Fase 4 — Generador de scripts con IA
-- [ ] Fase 5 — Pagos con Stripe
-- [ ] Fase 6 — UI/UX final
-- [ ] Fase 7 — Deploy a Vercel
+- [x] Fase 3 — Auth + Supabase + tablas
+- [x] Fase 4 — Generador IA (5 modos)
+- [x] Fase 5 — Edge Function (API key segura)
+- [ ] Fase 6 — Stripe (pagos)
+- [ ] Fase 7 — Deploy Vercel
