@@ -80,11 +80,11 @@ export default function GroupChat() {
     <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
       <div style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12, background: '#ffffff', borderBottom: '1px solid rgba(79,172,254,0.12)', backdropFilter: 'blur(12px)', position: 'sticky', top: 0, zIndex: 50 }}>
-        <button onClick={() => navigate('/social/chat')} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.6)', fontSize: 22, cursor: 'pointer', padding: 4 }}>←</button>
+        <button onClick={() => navigate('/social/chat')} style={{ background: 'none', border: 'none', color: 'rgba(10,10,20,0.65)', fontSize: 22, cursor: 'pointer', padding: 4 }}>←</button>
         <div style={{ width: 38, height: 38, borderRadius: '50%', background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>👥</div>
         <div style={{ flex: 1 }}>
           <div style={{ color: '#fff', fontWeight: 600, fontSize: 14 }}>{group?.name || 'Grupo'}</div>
-          <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: 11 }}>
+          <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 11 }}>
             {typingUsers.length > 0
               ? `${typingUsers.map(u => u.username).join(', ')} escribiendo...`
               : `${group?.members?.length || 0} miembros`}
@@ -102,7 +102,7 @@ export default function GroupChat() {
         {/* Messages */}
         <div style={{ flex: 1, overflowY: 'auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: 8, paddingBottom: 80 }}>
           {messages.length === 0 && (
-            <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.3)', padding: 40 }}>
+            <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.35)', padding: 40 }}>
               <div style={{ fontSize: 40, marginBottom: 8 }}>👥</div>
               <div>Empieza la conversación grupal</div>
             </div>
@@ -119,7 +119,7 @@ export default function GroupChat() {
                       alt=""
                       style={{ width: 22, height: 22, borderRadius: '50%', objectFit: 'cover' }}
                     />
-                    <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11 }}>{author?.firstName || author?.username}</span>
+                    <span style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11 }}>{author?.firstName || author?.username}</span>
                   </div>
                 )}
                 <div style={{
@@ -130,7 +130,7 @@ export default function GroupChat() {
                 }}>
                   {msg.content}
                 </div>
-                <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: 10, paddingLeft: isMine ? 0 : 6, paddingRight: isMine ? 6 : 0 }}>
+                <span style={{ color: 'rgba(10,10,20,0.35)', fontSize: 10, paddingLeft: isMine ? 0 : 6, paddingRight: isMine ? 6 : 0 }}>
                   {new Date(msg.createdAt).toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' })}
                 </span>
               </div>
@@ -142,7 +142,7 @@ export default function GroupChat() {
         {/* Members panel */}
         {showMembers && group && (
           <div style={{ width: 220, background: '#ffffff', borderLeft: '1px solid rgba(255,255,255,0.06)', padding: 16, overflowY: 'auto' }}>
-            <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, marginBottom: 12, textTransform: 'uppercase', letterSpacing: 1 }}>Miembros ({group.members?.length})</div>
+            <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11, marginBottom: 12, textTransform: 'uppercase', letterSpacing: 1 }}>Miembros ({group.members?.length})</div>
             {group.members?.map(m => (
               <div key={m._id} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
                 <img src={m.avatar || `https://ui-avatars.com/api/?name=${m.username}&background=random&color=fff&size=32`} alt="" style={{ width: 32, height: 32, borderRadius: '50%', objectFit: 'cover' }} />

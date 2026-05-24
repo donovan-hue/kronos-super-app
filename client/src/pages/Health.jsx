@@ -71,7 +71,7 @@ function MetricCard({ emoji, label, value, onChange, goal, unit, color, min = 0,
           {emoji}
         </div>
         <div>
-          <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: 11, letterSpacing: 0.5 }}>{label.toUpperCase()}</div>
+          <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11, letterSpacing: 0.5 }}>{label.toUpperCase()}</div>
           {editing ? (
             <input
               autoFocus
@@ -99,7 +99,7 @@ function MetricCard({ emoji, label, value, onChange, goal, unit, color, min = 0,
           ) : (
             <div style={{ color: '#0a0a14', fontSize: 24, fontWeight: 800, lineHeight: 1.2 }}>
               {value.toLocaleString()}
-              <span style={{ color: 'rgba(255,255,255,0.35)', fontSize: 12, fontWeight: 400, marginLeft: 4 }}>{unit}</span>
+              <span style={{ color: 'rgba(10,10,20,0.35)', fontSize: 12, fontWeight: 400, marginLeft: 4 }}>{unit}</span>
             </div>
           )}
         </div>
@@ -108,7 +108,7 @@ function MetricCard({ emoji, label, value, onChange, goal, unit, color, min = 0,
       {goal && (
         <>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 2 }}>
-            <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: 11 }}>Meta: {goal.toLocaleString()} {unit}</span>
+            <span style={{ color: 'rgba(10,10,20,0.35)', fontSize: 11 }}>Meta: {goal.toLocaleString()} {unit}</span>
             <span style={{ color: pct >= 100 ? '#10b981' : color, fontSize: 11, fontWeight: 700 }}>{pct}%</span>
           </div>
           <ProgressBar value={value} max={goal} color={color} />
@@ -164,7 +164,7 @@ function WeeklyChart({ history }) {
           );
         })}
       </div>
-      <div style={{ color: 'rgba(255,255,255,0.25)', fontSize: 10, marginTop: 10, textAlign: 'right' }}>
+      <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 10, marginTop: 10, textAlign: 'right' }}>
         ⭐ = meta 10,000 alcanzada
       </div>
     </GlassCard>
@@ -268,12 +268,12 @@ export default function Health() {
       <div style={{ maxWidth: 480, margin: '0 auto', padding: '16px' }}>
         {/* Header */}
         <HoloText size={26} style={{ marginBottom: 4 }}>Health & Fitness</HoloText>
-        <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: 13, marginBottom: 20, textTransform: 'capitalize' }}>
+        <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 13, marginBottom: 20, textTransform: 'capitalize' }}>
           {formatDateHeader()}
         </div>
 
         {loading ? (
-          <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.35)', padding: 60 }}>
+          <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.35)', padding: 60 }}>
             Cargando tu registro de salud...
           </div>
         ) : (
@@ -291,7 +291,7 @@ export default function Health() {
                   <div style={{ color: '#10b981', fontWeight: 700, fontSize: 14 }}>
                     +10 tokens ganados hoy
                   </div>
-                  <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: 12 }}>
+                  <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12 }}>
                     Meta de 10,000 pasos alcanzada
                   </div>
                 </div>

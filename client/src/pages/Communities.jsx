@@ -106,16 +106,16 @@ function CommunityCard({ community, currentUserId, onJoin, onClick }) {
               {community.privacy === 'private' ? '🔒' : '🌍'}
             </span>
           </div>
-          <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12, marginBottom: 8, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+          <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12, marginBottom: 8, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
             {community.description || 'Sin descripción'}
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11 }}>👥 {community.members?.length || 0} miembros</span>
+            <span style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11 }}>👥 {community.members?.length || 0} miembros</span>
             <button
               onClick={e => { e.stopPropagation(); onJoin(community._id); }}
               style={{
                 padding: '5px 14px', borderRadius: 20, fontSize: 12, fontWeight: 600, border: 'none', cursor: 'pointer',
-                background: isMember ? 'rgba(255,255,255,0.1)' : 'linear-gradient(135deg,#7c3aed,#06b6d4)',
+                background: isMember ? 'rgba(79,172,254,0.1)' : 'linear-gradient(135deg,#7c3aed,#06b6d4)',
                 color: '#fff'
               }}
             >
@@ -221,9 +221,9 @@ export default function Communities() {
 
         {/* Communities list */}
         {loading ? (<div style={{padding:'0 16px'}}><SkeletonList count={4} /></div>) : communities.length === 0 ? (
-          <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.3)', padding: 60 }}>
+          <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.35)', padding: 60 }}>
             <div style={{ fontSize: 48, marginBottom: 12 }}>🏛️</div>
-            <div style={{ fontSize: 16, fontWeight: 600, color: 'rgba(255,255,255,0.5)' }}>
+            <div style={{ fontSize: 16, fontWeight: 600, color: 'rgba(10,10,20,0.5)' }}>
               {tab === 'mine' ? 'No perteneces a ninguna comunidad aún' : 'No hay comunidades'}
             </div>
             <div style={{ fontSize: 13, marginTop: 6 }}>¡Crea la primera!</div>

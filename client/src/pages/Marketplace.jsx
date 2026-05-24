@@ -45,7 +45,7 @@ function statusBadge(status) {
 
 const inputStyle = {
   background: 'rgba(79,172,254,0.07)',
-  border: '1px solid rgba(255,255,255,0.12)',
+  border: '1px solid rgba(79,172,254,0.18)',
   borderRadius: 10,
   padding: '10px 14px',
   color: '#fff',
@@ -107,13 +107,13 @@ function ListingCard({ listing, onClick }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
           {statusBadge(listing.status)}
           {listing.category && (
-            <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)', fontWeight: 600 }}>
+            <span style={{ fontSize: 11, color: 'rgba(10,10,20,0.5)', fontWeight: 600 }}>
               {CATEGORY_LABELS[listing.category] || listing.category}
             </span>
           )}
         </div>
         {listing.seller && (
-          <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', marginTop: 2 }}>
+          <div style={{ fontSize: 12, color: 'rgba(10,10,20,0.5)', marginTop: 2 }}>
             @{listing.seller.username}
           </div>
         )}
@@ -155,7 +155,7 @@ function CreateListingModal({ onClose, onCreated }) {
       <GlassCard style={{ width: '100%', maxWidth: 460 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <div style={{ color: '#0a0a14', fontSize: 18, fontWeight: 700 }}>Nuevo Listing</div>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)', fontSize: 22, cursor: 'pointer', lineHeight: 1 }}>×</button>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'rgba(10,10,20,0.5)', fontSize: 22, cursor: 'pointer', lineHeight: 1 }}>×</button>
         </div>
         {error && (
           <div style={{ background: 'rgba(239,68,68,0.15)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 10, padding: '10px 14px', color: '#f87171', fontSize: 13, marginBottom: 14 }}>
@@ -289,7 +289,7 @@ function ListingDetailModal({ listing: initialListing, user, onClose, onUpdate }
       <GlassCard style={{ width: '100%', maxWidth: 500, position: 'relative' }}>
         <button
           onClick={onClose}
-          style={{ position: 'absolute', top: 14, right: 16, background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)', fontSize: 24, cursor: 'pointer', lineHeight: 1, zIndex: 1 }}
+          style={{ position: 'absolute', top: 14, right: 16, background: 'none', border: 'none', color: 'rgba(10,10,20,0.5)', fontSize: 24, cursor: 'pointer', lineHeight: 1, zIndex: 1 }}
         >
           ×
         </button>
@@ -317,17 +317,17 @@ function ListingDetailModal({ listing: initialListing, user, onClose, onUpdate }
         </div>
 
         {listing.description && (
-          <div style={{ color: 'rgba(255,255,255,0.65)', fontSize: 14, lineHeight: 1.6, marginBottom: 14 }}>
+          <div style={{ color: 'rgba(10,10,20,0.65)', fontSize: 14, lineHeight: 1.6, marginBottom: 14 }}>
             {listing.description}
           </div>
         )}
 
         <div style={{ display: 'flex', gap: 16, marginBottom: 14, flexWrap: 'wrap' }}>
-          <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)' }}>
-            Categoría: <span style={{ color: 'rgba(255,255,255,0.8)' }}>{CATEGORY_LABELS[listing.category] || listing.category}</span>
+          <div style={{ fontSize: 13, color: 'rgba(10,10,20,0.5)' }}>
+            Categoría: <span style={{ color: 'rgba(10,10,20,0.65)' }}>{CATEGORY_LABELS[listing.category] || listing.category}</span>
           </div>
           {listing.seller && (
-            <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)' }}>
+            <div style={{ fontSize: 13, color: 'rgba(10,10,20,0.5)' }}>
               Vendedor: <span style={{ color: '#a78bfa' }}>@{listing.seller.username}</span>
             </div>
           )}
@@ -336,11 +336,11 @@ function ListingDetailModal({ listing: initialListing, user, onClose, onUpdate }
         {listing.status === 'escrow' && (
           <div style={{ background: 'rgba(245,158,11,0.12)', border: '1px solid rgba(251,191,36,0.25)', borderRadius: 12, padding: '12px 14px', marginBottom: 14 }}>
             <div style={{ color: '#fbbf24', fontWeight: 700, fontSize: 13, marginBottom: 4 }}>🔒 Fondos en Escrow</div>
-            <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 12 }}>
+            <div style={{ color: 'rgba(10,10,20,0.65)', fontSize: 12 }}>
               Monto retenido: <strong style={{ color: '#fbbf24' }}>${listing.escrow?.amount?.toLocaleString('es-MX', { minimumFractionDigits: 2 })}</strong>
             </div>
             {listing.buyer && (
-              <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 12, marginTop: 3 }}>
+              <div style={{ color: 'rgba(10,10,20,0.65)', fontSize: 12, marginTop: 3 }}>
                 Comprador: <strong style={{ color: '#a78bfa' }}>@{listing.buyer.username || listing.buyer}</strong>
               </div>
             )}
@@ -351,7 +351,7 @@ function ListingDetailModal({ listing: initialListing, user, onClose, onUpdate }
           <div style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(52,211,153,0.2)', borderRadius: 12, padding: '12px 14px', marginBottom: 14 }}>
             <div style={{ color: '#34d399', fontWeight: 700, fontSize: 13 }}>Transacción completada ✓</div>
             {listing.escrow?.releasedAt && (
-              <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12, marginTop: 3 }}>
+              <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12, marginTop: 3 }}>
                 Liberado: {new Date(listing.escrow.releasedAt).toLocaleDateString('es-MX')}
               </div>
             )}
@@ -435,7 +435,7 @@ function MyListingItem({ listing, onUpdate }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
             {statusBadge(listing.status)}
             {listing.buyer && (
-              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>
+              <span style={{ fontSize: 11, color: 'rgba(10,10,20,0.5)' }}>
                 Comprador: @{listing.buyer.username}
               </span>
             )}
@@ -540,7 +540,7 @@ export default function Marketplace() {
 
         <div style={{ paddingTop: 72, paddingBottom: 8 }}>
           <HoloText size={26} style={{ marginBottom: 4 }}>Marketplace</HoloText>
-          <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14 }}>Compra y vende con escrow seguro</div>
+          <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 14 }}>Compra y vende con escrow seguro</div>
         </div>
 
         <div style={{ display: 'flex', gap: 0, borderBottom: '1px solid rgba(255,255,255,0.07)', marginBottom: 20 }}>
@@ -621,7 +621,7 @@ export default function Marketplace() {
                 ))}
               </div>
             ) : listings.length === 0 ? (
-              <div style={{ textAlign: 'center', padding: '60px 0', color: 'rgba(255,255,255,0.3)', fontSize: 14 }}>
+              <div style={{ textAlign: 'center', padding: '60px 0', color: 'rgba(10,10,20,0.35)', fontSize: 14 }}>
                 <div style={{ fontSize: 48, marginBottom: 12 }}>🛍️</div>
                 No hay listings disponibles
               </div>
@@ -642,7 +642,7 @@ export default function Marketplace() {
                 >
                   ← Anterior
                 </button>
-                <span style={{ display: 'flex', alignItems: 'center', color: 'rgba(255,255,255,0.5)', fontSize: 13 }}>
+                <span style={{ display: 'flex', alignItems: 'center', color: 'rgba(10,10,20,0.5)', fontSize: 13 }}>
                   {page} / {totalPages}
                 </span>
                 <button
@@ -660,11 +660,11 @@ export default function Marketplace() {
         {tab === 'mine' && (
           <>
             {!user ? (
-              <div style={{ textAlign: 'center', padding: '60px 0', color: 'rgba(255,255,255,0.3)', fontSize: 14 }}>
+              <div style={{ textAlign: 'center', padding: '60px 0', color: 'rgba(10,10,20,0.35)', fontSize: 14 }}>
                 Inicia sesión para ver tus listings
               </div>
             ) : myListings.length === 0 ? (
-              <div style={{ textAlign: 'center', padding: '60px 0', color: 'rgba(255,255,255,0.3)', fontSize: 14 }}>
+              <div style={{ textAlign: 'center', padding: '60px 0', color: 'rgba(10,10,20,0.35)', fontSize: 14 }}>
                 <div style={{ fontSize: 48, marginBottom: 12 }}>📦</div>
                 No has publicado nada aún
               </div>

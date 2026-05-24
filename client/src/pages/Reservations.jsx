@@ -95,7 +95,7 @@ function NewReservationModal({ onClose, onCreated }) {
   };
 
   const labelStyle = {
-    color: 'rgba(255,255,255,0.5)',
+    color: 'rgba(10,10,20,0.5)',
     fontSize: 11,
     letterSpacing: 0.5,
     marginBottom: 6,
@@ -108,7 +108,7 @@ function NewReservationModal({ onClose, onCreated }) {
       <GlassCard style={{ width: '100%', maxWidth: 480, borderRadius: '20px 20px 0 0', paddingBottom: 32, maxHeight: '90vh', overflowY: 'auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
           <div style={{ color: '#0a0a14', fontSize: 18, fontWeight: 700 }}>Nueva Reservación</div>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)', fontSize: 22, cursor: 'pointer', lineHeight: 1 }}>✕</button>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'rgba(10,10,20,0.5)', fontSize: 22, cursor: 'pointer', lineHeight: 1 }}>✕</button>
         </div>
 
         {error && (
@@ -174,16 +174,16 @@ function NewReservationModal({ onClose, onCreated }) {
               <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
                 <button type="button"
                   onClick={() => set('partySize', Math.max(1, form.partySize - 1))}
-                  style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(255,255,255,0.12)', color: '#0a0a14', fontSize: 20, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.18)', color: '#0a0a14', fontSize: 20, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   −
                 </button>
                 <span style={{ color: '#0a0a14', fontSize: 22, fontWeight: 700, minWidth: 32, textAlign: 'center' }}>{form.partySize}</span>
                 <button type="button"
                   onClick={() => set('partySize', Math.min(20, form.partySize + 1))}
-                  style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(255,255,255,0.12)', color: '#0a0a14', fontSize: 20, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.18)', color: '#0a0a14', fontSize: 20, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   +
                 </button>
-                <span style={{ color: 'rgba(255,255,255,0.35)', fontSize: 13 }}>
+                <span style={{ color: 'rgba(10,10,20,0.35)', fontSize: 13 }}>
                   {form.partySize === 1 ? 'persona' : 'personas'}
                 </span>
               </div>
@@ -263,18 +263,18 @@ function ReservationCard({ reservation, onCancel }) {
             <StatusBadge status={reservation.status} />
           </div>
 
-          <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: 11, marginBottom: 8 }}>
+          <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11, marginBottom: 8 }}>
             {businessTypeLabel(reservation.businessType)}
           </div>
 
           <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'rgba(255,255,255,0.65)', fontSize: 13 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'rgba(10,10,20,0.65)', fontSize: 13 }}>
               <span>📅</span> {formatDate(reservation.date)}
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'rgba(255,255,255,0.65)', fontSize: 13 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'rgba(10,10,20,0.65)', fontSize: 13 }}>
               <span>🕐</span> {reservation.time}
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'rgba(255,255,255,0.65)', fontSize: 13 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'rgba(10,10,20,0.65)', fontSize: 13 }}>
               <span>👥</span> {reservation.partySize} {reservation.partySize === 1 ? 'persona' : 'personas'}
             </div>
           </div>
@@ -285,7 +285,7 @@ function ReservationCard({ reservation, onCancel }) {
               padding: '8px 12px',
               background: 'rgba(79,172,254,0.04)',
               borderRadius: 8,
-              color: 'rgba(255,255,255,0.45)',
+              color: 'rgba(10,10,20,0.5)',
               fontSize: 12,
               fontStyle: 'italic',
             }}>
@@ -415,7 +415,7 @@ export default function Reservations() {
             ].map(s => (
               <GlassCard key={s.label} style={{ textAlign: 'center', padding: '14px 10px' }}>
                 <div style={{ color: s.color, fontSize: 22, fontWeight: 900, marginBottom: 2 }}>{s.count}</div>
-                <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 10, letterSpacing: 0.5 }}>{s.label}</div>
+                <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 10, letterSpacing: 0.5 }}>{s.label}</div>
               </GlassCard>
             ))}
           </div>
@@ -448,7 +448,7 @@ export default function Reservations() {
 
         {/* Content */}
         {loading ? (
-          <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.35)', padding: 60 }}>
+          <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.35)', padding: 60 }}>
             Cargando reservaciones...
           </div>
         ) : filtered.length === 0 ? (
@@ -457,7 +457,7 @@ export default function Reservations() {
             <div style={{ color: '#0a0a14', fontSize: 17, fontWeight: 700, marginBottom: 6 }}>
               {filter === 'all' ? 'Sin reservaciones' : `Sin reservaciones ${FILTERS.find(f => f.id === filter)?.label.toLowerCase()}`}
             </div>
-            <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: 13, marginBottom: 24 }}>
+            <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 13, marginBottom: 24 }}>
               {filter === 'all' ? 'Crea tu primera reservación con el botón de arriba' : 'Prueba otro filtro'}
             </div>
             {filter === 'all' && (

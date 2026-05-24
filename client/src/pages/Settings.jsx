@@ -51,7 +51,7 @@ function PrivacyTab() {
           <div key={item.key} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 0', borderBottom: i < items.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
             <div>
               <div style={{ color: '#0a0a14', fontSize: 14, fontWeight: 600 }}>{item.label}</div>
-              <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12, marginTop: 2 }}>{item.desc}</div>
+              <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12, marginTop: 2 }}>{item.desc}</div>
             </div>
             <button onClick={() => toggle(item.key)}
               style={{ width: 48, height: 26, borderRadius: 13, border: 'none', cursor: 'pointer', background: settings[item.key] ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(255,255,255,0.1)', position: 'relative', transition: 'background 0.3s', flexShrink: 0 }}>
@@ -150,7 +150,7 @@ function AppearanceTab() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div>
             <div style={{ color: '#0a0a14', fontSize: 14, fontWeight: 600 }}>Animaciones</div>
-            <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12, marginTop: 2 }}>Transiciones y efectos visuales</div>
+            <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12, marginTop: 2 }}>Transiciones y efectos visuales</div>
           </div>
           <button onClick={() => setAnimations(a => !a)}
             style={{ width: 48, height: 26, borderRadius: 13, border: 'none', cursor: 'pointer', background: animations ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(255,255,255,0.1)', position: 'relative', transition: 'background 0.3s' }}>
@@ -161,7 +161,7 @@ function AppearanceTab() {
 
       {/* Preview */}
       <GlassCard style={{ marginBottom: 12, textAlign: 'center', padding: '20px' }}>
-        <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 }}>Vista previa</div>
+        <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 }}>Vista previa</div>
         <div style={{ color: accent, fontSize: 18, fontWeight: 800, marginBottom: 4 }}>Kronos</div>
         <div style={{ color: '#0a0a14', fontSize: fontSize === 'small' ? 12 : fontSize === 'large' ? 16 : 14 }}>Así se verá el texto en la app</div>
       </GlassCard>
@@ -207,7 +207,7 @@ function AccountTab() {
   return (
     <div>
       <GlassCard style={{ marginBottom: 12 }}>
-        <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, marginBottom: 12, textTransform: 'uppercase', letterSpacing: 1 }}>Información de cuenta</div>
+        <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11, marginBottom: 12, textTransform: 'uppercase', letterSpacing: 1 }}>Información de cuenta</div>
         {[
           { label: 'Usuario', value: `@${user?.username}` },
           { label: 'Email', value: user?.email },
@@ -215,7 +215,7 @@ function AccountTab() {
           { label: 'Miembro desde', value: user?.createdAt ? new Date(user.createdAt).toLocaleDateString('es-MX', { year: 'numeric', month: 'long' }) : '—' },
         ].map(item => (
           <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', padding: '11px 0', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
-            <span style={{ color: 'rgba(255,255,255,0.45)', fontSize: 13 }}>{item.label}</span>
+            <span style={{ color: 'rgba(10,10,20,0.5)', fontSize: 13 }}>{item.label}</span>
             <span style={{ color: '#0a0a14', fontSize: 13, fontWeight: 600 }}>{item.value || '—'}</span>
           </div>
         ))}
@@ -240,7 +240,7 @@ function AccountTab() {
       ) : (
         <GlassCard style={{ border: '1px solid rgba(239,68,68,0.4)', background: 'rgba(239,68,68,0.06)' }}>
           <div style={{ color: '#ef4444', fontWeight: 700, fontSize: 14, marginBottom: 8 }}>⚠️ Esto no se puede deshacer</div>
-          <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12, marginBottom: 12 }}>
+          <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12, marginBottom: 12 }}>
             Se eliminarán tu cuenta, posts, wallet y todos tus datos. Escribe <strong style={{ color: '#fff' }}>ELIMINAR</strong> para confirmar.
           </div>
           <input value={deleteInput} onChange={e => setDeleteInput(e.target.value)} placeholder="Escribe ELIMINAR"
@@ -271,7 +271,7 @@ export default function Settings() {
       <div style={{ maxWidth: 480, margin: '0 auto', padding: '16px' }}>
         <div style={{ marginBottom: 20 }}>
           <div style={{ color: '#0a0a14', fontSize: 22, fontWeight: 800 }}>Configuración</div>
-          <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: 13, marginTop: 2 }}>Cuenta, privacidad y apariencia</div>
+          <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 13, marginTop: 2 }}>Cuenta, privacidad y apariencia</div>
         </div>
 
         {/* Scrollable tab bar */}

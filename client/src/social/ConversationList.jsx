@@ -50,7 +50,7 @@ function CreateGroupModal({ onClose, onCreated }) {
         {results.map(u => (
           <div key={u._id} onClick={() => toggle(u)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 4px', cursor: 'pointer' }}>
             <img src={u.avatar || `https://ui-avatars.com/api/?name=${u.username}&background=random&color=fff&size=32`} alt="" style={{ width: 32, height: 32, borderRadius: '50%' }} />
-            <div style={{ flex: 1, color: '#0a0a14', fontSize: 13 }}>{u.firstName} {u.lastName} <span style={{ color: 'rgba(255,255,255,0.4)' }}>@{u.username}</span></div>
+            <div style={{ flex: 1, color: '#0a0a14', fontSize: 13 }}>{u.firstName} {u.lastName} <span style={{ color: 'rgba(10,10,20,0.5)' }}>@{u.username}</span></div>
             <span style={{ fontSize: 16 }}>{selected.find(p => p._id === u._id) ? '✅' : '⬜'}</span>
           </div>
         ))}
@@ -143,7 +143,7 @@ export default function ConversationList() {
         {/* Resultados búsqueda */}
         {tab === 'directos' && search.trim() && (
           <div style={{ marginBottom: 16 }}>
-            <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 }}>
+            <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 }}>
               {searching ? 'Buscando...' : `${searchResults.length} resultado(s)`}
             </div>
             {searchResults.map(u => (
@@ -152,14 +152,14 @@ export default function ConversationList() {
                   <img src={u.avatar || `https://ui-avatars.com/api/?name=${u.username}&background=random&color=fff&size=40`} alt="" style={{ width: 44, height: 44, borderRadius: '50%', objectFit: 'cover' }} />
                   <div>
                     <div style={{ color: '#fff', fontWeight: 600, fontSize: 14 }}>{u.firstName} {u.lastName}</div>
-                    <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12 }}>@{u.username}</div>
+                    <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12 }}>@{u.username}</div>
                   </div>
                   <span style={{ marginLeft: 'auto', fontSize: 18 }}>💬</span>
                 </div>
               </GlassCard>
             ))}
             {!searching && searchResults.length === 0 && (
-              <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13, textAlign: 'center', padding: 16 }}>No encontrado</div>
+              <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 13, textAlign: 'center', padding: 16 }}>No encontrado</div>
             )}
           </div>
         )}
@@ -167,11 +167,11 @@ export default function ConversationList() {
         {/* Conversaciones directas */}
         {tab === 'directos' && !search.trim() && (
           <>
-            <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 }}>Conversaciones</div>
+            <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 }}>Conversaciones</div>
             {chats.length === 0 ? (
-              <div style={{ textAlign: 'center', padding: 60, color: 'rgba(255,255,255,0.3)' }}>
+              <div style={{ textAlign: 'center', padding: 60, color: 'rgba(10,10,20,0.35)' }}>
                 <div style={{ fontSize: 48, marginBottom: 12 }}>💬</div>
-                <div style={{ fontSize: 16, fontWeight: 600, color: 'rgba(255,255,255,0.5)' }}>Sin conversaciones aún</div>
+                <div style={{ fontSize: 16, fontWeight: 600, color: 'rgba(10,10,20,0.5)' }}>Sin conversaciones aún</div>
                 <div style={{ fontSize: 13, marginTop: 6 }}>Busca personas arriba</div>
               </div>
             ) : chats.map(chat => (
@@ -180,7 +180,7 @@ export default function ConversationList() {
                   <img src={chat.avatar || `https://ui-avatars.com/api/?name=${chat.username}&background=random&color=fff&size=40`} alt="" style={{ width: 44, height: 44, borderRadius: '50%', objectFit: 'cover' }} />
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ color: '#fff', fontWeight: 600, fontSize: 14 }}>{chat.firstName || chat.username}</div>
-                    <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{chat.lastMessage || 'Sin mensajes aún'}</div>
+                    <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{chat.lastMessage || 'Sin mensajes aún'}</div>
                   </div>
                   {chat.unread > 0 && (
                     <span style={{ background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#fff', borderRadius: '50%', width: 20, height: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700 }}>{chat.unread}</span>
@@ -194,11 +194,11 @@ export default function ConversationList() {
         {/* Grupos */}
         {tab === 'grupos' && (
           <>
-            <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 }}>Tus grupos</div>
+            <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 }}>Tus grupos</div>
             {groups.length === 0 ? (
-              <div style={{ textAlign: 'center', padding: 60, color: 'rgba(255,255,255,0.3)' }}>
+              <div style={{ textAlign: 'center', padding: 60, color: 'rgba(10,10,20,0.35)' }}>
                 <div style={{ fontSize: 48, marginBottom: 12 }}>👥</div>
-                <div style={{ fontSize: 16, fontWeight: 600, color: 'rgba(255,255,255,0.5)' }}>Sin grupos aún</div>
+                <div style={{ fontSize: 16, fontWeight: 600, color: 'rgba(10,10,20,0.5)' }}>Sin grupos aún</div>
                 <div style={{ fontSize: 13, marginTop: 6 }}>Crea uno con el botón + Grupo</div>
               </div>
             ) : groups.map(g => (
@@ -207,7 +207,7 @@ export default function ConversationList() {
                   <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, flexShrink: 0 }}>👥</div>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ color: '#fff', fontWeight: 600, fontSize: 14 }}>{g.name}</div>
-                    <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       {g.lastMessage?.content || `${g.members?.length || 0} miembros`}
                     </div>
                   </div>

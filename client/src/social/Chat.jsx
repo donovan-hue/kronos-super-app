@@ -76,13 +76,13 @@ function Chat() {
     <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
       <div style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12, background: '#ffffff', borderBottom: '1px solid rgba(79,172,254,0.12)', backdropFilter: 'blur(12px)', position: 'sticky', top: 0, zIndex: 50 }}>
-        <button onClick={() => navigate('/social/chat')} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.6)', fontSize: 22, cursor: 'pointer', padding: 4 }}>←</button>
+        <button onClick={() => navigate('/social/chat')} style={{ background: 'none', border: 'none', color: 'rgba(10,10,20,0.65)', fontSize: 22, cursor: 'pointer', padding: 4 }}>←</button>
         {otherUser && (
           <>
             <img src={otherUser.avatar || `https://ui-avatars.com/api/?name=${otherUser.username}&background=random&color=fff&size=40`} alt={otherUser.username} style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover' }} />
             <div>
               <div style={{ color: '#fff', fontWeight: 600, fontSize: 14 }}>{otherUser.firstName} {otherUser.lastName || otherUser.username}</div>
-              <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: 11 }}>{isTyping ? 'escribiendo...' : `@${otherUser.username}`}</div>
+              <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 11 }}>{isTyping ? 'escribiendo...' : `@${otherUser.username}`}</div>
             </div>
           </>
         )}
@@ -91,7 +91,7 @@ function Chat() {
       {/* Messages */}
       <div ref={containerRef} style={{ flex: 1, overflowY: 'auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: 8, paddingBottom: 80 }}>
         {messages.length === 0 && (
-          <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.3)', padding: 40 }}>
+          <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.35)', padding: 40 }}>
             <div style={{ fontSize: 40, marginBottom: 8 }}>💬</div>
             <div>Inicia la conversación</div>
           </div>

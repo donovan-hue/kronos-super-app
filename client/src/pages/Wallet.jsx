@@ -60,15 +60,15 @@ function VirtualCardDisplay({ card, onFreeze }) {
         {/* Name, expiry, CVV */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', position: 'relative', zIndex: 1 }}>
           <div>
-            <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 9, letterSpacing: 1, marginBottom: 2 }}>TITULAR</div>
+            <div style={{ color: 'rgba(10,10,20,0.65)', fontSize: 9, letterSpacing: 1, marginBottom: 2 }}>TITULAR</div>
             <div style={{ color: '#0a0a14', fontSize: 13, fontWeight: 600, letterSpacing: 1 }}>{card.cardholderName}</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 9, letterSpacing: 1, marginBottom: 2 }}>VÁLIDA HASTA</div>
+            <div style={{ color: 'rgba(10,10,20,0.65)', fontSize: 9, letterSpacing: 1, marginBottom: 2 }}>VÁLIDA HASTA</div>
             <div style={{ color: '#0a0a14', fontSize: 13, fontFamily: 'monospace' }}>{card.expiry}</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 9, letterSpacing: 1, marginBottom: 2 }}>CVV</div>
+            <div style={{ color: 'rgba(10,10,20,0.65)', fontSize: 9, letterSpacing: 1, marginBottom: 2 }}>CVV</div>
             <div style={{ color: '#0a0a14', fontSize: 13, fontFamily: 'monospace' }}>{showDetails ? card.cvv : '•••'}</div>
           </div>
         </div>
@@ -136,7 +136,7 @@ function SendModal({ balance, onClose, onSuccess }) {
       <GlassCard style={{ width: '100%', maxWidth: 480, borderRadius: '20px 20px 0 0', paddingBottom: 32 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <div style={{ color: '#0a0a14', fontSize: 17, fontWeight: 700 }}>Enviar dinero</div>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)', fontSize: 20, cursor: 'pointer' }}>✕</button>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'rgba(10,10,20,0.5)', fontSize: 20, cursor: 'pointer' }}>✕</button>
         </div>
 
         {step === 'search' && (
@@ -149,9 +149,9 @@ function SendModal({ balance, onClose, onSuccess }) {
                 <img src={u.avatar || `https://ui-avatars.com/api/?name=${u.username}&background=random&color=fff&size=40`} alt="" style={{ width: 42, height: 42, borderRadius: '50%', objectFit: 'cover' }} />
                 <div>
                   <div style={{ color: '#fff', fontWeight: 600, fontSize: 14 }}>{u.firstName} {u.lastName}</div>
-                  <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12 }}>@{u.username}</div>
+                  <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12 }}>@{u.username}</div>
                 </div>
-                <span style={{ marginLeft: 'auto', color: 'rgba(255,255,255,0.3)', fontSize: 18 }}>→</span>
+                <span style={{ marginLeft: 'auto', color: 'rgba(10,10,20,0.35)', fontSize: 18 }}>→</span>
               </div>
             ))}
           </>
@@ -163,22 +163,22 @@ function SendModal({ balance, onClose, onSuccess }) {
               <img src={selected.avatar || `https://ui-avatars.com/api/?name=${selected.username}&background=random&color=fff&size=40`} alt="" style={{ width: 40, height: 40, borderRadius: '50%' }} />
               <div>
                 <div style={{ color: '#fff', fontWeight: 600 }}>{selected.firstName} {selected.lastName}</div>
-                <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12 }}>@{selected.username}</div>
+                <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12 }}>@{selected.username}</div>
               </div>
-              <button onClick={() => { setSelected(null); setStep('search'); }} style={{ marginLeft: 'auto', background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer', fontSize: 13 }}>Cambiar</button>
+              <button onClick={() => { setSelected(null); setStep('search'); }} style={{ marginLeft: 'auto', background: 'none', border: 'none', color: 'rgba(10,10,20,0.5)', cursor: 'pointer', fontSize: 13 }}>Cambiar</button>
             </div>
 
             {/* Amount input */}
             <div style={{ textAlign: 'center', marginBottom: 20 }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
-                <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 28, fontWeight: 300 }}>$</span>
+                <span style={{ color: 'rgba(10,10,20,0.5)', fontSize: 28, fontWeight: 300 }}>$</span>
                 <input
                   type="number" value={amount} onChange={e => setAmount(e.target.value)}
                   placeholder="0.00" min="0" max={balance} step="0.01"
                   style={{ background: 'none', border: 'none', color: '#0a0a14', fontSize: 48, fontWeight: 700, width: 180, textAlign: 'center', outline: 'none', fontFamily: 'inherit' }}
                 />
               </div>
-              <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: 12 }}>Disponible: ${balance.toFixed(2)}</div>
+              <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 12 }}>Disponible: ${balance.toFixed(2)}</div>
             </div>
 
             {/* Quick amounts */}
@@ -230,11 +230,11 @@ function DepositModal({ onClose, onSuccess }) {
       <GlassCard style={{ width: '100%', maxWidth: 480, borderRadius: '20px 20px 0 0', paddingBottom: 32 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <div style={{ color: '#0a0a14', fontSize: 17, fontWeight: 700 }}>Recargar saldo</div>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)', fontSize: 20, cursor: 'pointer' }}>✕</button>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'rgba(10,10,20,0.5)', fontSize: 20, cursor: 'pointer' }}>✕</button>
         </div>
         <div style={{ textAlign: 'center', marginBottom: 20 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
-            <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 28 }}>$</span>
+            <span style={{ color: 'rgba(10,10,20,0.5)', fontSize: 28 }}>$</span>
             <input type="number" value={amount} onChange={e => setAmount(e.target.value)} placeholder="0.00" min="1" max="10000"
               style={{ background: 'none', border: 'none', color: '#0a0a14', fontSize: 48, fontWeight: 700, width: 180, textAlign: 'center', outline: 'none', fontFamily: 'inherit' }} />
           </div>
@@ -247,7 +247,7 @@ function DepositModal({ onClose, onSuccess }) {
             </button>
           ))}
         </div>
-        <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: 11, textAlign: 'center', marginBottom: 16 }}>Demo: el dinero se añade sin cobro real</div>
+        <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 11, textAlign: 'center', marginBottom: 16 }}>Demo: el dinero se añade sin cobro real</div>
         <button onClick={handleDeposit} disabled={loading || !amount || Number(amount) <= 0}
           style={{ width: '100%', padding: '14px', borderRadius: 14, background: amount && Number(amount) > 0 ? 'linear-gradient(135deg,#10b981,#06b6d4)' : 'rgba(255,255,255,0.08)', color: '#fff', border: 'none', fontSize: 15, fontWeight: 700, cursor: 'pointer' }}>
           {loading ? 'Recargando...' : `Recargar $${amount || '0'}`}
@@ -297,7 +297,7 @@ function DailyRewardCard({ onClaimed }) {
           <div style={{ color: '#fff', fontWeight: 700, fontSize: 15, marginBottom: 2 }}>
             {canClaim ? `Recompensa diaria — +${amount} KRO` : 'Recompensa reclamada'}
           </div>
-          <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: 12 }}>
+          <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12 }}>
             {streakDays > 0 ? `🔥 Racha de ${streakDays} día${streakDays !== 1 ? 's' : ''}` : 'Primer día — ¡comienza tu racha!'}
           </div>
           {/* Streak dots */}
@@ -371,23 +371,23 @@ export default function Wallet() {
         <HoloText size={26} style={{ marginBottom: 20 }}>Wallet</HoloText>
 
         {loading ? (
-          <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.4)', padding: 60 }}>Cargando wallet...</div>
+          <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.5)', padding: 60 }}>Cargando wallet...</div>
         ) : (
           <>
             {/* Balance principal */}
             <GlassCard style={{ textAlign: 'center', marginBottom: 20, padding: '32px 24px', background: 'linear-gradient(135deg,rgba(124,58,237,0.15),rgba(6,182,212,0.08))' }}>
-              <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13, marginBottom: 6, letterSpacing: 1 }}>SALDO DISPONIBLE</div>
+              <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 13, marginBottom: 6, letterSpacing: 1 }}>SALDO DISPONIBLE</div>
               <div style={{ color: '#0a0a14', fontSize: 52, fontWeight: 900, letterSpacing: -2, marginBottom: 4 }}>
                 ${(data?.cash?.balance || 0).toFixed(2)}
               </div>
-              <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: 12 }}>{data?.cash?.currency || 'USD'}</div>
+              <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 12 }}>{data?.cash?.currency || 'USD'}</div>
 
               {data?.kro && (
                 <div style={{ marginTop: 16, padding: '10px 20px', background: 'rgba(168,85,247,0.15)', borderRadius: 12, display: 'inline-block' }}>
                   <span style={{ color: '#a855f7', fontSize: 14, fontWeight: 700 }}>
                     {parseFloat(data.kro.tokenBalance || 0).toFixed(0)} KRO
                   </span>
-                  <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: 12 }}> tokens</span>
+                  <span style={{ color: 'rgba(10,10,20,0.35)', fontSize: 12 }}> tokens</span>
                 </div>
               )}
             </GlassCard>
@@ -420,9 +420,9 @@ export default function Wallet() {
             {/* ACTIVITY TAB */}
             {tab === 'wallet' && (
               <div>
-                <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, marginBottom: 10, textTransform: 'uppercase', letterSpacing: 1 }}>Movimientos recientes</div>
+                <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11, marginBottom: 10, textTransform: 'uppercase', letterSpacing: 1 }}>Movimientos recientes</div>
                 {!data?.cash?.transactions?.length ? (
-                  <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.3)', padding: 40 }}>
+                  <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.35)', padding: 40 }}>
                     <div style={{ fontSize: 40, marginBottom: 8 }}>💸</div>
                     <div>Sin movimientos aún</div>
                     <div style={{ fontSize: 12, marginTop: 4 }}>Recarga tu saldo para empezar</div>
@@ -439,7 +439,7 @@ export default function Wallet() {
                             <div style={{ color: '#0a0a14', fontSize: 13, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                               {tx.description || tx.type}
                             </div>
-                            <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: 11 }}>
+                            <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 11 }}>
                               {new Date(tx.createdAt).toLocaleDateString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}
                             </div>
                           </div>
@@ -459,7 +459,7 @@ export default function Wallet() {
               <div>
                 <VirtualCardDisplay card={card} onFreeze={handleFreeze} />
                 <GlassCard>
-                  <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12, marginBottom: 12 }}>Detalles de la tarjeta</div>
+                  <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12, marginBottom: 12 }}>Detalles de la tarjeta</div>
                   {[
                     { label: 'Red', value: card?.network || 'VISA' },
                     { label: 'Estado', value: card?.frozen ? '🔒 Congelada' : '✅ Activa' },
@@ -467,7 +467,7 @@ export default function Wallet() {
                     { label: 'Total gastado', value: `$${(card?.totalSpent || 0).toFixed(2)}` },
                   ].map(item => (
                     <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
-                      <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: 13 }}>{item.label}</span>
+                      <span style={{ color: 'rgba(10,10,20,0.5)', fontSize: 13 }}>{item.label}</span>
                       <span style={{ color: '#0a0a14', fontSize: 13, fontWeight: 600 }}>{item.value}</span>
                     </div>
                   ))}
@@ -490,7 +490,7 @@ export default function Wallet() {
                         { label: '🎁 Recompensas pendientes', value: `${parseFloat(data.kro.pendingRewards || 0).toFixed(4)} KRO` },
                       ].map(item => (
                         <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
-                          <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 14 }}>{item.label}</span>
+                          <span style={{ color: 'rgba(10,10,20,0.5)', fontSize: 14 }}>{item.label}</span>
                           <span style={{ color: '#a855f7', fontSize: 14, fontWeight: 700 }}>{item.value}</span>
                         </div>
                       ))}
@@ -502,7 +502,7 @@ export default function Wallet() {
                     </div>
                   </>
                 ) : (
-                  <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.3)', padding: 40 }}>
+                  <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.35)', padding: 40 }}>
                     <div style={{ fontSize: 40, marginBottom: 8 }}>⭐</div>
                     <div>Wallet KRO no inicializada</div>
                     <button onClick={async () => { await axios.post(`${API_URL}/tokens/wallet/init`); fetchWallet(); }}

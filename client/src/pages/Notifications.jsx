@@ -100,9 +100,9 @@ export default function NotificationsPage() {
 
         {/* Content */}
         {loading ? (
-          <div style={{ textAlign: 'center', padding: 60, color: 'rgba(255,255,255,0.3)' }}>Cargando...</div>
+          <div style={{ textAlign: 'center', padding: 60, color: 'rgba(10,10,20,0.35)' }}>Cargando...</div>
         ) : filtered.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: 60, color: 'rgba(255,255,255,0.3)' }}>
+          <div style={{ textAlign: 'center', padding: 60, color: 'rgba(10,10,20,0.35)' }}>
             <div style={{ fontSize: 48, marginBottom: 12 }}>🔔</div>
             <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 4 }}>
               {filter === 'unread' ? 'Todo al día' : 'Sin notificaciones'}
@@ -152,12 +152,12 @@ export default function NotificationsPage() {
                             {sender.firstName || sender.username}{' '}
                           </span>
                         )}
-                        <span style={{ color: 'rgba(255,255,255,0.65)' }}>
+                        <span style={{ color: 'rgba(10,10,20,0.65)' }}>
                           {notif.body || meta.label}
                         </span>
                       </div>
                       {notif.title && notif.title !== notif.body && (
-                        <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: 11, marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 11, marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                           {notif.title}
                         </div>
                       )}
@@ -165,7 +165,7 @@ export default function NotificationsPage() {
 
                     {/* Time + unread dot */}
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6, flexShrink: 0 }}>
-                      <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: 11 }}>{timeAgo(notif.createdAt)}</span>
+                      <span style={{ color: 'rgba(10,10,20,0.35)', fontSize: 11 }}>{timeAgo(notif.createdAt)}</span>
                       {!notif.read && (
                         <div style={{ width: 8, height: 8, borderRadius: '50%', background: meta.color }} />
                       )}
