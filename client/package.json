@@ -9,6 +9,7 @@
     "@stripe/react-stripe-js": "^2.2.0",
     "@stripe/stripe-js": "^1.46.0",
     "@tensorflow/tfjs": "^4.15.0",
+    "@vercel/analytics": "^2.0.1",
     "@xterm/addon-fit": "^0.10.0",
     "@xterm/xterm": "^5.5.0",
     "autoprefixer": "^10.4.16",
