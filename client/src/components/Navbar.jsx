@@ -37,9 +37,10 @@ export default function Navbar() {
     <>
       <nav style={{
         position: 'sticky', top: 0, zIndex: 200,
-        background: 'rgba(10,10,18,0.97)',
-        borderBottom: '1px solid rgba(255,255,255,0.07)',
+        background: 'rgba(255,255,255,0.97)',
+        borderBottom: '1.5px solid rgba(79,172,254,0.12)',
         backdropFilter: 'blur(16px)',
+        boxShadow: '0 2px 16px rgba(79,172,254,0.08)',
         fontFamily: "'Outfit', sans-serif",
       }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 16px', display: 'flex', alignItems: 'center', height: 56, gap: 16 }}>
@@ -59,7 +60,7 @@ export default function Navbar() {
               const active = pathname === link.to || (link.to !== '/feed' && pathname.startsWith(link.to));
               return (
                 <Link key={link.to} to={link.to}
-                  style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '5px 10px', borderRadius: 20, textDecoration: 'none', fontSize: 12, fontWeight: 600, whiteSpace: 'nowrap', color: active ? '#fff' : 'rgba(255,255,255,0.45)', background: active ? 'rgba(124,58,237,0.25)' : 'transparent', transition: 'all 0.15s', flexShrink: 0 }}>
+                  style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '5px 10px', borderRadius: 20, textDecoration: 'none', fontSize: 12, fontWeight: 600, whiteSpace: 'nowrap', color: active ? '#0a0a14' : 'rgba(10,10,20,0.5)', background: active ? 'linear-gradient(135deg,rgba(79,172,254,0.15),rgba(243,160,255,0.12))' : 'transparent', border: active ? '1px solid rgba(79,172,254,0.25)' : '1px solid transparent', transition: 'all 0.15s', flexShrink: 0 }}>
                   <span style={{ fontSize: 14 }}>{link.icon}</span>
                   <span>{link.label}</span>
                 </Link>
@@ -80,13 +81,13 @@ export default function Navbar() {
                 <NotificationCenter />
 
                 <Link to={userId ? `/profile/${userId}` : '/auth/login'}
-                  style={{ display: 'flex', alignItems: 'center', gap: 6, textDecoration: 'none', padding: '4px 8px', borderRadius: 20, background: 'rgba(255,255,255,0.06)' }}>
+                  style={{ display: 'flex', alignItems: 'center', gap: 6, textDecoration: 'none', padding: '4px 8px', borderRadius: 20, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.15)' }}>
                   <img
                     src={user.avatar || `https://ui-avatars.com/api/?name=${user.username}&background=random&color=fff&size=32`}
                     alt={user.username}
                     style={{ width: 28, height: 28, borderRadius: '50%', objectFit: 'cover' }}
                   />
-                  <span style={{ color: '#fff', fontSize: 12, fontWeight: 600, maxWidth: 80, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                  <span style={{ color: '#0a0a14', fontSize: 12, fontWeight: 600, maxWidth: 80, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
                     className="hidden-mobile">
                     {user.username}
                   </span>
@@ -94,7 +95,7 @@ export default function Navbar() {
                 </Link>
 
                 <Link to="/settings"
-                  style={{ color: 'rgba(255,255,255,0.45)', fontSize: 18, textDecoration: 'none', padding: 4 }}
+                  style={{ color: 'rgba(10,10,20,0.5)', fontSize: 18, textDecoration: 'none', padding: 4 }}
                   title="Configuración">
                   ⚙️
                 </Link>

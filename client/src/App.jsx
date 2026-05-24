@@ -38,7 +38,7 @@ function MyProfileRedirect() {
 // Layout con sidebar en desktop + Navbar + contenido
 function AppLayout({ children }) {
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: '#08080f' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', background: '#ffffff' }}>
       <DesktopSidebar />
       <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
         <Navbar />

@@ -166,7 +166,7 @@ function Bubble({ item, active, badge }) {
       <span style={{
         fontSize: 9,
         fontWeight: active ? 700 : 400,
-        color: active ? '#a8d8ff' : 'rgba(255,255,255,0.4)',
+        color: active ? '#4facfe' : 'rgba(10,10,20,0.4)',
         fontFamily: "'Outfit', sans-serif",
         letterSpacing: 0.3,
       }}>
@@ -200,9 +200,10 @@ export default function BubbleNav({ items }) {
         left: 0,
         right: 0,
         height: 80,
-        background: 'rgba(8,8,15,0.85)',
-        borderTop: '1px solid rgba(255,255,255,0.06)',
+        background: 'rgba(255,255,255,0.95)',
+        borderTop: '1.5px solid rgba(79,172,254,0.12)',
         backdropFilter: 'blur(20px)',
+        boxShadow: '0 -2px 16px rgba(79,172,254,0.08)',
         display: 'flex',
         justifyContent: 'space-around',
         alignItems: 'center',

@@ -20,9 +20,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #04040a;
+  background: #ffffff;
   min-height: 100vh;
-  color: #ffffff;
+  color: #0a0a14;
 }
 
 code {
@@ -243,9 +243,10 @@ code {
     height: 100vh;
     overflow-y: auto;
     padding: 24px 16px;
-    border-right: 1px solid rgba(255,255,255,0.06);
-    background: rgba(8,8,15,0.97);
+    border-right: 1.5px solid rgba(79,172,254,0.12);
+    background: rgba(255,255,255,0.97);
     gap: 6px;
+    box-shadow: 2px 0 16px rgba(79,172,254,0.06);
   }
 
   /* BottomNav oculto en desktop */
