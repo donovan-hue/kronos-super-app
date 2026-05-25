@@ -24,13 +24,14 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   // Registrar
-  const register = useCallback(async (username, email, password, firstName, lastName) => {
+  const register = useCallback(async (username, email, password, firstName, lastName, phone) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await api.post('/auth/register', {
-        username, email, password, firstName, lastName
-      });
+      const body = { username, password, firstName, lastName };
+      if (email) body.email = email;
+      if (phone) body.phone = phone;
+      const response = await api.post('/auth/register', body);
 
       const { token: authToken, user: authUser } = response.data;
       localStorage.setItem('token', authToken);
@@ -51,11 +52,14 @@ export const AuthProvider = ({ children }) => {
   }, [setupAxios]);
 
   // Login
-  const login = useCallback(async (email, password) => {
+  const login = useCallback(async (email, password, phone) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await api.post('/auth/login', { email, password });
+      const body = { password };
+      if (email) body.email = email;
+      if (phone) body.phone = phone;
+      const response = await api.post('/auth/login', body);
 
       const { token: authToken, user: authUser } = response.data;
       localStorage.setItem('token', authToken);

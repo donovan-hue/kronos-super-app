@@ -12,8 +12,9 @@ const inputStyle = {
 };
 
 function Register() {
+  const [method, setMethod] = useState('email'); // 'email' | 'phone'
   const [formData, setFormData] = useState({
-    username: '', email: '', password: '', firstName: '', lastName: '',
+    username: '', email: '', phone: '', password: '', firstName: '', lastName: '',
   });
   const [error, setError] = useState('');
   const [slowWarning, setSlowWarning] = useState(false);
@@ -29,8 +30,23 @@ function Register() {
     e.preventDefault();
     setError('');
     setSlowWarning(false);
+
+    if (method === 'phone' && !formData.phone) {
+      return setError('Ingresa tu número de teléfono');
+    }
+    if (method === 'email' && !formData.email) {
+      return setError('Ingresa tu email');
+    }
+
     const timer = setTimeout(() => setSlowWarning(true), 5000);
-    const result = await register(formData.username, formData.email, formData.password, formData.firstName, formData.lastName);
+    const result = await register(
+      formData.username,
+      method === 'email' ? formData.email : '',
+      formData.password,
+      formData.firstName,
+      formData.lastName,
+      method === 'phone' ? formData.phone : ''
+    );
     clearTimeout(timer);
     setSlowWarning(false);
     if (result.success) navigate('/feed');
@@ -50,6 +66,25 @@ function Register() {
           <div style={{ fontSize: 44, marginBottom: 8 }}>⭐</div>
           <HoloText size={34}>KRONOS</HoloText>
           <div style={{ color: 'rgba(10,10,20,0.45)', fontSize: 13, marginTop: 6 }}>Crea tu cuenta</div>
+        </div>
+
+        {/* Selector Email / Teléfono */}
+        <div style={{ display: 'flex', gap: 4, marginBottom: 16, background: 'rgba(79,172,254,0.04)', borderRadius: 12, padding: 4 }}>
+          {[
+            { id: 'email', label: '📧 Email' },
+            { id: 'phone', label: '📱 Teléfono' },
+          ].map(opt => (
+            <button key={opt.id} type="button" onClick={() => setMethod(opt.id)}
+              style={{
+                flex: 1, padding: '9px', borderRadius: 8, fontSize: 13, fontWeight: 600,
+                border: 'none', cursor: 'pointer',
+                background: method === opt.id ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'transparent',
+                color: method === opt.id ? '#fff' : 'rgba(10,10,20,0.55)',
+                transition: 'all 0.2s',
+              }}>
+              {opt.label}
+            </button>
+          ))}
         </div>
 
         {slowWarning && (
@@ -76,16 +111,23 @@ function Register() {
             <input style={inputStyle} name="firstName" placeholder="Nombre" value={formData.firstName} onChange={handleChange} />
             <input style={inputStyle} name="lastName" placeholder="Apellido" value={formData.lastName} onChange={handleChange} />
           </div>
-          <input style={inputStyle} name="username" placeholder="Usuario" value={formData.username} onChange={handleChange} required />
-          <input style={inputStyle} name="email" type="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
-          <input style={inputStyle} name="password" type="password" placeholder="Contraseña" value={formData.password} onChange={handleChange} required />
+          <input style={inputStyle} name="username" placeholder="Nombre de usuario" value={formData.username} onChange={handleChange} required />
+
+          {method === 'email' ? (
+            <input style={inputStyle} name="email" type="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
+          ) : (
+            <input style={inputStyle} name="phone" type="tel" placeholder="Número de teléfono (ej. +521234567890)" value={formData.phone} onChange={handleChange} required />
+          )}
+
+          <input style={inputStyle} name="password" type="password" placeholder="Contraseña (mín. 6 caracteres)" value={formData.password} onChange={handleChange} required />
+
           <button type="submit" disabled={loading} style={{
             marginTop: 4, padding: '14px', borderRadius: 12, border: 'none', cursor: loading ? 'not-allowed' : 'pointer',
             background: HOLO, color: '#fff', fontSize: 14, fontWeight: 700,
             fontFamily: 'inherit', letterSpacing: 1, opacity: loading ? 0.7 : 1,
             boxShadow: '0 4px 16px rgba(79,172,254,0.3)',
           }}>
-            {loading ? 'Creando...' : 'REGISTRARSE'}
+            {loading ? 'Creando cuenta...' : 'REGISTRARSE'}
           </button>
         </form>
 

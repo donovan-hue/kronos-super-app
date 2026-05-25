@@ -7,18 +7,31 @@ const { createNotification } = require('./notificationController');
 // Registrar usuario
 exports.register = async (req, res) => {
   try {
-    const { username, email, password, firstName, lastName } = req.body;
+    const { username, email, phone, password, firstName, lastName } = req.body;
 
-    // Verificar si el usuario ya existe
-    let user = await User.findOne({ $or: [{ email }, { username }] });
-    if (user) {
-      return res.status(400).json({ message: 'User already exists' });
+    if (!email && !phone) {
+      return res.status(400).json({ message: 'Se requiere email o número de teléfono' });
     }
 
-    // Crear nuevo usuario
+    // Verificar si ya existe por email, teléfono o username
+    const orConditions = [{ username }];
+    if (email) orConditions.push({ email });
+    if (phone) orConditions.push({ phone });
+
+    let user = await User.findOne({ $or: orConditions });
+    if (user) {
+      if (user.username === username) return res.status(400).json({ message: 'El nombre de usuario ya está en uso' });
+      if (email && user.email === email) return res.status(400).json({ message: 'El email ya está registrado' });
+      if (phone && user.phone === phone) return res.status(400).json({ message: 'El número de teléfono ya está registrado' });
+    }
+
+    // Si no tiene email, generar uno interno para que el modelo lo acepte
+    const internalEmail = email || `${username}@kronos.phone`;
+
     user = new User({
       username,
-      email,
+      email: internalEmail,
+      phone: phone || undefined,
       password,
       firstName,
       lastName
@@ -26,8 +39,10 @@ exports.register = async (req, res) => {
 
     await user.save();
 
-    emailService.sendWelcome(user.email, user.firstName || user.username)
-      .catch(err => console.error('Welcome email failed:', err));
+    if (email) {
+      emailService.sendWelcome(user.email, user.firstName || user.username)
+        .catch(err => console.error('Welcome email failed:', err));
+    }
 
     // Crear JWT token
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
@@ -53,17 +68,17 @@ exports.register = async (req, res) => {
 // Login
 exports.login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, phone, password } = req.body;
 
-    // Validar campos
-    if (!email || !password) {
-      return res.status(400).json({ message: 'Please provide email and password' });
+    if (!password || (!email && !phone)) {
+      return res.status(400).json({ message: 'Proporciona email o teléfono y contraseña' });
     }
 
-    // Buscar usuario
-    const user = await User.findOne({ email }).select('+password');
+    // Buscar por email o teléfono
+    const query = email ? { email } : { phone };
+    const user = await User.findOne(query).select('+password');
     if (!user) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+      return res.status(401).json({ message: 'Credenciales incorrectas' });
     }
 
     // Validar contraseña

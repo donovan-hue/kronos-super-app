@@ -49,6 +49,11 @@ const userSchema = new mongoose.Schema(
         ref: 'User'
       }
     ],
+    phone: {
+      type: String,
+      trim: true,
+      sparse: true,
+    },
     location: String,
     website: String,
     role: {
