@@ -65,14 +65,15 @@ export default function BottomNav({ items }) {
         left: 0,
         right: 0,
         height: 64,
-        background: 'rgba(10,10,18,0.95)',
-        borderTop: '1px solid rgba(255,255,255,0.06)',
-        backdropFilter: 'blur(12px)',
+        background: 'rgba(255,255,255,0.97)',
+        borderTop: '1.5px solid rgba(79,172,254,0.15)',
+        backdropFilter: 'blur(16px)',
         justifyContent: 'space-around',
         alignItems: 'center',
         padding: '0 8px',
         zIndex: 100,
         fontFamily: "'Outfit', sans-serif",
+        boxShadow: '0 -4px 24px rgba(79,172,254,0.08)',
       }}
     >
       {navItems.map((it) => {
@@ -87,7 +88,7 @@ export default function BottomNav({ items }) {
               alignItems: 'center',
               gap: 2,
               textDecoration: 'none',
-              color: active ? '#a855f7' : 'rgba(255,255,255,0.4)',
+              color: active ? '#4facfe' : 'rgba(10,10,20,0.45)',
               fontSize: 9,
               position: 'relative',
             }}
@@ -109,7 +110,7 @@ export default function BottomNav({ items }) {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: '1.5px solid rgba(10,10,18,0.95)',
+                  border: '1.5px solid #fff',
                 }}>
                   {it.badge > 9 ? '9+' : it.badge}
                 </div>

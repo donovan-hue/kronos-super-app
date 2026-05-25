@@ -116,11 +116,11 @@ export default function UniversalSearch() {
 
           {/* Suggestions dropdown */}
           {showDrop && suggestions.length > 0 && (
-            <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 50, background: 'rgba(15,15,26,0.98)', border: '1px solid rgba(79,172,254,0.18)', borderRadius: 16, marginTop: 6, overflow: 'hidden', boxShadow: '0 8px 32px rgba(0,0,0,0.5)' }}>
+            <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 50, background: 'rgba(255,255,255,0.98)', border: '1.5px solid rgba(79,172,254,0.2)', borderRadius: 16, marginTop: 6, overflow: 'hidden', boxShadow: '0 8px 32px rgba(79,172,254,0.15)' }}>
               {suggestions.map((s, i) => (
                 <button key={i} type="button"
                   onClick={() => { setQuery(s.text); setShowDrop(false); doSearch(s.text, category); setSearchParams({ q: s.text }); }}
-                  style={{ width: '100%', textAlign: 'left', padding: '10px 16px', background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontSize: 13, display: 'flex', alignItems: 'center', gap: 10, borderBottom: i < suggestions.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
+                  style={{ width: '100%', textAlign: 'left', padding: '10px 16px', background: 'none', border: 'none', color: '#0a0a14', cursor: 'pointer', fontSize: 13, display: 'flex', alignItems: 'center', gap: 10, borderBottom: i < suggestions.length - 1 ? '1px solid rgba(79,172,254,0.08)' : 'none' }}>
                   <span style={{ fontSize: 15 }}>{s.type === 'user' ? '👤' : s.type === 'product' ? '👗' : '🔍'}</span>
                   <span>{s.text}</span>
                 </button>
@@ -133,7 +133,7 @@ export default function UniversalSearch() {
         <div style={{ display: 'flex', gap: 8, marginBottom: 20, overflowX: 'auto', paddingBottom: 2 }}>
           {CATEGORIES.map(cat => (
             <button key={cat.value} onClick={() => handleCategoryChange(cat.value)}
-              style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 5, padding: '7px 14px', borderRadius: 20, fontSize: 12, fontWeight: 600, border: 'none', cursor: 'pointer', background: category === cat.value ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(255,255,255,0.06)', color: '#fff', transition: 'background 0.2s' }}>
+              style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 5, padding: '7px 14px', borderRadius: 20, fontSize: 12, fontWeight: 600, border: '1.5px solid', borderColor: category === cat.value ? 'transparent' : 'rgba(79,172,254,0.2)', cursor: 'pointer', background: category === cat.value ? 'linear-gradient(135deg,#4facfe,#f3a0ff)' : 'rgba(255,255,255,0.8)', color: category === cat.value ? '#fff' : 'rgba(10,10,20,0.65)', transition: 'all 0.2s' }}>
               <span>{cat.icon}</span><span>{cat.label}</span>
             </button>
           ))}

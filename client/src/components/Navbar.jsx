@@ -113,7 +113,7 @@ export default function Navbar() {
             <button
               onClick={() => setMenuOpen(m => !m)}
               className="hamburger-btn"
-              style={{ background: 'none', border: 'none', color: '#fff', fontSize: 22, cursor: 'pointer', padding: 4, lineHeight: 1 }}>
+              style={{ background: 'none', border: 'none', color: '#0a0a14', fontSize: 22, cursor: 'pointer', padding: 4, lineHeight: 1 }}>
               {menuOpen ? '✕' : '☰'}
             </button>
           </div>
@@ -121,13 +121,13 @@ export default function Navbar() {
 
         {/* Mobile drawer */}
         {menuOpen && (
-          <div style={{ background: 'rgba(10,10,18,0.99)', borderTop: '1px solid rgba(255,255,255,0.06)', padding: '12px 16px 20px' }}>
+          <div style={{ background: 'rgba(255,255,255,0.98)', borderTop: '1.5px solid rgba(79,172,254,0.12)', padding: '12px 16px 20px' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 8, marginBottom: 16 }}>
               {NAV_LINKS.map(link => {
                 const active = pathname === link.to || (link.to !== '/feed' && pathname.startsWith(link.to));
                 return (
                   <Link key={link.to} to={link.to} onClick={() => setMenuOpen(false)}
-                    style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, padding: '10px 4px', borderRadius: 12, textDecoration: 'none', color: active ? '#fff' : 'rgba(255,255,255,0.5)', background: active ? 'rgba(124,58,237,0.25)' : 'rgba(255,255,255,0.04)', fontSize: 10, fontWeight: 600 }}>
+                    style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, padding: '10px 4px', borderRadius: 12, textDecoration: 'none', color: active ? '#4facfe' : 'rgba(10,10,20,0.6)', background: active ? 'rgba(79,172,254,0.1)' : 'rgba(10,10,20,0.04)', fontSize: 10, fontWeight: 600 }}>
                     <span style={{ fontSize: 20 }}>{link.icon}</span>
                     <span>{link.label}</span>
                   </Link>
@@ -136,11 +136,11 @@ export default function Navbar() {
             </div>
             <div style={{ display: 'flex', gap: 8 }}>
               <Link to="/settings" onClick={() => setMenuOpen(false)}
-                style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'rgba(255,255,255,0.06)', color: '#fff', textDecoration: 'none', fontSize: 13, fontWeight: 600, textAlign: 'center' }}>
+                style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.15)', color: '#0a0a14', textDecoration: 'none', fontSize: 13, fontWeight: 600, textAlign: 'center' }}>
                 ⚙️ Configuración
               </Link>
               <button onClick={() => { handleLogout(); setMenuOpen(false); }}
-                style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'rgba(239,68,68,0.15)', border: '1px solid rgba(239,68,68,0.3)', color: '#ef4444', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
+                style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.25)', color: '#ef4444', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
                 🚪 Salir
               </button>
             </div>

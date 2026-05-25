@@ -150,7 +150,7 @@ function SidebarItem({ item, isActive }) {
           <item.Icon />
         </div>
         <span style={{
-          color: isActive ? '#a8d8ff' : 'rgba(255,255,255,0.55)',
+          color: isActive ? '#4facfe' : 'rgba(10,10,20,0.65)',
           fontWeight: isActive ? 700 : 400,
           fontSize: 13,
           fontFamily: "'Outfit', sans-serif",
