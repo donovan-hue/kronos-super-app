@@ -9,6 +9,7 @@ import AdminDashboard from './admin/AdminDashboard';
 import ProtectedAdminRoute from './admin/ProtectedAdminRoute';
 import { AuthContext } from './context/AuthContext';
 import DesktopSidebar from './components/kronos/DesktopSidebar';
+import ExpandableBubbleNav from './components/kronos/ExpandableBubbleNav';
 
 class ErrorBoundary extends Component {
   state = { hasError: false };
@@ -19,7 +20,7 @@ class ErrorBoundary extends Component {
         <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
           <div style={{ fontSize: 48 }}>⚠️</div>
           <div style={{ color: '#0a0a14', fontSize: 18, fontWeight: 700 }}>Algo salió mal</div>
-          <button onClick={() => window.location.reload()} style={{ padding: '10px 28px', borderRadius: 24, background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 14, fontWeight: 700 }}>
+          <button onClick={() => window.location.reload()} style={{ padding: '10px 28px', borderRadius: 24, background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: 600 }}>
             Recargar
           </button>
         </div>
@@ -35,15 +36,16 @@ function MyProfileRedirect() {
   return id ? <Navigate to={`/profile/${id}`} replace /> : <Navigate to="/auth/login" replace />;
 }
 
-// Layout con sidebar en desktop + Navbar + contenido
+// Layout con sidebar en desktop + Navbar + contenido + ExpandableBubbleNav
 function AppLayout({ children }) {
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: '#ffffff' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', background: '#ffffff', position: 'relative' }}>
       <DesktopSidebar />
       <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
         <Navbar />
         {children}
       </div>
+      <ExpandableBubbleNav />
     </div>
   );
 }
@@ -118,7 +120,7 @@ function App() {
             <Route path="/login"                 element={<Navigate to="/auth/login" />} />
             <Route path="/register"              element={<Navigate to="/auth/register" />} />
 
-            {/* Protegidas — todas usan AppLayout (sidebar desktop + navbar) */}
+            {/* Protegidas — todas usan AppLayout (sidebar desktop + navbar + bubble nav) */}
             <Route path="/feed"                  element={<P><HybridFeed /></P>} />
             <Route path="/search"                element={<P><UniversalSearch /></P>} />
             <Route path="/profile/me"            element={<ProtectedRoute><MyProfileRedirect /></ProtectedRoute>} />
