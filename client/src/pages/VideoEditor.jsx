@@ -1,4 +1,4 @@
-﻿import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { GlassCard, BottomNav } from '../components/kronos';
 
 const CSS_FILTERS = [

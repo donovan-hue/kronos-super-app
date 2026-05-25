@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+mport React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { GlassCard, HoloText, BottomNav } from '../components/kronos';
 

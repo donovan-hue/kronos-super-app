@@ -1,8 +1,7 @@
-﻿import React, { useState, useEffect, useCallback, useContext } from 'react';
+mport React, { useState, useEffect, useCallback, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { GlassCard, HoloText, BottomNav } from '../components/kronos';
-import { AuthContext } from '../context/AuthContext';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 

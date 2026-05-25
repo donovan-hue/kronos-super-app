@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useContext, useRef, useCallback } from 'react';
+mport React, { useState, useEffect, useContext, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { HoloText, GlassCard, BottomNav, KronosImage } from './kronos';
