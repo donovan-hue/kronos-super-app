@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844">
+  <rect width="390" height="844" fill="#ffffff"/>
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe"/>
+      <stop offset="100%" style="stop-color:#f3a0ff"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="390" height="60" fill="url(#g)"/>
+  <text x="195" y="38" font-family="Arial" font-weight="900" font-size="24" fill="white" text-anchor="middle">Kronos</text>
+  <text x="195" y="422" font-family="Arial" font-size="18" fill="#4facfe" text-anchor="middle">Super-App</text>
+</svg>

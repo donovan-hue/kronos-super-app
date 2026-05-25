@@ -1,12 +1,48 @@
 {
   "short_name": "Kronos",
   "name": "Kronos Super-App",
-  "description": "Red Social + E-Commerce + Delivery + Portal + Cinema + AR",
+  "description": "Red social, tienda, wallet, comunidades y más",
   "icons": [
+    {
+      "src": "icons/icon-72.png",
+      "type": "image/png",
+      "sizes": "72x72",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-96.png",
+      "type": "image/png",
+      "sizes": "96x96",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-128.png",
+      "type": "image/png",
+      "sizes": "128x128",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-144.png",
+      "type": "image/png",
+      "sizes": "144x144",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-152.png",
+      "type": "image/png",
+      "sizes": "152x152",
+      "purpose": "any maskable"
+    },
     {
       "src": "icons/icon-192.png",
       "type": "image/png",
       "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-384.png",
+      "type": "image/png",
+      "sizes": "384x384",
       "purpose": "any maskable"
     },
     {
@@ -16,11 +52,21 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": "/",
+  "start_url": "/feed",
   "scope": "/",
   "display": "standalone",
-  "theme_color": "#0f0f1a",
-  "background_color": "#0f0f1a",
+  "theme_color": "#4facfe",
+  "background_color": "#ffffff",
   "orientation": "portrait-primary",
-  "categories": ["social", "shopping", "food"]
+  "categories": ["social", "shopping", "lifestyle"],
+  "lang": "es",
+  "dir": "ltr",
+  "screenshots": [
+    {
+      "src": "icons/screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ]
 }
