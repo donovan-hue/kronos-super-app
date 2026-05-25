@@ -32,9 +32,6 @@ function Login() {
   const handleGoogleLogin = () => {
     window.location.href = `${API_BASE}/api/auth/google`;
   };
-  const handleFacebookLogin = () => {
-    window.location.href = `${API_BASE}/api/auth/facebook`;
-  };
 
   return (
     <div style={{
@@ -124,27 +121,25 @@ function Login() {
           </button>
         </form>
 
-        {/* Social login */}
-        <div style={{ display: 'flex', gap: 10, marginTop: 14 }}>
+        <div style={{ marginTop: 12, textAlign: 'center' }}>
+          <Link to="/forgot-password" style={{ color: 'rgba(10,10,20,0.45)', fontSize: 12, textDecoration: 'none' }}>
+            ¿Olvidaste tu contraseña?
+          </Link>
+        </div>
+
+        {/* Google login */}
+        <div style={{ marginTop: 14 }}>
           <button onClick={handleGoogleLogin} style={{
-            flex: 1, padding: '11px 0', borderRadius: 10, cursor: 'pointer',
+            width: '100%', padding: '11px 0', borderRadius: 10, cursor: 'pointer',
             background: '#fff', border: '1.5px solid rgba(79,172,254,0.2)',
-            color: '#0a0a14', fontSize: 12, fontFamily: 'inherit', fontWeight: 600,
+            color: '#0a0a14', fontSize: 13, fontFamily: 'inherit', fontWeight: 600,
             boxShadow: '0 2px 8px rgba(79,172,254,0.08)',
           }}>
-            🔵 Google
-          </button>
-          <button onClick={handleFacebookLogin} style={{
-            flex: 1, padding: '11px 0', borderRadius: 10, cursor: 'pointer',
-            background: '#fff', border: '1.5px solid rgba(79,172,254,0.2)',
-            color: '#0a0a14', fontSize: 12, fontFamily: 'inherit', fontWeight: 600,
-            boxShadow: '0 2px 8px rgba(79,172,254,0.08)',
-          }}>
-            🔷 Facebook
+            🔵 Continuar con Google
           </button>
         </div>
 
-        <div style={{ marginTop: 28, textAlign: 'center', color: 'rgba(10,10,20,0.45)', fontSize: 13 }}>
+        <div style={{ marginTop: 24, textAlign: 'center', color: 'rgba(10,10,20,0.45)', fontSize: 13 }}>
           ¿No tienes cuenta?{' '}
           <Link to="/register" style={{ background: HOLO, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', textDecoration: 'none', fontWeight: 700 }}>
             Regístrate

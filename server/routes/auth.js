@@ -8,7 +8,8 @@ const {
   getProfile,
   followUser,
   unfollowUser,
-  forgotPassword
+  forgotPassword,
+  resetPassword
 } = require('../controllers/authController');
 const passport = require('../config/passport');
 
@@ -18,6 +19,7 @@ const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:3000';
 router.post('/register', register);
 router.post('/login', authLimiter, login);
 router.post('/forgot-password', forgotPassword);
+router.post('/reset-password', resetPassword);
 router.get('/profile', protect, getProfile);
 router.post('/follow/:userId', protect, followUser);
 router.post('/unfollow/:userId', protect, unfollowUser);

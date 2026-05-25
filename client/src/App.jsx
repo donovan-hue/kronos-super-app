@@ -56,6 +56,8 @@ const ShopModule      = lazy(() => import('./shop/ShopModule'));
 const Login           = lazy(() => import('./components/Auth/Login'));
 const Register        = lazy(() => import('./components/Auth/Register'));
 const OAuthCallback   = lazy(() => import('./components/Auth/OAuthCallback'));
+const ForgotPassword  = lazy(() => import('./components/Auth/ForgotPassword'));
+const ResetPassword   = lazy(() => import('./components/Auth/ResetPassword'));
 const UniversalSearch = lazy(() => import('./pages/Search'));
 const HybridFeed      = lazy(() => import('./pages/Feed'));
 const UserProfile     = lazy(() => import('./pages/Profile'));
@@ -120,6 +122,8 @@ function App() {
             <Route path="/auth/callback"         element={<OAuthCallback />} />
             <Route path="/login"                 element={<Navigate to="/auth/login" />} />
             <Route path="/register"              element={<Navigate to="/auth/register" />} />
+            <Route path="/forgot-password"       element={<ForgotPassword />} />
+            <Route path="/reset-password"        element={<ResetPassword />} />
 
             {/* Protegidas — todas usan AppLayout (sidebar desktop + navbar + bubble nav) */}
             <Route path="/feed"                  element={<P><HybridFeed /></P>} />

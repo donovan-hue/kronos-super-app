@@ -183,6 +183,39 @@ exports.forgotPassword = async (req, res) => {
   }
 };
 
+// Reset password — verifica token y guarda nueva contraseña
+exports.resetPassword = async (req, res) => {
+  try {
+    const { token, email, password } = req.body;
+    if (!token || !email || !password) {
+      return res.status(400).json({ message: 'Datos incompletos' });
+    }
+    if (password.length < 6) {
+      return res.status(400).json({ message: 'La contraseña debe tener al menos 6 caracteres' });
+    }
+
+    const hashedToken = crypto.createHash('sha256').update(token).digest('hex');
+    const user = await User.findOne({
+      email,
+      passwordResetToken: hashedToken,
+      passwordResetExpires: { $gt: Date.now() },
+    }).select('+passwordResetToken +passwordResetExpires');
+
+    if (!user) {
+      return res.status(400).json({ message: 'El enlace expiró o es inválido. Solicita uno nuevo.' });
+    }
+
+    user.password = password;
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    await user.save();
+
+    res.status(200).json({ success: true, message: 'Contraseña actualizada correctamente' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // Dejar de seguir
 exports.unfollowUser = async (req, res) => {
   try {
