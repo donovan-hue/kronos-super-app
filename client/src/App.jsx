@@ -36,7 +36,7 @@ function MyProfileRedirect() {
   return id ? <Navigate to={`/profile/${id}`} replace /> : <Navigate to="/auth/login" replace />;
 }
 
-// Layout con sidebar en desktop + Navbar + contenido + ExpandableBubbleNav
+// Layout con sidebar en desktop + Navbar + contenido
 function AppLayout({ children }) {
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: '#ffffff', position: 'relative' }}>
@@ -45,7 +45,6 @@ function AppLayout({ children }) {
         <Navbar />
         {children}
       </div>
-      <ExpandableBubbleNav />
     </div>
   );
 }
@@ -97,6 +96,7 @@ function P({ children }) {
 function App() {
   return (
     <Router>
+      <ExpandableBubbleNav />
       <NotificationToast />
       <Toaster
         position="top-right"
