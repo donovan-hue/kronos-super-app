@@ -13,13 +13,18 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [slowWarning, setSlowWarning] = useState(false);
   const { login, loading } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setSlowWarning(false);
+    const timer = setTimeout(() => setSlowWarning(true), 5000);
     const result = await login(email, password);
+    clearTimeout(timer);
+    setSlowWarning(false);
     if (result.success) navigate('/feed');
     else setError(result.message);
   };
@@ -51,6 +56,17 @@ function Login() {
             Inicia sesión en tu cuenta
           </div>
         </div>
+
+        {/* Aviso servidor lento */}
+        {slowWarning && (
+          <div style={{
+            background: 'rgba(79,172,254,0.08)', border: '1px solid rgba(79,172,254,0.3)',
+            color: '#4facfe', padding: '10px 14px', borderRadius: 12, fontSize: 12,
+            marginBottom: 14, textAlign: 'center',
+          }}>
+            ⏳ El servidor está despertando, espera unos segundos...
+          </div>
+        )}
 
         {/* Error */}
         {error && (

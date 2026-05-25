@@ -16,6 +16,7 @@ function Register() {
     username: '', email: '', password: '', firstName: '', lastName: '',
   });
   const [error, setError] = useState('');
+  const [slowWarning, setSlowWarning] = useState(false);
   const { register, loading } = useAuth();
   const navigate = useNavigate();
 
@@ -27,7 +28,11 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setSlowWarning(false);
+    const timer = setTimeout(() => setSlowWarning(true), 5000);
     const result = await register(formData.username, formData.email, formData.password, formData.firstName, formData.lastName);
+    clearTimeout(timer);
+    setSlowWarning(false);
     if (result.success) navigate('/feed');
     else setError(result.message);
   };
@@ -46,6 +51,16 @@ function Register() {
           <HoloText size={34}>KRONOS</HoloText>
           <div style={{ color: 'rgba(10,10,20,0.45)', fontSize: 13, marginTop: 6 }}>Crea tu cuenta</div>
         </div>
+
+        {slowWarning && (
+          <div style={{
+            background: 'rgba(79,172,254,0.08)', border: '1px solid rgba(79,172,254,0.3)',
+            color: '#4facfe', padding: '10px 14px', borderRadius: 12, fontSize: 12,
+            marginBottom: 14, textAlign: 'center',
+          }}>
+            ⏳ El servidor está despertando, espera unos segundos...
+          </div>
+        )}
 
         {error && (
           <div style={{

@@ -5,6 +5,9 @@ export const AuthContext = createContext();
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
+// Timeout de 20 segundos para que no quede colgado si Render está despertando
+const api = axios.create({ baseURL: API_URL, timeout: 20000 });
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('token'));
@@ -25,23 +28,21 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.post(`${API_URL}/auth/register`, {
-        username,
-        email,
-        password,
-        firstName,
-        lastName
+      const response = await api.post('/auth/register', {
+        username, email, password, firstName, lastName
       });
 
-      const { token, user } = response.data;
-      localStorage.setItem('token', token);
-      setToken(token);
-      setUser(user);
-      setupAxios(token);
+      const { token: authToken, user: authUser } = response.data;
+      localStorage.setItem('token', authToken);
+      setToken(authToken);
+      setUser(authUser);
+      setupAxios(authToken);
 
       return { success: true };
     } catch (err) {
-      const message = err.response?.data?.message || 'Registration failed';
+      const message = err.code === 'ECONNABORTED'
+        ? 'El servidor tardó demasiado. Intenta de nuevo en unos segundos.'
+        : err.response?.data?.message || 'Error al registrarse';
       setError(message);
       return { success: false, message };
     } finally {
@@ -54,20 +55,19 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.post(`${API_URL}/auth/login`, {
-        email,
-        password
-      });
+      const response = await api.post('/auth/login', { email, password });
 
-      const { token, user } = response.data;
-      localStorage.setItem('token', token);
-      setToken(token);
-      setUser(user);
-      setupAxios(token);
+      const { token: authToken, user: authUser } = response.data;
+      localStorage.setItem('token', authToken);
+      setToken(authToken);
+      setUser(authUser);
+      setupAxios(authToken);
 
       return { success: true };
     } catch (err) {
-      const message = err.response?.data?.message || 'Login failed';
+      const message = err.code === 'ECONNABORTED'
+        ? 'El servidor tardó demasiado. Intenta de nuevo en unos segundos.'
+        : err.response?.data?.message || 'Email o contraseña incorrectos';
       setError(message);
       return { success: false, message };
     } finally {
@@ -95,11 +95,10 @@ export const AuthProvider = ({ children }) => {
   // Obtener perfil
   const getProfile = useCallback(async () => {
     try {
-      const response = await axios.get(`${API_URL}/auth/profile`);
+      const response = await api.get('/auth/profile');
       setUser(response.data.user);
       return response.data.user;
     } catch (err) {
-      console.error('Error fetching profile:', err);
       return null;
     }
   }, []);
