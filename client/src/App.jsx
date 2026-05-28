@@ -17,7 +17,7 @@ class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
+        <div style={{ minHeight: '100vh', background: '#08080f', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
           <div style={{ fontSize: 48 }}>⚠️</div>
           <div style={{ color: '#0a0a14', fontSize: 18, fontWeight: 700 }}>Algo salió mal</div>
           <button onClick={() => window.location.reload()} style={{ padding: '10px 28px', borderRadius: 24, background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: 600 }}>
@@ -39,7 +39,7 @@ function MyProfileRedirect() {
 // Layout con sidebar en desktop + Navbar + contenido
 function AppLayout({ children }) {
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: '#ffffff', position: 'relative' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', background: '#08080f', position: 'relative' }}>
       <DesktopSidebar />
       <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
         <Navbar />
@@ -79,8 +79,8 @@ const EventsPage      = lazy(() => import('./pages/Events'));
 const GamificationPage = lazy(() => import('./pages/Gamification'));
 
 const LOADING = (
-  <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-    <div style={{ color: 'rgba(10,10,20,0.4)' }}>Cargando...</div>
+  <div style={{ minHeight: '100vh', background: '#08080f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ color: 'rgba(212,175,55,0.4)', fontFamily: "'Outfit', sans-serif", letterSpacing: 2, fontSize: 13 }}>Cargando...</div>
   </div>
 );
 
@@ -103,11 +103,12 @@ function App() {
         toastOptions={{
           duration: 4000,
           style: {
-            background: 'rgba(255,255,255,0.98)',
-            color: '#0a0a14',
-            border: '1.5px solid rgba(79,172,254,0.2)',
-            backdropFilter: 'blur(20px)',
-            boxShadow: '0 4px 20px rgba(79,172,254,0.15)',
+            background: 'rgba(14,14,26,0.97)',
+            color: '#F0F0F8',
+            border: '1px solid rgba(212,175,55,0.2)',
+            backdropFilter: 'blur(24px)',
+            boxShadow: '0 4px 24px rgba(0,0,0,0.6), 0 0 20px rgba(212,175,55,0.08)',
+            fontFamily: "'Outfit', sans-serif",
           }
         }}
       />

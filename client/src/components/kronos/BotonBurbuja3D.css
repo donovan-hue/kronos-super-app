@@ -1,4 +1,4 @@
-/* ===== BOTÓN BURBUJA FLOTANTE 3D TORNASOL ===== */
+/* ===== BOTÓN LUXURY DARK 3D — KRONOS ===== */
 
 .btn-burbuja-3d {
   position: relative;
@@ -8,58 +8,56 @@
   gap: 8px;
   padding: 16px 32px;
   min-width: 160px;
-  height: 64px;
-  border-radius: 32px;
-  background: linear-gradient(135deg, #EC4899 0%, #8B5CF6 50%, #06B6D4 100%);
-  background-size: 200% 200%;
-  color: white;
-  font-family: 'Outfit', 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 0.5px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  height: 56px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #A08820 0%, #D4AF37 35%, #F0D060 55%, #D4AF37 75%, #A08820 100%);
+  background-size: 300% 300%;
+  color: #08080f;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: none;
   cursor: pointer;
   outline: none;
-  transform-style: preserve-3d;
-  perspective: 1000px;
   box-shadow:
-    0 10px 30px rgba(139, 92, 246, 0.4),
-    0 0 40px rgba(236, 72, 153, 0.3),
-    inset 0 2px 0 rgba(255, 255, 255, 0.4),
-    inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+    0 6px 24px rgba(212,175,55,0.45),
+    0 2px 8px rgba(0,0,0,0.6),
+    inset 0 2px 0 rgba(255,255,255,0.35),
+    inset 0 -2px 0 rgba(0,0,0,0.25);
   animation:
-    float-bubble 4s ease-in-out infinite,
-    tornasol-shift 8s ease-in-out infinite,
-    pulse-glow 3s ease-in-out infinite;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    luxury-gold-shift 6s ease-in-out infinite,
+    luxury-pulse 3s ease-in-out infinite;
+  transition: transform 0.25s cubic-bezier(0.4,0,0.2,1),
+              box-shadow 0.25s cubic-bezier(0.4,0,0.2,1);
   text-decoration: none;
 }
 
-/* Brillo glossy superior (cristal) */
+/* Brillo superior (espejo dorado) */
 .btn-burbuja-3d::before {
   content: '';
   position: absolute;
-  top: 8px;
-  left: 20%;
-  width: 60%;
-  height: 30%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, transparent 100%);
+  top: 6px;
+  left: 18%;
+  width: 64%;
+  height: 32%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, transparent 100%);
   border-radius: 50%;
   filter: blur(2px);
   pointer-events: none;
   z-index: 1;
 }
 
-/* Reflexión inferior */
+/* Sombra inferior (profundidad) */
 .btn-burbuja-3d::after {
   content: '';
   position: absolute;
-  bottom: 4px;
-  left: 30%;
-  width: 40%;
-  height: 15%;
-  background: rgba(255, 255, 255, 0.2);
+  bottom: 5px;
+  left: 28%;
+  width: 44%;
+  height: 12%;
+  background: rgba(0,0,0,0.35);
   border-radius: 50%;
   filter: blur(4px);
   pointer-events: none;
@@ -67,117 +65,103 @@
 }
 
 .btn-burbuja-3d:hover {
-  transform: translateY(-4px) scale(1.08);
+  transform: translateY(-3px) scale(1.04);
   box-shadow:
-    0 20px 50px rgba(139, 92, 246, 0.6),
-    0 0 80px rgba(236, 72, 153, 0.5),
-    0 0 100px rgba(6, 182, 212, 0.4),
-    inset 0 2px 0 rgba(255, 255, 255, 0.5),
-    inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+    0 12px 40px rgba(212,175,55,0.65),
+    0 0 60px rgba(212,175,55,0.25),
+    0 4px 12px rgba(0,0,0,0.7),
+    inset 0 2px 0 rgba(255,255,255,0.45),
+    inset 0 -2px 0 rgba(0,0,0,0.2);
   animation-play-state: paused;
 }
 
 .btn-burbuja-3d:active {
-  transform: translateY(-2px) scale(0.95);
-  transition: all 0.1s;
+  transform: translateY(-1px) scale(0.97);
+  transition: all 0.08s;
 }
 
 .btn-burbuja-3d:disabled {
-  opacity: 0.5;
+  opacity: 0.35;
   cursor: not-allowed;
   animation-play-state: paused;
 }
 
-/* ── VARIANTES DE TAMAÑO ── */
+/* ── TAMAÑOS ── */
 .btn-burbuja-3d.size-sm {
   padding: 8px 18px;
-  height: 40px;
-  font-size: 13px;
+  height: 38px;
+  font-size: 12px;
   min-width: 100px;
-  border-radius: 20px;
+  border-radius: 10px;
+  letter-spacing: 1px;
 }
 
 .btn-burbuja-3d.size-md {
-  padding: 16px 32px;
-  height: 56px;
-  font-size: 15px;
+  padding: 14px 28px;
+  height: 52px;
+  font-size: 13px;
   min-width: 140px;
 }
 
 .btn-burbuja-3d.size-lg {
-  padding: 20px 44px;
-  height: 72px;
-  font-size: 18px;
+  padding: 18px 44px;
+  height: 66px;
+  font-size: 16px;
   min-width: 220px;
-  border-radius: 36px;
+  border-radius: 18px;
 }
 
-/* Circular (solo icono) */
+/* Circular */
 .btn-burbuja-3d.icon-only {
-  width: 56px;
-  height: 56px;
+  width: 52px; height: 52px;
   border-radius: 50%;
-  padding: 0;
-  min-width: unset;
+  padding: 0; min-width: unset;
 }
 
-.btn-burbuja-3d.icon-only.size-sm {
-  width: 40px;
-  height: 40px;
-}
+.btn-burbuja-3d.icon-only.size-sm  { width: 38px; height: 38px; }
+.btn-burbuja-3d.icon-only.size-lg  { width: 66px; height: 66px; }
 
-.btn-burbuja-3d.icon-only.size-lg {
-  width: 72px;
-  height: 72px;
-}
-
-/* Outline — borde tornasol, fondo transparente */
+/* Outline — cristal oscuro con borde dorado */
 .btn-burbuja-3d.outline {
-  background: white;
-  border: 2.5px solid transparent;
+  background: rgba(14,14,26,0.85);
+  border: 1.5px solid transparent;
   background-image:
-    linear-gradient(white, white),
-    linear-gradient(135deg, #EC4899, #8B5CF6, #06B6D4);
+    linear-gradient(rgba(14,14,26,0.9), rgba(14,14,26,0.9)),
+    linear-gradient(135deg, #A08820, #D4AF37, #F0D060, #D4AF37);
   background-origin: border-box;
   background-clip: content-box, border-box;
-  color: #8B5CF6;
+  color: #F0D060;
   box-shadow:
-    0 5px 20px rgba(139, 92, 246, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  animation: float-bubble 4s ease-in-out infinite;
+    0 4px 16px rgba(212,175,55,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+  animation: none;
 }
 
 .btn-burbuja-3d.outline:hover {
   box-shadow:
-    0 10px 30px rgba(139, 92, 246, 0.35),
-    0 0 40px rgba(236, 72, 153, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    0 6px 28px rgba(212,175,55,0.35),
+    0 0 40px rgba(212,175,55,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.06);
 }
 
 /* ── ANIMACIONES ── */
-
-@keyframes float-bubble {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-7px); }
+@keyframes luxury-gold-shift {
+  0%,100% { background-position: 0% 50%; }
+  50%     { background-position: 100% 50%; }
 }
 
-@keyframes tornasol-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50%       { background-position: 100% 50%; }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
+@keyframes luxury-pulse {
+  0%,100% {
     box-shadow:
-      0 10px 30px rgba(139, 92, 246, 0.4),
-      0 0 40px rgba(236, 72, 153, 0.3),
-      inset 0 2px 0 rgba(255, 255, 255, 0.4);
+      0 6px 24px rgba(212,175,55,0.45),
+      0 2px 8px rgba(0,0,0,0.6),
+      inset 0 2px 0 rgba(255,255,255,0.35);
   }
   50% {
     box-shadow:
-      0 15px 40px rgba(139, 92, 246, 0.6),
-      0 0 60px rgba(236, 72, 153, 0.5),
-      0 0 80px rgba(6, 182, 212, 0.4),
-      inset 0 2px 0 rgba(255, 255, 255, 0.5);
+      0 8px 36px rgba(212,175,55,0.65),
+      0 0 50px rgba(212,175,55,0.2),
+      0 2px 8px rgba(0,0,0,0.6),
+      inset 0 2px 0 rgba(255,255,255,0.4);
   }
 }
