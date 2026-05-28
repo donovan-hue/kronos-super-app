@@ -45,6 +45,27 @@ const io = socketIo(server, {
   }
 });
 
+// ============= CORS — debe ir ANTES del rate limiter =============
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  'http://localhost:3000',
+  'https://kronos-space.com',
+  'https://www.kronos-space.com',
+  /\.vercel\.app$/,
+  /\.kronos-space\.com$/,
+].filter(Boolean);
+app.use(cors({
+  origin: (origin, callback) => {
+    // Permitir requests sin origin (curl, Postman, mobile apps)
+    if (!origin) return callback(null, true);
+    const allowed = allowedOrigins.some(o =>
+      typeof o === 'string' ? o === origin : o.test(origin)
+    );
+    callback(null, allowed ? origin : false);
+  },
+  credentials: true,
+}));
+
 // ============= SECURITY & PERFORMANCE MIDDLEWARE =============
 
 // HTTP security headers
@@ -56,35 +77,19 @@ app.use(compression());
 // Request logging
 app.use(morgan('combined'));
 
-// General rate limit: 100 requests per 15 minutes
+// General rate limit: 500 requests per 15 minutes (permisivo para desarrollo)
 const generalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100,
+  max: 500,
   standardHeaders: true,
   legacyHeaders: false,
-  message: { error: 'Demasiadas solicitudes. Intenta de nuevo en unos minutos.' }
+  message: { error: 'Demasiadas solicitudes. Intenta de nuevo en unos minutos.' },
+  skip: (req) => process.env.NODE_ENV === 'development'
 });
 app.use(generalLimiter);
-
-// Auth-specific rate limit: 10 requests per hour (brute-force protection)
-const authLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000,
-  max: 10,
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: { error: 'Demasiados intentos. Espera una hora e intenta de nuevo.' }
-});
-app.use('/api/auth', authLimiter);
+// Nota: el rate limiter de /api/auth ya está definido en middleware/rateLimit.js y aplicado en routes/auth.js
 
 // =============================================================
-
-// Middleware
-const allowedOrigins = [
-  process.env.CLIENT_URL,
-  'http://localhost:3000',
-  /\.vercel\.app$/,
-].filter(Boolean);
-app.use(cors({ origin: allowedOrigins }));
 
 // ── Stripe webhook: necesita el body en raw ANTES de express.json() ──
 // Si el JSON parser corre primero, la firma de Stripe no se puede verificar.
