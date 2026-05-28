@@ -20,6 +20,7 @@ const NAV_ITEMS = [
   { emoji: '🏆', label: 'Gamificación',     to: '/gamification' },
   { emoji: '⚙️', label: 'Ajustes',          to: '/settings' },
   { emoji: '◈',  label: 'AXIS Studio',      to: '/axis',     premium: true },
+  { emoji: '🎬', label: 'NOIR Scripts',     to: '/scripts',  premium: true },
 ];
 
 function SidebarItem({ item, isActive }) {
