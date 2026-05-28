@@ -19,6 +19,7 @@ const NAV_ITEMS = [
   { emoji: '🎪', label: 'Eventos',          to: '/events' },
   { emoji: '🏆', label: 'Gamificación',     to: '/gamification' },
   { emoji: '⚙️', label: 'Ajustes',          to: '/settings' },
+  { emoji: '◈',  label: 'AXIS Studio',      to: '/axis',     premium: true },
 ];
 
 function SidebarItem({ item, isActive }) {
@@ -70,9 +71,18 @@ function SidebarItem({ item, isActive }) {
         fontFamily: "'Outfit', sans-serif",
         letterSpacing: 0.2,
         transition: 'color 0.17s',
+        flex: 1,
       }}>
         {item.label}
       </span>
+
+      {item.premium && !isActive && (
+        <span style={{
+          fontSize: 8, fontWeight: 700, padding: '2px 5px', borderRadius: 6,
+          background: 'rgba(212,175,55,0.1)', border: '1px solid rgba(212,175,55,0.25)',
+          color: 'rgba(212,175,55,0.6)', letterSpacing: 0.5,
+        }}>PRO</span>
+      )}
 
       {/* Indicador activo */}
       {isActive && (

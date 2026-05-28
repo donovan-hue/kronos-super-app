@@ -77,6 +77,7 @@ const AvatarPage      = lazy(() => import('./pages/Avatar'));
 const VideoEditorPage = lazy(() => import('./pages/VideoEditor'));
 const EventsPage      = lazy(() => import('./pages/Events'));
 const GamificationPage = lazy(() => import('./pages/Gamification'));
+const AxisPage         = lazy(() => import('./pages/Axis'));
 
 const LOADING = (
   <div style={{ minHeight: '100vh', background: '#08080f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -149,6 +150,7 @@ function App() {
             <Route path="/video-editor"          element={<P><VideoEditorPage /></P>} />
             <Route path="/events"                element={<P><EventsPage /></P>} />
             <Route path="/gamification"          element={<P><GamificationPage /></P>} />
+            <Route path="/axis"                  element={<P><AxisPage /></P>} />
             <Route path="/subscription/success"  element={<ProtectedRoute><SubscriptionSuccess /></ProtectedRoute>} />
 
             {/* Admin */}
