@@ -1,6 +1,7 @@
 import React, { Suspense, lazy, useContext, Component } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 import NotificationToast from './components/NotificationToast';
@@ -163,6 +164,7 @@ function App() {
           </Routes>
         </Suspense>
       </ErrorBoundary>
+      <Analytics />
     </Router>
   );
 }
