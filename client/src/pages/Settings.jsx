@@ -55,7 +55,7 @@ function PrivacyTab() {
             </div>
             <button onClick={() => toggle(item.key)}
               style={{ width: 48, height: 26, borderRadius: 13, border: 'none', cursor: 'pointer', background: settings[item.key] ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(240,240,255,0.45)', position: 'relative', transition: 'background 0.3s', flexShrink: 0 }}>
-              <div style={{ position: 'absolute', top: 3, left: settings[item.key] ? 25 : 3, width: 20, height: 20, borderRadius: '50%', background: '#fff', transition: 'left 0.3s', boxShadow: '0 1px 4px rgba(0,0,0,0.3)' }} />
+              <div style={{ position: 'absolute', top: 3, left: settings[item.key] ? 25 : 3, width: 20, height: 20, borderRadius: '50%', background: '#000', transition: 'left 0.3s', boxShadow: '0 1px 4px rgba(0,0,0,0.3)' }} />
             </button>
           </div>
         ))}
@@ -100,7 +100,7 @@ function NotificationsTab() {
             </div>
             <button onClick={() => toggle(item.key)}
               style={{ width: 48, height: 26, borderRadius: 13, border: 'none', cursor: 'pointer', background: prefs[item.key] ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(240,240,255,0.45)', position: 'relative', transition: 'background 0.3s', flexShrink: 0 }}>
-              <div style={{ position: 'absolute', top: 3, left: prefs[item.key] ? 25 : 3, width: 20, height: 20, borderRadius: '50%', background: '#fff', transition: 'left 0.3s', boxShadow: '0 1px 4px rgba(0,0,0,0.3)' }} />
+              <div style={{ position: 'absolute', top: 3, left: prefs[item.key] ? 25 : 3, width: 20, height: 20, borderRadius: '50%', background: '#000', transition: 'left 0.3s', boxShadow: '0 1px 4px rgba(0,0,0,0.3)' }} />
             </button>
           </div>
         ))}
@@ -154,7 +154,7 @@ function AppearanceTab() {
           </div>
           <button onClick={() => setAnimations(a => !a)}
             style={{ width: 48, height: 26, borderRadius: 13, border: 'none', cursor: 'pointer', background: animations ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(240,240,255,0.45)', position: 'relative', transition: 'background 0.3s' }}>
-            <div style={{ position: 'absolute', top: 3, left: animations ? 25 : 3, width: 20, height: 20, borderRadius: '50%', background: '#fff', transition: 'left 0.3s' }} />
+            <div style={{ position: 'absolute', top: 3, left: animations ? 25 : 3, width: 20, height: 20, borderRadius: '50%', background: '#000', transition: 'left 0.3s' }} />
           </button>
         </div>
       </GlassCard>
@@ -267,7 +267,7 @@ export default function Settings() {
   const [activeTab, setActiveTab] = useState(tabParam || '2fa');
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff', paddingBottom: 100 }}>
+    <div style={{ minHeight: '100vh', background: '#000', paddingBottom: 100 }}>
       <div style={{ maxWidth: 480, margin: '0 auto', padding: '16px' }}>
         <div style={{ marginBottom: 20 }}>
           <div style={{ color: 'rgba(240,240,255,0.9)', fontSize: 22, fontWeight: 800 }}>Configuración</div>

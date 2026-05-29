@@ -38,7 +38,7 @@ function QRDisplay({ value, size = 200 }) {
     (r < 7 && c < 7) || (r < 7 && c >= cells - 7) || (r >= cells - 7 && c < 7);
 
   return (
-    <div style={{ background: '#fff', padding: 12, borderRadius: 12, display: 'inline-block', boxShadow: '0 4px 20px rgba(0,0,0,0.1)' }}>
+    <div style={{ background: '#000', padding: 12, borderRadius: 12, display: 'inline-block', boxShadow: '0 4px 20px rgba(0,0,0,0.1)' }}>
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
         {grid.map(({ r, c, dark }) => {
           const isFinder = isFinderPattern(r, c);
@@ -102,7 +102,7 @@ function CreateEventModal({ onClose, onCreated }) {
 
   return (
     <div style={{ position: 'fixed', inset: 0, background: 'rgba(240,240,255,0.45)', backdropFilter: 'blur(6px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
-      <div style={{ background: '#fff', borderRadius: 20, width: '100%', maxWidth: 520, maxHeight: '90vh', overflowY: 'auto', padding: 28 }}>
+      <div style={{ background: '#000', borderRadius: 20, width: '100%', maxWidth: 520, maxHeight: '90vh', overflowY: 'auto', padding: 28 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <h2 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: 'rgba(240,240,255,0.9)' }}>🎪 Crear Evento</h2>
           <button onClick={onClose} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer', color: 'rgba(240,240,255,0.9)' }}>×</button>
@@ -204,7 +204,7 @@ function TicketModal({ event, onClose }) {
 
   return (
     <div style={{ position: 'fixed', inset: 0, background: 'rgba(240,240,255,0.6)', backdropFilter: 'blur(8px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
-      <div style={{ background: '#fff', borderRadius: 24, width: '100%', maxWidth: 400, padding: 28, textAlign: 'center' }}>
+      <div style={{ background: '#000', borderRadius: 24, width: '100%', maxWidth: 400, padding: 28, textAlign: 'center' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: 'rgba(240,240,255,0.9)' }}>🎟️ Boleto</h3>
           <button onClick={onClose} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer', color: 'rgba(240,240,255,0.9)' }}>×</button>

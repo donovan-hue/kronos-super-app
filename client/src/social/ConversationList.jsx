@@ -102,7 +102,7 @@ export default function ConversationList() {
   }, [search]);
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff', paddingBottom: 80 }}>
+    <div style={{ minHeight: '100vh', background: '#000', paddingBottom: 80 }}>
       <div style={{ padding: '16px', maxWidth: 680, margin: '0 auto' }}>
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>

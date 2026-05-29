@@ -535,7 +535,7 @@ export default function Marketplace() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff', paddingBottom: 80 }}>
+    <div style={{ minHeight: '100vh', background: '#000', paddingBottom: 80 }}>
       <div style={{ maxWidth: 700, margin: '0 auto', padding: '0 16px' }}>
 
         <div style={{ paddingTop: 72, paddingBottom: 8 }}>

@@ -250,7 +250,7 @@ export default function Health() {
   const tc = toastColors[toast.type] || toastColors.info;
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff', paddingBottom: 100 }}>
+    <div style={{ minHeight: '100vh', background: '#000', paddingBottom: 100 }}>
       {/* Toast */}
       {toast.msg && (
         <div style={{

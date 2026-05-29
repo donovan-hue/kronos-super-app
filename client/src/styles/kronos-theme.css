@@ -57,33 +57,71 @@ body {
   font-family: var(--k-font) !important;
 }
 
-/* ── TEXTO NEÓN ANIMADO ── */
+/* ── TEXTO PLATEADO ANIMADO ── */
 .k-holo-text {
-  font-family: var(--k-font);
-  font-weight: 800;
-  background: var(--k-grad-neon-h);
+  font-family: 'Cinzel', var(--k-font);
+  font-weight: 700;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, #fff 0%, #d7dbe2 20%, #8b9099 45%, #fff 60%, #5d626b 80%, #c9ced6 100%);
   background-size: 300% 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: k-neon-shift 4s ease-in-out infinite;
-  filter: drop-shadow(0 0 8px rgba(255,0,200,0.6));
+  animation: silver-flow-global 5s ease-in-out infinite;
+  filter: drop-shadow(0 0 6px rgba(215,219,226,0.3));
 }
 
-/* ── CARD CYBERPUNK ── */
+/* ── CARD BURBUJA CRISTALINA ── */
 .k-glass {
-  background: rgba(255,255,255,0.02);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--k-border-card);
-  border-radius: var(--k-r-lg);
-  box-shadow: 0 4px 24px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.03);
-  transition: all 0.25s;
+  position: relative;
+  isolation: isolate;
+  background: radial-gradient(circle at 35% 30%, #1a1a1a 0%, #0d0d0d 60%, #080808 100%);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border-radius: 20px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.85), inset 0 1px 0 rgba(255,255,255,0.5);
+  transition: all 0.25s cubic-bezier(.22,1,.36,1);
+  overflow: hidden;
+}
+
+/* Filo plateado animado */
+.k-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1.6px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #fff, #d7dbe2, #8b9099, #fff, #5d626b, #c9ced6);
+  background-size: 300% 300%;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+  animation: silver-flow-global 5s ease-in-out infinite;
+}
+
+/* Reflejo superior */
+.k-glass::after {
+  content: '';
+  position: absolute;
+  left: 10%; right: 10%; top: 0;
+  height: 30%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 100%);
+  filter: blur(1px);
+  pointer-events: none;
+  z-index: 2;
+  border-radius: inherit;
 }
 
 .k-glass:hover {
-  border-color: rgba(255,0,200,0.3);
-  box-shadow: 0 0 20px rgba(255,0,200,0.15), 0 0 40px rgba(0,245,255,0.08), 0 4px 32px rgba(0,0,0,0.9);
+  box-shadow: 0 10px 36px rgba(0,0,0,0.9), 0 0 18px rgba(215,219,226,0.15), inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+@keyframes silver-flow-global {
+  0%,100% { background-position: 0% 50%; }
+  33%     { background-position: 100% 50%; }
+  66%     { background-position: 50% 0%; }
 }
 
 /* ── INPUT CYBERPUNK ── */

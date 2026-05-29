@@ -238,7 +238,7 @@ export default function AvatarPage() {
   const styles = {
     page: {
       minHeight: '100vh',
-      background: '#ffffff',
+      background: '#000',
       color: '#fff',
       fontFamily: "'Outfit', sans-serif",
       paddingTop: 72,

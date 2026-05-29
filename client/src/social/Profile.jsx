@@ -153,7 +153,7 @@ function Profile() {
 
   if (loading) {
     return (
-      <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ minHeight: '100vh', background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ color: 'rgba(10,10,20,0.5)' }}>Cargando perfil...</div>
       </div>
     );
@@ -161,7 +161,7 @@ function Profile() {
 
   if (!profile) {
     return (
-      <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ minHeight: '100vh', background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.5)' }}>
           <div style={{ fontSize: 40, marginBottom: 8 }}>😕</div>
           <div>Perfil no encontrado</div>
@@ -171,7 +171,7 @@ function Profile() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff', paddingBottom: 100 }}>
+    <div style={{ minHeight: '100vh', background: '#000', paddingBottom: 100 }}>
       {/* Back button */}
       {userId && (
         <button onClick={() => navigate(-1)}

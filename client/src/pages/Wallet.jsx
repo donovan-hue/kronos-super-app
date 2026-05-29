@@ -357,7 +357,7 @@ export default function Wallet() {
   const txColor = { deposit: '#10b981', withdrawal: '#ef4444', transfer_in: '#10b981', transfer_out: '#ef4444', payment: '#f59e0b', refund: '#06b6d4' };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff', paddingBottom: 100 }}>
+    <div style={{ minHeight: '100vh', background: '#000', paddingBottom: 100 }}>
       {/* Toast */}
       {toast && (
         <div style={{ position: 'fixed', top: 80, left: '50%', transform: 'translateX(-50%)', background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#fff', padding: '10px 24px', borderRadius: 28, fontSize: 14, fontWeight: 600, zIndex: 9999, boxShadow: '0 8px 32px rgba(124,58,237,0.4)' }}>

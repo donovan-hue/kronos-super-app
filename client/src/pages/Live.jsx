@@ -402,7 +402,7 @@ export default function Live() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff', paddingBottom: 80 }}>
+    <div style={{ minHeight: '100vh', background: '#000', paddingBottom: 80 }}>
       <div style={{ padding: '16px', maxWidth: 760, margin: '0 auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <HoloText size={26}>LIVE</HoloText>
