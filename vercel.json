@@ -5,7 +5,9 @@
   "outputDirectory": "build",
   "installCommand": "npm install",
   "env": {
-    "CI": "false"
+    "CI": "false",
+    "REACT_APP_API_URL": "https://kronos-api-qq0o.onrender.com/api",
+    "REACT_APP_SOCKET_URL": "https://kronos-api-qq0o.onrender.com"
   },
   "headers": [
     {
