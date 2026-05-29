@@ -1,4 +1,22 @@
-/* ===== BOTÓN LUXURY DARK 3D — KRONOS ===== */
+/* ═══════════════════════════════════════════════
+   BOTÓN BURBUJA CRISTALINA PLATEADA — KRONOS
+   ═══════════════════════════════════════════════ */
+
+@keyframes silver-flow {
+  0%,100% { background-position: 0%   50%; }
+  33%     { background-position: 100% 50%; }
+  66%     { background-position: 50%  0%;  }
+}
+
+@keyframes btn-float {
+  0%,100% { transform: translateY(0px); }
+  50%     { transform: translateY(-5px); }
+}
+
+@keyframes btn-glow-pulse {
+  0%,100% { box-shadow: 0 10px 34px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.55); }
+  50%     { box-shadow: 0 10px 34px rgba(0,0,0,.65), 0 0 22px rgba(215,219,226,.22), inset 0 1px 0 rgba(255,255,255,.65); }
+}
 
 .btn-burbuja-3d {
   position: relative;
@@ -6,162 +24,145 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 16px 32px;
-  min-width: 160px;
-  height: 56px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #A08820 0%, #D4AF37 35%, #F0D060 55%, #D4AF37 75%, #A08820 100%);
-  background-size: 300% 300%;
-  color: #08080f;
-  font-family: 'Outfit', sans-serif;
-  font-weight: 800;
-  font-size: 14px;
+  isolation: isolate;
+  overflow: hidden;
+
+  /* Dimensiones por defecto (md) */
+  padding: 13px 26px;
+  min-width: 140px;
+  height: 48px;
+  border-radius: 999px;
+
+  /* Burbuja */
+  background: rgba(255,255,255,.045);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+
+  /* Tipografía */
+  font-family: 'Sora', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
+  color: rgba(233,236,241,.9);
+
+  /* Borde */
   border: none;
   cursor: pointer;
-  outline: none;
-  box-shadow:
-    0 6px 24px rgba(212,175,55,0.45),
-    0 2px 8px rgba(0,0,0,0.6),
-    inset 0 2px 0 rgba(255,255,255,0.35),
-    inset 0 -2px 0 rgba(0,0,0,0.25);
-  animation:
-    luxury-gold-shift 6s ease-in-out infinite,
-    luxury-pulse 3s ease-in-out infinite;
-  transition: transform 0.25s cubic-bezier(0.4,0,0.2,1),
-              box-shadow 0.25s cubic-bezier(0.4,0,0.2,1);
   text-decoration: none;
+  user-select: none;
+
+  /* Sombra + brillo interior */
+  box-shadow: 0 10px 34px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.55);
+
+  /* Animaciones */
+  animation: btn-float 4s ease-in-out infinite, btn-glow-pulse 3s ease-in-out infinite;
+  transition: transform 0.22s cubic-bezier(.22,1,.36,1),
+              box-shadow 0.3s cubic-bezier(.22,1,.36,1),
+              background 0.3s;
 }
 
-/* Brillo superior (espejo dorado) */
+/* Filo plateado animado */
 .btn-burbuja-3d::before {
   content: '';
   position: absolute;
-  top: 6px;
-  left: 18%;
-  width: 64%;
-  height: 32%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, transparent 100%);
-  border-radius: 50%;
-  filter: blur(2px);
+  inset: 0;
+  padding: 1.6px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #fff 0%, #d7dbe2 22%, #8b9099 48%, #fff 60%, #5d626b 82%, #c9ced6 100%);
+  background-size: 300% 300%;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
+  animation: silver-flow 5s ease-in-out infinite;
 }
 
-/* Sombra inferior (profundidad) */
+/* Reflejo superior (brillo de burbuja) */
 .btn-burbuja-3d::after {
   content: '';
   position: absolute;
-  bottom: 5px;
-  left: 28%;
-  width: 44%;
-  height: 12%;
-  background: rgba(0,0,0,0.35);
-  border-radius: 50%;
-  filter: blur(4px);
+  left: 14%;
+  right: 14%;
+  top: 6px;
+  height: 38%;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,.38) 0%, rgba(255,255,255,0) 100%);
+  filter: blur(1px);
   pointer-events: none;
-  z-index: 1;
+  z-index: 3;
 }
 
+.btn-burbuja-3d span,
+.btn-burbuja-3d > * {
+  position: relative;
+  z-index: 4;
+}
+
+/* Hover */
 .btn-burbuja-3d:hover {
-  transform: translateY(-3px) scale(1.04);
-  box-shadow:
-    0 12px 40px rgba(212,175,55,0.65),
-    0 0 60px rgba(212,175,55,0.25),
-    0 4px 12px rgba(0,0,0,0.7),
-    inset 0 2px 0 rgba(255,255,255,0.45),
-    inset 0 -2px 0 rgba(0,0,0,0.2);
+  background: rgba(255,255,255,.085);
+  box-shadow: 0 10px 34px rgba(0,0,0,.65), 0 0 22px rgba(215,219,226,.22), inset 0 1px 0 rgba(255,255,255,.65);
   animation-play-state: paused;
+  transform: translateY(-3px) scale(1.03);
 }
 
+/* Active */
 .btn-burbuja-3d:active {
-  transform: translateY(-1px) scale(0.97);
+  transform: scale(.97) translateY(0);
   transition: all 0.08s;
 }
 
+/* Disabled */
 .btn-burbuja-3d:disabled {
-  opacity: 0.35;
+  opacity: .32;
   cursor: not-allowed;
   animation-play-state: paused;
+  transform: none !important;
 }
 
 /* ── TAMAÑOS ── */
 .btn-burbuja-3d.size-sm {
-  padding: 8px 18px;
-  height: 38px;
-  font-size: 12px;
-  min-width: 100px;
-  border-radius: 10px;
+  padding: 9px 18px;
+  height: 34px;
+  font-size: 11px;
+  min-width: 90px;
+  border-radius: 999px;
   letter-spacing: 1px;
 }
 
 .btn-burbuja-3d.size-md {
-  padding: 14px 28px;
-  height: 52px;
+  padding: 13px 26px;
+  height: 48px;
   font-size: 13px;
   min-width: 140px;
 }
 
 .btn-burbuja-3d.size-lg {
-  padding: 18px 44px;
-  height: 66px;
+  padding: 17px 34px;
+  height: 60px;
   font-size: 16px;
-  min-width: 220px;
-  border-radius: 18px;
+  min-width: 200px;
+  border-radius: 999px;
 }
 
-/* Circular */
+/* Solo ícono */
 .btn-burbuja-3d.icon-only {
-  width: 52px; height: 52px;
+  width: 48px; height: 48px;
   border-radius: 50%;
   padding: 0; min-width: unset;
 }
+.btn-burbuja-3d.icon-only.size-sm { width: 34px; height: 34px; }
+.btn-burbuja-3d.icon-only.size-lg { width: 60px; height: 60px; }
 
-.btn-burbuja-3d.icon-only.size-sm  { width: 38px; height: 38px; }
-.btn-burbuja-3d.icon-only.size-lg  { width: 66px; height: 66px; }
+/* Ancho completo */
+.btn-burbuja-3d.full { width: 100%; }
 
-/* Outline — cristal oscuro con borde dorado */
+/* Outline (sin relleno, solo filo plateado visible) */
 .btn-burbuja-3d.outline {
-  background: rgba(14,14,26,0.85);
-  border: 1.5px solid transparent;
-  background-image:
-    linear-gradient(rgba(14,14,26,0.9), rgba(14,14,26,0.9)),
-    linear-gradient(135deg, #A08820, #D4AF37, #F0D060, #D4AF37);
-  background-origin: border-box;
-  background-clip: content-box, border-box;
-  color: #F0D060;
-  box-shadow:
-    0 4px 16px rgba(212,175,55,0.2),
-    inset 0 1px 0 rgba(255,255,255,0.05);
-  animation: none;
+  background: transparent;
 }
-
 .btn-burbuja-3d.outline:hover {
-  box-shadow:
-    0 6px 28px rgba(212,175,55,0.35),
-    0 0 40px rgba(212,175,55,0.15),
-    inset 0 1px 0 rgba(255,255,255,0.06);
-}
-
-/* ── ANIMACIONES ── */
-@keyframes luxury-gold-shift {
-  0%,100% { background-position: 0% 50%; }
-  50%     { background-position: 100% 50%; }
-}
-
-@keyframes luxury-pulse {
-  0%,100% {
-    box-shadow:
-      0 6px 24px rgba(212,175,55,0.45),
-      0 2px 8px rgba(0,0,0,0.6),
-      inset 0 2px 0 rgba(255,255,255,0.35);
-  }
-  50% {
-    box-shadow:
-      0 8px 36px rgba(212,175,55,0.65),
-      0 0 50px rgba(212,175,55,0.2),
-      0 2px 8px rgba(0,0,0,0.6),
-      inset 0 2px 0 rgba(255,255,255,0.4);
-  }
+  background: rgba(255,255,255,.045);
 }

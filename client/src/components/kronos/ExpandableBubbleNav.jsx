@@ -4,57 +4,53 @@ import { AuthContext } from '../../context/AuthContext';
 
 const BUBBLES = [
   {
-    id: 'inicio',
-    emoji: '🏠',
+    id: 'inicio', emoji: '◇',
     corner: { bottom: 90, left: 16 },
     fanDirection: 'up-right',
     subs: [
-      { emoji: '📝', label: 'Post',     path: '/feed' },
-      { emoji: '📸', label: 'Foto',     path: '/feed?type=photo' },
-      { emoji: '🎥', label: 'Video',    path: '/video-editor' },
-      { emoji: '📖', label: 'Historia', path: '/social/stories' },
-      { emoji: '🔴', label: 'LIVE',     path: '/live' },
+      { emoji: '▷', label: 'Feed',     path: '/feed' },
+      { emoji: '◎', label: 'Foto',     path: '/feed?type=photo' },
+      { emoji: '▶', label: 'Video',    path: '/video-editor' },
+      { emoji: '◉', label: 'Historia', path: '/social/stories' },
+      { emoji: '●', label: 'LIVE',     path: '/live' },
     ],
   },
   {
-    id: 'buscar',
-    emoji: '🔍',
+    id: 'buscar', emoji: '◎',
     corner: { bottom: 90, right: 16 },
     fanDirection: 'up-left',
     subs: [
-      { emoji: '👤', label: 'Personas',    path: '/search?type=people' },
-      { emoji: '🏪', label: 'Tiendas',     path: '/search?type=shops' },
-      { emoji: '🏘️', label: 'Comunidades', path: '/communities' },
+      { emoji: '◑', label: 'Personas',    path: '/search?type=people' },
+      { emoji: '◈', label: 'Tiendas',     path: '/search?type=shops' },
+      { emoji: '⬡', label: 'Comunidades', path: '/communities' },
     ],
   },
   {
-    id: 'chat',
-    emoji: '💬',
+    id: 'chat', emoji: '▣',
     corner: { bottom: 16, left: 16 },
     fanDirection: 'up-right',
     subs: [
-      { emoji: '💬', label: 'Chat',           path: '/social/chat' },
-      { emoji: '👥', label: 'Grupos',         path: '/social/groups' },
-      { emoji: '🔔', label: 'Notificaciones', path: '/notifications' },
+      { emoji: '◇', label: 'Chat',    path: '/social/chat' },
+      { emoji: '◫', label: 'Grupos',  path: '/social/groups' },
+      { emoji: '◉', label: 'Notifs',  path: '/notifications' },
     ],
   },
   {
-    id: 'perfil',
-    emoji: '👤',
+    id: 'perfil', emoji: '◑',
     corner: { bottom: 16, right: 16 },
     fanDirection: 'up-left',
     subs: [
-      { emoji: '👁️', label: 'Mi perfil',    path: '/profile/me' },
-      { emoji: '🏆', label: 'Gamificación', path: '/gamification' },
-      { emoji: '💰', label: 'Wallet',       path: '/wallet' },
-      { emoji: '🎪', label: 'Eventos',      path: '/events' },
-      { emoji: '⚙️', label: 'Ajustes',      path: '/settings' },
+      { emoji: '◎', label: 'Perfil',  path: '/profile/me' },
+      { emoji: '✦', label: 'Logros',  path: '/gamification' },
+      { emoji: '◆', label: 'Wallet',  path: '/wallet' },
+      { emoji: '▦', label: 'Eventos', path: '/events' },
+      { emoji: '◎', label: 'Ajustes', path: '/settings' },
     ],
   },
 ];
 
 function getFanPositions(direction, count) {
-  const radius = 88;
+  const radius = 86;
   const startAngle = direction === 'up-right' ? -160 : -20;
   const range      = direction === 'up-right' ?   80 : -80;
   return Array.from({ length: count }, (_, i) => {
@@ -64,82 +60,105 @@ function getFanPositions(direction, count) {
   });
 }
 
-function GoldSphere({ size, emoji, isOpen, onClick, style = {} }) {
+/* Esfera burbuja cristalina plateada */
+function CrystalSphere({ size, emoji, isOpen, onClick, style = {} }) {
   return (
     <div
       onClick={onClick}
       style={{
         width: size, height: size, borderRadius: '50%',
         position: 'relative', cursor: 'pointer', userSelect: 'none',
-        transform: isOpen ? 'scale(1.2)' : 'scale(1)',
-        transition: 'transform 0.25s cubic-bezier(0.34,1.56,0.64,1)',
+        isolation: 'isolate',
+        transform: isOpen ? 'scale(1.15)' : 'scale(1)',
+        transition: 'transform 0.25s cubic-bezier(.34,1.56,.64,1)',
         ...style,
       }}
     >
-      {/* Capa base — cristal oscuro con borde dorado */}
+      {/* Cuerpo translúcido */}
       <div style={{
         position: 'absolute', inset: 0, borderRadius: '50%',
         background: isOpen
-          ? 'radial-gradient(circle at 38% 38%, rgba(212,175,55,0.25) 0%, rgba(160,136,32,0.15) 40%, rgba(8,8,15,0.85) 100%)'
-          : 'radial-gradient(circle at 38% 38%, rgba(212,175,55,0.15) 0%, rgba(14,14,26,0.92) 55%, rgba(8,8,15,0.95) 100%)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
+          ? 'rgba(255,255,255,.085)'
+          : 'rgba(255,255,255,.045)',
+        backdropFilter: 'blur(16px) saturate(140%)',
+        WebkitBackdropFilter: 'blur(16px) saturate(140%)',
         boxShadow: isOpen
-          ? '0 6px 28px rgba(212,175,55,0.5), 0 0 40px rgba(212,175,55,0.2), inset 0 -2px 6px rgba(0,0,0,0.5)'
-          : '0 4px 18px rgba(0,0,0,0.6), 0 0 16px rgba(212,175,55,0.15), inset 0 -2px 4px rgba(0,0,0,0.4)',
+          ? '0 8px 28px rgba(0,0,0,.75), 0 0 18px rgba(215,219,226,.22), inset 0 1px 0 rgba(255,255,255,.55)'
+          : '0 6px 20px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.45)',
       }} />
 
-      {/* Borde dorado */}
+      {/* Filo plateado animado */}
       <div style={{
         position: 'absolute', inset: 0, borderRadius: '50%',
-        border: isOpen ? '1.5px solid rgba(212,175,55,0.7)' : '1px solid rgba(212,175,55,0.3)',
-        boxSizing: 'border-box',
+        padding: '1.6px',
+        background: 'linear-gradient(135deg,#fff,#d7dbe2,#8b9099,#fff,#5d626b,#c9ced6)',
+        backgroundSize: '300% 300%',
+        WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
+        WebkitMaskComposite: 'xor',
+        maskComposite: 'exclude',
+        pointerEvents: 'none',
+        animation: 'silver-flow 5s ease-in-out infinite',
       }} />
 
-      {/* Reflejo lateral dorado */}
-      <div style={{
-        position: 'absolute', inset: 0, borderRadius: '50%',
-        background: 'radial-gradient(circle at 75% 45%, rgba(240,208,96,0.12) 0%, transparent 50%)',
-      }} />
-
-      {/* Brillo especular — punto de luz */}
+      {/* Reflejo superior */}
       <div style={{
         position: 'absolute',
-        top: '11%', left: '17%',
-        width: '40%', height: '26%',
+        top: '8%', left: '14%',
+        width: '44%', height: '28%',
         borderRadius: '50%',
-        background: 'radial-gradient(ellipse, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.2) 50%, transparent 100%)',
+        background: 'linear-gradient(180deg, rgba(255,255,255,.42) 0%, rgba(255,255,255,0) 100%)',
         filter: 'blur(1.5px)',
-        transform: 'rotate(-25deg)',
+        transform: 'rotate(-20deg)',
+        pointerEvents: 'none',
       }} />
 
-      {/* Brillo secundario pequeño */}
+      {/* Reflejo secundario pequeño */}
       <div style={{
-        position: 'absolute', top: '18%', left: '55%',
+        position: 'absolute', top: '16%', left: '54%',
         width: '13%', height: '9%', borderRadius: '50%',
-        background: 'rgba(255,255,255,0.5)',
+        background: 'rgba(255,255,255,.55)',
         filter: 'blur(1px)',
+        pointerEvents: 'none',
       }} />
 
-      {/* Emoji */}
+      {/* Emoji / símbolo centrado */}
       <div style={{
         position: 'absolute', inset: 0,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         fontSize: size * 0.38,
-        filter: 'drop-shadow(0 1px 3px rgba(0,0,0,0.7))',
+        color: isOpen ? 'rgba(233,236,241,.95)' : 'rgba(200,210,230,.7)',
+        filter: isOpen ? 'drop-shadow(0 0 5px rgba(215,219,226,.7))' : 'none',
+        transition: 'color .2s, filter .2s',
+        fontFamily: "'Cinzel', serif",
+        zIndex: 3,
       }}>
         {emoji}
       </div>
+
+      {/* Espejo de piso (reflejo debajo) */}
+      <div style={{
+        position: 'absolute',
+        top: '100%', left: '10%', right: '10%',
+        height: size * 0.4,
+        background: 'rgba(255,255,255,.015)',
+        borderRadius: '0 0 50% 50%',
+        transform: 'scaleY(-1)',
+        filter: 'blur(3px)',
+        opacity: 0.35,
+        pointerEvents: 'none',
+        maskImage: 'linear-gradient(to bottom, rgba(0,0,0,.5), transparent)',
+        WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,.5), transparent)',
+      }} />
     </div>
   );
 }
 
-const MAIN_SIZE = 54;
-const SUB_SIZE  = 42;
+const MAIN_SIZE = 52;
+const SUB_SIZE  = 40;
 
 export default function ExpandableBubbleNav() {
-  const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+  const navigate  = useNavigate();
+  const { user }  = useContext(AuthContext);
   const [openId, setOpenId] = useState(null);
 
   if (!user) return null;
@@ -150,29 +169,28 @@ export default function ExpandableBubbleNav() {
   return (
     <>
       <style>{`
+        @keyframes silver-flow {
+          0%,100% { background-position: 0% 50%; }
+          33%     { background-position: 100% 50%; }
+          66%     { background-position: 50% 0%; }
+        }
         @keyframes bubbleFloat {
           0%,100% { transform: translateY(0px) scale(1); }
           50%      { transform: translateY(-6px) scale(1.02); }
         }
-        @keyframes bubblePulseGold {
-          0%,100% { filter: drop-shadow(0 0 6px rgba(212,175,55,0.4)); }
-          50%     { filter: drop-shadow(0 0 14px rgba(212,175,55,0.7)); }
-        }
         @keyframes subPopIn {
-          0%   { opacity:0; transform: translate(var(--tx),var(--ty)) scale(0.15); }
-          65%  { transform: translate(var(--tx),var(--ty)) scale(1.12); }
+          0%   { opacity:0; transform: translate(var(--tx),var(--ty)) scale(0.1); }
+          70%  { transform: translate(var(--tx),var(--ty)) scale(1.08); }
           100% { opacity:1; transform: translate(var(--tx),var(--ty)) scale(1); }
         }
-        @media (min-width: 768px) {
-          .bubble-corner { display: none !important; }
-        }
+        @media (min-width: 768px) { .bubble-corner { display: none !important; } }
       `}</style>
 
       {openId && (
-        <div onClick={close} style={{ position:'fixed', inset:0, zIndex:298 }} />
+        <div onClick={close} style={{ position: 'fixed', inset: 0, zIndex: 298 }} />
       )}
 
-      {BUBBLES.map((bubble) => {
+      {BUBBLES.map(bubble => {
         const isOpen = openId === bubble.id;
         const fanPos = getFanPositions(bubble.fanDirection, bubble.subs.length);
 
@@ -180,12 +198,7 @@ export default function ExpandableBubbleNav() {
           <div
             key={bubble.id}
             className="bubble-corner"
-            style={{
-              position: 'fixed',
-              ...bubble.corner,
-              zIndex: 299,
-              width: MAIN_SIZE, height: MAIN_SIZE,
-            }}
+            style={{ position: 'fixed', ...bubble.corner, zIndex: 299, width: MAIN_SIZE, height: MAIN_SIZE }}
           >
             {/* Sub-burbujas */}
             {isOpen && bubble.subs.map((sub, i) => {
@@ -203,21 +216,19 @@ export default function ExpandableBubbleNav() {
                     zIndex: 300,
                     '--tx': `${pos.x}px`,
                     '--ty': `${pos.y}px`,
-                    animation: `subPopIn 0.38s cubic-bezier(0.34,1.56,0.64,1) ${i * 0.06}s both`,
+                    animation: `subPopIn 0.35s cubic-bezier(.34,1.56,.64,1) ${i * 0.055}s both`,
                     transform: `translate(${pos.x}px, ${pos.y}px)`,
                     cursor: 'pointer',
                   }}
                 >
-                  <GoldSphere size={SUB_SIZE} emoji={sub.emoji} isOpen={false} onClick={() => {}} />
+                  <CrystalSphere size={SUB_SIZE} emoji={sub.emoji} isOpen={false} onClick={() => {}} />
                 </div>
               );
             })}
 
             {/* Burbuja principal */}
-            <div style={{
-              animation: isOpen ? 'bubblePulseGold 1.5s ease-in-out infinite' : 'bubbleFloat 4s ease-in-out infinite, bubblePulseGold 3s ease-in-out infinite',
-            }}>
-              <GoldSphere
+            <div style={{ animation: isOpen ? 'none' : 'bubbleFloat 4s ease-in-out infinite' }}>
+              <CrystalSphere
                 size={MAIN_SIZE}
                 emoji={bubble.emoji}
                 isOpen={isOpen}

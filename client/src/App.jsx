@@ -17,7 +17,7 @@ class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div style={{ minHeight: '100vh', background: '#08080f', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
+        <div style={{ minHeight: '100vh', background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
           <div style={{ fontSize: 48 }}>⚠️</div>
           <div style={{ color: '#0a0a14', fontSize: 18, fontWeight: 700 }}>Algo salió mal</div>
           <button onClick={() => window.location.reload()} style={{ padding: '10px 28px', borderRadius: 24, background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: 600 }}>
@@ -39,7 +39,7 @@ function MyProfileRedirect() {
 // Layout con sidebar en desktop + Navbar + contenido
 function AppLayout({ children }) {
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: '#08080f', position: 'relative' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', background: '#000', backgroundImage: 'radial-gradient(120% 50% at 50% 0%, #15161c 0%, #000 65%)', position: 'relative' }}>
       <DesktopSidebar />
       <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
         <Navbar />
@@ -82,7 +82,7 @@ const NoirPage         = lazy(() => import('./pages/Noir'));
 
 const LOADING = (
   <div style={{ minHeight: '100vh', background: '#08080f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-    <div style={{ color: 'rgba(212,175,55,0.4)', fontFamily: "'Outfit', sans-serif", letterSpacing: 2, fontSize: 13 }}>Cargando...</div>
+    <div style={{ fontFamily: "'Cinzel',serif", letterSpacing: 4, fontSize: 12, background: 'linear-gradient(135deg,#fff,#d7dbe2,#8b9099,#fff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>KRONOS</div>
   </div>
 );
 
@@ -105,12 +105,13 @@ function App() {
         toastOptions={{
           duration: 4000,
           style: {
-            background: 'rgba(14,14,26,0.97)',
-            color: '#F0F0F8',
-            border: '1px solid rgba(212,175,55,0.2)',
-            backdropFilter: 'blur(24px)',
-            boxShadow: '0 4px 24px rgba(0,0,0,0.6), 0 0 20px rgba(212,175,55,0.08)',
-            fontFamily: "'Outfit', sans-serif",
+            background: 'rgba(255,255,255,.04)',
+            backdropFilter: 'blur(16px)',
+            color: 'rgba(233,236,241,.9)',
+            border: '1px solid rgba(215,219,226,.15)',
+            boxShadow: '0 10px 34px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.45)',
+            fontFamily: "'Sora', sans-serif",
+            borderRadius: '999px',
           }
         }}
       />
