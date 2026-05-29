@@ -370,7 +370,7 @@ export default function Reservations() {
   const filtered = filter === 'all' ? reservations : reservations.filter(r => r.status === filter);
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff', paddingBottom: 100 }}>
+    <div style={{ minHeight: '100vh', background: '#000', paddingBottom: 100 }}>
       {/* Toast */}
       {toast && (
         <div style={{

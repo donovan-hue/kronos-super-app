@@ -123,10 +123,9 @@ export default function Register() {
               </button>
             </div>
 
-            <BotonBurbuja3D as="button" type="submit" size="md" disabled={loading}
-              style={{ width:'100%',marginTop:4 }}>
-              {loading?'Creando…':'Registrarse'}
-            </BotonBurbuja3D>
+            <BotonBurbuja3D as="button" type="submit" size="md" variant="pill"
+              icon={loading?'⟳':'✨'} label={loading?'Creando…':'REGISTRARSE'}
+              disabled={loading} style={{ width:'100%', marginTop:4 }} />
           </form>
         </div>
 

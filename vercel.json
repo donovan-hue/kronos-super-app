@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "rootDirectory": "client",
-  "buildCommand": "npm run build",
-  "outputDirectory": "build",
-  "installCommand": "npm install",
+  "buildCommand": "npm install --prefix client && npm run build --prefix client",
+  "outputDirectory": "client/build",
+  "installCommand": "echo ok",
   "env": {
-    "CI": "false"
+    "CI": "false",
+    "REACT_APP_API_URL": "https://kronos-api-qq0o.onrender.com/api",
+    "REACT_APP_SOCKET_URL": "https://kronos-api-qq0o.onrender.com"
   },
   "headers": [
     {

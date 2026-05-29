@@ -177,7 +177,7 @@ function HybridFeed() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff', paddingBottom: 80 }}>
+    <div style={{ minHeight: '100vh', background: '#000', paddingBottom: 80 }}>
       {/* Header */}
       <div style={{ padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: 680, margin: '0 auto' }}>
         <HoloText size={26}>Feed</HoloText>
@@ -236,13 +236,16 @@ function HybridFeed() {
               onClick={handlePost}
               disabled={posting || (!postText.trim() && !postImage)}
               style={{
-                padding: '8px 24px', borderRadius: 20,
-                background: (postText.trim() || postImage) ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(255,255,255,0.08)',
-                color: '#fff', border: 'none', fontSize: 13, fontWeight: 700,
-                cursor: (postText.trim() || postImage) ? 'pointer' : 'default', transition: 'all 0.2s',
+                padding: '8px 20px', borderRadius: 999,
+                background: 'radial-gradient(circle at 35% 30%, #2a2a2a, #080808)',
+                color: 'rgba(215,219,226,0.9)', border: '1.5px solid rgba(215,219,226,0.35)',
+                fontSize: 12, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase',
+                cursor: (postText.trim() || postImage) && !posting ? 'pointer' : 'default',
+                boxShadow: '0 4px 14px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.4)',
+                transition: 'all 0.2s', opacity: (!postText.trim() && !postImage) ? 0.4 : 1,
               }}
             >
-              {posting ? 'Publicando...' : 'Publicar'}
+              {posting ? '...' : 'Publicar'}
             </button>
           </div>
         </GlassCard>

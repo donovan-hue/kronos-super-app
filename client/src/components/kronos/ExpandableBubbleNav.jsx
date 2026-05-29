@@ -2,55 +2,64 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 
+/* Grupos de burbujas en las 4 esquinas */
 const BUBBLES = [
   {
-    id: 'inicio', emoji: '◇',
+    id: 'inicio',
+    icon: '🏠',
+    label: 'Inicio',
     corner: { bottom: 90, left: 16 },
     fanDirection: 'up-right',
     subs: [
-      { emoji: '▷', label: 'Feed',     path: '/feed' },
-      { emoji: '◎', label: 'Foto',     path: '/feed?type=photo' },
-      { emoji: '▶', label: 'Video',    path: '/video-editor' },
-      { emoji: '◉', label: 'Historia', path: '/social/stories' },
-      { emoji: '●', label: 'LIVE',     path: '/live' },
+      { icon: '📝', label: 'Feed',     path: '/feed' },
+      { icon: '📸', label: 'Foto',     path: '/feed?type=photo' },
+      { icon: '🎥', label: 'Video',    path: '/video-editor' },
+      { icon: '📖', label: 'Historia', path: '/social/stories' },
+      { icon: '🔴', label: 'LIVE',     path: '/live' },
     ],
   },
   {
-    id: 'buscar', emoji: '◎',
+    id: 'buscar',
+    icon: '🔍',
+    label: 'Buscar',
     corner: { bottom: 90, right: 16 },
     fanDirection: 'up-left',
     subs: [
-      { emoji: '◑', label: 'Personas',    path: '/search?type=people' },
-      { emoji: '◈', label: 'Tiendas',     path: '/search?type=shops' },
-      { emoji: '⬡', label: 'Comunidades', path: '/communities' },
+      { icon: '👤', label: 'Personas',    path: '/search' },
+      { icon: '🛍️', label: 'Tiendas',     path: '/shop' },
+      { icon: '🏘️', label: 'Comunidades', path: '/communities' },
     ],
   },
   {
-    id: 'chat', emoji: '▣',
+    id: 'chat',
+    icon: '💬',
+    label: 'Chat',
     corner: { bottom: 16, left: 16 },
     fanDirection: 'up-right',
     subs: [
-      { emoji: '◇', label: 'Chat',    path: '/social/chat' },
-      { emoji: '◫', label: 'Grupos',  path: '/social/groups' },
-      { emoji: '◉', label: 'Notifs',  path: '/notifications' },
+      { icon: '💬', label: 'Mensajes',  path: '/social/chat' },
+      { icon: '👥', label: 'Grupos',   path: '/social/groups' },
+      { icon: '🔔', label: 'Notifs',   path: '/notifications' },
     ],
   },
   {
-    id: 'perfil', emoji: '◑',
+    id: 'perfil',
+    icon: '👤',
+    label: 'Perfil',
     corner: { bottom: 16, right: 16 },
     fanDirection: 'up-left',
     subs: [
-      { emoji: '◎', label: 'Perfil',  path: '/profile/me' },
-      { emoji: '✦', label: 'Logros',  path: '/gamification' },
-      { emoji: '◆', label: 'Wallet',  path: '/wallet' },
-      { emoji: '▦', label: 'Eventos', path: '/events' },
-      { emoji: '◎', label: 'Ajustes', path: '/settings' },
+      { icon: '👁️', label: 'Mi perfil',    path: '/profile/me' },
+      { icon: '🏆', label: 'Logros',       path: '/gamification' },
+      { icon: '💰', label: 'Wallet',       path: '/wallet' },
+      { icon: '🎪', label: 'Eventos',      path: '/events' },
+      { icon: '⚙️', label: 'Ajustes',      path: '/settings' },
     ],
   },
 ];
 
 function getFanPositions(direction, count) {
-  const radius = 86;
+  const radius = 88;
   const startAngle = direction === 'up-right' ? -160 : -20;
   const range      = direction === 'up-right' ?   80 : -80;
   return Array.from({ length: count }, (_, i) => {
@@ -60,101 +69,80 @@ function getFanPositions(direction, count) {
   });
 }
 
-/* Esfera burbuja cristalina plateada */
-function CrystalSphere({ size, emoji, isOpen, onClick, style = {} }) {
+/* Esfera individual — igual al estilo de la imagen */
+function Sphere({ size, icon, label, isOpen, onClick, style = {}, showLabel = false }) {
   return (
     <div
       onClick={onClick}
       style={{
-        width: size, height: size, borderRadius: '50%',
-        position: 'relative', cursor: 'pointer', userSelect: 'none',
-        isolation: 'isolate',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5,
+        cursor: 'pointer', userSelect: 'none',
         transform: isOpen ? 'scale(1.15)' : 'scale(1)',
         transition: 'transform 0.25s cubic-bezier(.34,1.56,.64,1)',
         ...style,
       }}
     >
-      {/* Cuerpo translúcido */}
+      {/* Esfera */}
       <div style={{
-        position: 'absolute', inset: 0, borderRadius: '50%',
-        background: isOpen
-          ? 'rgba(255,255,255,.085)'
-          : 'rgba(255,255,255,.045)',
-        backdropFilter: 'blur(16px) saturate(140%)',
-        WebkitBackdropFilter: 'blur(16px) saturate(140%)',
+        width: size, height: size, borderRadius: '50%',
+        position: 'relative', isolation: 'isolate', overflow: 'hidden',
+        background: `radial-gradient(circle at 35% 30%, #2a2a2a 0%, #141414 40%, #080808 100%)`,
         boxShadow: isOpen
-          ? '0 8px 28px rgba(0,0,0,.75), 0 0 18px rgba(215,219,226,.22), inset 0 1px 0 rgba(255,255,255,.55)'
-          : '0 6px 20px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.45)',
-      }} />
-
-      {/* Filo plateado animado */}
-      <div style={{
-        position: 'absolute', inset: 0, borderRadius: '50%',
-        padding: '1.6px',
-        background: 'linear-gradient(135deg,#fff,#d7dbe2,#8b9099,#fff,#5d626b,#c9ced6)',
-        backgroundSize: '300% 300%',
-        WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
-        WebkitMaskComposite: 'xor',
-        maskComposite: 'exclude',
-        pointerEvents: 'none',
-        animation: 'silver-flow 5s ease-in-out infinite',
-      }} />
-
-      {/* Reflejo superior */}
-      <div style={{
-        position: 'absolute',
-        top: '8%', left: '14%',
-        width: '44%', height: '28%',
-        borderRadius: '50%',
-        background: 'linear-gradient(180deg, rgba(255,255,255,.42) 0%, rgba(255,255,255,0) 100%)',
-        filter: 'blur(1.5px)',
-        transform: 'rotate(-20deg)',
-        pointerEvents: 'none',
-      }} />
-
-      {/* Reflejo secundario pequeño */}
-      <div style={{
-        position: 'absolute', top: '16%', left: '54%',
-        width: '13%', height: '9%', borderRadius: '50%',
-        background: 'rgba(255,255,255,.55)',
-        filter: 'blur(1px)',
-        pointerEvents: 'none',
-      }} />
-
-      {/* Emoji / símbolo centrado */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        fontSize: size * 0.38,
-        color: isOpen ? 'rgba(233,236,241,.95)' : 'rgba(200,210,230,.7)',
-        filter: isOpen ? 'drop-shadow(0 0 5px rgba(215,219,226,.7))' : 'none',
-        transition: 'color .2s, filter .2s',
-        fontFamily: "'Cinzel', serif",
-        zIndex: 3,
+          ? '0 8px 28px rgba(0,0,0,0.95), 0 0 18px rgba(215,219,226,.22), inset 0 1px 0 rgba(255,255,255,.65)'
+          : '0 6px 20px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,.5)',
       }}>
-        {emoji}
+        {/* Filo plateado */}
+        <div style={{
+          position: 'absolute', inset: 0, padding: '1.8px', borderRadius: '50%',
+          background: 'linear-gradient(135deg,#fff,#d7dbe2,#8b9099,#fff,#5d626b,#c9ced6)',
+          backgroundSize: '300% 300%',
+          WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
+          WebkitMaskComposite: 'xor', maskComposite: 'exclude',
+          pointerEvents: 'none',
+          animation: 'silver-flow 5s ease-in-out infinite',
+        }} />
+        {/* Reflejo especular */}
+        <div style={{
+          position: 'absolute', top: '8%', left: '14%',
+          width: '42%', height: '28%', borderRadius: '50%',
+          background: 'radial-gradient(ellipse, rgba(255,255,255,.75) 0%, rgba(255,255,255,.2) 50%, transparent 100%)',
+          filter: 'blur(1px)', transform: 'rotate(-25deg)', pointerEvents: 'none',
+        }} />
+        {/* Icono */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontSize: size * 0.38,
+          filter: 'drop-shadow(0 1px 3px rgba(0,0,0,0.9))',
+          zIndex: 3,
+        }}>
+          {icon}
+        </div>
       </div>
 
-      {/* Espejo de piso (reflejo debajo) */}
-      <div style={{
-        position: 'absolute',
-        top: '100%', left: '10%', right: '10%',
-        height: size * 0.4,
-        background: 'rgba(255,255,255,.015)',
-        borderRadius: '0 0 50% 50%',
-        transform: 'scaleY(-1)',
-        filter: 'blur(3px)',
-        opacity: 0.35,
-        pointerEvents: 'none',
-        maskImage: 'linear-gradient(to bottom, rgba(0,0,0,.5), transparent)',
-        WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,.5), transparent)',
-      }} />
+      {/* Label plateado */}
+      {showLabel && label && (
+        <span style={{
+          fontFamily: "'Cinzel','Sora',sans-serif",
+          fontSize: 7, fontWeight: 600, letterSpacing: 0.8,
+          textTransform: 'uppercase', textAlign: 'center',
+          maxWidth: size + 12,
+          background: 'linear-gradient(135deg,#fff,#d7dbe2,#9aa0ab)',
+          backgroundSize: '300% 300%',
+          WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          animation: 'silver-flow 5s ease-in-out infinite',
+          lineHeight: 1.3,
+        }}>
+          {label}
+        </span>
+      )}
     </div>
   );
 }
 
-const MAIN_SIZE = 52;
-const SUB_SIZE  = 40;
+const MAIN_SIZE = 54;
+const SUB_SIZE  = 42;
 
 export default function ExpandableBubbleNav() {
   const navigate  = useNavigate();
@@ -170,24 +158,24 @@ export default function ExpandableBubbleNav() {
     <>
       <style>{`
         @keyframes silver-flow {
-          0%,100% { background-position: 0% 50%; }
-          33%     { background-position: 100% 50%; }
-          66%     { background-position: 50% 0%; }
+          0%,100%{background-position:0% 50%}
+          33%{background-position:100% 50%}
+          66%{background-position:50% 0%}
         }
-        @keyframes bubbleFloat {
-          0%,100% { transform: translateY(0px) scale(1); }
-          50%      { transform: translateY(-6px) scale(1.02); }
+        @keyframes sphereFloat {
+          0%,100%{transform:translateY(0px)}
+          50%{transform:translateY(-6px)}
         }
         @keyframes subPopIn {
-          0%   { opacity:0; transform: translate(var(--tx),var(--ty)) scale(0.1); }
-          70%  { transform: translate(var(--tx),var(--ty)) scale(1.08); }
-          100% { opacity:1; transform: translate(var(--tx),var(--ty)) scale(1); }
+          0%{opacity:0;transform:translate(var(--tx),var(--ty)) scale(0.1)}
+          70%{transform:translate(var(--tx),var(--ty)) scale(1.08)}
+          100%{opacity:1;transform:translate(var(--tx),var(--ty)) scale(1)}
         }
-        @media (min-width: 768px) { .bubble-corner { display: none !important; } }
+        @media(min-width:768px){.bubble-corner{display:none !important}}
       `}</style>
 
       {openId && (
-        <div onClick={close} style={{ position: 'fixed', inset: 0, zIndex: 298 }} />
+        <div onClick={close} style={{ position:'fixed', inset:0, zIndex:298 }} />
       )}
 
       {BUBBLES.map(bubble => {
@@ -198,7 +186,7 @@ export default function ExpandableBubbleNav() {
           <div
             key={bubble.id}
             className="bubble-corner"
-            style={{ position: 'fixed', ...bubble.corner, zIndex: 299, width: MAIN_SIZE, height: MAIN_SIZE }}
+            style={{ position:'fixed', ...bubble.corner, zIndex:299, width:MAIN_SIZE, height:MAIN_SIZE }}
           >
             {/* Sub-burbujas */}
             {isOpen && bubble.subs.map((sub, i) => {
@@ -207,7 +195,6 @@ export default function ExpandableBubbleNav() {
                 <div
                   key={sub.path}
                   onClick={() => { navigate(sub.path); close(); }}
-                  title={sub.label}
                   style={{
                     position: 'absolute',
                     top: (MAIN_SIZE - SUB_SIZE) / 2,
@@ -218,21 +205,22 @@ export default function ExpandableBubbleNav() {
                     '--ty': `${pos.y}px`,
                     animation: `subPopIn 0.35s cubic-bezier(.34,1.56,.64,1) ${i * 0.055}s both`,
                     transform: `translate(${pos.x}px, ${pos.y}px)`,
-                    cursor: 'pointer',
                   }}
                 >
-                  <CrystalSphere size={SUB_SIZE} emoji={sub.emoji} isOpen={false} onClick={() => {}} />
+                  <Sphere size={SUB_SIZE} icon={sub.icon} label={sub.label} isOpen={false} onClick={() => {}} showLabel />
                 </div>
               );
             })}
 
             {/* Burbuja principal */}
-            <div style={{ animation: isOpen ? 'none' : 'bubbleFloat 4s ease-in-out infinite' }}>
-              <CrystalSphere
+            <div style={{ animation: isOpen ? 'none' : 'sphereFloat 4s ease-in-out infinite' }}>
+              <Sphere
                 size={MAIN_SIZE}
-                emoji={bubble.emoji}
+                icon={bubble.icon}
+                label={bubble.label}
                 isOpen={isOpen}
                 onClick={() => toggle(bubble.id)}
+                showLabel
               />
             </div>
           </div>

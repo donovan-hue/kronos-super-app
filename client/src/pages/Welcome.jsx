@@ -137,12 +137,10 @@ export default function Welcome() {
 
       {/* Botones */}
       <div className="wc-btns">
-        <BotonBurbuja3D size="lg" className="full" onClick={() => navigate('/auth/login')}>
-          Iniciar sesión
-        </BotonBurbuja3D>
-        <BotonBurbuja3D size="md" variant="outline" className="full" onClick={() => navigate('/auth/register')}>
-          Crear cuenta
-        </BotonBurbuja3D>
+        <BotonBurbuja3D size="lg" variant="pill" icon="🔑" label="INICIAR SESIÓN"
+          className="full" onClick={() => navigate('/auth/login')} />
+        <BotonBurbuja3D size="md" variant="pill" icon="✨" label="CREAR CUENTA"
+          className="full" onClick={() => navigate('/auth/register')} />
         <button className="wc-toggle" onClick={() => setShowFeatures(v => !v)}>
           {showFeatures ? '↑ ocultar' : '↓ explorar la app'}
         </button>

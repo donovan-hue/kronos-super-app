@@ -109,7 +109,7 @@ export default function CommunityDetail() {
 
   if (loading) {
     return (
-      <div style={{ minHeight: '100vh', background: '#ffffff', paddingBottom: 80 }}>
+      <div style={{ minHeight: '100vh', background: '#000', paddingBottom: 80 }}>
         <div style={{ height: 140, background: 'linear-gradient(135deg,rgba(124,58,237,0.3),rgba(6,182,212,0.2))' }} />
         <div style={{ maxWidth: 680, margin: '0 auto', padding: '0 16px' }}>
           {[1,2,3].map(i => (
@@ -123,14 +123,14 @@ export default function CommunityDetail() {
 
   if (!community) {
     return (
-      <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(240,240,255,0.45)' }}>
+      <div style={{ minHeight: '100vh', background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(240,240,255,0.45)' }}>
         Comunidad no encontrada
       </div>
     );
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff', paddingBottom: 80 }}>
+    <div style={{ minHeight: '100vh', background: '#000', paddingBottom: 80 }}>
       {/* Cover/Header */}
       <div style={{ height: 140, background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', position: 'relative' }}>
         <button onClick={() => navigate('/communities')} style={{ position: 'absolute', top: 16, left: 16, background: 'rgba(0,0,0,0.4)', border: 'none', color: 'rgba(240,240,255,0.9)', fontSize: 18, cursor: 'pointer', borderRadius: '50%', width: 36, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

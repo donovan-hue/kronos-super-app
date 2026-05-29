@@ -76,9 +76,9 @@ export default function GroupChat() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ minHeight: '100vh', background: '#000', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
-      <div style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12, background: '#ffffff', borderBottom: '1px solid rgba(79,172,254,0.12)', backdropFilter: 'blur(12px)', position: 'sticky', top: 0, zIndex: 50 }}>
+      <div style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12, background: '#000', borderBottom: '1px solid rgba(79,172,254,0.12)', backdropFilter: 'blur(12px)', position: 'sticky', top: 0, zIndex: 50 }}>
         <button onClick={() => navigate('/social/chat')} style={{ background: 'none', border: 'none', color: 'rgba(10,10,20,0.65)', fontSize: 22, cursor: 'pointer', padding: 4 }}>←</button>
         <div style={{ width: 38, height: 38, borderRadius: '50%', background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>👥</div>
         <div style={{ flex: 1 }}>
@@ -140,7 +140,7 @@ export default function GroupChat() {
 
         {/* Members panel */}
         {showMembers && group && (
-          <div style={{ width: 220, background: '#ffffff', borderLeft: '1px solid rgba(255,255,255,0.06)', padding: 16, overflowY: 'auto' }}>
+          <div style={{ width: 220, background: '#000', borderLeft: '1px solid rgba(255,255,255,0.06)', padding: 16, overflowY: 'auto' }}>
             <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11, marginBottom: 12, textTransform: 'uppercase', letterSpacing: 1 }}>Miembros ({group.members?.length})</div>
             {group.members?.map(m => (
               <div key={m._id} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
@@ -158,7 +158,7 @@ export default function GroupChat() {
       </div>
 
       {/* Input */}
-      <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, padding: '12px 16px', background: '#ffffff', borderTop: '1px solid rgba(79,172,254,0.12)', backdropFilter: 'blur(12px)', display: 'flex', gap: 10, alignItems: 'center' }}>
+      <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, padding: '12px 16px', background: '#000', borderTop: '1px solid rgba(79,172,254,0.12)', backdropFilter: 'blur(12px)', display: 'flex', gap: 10, alignItems: 'center' }}>
         <input
           value={input}
           onChange={e => handleTyping(e.target.value)}

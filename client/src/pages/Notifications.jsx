@@ -70,7 +70,7 @@ export default function NotificationsPage() {
     : notifications;
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff', paddingBottom: 100 }}>
+    <div style={{ minHeight: '100vh', background: '#000', paddingBottom: 100 }}>
       <div style={{ maxWidth: 480, margin: '0 auto', padding: '16px' }}>
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
@@ -136,7 +136,7 @@ export default function NotificationsPage() {
                         </div>
                       )}
                       {sender?.avatar && (
-                        <div style={{ position: 'absolute', bottom: -2, right: -2, width: 18, height: 18, borderRadius: '50%', background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10 }}>
+                        <div style={{ position: 'absolute', bottom: -2, right: -2, width: 18, height: 18, borderRadius: '50%', background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10 }}>
                           {meta.icon}
                         </div>
                       )}
