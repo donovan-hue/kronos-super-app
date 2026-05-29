@@ -177,10 +177,9 @@ export default function Login() {
               </button>
             </div>
 
-            <BotonBurbuja3D as="button" type="submit" size="md" disabled={loading}
-              style={{ width:'100%',marginTop:4 }}>
-              {loading?'Entrando…':'Entrar'}
-            </BotonBurbuja3D>
+            <BotonBurbuja3D as="button" type="submit" size="md" variant="pill"
+              icon={loading?'⟳':'🔑'} label={loading?'Entrando…':'ENTRAR'}
+              disabled={loading} style={{ width:'100%', marginTop:4 }} />
           </form>
 
           <Link to="/forgot-password" className="auth-forgot">¿Olvidaste tu contraseña?</Link>
