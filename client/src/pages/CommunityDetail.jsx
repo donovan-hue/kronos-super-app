@@ -123,7 +123,7 @@ export default function CommunityDetail() {
 
   if (!community) {
     return (
-      <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(10,10,20,0.5)' }}>
+      <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(240,240,255,0.45)' }}>
         Comunidad no encontrada
       </div>
     );
@@ -133,7 +133,7 @@ export default function CommunityDetail() {
     <div style={{ minHeight: '100vh', background: '#ffffff', paddingBottom: 80 }}>
       {/* Cover/Header */}
       <div style={{ height: 140, background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', position: 'relative' }}>
-        <button onClick={() => navigate('/communities')} style={{ position: 'absolute', top: 16, left: 16, background: 'rgba(0,0,0,0.4)', border: 'none', color: '#0a0a14', fontSize: 18, cursor: 'pointer', borderRadius: '50%', width: 36, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <button onClick={() => navigate('/communities')} style={{ position: 'absolute', top: 16, left: 16, background: 'rgba(0,0,0,0.4)', border: 'none', color: 'rgba(240,240,255,0.9)', fontSize: 18, cursor: 'pointer', borderRadius: '50%', width: 36, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           ←
         </button>
       </div>
@@ -143,11 +143,11 @@ export default function CommunityDetail() {
         <GlassCard style={{ marginTop: -30, marginBottom: 16, position: 'relative' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <div>
-              <div style={{ color: '#0a0a14', fontSize: 20, fontWeight: 800, marginBottom: 4 }}>{community.name}</div>
+              <div style={{ color: 'rgba(240,240,255,0.9)', fontSize: 20, fontWeight: 800, marginBottom: 4 }}>{community.name}</div>
               {community.description && (
-                <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 13, marginBottom: 10, lineHeight: 1.4 }}>{community.description}</div>
+                <div style={{ color: 'rgba(240,240,255,0.45)', fontSize: 13, marginBottom: 10, lineHeight: 1.4 }}>{community.description}</div>
               )}
-              <div style={{ display: 'flex', gap: 16, color: 'rgba(10,10,20,0.5)', fontSize: 12 }}>
+              <div style={{ display: 'flex', gap: 16, color: 'rgba(240,240,255,0.45)', fontSize: 12 }}>
                 <span>👥 {community.members?.length || 0} miembros</span>
                 <span>📝 {community.posts?.length || 0} posts</span>
                 <span>{community.privacy === 'private' ? '🔒 Privada' : '🌍 Pública'}</span>
@@ -184,7 +184,7 @@ export default function CommunityDetail() {
                   value={postText}
                   onChange={e => setPostText(e.target.value)}
                   placeholder={`Escribe en ${community.name}...`}
-                  style={{ flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 12, padding: '10px 14px', color: '#0a0a14', fontSize: 14, resize: 'none', outline: 'none', minHeight: 70, fontFamily: 'inherit' }}
+                  style={{ flex: 1, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 12, padding: '10px 14px', color: 'rgba(240,240,255,0.9)', fontSize: 14, resize: 'none', outline: 'none', minHeight: 70, fontFamily: 'inherit' }}
                 />
               </div>
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -197,7 +197,7 @@ export default function CommunityDetail() {
 
             {/* Posts */}
             {(community.posts || []).length === 0 ? (
-              <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.35)', padding: 40 }}>
+              <div style={{ textAlign: 'center', color: 'rgba(240,240,255,0.45)', padding: 40 }}>
                 <div style={{ fontSize: 40, marginBottom: 12 }}>📭</div>
                 <div>Aún no hay posts en esta comunidad</div>
               </div>
@@ -215,8 +215,8 @@ export default function CommunityDetail() {
                           style={{ width: 34, height: 34, borderRadius: '50%', objectFit: 'cover' }}
                         />
                         <div style={{ flex: 1 }}>
-                          <div style={{ color: '#0a0a14', fontSize: 13, fontWeight: 600 }}>{post.author?.firstName} {post.author?.lastName || post.author?.username}</div>
-                          <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 11 }}>{new Date(post.createdAt).toLocaleDateString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</div>
+                          <div style={{ color: 'rgba(240,240,255,0.9)', fontSize: 13, fontWeight: 600 }}>{post.author?.firstName} {post.author?.lastName || post.author?.username}</div>
+                          <div style={{ color: 'rgba(240,240,255,0.45)', fontSize: 11 }}>{new Date(post.createdAt).toLocaleDateString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</div>
                         </div>
                         {(isMod || post.author?._id?.toString() === user?._id?.toString()) && (
                           <button
@@ -226,10 +226,10 @@ export default function CommunityDetail() {
                           >🗑️</button>
                         )}
                       </div>
-                      <div style={{ color: 'rgba(10,10,20,0.65)', fontSize: 14, marginBottom: 10, lineHeight: 1.5 }}>
+                      <div style={{ color: 'rgba(240,240,255,0.45)', fontSize: 14, marginBottom: 10, lineHeight: 1.5 }}>
                         <HashtagText text={post.content} />
                       </div>
-                      <div style={{ display: 'flex', gap: 24, color: 'rgba(10,10,20,0.5)', fontSize: 13, paddingTop: 8, borderTop: '1px solid rgba(79,172,254,0.12)' }}>
+                      <div style={{ display: 'flex', gap: 24, color: 'rgba(240,240,255,0.45)', fontSize: 13, paddingTop: 8, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
                         <button onClick={() => handleLike(post._id)}
                           style={{ background: 'none', border: 'none', color: isLiked ? '#ec4899' : 'rgba(255,255,255,0.5)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit' }}>
                           {isLiked ? '❤️' : '🤍'} {post.likes?.length || 0}
@@ -248,18 +248,18 @@ export default function CommunityDetail() {
                                 alt=""
                                 style={{ width: 26, height: 26, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
                               />
-                              <div style={{ background: 'rgba(79,172,254,0.07)', borderRadius: 10, padding: '6px 10px', flex: 1 }}>
+                              <div style={{ background: 'rgba(255,255,255,0.03)', borderRadius: 10, padding: '6px 10px', flex: 1 }}>
                                 {c.author?.username && (
                                   <div style={{ color: '#a855f7', fontSize: 10, fontWeight: 700, marginBottom: 2 }}>@{c.author.username}</div>
                                 )}
-                                <div style={{ color: 'rgba(10,10,20,0.65)', fontSize: 12 }}>{c.text}</div>
+                                <div style={{ color: 'rgba(240,240,255,0.45)', fontSize: 12 }}>{c.text}</div>
                               </div>
                             </div>
                           ))}
                           <div style={{ display: 'flex', gap: 8 }}>
                             <input value={commentText} onChange={e => setCommentText(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleComment(post._id)}
                               placeholder="Comenta..."
-                              style={{ flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 20, padding: '7px 12px', color: '#0a0a14', fontSize: 13, outline: 'none', fontFamily: 'inherit' }} />
+                              style={{ flex: 1, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 20, padding: '7px 12px', color: 'rgba(240,240,255,0.9)', fontSize: 13, outline: 'none', fontFamily: 'inherit' }} />
                             <button onClick={() => handleComment(post._id)} disabled={!commentText.trim()}
                               style={{ padding: '7px 14px', borderRadius: 20, background: commentText.trim() ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(255,255,255,0.08)', color: '#fff', border: 'none', fontSize: 13, cursor: 'pointer' }}>→</button>
                           </div>
@@ -295,12 +295,12 @@ export default function CommunityDetail() {
                       style={{ width: 44, height: 44, borderRadius: '50%', objectFit: 'cover' }}
                     />
                     <div style={{ flex: 1 }}>
-                      <div style={{ color: '#0a0a14', fontSize: 14, fontWeight: 600 }}>{member.firstName} {member.lastName || member.username}</div>
-                      <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12 }}>@{member.username}</div>
+                      <div style={{ color: 'rgba(240,240,255,0.9)', fontSize: 14, fontWeight: 600 }}>{member.firstName} {member.lastName || member.username}</div>
+                      <div style={{ color: 'rgba(240,240,255,0.45)', fontSize: 12 }}>@{member.username}</div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       {roleBadge && (
-                        <span style={{ fontSize: 10, padding: '3px 10px', borderRadius: 20, background: roleBadge.bg, color: '#0a0a14', fontWeight: 700 }}>
+                        <span style={{ fontSize: 10, padding: '3px 10px', borderRadius: 20, background: roleBadge.bg, color: 'rgba(240,240,255,0.9)', fontWeight: 700 }}>
                           {roleBadge.label}
                         </span>
                       )}
@@ -311,8 +311,8 @@ export default function CommunityDetail() {
                           onChange={e => handleAssignRole(memberId, e.target.value)}
                           onClick={e => e.stopPropagation()}
                           style={{
-                            background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.18)',
-                            borderRadius: 8, padding: '3px 8px', color: '#0a0a14', fontSize: 11, cursor: 'pointer', outline: 'none',
+                            background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,0,200,0.15)',
+                            borderRadius: 8, padding: '3px 8px', color: 'rgba(240,240,255,0.9)', fontSize: 11, cursor: 'pointer', outline: 'none',
                           }}
                         >
                           <option value="member">Member</option>

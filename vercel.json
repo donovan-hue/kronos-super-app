@@ -1,6 +1,9 @@
 {
   "version": 2,
   "buildCommand": "cd client && npm install && npm run build",
+  "env": {
+    "CI": "false"
+  },
   "outputDirectory": "client/build",
   "framework": "create-react-app",
   "headers": [

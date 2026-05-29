@@ -301,7 +301,7 @@ export default function AvatarPage() {
     sectionTitle: {
       fontSize: 14,
       fontWeight: 700,
-      color: 'rgba(10,10,20,0.5)',
+      color: 'rgba(240,240,255,0.45)',
       textTransform: 'uppercase',
       letterSpacing: 1,
       marginBottom: 12,
@@ -340,7 +340,7 @@ export default function AvatarPage() {
       flexDirection: 'column',
       alignItems: 'center',
       gap: 6,
-      border: '1px solid rgba(79,172,254,0.12)',
+      border: '1px solid rgba(255,255,255,0.06)',
       transition: 'transform 0.15s',
     },
     rarityBadge: (rarity) => ({
@@ -406,7 +406,7 @@ export default function AvatarPage() {
   if (loading) {
     return (
       <div style={{ ...styles.page, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 16 }}>Cargando avatar...</div>
+        <div style={{ color: 'rgba(240,240,255,0.45)', fontSize: 16 }}>Cargando avatar...</div>
       </div>
     );
   }
@@ -417,7 +417,7 @@ export default function AvatarPage() {
 
       <div style={styles.header}>
         <h1 style={styles.title}>Mi Avatar</h1>
-        <p style={{ color: 'rgba(10,10,20,0.5)', fontSize: 14, margin: '6px 0 0' }}>
+        <p style={{ color: 'rgba(240,240,255,0.45)', fontSize: 14, margin: '6px 0 0' }}>
           Personaliza tu identidad en Kronos
         </p>
       </div>
@@ -446,7 +446,7 @@ export default function AvatarPage() {
             <GlassCard style={{ marginBottom: 20 }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, padding: '8px 0' }}>
                 <AvatarCanvas avatar={avatar} />
-                <div style={{ fontSize: 13, color: 'rgba(10,10,20,0.5)', textAlign: 'center' }}>
+                <div style={{ fontSize: 13, color: 'rgba(240,240,255,0.45)', textAlign: 'center' }}>
                   Equipa items desde la tienda para personalizar tu look
                 </div>
               </div>
@@ -455,7 +455,7 @@ export default function AvatarPage() {
             <div style={styles.sectionTitle}>Items equipados</div>
 
             {avatar?.equippedItems?.length === 0 ? (
-              <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 14, textAlign: 'center', padding: 20 }}>
+              <div style={{ color: 'rgba(240,240,255,0.45)', fontSize: 14, textAlign: 'center', padding: 20 }}>
                 No tienes items equipados
               </div>
             ) : (
@@ -541,7 +541,7 @@ export default function AvatarPage() {
             </div>
 
             {shopLoading ? (
-              <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.35)', padding: 40 }}>
+              <div style={{ textAlign: 'center', color: 'rgba(240,240,255,0.45)', padding: 40 }}>
                 Cargando tienda...
               </div>
             ) : (
@@ -557,7 +557,7 @@ export default function AvatarPage() {
                       <div style={{ fontWeight: 700, fontSize: 13, textAlign: 'center' }}>{item.name}</div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap', justifyContent: 'center' }}>
                         <span style={styles.rarityBadge(item.rarity)}>{RARITY_LABELS[item.rarity]}</span>
-                        <span style={{ fontSize: 11, color: 'rgba(10,10,20,0.5)' }}>
+                        <span style={{ fontSize: 11, color: 'rgba(240,240,255,0.45)' }}>
                           {CATEGORY_LABELS[item.category]}
                         </span>
                       </div>
@@ -591,7 +591,7 @@ export default function AvatarPage() {
                 })}
 
                 {filteredItems.length === 0 && (
-                  <div style={{ gridColumn: '1/-1', textAlign: 'center', color: 'rgba(10,10,20,0.35)', padding: 40 }}>
+                  <div style={{ gridColumn: '1/-1', textAlign: 'center', color: 'rgba(240,240,255,0.45)', padding: 40 }}>
                     No hay items en esta categoría
                   </div>
                 )}

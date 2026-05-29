@@ -42,7 +42,7 @@ function CreateCommunityModal({ onClose, onCreated }) {
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 999, background: 'rgba(0,0,0,0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <GlassCard style={{ width: '90%', maxWidth: 440 }}>
-        <div style={{ color: '#0a0a14', fontSize: 18, fontWeight: 700, marginBottom: 20 }}>Nueva Comunidad</div>
+        <div style={{ color: 'rgba(240,240,255,0.9)', fontSize: 18, fontWeight: 700, marginBottom: 20 }}>Nueva Comunidad</div>
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           <input
             placeholder="Nombre de la comunidad *"
@@ -50,28 +50,28 @@ function CreateCommunityModal({ onClose, onCreated }) {
             onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
             maxLength={100}
             required
-            style={{ background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 10, padding: '10px 14px', color: '#0a0a14', fontSize: 14, outline: 'none', fontFamily: 'inherit' }}
+            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 10, padding: '10px 14px', color: 'rgba(240,240,255,0.9)', fontSize: 14, outline: 'none', fontFamily: 'inherit' }}
           />
           <textarea
             placeholder="Descripción (opcional)"
             value={form.description}
             onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
             maxLength={500}
-            style={{ background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 10, padding: '10px 14px', color: '#0a0a14', fontSize: 14, outline: 'none', resize: 'none', minHeight: 80, fontFamily: 'inherit' }}
+            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 10, padding: '10px 14px', color: 'rgba(240,240,255,0.9)', fontSize: 14, outline: 'none', resize: 'none', minHeight: 80, fontFamily: 'inherit' }}
           />
           <div style={{ display: 'flex', gap: 10 }}>
             <select value={form.category} onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
-              style={{ flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 10, padding: '10px 12px', color: '#0a0a14', fontSize: 13, outline: 'none' }}>
+              style={{ flex: 1, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 10, padding: '10px 12px', color: 'rgba(240,240,255,0.9)', fontSize: 13, outline: 'none' }}>
               {CATEGORIES.filter(c => c.value).map(c => <option key={c.value} value={c.value}>{c.label}</option>)}
             </select>
             <select value={form.privacy} onChange={e => setForm(f => ({ ...f, privacy: e.target.value }))}
-              style={{ flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 10, padding: '10px 12px', color: '#0a0a14', fontSize: 13, outline: 'none' }}>
+              style={{ flex: 1, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 10, padding: '10px 12px', color: 'rgba(240,240,255,0.9)', fontSize: 13, outline: 'none' }}>
               <option value="public">🌍 Pública</option>
               <option value="private">🔒 Privada</option>
             </select>
           </div>
           <div style={{ display: 'flex', gap: 10, marginTop: 8 }}>
-            <button type="button" onClick={onClose} style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'rgba(79,172,254,0.07)', color: '#0a0a14', border: 'none', cursor: 'pointer', fontSize: 14 }}>Cancelar</button>
+            <button type="button" onClick={onClose} style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'rgba(255,255,255,0.03)', color: 'rgba(240,240,255,0.9)', border: 'none', cursor: 'pointer', fontSize: 14 }}>Cancelar</button>
             <button type="submit" disabled={loading || !form.name.trim()}
               style={{ flex: 2, padding: '10px', borderRadius: 12, background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 14, fontWeight: 700 }}>
               {loading ? 'Creando...' : 'Crear Comunidad'}
@@ -101,16 +101,16 @@ function CommunityCard({ community, currentUserId, onJoin, onClick }) {
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div style={{ color: '#0a0a14', fontSize: 15, fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{community.name}</div>
+            <div style={{ color: 'rgba(240,240,255,0.9)', fontSize: 15, fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{community.name}</div>
             <span style={{ fontSize: 10, padding: '2px 8px', borderRadius: 20, background: community.privacy === 'private' ? 'rgba(239,68,68,0.2)' : 'rgba(16,185,129,0.2)', color: community.privacy === 'private' ? '#ef4444' : '#10b981', flexShrink: 0 }}>
               {community.privacy === 'private' ? '🔒' : '🌍'}
             </span>
           </div>
-          <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12, marginBottom: 8, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+          <div style={{ color: 'rgba(240,240,255,0.5)', fontSize: 12, marginBottom: 8, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
             {community.description || 'Sin descripción'}
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11 }}>👥 {community.members?.length || 0} miembros</span>
+            <span style={{ color: 'rgba(240,240,255,0.5)', fontSize: 11 }}>👥 {community.members?.length || 0} miembros</span>
             <button
               onClick={e => { e.stopPropagation(); onJoin(community._id); }}
               style={{
@@ -202,7 +202,7 @@ export default function Communities() {
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 placeholder="Buscar comunidades..."
-                style={{ flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 20, padding: '9px 16px', color: '#0a0a14', fontSize: 13, outline: 'none', fontFamily: 'inherit' }}
+                style={{ flex: 1, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 20, padding: '9px 16px', color: 'rgba(240,240,255,0.9)', fontSize: 13, outline: 'none', fontFamily: 'inherit' }}
               />
               <button type="submit" style={{ padding: '9px 18px', borderRadius: 20, background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 13 }}>
                 Buscar
@@ -221,9 +221,9 @@ export default function Communities() {
 
         {/* Communities list */}
         {loading ? (<div style={{padding:'0 16px'}}><SkeletonList count={4} /></div>) : communities.length === 0 ? (
-          <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.35)', padding: 60 }}>
+          <div style={{ textAlign: 'center', color: 'rgba(240,240,255,0.35)', padding: 60 }}>
             <div style={{ fontSize: 48, marginBottom: 12 }}>🏛️</div>
-            <div style={{ fontSize: 16, fontWeight: 600, color: 'rgba(10,10,20,0.5)' }}>
+            <div style={{ fontSize: 16, fontWeight: 600, color: 'rgba(240,240,255,0.5)' }}>
               {tab === 'mine' ? 'No perteneces a ninguna comunidad aún' : 'No hay comunidades'}
             </div>
             <div style={{ fontSize: 13, marginTop: 6 }}>¡Crea la primera!</div>

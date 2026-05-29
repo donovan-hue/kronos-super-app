@@ -43,7 +43,7 @@ function ForgotPassword() {
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
           <div style={{ fontSize: 44, marginBottom: 8 }}>🔑</div>
           <HoloText size={30}>Recuperar contraseña</HoloText>
-          <div style={{ color: 'rgba(10,10,20,0.45)', fontSize: 13, marginTop: 8 }}>
+          <div style={{ color: 'rgba(240,240,255,0.45)', fontSize: 13, marginTop: 8 }}>
             Te enviaremos un enlace a tu email
           </div>
         </div>
@@ -78,7 +78,7 @@ function ForgotPassword() {
                 style={{
                   width: '100%', padding: '13px 16px', borderRadius: 12, outline: 'none',
                   background: 'rgba(79,172,254,0.05)', border: '1.5px solid rgba(79,172,254,0.2)',
-                  color: '#0a0a14', fontSize: 14, fontFamily: 'inherit', boxSizing: 'border-box',
+                  color: 'rgba(240,240,255,0.9)', fontSize: 14, fontFamily: 'inherit', boxSizing: 'border-box',
                 }}
               />
               <button type="submit" disabled={status === 'loading'} style={{
@@ -90,7 +90,7 @@ function ForgotPassword() {
                 {status === 'loading' ? 'Enviando...' : 'ENVIAR ENLACE'}
               </button>
             </form>
-            <div style={{ marginTop: 24, textAlign: 'center', color: 'rgba(10,10,20,0.45)', fontSize: 13 }}>
+            <div style={{ marginTop: 24, textAlign: 'center', color: 'rgba(240,240,255,0.45)', fontSize: 13 }}>
               <Link to="/login" style={{ background: HOLO, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', textDecoration: 'none', fontWeight: 700 }}>
                 ← Volver al login
               </Link>
