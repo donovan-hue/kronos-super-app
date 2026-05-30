@@ -166,6 +166,7 @@ function App() {
           </Routes>
         </Suspense>
       </ErrorBoundary>
+      <Analytics />
     </Router>
   );
 }
