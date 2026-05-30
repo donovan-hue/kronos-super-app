@@ -1,6 +1,7 @@
 import React, { Suspense, lazy, useContext, Component } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 import NotificationToast from './components/NotificationToast';
@@ -100,6 +101,7 @@ function App() {
     <Router>
       <ExpandableBubbleNav />
       <NotificationToast />
+      <SpeedInsights />
       <Toaster
         position="top-right"
         toastOptions={{
