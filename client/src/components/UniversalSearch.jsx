@@ -85,7 +85,7 @@ export default function UniversalSearch() {
     : 0;
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff', paddingBottom: 100 }}>
+    <div style={{ minHeight: '100vh', background: '#000', paddingBottom: 100 }}>
       <div style={{ maxWidth: 600, margin: '0 auto', padding: '16px' }}>
         <HoloText size={24} style={{ marginBottom: 16 }}>Buscar</HoloText>
 

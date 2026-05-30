@@ -1,13 +1,57 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { HoloText } from '../kronos';
 
-const HOLO = 'linear-gradient(135deg,#4facfe,#00f2fe,#f3a0ff,#ff85a2)';
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
-function ForgotPassword() {
+const S = `
+  @keyframes silver-flow{0%,100%{background-position:0% 50%}33%{background-position:100% 50%}66%{background-position:50% 0%}}
+  @keyframes float-mark{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  .fp-page{min-height:100vh;background:#000;display:flex;align-items:center;justify-content:center;padding:32px 20px;font-family:'Sora',sans-serif;}
+  .fp-box{width:100%;max-width:380px;display:flex;flex-direction:column;align-items:center;}
+  .fp-sphere{width:72px;height:72px;border-radius:50%;position:relative;isolation:isolate;overflow:hidden;
+    background:radial-gradient(circle at 35% 30%,#2a2a2a,#080808);
+    box-shadow:0 8px 28px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.55);
+    display:flex;align-items:center;justify-content:center;margin-bottom:18px;animation:float-mark 4s ease-in-out infinite;}
+  .fp-sphere::before{content:'';position:absolute;inset:0;padding:1.8px;border-radius:50%;
+    background:linear-gradient(135deg,#fff,#d7dbe2,#8b9099,#fff,#5d626b,#c9ced6);background-size:300% 300%;
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;animation:silver-flow 5s ease-in-out infinite;}
+  .fp-title{font-family:'Cinzel',serif;font-size:20px;font-weight:700;letter-spacing:3px;text-align:center;margin-bottom:4px;
+    background:linear-gradient(135deg,#fff,#d7dbe2,#8b9099,#fff);background-size:300% 300%;
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:silver-flow 5s ease-in-out infinite;}
+  .fp-sub{font-size:12px;color:rgba(200,210,230,.4);text-align:center;margin-bottom:26px;letter-spacing:.5px;}
+  .fp-card{width:100%;position:relative;isolation:isolate;overflow:hidden;border-radius:22px;padding:24px 20px;
+    background:radial-gradient(circle at 35% 30%,#1a1a1a,#080808);
+    box-shadow:0 10px 34px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.45);display:flex;flex-direction:column;gap:12px;}
+  .fp-card::before{content:'';position:absolute;inset:0;padding:1.6px;border-radius:inherit;
+    background:linear-gradient(135deg,#fff,#d7dbe2,#8b9099,#fff,#5d626b,#c9ced6);background-size:300% 300%;
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;animation:silver-flow 5s ease-in-out infinite;}
+  .fp-input{width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(215,219,226,.2);border-radius:999px;
+    padding:12px 20px;color:rgba(233,236,241,.9);font-family:'Sora',sans-serif;font-size:14px;outline:none;
+    position:relative;z-index:2;box-sizing:border-box;transition:border-color .2s;}
+  .fp-input:focus{border-color:rgba(215,219,226,.6);}
+  .fp-input::placeholder{color:rgba(200,210,230,.28);}
+  .fp-btn{width:100%;padding:12px;border-radius:999px;border:none;cursor:pointer;position:relative;z-index:2;
+    background:radial-gradient(circle at 35% 30%,#2a2a2a,#080808);
+    color:rgba(215,219,226,.9);font-family:'Sora',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+    box-shadow:0 4px 16px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.4);transition:all .2s;}
+  .fp-btn:hover:not(:disabled){box-shadow:0 6px 22px rgba(0,0,0,.8),0 0 14px rgba(215,219,226,.15),inset 0 1px 0 rgba(255,255,255,.5);}
+  .fp-btn:disabled{opacity:.4;cursor:not-allowed;}
+  .fp-link{background:linear-gradient(135deg,#fff,#d7dbe2,#9aa0ab);background-size:300% 300%;
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    text-decoration:none;font-weight:600;font-size:13px;animation:silver-flow 5s ease-in-out infinite;}
+  .fp-success{border-radius:14px;padding:16px;text-align:center;font-size:13px;
+    background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.25);color:rgba(134,239,172,.9);
+    position:relative;z-index:2;}
+  .fp-err{border-radius:12px;padding:10px 14px;font-size:12px;
+    background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);color:rgba(252,165,165,.9);
+    position:relative;z-index:2;}
+`;
+
+export default function ForgotPassword() {
   const [email, setEmail] = useState('');
-  const [status, setStatus] = useState('idle'); // idle | loading | sent | error
+  const [status, setStatus] = useState('idle');
   const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
@@ -20,86 +64,50 @@ function ForgotPassword() {
         body: JSON.stringify({ email }),
       });
       const data = await res.json();
-      if (res.ok) {
-        setStatus('sent');
-      } else {
-        setStatus('error');
-        setMessage(data.message || 'No se pudo enviar el correo. Intenta de nuevo.');
-      }
+      if (res.ok) { setStatus('sent'); }
+      else { setStatus('error'); setMessage(data.message || 'No se pudo enviar el correo.'); }
     } catch {
       setStatus('error');
-      setMessage('El servidor tardó demasiado. Espera unos segundos y vuelve a intentarlo.');
+      setMessage('El servidor tardó demasiado. Intenta de nuevo.');
     }
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'radial-gradient(ellipse at 30% 20%, rgba(79,172,254,0.08), transparent 50%), #ffffff',
-      display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24,
-      fontFamily: "'Outfit', sans-serif",
-    }}>
-      <div style={{ width: '100%', maxWidth: 380 }}>
-        <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <div style={{ fontSize: 44, marginBottom: 8 }}>🔑</div>
-          <HoloText size={30}>Recuperar contraseña</HoloText>
-          <div style={{ color: 'rgba(240,240,255,0.45)', fontSize: 13, marginTop: 8 }}>
-            Te enviaremos un enlace a tu email
-          </div>
+    <div className="fp-page">
+      <style>{S}</style>
+      <div className="fp-box">
+        <div className="fp-sphere">
+          <span style={{ fontSize: 32, position: 'relative', zIndex: 3 }}>🔑</span>
         </div>
+        <div className="fp-title">RECUPERAR ACCESO</div>
+        <div className="fp-sub">Te enviaremos un enlace a tu email</div>
 
-        {status === 'sent' ? (
-          <div style={{
-            background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.3)',
-            color: '#16a34a', padding: '18px', borderRadius: 14, textAlign: 'center', fontSize: 14,
-          }}>
-            <div style={{ fontSize: 32, marginBottom: 8 }}>📧</div>
-            <strong>¡Listo!</strong> Si ese email existe, recibirás el enlace en unos minutos.
-            <div style={{ marginTop: 16 }}>
-              <Link to="/login" style={{ background: HOLO, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', fontWeight: 700, textDecoration: 'none' }}>
-                Volver al login
-              </Link>
-            </div>
-          </div>
-        ) : (
-          <>
-            {status === 'error' && (
-              <div style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.3)', color: '#ef4444', padding: '12px 14px', borderRadius: 12, fontSize: 13, marginBottom: 14 }}>
-                {message}
+        <div className="fp-card">
+          {status === 'sent' ? (
+            <div className="fp-success">
+              <div style={{ fontSize: 28, marginBottom: 8 }}>📧</div>
+              <strong>¡Listo!</strong> Si ese email existe, recibirás el enlace en unos minutos.
+              <div style={{ marginTop: 14 }}>
+                <Link to="/login" className="fp-link">← Volver al login</Link>
               </div>
-            )}
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <input
-                type="email"
-                placeholder="Tu email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                style={{
-                  width: '100%', padding: '13px 16px', borderRadius: 12, outline: 'none',
-                  background: 'rgba(79,172,254,0.05)', border: '1.5px solid rgba(79,172,254,0.2)',
-                  color: 'rgba(240,240,255,0.9)', fontSize: 14, fontFamily: 'inherit', boxSizing: 'border-box',
-                }}
-              />
-              <button type="submit" disabled={status === 'loading'} style={{
-                padding: '14px', borderRadius: 12, border: 'none', cursor: status === 'loading' ? 'not-allowed' : 'pointer',
-                background: HOLO, color: '#fff', fontSize: 14, fontWeight: 700,
-                fontFamily: 'inherit', letterSpacing: 1, opacity: status === 'loading' ? 0.7 : 1,
-                boxShadow: '0 4px 16px rgba(79,172,254,0.3)',
-              }}>
-                {status === 'loading' ? 'Enviando...' : 'ENVIAR ENLACE'}
-              </button>
-            </form>
-            <div style={{ marginTop: 24, textAlign: 'center', color: 'rgba(240,240,255,0.45)', fontSize: 13 }}>
-              <Link to="/login" style={{ background: HOLO, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', textDecoration: 'none', fontWeight: 700 }}>
-                ← Volver al login
-              </Link>
             </div>
-          </>
-        )}
+          ) : (
+            <>
+              {status === 'error' && <div className="fp-err">{message}</div>}
+              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <input className="fp-input" type="email" placeholder="Tu email"
+                  value={email} onChange={e => setEmail(e.target.value)} required />
+                <button className="fp-btn" type="submit" disabled={status === 'loading'}>
+                  {status === 'loading' ? 'Enviando...' : 'ENVIAR ENLACE'}
+                </button>
+              </form>
+              <div style={{ textAlign: 'center', position: 'relative', zIndex: 2 }}>
+                <Link to="/login" className="fp-link">← Volver al login</Link>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
 }
-
-export default ForgotPassword;
