@@ -68,7 +68,7 @@ function ResetPassword() {
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
           <div style={{ fontSize: 44, marginBottom: 8 }}>🔐</div>
           <HoloText size={30}>Nueva contraseña</HoloText>
-          <div style={{ color: 'rgba(10,10,20,0.45)', fontSize: 13, marginTop: 8 }}>
+          <div style={{ color: 'rgba(240,240,255,0.45)', fontSize: 13, marginTop: 8 }}>
             Para: {email}
           </div>
         </div>
@@ -98,7 +98,7 @@ function ResetPassword() {
                 style={{
                   width: '100%', padding: '13px 16px', borderRadius: 12, outline: 'none',
                   background: 'rgba(79,172,254,0.05)', border: '1.5px solid rgba(79,172,254,0.2)',
-                  color: '#0a0a14', fontSize: 14, fontFamily: 'inherit', boxSizing: 'border-box',
+                  color: 'rgba(240,240,255,0.9)', fontSize: 14, fontFamily: 'inherit', boxSizing: 'border-box',
                 }}
               />
               <input
@@ -110,7 +110,7 @@ function ResetPassword() {
                 style={{
                   width: '100%', padding: '13px 16px', borderRadius: 12, outline: 'none',
                   background: 'rgba(79,172,254,0.05)', border: '1.5px solid rgba(79,172,254,0.2)',
-                  color: '#0a0a14', fontSize: 14, fontFamily: 'inherit', boxSizing: 'border-box',
+                  color: 'rgba(240,240,255,0.9)', fontSize: 14, fontFamily: 'inherit', boxSizing: 'border-box',
                 }}
               />
               <button type="submit" disabled={status === 'loading'} style={{

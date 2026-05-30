@@ -177,7 +177,7 @@ function HybridFeed() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff', paddingBottom: 80 }}>
+    <div style={{ minHeight: '100vh', background: '#000', paddingBottom: 80 }}>
       {/* Header */}
       <div style={{ padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: 680, margin: '0 auto' }}>
         <HoloText size={26}>Feed</HoloText>
@@ -209,13 +209,13 @@ function HybridFeed() {
                 onChange={e => setPostText(e.target.value.slice(0, 280))}
                 placeholder="¿Qué está pasando?"
                 style={{
-                  width: '100%', background: 'rgba(79,172,254,0.07)', border: `1px solid ${postText.length > 260 ? (postText.length >= 280 ? '#ef4444' : '#f59e0b') : 'rgba(79,172,254,0.18)'}`,
-                  borderRadius: 12, padding: '10px 14px', color: '#0a0a14', fontSize: 14, resize: 'none',
+                  width: '100%', background: 'rgba(255,255,255,0.03)', border: `1px solid ${postText.length > 260 ? (postText.length >= 280 ? '#ef4444' : '#f59e0b') : 'rgba(255,0,200,0.15)'}`,
+                  borderRadius: 12, padding: '10px 14px', color: 'rgba(240,240,255,0.9)', fontSize: 14, resize: 'none',
                   outline: 'none', minHeight: 70, fontFamily: 'inherit', boxSizing: 'border-box',
                 }}
               />
               {postText.length > 0 && (
-                <div style={{ textAlign: 'right', fontSize: 11, marginTop: 3, color: postText.length >= 280 ? '#ef4444' : postText.length > 260 ? '#f59e0b' : 'rgba(10,10,20,0.35)' }}>
+                <div style={{ textAlign: 'right', fontSize: 11, marginTop: 3, color: postText.length >= 280 ? '#ef4444' : postText.length > 260 ? '#f59e0b' : 'rgba(240,240,255,0.45)' }}>
                   {postText.length}/280
                 </div>
               )}
@@ -228,7 +228,7 @@ function HybridFeed() {
             </div>
           )}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <label style={{ cursor: 'pointer', color: 'rgba(10,10,20,0.5)', fontSize: 20, padding: '4px 8px' }} title="Agregar imagen">
+            <label style={{ cursor: 'pointer', color: 'rgba(240,240,255,0.45)', fontSize: 20, padding: '4px 8px' }} title="Agregar imagen">
               📷
               <input ref={fileInputRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageSelect} />
             </label>
@@ -236,24 +236,27 @@ function HybridFeed() {
               onClick={handlePost}
               disabled={posting || (!postText.trim() && !postImage)}
               style={{
-                padding: '8px 24px', borderRadius: 20,
-                background: (postText.trim() || postImage) ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(255,255,255,0.08)',
-                color: '#fff', border: 'none', fontSize: 13, fontWeight: 700,
-                cursor: (postText.trim() || postImage) ? 'pointer' : 'default', transition: 'all 0.2s',
+                padding: '8px 20px', borderRadius: 999,
+                background: 'radial-gradient(circle at 35% 30%, #2a2a2a, #080808)',
+                color: 'rgba(215,219,226,0.9)', border: '1.5px solid rgba(215,219,226,0.35)',
+                fontSize: 12, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase',
+                cursor: (postText.trim() || postImage) && !posting ? 'pointer' : 'default',
+                boxShadow: '0 4px 14px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.4)',
+                transition: 'all 0.2s', opacity: (!postText.trim() && !postImage) ? 0.4 : 1,
               }}
             >
-              {posting ? 'Publicando...' : 'Publicar'}
+              {posting ? '...' : 'Publicar'}
             </button>
           </div>
         </GlassCard>
 
         {/* Feed items */}
         {loading && feed.length === 0 ? (
-          <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.5)', padding: 40 }}>Cargando feed...</div>
+          <div style={{ textAlign: 'center', color: 'rgba(240,240,255,0.45)', padding: 40 }}>Cargando feed...</div>
         ) : feed.length === 0 ? (
-          <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.35)', padding: 60 }}>
+          <div style={{ textAlign: 'center', color: 'rgba(240,240,255,0.45)', padding: 60 }}>
             <div style={{ fontSize: 48, marginBottom: 12 }}>📭</div>
-            <div style={{ fontSize: 16, fontWeight: 600, color: 'rgba(10,10,20,0.5)' }}>Sin publicaciones aún</div>
+            <div style={{ fontSize: 16, fontWeight: 600, color: 'rgba(240,240,255,0.45)' }}>Sin publicaciones aún</div>
             <div style={{ fontSize: 13, marginTop: 6 }}>¡Sé el primero en publicar algo!</div>
           </div>
         ) : (
@@ -277,10 +280,10 @@ function HybridFeed() {
                         style={{ cursor: 'pointer' }}
                       />
                       <div style={{ flex: 1 }}>
-                        <div style={{ color: '#0a0a14', fontSize: 14, fontWeight: 600 }}>
+                        <div style={{ color: 'rgba(240,240,255,0.9)', fontSize: 14, fontWeight: 600 }}>
                           {post.author?.firstName} {post.author?.lastName || post.author?.username}
                         </div>
-                        <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 11 }}>
+                        <div style={{ color: 'rgba(240,240,255,0.45)', fontSize: 11 }}>
                           {new Date(post.createdAt).toLocaleDateString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}
                         </div>
                       </div>
@@ -288,7 +291,7 @@ function HybridFeed() {
 
                     {/* Content */}
                     {post.content && (
-                      <div style={{ color: '#0a0a14', fontSize: 14, marginBottom: 10, lineHeight: 1.5 }}>
+                      <div style={{ color: 'rgba(240,240,255,0.9)', fontSize: 14, marginBottom: 10, lineHeight: 1.5 }}>
                         <HashtagText text={post.content} />
                       </div>
                     )}
@@ -297,28 +300,28 @@ function HybridFeed() {
                     )}
 
                     {/* Actions */}
-                    <div style={{ display: 'flex', gap: 24, color: 'rgba(10,10,20,0.5)', fontSize: 13, paddingTop: 8, borderTop: '1px solid rgba(10,10,20,0.08)' }}>
+                    <div style={{ display: 'flex', gap: 24, color: 'rgba(240,240,255,0.45)', fontSize: 13, paddingTop: 8, borderTop: '1px solid rgba(240,240,255,0.45)' }}>
                       <button
                         onClick={() => handleLike(post._id)}
-                        style={{ background: 'none', border: 'none', color: isLiked ? '#ec4899' : 'rgba(10,10,20,0.4)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit' }}
+                        style={{ background: 'none', border: 'none', color: isLiked ? '#ec4899' : 'rgba(240,240,255,0.45)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit' }}
                       >
                         {isLiked ? '❤️' : '🤍'} {post.likes?.length || 0}
                       </button>
                       <button
                         onClick={() => { setCommentOpen(isOpen ? null : post._id); setCommentText(''); }}
-                        style={{ background: 'none', border: 'none', color: isOpen ? '#06b6d4' : 'rgba(10,10,20,0.4)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit' }}
+                        style={{ background: 'none', border: 'none', color: isOpen ? '#06b6d4' : 'rgba(240,240,255,0.45)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit' }}
                       >
                         💬 {post.comments?.length || 0}
                       </button>
                       <button
                         onClick={() => handleShare(post._id)}
-                        style={{ background: 'none', border: 'none', color: 'rgba(10,10,20,0.5)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit' }}
+                        style={{ background: 'none', border: 'none', color: 'rgba(240,240,255,0.45)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit' }}
                       >
                         🔄 {post.shares || 0}
                       </button>
                       <button
                         onClick={() => handleBookmark(post._id)}
-                        style={{ background: 'none', border: 'none', color: bookmarks.has(post._id) ? '#a855f7' : 'rgba(10,10,20,0.4)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit', marginLeft: 'auto' }}
+                        style={{ background: 'none', border: 'none', color: bookmarks.has(post._id) ? '#a855f7' : 'rgba(240,240,255,0.45)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit', marginLeft: 'auto' }}
                       >
                         {bookmarks.has(post._id) ? '🔖' : '🏷️'}
                       </button>
@@ -332,8 +335,8 @@ function HybridFeed() {
                             {post.comments.slice(-3).map((c, i) => (
                               <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
                                 <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12 }}>👤</div>
-                                <div style={{ background: 'rgba(79,172,254,0.07)', borderRadius: 10, padding: '6px 10px', flex: 1 }}>
-                                  <div style={{ color: '#0a0a14', fontSize: 13 }}>{c.text}</div>
+                                <div style={{ background: 'rgba(255,255,255,0.03)', borderRadius: 10, padding: '6px 10px', flex: 1 }}>
+                                  <div style={{ color: 'rgba(240,240,255,0.9)', fontSize: 13 }}>{c.text}</div>
                                 </div>
                               </div>
                             ))}
@@ -346,8 +349,8 @@ function HybridFeed() {
                             onKeyDown={e => e.key === 'Enter' && handleComment(post._id)}
                             placeholder="Escribe un comentario..."
                             style={{
-                              flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.18)',
-                              borderRadius: 20, padding: '8px 14px', color: '#0a0a14', fontSize: 13, outline: 'none', fontFamily: 'inherit',
+                              flex: 1, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,0,200,0.15)',
+                              borderRadius: 20, padding: '8px 14px', color: 'rgba(240,240,255,0.9)', fontSize: 13, outline: 'none', fontFamily: 'inherit',
                             }}
                           />
                           <button
@@ -372,12 +375,12 @@ function HybridFeed() {
             {/* Sentinel para infinite scroll */}
             <div ref={sentinelRef} style={{ height: 1 }} />
             {loadingMore && (
-              <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.35)', padding: 16, fontSize: 13 }}>
+              <div style={{ textAlign: 'center', color: 'rgba(240,240,255,0.45)', padding: 16, fontSize: 13 }}>
                 Cargando más...
               </div>
             )}
             {!hasMore && feed.length > 0 && (
-              <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.35)', padding: 16, fontSize: 12 }}>
+              <div style={{ textAlign: 'center', color: 'rgba(240,240,255,0.45)', padding: 16, fontSize: 12 }}>
                 — Fin del feed —
               </div>
             )}

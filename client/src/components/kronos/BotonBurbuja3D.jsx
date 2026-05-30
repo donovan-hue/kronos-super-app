@@ -2,43 +2,63 @@ import React from 'react';
 import './BotonBurbuja3D.css';
 
 /**
- * Botón Burbuja Flotante 3D Tornasol — Plan Maestro Kronos
+ * BotonBurbuja3D — Esfera 3D negra con filo plateado metálico
  *
  * Props:
- *   size     — 'sm' | 'md' | 'lg'             (default: 'md')
- *   variant  — 'primary' | 'outline' | 'icon-only'  (default: 'primary')
+ *   icon     — emoji o elemento React para el icono (ej: '👤')
+ *   label    — texto plateado debajo de la esfera
+ *   size     — 'sm' | 'md' | 'lg'  (default: 'md')
+ *   variant  — 'sphere' | 'pill' | 'icon-only'  (default: 'sphere')
  *   disabled — boolean
  *   onClick  — function
- *   as       — 'button' | 'a' | any tag       (default: 'button')
+ *   as       — tag HTML  (default: 'button')
+ *   children — alternativa a icon+label (se pone dentro de la esfera)
  */
 function BotonBurbuja3D({
   children,
+  icon,
+  label,
   size = 'md',
-  variant = 'primary',
+  variant = 'sphere',
   disabled = false,
   onClick,
   as: Tag = 'button',
   className = '',
   style = {},
+  type,
   ...props
 }) {
   const classes = [
     'btn-burbuja-3d',
     `size-${size}`,
-    variant !== 'primary' ? variant : '',
+    variant === 'pill'      ? 'pill'      : '',
+    variant === 'icon-only' ? 'icon-only' : '',
     className,
   ].filter(Boolean).join(' ');
+
+  const isBtn = Tag === 'button';
 
   return (
     <Tag
       className={classes}
       onClick={disabled ? undefined : onClick}
-      disabled={Tag === 'button' ? disabled : undefined}
+      disabled={isBtn ? disabled : undefined}
       aria-disabled={disabled}
       style={style}
+      type={isBtn ? (type || 'button') : undefined}
       {...props}
     >
-      {children}
+      {/* Esfera con icono */}
+      <div className="sphere">
+        <div className="sphere-icon">
+          {icon || children}
+        </div>
+      </div>
+
+      {/* Label plateado (solo en variante sphere o pill) */}
+      {label && variant !== 'icon-only' && (
+        <span className="sphere-label">{label}</span>
+      )}
     </Tag>
   );
 }

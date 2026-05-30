@@ -197,7 +197,7 @@ export default function VideoEditor() {
   const styles = {
     page: {
       minHeight: '100vh',
-      background: '#ffffff',
+      background: '#000',
       color: '#fff',
       fontFamily: "'Outfit', sans-serif",
       paddingTop: 72,
@@ -227,7 +227,7 @@ export default function VideoEditor() {
     sectionTitle: {
       fontSize: 13,
       fontWeight: 700,
-      color: 'rgba(10,10,20,0.5)',
+      color: 'rgba(240,240,255,0.45)',
       textTransform: 'uppercase',
       letterSpacing: 1,
       marginBottom: 12,
@@ -266,10 +266,10 @@ export default function VideoEditor() {
         : variant === 'danger'
           ? 'rgba(239,68,68,0.1)'
           : 'rgba(255,255,255,0.05)',
-      color: variant === 'danger' ? '#f87171' : '#0a0a14',
+      color: variant === 'danger' ? '#f87171' : 'rgba(240,240,255,0.9)',
     }),
     input: {
-      background: 'rgba(79,172,254,0.07)',
+      background: 'rgba(255,255,255,0.03)',
       border: '1px solid rgba(79,172,254,0.2)',
       borderRadius: 8,
       padding: '8px 12px',
@@ -345,7 +345,7 @@ export default function VideoEditor() {
         {msg && <div style={styles.msgBox(msg.isError)}>{msg.text}</div>}
         <div style={styles.header}>
           <h1 style={styles.title}>Editor de Video</h1>
-          <p style={{ color: 'rgba(10,10,20,0.5)', fontSize: 14, margin: '6px 0 0' }}>
+          <p style={{ color: 'rgba(240,240,255,0.45)', fontSize: 14, margin: '6px 0 0' }}>
             Graba o sube un video para comenzar a editar
           </p>
         </div>
@@ -467,7 +467,7 @@ export default function VideoEditor() {
                   left: '50%',
                   transform: 'translateX(-50%)',
                   background: 'rgba(0,0,0,0.65)',
-                  color: '#0a0a14',
+                  color: 'rgba(240,240,255,0.9)',
                   padding: '6px 14px',
                   borderRadius: 8,
                   fontSize: 18,
@@ -484,7 +484,7 @@ export default function VideoEditor() {
               )}
             </div>
             {duration > 0 && (
-              <div style={{ padding: '8px 16px', fontSize: 12, color: 'rgba(10,10,20,0.5)' }}>
+              <div style={{ padding: '8px 16px', fontSize: 12, color: 'rgba(240,240,255,0.45)' }}>
                 {formatTime(currentTime)} / {formatTime(duration)}
               </div>
             )}
@@ -546,13 +546,13 @@ export default function VideoEditor() {
             <GlassCard>
               <div style={styles.sectionTitle}>Recortar video</div>
               {duration > 0 && (
-                <div style={{ fontSize: 12, color: 'rgba(10,10,20,0.5)', marginBottom: 10 }}>
+                <div style={{ fontSize: 12, color: 'rgba(240,240,255,0.45)', marginBottom: 10 }}>
                   Duracion total: {formatTime(duration)}
                 </div>
               )}
               <div style={{ display: 'flex', gap: 10, alignItems: 'flex-end', flexWrap: 'wrap' }}>
                 <div style={{ flex: 1, minWidth: 100 }}>
-                  <div style={{ fontSize: 12, color: 'rgba(10,10,20,0.5)', marginBottom: 4 }}>
+                  <div style={{ fontSize: 12, color: 'rgba(240,240,255,0.45)', marginBottom: 4 }}>
                     Inicio (segundos)
                   </div>
                   <input
@@ -567,7 +567,7 @@ export default function VideoEditor() {
                   />
                 </div>
                 <div style={{ flex: 1, minWidth: 100 }}>
-                  <div style={{ fontSize: 12, color: 'rgba(10,10,20,0.5)', marginBottom: 4 }}>
+                  <div style={{ fontSize: 12, color: 'rgba(240,240,255,0.45)', marginBottom: 4 }}>
                     Fin (segundos)
                   </div>
                   <input
@@ -588,7 +588,7 @@ export default function VideoEditor() {
                   Previsualizar
                 </button>
               </div>
-              <div style={{ fontSize: 11, color: 'rgba(10,10,20,0.35)', marginTop: 8 }}>
+              <div style={{ fontSize: 11, color: 'rgba(240,240,255,0.45)', marginTop: 8 }}>
                 La exportacion con corte preciso requiere procesamiento en servidor (FFmpeg).
                 Esta herramienta navega al punto de inicio para previsualizar.
               </div>
@@ -606,7 +606,7 @@ export default function VideoEditor() {
                 maxLength={80}
               />
               {overlay && (
-                <div style={{ marginTop: 8, fontSize: 12, color: 'rgba(10,10,20,0.5)' }}>
+                <div style={{ marginTop: 8, fontSize: 12, color: 'rgba(240,240,255,0.45)' }}>
                   Texto visible sobre el video en reproduccion
                 </div>
               )}
@@ -615,7 +615,7 @@ export default function VideoEditor() {
             {/* EXPORT */}
             <GlassCard>
               <div style={styles.sectionTitle}>Exportar</div>
-              <div style={{ fontSize: 13, color: 'rgba(10,10,20,0.5)', marginBottom: 14 }}>
+              <div style={{ fontSize: 13, color: 'rgba(240,240,255,0.45)', marginBottom: 14 }}>
                 Descarga el video original con los ajustes visuales aplicados en el reproductor.
               </div>
               <button

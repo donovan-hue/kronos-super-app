@@ -114,7 +114,7 @@ function Bubble({ item, active, badge }) {
         height: 56,
         borderRadius: '50%',
         background: active
-          ? 'radial-gradient(circle at 35% 35%, rgba(255,255,255,0.25), rgba(79,172,254,0.15) 50%, rgba(243,160,255,0.1))'
+          ? 'radial-gradient(circle at 35% 35%, rgba(255,255,255,0.25), rgba(255,255,255,0.05) 50%, rgba(243,160,255,0.1))'
           : 'radial-gradient(circle at 35% 35%, rgba(255,255,255,0.1), rgba(255,255,255,0.03))',
         border: active
           ? '1.5px solid rgba(79,172,254,0.6)'
@@ -167,7 +167,7 @@ function Bubble({ item, active, badge }) {
       <span style={{
         fontSize: 9,
         fontWeight: active ? 700 : 400,
-        color: active ? '#4facfe' : 'rgba(10,10,20,0.4)',
+        color: active ? '#4facfe' : 'rgba(240,240,255,0.45)',
         fontFamily: "'Outfit', sans-serif",
         letterSpacing: 0.3,
       }}>
@@ -202,7 +202,7 @@ export default function BubbleNav({ items }) {
         right: 0,
         height: 80,
         background: 'rgba(255,255,255,0.95)',
-        borderTop: '1.5px solid rgba(79,172,254,0.12)',
+        borderTop: '1.5px solid rgba(255,255,255,0.06)',
         backdropFilter: 'blur(20px)',
         boxShadow: '0 -2px 16px rgba(79,172,254,0.08)',
         display: 'flex',

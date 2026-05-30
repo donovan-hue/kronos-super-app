@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Sora:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* ── FONDO ── */
+  --bg:            #000000;
+  --bg-halo:       radial-gradient(ellipse 80% 40% at 50% 0%, #15161c 0%, #000 70%);
+
+  /* ── GRADIENTE PLATEADO ── */
+  --grad-silver:   linear-gradient(135deg, #fff 0%, #d7dbe2 20%, #8b9099 45%, #fff 60%, #5d626b 78%, #c9ced6 100%);
+  --grad-silver-h: linear-gradient(90deg,  #fff 0%, #d7dbe2 25%, #8b9099 50%, #c9ced6 75%, #fff 100%);
+  --grad-progress: linear-gradient(90deg,  #6b7079 0%, #e9ecf1 50%, #c7ccd6 100%);
+
+  /* ── BURBUJA ── */
+  --bubble-bg:     rgba(255,255,255,.045);
+  --bubble-blur:   blur(16px) saturate(140%);
+  --bubble-shadow: 0 10px 34px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.55);
+  --bubble-hover:  0 0 22px rgba(215,219,226,.18), 0 10px 34px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.55);
+  --bubble-filo:   1.6px;   /* grosor del filo plateado */
+
+  /* ── RADIOS ── */
+  --r-pill:   999px;
+  --r-card:   26px;
+  --r-nav:    26px;
+  --r-sm:     12px;
+
+  /* ── TIPOGRAFÍA ── */
+  --font-title: 'Cinzel', serif;
+  --font-body:  'Sora', sans-serif;
+
+  /* ── TEXTO ── */
+  --text:        #f0f0f8;
+  --text-2:      rgba(240,240,248,.65);
+  --text-3:      rgba(240,240,248,.38);
+  --text-4:      rgba(240,240,248,.18);
+
+  /* ── GLOW ── */
+  --glow-silver: 0 0 18px rgba(215,219,226,.35), 0 0 40px rgba(215,219,226,.12);
+  --glow-white:  0 0 12px rgba(255,255,255,.5);
+
+  /* ── TRANSICIONES ── */
+  --ease: cubic-bezier(.4,0,.2,1);
+  --dur:  0.22s;
+}

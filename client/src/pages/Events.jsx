@@ -38,11 +38,11 @@ function QRDisplay({ value, size = 200 }) {
     (r < 7 && c < 7) || (r < 7 && c >= cells - 7) || (r >= cells - 7 && c < 7);
 
   return (
-    <div style={{ background: '#fff', padding: 12, borderRadius: 12, display: 'inline-block', boxShadow: '0 4px 20px rgba(0,0,0,0.1)' }}>
+    <div style={{ background: '#000', padding: 12, borderRadius: 12, display: 'inline-block', boxShadow: '0 4px 20px rgba(0,0,0,0.1)' }}>
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
         {grid.map(({ r, c, dark }) => {
           const isFinder = isFinderPattern(r, c);
-          const fill = isFinder ? '#1a0040' : (dark ? '#0a0a14' : '#ffffff');
+          const fill = isFinder ? '#1a0040' : (dark ? 'rgba(240,240,255,0.9)' : '#ffffff');
           return (
             <rect
               key={`${r}-${c}`}
@@ -54,7 +54,7 @@ function QRDisplay({ value, size = 200 }) {
           );
         })}
       </svg>
-      <div style={{ textAlign: 'center', fontSize: 10, color: 'rgba(10,10,20,0.4)', marginTop: 4, fontFamily: 'monospace', letterSpacing: 1 }}>
+      <div style={{ textAlign: 'center', fontSize: 10, color: 'rgba(240,240,255,0.45)', marginTop: 4, fontFamily: 'monospace', letterSpacing: 1 }}>
         {value.slice(0, 16).toUpperCase()}
       </div>
     </div>
@@ -97,15 +97,15 @@ function CreateEventModal({ onClose, onCreated }) {
   const inp = {
     width: '100%', padding: '11px 14px', borderRadius: 10, outline: 'none',
     background: 'rgba(79,172,254,0.05)', border: '1.5px solid rgba(79,172,254,0.2)',
-    color: '#0a0a14', fontSize: 14, fontFamily: 'inherit', boxSizing: 'border-box',
+    color: 'rgba(240,240,255,0.9)', fontSize: 14, fontFamily: 'inherit', boxSizing: 'border-box',
   };
 
   return (
-    <div style={{ position: 'fixed', inset: 0, background: 'rgba(10,10,20,0.5)', backdropFilter: 'blur(6px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
-      <div style={{ background: '#fff', borderRadius: 20, width: '100%', maxWidth: 520, maxHeight: '90vh', overflowY: 'auto', padding: 28 }}>
+    <div style={{ position: 'fixed', inset: 0, background: 'rgba(240,240,255,0.45)', backdropFilter: 'blur(6px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
+      <div style={{ background: '#000', borderRadius: 20, width: '100%', maxWidth: 520, maxHeight: '90vh', overflowY: 'auto', padding: 28 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-          <h2 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: '#0a0a14' }}>🎪 Crear Evento</h2>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer', color: '#0a0a14' }}>×</button>
+          <h2 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: 'rgba(240,240,255,0.9)' }}>🎪 Crear Evento</h2>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer', color: 'rgba(240,240,255,0.9)' }}>×</button>
         </div>
 
         {error && <div style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.3)', color: '#ef4444', padding: '10px 14px', borderRadius: 10, marginBottom: 14, fontSize: 13 }}>{error}</div>}
@@ -132,11 +132,11 @@ function CreateEventModal({ onClose, onCreated }) {
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
             <div>
-              <div style={{ fontSize: 11, color: 'rgba(10,10,20,0.5)', marginBottom: 4 }}>Fecha inicio *</div>
+              <div style={{ fontSize: 11, color: 'rgba(240,240,255,0.45)', marginBottom: 4 }}>Fecha inicio *</div>
               <input style={inp} type="datetime-local" value={form.startDate} onChange={e => set('startDate', e.target.value)} required />
             </div>
             <div>
-              <div style={{ fontSize: 11, color: 'rgba(10,10,20,0.5)', marginBottom: 4 }}>Fecha fin</div>
+              <div style={{ fontSize: 11, color: 'rgba(240,240,255,0.45)', marginBottom: 4 }}>Fecha fin</div>
               <input style={inp} type="datetime-local" value={form.endDate} onChange={e => set('endDate', e.target.value)} />
             </div>
           </div>
@@ -144,11 +144,11 @@ function CreateEventModal({ onClose, onCreated }) {
           {/* Tipos de boleto */}
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-              <div style={{ fontWeight: 700, fontSize: 14, color: '#0a0a14' }}>🎟️ Tipos de boleto</div>
+              <div style={{ fontWeight: 700, fontSize: 14, color: 'rgba(240,240,255,0.9)' }}>🎟️ Tipos de boleto</div>
               <button type="button" onClick={addTicket} style={{ background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#fff', border: 'none', borderRadius: 8, padding: '5px 12px', cursor: 'pointer', fontSize: 12, fontWeight: 700 }}>+ Añadir</button>
             </div>
             {form.ticketTypes.map((tt, i) => (
-              <div key={i} style={{ background: 'rgba(79,172,254,0.04)', border: '1px solid rgba(79,172,254,0.15)', borderRadius: 12, padding: 12, marginBottom: 8 }}>
+              <div key={i} style={{ background: 'rgba(79,172,254,0.04)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 12, padding: 12, marginBottom: 8 }}>
                 <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 8, marginBottom: 6 }}>
                   <input style={inp} placeholder="Nombre (ej. VIP)" value={tt.name} onChange={e => setTicket(i, 'name', e.target.value)} required />
                   <input style={inp} type="number" placeholder="Precio" min="0" value={tt.price} onChange={e => setTicket(i, 'price', e.target.value)} />
@@ -203,18 +203,18 @@ function TicketModal({ event, onClose }) {
   const selType = event.ticketTypes?.find(t => t._id === selectedType);
 
   return (
-    <div style={{ position: 'fixed', inset: 0, background: 'rgba(10,10,20,0.6)', backdropFilter: 'blur(8px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
-      <div style={{ background: '#fff', borderRadius: 24, width: '100%', maxWidth: 400, padding: 28, textAlign: 'center' }}>
+    <div style={{ position: 'fixed', inset: 0, background: 'rgba(240,240,255,0.6)', backdropFilter: 'blur(8px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
+      <div style={{ background: '#000', borderRadius: 24, width: '100%', maxWidth: 400, padding: 28, textAlign: 'center' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-          <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#0a0a14' }}>🎟️ Boleto</h3>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer', color: '#0a0a14' }}>×</button>
+          <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: 'rgba(240,240,255,0.9)' }}>🎟️ Boleto</h3>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer', color: 'rgba(240,240,255,0.9)' }}>×</button>
         </div>
 
-        <div style={{ fontWeight: 700, fontSize: 16, color: '#0a0a14', marginBottom: 4 }}>{event.title}</div>
-        <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 13, marginBottom: 20 }}>{fmt(event.startDate)} · {fmtTime(event.startDate)}</div>
+        <div style={{ fontWeight: 700, fontSize: 16, color: 'rgba(240,240,255,0.9)', marginBottom: 4 }}>{event.title}</div>
+        <div style={{ color: 'rgba(240,240,255,0.45)', fontSize: 13, marginBottom: 20 }}>{fmt(event.startDate)} · {fmtTime(event.startDate)}</div>
 
         {loading ? (
-          <div style={{ color: 'rgba(10,10,20,0.4)', padding: 24 }}>Cargando...</div>
+          <div style={{ color: 'rgba(240,240,255,0.45)', padding: 24 }}>Cargando...</div>
         ) : ticket ? (
           <div>
             <div style={{ marginBottom: 16 }}>
@@ -223,7 +223,7 @@ function TicketModal({ event, onClose }) {
             <div style={{ background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.3)', color: '#16a34a', borderRadius: 12, padding: '10px 16px', fontSize: 13, fontWeight: 600, marginBottom: 8 }}>
               ✅ Boleto activo
             </div>
-            <div style={{ fontSize: 12, color: 'rgba(10,10,20,0.4)', fontFamily: 'monospace' }}>
+            <div style={{ fontSize: 12, color: 'rgba(240,240,255,0.45)', fontFamily: 'monospace' }}>
               ID: {ticket.qrCode?.slice(0, 12).toUpperCase()}
             </div>
           </div>
@@ -231,7 +231,7 @@ function TicketModal({ event, onClose }) {
           <div>
             {error && <div style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.3)', color: '#ef4444', padding: '10px', borderRadius: 10, marginBottom: 12, fontSize: 13 }}>{error}</div>}
             <div style={{ marginBottom: 16 }}>
-              <div style={{ fontSize: 13, color: 'rgba(10,10,20,0.5)', marginBottom: 8, textAlign: 'left' }}>Tipo de boleto:</div>
+              <div style={{ fontSize: 13, color: 'rgba(240,240,255,0.45)', marginBottom: 8, textAlign: 'left' }}>Tipo de boleto:</div>
               {event.ticketTypes?.map(tt => (
                 <div key={tt._id} onClick={() => setSelectedType(tt._id)}
                   style={{
@@ -242,15 +242,15 @@ function TicketModal({ event, onClose }) {
                     transition: 'all 0.2s',
                   }}>
                   <div>
-                    <div style={{ fontWeight: 700, fontSize: 14, color: '#0a0a14' }}>{tt.name}</div>
-                    {tt.description && <div style={{ fontSize: 11, color: 'rgba(10,10,20,0.45)' }}>{tt.description}</div>}
+                    <div style={{ fontWeight: 700, fontSize: 14, color: 'rgba(240,240,255,0.9)' }}>{tt.name}</div>
+                    {tt.description && <div style={{ fontSize: 11, color: 'rgba(240,240,255,0.45)' }}>{tt.description}</div>}
                   </div>
                   <div style={{ fontWeight: 800, fontSize: 15, color: '#8B5CF6' }}>
                     {tt.price === 0 ? 'GRATIS' : `$${tt.price}`}
                   </div>
                 </div>
               ))}
-              <div style={{ fontSize: 11, color: 'rgba(10,10,20,0.4)', marginTop: 4 }}>
+              <div style={{ fontSize: 11, color: 'rgba(240,240,255,0.45)', marginTop: 4 }}>
                 {event.ticketTypes?.find(t => t._id === selectedType)?.sold || 0} / {event.ticketTypes?.find(t => t._id === selectedType)?.quantity || 0} boletos vendidos
               </div>
             </div>
@@ -326,8 +326,8 @@ export default function Events() {
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <div>
-            <h1 style={{ margin: 0, fontSize: 24, fontWeight: 900, color: '#0a0a14' }}>🎪 Eventos</h1>
-            <div style={{ color: 'rgba(10,10,20,0.45)', fontSize: 13 }}>Descubre y crea eventos</div>
+            <h1 style={{ margin: 0, fontSize: 24, fontWeight: 900, color: 'rgba(240,240,255,0.9)' }}>🎪 Eventos</h1>
+            <div style={{ color: 'rgba(240,240,255,0.45)', fontSize: 13 }}>Descubre y crea eventos</div>
           </div>
           <BotonBurbuja3D size="sm" onClick={() => setShowCreate(true)}>+ Crear</BotonBurbuja3D>
         </div>
@@ -343,7 +343,7 @@ export default function Events() {
               flex: 1, padding: '9px', borderRadius: 10, fontSize: 12, fontWeight: 600,
               border: 'none', cursor: 'pointer',
               background: tab === t.id ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'transparent',
-              color: tab === t.id ? '#fff' : 'rgba(10,10,20,0.55)',
+              color: tab === t.id ? '#fff' : 'rgba(240,240,255,0.45)',
               transition: 'all 0.2s',
             }}>{t.label}</button>
           ))}
@@ -357,7 +357,7 @@ export default function Events() {
                 <button key={c} onClick={() => setCategory(c)} style={{
                   padding: '6px 14px', borderRadius: 20, border: 'none', cursor: 'pointer', whiteSpace: 'nowrap', fontSize: 12, fontWeight: 600,
                   background: category === c ? 'linear-gradient(135deg,#EC4899,#8B5CF6)' : 'rgba(79,172,254,0.08)',
-                  color: category === c ? '#fff' : 'rgba(10,10,20,0.6)',
+                  color: category === c ? '#fff' : 'rgba(240,240,255,0.6)',
                   transition: 'all 0.2s',
                 }}>{c.charAt(0).toUpperCase() + c.slice(1)}</button>
               ))}
@@ -367,7 +367,7 @@ export default function Events() {
                 <button key={t.v} onClick={() => setEventType(t.v)} style={{
                   padding: '6px 14px', borderRadius: 20, border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 600,
                   background: eventType === t.v ? 'linear-gradient(135deg,#06B6D4,#8B5CF6)' : 'rgba(79,172,254,0.08)',
-                  color: eventType === t.v ? '#fff' : 'rgba(10,10,20,0.6)',
+                  color: eventType === t.v ? '#fff' : 'rgba(240,240,255,0.6)',
                   transition: 'all 0.2s',
                 }}>{t.l}</button>
               ))}
@@ -377,14 +377,14 @@ export default function Events() {
 
         {/* Contenido */}
         {loading ? (
-          <div style={{ textAlign: 'center', padding: 48, color: 'rgba(10,10,20,0.35)' }}>Cargando...</div>
+          <div style={{ textAlign: 'center', padding: 48, color: 'rgba(240,240,255,0.45)' }}>Cargando...</div>
         ) : tab === 'discover' ? (
           events.length ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {events.map(ev => <EventCard key={ev._id} event={ev} onSelect={() => setSelectedEvent(ev)} />)}
             </div>
           ) : (
-            <div style={{ textAlign: 'center', padding: 48, color: 'rgba(10,10,20,0.35)' }}>
+            <div style={{ textAlign: 'center', padding: 48, color: 'rgba(240,240,255,0.45)' }}>
               <div style={{ fontSize: 40, marginBottom: 8 }}>🎪</div>
               <div>No hay eventos disponibles</div>
             </div>
@@ -395,7 +395,7 @@ export default function Events() {
               {myTickets.map(tk => <TicketCard key={tk._id} ticket={tk} />)}
             </div>
           ) : (
-            <div style={{ textAlign: 'center', padding: 48, color: 'rgba(10,10,20,0.35)' }}>
+            <div style={{ textAlign: 'center', padding: 48, color: 'rgba(240,240,255,0.45)' }}>
               <div style={{ fontSize: 40, marginBottom: 8 }}>🎟️</div>
               <div>No tienes boletos aún</div>
               <button onClick={() => setTab('discover')} style={{ marginTop: 12, background: 'none', border: 'none', color: '#8B5CF6', cursor: 'pointer', fontWeight: 700, fontSize: 13 }}>Descubrir eventos →</button>
@@ -407,7 +407,7 @@ export default function Events() {
               {myEvents.map(ev => <EventCard key={ev._id} event={ev} isOrganizer onSelect={() => setSelectedEvent(ev)} />)}
             </div>
           ) : (
-            <div style={{ textAlign: 'center', padding: 48, color: 'rgba(10,10,20,0.35)' }}>
+            <div style={{ textAlign: 'center', padding: 48, color: 'rgba(240,240,255,0.45)' }}>
               <div style={{ fontSize: 40, marginBottom: 8 }}>🎪</div>
               <div>No has creado eventos</div>
               <BotonBurbuja3D size="sm" style={{ marginTop: 16 }} onClick={() => setShowCreate(true)}>Crear mi primer evento</BotonBurbuja3D>
@@ -435,18 +435,18 @@ function EventCard({ event, onSelect, isOrganizer }) {
       )}
       <div style={{ padding: '14px 16px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
-          <div style={{ fontWeight: 800, fontSize: 16, color: '#0a0a14', flex: 1, marginRight: 8 }}>{event.title}</div>
+          <div style={{ fontWeight: 800, fontSize: 16, color: 'rgba(240,240,255,0.9)', flex: 1, marginRight: 8 }}>{event.title}</div>
           {isOrganizer && (
             <span style={{ background: 'rgba(139,92,246,0.1)', color: '#8B5CF6', borderRadius: 8, padding: '2px 8px', fontSize: 11, fontWeight: 700, whiteSpace: 'nowrap' }}>Tu evento</span>
           )}
         </div>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 10 }}>
-          <span style={{ fontSize: 12, color: 'rgba(10,10,20,0.5)' }}>📅 {fmt(event.startDate)}</span>
-          <span style={{ fontSize: 12, color: 'rgba(10,10,20,0.5)' }}>{typeIcon} {event.location || 'Online'}</span>
+          <span style={{ fontSize: 12, color: 'rgba(240,240,255,0.45)' }}>📅 {fmt(event.startDate)}</span>
+          <span style={{ fontSize: 12, color: 'rgba(240,240,255,0.45)' }}>{typeIcon} {event.location || 'Online'}</span>
           <span style={{ background: 'rgba(79,172,254,0.1)', color: '#4facfe', borderRadius: 6, padding: '1px 7px', fontSize: 11, fontWeight: 600 }}>{event.category}</span>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ fontSize: 13, color: 'rgba(10,10,20,0.45)' }}>
+          <div style={{ fontSize: 13, color: 'rgba(240,240,255,0.45)' }}>
             {event.ticketTypes?.reduce((a, t) => a + (t.quantity - t.sold), 0)} boletos disponibles
           </div>
           <div style={{ fontWeight: 800, fontSize: 15, background: 'linear-gradient(135deg,#EC4899,#8B5CF6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
@@ -468,10 +468,10 @@ function TicketCard({ ticket }) {
   return (
     <GlassCard style={{ padding: '14px 16px' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
-        <div style={{ fontWeight: 800, fontSize: 15, color: '#0a0a14' }}>{ev?.title || 'Evento'}</div>
+        <div style={{ fontWeight: 800, fontSize: 15, color: 'rgba(240,240,255,0.9)' }}>{ev?.title || 'Evento'}</div>
         <span style={{ fontSize: 12, fontWeight: 700, color: statusColor }}>{statusLabel}</span>
       </div>
-      <div style={{ fontSize: 12, color: 'rgba(10,10,20,0.5)', marginBottom: 12 }}>
+      <div style={{ fontSize: 12, color: 'rgba(240,240,255,0.45)', marginBottom: 12 }}>
         📅 {ev?.startDate ? fmt(ev.startDate) : ''} · {ticket.price === 0 ? 'Gratis' : `$${ticket.price}`}
       </div>
       {ticket.status === 'active' && (

@@ -1,99 +1,112 @@
-import React, { useContext, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 
 const NAV_ITEMS = [
-  { emoji: '🏠', label: 'Inicio',          to: '/feed' },
-  { emoji: '🔍', label: 'Buscar',           to: '/search' },
-  { emoji: '💬', label: 'Mensajes',         to: '/social/chat' },
-  { emoji: '🔔', label: 'Notificaciones',   to: '/notifications' },
-  { emoji: '🏘️', label: 'Comunidades',      to: '/communities' },
-  { emoji: '🛒', label: 'Tienda',           to: '/shop' },
-  { emoji: '🛍️', label: 'Marketplace',      to: '/marketplace' },
-  { emoji: '💰', label: 'Wallet',           to: '/wallet' },
-  { emoji: '🔴', label: 'LIVE',             to: '/live' },
-  { emoji: '❤️', label: 'Health',           to: '/health' },
-  { emoji: '🎮', label: 'Avatar',           to: '/avatar' },
-  { emoji: '📅', label: 'Reservaciones',    to: '/reservations' },
-  { emoji: '🎬', label: 'Video Editor',     to: '/video-editor' },
-  { emoji: '🎪', label: 'Eventos',          to: '/events' },
-  { emoji: '🏆', label: 'Gamificación',     to: '/gamification' },
-  { emoji: '⚙️', label: 'Ajustes',          to: '/settings' },
-  { emoji: '◈',  label: 'AXIS Studio',      to: '/axis',     premium: true },
-  { emoji: '🎬', label: 'NOIR Scripts',     to: '/scripts',  premium: true },
+  { icon: '👤', label: 'Perfil',         to: '/profile/me' },
+  { icon: '🌐', label: 'Conexiones',     to: '/communities' },
+  { icon: '📰', label: 'Feed',           to: '/feed' },
+  { icon: '🔭', label: 'Explorar',       to: '/search' },
+  { icon: '📱', label: 'Plataforma',     to: '/mockups' },
+  { icon: '🔔', label: 'Notificaciones', to: '/notifications' },
+  { icon: '📊', label: 'Estadísticas',   to: '/gamification' },
+  { icon: '📡', label: 'Alcance',        to: '/analytics' },
+  { icon: '🎬', label: 'Crear Reel',     to: '/video-editor' },
+  { icon: '📸', label: 'Foto',           to: '/feed?type=photo' },
+  { icon: '💬', label: 'Mensajes',       to: '/social/chat' },
+  { icon: '📍', label: 'Ubicación',      to: '/map' },
+  { icon: '🛒', label: 'Tienda',         to: '/shop' },
+  { icon: '🔒', label: 'Privacidad',     to: '/settings/privacy' },
+  { icon: '⚙️', label: 'Cuenta',         to: '/settings' },
+  { icon: '#',  label: 'Hashtags',       to: '/search?type=hashtags' },
+  { icon: '👥', label: 'Grupos',         to: '/social/groups' },
+  { icon: '📸', label: 'Tomar Foto',     to: '/feed?type=photo' },
+  { icon: '📍', label: 'Demografía',     to: '/settings' },
+  { icon: '❤️', label: 'Likes',          to: '/notifications' },
+  { icon: '🗓️', label: 'Publicaciones',  to: '/feed' },
+  { icon: '📈', label: 'Compromiso',     to: '/gamification' },
+  { icon: '👥', label: 'Seguidores',     to: '/profile/me' },
+  { icon: '🔗', label: 'Compartidos',    to: '/feed' },
 ];
 
-function SidebarItem({ item, isActive }) {
-  const [hovered, setHovered] = useState(false);
-  const active = isActive || hovered;
+const SPHERE_S = `
+  @keyframes silver-flow {
+    0%,100%{background-position:0% 50%}33%{background-position:100% 50%}66%{background-position:50% 0%}
+  }
+`;
 
+function SphereItem({ item, isActive, onClick }) {
   return (
     <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onClick={onClick}
       style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 11,
-        padding: '8px 12px',
-        borderRadius: 13,
-        background: isActive
-          ? 'linear-gradient(135deg, rgba(212,175,55,0.14), rgba(212,175,55,0.06))'
-          : hovered ? 'rgba(212,175,55,0.06)' : 'transparent',
-        border: isActive
-          ? '1px solid rgba(212,175,55,0.3)'
-          : `1px solid ${hovered ? 'rgba(212,175,55,0.12)' : 'transparent'}`,
-        boxShadow: isActive ? '0 0 16px rgba(212,175,55,0.12), inset 0 1px 0 rgba(255,255,255,0.03)' : 'none',
-        transition: 'all 0.17s ease',
-        cursor: 'pointer',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
+        cursor: 'pointer', padding: '8px 4px',
+        transition: 'transform 0.2s',
       }}
+      onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-3px)'}
+      onMouseLeave={e => e.currentTarget.style.transform = ''}
     >
-      {/* Icono contenedor */}
+      {/* Esfera */}
       <div style={{
-        width: 34, height: 34, borderRadius: 10, flexShrink: 0,
+        width: 52, height: 52, borderRadius: '50%',
+        position: 'relative', isolation: 'isolate', overflow: 'hidden',
         background: isActive
-          ? 'linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.08))'
-          : 'rgba(255,255,255,0.04)',
-        border: isActive
-          ? '1px solid rgba(212,175,55,0.4)'
-          : '1px solid rgba(255,255,255,0.06)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        fontSize: 16,
-        boxShadow: isActive ? '0 0 12px rgba(212,175,55,0.2)' : 'none',
-        transition: 'all 0.17s',
+          ? 'radial-gradient(circle at 35% 30%, #3a3a3a 0%, #202020 40%, #111 100%)'
+          : 'radial-gradient(circle at 35% 30%, #2a2a2a 0%, #141414 40%, #080808 100%)',
+        boxShadow: isActive
+          ? '0 6px 20px rgba(0,0,0,0.9), 0 0 16px rgba(215,219,226,.2), inset 0 1px 0 rgba(255,255,255,.65)'
+          : '0 4px 14px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,.45)',
+        flexShrink: 0,
       }}>
-        {item.emoji}
+        {/* Filo plateado */}
+        <div style={{
+          position: 'absolute', inset: 0, padding: '1.8px', borderRadius: '50%',
+          background: 'linear-gradient(135deg,#fff,#d7dbe2,#8b9099,#fff,#5d626b,#c9ced6)',
+          backgroundSize: '300% 300%',
+          WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
+          WebkitMaskComposite: 'xor', maskComposite: 'exclude',
+          pointerEvents: 'none',
+          animation: 'silver-flow 5s ease-in-out infinite',
+          opacity: isActive ? 1 : 0.75,
+        }} />
+        {/* Reflejo */}
+        <div style={{
+          position: 'absolute', top: '8%', left: '14%',
+          width: '42%', height: '28%', borderRadius: '50%',
+          background: 'radial-gradient(ellipse, rgba(255,255,255,.7) 0%, rgba(255,255,255,.15) 50%, transparent 100%)',
+          filter: 'blur(1px)', transform: 'rotate(-25deg)', pointerEvents: 'none',
+        }} />
+        {/* Icono */}
+        <div style={{
+          position: 'absolute', inset: 0, zIndex: 3,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontSize: item.icon === '#' ? 18 : 22,
+          fontWeight: item.icon === '#' ? 900 : 400,
+          color: 'rgba(255,255,255,0.92)',
+          filter: 'drop-shadow(0 1px 3px rgba(0,0,0,.9))',
+          fontFamily: item.icon === '#' ? 'Cinzel, serif' : 'inherit',
+        }}>
+          {item.icon}
+        </div>
       </div>
 
+      {/* Label */}
       <span style={{
-        color: isActive ? '#F0D060' : hovered ? 'rgba(240,240,248,0.85)' : 'rgba(240,240,248,0.5)',
-        fontWeight: isActive ? 700 : 400,
-        fontSize: 13,
-        fontFamily: "'Outfit', sans-serif",
-        letterSpacing: 0.2,
-        transition: 'color 0.17s',
-        flex: 1,
+        fontFamily: "'Cinzel','Sora',sans-serif",
+        fontSize: 7, fontWeight: 600, letterSpacing: 0.6,
+        textTransform: 'uppercase', textAlign: 'center',
+        maxWidth: 60, lineHeight: 1.3,
+        background: isActive
+          ? 'linear-gradient(135deg,#fff,#e9ecf1,#c7ccd6)'
+          : 'linear-gradient(135deg,#9aa0ab,#d7dbe2,#9aa0ab)',
+        backgroundSize: '300% 300%',
+        WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+        backgroundClip: 'text',
+        animation: 'silver-flow 5s ease-in-out infinite',
       }}>
         {item.label}
       </span>
-
-      {item.premium && !isActive && (
-        <span style={{
-          fontSize: 8, fontWeight: 700, padding: '2px 5px', borderRadius: 6,
-          background: 'rgba(212,175,55,0.1)', border: '1px solid rgba(212,175,55,0.25)',
-          color: 'rgba(212,175,55,0.6)', letterSpacing: 0.5,
-        }}>PRO</span>
-      )}
-
-      {/* Indicador activo */}
-      {isActive && (
-        <div style={{
-          marginLeft: 'auto',
-          width: 4, height: 4, borderRadius: '50%',
-          background: '#D4AF37',
-          boxShadow: '0 0 8px rgba(212,175,55,0.8)',
-        }} />
-      )}
     </div>
   );
 }
@@ -101,113 +114,132 @@ function SidebarItem({ item, isActive }) {
 export default function DesktopSidebar() {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
-  const userId = user?._id || user?.id;
+  const location = useLocation();
 
   return (
-    <aside className="kronos-sidebar" style={{ background: 'rgba(8,8,15,0.98)' }}>
+    <aside
+      className="kronos-sidebar"
+      style={{
+        background: '#000',
+        borderRight: '1px solid rgba(255,255,255,.05)',
+        boxShadow: '2px 0 24px rgba(0,0,0,.9)',
+        overflowY: 'auto',
+        paddingBottom: 20,
+      }}
+    >
+      <style>{SPHERE_S}</style>
 
-      {/* Logo */}
-      <div
-        onClick={() => navigate('/feed')}
-        style={{
-          display: 'flex', alignItems: 'center', gap: 10,
-          padding: '10px 12px', marginBottom: 20, cursor: 'pointer',
-          borderRadius: 14,
-          background: 'linear-gradient(135deg, rgba(212,175,55,0.08), rgba(212,175,55,0.03))',
-          border: '1px solid rgba(212,175,55,0.15)',
-        }}
-      >
-        {/* K logo */}
-        <div style={{
-          width: 36, height: 36, borderRadius: 10, flexShrink: 0,
-          background: 'linear-gradient(135deg, #A08820, #D4AF37, #F0D060)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 17, fontWeight: 900, color: '#0a0a0f',
-          boxShadow: '0 0 20px rgba(212,175,55,0.4)',
-          position: 'relative', overflow: 'hidden',
-        }}>
-          {/* Brillo */}
+      {/* Logo KRONOS */}
+      <div style={{
+        padding: '20px 16px 12px',
+        textAlign: 'center',
+        borderBottom: '1px solid rgba(255,255,255,.06)',
+        marginBottom: 8,
+      }}>
+        <div
+          onClick={() => navigate('/feed')}
+          style={{ cursor: 'pointer', display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}
+        >
+          {/* K esfera grande */}
           <div style={{
-            position: 'absolute', top: 4, left: 6, width: 16, height: 8,
-            borderRadius: '50%',
-            background: 'radial-gradient(ellipse, rgba(255,255,255,0.5), transparent 70%)',
-          }} />
-          K
-        </div>
-        <div>
-          <div style={{
-            fontWeight: 900, fontSize: 17, letterSpacing: 1,
-            background: 'linear-gradient(90deg, #A08820, #D4AF37, #F0D060, #D4AF37)',
-            backgroundSize: '200% 200%',
-            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-            animation: 'k-gold-shift 5s ease-in-out infinite',
+            width: 56, height: 56, borderRadius: '50%',
+            position: 'relative', isolation: 'isolate', overflow: 'hidden',
+            background: 'radial-gradient(circle at 35% 30%, #2a2a2a 0%, #141414 40%, #080808 100%)',
+            boxShadow: '0 6px 24px rgba(0,0,0,.9), 0 0 20px rgba(215,219,226,.15), inset 0 1px 0 rgba(255,255,255,.6)',
           }}>
-            KRONOS
+            <div style={{
+              position: 'absolute', inset: 0, padding: '1.8px', borderRadius: '50%',
+              background: 'linear-gradient(135deg,#fff,#d7dbe2,#8b9099,#fff,#5d626b,#c9ced6)',
+              backgroundSize: '300% 300%',
+              WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
+              WebkitMaskComposite: 'xor', maskComposite: 'exclude',
+              animation: 'silver-flow 5s ease-in-out infinite',
+            }} />
+            <div style={{
+              position: 'absolute', top: '8%', left: '14%', width: '42%', height: '28%',
+              borderRadius: '50%',
+              background: 'radial-gradient(ellipse, rgba(255,255,255,.75) 0%, transparent 100%)',
+              filter: 'blur(1px)', transform: 'rotate(-25deg)',
+            }} />
+            <div style={{
+              position: 'absolute', inset: 0, zIndex: 3,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontFamily: "'Cinzel',serif", fontSize: 22, fontWeight: 700,
+              background: 'linear-gradient(135deg,#fff,#d7dbe2,#8b9099,#fff)',
+              backgroundSize: '300% 300%',
+              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              animation: 'silver-flow 5s ease-in-out infinite',
+            }}>K</div>
           </div>
-          <div style={{ fontSize: 9, color: 'rgba(212,175,55,0.45)', letterSpacing: 0.5, marginTop: -1 }}>
-            SUPER APP
-          </div>
+          <span style={{
+            fontFamily: "'Cinzel',serif", fontSize: 11, fontWeight: 700, letterSpacing: 4,
+            background: 'linear-gradient(135deg,#fff,#d7dbe2,#8b9099,#fff)',
+            backgroundSize: '300% 300%',
+            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            animation: 'silver-flow 5s ease-in-out infinite',
+          }}>KRONOS</span>
         </div>
       </div>
 
-      {/* Línea separadora dorada */}
+      {/* Grid de esferas — 3 columnas como en la imagen */}
       <div style={{
-        height: 1,
-        background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.2), transparent)',
-        marginBottom: 12,
-      }} />
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3, 1fr)',
+        gap: 4,
+        padding: '0 8px',
+      }}>
+        {NAV_ITEMS.map(item => (
+          <SphereItem
+            key={item.to + item.label}
+            item={item}
+            isActive={location.pathname === item.to}
+            onClick={() => navigate(item.to)}
+          />
+        ))}
+      </div>
 
-      {/* Nav items */}
-      {NAV_ITEMS.map(item => (
-        <NavLink key={item.to} to={item.to} style={{ textDecoration: 'none' }}>
-          {({ isActive }) => <SidebarItem item={item} isActive={isActive} />}
-        </NavLink>
-      ))}
-
-      <div style={{ flex: 1 }} />
-
-      {/* User card */}
+      {/* User + logout */}
       {user && (
-        <div style={{ borderTop: '1px solid rgba(212,175,55,0.08)', paddingTop: 16, marginTop: 8 }}>
+        <div style={{
+          margin: '16px 8px 0',
+          borderTop: '1px solid rgba(255,255,255,.06)',
+          paddingTop: 12,
+          display: 'flex', flexDirection: 'column', gap: 8,
+        }}>
           <div
-            onClick={() => navigate(userId ? `/profile/${userId}` : '/profile/me')}
+            onClick={() => navigate(`/profile/${user._id || user.id}`)}
             style={{
-              display: 'flex', alignItems: 'center', gap: 10,
-              padding: '10px 12px', borderRadius: 14, cursor: 'pointer', marginBottom: 8,
-              background: 'linear-gradient(135deg, rgba(212,175,55,0.06), rgba(212,175,55,0.02))',
-              border: '1px solid rgba(212,175,55,0.12)',
-              transition: 'border-color 0.2s',
+              display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer',
+              padding: '8px 10px', borderRadius: 12,
+              background: 'rgba(255,255,255,.03)',
+              border: '1px solid rgba(255,255,255,.06)',
             }}
           >
             <div style={{
-              width: 34, height: 34, borderRadius: '50%', flexShrink: 0,
-              background: 'linear-gradient(135deg, #A08820, #D4AF37)',
-              padding: 2,
-              boxShadow: '0 0 10px rgba(212,175,55,0.3)',
+              width: 32, height: 32, borderRadius: '50%', overflow: 'hidden', flexShrink: 0,
+              border: '1px solid rgba(215,219,226,.3)',
             }}>
               <img
-                src={user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.username || 'K')}&background=1a1a2e&color=D4AF37&size=34`}
-                alt=""
-                style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', border: '1.5px solid rgba(8,8,15,0.8)' }}
+                src={user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.username||'K')}&background=111&color=d7dbe2&size=32`}
+                alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ color: '#F0D060', fontWeight: 600, fontSize: 13, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <div style={{ color: 'rgba(233,236,241,.85)', fontWeight: 500, fontSize: 11, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {user.firstName || user.username}
               </div>
-              <div style={{ color: 'rgba(212,175,55,0.45)', fontSize: 11 }}>@{user.username}</div>
+              <div style={{ color: 'rgba(200,210,230,.35)', fontSize: 10 }}>@{user.username}</div>
             </div>
           </div>
-
           <button
             onClick={logout}
             style={{
-              width: '100%', padding: '8px', borderRadius: 10,
-              background: 'rgba(239,68,68,0.08)',
-              border: '1px solid rgba(239,68,68,0.15)',
-              color: 'rgba(239,68,68,0.7)',
-              fontSize: 12, cursor: 'pointer', fontFamily: 'inherit',
-              transition: 'all 0.2s',
+              width: '100%', padding: '7px', borderRadius: 8, border: '1px solid rgba(255,255,255,.06)',
+              background: 'transparent', cursor: 'pointer', fontFamily: 'inherit',
+              fontSize: 10, color: 'rgba(200,210,230,.3)', letterSpacing: 1,
+              textTransform: 'uppercase',
             }}
           >
             Cerrar sesión

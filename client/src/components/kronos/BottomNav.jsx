@@ -66,7 +66,7 @@ export default function BottomNav({ items }) {
         right: 0,
         height: 64,
         background: 'rgba(255,255,255,0.97)',
-        borderTop: '1.5px solid rgba(79,172,254,0.15)',
+        borderTop: '1.5px solid rgba(255,255,255,0.05)',
         backdropFilter: 'blur(16px)',
         justifyContent: 'space-around',
         alignItems: 'center',
@@ -88,7 +88,7 @@ export default function BottomNav({ items }) {
               alignItems: 'center',
               gap: 2,
               textDecoration: 'none',
-              color: active ? '#4facfe' : 'rgba(10,10,20,0.45)',
+              color: active ? '#4facfe' : 'rgba(240,240,255,0.45)',
               fontSize: 9,
               position: 'relative',
             }}

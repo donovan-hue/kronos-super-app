@@ -35,11 +35,11 @@ export default function FollowSuggestions() {
   return (
     <div style={{
       background: 'rgba(255,255,255,0.8)',
-      border: '1.5px solid rgba(79,172,254,0.15)',
+      border: '1.5px solid rgba(255,255,255,0.05)',
       borderRadius: 16, padding: '14px 16px', marginBottom: 16,
       boxShadow: '0 2px 12px rgba(79,172,254,0.08)',
     }}>
-      <div style={{ color: 'rgba(10,10,20,0.45)', fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 12 }}>
+      <div style={{ color: 'rgba(240,240,255,0.45)', fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 12 }}>
         A quién seguir
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -58,10 +58,10 @@ export default function FollowSuggestions() {
                 style={{ flex: 1, minWidth: 0, cursor: 'pointer' }}
                 onClick={() => navigate(`/profile/${user._id}`)}
               >
-                <div style={{ color: '#0a0a14', fontSize: 13, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <div style={{ color: 'rgba(240,240,255,0.9)', fontSize: 13, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {user.firstName} {user.lastName || ''}
                 </div>
-                <div style={{ color: 'rgba(10,10,20,0.45)', fontSize: 11 }}>@{user.username}</div>
+                <div style={{ color: 'rgba(240,240,255,0.45)', fontSize: 11 }}>@{user.username}</div>
               </div>
               <button
                 onClick={() => handleFollow(user._id)}
@@ -70,7 +70,7 @@ export default function FollowSuggestions() {
                   padding: '5px 14px', borderRadius: 20, fontSize: 12, fontWeight: 600,
                   border: isFollowing ? '1px solid rgba(79,172,254,0.3)' : 'none',
                   background: isFollowing ? 'transparent' : 'linear-gradient(135deg,#4facfe,#f3a0ff)',
-                  color: isFollowing ? 'rgba(10,10,20,0.5)' : '#fff', cursor: isFollowing ? 'default' : 'pointer', flexShrink: 0,
+                  color: isFollowing ? 'rgba(240,240,255,0.5)' : '#fff', cursor: isFollowing ? 'default' : 'pointer', flexShrink: 0,
                 }}
               >
                 {isFollowing ? 'Siguiendo' : 'Seguir'}
