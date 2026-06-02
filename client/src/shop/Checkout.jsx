@@ -2,9 +2,24 @@ import React, { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { CardElement, Elements, useStripe, useElements } from '@stripe/react-stripe-js';
 import axios from 'axios';
+import { GlassCard, HoloText } from '../components/kronos';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+
+const HOLO = 'linear-gradient(135deg, #4facfe 0%, #00f2fe 40%, #f3a0ff 70%, #ff85a2 100%)';
+
+const CARD_ELEMENT_OPTIONS = {
+  style: {
+    base: {
+      fontSize: '15px',
+      fontFamily: "'Outfit', 'Inter', sans-serif",
+      color: '#0a0a14',
+      '::placeholder': { color: 'rgba(10,10,20,0.4)' },
+    },
+    invalid: { color: '#ef4444' },
+  },
+};
 
 function CheckoutForm({ cart }) {
   const stripe = useStripe();
@@ -24,13 +39,9 @@ function CheckoutForm({ cart }) {
         items: cart
       });
 
-      const result = await stripe.redirectToCheckout({
-        sessionId: data.sessionId
-      });
+      const result = await stripe.redirectToCheckout({ sessionId: data.sessionId });
 
-      if (result.error) {
-        setError(result.error.message);
-      }
+      if (result.error) setError(result.error.message);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -39,15 +50,36 @@ function CheckoutForm({ cart }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <CardElement />
-      {error && <p className="text-red-600">{error}</p>}
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <div style={{
+        padding: '14px 16px', borderRadius: 14,
+        border: '1.5px solid rgba(79,172,254,0.25)',
+        background: 'rgba(255,255,255,0.95)',
+        boxShadow: '0 2px 8px rgba(79,172,254,0.08)',
+      }}>
+        <CardElement options={CARD_ELEMENT_OPTIONS} />
+      </div>
+
+      {error && (
+        <p style={{ color: '#ef4444', fontSize: 13, margin: 0, padding: '8px 12px', background: 'rgba(239,68,68,0.08)', borderRadius: 10 }}>
+          {error}
+        </p>
+      )}
+
       <button
         type="submit"
         disabled={!stripe || loading}
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-bold disabled:opacity-50"
+        style={{
+          width: '100%', padding: '14px 0', borderRadius: 14, border: 'none',
+          background: (!stripe || loading) ? 'rgba(79,172,254,0.3)' : HOLO,
+          color: '#fff', fontWeight: 700, fontSize: 16,
+          cursor: (!stripe || loading) ? 'not-allowed' : 'pointer',
+          boxShadow: '0 4px 16px rgba(79,172,254,0.35)',
+          transition: 'all 0.2s ease',
+          letterSpacing: 0.3
+        }}
       >
-        {loading ? 'Processing...' : 'Pay Now'}
+        {loading ? 'Procesando...' : 'Pagar ahora'}
       </button>
     </form>
   );
@@ -57,40 +89,68 @@ function Checkout({ cart }) {
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Checkout</h1>
+    <div style={{ maxWidth: 900, margin: '0 auto', padding: '32px 16px' }}>
+      <HoloText size={32} style={{ display: 'block', marginBottom: 28, fontWeight: 800 }}>
+        Checkout
+      </HoloText>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Order Summary */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-2xl font-bold mb-4">Order Summary</h2>
-          <div className="space-y-4">
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+        gap: 24
+      }}>
+        {/* Resumen de orden */}
+        <GlassCard padding={24}>
+          <p style={{ fontWeight: 700, fontSize: 18, color: '#0a0a14', margin: '0 0 20px' }}>
+            Resumen del pedido
+          </p>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             {cart.map((item) => (
-              <div key={item.productId} className="flex justify-between border-b pb-4">
+              <div
+                key={item.productId}
+                style={{
+                  display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                  paddingBottom: 12, borderBottom: '1px solid rgba(79,172,254,0.15)'
+                }}
+              >
                 <div>
-                  <p className="font-semibold">{item.name}</p>
-                  <p className="text-gray-600">x{item.quantity}</p>
+                  <p style={{ fontWeight: 600, fontSize: 14, color: '#0a0a14', margin: 0 }}>{item.name}</p>
+                  <p style={{ fontSize: 12, color: 'rgba(10,10,20,0.5)', margin: '2px 0 0' }}>
+                    x{item.quantity}
+                  </p>
                 </div>
-                <p className="font-semibold">${(item.price * item.quantity).toFixed(2)}</p>
+                <p style={{ fontWeight: 700, fontSize: 14, color: '#0a0a14', margin: 0 }}>
+                  ${(item.price * item.quantity).toFixed(2)}
+                </p>
               </div>
             ))}
           </div>
 
-          <div className="mt-6 pt-6 border-t text-xl font-bold flex justify-between">
-            <span>Total</span>
-            <span>${(total * 1.1).toFixed(2)}</span>
+          <div style={{
+            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+            marginTop: 20, paddingTop: 16, borderTop: '1.5px solid rgba(79,172,254,0.2)'
+          }}>
+            <span style={{ fontWeight: 700, fontSize: 16, color: '#0a0a14' }}>Total</span>
+            <span style={{
+              fontWeight: 800, fontSize: 20,
+              background: HOLO, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
+            }}>
+              ${(total * 1.1).toFixed(2)}
+            </span>
           </div>
-        </div>
+        </GlassCard>
 
-        {/* Payment Form */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-2xl font-bold mb-4">Payment Method</h2>
+        {/* Método de pago */}
+        <GlassCard padding={24}>
+          <p style={{ fontWeight: 700, fontSize: 18, color: '#0a0a14', margin: '0 0 20px' }}>
+            Método de pago
+          </p>
 
           <Elements stripe={stripePromise}>
             <CheckoutForm cart={cart} />
           </Elements>
-
-        </div>
+        </GlassCard>
       </div>
     </div>
   );

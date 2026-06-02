@@ -55,5 +55,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "engines": {
+    "node": "18.x"
+  },
+  "devDependencies": {
+    "webpack": "^5.107.2"
   }
 }
