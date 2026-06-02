@@ -23,20 +23,26 @@ export const useAudioRoom = () => {
       });
 
       socket.on('user_joined_audio', (data) => {
-        console.log('User joined:', data);
-        // Refetch users
+        setRoomUsers(prev => {
+          if (prev.find(u => u.userId === data.userId)) return prev;
+          return [...prev, data];
+        });
       });
 
       socket.on('user_left_audio', (data) => {
-        console.log('User left:', data);
+        setRoomUsers(prev => prev.filter(u => u.userId !== data.userId));
       });
 
       socket.on('user_mute_changed', (data) => {
-        console.log('Mute status changed:', data);
+        setRoomUsers(prev =>
+          prev.map(u => u.userId === data.userId ? { ...u, isMuted: data.isMuted } : u)
+        );
       });
 
       socket.on('spatial_position_updated', (data) => {
-        console.log('Position updated:', data);
+        setRoomUsers(prev =>
+          prev.map(u => u.userId === data.userId ? { ...u, spatial: data.spatial } : u)
+        );
       });
 
       socket.on('connect', () => {

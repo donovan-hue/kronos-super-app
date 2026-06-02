@@ -34,8 +34,11 @@ const useAttention = () => {
         return;
       }
 
-      const endTime = Date.now();
-      const timeSpentSeconds = Math.round((endTime - tracking.startTime) / 1000);
+      const accumulated = tracking.accumulatedSeconds || 0;
+      const currentSegment = tracking.paused
+        ? 0
+        : Math.round((Date.now() - tracking.startTime) / 1000);
+      const timeSpentSeconds = accumulated + currentSegment;
 
       delete contentTimerRef.current[contentId];
 
@@ -64,8 +67,11 @@ const useAttention = () => {
 
   // Pause tracking (e.g., user minimized tab)
   const pauseTracking = useCallback((contentId) => {
-    if (contentTimerRef.current[contentId]) {
-      contentTimerRef.current[contentId].paused = true;
+    const tracking = contentTimerRef.current[contentId];
+    if (tracking && !tracking.paused) {
+      const elapsed = Math.round((Date.now() - tracking.startTime) / 1000);
+      tracking.accumulatedSeconds = (tracking.accumulatedSeconds || 0) + elapsed;
+      tracking.paused = true;
     }
   }, []);
 

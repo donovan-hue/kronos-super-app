@@ -49,6 +49,28 @@ exports.trackInteraction = async (req, res) => {
   }
 };
 
+exports.getRecommendedProducts = async (req, res) => {
+  try {
+    const { limit = 20, page = 0 } = req.query;
+    const products = await recommendationService.recommendProducts(req.user.id, Number(limit), Number(page));
+    res.json({ products, page: Number(page) });
+  } catch (error) {
+    console.error('Error getting recommended products:', error);
+    res.status(500).json({ message: 'Error fetching product recommendations' });
+  }
+};
+
+exports.getRecommendedListings = async (req, res) => {
+  try {
+    const { limit = 20, page = 0 } = req.query;
+    const listings = await recommendationService.recommendListings(req.user.id, Number(limit), Number(page));
+    res.json({ listings, page: Number(page) });
+  } catch (error) {
+    console.error('Error getting recommended listings:', error);
+    res.status(500).json({ message: 'Error fetching listing recommendations' });
+  }
+};
+
 exports.getUserProfile = async (req, res) => {
   try {
     const profile = await recommendationService.buildUserProfile(req.user.id);

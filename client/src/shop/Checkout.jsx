@@ -90,11 +90,6 @@ function Checkout({ cart }) {
             <CheckoutForm cart={cart} />
           </Elements>
 
-          <div className="mt-6 p-4 bg-blue-50 rounded">
-            <p className="text-sm text-blue-800">
-              💳 Use test card: 4242 4242 4242 4242 (any future expiry & CVC)
-            </p>
-          </div>
         </div>
       </div>
     </div>

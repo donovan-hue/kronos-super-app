@@ -2,20 +2,21 @@ const express = require('express');
 const router = express.Router();
 const tokenController = require('../controllers/tokenController');
 const { protect } = require('../middleware/auth');
+const { web3Protect } = require('../middleware/web3Auth');
 
-// Initialize wallet
-router.post('/wallet/init', protect, tokenController.initializeWallet);
+// Initialize wallet — requiere usuario Web3 verificado
+router.post('/wallet/init', web3Protect, tokenController.initializeWallet);
 
-// Get balance
+// Get balance — accesible por usuarios regulares y Web3
 router.get('/balance', protect, tokenController.getBalance);
 
-// Transfer tokens
-router.post('/transfer', protect, tokenController.transferTokens);
+// Transfer tokens — requiere usuario Web3 verificado
+router.post('/transfer', web3Protect, tokenController.transferTokens);
 
-// Staking
-router.post('/stake', protect, tokenController.stakeTokens);
+// Staking — requiere usuario Web3 verificado
+router.post('/stake', web3Protect, tokenController.stakeTokens);
 router.get('/stakes', protect, tokenController.getStakes);
-router.post('/claim-rewards', protect, tokenController.claimRewards);
+router.post('/claim-rewards', web3Protect, tokenController.claimRewards);
 
 // Attention tracking
 router.post('/track-attention', protect, tokenController.trackAttention);

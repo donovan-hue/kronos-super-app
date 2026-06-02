@@ -1,12 +1,21 @@
 const express = require('express');
+const rateLimit = require('express-rate-limit');
 const { protect: auth } = require('../middleware/auth');
 const { uploadVideo } = require('../middleware/upload');
 const videoController = require('../controllers/videoController');
 
 const router = express.Router();
 
+const uploadLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  limit: 10,
+  message: { error: 'Too many video uploads. Try again in an hour.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 // Upload video
-router.post('/', auth, uploadVideo.single('video'), videoController.uploadVideo);
+router.post('/', auth, uploadLimiter, uploadVideo.single('video'), videoController.uploadVideo);
 
 // Get videos
 router.get('/public', videoController.getPublicVideos);

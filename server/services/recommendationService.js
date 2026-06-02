@@ -208,6 +208,59 @@ class RecommendationService {
     return seen;
   }
 
+  // Recommend products based on user interest profile
+  async recommendProducts(userId, limit = 20, page = 0) {
+    const Product = require('../models/Product');
+    const profile = await this.buildUserProfile(userId);
+    const seenIds = await this.getSeenIds(userId, 'product');
+
+    const topTags = profile.sortedTags.slice(0, 10).map(t => t.tag);
+    const topSellers = profile.topAuthors;
+
+    const query = { _id: { $nin: seenIds } };
+    if (topTags.length > 0) {
+      query.$or = [
+        { category: { $in: topTags } },
+        { seller: { $in: topSellers } },
+      ];
+    }
+
+    const products = await Product.find(query)
+      .sort({ createdAt: -1 })
+      .skip(page * limit)
+      .limit(limit)
+      .populate('seller', 'username avatar')
+      .lean();
+
+    return products;
+  }
+
+  // Recommend marketplace listings based on user interest profile
+  async recommendListings(userId, limit = 20, page = 0) {
+    const Listing = require('../models/Listing');
+    const profile = await this.buildUserProfile(userId);
+    const seenIds = await this.getSeenIds(userId, 'listing');
+
+    const topSellers = profile.topAuthors;
+
+    const query = {
+      _id: { $nin: seenIds },
+      status: 'active',
+    };
+    if (topSellers.length > 0) {
+      query.$or = [{ seller: { $in: topSellers } }];
+    }
+
+    const listings = await Listing.find(query)
+      .sort({ createdAt: -1 })
+      .skip(page * limit)
+      .limit(limit)
+      .populate('seller', 'username avatar')
+      .lean();
+
+    return listings;
+  }
+
   // Trending posts globally
   async getTrendingPosts(limit = 20) {
     const since = new Date(Date.now() - 48 * 60 * 60 * 1000);

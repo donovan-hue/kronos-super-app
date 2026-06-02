@@ -142,6 +142,7 @@ app.use('/api/feed', require('./routes/feed'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/multimedia', require('./routes/multimedia'));
 app.use('/api/checkout', require('./routes/checkout')); // Stripe payment routes
+app.use('/api/cart',     require('./routes/cart'));     // Carrito sincronizado
 app.use('/api/tokens', require('./routes/tokens')); // Kronos Token
 app.use('/api/stories', require('./routes/stories')); // Stories 24h
 app.use('/api/admin', require('./routes/admin')); // Admin Dashboard

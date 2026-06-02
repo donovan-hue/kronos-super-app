@@ -1,8 +1,14 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef, useCallback } from 'react';
+import axios from 'axios';
 
 const CartContext = createContext(null);
 
 const CART_STORAGE_KEY = 'kronos_cart';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+
+function getToken() {
+  return localStorage.getItem('token');
+}
 
 export function CartProvider({ children }) {
   const [cart, setCart] = useState(() => {
@@ -14,9 +20,44 @@ export function CartProvider({ children }) {
     }
   });
 
+  const syncTimerRef = useRef(null);
+  const initialLoadDone = useRef(false);
+
+  // On mount: load cart from server if authenticated, merging with localStorage
+  useEffect(() => {
+    if (initialLoadDone.current) return;
+    initialLoadDone.current = true;
+
+    const token = getToken();
+    if (!token) return;
+
+    axios
+      .get(`${API_URL}/cart`, { headers: { Authorization: `Bearer ${token}` } })
+      .then(({ data }) => {
+        if (data.success && Array.isArray(data.items) && data.items.length > 0) {
+          setCart(data.items);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  // Debounced sync to server on cart changes
+  const syncToServer = useCallback((items) => {
+    const token = getToken();
+    if (!token) return;
+
+    if (syncTimerRef.current) clearTimeout(syncTimerRef.current);
+    syncTimerRef.current = setTimeout(() => {
+      axios
+        .put(`${API_URL}/cart`, { items }, { headers: { Authorization: `Bearer ${token}` } })
+        .catch(() => {});
+    }, 800);
+  }, []);
+
   useEffect(() => {
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
-  }, [cart]);
+    syncToServer(cart);
+  }, [cart, syncToServer]);
 
   const addToCart = (item) => {
     setCart((prev) => {
@@ -44,7 +85,15 @@ export function CartProvider({ children }) {
     );
   };
 
-  const clearCart = () => setCart([]);
+  const clearCart = () => {
+    setCart([]);
+    const token = getToken();
+    if (token) {
+      axios
+        .delete(`${API_URL}/cart`, { headers: { Authorization: `Bearer ${token}` } })
+        .catch(() => {});
+    }
+  };
 
   const totalItems = cart.reduce((sum, i) => sum + i.quantity, 0);
   const totalPrice = cart.reduce((sum, i) => sum + i.price * i.quantity, 0);

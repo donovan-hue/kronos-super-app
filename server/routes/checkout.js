@@ -98,12 +98,23 @@ router.post('/food', protect, async (req, res) => {
       return res.status(400).json({ error: 'No items in order' });
     }
 
+    const totalAmount = items.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0) + (deliveryFee || 0);
+    const newOrder = await Order.create({
+      customer: req.user.id,
+      restaurant,
+      items: items.map(i => ({ name: i.name, quantity: i.quantity || 1, price: i.price })),
+      totalAmount,
+      deliveryAddress,
+      deliveryFee: deliveryFee || 0,
+      paymentMethod: 'credit_card',
+    });
+
     const order = {
       items,
       restaurant,
       deliveryAddress,
       deliveryFee: deliveryFee || 0,
-      _id: null, // Will be set after order creation
+      _id: newOrder._id,
     };
 
     const session = await createFoodCheckoutSession(order, customerEmail);

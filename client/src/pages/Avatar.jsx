@@ -36,6 +36,7 @@ function AvatarCanvas({ avatar }) {
   const hairItem = avatar.equippedItems?.find(e => e.category === 'hair');
   const accessoryItem = avatar.equippedItems?.find(e => e.category === 'accessory');
   const outfitItem = avatar.equippedItems?.find(e => e.category === 'outfit');
+  const skinItem = avatar.equippedItems?.find(e => e.category === 'skin');
 
   const bgColor = bgItem ? '#1a0a2e' : (avatar.backgroundColor || '#7c3aed');
   const bgEmoji = bgItem?.itemId?.imageEmoji || null;
@@ -94,7 +95,7 @@ function AvatarCanvas({ avatar }) {
         zIndex: 2,
         marginTop: hairItem ? 20 : 0,
       }}>
-        😊
+        {skinItem?.itemId?.imageEmoji || '😊'}
       </div>
 
       {/* Accessory overlay */}
@@ -553,7 +554,11 @@ export default function AvatarPage() {
 
                   return (
                     <GlassCard key={item._id} padding={12} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-                      <div style={{ fontSize: 44, lineHeight: 1 }}>{item.imageEmoji}</div>
+                      <div style={{ fontSize: 44, lineHeight: 1 }}>
+                        {item.imageUrl
+                          ? <img src={item.imageUrl} alt={item.name} style={{ width: 44, height: 44, objectFit: 'contain' }} />
+                          : item.imageEmoji}
+                      </div>
                       <div style={{ fontWeight: 700, fontSize: 13, textAlign: 'center' }}>{item.name}</div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap', justifyContent: 'center' }}>
                         <span style={styles.rarityBadge(item.rarity)}>{RARITY_LABELS[item.rarity]}</span>
