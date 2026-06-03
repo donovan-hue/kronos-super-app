@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const AuthContext = createContext();
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'https://kronos-api-qq0o.onrender.com/api';
 
 // Timeout de 20 segundos para que no quede colgado si Render está despertando
 const api = axios.create({ baseURL: API_URL, timeout: 20000 });

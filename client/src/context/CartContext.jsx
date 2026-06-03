@@ -4,7 +4,7 @@ import axios from 'axios';
 const CartContext = createContext(null);
 
 const CART_STORAGE_KEY = 'kronos_cart';
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'https://kronos-api-qq0o.onrender.com/api';
 
 function getToken() {
   return localStorage.getItem('token');
