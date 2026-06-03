@@ -14,7 +14,7 @@ export const useAudioRoom = () => {
   // Initialize Socket.io connection
   useEffect(() => {
     if (!socket) {
-      socket = io(process.env.REACT_APP_API_URL || 'http://localhost:5000', {
+      socket = io(process.env.REACT_APP_SOCKET_URL || 'https://kronos-api-qq0o.onrender.com', {
         transports: ['websocket', 'polling'],
         reconnection: true,
         reconnectionDelay: 1000,
