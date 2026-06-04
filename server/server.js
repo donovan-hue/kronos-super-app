@@ -13,6 +13,18 @@ const rateLimit = require('express-rate-limit');
 const compression = require('compression');
 const morgan = require('morgan');
 
+// Verificar variables de entorno críticas al arranque
+const REQUIRED_ENV = ['MONGODB_URI', 'JWT_SECRET'];
+REQUIRED_ENV.forEach(key => {
+  if (!process.env[key]) {
+    console.error(`[FATAL] Variable de entorno requerida no configurada: ${key}`);
+  } else {
+    console.log(`[ENV] ${key}: OK`);
+  }
+});
+console.log(`[ENV] CLIENT_URL: ${process.env.CLIENT_URL || '(no configurado — usando regex Vercel)'}`);
+console.log(`[ENV] NODE_ENV: ${process.env.NODE_ENV || 'development'}`);
+
 // Conectar a MongoDB (with timeout)
 connectDB();
 
@@ -52,38 +64,7 @@ const io = socketIo(server, {
   }
 });
 
-// ============= SECURITY & PERFORMANCE MIDDLEWARE =============
-
-// HTTP security headers
-app.use(helmet());
-
-// Gzip compression for all responses
-app.use(compression());
-
-// Request logging
-app.use(morgan('combined'));
-
-// General rate limit: 100 requests per 15 minutes
-const generalLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: { error: 'Demasiadas solicitudes. Intenta de nuevo en unos minutos.' }
-});
-app.use(generalLimiter);
-
-// Auth-specific rate limit: solo en login (brute-force protection)
-const authLoginLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 20,
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: { message: 'Demasiados intentos de login. Espera 15 minutos.' }
-});
-app.use('/api/auth/login', authLoginLimiter);
-
-// =============================================================
+// ============= CORS PRIMERO — antes de cualquier middleware que pueda rechazar =============
 
 // CORS — producción + desarrollo
 const corsOptions = {
@@ -102,6 +83,7 @@ const corsOptions = {
     if (whitelist.includes(origin) || isVercel) {
       callback(null, true);
     } else {
+      console.warn(`[CORS] Origen rechazado: ${origin}`);
       callback(new Error(`CORS: origen no permitido — ${origin}`));
     }
   },
@@ -113,6 +95,39 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions)); // Pre-flight para todas las rutas
+
+// ============= SECURITY & PERFORMANCE MIDDLEWARE =============
+
+// HTTP security headers
+app.use(helmet());
+
+// Gzip compression for all responses
+app.use(compression());
+
+// Request logging
+app.use(morgan('combined'));
+
+// General rate limit: 100 requests per 15 minutes
+const generalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 200,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Demasiadas solicitudes. Intenta de nuevo en unos minutos.' }
+});
+app.use(generalLimiter);
+
+// Auth-specific rate limit: solo en login (brute-force protection)
+const authLoginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Demasiados intentos de login. Espera 15 minutos.' }
+});
+app.use('/api/auth/login', authLoginLimiter);
+
+// ============================================================
 
 // ── Stripe webhooks: necesitan el body en raw ANTES de express.json() ──
 const subscriptionRoutes = require('./routes/subscription');
