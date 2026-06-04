@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useContext, Component } from 'react';
+import React, { Suspense, lazy, useContext, Component, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
@@ -96,6 +96,14 @@ function P({ children }) {
 }
 
 function App() {
+  // Wake up the Render server (free tier sleeps after 15 min inactivity)
+  useEffect(() => {
+    const API = process.env.REACT_APP_API_URL
+      ? process.env.REACT_APP_API_URL.replace('/api', '')
+      : 'https://kronos-api-qq0o.onrender.com';
+    fetch(`${API}/api/health`, { signal: AbortSignal.timeout(60000) }).catch(() => {});
+  }, []);
+
   return (
     <Router>
       <ExpandableBubbleNav />

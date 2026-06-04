@@ -41,9 +41,15 @@ export const AuthProvider = ({ children }) => {
 
       return { success: true };
     } catch (err) {
-      const message = err.code === 'ECONNABORTED'
-        ? 'El servidor tardó demasiado. Intenta de nuevo en unos segundos.'
-        : err.response?.data?.message || 'Error al registrarse';
+      let message;
+      if (err.code === 'ECONNABORTED') {
+        message = 'El servidor tardó demasiado. Vuelve a intentarlo en unos segundos.';
+      } else if (!err.response) {
+        // Network error / server sleeping
+        message = 'El servidor está despertando. Espera 30 segundos e intenta de nuevo.';
+      } else {
+        message = err.response.data?.message || 'Error al registrarse';
+      }
       setError(message);
       return { success: false, message };
     } finally {
@@ -69,9 +75,14 @@ export const AuthProvider = ({ children }) => {
 
       return { success: true };
     } catch (err) {
-      const message = err.code === 'ECONNABORTED'
-        ? 'El servidor tardó demasiado. Intenta de nuevo en unos segundos.'
-        : err.response?.data?.message || 'Email o contraseña incorrectos';
+      let message;
+      if (err.code === 'ECONNABORTED') {
+        message = 'El servidor tardó demasiado. Vuelve a intentarlo en unos segundos.';
+      } else if (!err.response) {
+        message = 'El servidor está despertando. Espera 30 segundos e intenta de nuevo.';
+      } else {
+        message = err.response.data?.message || 'Email o contraseña incorrectos';
+      }
       setError(message);
       return { success: false, message };
     } finally {
