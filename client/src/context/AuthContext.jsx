@@ -4,9 +4,36 @@ import axios from 'axios';
 export const AuthContext = createContext();
 
 const API_URL = process.env.REACT_APP_API_URL || 'https://kronos-api-qq0o.onrender.com/api';
+const API_ORIGIN = API_URL.replace(/\/api\/?$/, '');
 
-// Timeout de 20 segundos para que no quede colgado si Render está despertando
-const api = axios.create({ baseURL: API_URL, timeout: 20000 });
+// Timeout de 60s para sobrevivir el arranque en frío de Render (free tier ~30-60s)
+const api = axios.create({ baseURL: API_URL, timeout: 60000 });
+
+// Despierta el servidor: pega a /api/health hasta que responda 200 o se agote el tiempo.
+const wakeServer = async (maxWaitMs = 50000) => {
+  const deadline = Date.now() + maxWaitMs;
+  while (Date.now() < deadline) {
+    try {
+      const res = await fetch(`${API_ORIGIN}/api/health`, { signal: AbortSignal.timeout(10000) });
+      if (res.ok) return true; // 200 = servidor + DB listos
+    } catch {
+      /* sigue intentando */
+    }
+    await new Promise(r => setTimeout(r, 2000));
+  }
+  return false;
+};
+
+// Traduce un error de axios a un mensaje claro para el usuario.
+const messageFromError = (err, fallback) => {
+  if (err.code === 'ECONNABORTED') {
+    return 'El servidor tardó demasiado (arranque en frío). Vuelve a intentarlo.';
+  }
+  if (!err.response) {
+    return 'No se pudo conectar con el servidor. Revisa tu conexión e intenta de nuevo.';
+  }
+  return err.response.data?.message || fallback;
+};
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -23,72 +50,58 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  // Registrar
-  const register = useCallback(async (username, email, password, firstName, lastName, phone) => {
+  // Guarda la sesión tras un login/registro exitoso
+  const persistSession = useCallback((authToken, authUser) => {
+    localStorage.setItem('token', authToken);
+    setToken(authToken);
+    setUser(authUser);
+    setupAxios(authToken);
+  }, [setupAxios]);
+
+  // Llama a un endpoint de auth con wake + reintento automático:
+  // si no hay respuesta (servidor dormido/red), despierta el server y reintenta una vez.
+  const authRequest = useCallback(async (endpoint, body, fallbackMsg) => {
     setLoading(true);
     setError(null);
     try {
-      const body = { username, password, firstName, lastName };
-      if (email) body.email = email;
-      if (phone) body.phone = phone;
-      const response = await api.post('/auth/register', body);
-
-      const { token: authToken, user: authUser } = response.data;
-      localStorage.setItem('token', authToken);
-      setToken(authToken);
-      setUser(authUser);
-      setupAxios(authToken);
-
+      let response;
+      try {
+        response = await api.post(endpoint, body);
+      } catch (err) {
+        // Sin respuesta o timeout: pudo ser arranque en frío. Despierta y reintenta 1 vez.
+        if (!err.response || err.code === 'ECONNABORTED') {
+          await wakeServer();
+          response = await api.post(endpoint, body);
+        } else {
+          throw err;
+        }
+      }
+      persistSession(response.data.token, response.data.user);
       return { success: true };
     } catch (err) {
-      let message;
-      if (err.code === 'ECONNABORTED') {
-        message = 'El servidor tardó demasiado. Vuelve a intentarlo en unos segundos.';
-      } else if (!err.response) {
-        // Network error / server sleeping
-        message = 'El servidor está despertando. Espera 30 segundos e intenta de nuevo.';
-      } else {
-        message = err.response.data?.message || 'Error al registrarse';
-      }
+      const message = messageFromError(err, fallbackMsg);
       setError(message);
       return { success: false, message };
     } finally {
       setLoading(false);
     }
-  }, [setupAxios]);
+  }, [persistSession]);
+
+  // Registrar
+  const register = useCallback((username, email, password, firstName, lastName, phone) => {
+    const body = { username, password, firstName, lastName };
+    if (email) body.email = email;
+    if (phone) body.phone = phone;
+    return authRequest('/auth/register', body, 'Error al registrarse');
+  }, [authRequest]);
 
   // Login
-  const login = useCallback(async (email, password, phone) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const body = { password };
-      if (email) body.email = email;
-      if (phone) body.phone = phone;
-      const response = await api.post('/auth/login', body);
-
-      const { token: authToken, user: authUser } = response.data;
-      localStorage.setItem('token', authToken);
-      setToken(authToken);
-      setUser(authUser);
-      setupAxios(authToken);
-
-      return { success: true };
-    } catch (err) {
-      let message;
-      if (err.code === 'ECONNABORTED') {
-        message = 'El servidor tardó demasiado. Vuelve a intentarlo en unos segundos.';
-      } else if (!err.response) {
-        message = 'El servidor está despertando. Espera 30 segundos e intenta de nuevo.';
-      } else {
-        message = err.response.data?.message || 'Email o contraseña incorrectos';
-      }
-      setError(message);
-      return { success: false, message };
-    } finally {
-      setLoading(false);
-    }
-  }, [setupAxios]);
+  const login = useCallback((email, password, phone) => {
+    const body = { password };
+    if (email) body.email = email;
+    if (phone) body.phone = phone;
+    return authRequest('/auth/login', body, 'Email o contraseña incorrectos');
+  }, [authRequest]);
 
   // Logout
   const logout = useCallback(() => {
@@ -114,9 +127,14 @@ export const AuthProvider = ({ children }) => {
       setUser(response.data.user);
       return response.data.user;
     } catch (err) {
+      // Token inválido/expirado: limpiar la sesión para no quedar con
+      // isAuthenticated=true y user=null (estado que deja pantallas a medias).
+      if (err.response?.status === 401) {
+        logout();
+      }
       return null;
     }
-  }, []);
+  }, [logout]);
 
   // Inicializar con token guardado
   React.useEffect(() => {

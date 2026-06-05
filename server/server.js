@@ -36,27 +36,48 @@ const server = http.createServer(app);
 app.set('trust proxy', 1);
 
 // Health check ANTES de cualquier middleware (rate limiter, auth, etc.)
+// Devuelve 503 si la base de datos NO está conectada para que Render y el
+// wake-up ping del cliente reflejen el estado REAL (antes mentía con 200).
 app.get('/api/health', (req, res) => {
   const mongoose = require('mongoose');
-  const dbState = mongoose.connection.readyState;
-  const dbStatus = dbState === 1 ? 'connected' : 'disconnected';
-  res.status(200).json({
-    status: 'ok',
+  const dbConnected = mongoose.connection.readyState === 1;
+  res.status(dbConnected ? 200 : 503).json({
+    status: dbConnected ? 'ok' : 'degraded',
     uptime: process.uptime(),
-    db: dbStatus,
+    db: dbConnected ? 'connected' : 'disconnected',
     memory: process.memoryUsage().heapUsed,
     timestamp: new Date().toISOString()
   });
 });
 
+// ============= CORS — origen permitido (compartido por Express y Socket.io) =============
+
+// Normaliza un origin/URL para comparar: minúsculas y sin barra final.
+const normalizeOrigin = (value) => (value || '').trim().toLowerCase().replace(/\/+$/, '');
+
+// CLIENT_URL puede ser una lista separada por comas: "https://midominio.com,https://www.midominio.com"
+const allowedOrigins = (process.env.CLIENT_URL || '')
+  .split(',')
+  .map(normalizeOrigin)
+  .filter(Boolean)
+  .concat(['http://localhost:3000', 'http://localhost:3001']);
+
+// ¿El origin está permitido? (whitelist exacta o cualquier preview *.vercel.app)
+const isAllowedOrigin = (origin) => {
+  if (!origin) return true; // apps móviles, Postman, server-to-server
+  const o = normalizeOrigin(origin);
+  if (allowedOrigins.includes(o)) return true;
+  return /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o);
+};
+
+console.log(`[CORS] Orígenes permitidos: ${allowedOrigins.join(', ')} (+ *.vercel.app)`);
+
 // Socket.io con CORS
 const io = socketIo(server, {
   cors: {
     origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-      const allowed = [process.env.CLIENT_URL, 'http://localhost:3000', 'http://localhost:3001'].filter(Boolean);
-      const isVercel = /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(origin);
-      if (allowed.includes(origin) || isVercel) return callback(null, true);
+      if (isAllowedOrigin(origin)) return callback(null, true);
+      console.warn(`[Socket CORS] Origen rechazado: ${origin}`);
       callback(new Error('Socket CORS: origen no permitido'));
     },
     methods: ['GET', 'POST'],
@@ -66,21 +87,9 @@ const io = socketIo(server, {
 
 // ============= CORS PRIMERO — antes de cualquier middleware que pueda rechazar =============
 
-// CORS — producción + desarrollo
 const corsOptions = {
   origin: (origin, callback) => {
-    // Peticiones sin origin (apps móviles, Postman, server-to-server)
-    if (!origin) return callback(null, true);
-
-    const whitelist = [
-      process.env.CLIENT_URL,
-      'http://localhost:3000',
-      'http://localhost:3001',
-    ].filter(Boolean);
-
-    const isVercel = /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(origin);
-
-    if (whitelist.includes(origin) || isVercel) {
+    if (isAllowedOrigin(origin)) {
       callback(null, true);
     } else {
       console.warn(`[CORS] Origen rechazado: ${origin}`);

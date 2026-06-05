@@ -1,12 +1,22 @@
+const mongoose = require('mongoose');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const emailService = require('../services/emailService');
 const { createNotification } = require('./notificationController');
 
+// ¿La base de datos está conectada? Evita que las queries cuelguen ~10s en buffer
+// cuando Mongo no responde y devuelve un mensaje accionable al instante.
+const isDbDown = () => mongoose.connection.readyState !== 1;
+const DB_DOWN_MESSAGE = 'Base de datos no disponible, intenta de nuevo en unos segundos.';
+
 // Registrar usuario
 exports.register = async (req, res) => {
   try {
+    if (isDbDown()) {
+      return res.status(503).json({ message: DB_DOWN_MESSAGE });
+    }
+
     const { username, email, phone, password, firstName, lastName } = req.body;
 
     if (!email && !phone) {
@@ -62,13 +72,17 @@ exports.register = async (req, res) => {
     });
   } catch (error) {
     console.error('[Register] Error:', error.name, error.message);
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: 'No se pudo completar el registro. Intenta de nuevo.' });
   }
 };
 
 // Login
 exports.login = async (req, res) => {
   try {
+    if (isDbDown()) {
+      return res.status(503).json({ message: DB_DOWN_MESSAGE });
+    }
+
     const { email, phone, password } = req.body;
 
     if (!password || (!email && !phone)) {
@@ -103,7 +117,8 @@ exports.login = async (req, res) => {
       }
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('[Login] Error:', error.name, error.message);
+    res.status(500).json({ message: 'No se pudo iniciar sesión. Intenta de nuevo.' });
   }
 };
 

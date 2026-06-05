@@ -106,22 +106,22 @@ function App() {
 
   return (
     <Router>
-      <ExpandableBubbleNav />
-      <NotificationToast />
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          duration: 4000,
-          style: {
-            background: 'rgba(255,255,255,0.98)',
-            color: '#0a0a14',
-            border: '1.5px solid rgba(79,172,254,0.2)',
-            backdropFilter: 'blur(20px)',
-            boxShadow: '0 4px 20px rgba(79,172,254,0.15)',
-          }
-        }}
-      />
       <ErrorBoundary>
+        <ExpandableBubbleNav />
+        <NotificationToast />
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: 'rgba(255,255,255,0.98)',
+              color: '#0a0a14',
+              border: '1.5px solid rgba(79,172,254,0.2)',
+              backdropFilter: 'blur(20px)',
+              boxShadow: '0 4px 20px rgba(79,172,254,0.15)',
+            }
+          }}
+        />
         <Suspense fallback={LOADING}>
           <Routes>
             {/* Públicas */}
