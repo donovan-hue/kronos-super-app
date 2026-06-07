@@ -1,0 +1,256 @@
+/* ============================================================
+   KRONOSPACE · Sistema de diseño metálico (plata sobre negro)
+   Fuentes: Space Grotesk (display) + Manrope (texto)
+   Gradientes SVG compartidos: #ksV, #ksDiag, #ksSph, #ksSphereSm
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+
+:root {
+  /* fondo "estudio" */
+  --ks-bg: radial-gradient(135% 105% at 50% 32%, #141517 0%, #0a0a0b 48%, #030304 100%);
+  /* tipografía metálica */
+  --ks-text-grad: linear-gradient(180deg, #ffffff 0%, #eef1f4 22%, #a9aeb5 48%, #7c8087 53%, #c6cbd2 70%, #f4f6f8 100%);
+  /* tintas */
+  --ks-ink: #e9edf1;
+  --ks-dim: #9aa0a7;
+  --ks-faint: #5e636a;
+  /* líneas y paneles */
+  --ks-line: rgba(180, 190, 200, 0.10);
+  --ks-line-strong: rgba(190, 200, 212, 0.22);
+  --ks-panel: linear-gradient(180deg, rgba(255, 255, 255, 0.018), rgba(255, 255, 255, 0.004));
+  --ks-panel-2: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+  /* relleno plata (CTA) */
+  --ks-silver: linear-gradient(180deg, #ffffff 0%, #dfe3e8 30%, #aeb4bb 60%, #cdd2d8 100%);
+  /* aro metálico conic (botones del abanico) */
+  --ks-metal: conic-gradient(from 138deg, #54585d 0%, #c9ced4 11%, #ffffff 19%, #9aa0a7 29%, #686c71 41%, #e9ecf0 54%, #b4b9c0 65%, #f5f7f9 77%, #7e8288 89%, #54585d 100%);
+  --ks-glow: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 7px rgba(186, 198, 212, 0.12));
+}
+
+/* ---------- utilidades base ---------- */
+.ks-root { font-family: 'Manrope', system-ui, sans-serif; color: var(--ks-ink); -webkit-font-smoothing: antialiased; }
+.ks-bg { background: var(--ks-bg); background-attachment: fixed; }
+
+.metal-text {
+  background: var(--ks-text-grad);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+}
+
+/* wordmark KRONO·SPACE */
+.wm { font-family: 'Space Grotesk', sans-serif; display: inline-flex; align-items: baseline; line-height: 1; letter-spacing: 0.01em; }
+.wm .k { font-weight: 700; }
+.wm .s { font-weight: 300; }
+
+.ks-h { font-family: 'Space Grotesk', sans-serif; font-weight: 600; letter-spacing: 0.01em; }
+.ks-tag { font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--ks-faint); font-weight: 600; }
+.ks-rule { height: 1px; background: linear-gradient(90deg, transparent, rgba(190, 200, 212, 0.45), transparent); }
+
+/* iconos de línea: heredan el plateado del gradiente SVG */
+.ks-ico { fill: none; stroke: url(#ksV); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+.ks-ico.solid { stroke-width: 1.5; }
+
+/* ---------- tarjetas ---------- */
+.card {
+  border: 1px solid var(--ks-line);
+  border-radius: 16px;
+  background: var(--ks-panel);
+  transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.2, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+.card.hover:hover {
+  transform: translateY(-3px);
+  border-color: var(--ks-line-strong);
+  box-shadow: 0 24px 50px -22px rgba(0, 0, 0, 0.9), 0 0 30px rgba(174, 186, 200, 0.06);
+}
+
+/* ---------- botones ---------- */
+.btn-metal {
+  font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.06em;
+  border: 0; border-radius: 12px; padding: 12px 18px; cursor: pointer;
+  background: var(--ks-silver); color: #15171a;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.7), 0 10px 24px -12px rgba(0, 0, 0, 0.8);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.btn-metal:hover { filter: brightness(1.06); transform: translateY(-1px); }
+.btn-metal:active { transform: translateY(0) scale(0.98); }
+
+.btn-ghost {
+  font-family: 'Manrope', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.04em;
+  border: 1px solid var(--ks-line-strong); border-radius: 12px; padding: 11px 18px; cursor: pointer;
+  background: transparent;
+}
+.btn-ghost > span { background: var(--ks-text-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.btn-ghost:hover { border-color: rgba(200, 210, 222, 0.4); }
+
+/* ---------- campos / placeholders de datos ---------- */
+.field {
+  border: 1px solid var(--ks-line); border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
+  padding: 12px 14px; display: flex; align-items: center; gap: 10px;
+  color: var(--ks-faint); font-size: 13px;
+}
+.field .ks-ico { width: 16px; height: 16px; flex-shrink: 0; }
+
+/* barras placeholder (los datos llegan como "—") */
+.ph-bar { height: 9px; border-radius: 6px; background: linear-gradient(90deg, rgba(190, 200, 212, 0.20), rgba(190, 200, 212, 0.05)); }
+.ph-bar.tall { height: 12px; }
+.ph-block { border-radius: 12px; background: linear-gradient(135deg, rgba(190, 200, 212, 0.10), rgba(120, 128, 138, 0.04)); border: 1px solid var(--ks-line); }
+.ph-amt { font-family: 'Space Grotesk', sans-serif; color: transparent; background: var(--ks-text-grad); -webkit-background-clip: text; background-clip: text; }
+
+/* avatar plateado */
+.avatar {
+  border-radius: 50%; display: grid; place-items: center; flex-shrink: 0;
+  background: radial-gradient(122% 120% at 32% 22%, #26282b 0%, #17181a 40%, #0b0c0d 78%);
+  border: 1px solid var(--ks-line-strong);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.16);
+}
+.avatar .ks-ico { width: 52%; height: 52%; opacity: 0.6; }
+
+/* chips / tabs */
+.chip {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.02em; white-space: nowrap;
+  padding: 6px 13px; border-radius: 20px; cursor: pointer;
+  border: 1px solid var(--ks-line); color: var(--ks-dim); background: rgba(255, 255, 255, 0.02);
+}
+.chip.on { border-color: transparent; background: var(--ks-silver); color: #15171a; }
+
+/* ---------- botón circular del abanico / topbar ---------- */
+.iconbtn {
+  width: 38px; height: 38px; border-radius: 11px; border: 1px solid var(--ks-line);
+  background: var(--ks-panel-2); display: grid; place-items: center; cursor: pointer; position: relative;
+  transition: border-color 0.3s ease;
+}
+.iconbtn:hover { border-color: var(--ks-line-strong); }
+.iconbtn .ks-ico { width: 20px; height: 20px; }
+.iconbtn.badge::after { content: ""; position: absolute; top: 7px; right: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--ks-silver); box-shadow: 0 0 6px rgba(220, 226, 232, 0.6); }
+
+/* ============================================================
+   MENÚ ABANICO (launcher radial flotante)
+   ============================================================ */
+.fan { position: relative; }
+.fan .scrim { position: fixed; inset: 0; background: radial-gradient(circle at center, rgba(0, 0, 0, 0.35), transparent 70%); opacity: 0; pointer-events: none; transition: opacity 0.5s ease; }
+.fan.open .scrim { opacity: 1; }
+
+.orb {
+  position: absolute; left: 50%; top: 50%; border: 0; padding: 2.5px; cursor: pointer; border-radius: 50%;
+  background: var(--ks-metal);
+  box-shadow: 0 16px 34px -10px rgba(0, 0, 0, 0.85), 0 2px 6px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.035);
+  transition: transform 0.7s cubic-bezier(0.2, 1.12, 0.32, 1), opacity 0.5s ease, filter 0.5s ease;
+}
+.orb .face {
+  width: 100%; height: 100%; border-radius: 50%; display: grid; place-items: center;
+  background: radial-gradient(122% 120% at 32% 22%, #26282b 0%, #17181a 36%, #0b0c0d 72%, #050506 100%);
+  box-shadow: inset 0 1.5px 1.5px rgba(255, 255, 255, 0.22), inset 0 -12px 22px rgba(0, 0, 0, 0.65);
+}
+.orb .ks-ico { width: 44%; height: 44%; }
+.orb .olabel {
+  position: absolute; left: 50%; top: calc(100% + 8px); transform: translateX(-50%);
+  font-size: 9.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; white-space: nowrap;
+  background: linear-gradient(180deg, #fdfdfe, #cdd2d8 46%, #888d93 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  opacity: 0; transition: opacity 0.4s ease;
+}
+.fan.open .orb .olabel { opacity: 1; }
+
+.orb.sat {
+  width: 56px; height: 56px;
+  transform: translate(-50%, -50%) scale(0.2);
+  opacity: 0; filter: blur(6px); pointer-events: none; z-index: 2;
+}
+.fan.open .orb.sat {
+  transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1);
+  opacity: 1; filter: blur(0); pointer-events: auto;
+}
+.fan.open .orb.sat:hover { transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1.08); }
+
+.orb.home {
+  width: 66px; height: 66px; transform: translate(-50%, -50%); z-index: 6;
+  box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.05), 0 0 26px rgba(176, 186, 198, 0.16);
+}
+.orb.home:hover { transform: translate(-50%, -50%) scale(1.04); }
+.fan.open .orb.home { background: var(--ks-metal); }
+.orb.home .ks-ico { width: 42%; height: 42%; transition: transform 0.6s cubic-bezier(0.2, 1.1, 0.3, 1); }
+.fan.open .orb.home .ks-ico { transform: rotate(360deg) scale(0.92); }
+
+/* ---------- marco de teléfono ---------- */
+.ks-phone {
+  width: 300px; height: 620px; border-radius: 40px; position: relative; overflow: hidden;
+  background: #060708;
+  border: 1px solid var(--ks-line-strong);
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.9), inset 0 0 0 6px #0c0d0f, 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+.ks-phone .statusbar { height: 38px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; }
+.ks-phone .sb-time { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 13px; }
+.ks-phone .sb-icons { display: flex; align-items: center; gap: 6px; }
+.ks-phone .sb-icons svg { height: 11px; }
+.ks-phone .screen-body { height: calc(620px - 38px); overflow: hidden; position: relative; }
+.ks-phone .notch { position: absolute; top: 9px; left: 50%; transform: translateX(-50%); width: 92px; height: 22px; border-radius: 14px; background: #060708; z-index: 30; }
+
+/* contenido de pantalla */
+.scrn { height: 100%; padding: 14px 16px; display: flex; flex-direction: column; overflow: hidden; }
+.scrn-h { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.scrn-title { font-size: 19px; }
+
+/* barra inferior de navegación (dentro del teléfono) */
+.tabbar { margin-top: auto; display: flex; align-items: center; justify-content: space-around; padding-top: 10px; border-top: 1px solid var(--ks-line); }
+.tabbar .ks-ico { width: 22px; height: 22px; opacity: 0.45; }
+.tabbar .tab.on .ks-ico { opacity: 1; }
+.tabbar .tab.center .ks-ico { opacity: 1; }
+.tabbar .tab.center { width: 44px; height: 44px; border-radius: 14px; background: var(--ks-metal); padding: 2px; display: grid; place-items: center; }
+.tabbar .tab.center .inner { width: 100%; height: 100%; border-radius: 12px; background: radial-gradient(122% 120% at 32% 22%, #26282b, #0b0c0d); display: grid; place-items: center; }
+
+/* helpers de layout */
+.row { display: flex; align-items: center; gap: 10px; }
+.col { display: flex; flex-direction: column; }
+.between { justify-content: space-between; }
+.list-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(180, 190, 200, 0.05); }
+.stat-num { font-family: 'Space Grotesk', sans-serif; font-weight: 600; }
+
+/* ============================================================
+   SHELL WEB (escritorio) · topbar + stage
+   ============================================================ */
+.webshell {
+  border: 1px solid var(--ks-line); border-radius: 22px; overflow: hidden;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.014), transparent);
+}
+.topbar {
+  display: flex; align-items: center; gap: 18px; padding: 12px 18px;
+  border-bottom: 1px solid var(--ks-line);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand .logo { width: 38px; height: 38px; }
+.brand .logo svg { width: 100%; height: 100%; }
+.brand .wm { font-size: 20px; }
+.searchbar {
+  flex: 1; max-width: 460px; display: flex; align-items: center; gap: 10px;
+  border: 1px solid var(--ks-line); border-radius: 12px; padding: 9px 14px;
+  background: rgba(255, 255, 255, 0.022);
+}
+.searchbar .ks-ico { width: 17px; height: 17px; opacity: 0.7; }
+.tb-actions { display: flex; align-items: center; gap: 9px; margin-left: auto; }
+.av-40 { width: 40px; height: 40px; }
+.stage {
+  position: relative; min-height: 380px; display: grid; place-items: center;
+  background: radial-gradient(120% 90% at 50% 0%, rgba(180, 192, 206, 0.05), transparent 60%);
+}
+
+/* ============================================================
+   CHROME DEL SHOWCASE
+   ============================================================ */
+.ks-page { min-height: 100vh; padding: 40px 20px 80px; }
+.ks-hero { max-width: 1120px; margin: 0 auto 40px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.ks-lockup { display: flex; align-items: center; gap: 26px; }
+.ks-lockup .ks-mark { width: 92px; height: 92px; filter: var(--ks-glow); }
+.ks-lockup .wm { font-size: 50px; }
+.ks-hero .ks-rule { width: 320px; max-width: 70%; margin: 26px 0 14px; }
+.ks-hero .ks-domain { margin-top: 6px; font-size: 11px; letter-spacing: 0.28em; color: #565b62; }
+.ks-toggle { display: flex; gap: 8px; justify-content: center; margin-top: 22px; }
+.ks-shell-wrap { max-width: 1120px; margin: 0 auto 44px; }
+.ks-grid { display: flex; flex-wrap: wrap; gap: 36px 30px; justify-content: center; max-width: 1200px; margin: 0 auto; }
+.phone-cell { display: flex; flex-direction: column; align-items: center; }
+.phone-label { margin-top: 14px; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ks-faint); font-weight: 600; }
+
+@media (max-width: 640px) {
+  .ks-lockup { flex-direction: column; gap: 16px; }
+  .ks-lockup .wm { font-size: 38px; }
+}
