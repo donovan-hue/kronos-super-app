@@ -2,7 +2,7 @@
  * KRONOS BUILDER ALPHA AGENT
  * Picks the next pending task from tasks.json and implements it autonomously.
  * Focuses on: features, UI improvements, API improvements.
- * Skips security and test tasks (those go to Bug Fixer Beta).
+ * Skips security and test tasks (those go to Pelos).
  */
 
 const fs = require('fs');

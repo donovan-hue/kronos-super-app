@@ -1,5 +1,5 @@
 /**
- * KRONOS BUG FIXER BETA AGENT
+ * KRONOS PELOS AGENT
  * Picks pending security and test tasks from tasks.json and implements them.
  * Also runs automated checks to detect and auto-fix common issues.
  */
@@ -10,11 +10,11 @@ const { execSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..');
 const TASKS_FILE = path.join(__dirname, 'tasks.json');
-const LOG_FILE = path.join(__dirname, 'logs', 'bug-fixer-beta.log');
+const LOG_FILE = path.join(__dirname, 'logs', 'pelos.log');
 const DONE_FILE = path.join(__dirname, 'logs', 'completed.json');
 
 function log(msg) {
-  const line = `[${new Date().toISOString()}] [BUG-FIXER-BETA] ${msg}`;
+  const line = `[${new Date().toISOString()}] [PELOS] ${msg}`;
   console.log(line);
   fs.mkdirSync(path.dirname(LOG_FILE), { recursive: true });
   fs.appendFileSync(LOG_FILE, line + '\n');
@@ -41,7 +41,7 @@ function markTaskStatus(taskId, status, notes = '') {
 
 function recordCompleted(task) {
   const list = fs.existsSync(DONE_FILE) ? JSON.parse(fs.readFileSync(DONE_FILE, 'utf8')) : [];
-  list.push({ ...task, completedAt: new Date().toISOString(), agent: 'bug-fixer-beta' });
+  list.push({ ...task, completedAt: new Date().toISOString(), agent: 'pelos' });
   fs.writeFileSync(DONE_FILE, JSON.stringify(list, null, 2));
 }
 
@@ -481,7 +481,7 @@ function pickNextTask(tasks) {
 
 function run(options = {}) {
   const { taskId = null, autoFixOnly = false, dryRun = false } = options;
-  log('=== BUG FIXER BETA iniciando ===');
+  log('=== PELOS iniciando ===');
 
   // Auto-detect and fix issues first
   log('Ejecutando detección automática de problemas...');
@@ -500,7 +500,7 @@ function run(options = {}) {
   }
 
   if (autoFixOnly) {
-    log('=== BUG FIXER BETA finalizado (auto-fix only) ===');
+    log('=== PELOS finalizado (auto-fix only) ===');
     return;
   }
 
@@ -516,7 +516,7 @@ function run(options = {}) {
 
   if (!task) {
     log('No hay tareas de seguridad/test pendientes.');
-    log('=== BUG FIXER BETA finalizado ===');
+    log('=== PELOS finalizado ===');
     return;
   }
 
@@ -545,7 +545,7 @@ function run(options = {}) {
     markTaskStatus(task.id, 'error', err.message);
   }
 
-  log('=== BUG FIXER BETA finalizado ===');
+  log('=== PELOS finalizado ===');
 }
 
 if (require.main === module) {

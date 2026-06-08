@@ -1,13 +1,13 @@
 /**
  * KRONOS AGENT ORCHESTRATOR
- * Runs all three agents in sequence: Task Master → Builder Alpha → Bug Fixer Beta
+ * Runs all three agents in sequence: Task Master → Builder Alpha → Pelos
  * Can be run manually or scheduled via cron.
  *
  * Usage:
  *   node agents/orchestrator.js              → full cycle
  *   node agents/orchestrator.js --plan       → only generate tasks (Task Master)
  *   node agents/orchestrator.js --build      → only run Builder Alpha
- *   node agents/orchestrator.js --fix        → only run Bug Fixer Beta
+ *   node agents/orchestrator.js --fix        → only run Pelos
  *   node agents/orchestrator.js --dry        → dry run, no file writes
  *   node agents/orchestrator.js --all        → run all agents until queue empty
  *   node agents/orchestrator.js --status     → show current task queue status
@@ -92,15 +92,15 @@ async function runCycle(options = {}) {
     process.exit(1);
   }
 
-  // ── Step 2: Bug Fixer Beta — auto-fix primero ────────────────────────────
+  // ── Step 2: Pelos — auto-fix primero ────────────────────────────
   log('');
-  log('STEP 2: Bug Fixer Beta — auto-detect & fix...');
+  log('STEP 2: Pelos — auto-detect & fix...');
   try {
-    const { run: runFixer } = require('./bug-fixer-beta');
+    const { run: runFixer } = require('./pelos');
     runFixer({ autoFixOnly: true, dryRun });
-    log('Bug Fixer (auto-fix) completado');
+    log('Pelos (auto-fix) completado');
   } catch (err) {
-    log(`Bug Fixer (auto-fix) ERROR: ${err.message}`);
+    log(`Pelos (auto-fix) ERROR: ${err.message}`);
   }
 
   // ── Step 3: Builder Alpha ────────────────────────────────────────────────
@@ -134,9 +134,9 @@ async function runCycle(options = {}) {
     }
   }
 
-  // ── Step 4: Bug Fixer Beta — security/test tasks ─────────────────────────
+  // ── Step 4: Pelos — security/test tasks ─────────────────────────
   log('');
-  log('STEP 4: Bug Fixer Beta — seguridad y tests...');
+  log('STEP 4: Pelos — seguridad y tests...');
 
   if (runAll) {
     let iterations = 0;
@@ -149,19 +149,19 @@ async function runCycle(options = {}) {
       if (pending.length === 0) break;
 
       try {
-        const { run: runFixer } = require('./bug-fixer-beta');
+        const { run: runFixer } = require('./pelos');
         runFixer({ dryRun });
       } catch (err) {
-        log(`Bug Fixer Beta ERROR: ${err.message}`);
+        log(`Pelos ERROR: ${err.message}`);
         break;
       }
     }
   } else {
     try {
-      const { run: runFixer } = require('./bug-fixer-beta');
+      const { run: runFixer } = require('./pelos');
       runFixer({ dryRun });
     } catch (err) {
-      log(`Bug Fixer Beta ERROR: ${err.message}`);
+      log(`Pelos ERROR: ${err.message}`);
     }
   }
 
@@ -197,8 +197,8 @@ if (args.includes('--build')) {
 }
 
 if (args.includes('--fix')) {
-  log('Running Bug Fixer Beta only...');
-  const { run } = require('./bug-fixer-beta');
+  log('Running Pelos only...');
+  const { run } = require('./pelos');
   run({ dryRun: args.includes('--dry') });
   showStatus();
   process.exit(0);

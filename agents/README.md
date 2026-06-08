@@ -8,7 +8,7 @@ Sistema de 3 agentes autónomos que analizan, planifican e implementan mejoras a
 |--------|---------|-----|
 | **Task Master** | `task-master.js` | Analiza el proyecto, detecta gaps y genera cola de tareas priorizada en `tasks.json` |
 | **Builder Alpha** | `builder-alpha.js` | Implementa features y mejoras de UX/API pendientes |
-| **Bug Fixer Beta** | `bug-fixer-beta.js` | Implementa seguridad, tests y auto-detecta problemas comunes |
+| **Pelos** | `pelos.js` | Implementa seguridad, tests y auto-detecta problemas comunes |
 
 ## Uso
 
@@ -25,7 +25,7 @@ node agents/orchestrator.js --plan
 # Solo correr Builder Alpha
 node agents/orchestrator.js --build
 
-# Solo correr Bug Fixer
+# Solo correr Pelos
 node agents/orchestrator.js --fix
 
 # Correr hasta vaciar la cola
@@ -49,8 +49,8 @@ El Task Master genera tareas con estos estados:
 
 | Tipo | Agente | Descripción |
 |------|--------|-------------|
-| `security` | Bug Fixer Beta | Rate limiting, helmet, validaciones |
-| `test` | Bug Fixer Beta | Smoke tests, unit tests |
+| `security` | Pelos | Rate limiting, helmet, validaciones |
+| `test` | Pelos | Smoke tests, unit tests |
 | `feature` | Builder Alpha | Nuevas funcionalidades |
 | `improvement` | Builder Alpha | Mejoras de UX, performance, API |
 
@@ -58,7 +58,7 @@ El Task Master genera tareas con estos estados:
 
 - `agents/logs/orchestrator.log`
 - `agents/logs/builder-alpha.log`
-- `agents/logs/bug-fixer-beta.log`
+- `agents/logs/pelos.log`
 - `agents/logs/completed.json` — historial de tareas completadas
 
 ## Agregar tareas custom
