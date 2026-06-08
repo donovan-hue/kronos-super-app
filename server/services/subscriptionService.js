@@ -1,6 +1,7 @@
 const { stripe } = require('../config/stripe');
 const User = require('../models/User');
 const Subscription = require('../models/Subscription');
+const { PRODUCTS, getPriceId } = require('../config/subscriptionPlans');
 
 const TIER_FEATURES = {
   free: {
@@ -121,7 +122,7 @@ const createCheckoutSession = async (userId, tier) => {
 };
 
 /**
- * Sincroniza features del usuario según su tier actual.
+ * Sincroniza features del usuario según su tier actual. (Legacy)
  */
 const syncFeatures = async (userId, tier) => {
   const features = TIER_FEATURES[tier] || TIER_FEATURES.free;
@@ -129,6 +130,120 @@ const syncFeatures = async (userId, tier) => {
     tier,
     features
   });
+};
+
+// ════════════════════════════════════════════════════════════════════════
+//  NUEVO MODELO: 3 productos independientes (config/subscriptionPlans.js)
+// ════════════════════════════════════════════════════════════════════════
+
+/**
+ * Flags de `features` derivados del plan del producto SOCIAL,
+ * para que el frontend (sin anuncios, badge ✓) siga funcionando.
+ */
+const socialPlanFeatures = (planKey) => {
+  const premium = planKey === 'premium';
+  return {
+    noAds: premium,
+    verifiedBadge: premium,
+    prioritySupport: premium,
+    premiumStickers: premium
+  };
+};
+
+/**
+ * Aplica un plan de un producto al usuario: guarda productPlans[producto]
+ * y, si es el producto social, sincroniza los flags de features.
+ */
+const applyPlan = async (userId, productId, planKey) => {
+  const update = { [`productPlans.${productId}`]: planKey };
+  if (productId === 'social') {
+    const flags = socialPlanFeatures(planKey);
+    for (const [k, v] of Object.entries(flags)) {
+      update[`features.${k}`] = v;
+    }
+  }
+  await User.findByIdAndUpdate(userId, update);
+};
+
+/**
+ * Crea sesión de Stripe Checkout para un (producto, plan) del nuevo catálogo.
+ * @param {String} userId
+ * @param {'social'|'scripts'|'media'} productId
+ * @param {String} planKey  ej. 'premium' | 'estandar' | 'pro'
+ */
+const createProductCheckoutSession = async (userId, productId, planKey) => {
+  const product = PRODUCTS[productId];
+  if (!product) throw new Error(`Producto no soportado: ${productId}`);
+  const plan = product.plans[planKey];
+  if (!plan) throw new Error(`Plan no soportado: ${productId}/${planKey}`);
+  if (!plan.priceEnv) throw new Error(`El plan "${planKey}" es gratuito; no requiere pago.`);
+
+  const priceId = getPriceId(productId, planKey); // lanza si falta la env var
+
+  const user = await User.findById(userId);
+  if (!user) throw new Error('Usuario no encontrado');
+
+  const customerId = await ensureCustomer(user);
+  const clientUrl = process.env.CLIENT_URL || 'http://localhost:3000';
+
+  const session = await stripe.checkout.sessions.create({
+    mode: 'subscription',
+    customer: customerId,
+    line_items: [{ price: priceId, quantity: 1 }],
+    success_url: `${clientUrl}/subscription/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${clientUrl}/subscription/cancel`,
+    metadata: { userId: user._id.toString(), productId, planKey },
+    subscription_data: {
+      metadata: { userId: user._id.toString(), productId, planKey }
+    }
+  });
+
+  return { url: session.url, sessionId: session.id };
+};
+
+/**
+ * Cancela (al final del periodo) la suscripción de un producto específico.
+ */
+const cancelProductSubscription = async (userId, productId) => {
+  const sub = await Subscription.findOne({
+    userId,
+    productId,
+    status: { $in: ['active', 'trialing', 'past_due'] }
+  }).sort({ createdAt: -1 });
+
+  if (!sub || !sub.stripeSubscriptionId) {
+    throw new Error(`No hay suscripción activa de "${productId}" para cancelar`);
+  }
+
+  const updated = await stripe.subscriptions.update(sub.stripeSubscriptionId, {
+    cancel_at_period_end: true
+  });
+
+  sub.cancelAtPeriodEnd = true;
+  sub.status = updated.status;
+  await sub.save();
+  return sub;
+};
+
+/**
+ * Estado de los 3 productos del usuario: plan activo + suscripción de cada uno.
+ */
+const getProductSubscriptions = async (userId) => {
+  const user = await User.findById(userId).select('productPlans usage features').lean();
+  const subs = await Subscription.find({ userId, productId: { $exists: true } }).lean();
+
+  const byProduct = {};
+  for (const id of Object.keys(PRODUCTS)) {
+    const active = subs
+      .filter((s) => s.productId === id)
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0] || null;
+    byProduct[id] = {
+      plan: user?.productPlans?.[id] || 'free',
+      subscription: active
+    };
+  }
+
+  return { products: byProduct, usage: user?.usage || {}, features: user?.features || TIER_FEATURES.free };
 };
 
 /**
@@ -143,8 +258,10 @@ const handleSubscriptionWebhook = async (event) => {
       if (session.mode !== 'subscription') break;
 
       const userId = session.metadata?.userId;
-      const tier = session.metadata?.tier;
-      if (!userId || !tier) break;
+      const productId = session.metadata?.productId; // nuevo modelo
+      const planKey = session.metadata?.planKey;     // nuevo modelo
+      const tier = session.metadata?.tier;           // legacy
+      if (!userId || (!productId && !tier)) break;
 
       const stripeSubscriptionId = session.subscription;
       const stripeSub = await stripe.subscriptions.retrieve(stripeSubscriptionId);
@@ -153,7 +270,7 @@ const handleSubscriptionWebhook = async (event) => {
         { stripeSubscriptionId },
         {
           userId,
-          tier,
+          ...(productId ? { productId, planKey, tier: planKey } : { tier }),
           stripeCustomerId: session.customer,
           stripeSubscriptionId,
           stripePriceId: stripeSub.items?.data?.[0]?.price?.id,
@@ -169,7 +286,11 @@ const handleSubscriptionWebhook = async (event) => {
         { upsert: true, new: true, setDefaultsOnInsert: true }
       );
 
-      await syncFeatures(userId, tier);
+      if (productId) {
+        await applyPlan(userId, productId, planKey);
+      } else {
+        await syncFeatures(userId, tier);
+      }
       break;
     }
 
@@ -191,7 +312,10 @@ const handleSubscriptionWebhook = async (event) => {
 
       // Si la suscripción ya no está activa ni en trial, degradar a free
       const activeStatuses = ['active', 'trialing'];
-      if (!activeStatuses.includes(sub.status)) {
+      const active = activeStatuses.includes(sub.status);
+      if (stored.productId) {
+        await applyPlan(stored.userId, stored.productId, active ? stored.planKey : 'free');
+      } else if (!active) {
         await syncFeatures(stored.userId, 'free');
       } else {
         await syncFeatures(stored.userId, stored.tier);
@@ -208,7 +332,11 @@ const handleSubscriptionWebhook = async (event) => {
       stored.canceledAt = new Date();
       await stored.save();
 
-      await syncFeatures(stored.userId, 'free');
+      if (stored.productId) {
+        await applyPlan(stored.userId, stored.productId, 'free');
+      } else {
+        await syncFeatures(stored.userId, 'free');
+      }
       break;
     }
 
@@ -237,7 +365,11 @@ const handleSubscriptionWebhook = async (event) => {
       if (stored.status === 'past_due' || stored.status !== 'active') {
         stored.status = 'active';
         await stored.save();
-        await syncFeatures(stored.userId, stored.tier);
+        if (stored.productId) {
+          await applyPlan(stored.userId, stored.productId, stored.planKey);
+        } else {
+          await syncFeatures(stored.userId, stored.tier);
+        }
       }
       break;
     }
@@ -252,7 +384,11 @@ const handleSubscriptionWebhook = async (event) => {
           stored.status = 'canceled';
           stored.canceledAt = new Date();
           await stored.save();
-          await syncFeatures(stored.userId, 'free');
+          if (stored.productId) {
+            await applyPlan(stored.userId, stored.productId, 'free');
+          } else {
+            await syncFeatures(stored.userId, 'free');
+          }
         }
       }
       break;
@@ -348,5 +484,11 @@ module.exports = {
   handleSubscriptionWebhook,
   cancelSubscription,
   reactivateSubscription,
-  getSubscription
+  getSubscription,
+  // Nuevo modelo de 3 productos
+  applyPlan,
+  socialPlanFeatures,
+  createProductCheckoutSession,
+  cancelProductSubscription,
+  getProductSubscriptions
 };

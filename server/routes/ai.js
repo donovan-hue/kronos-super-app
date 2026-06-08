@@ -2,7 +2,7 @@ const express = require('express');
 const rateLimit = require('express-rate-limit');
 const router = express.Router();
 const { protect: auth } = require('../middleware/auth');
-const { requireFeature } = require('../middleware/requireTier');
+const { requireQuota } = require('../middleware/requireProductQuota');
 const {
   generateCaption, generateImage, generateImageVariants,
   analyzeSentiment, generateProductDescription,
@@ -17,15 +17,18 @@ const aiLimiter = rateLimit({
   legacyHeaders: false,
 });
 
-// Generación IA requiere plan Pro o superior
-router.post('/caption',             auth, aiLimiter, requireFeature('aiGenerator'), generateCaption);
-router.post('/image',               auth, aiLimiter, requireFeature('aiGenerator'), generateImage);
-router.post('/image/variants',      auth, aiLimiter, requireFeature('aiGenerator'), generateImageVariants);
-router.post('/product-description', auth, aiLimiter, requireFeature('aiGenerator'), generateProductDescription);
-router.post('/hashtags',            auth, aiLimiter, requireFeature('aiGenerator'), generateHashtags);
-router.post('/chat',                auth, aiLimiter, requireFeature('aiGenerator'), chat);
-router.post('/story',               auth, aiLimiter, requireFeature('aiGenerator'), generateStory);
-// Sentiment es uso interno (moderación de posts) — sin restricción de tier
+// ── Producto "Scripts" (texto, gpt-4o-mini): consume cuota de guiones ──
+router.post('/story',               auth, aiLimiter, requireQuota('scripts'), generateStory);
+router.post('/caption',             auth, aiLimiter, requireQuota('scripts'), generateCaption);
+router.post('/hashtags',            auth, aiLimiter, requireQuota('scripts'), generateHashtags);
+router.post('/product-description', auth, aiLimiter, requireQuota('scripts'), generateProductDescription);
+router.post('/chat',                auth, aiLimiter, requireQuota('scripts'), chat);
+
+// ── Producto "Media" (imágenes): consume cuota de imágenes ──
+router.post('/image',               auth, aiLimiter, requireQuota('images'), generateImage);
+router.post('/image/variants',      auth, aiLimiter, requireQuota('images'), generateImageVariants);
+
+// Sentiment es uso interno (moderación de posts) — sin restricción
 router.post('/sentiment', auth, analyzeSentiment);
 
 module.exports = router;

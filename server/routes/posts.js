@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const { protect } = require('../middleware/auth');
-const { postLimiter } = require('../middleware/postLimiter');
 const {
   createPost,
   getFeed,
@@ -13,7 +12,8 @@ const {
   getBookmarkedPosts,
 } = require('../controllers/postController');
 
-router.post('/', protect, postLimiter, createPost);
+// Publicar es GRATIS para todos (la red social no se cobra). Sin límite de posts.
+router.post('/', protect, createPost);
 router.get('/feed', protect, getFeed);
 router.get('/bookmarked', protect, getBookmarkedPosts);
 router.get('/user/:userId', getUserPosts);

@@ -116,6 +116,21 @@ const userSchema = new mongoose.Schema(
       prioritySupport: { type: Boolean, default: false },
       customShop: { type: Boolean, default: false }
     },
+
+    // ── 3 productos INDEPENDIENTES (ver config/subscriptionPlans.js) ──
+    // Plan activo por producto. 'free' = cuenta por defecto (no se cobra).
+    productPlans: {
+      social: { type: String, default: 'free' },   // free | premium
+      scripts: { type: String, default: 'free' },   // free | estandar | premium | pro
+      media: { type: String, default: 'free' }      // free | estandar | premium | pro
+    },
+    // Consumo del mes en curso por producto (para hacer cumplir las cuotas).
+    usage: {
+      scriptsCount: { type: Number, default: 0 },
+      mediaImagesCount: { type: Number, default: 0 },
+      mediaVideosCount: { type: Number, default: 0 },
+      periodStart: { type: Date }
+    },
     bookmarks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
     kronosTokens: { type: Number, default: 0, min: 0 }
   },

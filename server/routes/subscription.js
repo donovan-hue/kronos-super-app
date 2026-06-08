@@ -6,31 +6,53 @@ const subscriptionService = require('../services/subscriptionService');
 
 /**
  * POST /api/subscription/checkout
- * Crea sesión de Stripe Checkout para suscribir al usuario a Pro o Business.
- * Body: { tier: 'pro' | 'business' }
+ * Nuevo modelo (3 productos):  Body: { productId: 'social'|'scripts'|'media', planKey: 'premium'|'estandar'|'pro' }
+ * Legacy (compat):             Body: { tier: 'plus'|'pro'|'business' }
  */
 router.post('/checkout', protect, async (req, res) => {
   try {
-    const { tier } = req.body;
-    if (!['plus', 'pro', 'business'].includes(tier)) {
-      return res.status(400).json({ error: 'Tier inválido. Usa "plus", "pro" o "business".' });
+    const { productId, planKey, tier } = req.body;
+
+    if (productId) {
+      const { url, sessionId } = await subscriptionService.createProductCheckoutSession(
+        req.user._id,
+        productId,
+        planKey
+      );
+      return res.json({ success: true, url, sessionId });
     }
 
-    const { url, sessionId } = await subscriptionService.createCheckoutSession(
-      req.user._id,
-      tier
-    );
-
+    // ── Legacy ──
+    if (!['plus', 'pro', 'business'].includes(tier)) {
+      return res.status(400).json({
+        error: 'Falta productId/planKey (o un tier legacy válido: plus, pro, business).'
+      });
+    }
+    const { url, sessionId } = await subscriptionService.createCheckoutSession(req.user._id, tier);
     return res.json({ success: true, url, sessionId });
   } catch (err) {
     console.error('subscription/checkout error:', err);
+    return res.status(400).json({ error: err.message });
+  }
+});
+
+/**
+ * GET /api/subscription/products
+ * Estado de los 3 productos independientes (plan + suscripción + uso de cuotas).
+ */
+router.get('/products', protect, async (req, res) => {
+  try {
+    const data = await subscriptionService.getProductSubscriptions(req.user._id);
+    return res.json({ success: true, ...data });
+  } catch (err) {
+    console.error('subscription/products error:', err);
     return res.status(500).json({ error: err.message });
   }
 });
 
 /**
  * GET /api/subscription/status
- * Devuelve tier, features y datos de la suscripción actual.
+ * Devuelve tier, features y datos de la suscripción actual. (Legacy)
  */
 router.get('/status', protect, async (req, res) => {
   try {
@@ -48,7 +70,10 @@ router.get('/status', protect, async (req, res) => {
  */
 router.post('/cancel', protect, async (req, res) => {
   try {
-    const sub = await subscriptionService.cancelSubscription(req.user._id);
+    const { productId } = req.body || {};
+    const sub = productId
+      ? await subscriptionService.cancelProductSubscription(req.user._id, productId)
+      : await subscriptionService.cancelSubscription(req.user._id);
     return res.json({ success: true, subscription: sub });
   } catch (err) {
     console.error('subscription/cancel error:', err);

@@ -8,9 +8,19 @@ const subscriptionSchema = new mongoose.Schema(
       required: true,
       index: true
     },
+    // Cuál de los 3 productos independientes (social | scripts | media).
+    productId: {
+      type: String,
+      enum: ['social', 'scripts', 'media'],
+      index: true
+    },
+    // Plan dentro del producto (free | premium | estandar | pro).
+    planKey: {
+      type: String
+    },
+    // Legacy: tier del modelo viejo. Se conserva por compatibilidad.
     tier: {
       type: String,
-      enum: ['free', 'pro', 'business'],
       default: 'free'
     },
     stripeCustomerId: {
