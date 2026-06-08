@@ -81,6 +81,40 @@
 .btn-ghost > span { background: var(--ks-text-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .btn-ghost:hover { border-color: rgba(200, 210, 222, 0.4); }
 
+/* ---------- inputs reales (formularios) ---------- */
+.ks-input {
+  width: 100%; box-sizing: border-box;
+  border: 1px solid var(--ks-line); border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025); color: var(--ks-ink);
+  padding: 13px 15px; font-family: 'Manrope', sans-serif; font-size: 14px;
+  outline: none; transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.ks-input::placeholder { color: var(--ks-faint); }
+.ks-input:focus { border-color: var(--ks-line-strong); box-shadow: 0 0 0 3px rgba(190, 200, 212, 0.06); }
+
+.ks-link {
+  background: var(--ks-text-grad); -webkit-background-clip: text; background-clip: text;
+  color: transparent; font-weight: 700; text-decoration: none; cursor: pointer;
+}
+
+/* layout de pantallas de autenticación */
+.ks-auth { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+.ks-auth-card { width: 100%; max-width: 380px; padding: 32px 28px; box-sizing: border-box; }
+
+/* notas de estado (éxito / error) en tema oscuro */
+.ks-note { border-radius: 12px; padding: 14px; font-size: 13px; border: 1px solid; line-height: 1.5; }
+.ks-note.ok { background: rgba(190, 200, 212, 0.06); border-color: var(--ks-line-strong); color: var(--ks-ink); }
+.ks-note.err { background: rgba(255, 120, 120, 0.07); border-color: rgba(255, 120, 120, 0.32); color: #ff9b9b; }
+
+/* círculo metálico para icono principal */
+.ks-orb-ico {
+  width: 64px; height: 64px; border-radius: 50%; margin: 0 auto; display: grid; place-items: center;
+  background: radial-gradient(122% 120% at 32% 22%, #26282b 0%, #17181a 40%, #0b0c0d 78%);
+  border: 1px solid var(--ks-line-strong);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.16), 0 14px 34px -16px rgba(0, 0, 0, 0.9);
+}
+.ks-orb-ico .ks-ico { width: 30px; height: 30px; }
+
 /* ---------- campos / placeholders de datos ---------- */
 .field {
   border: 1px solid var(--ks-line); border-radius: 12px;

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
-import { HoloText } from '../kronos';
+import { KsDefs, Icon } from './ksParts';
+import '../../styles/kronospace.css';
 
-const HOLO = 'linear-gradient(135deg,#4facfe,#00f2fe,#f3a0ff,#ff85a2)';
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 function ResetPassword() {
@@ -18,13 +18,19 @@ function ResetPassword() {
 
   if (!token || !email) {
     return (
-      <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, fontFamily: "'Outfit', sans-serif" }}>
-        <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: 40, marginBottom: 8 }}>❌</div>
-          <div style={{ color: '#ef4444', marginBottom: 16 }}>Enlace inválido o expirado</div>
-          <Link to="/forgot-password" style={{ background: HOLO, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', fontWeight: 700, textDecoration: 'none' }}>
-            Solicitar nuevo enlace
-          </Link>
+      <div className="ks-root ks-bg ks-auth">
+        <KsDefs />
+        <div className="card ks-auth-card" style={{ textAlign: 'center' }}>
+          <div className="ks-orb-ico" style={{ marginBottom: 16 }}>
+            <Icon name="alert" size={28} />
+          </div>
+          <div className="ks-h metal-text" style={{ fontSize: 20, marginBottom: 8 }}>
+            Enlace inválido o expirado
+          </div>
+          <div style={{ color: 'var(--ks-dim)', fontSize: 13, marginBottom: 18 }}>
+            Solicita uno nuevo para continuar.
+          </div>
+          <Link to="/forgot-password" className="ks-link">Solicitar nuevo enlace</Link>
         </div>
       </div>
     );
@@ -58,68 +64,47 @@ function ResetPassword() {
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'radial-gradient(ellipse at 70% 20%, rgba(243,160,255,0.07), transparent 50%), #ffffff',
-      display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24,
-      fontFamily: "'Outfit', sans-serif",
-    }}>
-      <div style={{ width: '100%', maxWidth: 380 }}>
-        <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <div style={{ fontSize: 44, marginBottom: 8 }}>🔐</div>
-          <HoloText size={30}>Nueva contraseña</HoloText>
-          <div style={{ color: 'rgba(10,10,20,0.45)', fontSize: 13, marginTop: 8 }}>
-            Para: {email}
+    <div className="ks-root ks-bg ks-auth">
+      <KsDefs />
+      <div className="card ks-auth-card">
+        <div style={{ textAlign: 'center', marginBottom: 28 }}>
+          <div className="ks-orb-ico" style={{ marginBottom: 16 }}>
+            <Icon name="lock" size={30} />
           </div>
+          <h1 className="ks-h metal-text" style={{ fontSize: 26, margin: 0 }}>Nueva contraseña</h1>
+          <div style={{ color: 'var(--ks-dim)', fontSize: 13, marginTop: 8 }}>Para: {email}</div>
         </div>
 
         {status === 'done' ? (
-          <div style={{
-            background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.3)',
-            color: '#16a34a', padding: '18px', borderRadius: 14, textAlign: 'center', fontSize: 14,
-          }}>
-            <div style={{ fontSize: 32, marginBottom: 8 }}>✅</div>
-            ¡Contraseña actualizada! Redirigiendo al login...
+          <div className="ks-note ok" style={{ textAlign: 'center' }}>
+            <div className="ks-orb-ico" style={{ width: 48, height: 48, marginBottom: 12 }}>
+              <Icon name="shieldCheck" size={24} />
+            </div>
+            ¡Contraseña actualizada! Redirigiendo al login…
           </div>
         ) : (
           <>
-            {error && (
-              <div style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.3)', color: '#ef4444', padding: '12px 14px', borderRadius: 12, fontSize: 13, marginBottom: 14 }}>
-                {error}
-              </div>
-            )}
+            {error && <div className="ks-note err" style={{ marginBottom: 14 }}>{error}</div>}
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <input
+                className="ks-input"
                 type="password"
                 placeholder="Nueva contraseña"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                style={{
-                  width: '100%', padding: '13px 16px', borderRadius: 12, outline: 'none',
-                  background: 'rgba(79,172,254,0.05)', border: '1.5px solid rgba(79,172,254,0.2)',
-                  color: '#0a0a14', fontSize: 14, fontFamily: 'inherit', boxSizing: 'border-box',
-                }}
               />
               <input
+                className="ks-input"
                 type="password"
                 placeholder="Confirmar contraseña"
                 value={confirm}
                 onChange={(e) => setConfirm(e.target.value)}
                 required
-                style={{
-                  width: '100%', padding: '13px 16px', borderRadius: 12, outline: 'none',
-                  background: 'rgba(79,172,254,0.05)', border: '1.5px solid rgba(79,172,254,0.2)',
-                  color: '#0a0a14', fontSize: 14, fontFamily: 'inherit', boxSizing: 'border-box',
-                }}
               />
-              <button type="submit" disabled={status === 'loading'} style={{
-                padding: '14px', borderRadius: 12, border: 'none', cursor: status === 'loading' ? 'not-allowed' : 'pointer',
-                background: HOLO, color: '#fff', fontSize: 14, fontWeight: 700,
-                fontFamily: 'inherit', letterSpacing: 1, opacity: status === 'loading' ? 0.7 : 1,
-                boxShadow: '0 4px 16px rgba(79,172,254,0.3)',
-              }}>
-                {status === 'loading' ? 'Guardando...' : 'GUARDAR CONTRASEÑA'}
+              <button type="submit" className="btn-metal" disabled={status === 'loading'}
+                style={{ padding: 14, opacity: status === 'loading' ? 0.7 : 1, cursor: status === 'loading' ? 'not-allowed' : 'pointer' }}>
+                {status === 'loading' ? 'Guardando…' : 'GUARDAR CONTRASEÑA'}
               </button>
             </form>
           </>

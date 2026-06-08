@@ -1,14 +1,22 @@
-const { Resend } = require('resend');
+const nodemailer = require('nodemailer');
 const fs = require('fs');
 const path = require('path');
 
-let resend = null;
+let transporter = null;
 
-function getClient() {
-  if (resend) return resend;
-  if (!process.env.RESEND_API_KEY) return null;
-  resend = new Resend(process.env.RESEND_API_KEY);
-  return resend;
+function getTransporter() {
+  if (transporter) return transporter;
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) return null;
+  transporter = nodemailer.createTransport({
+    host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+    port: Number(process.env.EMAIL_PORT) || 587,
+    secure: process.env.EMAIL_SECURE === 'true', // true para 465, false para 587
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASSWORD, // App Password de Gmail (sin espacios)
+    },
+  });
+  return transporter;
 }
 
 function loadTemplate(name, vars = {}) {
@@ -21,21 +29,17 @@ function loadTemplate(name, vars = {}) {
 }
 
 async function send(to, subject, templateName, vars = {}) {
-  const client = getClient();
-  if (!client) {
-    console.warn('[Email] RESEND_API_KEY no configurado. Skip:', subject);
+  const tx = getTransporter();
+  if (!tx) {
+    console.warn('[Email] EMAIL_USER/EMAIL_PASSWORD no configurados. Skip:', subject);
     return null;
   }
   try {
     const html = loadTemplate(templateName, vars);
-    const from = process.env.EMAIL_FROM || 'Kronos <noreply@kronos-app.com>';
-    const { data, error } = await client.emails.send({ from, to, subject, html });
-    if (error) {
-      console.error('[Email] error Resend:', error);
-      return null;
-    }
-    console.log('[Email] enviado:', data?.id);
-    return data;
+    const from = process.env.EMAIL_FROM || `KRONOS <${process.env.EMAIL_USER}>`;
+    const info = await tx.sendMail({ from, to, subject, html });
+    console.log('[Email] enviado:', info.messageId);
+    return info;
   } catch (err) {
     console.error('[Email] excepción:', err.message);
     return null;
