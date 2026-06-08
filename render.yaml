@@ -26,9 +26,35 @@ services:
         value: 7d
       - key: CLIENT_URL
         sync: false
+      - key: SERVER_URL
+        sync: false
+      - key: SEED_SECRET
+        sync: false
       - key: STRIPE_SECRET_KEY
         sync: false
       - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      # ─── Stripe Price IDs · 3 productos (subscriptionPlans.js) ────
+      - key: STRIPE_SOCIAL_PREMIUM_PRICE_ID
+        sync: false
+      - key: STRIPE_SCRIPTS_ESTANDAR_PRICE_ID
+        sync: false
+      - key: STRIPE_SCRIPTS_PREMIUM_PRICE_ID
+        sync: false
+      - key: STRIPE_SCRIPTS_PRO_PRICE_ID
+        sync: false
+      - key: STRIPE_MEDIA_ESTANDAR_PRICE_ID
+        sync: false
+      - key: STRIPE_MEDIA_PREMIUM_PRICE_ID
+        sync: false
+      - key: STRIPE_MEDIA_PRO_PRICE_ID
+        sync: false
+      # ─── Stripe Price IDs · legacy 3 tiers (subscriptionService.js) ─
+      - key: STRIPE_PLUS_PRICE_ID
+        sync: false
+      - key: STRIPE_PRO_PRICE_ID
+        sync: false
+      - key: STRIPE_BUSINESS_PRICE_ID
         sync: false
       - key: CLOUDINARY_CLOUD_NAME
         sync: false
@@ -48,4 +74,37 @@ services:
       - key: EMAIL_PASSWORD
         sync: false
       - key: EMAIL_FROM
+        sync: false
+      # ─── Notificaciones push (VAPID) ──────────────────────────────
+      - key: VAPID_PUBLIC_KEY
+        sync: false
+      - key: VAPID_PRIVATE_KEY
+        sync: false
+      - key: VAPID_SUBJECT
+        sync: false
+      # ─── Redis (opcional; sin esto el cache cae a memoria) ────────
+      - key: REDIS_URL
+        sync: false
+      # ─── IA / Traducción ──────────────────────────────────────────
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: DEEPL_API_KEY
+        sync: false
+      # ─── Login social (OAuth) — opcional ──────────────────────────
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: FACEBOOK_APP_ID
+        sync: false
+      - key: FACEBOOK_APP_SECRET
+        sync: false
+      # ─── Web3 / Token KRO ─────────────────────────────────────────
+      - key: INFURA_API_KEY
+        sync: false
+      - key: SEPOLIA_RPC_URL
+        sync: false
+      - key: PRIVATE_KEY
+        sync: false
+      - key: KRONOS_TOKEN_ADDRESS
         sync: false

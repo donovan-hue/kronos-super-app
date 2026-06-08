@@ -147,11 +147,16 @@ function parseRenderKeys(content) {
   return [...content.matchAll(/-\s*key:\s*([A-Z0-9_]+)/g)].map(m => m[1]);
 }
 
+// Archivos dev-only (seeds, tests, scripts de validación) — sus envs no son
+// requisitos de producción, así que no cuentan como "gaps".
+const DEV_FILE_RE = /(__tests__|\.test\.|seedData|final-validation|test-dependencies|check-status|generate-)/;
+
 function collectEnvUsage() {
   const server = new Set();
   const client = new Set();
   const re = /process\.env\.([A-Z0-9_]+)/g;
   for (const f of walk('server', ['.js'])) {
+    if (DEV_FILE_RE.test(f)) continue;
     const c = read(f); if (!c) continue;
     for (const m of c.matchAll(re)) server.add(m[1]);
   }
@@ -242,18 +247,24 @@ function auditRoutes() {
 
 function auditClientPages() {
   const findings = [];
-  const app = read('client/src/App.jsx');
-  if (!app) return findings;
+  if (!exists('client/src/App.jsx')) return findings;
 
   const SKIP = new Set(['KronosMockups']); // showcases internos
+  // Una página está "conectada" si CUALQUIER otro archivo del cliente la importa
+  // o referencia por nombre (cubre rutas anidadas tipo /admin/* y layouts).
+  const allClient = walk('client/src', ['.js', '.jsx']);
   for (const f of walk('client/src/pages', ['.jsx'])) {
     const name = path.basename(f, '.jsx');
     if (SKIP.has(name)) continue;
-    // Una página "conectada" se importa o referencia por nombre en App.jsx.
-    if (!app.includes(name)) {
+    const referenced = allClient.some(other => {
+      if (other === f) return false;
+      const c = read(other);
+      return c && new RegExp(`\\b${name}\\b`).test(c);
+    });
+    if (!referenced) {
       findings.push({
         sev: 'warn', area: 'client',
-        msg: `La página ${f} existe pero no aparece en App.jsx — probablemente no tiene <Route> y el usuario no puede llegar a ella.`,
+        msg: `La página ${f} existe pero ningún otro archivo del cliente la referencia — probablemente no tiene <Route> y el usuario no puede llegar a ella.`,
         fixable: false,
       });
     }
