@@ -29,7 +29,17 @@ node agents/kairos.js            # auditoría + informe + encola tareas
 node agents/kairos.js --report   # solo informe en consola (no escribe nada)
 node agents/kairos.js --fix      # además aplica los auto-fixes seguros
 node agents/kairos.js --json     # informe como JSON
+node agents/kairos.js --study    # modo estudio: compara KRONOS vs otras redes y propone ideas
 ```
+
+### Modo estudio (`--study`)
+
+Kairos no navega internet — lleva embebido un mapa de las funciones de las grandes
+redes (Instagram, TikTok, X, Reddit, Snapchat, Clubhouse, WeChat…) y lo **cruza en
+vivo con tu código** para decir: qué funciones base ya tienes, qué detalles comunes
+te faltan, y **7 ideas diferenciadoras** apoyadas en modelos que ya existen en KRONOS
+(SocialFi con KRO, historias interactivas, marketplace con escrow, move-to-earn, etc.).
+El resultado se guarda en `agents/logs/kairos-study.md`.
 
 Auto-fixes seguros: registrar rutas huérfanas en `server.js` y documentar envs faltantes en `.env.example`. El informe completo queda en `agents/logs/kairos-report.json`.
 

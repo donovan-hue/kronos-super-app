@@ -566,6 +566,147 @@ function printReport(report) {
   console.log('');
 }
 
+// ════════════════════════════════════════════════════════════════════════════
+//  MODO ESTUDIO — Kairos compara KRONOS contra las grandes redes y propone ideas
+//  para destacar. El conocimiento de las otras redes está embebido (Kairos no
+//  navega internet); lo que SÍ hace en vivo es leer tu código para saber qué
+//  tienes ya, y a partir de eso decir qué te falta y qué te haría único.
+// ════════════════════════════════════════════════════════════════════════════
+
+// Funciones "de mesa" que toda red social grande tiene. (feature → archivo que la prueba)
+const TABLE_STAKES = [
+  { cap: 'Feed de publicaciones',        proof: 'server/routes/posts.js',          nets: 'todas' },
+  { cap: 'Mensajería directa (DM)',      proof: 'server/routes/messages.js',       nets: 'todas' },
+  { cap: 'Chats grupales',               proof: 'server/routes/groupChats.js',     nets: 'WhatsApp, Discord' },
+  { cap: 'Stories 24h',                  proof: 'server/routes/ephemeralStories.js',nets: 'Instagram, Snapchat' },
+  { cap: 'Video (subida/streaming)',     proof: 'server/routes/videos.js',         nets: 'TikTok, YouTube' },
+  { cap: 'Comunidades / grupos',         proof: 'server/routes/communities.js',    nets: 'Reddit, Facebook' },
+  { cap: 'Notificaciones en tiempo real',proof: 'server/routes/notifications.js',  nets: 'todas' },
+  { cap: 'Búsqueda',                     proof: 'server/routes/search.js',         nets: 'todas' },
+  { cap: 'Recomendaciones / descubrir',  proof: 'server/routes/recommendations.js',nets: 'TikTok, Instagram' },
+  { cap: 'Reportar / bloquear',          proof: 'server/routes/reporting.js',      nets: 'todas' },
+  { cap: 'Salas de audio en vivo',       proof: 'server/routes/audio.js',          nets: 'Clubhouse, X Spaces' },
+  { cap: 'Eventos',                      proof: 'server/routes/events.js',         nets: 'Facebook, Meetup' },
+];
+
+// Lo que tienen otras redes que KRONOS podría querer y conviene revisar si falta.
+const COMMON_ELSEWHERE = [
+  { cap: 'Encuestas / polls en posts',          hint: 'X, Instagram',  proof: null },
+  { cap: 'Reacciones múltiples (no solo like)',  hint: 'Facebook, LinkedIn', proof: null },
+  { cap: 'Hashtags y temas en tendencia',        hint: 'X, Instagram',  proof: 'client/src/components/HashtagText.jsx' },
+  { cap: 'Guardar / colecciones (bookmarks)',    hint: 'Instagram, Pinterest', proof: null },
+  { cap: 'Duetos / remix de video',              hint: 'TikTok',        proof: null },
+  { cap: 'Suscripción a creadores (paywall)',    hint: 'Patreon, OnlyFans', proof: 'server/routes/subscription.js' },
+];
+
+// Ideas diferenciadoras: cada una se apoya en algo que KRONOS YA tiene en su
+// modelo de datos, así que son extensiones realistas, no fantasía.
+const DIFFERENTIATORS = [
+  {
+    title: 'Historias interactivas "elige tu aventura"',
+    basadoEn: ['server/models/StoryNode.js', 'server/models/StoryProgress.js'],
+    idea: 'Stories ramificadas donde el espectador toca opciones y cambia el final. Ya tienes los nodos y el progreso modelados; falta el editor visual y el reproductor.',
+    porQue: 'Ninguna red grande tiene narrativa ramificada nativa. Es contenido que engancha y se comparte solo.',
+  },
+  {
+    title: 'SocialFi: gana KRO por buen contenido + apuesta para impulsar',
+    basadoEn: ['server/models/RewardPool.js', 'server/models/Stake.js', 'server/models/KronosToken.js'],
+    idea: 'Recompensar con tokens KRO las publicaciones de calidad y dejar "stakear" KRO para impulsar un post o a un creador. Ya tienes pool de recompensas, staking y el token.',
+    porQue: 'Mezcla economía real con red social — el creador gana de verdad, no solo "likes". WeChat/X tantean esto; tú ya tienes la base cripto.',
+  },
+  {
+    title: 'Marketplace social con escrow (compra-venta segura entre usuarios)',
+    basadoEn: ['server/models/Listing.js', 'server/models/Refund.js', 'server/models/CashWallet.js'],
+    idea: 'Vender entre usuarios donde el dinero queda retenido (escrow) hasta que el comprador confirma — con reembolsos integrados. Ya tienes listings, refunds y wallet.',
+    porQue: 'Facebook Marketplace no protege el pago; aquí la confianza es la función estrella. Diferenciador fuerte.',
+  },
+  {
+    title: 'Estudio de creación con IA dentro de la app',
+    basadoEn: ['server/routes/ai.js', 'server/services/aiService.js', 'server/config/subscriptionPlans.js'],
+    idea: 'Pestaña "Crear con IA": genera guiones, imágenes y videos sin salir de KRONOS, ligado a los planes que ya cobras (scripts/media).',
+    porQue: 'Ninguna red junta creación con IA + monetización en un mismo flujo. Tú ya tienes el cobro por cuotas armado.',
+  },
+  {
+    title: 'Capa social en Realidad Aumentada + avatares 3D',
+    basadoEn: ['server/routes/ar.js', 'server/models/AvatarItem.js', 'server/models/UserAvatar.js'],
+    idea: 'Filtros/objetos AR, probarte items del marketplace en AR, y "drops" AR por ubicación que sueltan KRO al encontrarlos (estilo Pokémon GO).',
+    porQue: 'Snapchat tiene AR pero no economía; tú puedes unir AR + token + comercio.',
+  },
+  {
+    title: 'Move-to-earn: gana KRO por moverte',
+    basadoEn: ['server/models/HealthLog.js', 'server/models/RewardPool.js'],
+    idea: 'Conectar actividad física (pasos/ejercicio) con recompensas en KRO y retos sociales entre amigos. Ya registras salud.',
+    porQue: 'StepN demostró que mueve millones; ninguna red social mainstream lo integra. Encaja con tu wallet.',
+  },
+  {
+    title: 'Propinas y regalos en vivo con KRO',
+    basadoEn: ['server/models/Tip.js', 'server/routes/audio.js', 'server/routes/videos.js'],
+    idea: 'Regalar KRO en tiempo real durante salas de audio o video en vivo (como los "bits" de Twitch, pero con valor real y retirable).',
+    porQue: 'Monetización directa creador-fan sin intermediario caro. Ya tienes propinas y salas en vivo.',
+  },
+];
+
+function runStudy(options = {}) {
+  const present = [];
+  const missingStakes = [];
+  for (const t of TABLE_STAKES) {
+    (exists(t.proof) ? present : missingStakes).push(t);
+  }
+  const missingCommon = COMMON_ELSEWHERE.filter(c => !c.proof || !exists(c.proof));
+
+  const lines = [];
+  const push = (s = '') => lines.push(s);
+
+  push('# 🧠 KAIROS · Estudio comparativo de KRONOS vs las grandes redes');
+  push(`_Generado: ${new Date().toISOString()}_`);
+  push('');
+  push('## 1. Qué tipo de producto es KRONOS');
+  push('No es "otra red social": es una **super-app** (social + comercio + delivery + wallet cripto/fiat + IA + AR), más cerca del modelo de WeChat que de Instagram. Esa combinación ES tu ventaja: nadie en occidente la tiene junta.');
+  push('');
+  push(`## 2. Funciones base que ya tienes (${present.length}/${TABLE_STAKES.length})`);
+  for (const t of present) push(`- ✅ ${t.cap}  _(como ${t.nets})_`);
+  if (missingStakes.length) {
+    push('');
+    push('### Funciones base que conviene revisar:');
+    for (const t of missingStakes) push(`- ⚠️ ${t.cap} — la tienen ${t.nets}. No encontré \`${t.proof}\`.`);
+  }
+  push('');
+  push('## 3. Detalles que otras redes tienen y a ti quizá te falten');
+  if (missingCommon.length) {
+    for (const c of missingCommon) push(`- 💡 ${c.cap}  _(visto en ${c.hint})_`);
+  } else {
+    push('- ✅ Cubres incluso los extras comunes.');
+  }
+  push('');
+  push('## 4. 🚀 Ideas para DESTACAR (apoyadas en lo que ya tienes)');
+  push('Ordenadas por impacto. Cada una se construye sobre modelos que ya existen en tu código:');
+  push('');
+  DIFFERENTIATORS.forEach((d, i) => {
+    push(`### ${i + 1}. ${d.title}`);
+    push(`- **La idea:** ${d.idea}`);
+    push(`- **Por qué resalta:** ${d.porQue}`);
+    push(`- **Ya tienes la base en:** ${d.basadoEn.map(f => '`' + f + '`').join(', ')}`);
+    push('');
+  });
+  push('## 5. Recomendación de Kairos');
+  push('Tu mayor diferenciador NO es copiar funciones de otras redes — es **unir lo social con la economía KRO**. Prioriza: (1) SocialFi (ganar/impulsar con KRO), (2) Historias interactivas, (3) Marketplace con escrow. Son únicas y ya tienes los cimientos.');
+  push('');
+
+  const out = lines.join('\n');
+  console.log('\n' + out + '\n');
+
+  if (!options.reportOnly) {
+    const file = path.join(__dirname, 'logs', 'kairos-study.md');
+    try {
+      fs.mkdirSync(path.dirname(file), { recursive: true });
+      fs.writeFileSync(file, out);
+      log(`Estudio guardado en ${path.relative(ROOT, file)}`);
+      console.log(`  📄 Estudio guardado en agents/logs/kairos-study.md`);
+    } catch { /* best-effort */ }
+  }
+  return { present, missingStakes, missingCommon, ideas: DIFFERENTIATORS };
+}
+
 // ─── Orquestación del agente ────────────────────────────────────────────────────
 
 function audit() {
@@ -628,11 +769,15 @@ function run(options = {}) {
 
 if (require.main === module) {
   const args = process.argv.slice(2);
-  run({
-    reportOnly: args.includes('--report'),
-    fix: args.includes('--fix'),
-    json: args.includes('--json'),
-  });
+  if (args.includes('--study')) {
+    runStudy({ reportOnly: args.includes('--report') });
+  } else {
+    run({
+      reportOnly: args.includes('--report'),
+      fix: args.includes('--fix'),
+      json: args.includes('--json'),
+    });
+  }
 } else {
-  module.exports = { run, audit };
+  module.exports = { run, audit, runStudy };
 }
