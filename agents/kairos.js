@@ -343,6 +343,128 @@ function auditDeploy() {
   return findings;
 }
 
+// ─── Directiva: secretos al descubierto (hardcoded) ────────────────────────────
+// Busca claves/contraseñas escritas directo en el código en vez de en envs.
+
+const SECRET_PATTERNS = [
+  { re: /\bsk_(live|test)_[A-Za-z0-9]{10,}/, what: 'clave secreta de Stripe (sk_)' },
+  { re: /\bwhsec_[A-Za-z0-9]{10,}/, what: 'secreto de webhook de Stripe (whsec_)' },
+  { re: /\bGOCSPX-[A-Za-z0-9_-]{10,}/, what: 'client secret de Google OAuth' },
+  { re: /\bAIza[0-9A-Za-z_-]{30,}/, what: 'API key de Google (AIza)' },
+  { re: /\bAKIA[0-9A-Z]{16}\b/, what: 'access key de AWS (AKIA)' },
+  { re: /mongodb(\+srv)?:\/\/[^\s'"`]+:[^\s'"`@]+@/, what: 'connection string de Mongo con usuario:contraseña' },
+  { re: /-----BEGIN (RSA |EC )?PRIVATE KEY-----/, what: 'llave privada' },
+];
+
+function auditSecrets() {
+  const findings = [];
+  const files = [...walk('server', ['.js']), ...walk('client/src', ['.js', '.jsx'])];
+  for (const f of files) {
+    if (DEV_FILE_RE.test(f)) continue;
+    const c = read(f); if (!c) continue;
+    for (const { re, what } of SECRET_PATTERNS) {
+      if (re.test(c)) {
+        findings.push({
+          sev: 'error', area: 'security',
+          msg: `${f}: parece tener un ${what} escrito directo en el código — muévelo a una variable de entorno (queda expuesto en Git).`,
+          fixable: false,
+        });
+      }
+    }
+  }
+  return findings;
+}
+
+// ─── Directiva: rutas sensibles sin candado de autenticación ────────────────────
+
+const SENSITIVE_ROUTES = ['wallet', 'admin', 'refunds', 'twofactor', 'tips', 'subscription'];
+const AUTH_TOKENS = /\b(protect|requireAdmin|adminAuth|web3Auth|authMiddleware|verifyToken|isAuthenticated)\b/;
+
+function auditRouteGuards() {
+  const findings = [];
+  for (const name of SENSITIVE_ROUTES) {
+    const rel = `server/routes/${name}.js`;
+    const c = read(rel);
+    if (!c) continue;
+    const hasRoutes = /router\.(get|post|put|patch|delete)\s*\(/.test(c);
+    if (hasRoutes && !AUTH_TOKENS.test(c)) {
+      findings.push({
+        sev: 'error', area: 'security',
+        msg: `${rel}: ruta sensible SIN middleware de autenticación — cualquiera podría usarla sin iniciar sesión. Agrega "protect" (o el guard que corresponda).`,
+        fixable: false,
+      });
+    }
+  }
+  return findings;
+}
+
+// ─── Directiva: pagos bien armados (Stripe) ────────────────────────────────────
+
+function auditPayments() {
+  const findings = [];
+  const plans = read('server/config/subscriptionPlans.js');
+  if (plans) {
+    const declared = new Set([
+      ...Object.keys(parseEnvKeys(read('.env.example'))),
+      ...parseRenderKeys(read('render.yaml')),
+    ]);
+    for (const m of plans.matchAll(/priceEnv:\s*'([A-Z0-9_]+)'/g)) {
+      if (!declared.has(m[1])) {
+        findings.push({
+          sev: 'error', area: 'payments',
+          msg: `El plan de pago necesita ${m[1]} pero esa variable no está documentada en .env.example ni render.yaml — ese plan no se podrá cobrar.`,
+          fixable: false,
+        });
+      }
+    }
+  }
+  // El webhook debe verificar la firma de Stripe (constructEvent), si no, es falsificable.
+  const usesStripe = walk('server', ['.js']).some(f => !DEV_FILE_RE.test(f) && /STRIPE_SECRET_KEY|require\(['"]stripe['"]\)/.test(read(f) || ''));
+  const verifiesWebhook = walk('server', ['.js']).some(f => /constructEvent/.test(read(f) || ''));
+  if (usesStripe && !verifiesWebhook) {
+    findings.push({
+      sev: 'error', area: 'payments',
+      msg: 'Usas Stripe pero ningún archivo verifica la firma del webhook (stripe.webhooks.constructEvent) — cualquiera podría falsificar un "pago exitoso".',
+      fixable: false,
+    });
+  }
+  return findings;
+}
+
+// ─── Directiva: endpoints fantasma (cliente llama API que no existe) ────────────
+
+function auditPhantomEndpoints() {
+  const findings = [];
+  const serverJs = read('server/server.js');
+  if (!serverJs) return findings;
+
+  // Segmentos de API realmente registrados en el servidor.
+  const registered = new Set();
+  for (const m of serverJs.matchAll(/app\.(?:use|get|post|put|patch|delete)\(\s*['"`]\/api\/([a-zA-Z0-9-]+)/g)) {
+    registered.add(m[1]);
+  }
+
+  // Segmentos que el cliente invoca.
+  const seen = new Map(); // segmento → primer archivo donde aparece
+  for (const f of walk('client/src', ['.js', '.jsx'])) {
+    const c = read(f); if (!c) continue;
+    for (const m of c.matchAll(/['"`]\/api\/([a-zA-Z0-9-]+)/g)) {
+      if (!seen.has(m[1])) seen.set(m[1], f);
+    }
+  }
+
+  for (const [seg, file] of seen) {
+    if (!registered.has(seg)) {
+      findings.push({
+        sev: 'warn', area: 'client',
+        msg: `El cliente llama a /api/${seg} (en ${file}) pero el servidor no tiene esa ruta registrada — esa llamada va a fallar.`,
+        fixable: false,
+      });
+    }
+  }
+  return findings;
+}
+
 // ─── Auto-fixes seguros ─────────────────────────────────────────────────────────
 
 function applyFixes(findings, dryRun) {
@@ -421,7 +543,7 @@ function pushTasks(findings) {
 function printReport(report) {
   const { findings } = report;
   const icon = { error: '🔴', warn: '🟡', info: '🔵' };
-  const groups = { deploy: 'DESPLIEGUE / WEB', env: 'VARIABLES DE ENTORNO', routes: 'CABLEADO DE RUTAS', integration: 'INTEGRACIONES', client: 'FRONTEND' };
+  const groups = { deploy: 'DESPLIEGUE / WEB', security: 'SEGURIDAD', payments: 'PAGOS (STRIPE)', env: 'VARIABLES DE ENTORNO', routes: 'CABLEADO DE RUTAS', integration: 'INTEGRACIONES', client: 'FRONTEND' };
 
   console.log('\n╔════════════════════════════════════════════════════════╗');
   console.log('║   KAIROS · ¿QUÉ LE FALTA A KRONOS PARA ESTAR EN LA WEB?  ║');
@@ -453,6 +575,10 @@ function audit() {
     ...auditEnv(),
     ...auditRoutes(),
     ...auditIntegrations(),
+    ...auditSecrets(),
+    ...auditRouteGuards(),
+    ...auditPayments(),
+    ...auditPhantomEndpoints(),
     ...auditClientPages(),
   ];
   log(`Auditoría completada: ${findings.length} hallazgos`);

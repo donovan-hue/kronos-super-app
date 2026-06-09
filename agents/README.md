@@ -20,6 +20,9 @@ Kairos sabe qué ES y qué CONLLEVA KRONOS (red social + e-commerce + delivery +
 - **Cableado de rutas** — rutas en `server/routes/` que no están registradas en `server.js` (endpoints muertos).
 - **Integraciones** — Stripe, Cloudinary, OpenAI, DeepL, Web3, Push, Email, OAuth: detecta las que están a medias.
 - **Frontend** — páginas en `client/src/pages/` sin `<Route>` en `App.jsx`.
+- **Seguridad** — secretos (claves Stripe/Google/AWS, llaves privadas, strings de Mongo con contraseña) escritos directo en el código en vez de en envs; rutas sensibles (wallet, admin, refunds, twofactor, tips, subscription) sin middleware de autenticación.
+- **Pagos (Stripe)** — planes de pago cuyo price ID no está documentado; webhook que no verifica la firma (`constructEvent`), lo que lo haría falsificable.
+- **Endpoints fantasma** — llamadas del cliente a `/api/...` que no existen como ruta en el servidor.
 
 ```powershell
 node agents/kairos.js            # auditoría + informe + encola tareas
