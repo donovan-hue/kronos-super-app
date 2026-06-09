@@ -465,6 +465,134 @@ function auditPhantomEndpoints() {
   return findings;
 }
 
+// ════════════════════════════════════════════════════════════════════════════
+//  MODO INGENIERO — revisiones de calidad de código (lo que cacha un dev senior)
+// ════════════════════════════════════════════════════════════════════════════
+
+// Archivos de producción (sin seeds/tests/scripts).
+function prodFiles(scope) {
+  const dirs = scope === 'server' ? ['server'] : scope === 'client' ? ['client/src'] : ['server', 'client/src'];
+  const out = [];
+  for (const d of dirs) for (const f of walk(d, ['.js', '.jsx'])) if (!DEV_FILE_RE.test(f)) out.push(f);
+  return out;
+}
+
+const IMPORT_EXTS = ['', '.jsx', '.js', '.json', '.ts', '.tsx', '/index.jsx', '/index.js', '/index.ts'];
+
+function auditEngineering() {
+  const findings = [];
+  const importRe = /(import[^"']*?from|require\()\s*["'](\.[^"']+)["']/g;
+  for (const f of prodFiles()) {
+    const raw = read(f); if (!raw) continue;
+    const dir = path.dirname(path.join(ROOT, f));
+
+    // Quitar comentarios para no confundir ejemplos de JSDoc con imports reales.
+    const c = raw
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      .replace(/(^|[^:])\/\/[^\n]*/g, '$1');
+
+    // Imports rotos → rompen el build (import) o truenan al ejecutarse (require).
+    for (const m of c.matchAll(importRe)) {
+      const target = path.resolve(dir, m[2]);
+      if (IMPORT_EXTS.some(e => fs.existsSync(target + e))) continue;
+      // Saltar requires opcionales protegidos con try { ... } catch.
+      const before = c.slice(Math.max(0, m.index - 20), m.index);
+      if (/try\s*\{[^}]*$/.test(before)) continue;
+      const isStatic = m[1].startsWith('import');
+      findings.push({
+        sev: isStatic ? 'error' : 'warn', area: 'code',
+        msg: isStatic
+          ? `${f}: importa "${m[2]}" pero ese archivo no existe — rompe el build y la sección no abrirá.`
+          : `${f}: hace require("${m[2]}") y ese archivo no existe — truena cuando se ejecute esa parte.`,
+        fixable: false,
+      });
+    }
+
+    // Funciones peligrosas: ejecución dinámica de código.
+    if (/\beval\s*\(/.test(c)) {
+      findings.push({ sev: 'error', area: 'security', msg: `${f}: usa eval() — permite ejecutar código arbitrario. Quítalo.`, fixable: false });
+    }
+    if (/(child_process|exec[A-Za-z]*)\s*\([^)]*(\$\{|\+\s*req\.)/.test(c)) {
+      findings.push({ sev: 'error', area: 'security', msg: `${f}: ejecuta comandos del sistema con datos variables — riesgo de inyección de comandos.`, fixable: false });
+    }
+
+    // Logging de datos sensibles.
+    if (/console\.(log|error|info|warn)\([^)]*\b(req\.body\.password|user\.password|\.privateKey|process\.env\.(JWT_SECRET|STRIPE_SECRET_KEY|EMAIL_PASSWORD))\b/.test(c)) {
+      findings.push({ sev: 'warn', area: 'security', msg: `${f}: imprime datos sensibles (contraseña/secreto/clave) en consola — quítalo de los logs.`, fixable: false });
+    }
+
+    // Sintaxis de Vite (import.meta.env) en un proyecto Create React App:
+    // siempre es undefined → la variable cae al fallback (localhost) en producción.
+    if (f.startsWith('client/') && /import\.meta\.env/.test(c)) {
+      findings.push({ sev: 'error', area: 'code', msg: `${f}: usa import.meta.env (sintaxis de Vite) pero el proyecto es Create React App — siempre será undefined y caerá al valor por defecto (localhost). Usa process.env.REACT_APP_*.`, fixable: false });
+    }
+
+    // URL de localhost incrustada en el cliente SIN ninguna variable de entorno
+    // en el archivo (localhost puro = se va a producción tal cual).
+    if (f.startsWith('client/') && /['"`]https?:\/\/localhost/.test(c) && !/process\.env/.test(c)) {
+      findings.push({ sev: 'warn', area: 'code', msg: `${f}: usa una URL de localhost sin ninguna variable de entorno — en producción debe venir de process.env.REACT_APP_*.`, fixable: false });
+    }
+  }
+  return findings;
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  MODO PENTESTER — Kairos ataca tu propio código buscando vulnerabilidades
+// ════════════════════════════════════════════════════════════════════════════
+
+function auditHardening() {
+  const findings = [];
+  const s = read('server/server.js') || '';
+
+  // Middlewares defensivos que deben estar activos.
+  const mids = [
+    { re: /helmet\s*\(/, name: 'helmet', desc: 'cabeceras de seguridad HTTP' },
+    { re: /mongoSanitize|mongo-sanitize/, name: 'express-mongo-sanitize', desc: 'previene inyección NoSQL' },
+    { re: /\bxss\s*\(/, name: 'xss-clean', desc: 'previene XSS' },
+    { re: /rateLimit|Limiter/, name: 'express-rate-limit', desc: 'frena fuerza bruta' },
+  ];
+  for (const m of mids) {
+    if (!m.re.test(s)) findings.push({ sev: 'error', area: 'security', msg: `server.js no aplica ${m.name} (${m.desc}) — protección clave ausente.`, fixable: false });
+  }
+
+  // CORS abierto a cualquier origen.
+  if (/origin:\s*['"`]\*['"`]/.test(s) || /['"]Access-Control-Allow-Origin['"]\s*[,:]\s*['"]\*/.test(s)) {
+    findings.push({ sev: 'error', area: 'security', msg: `server.js permite CORS desde cualquier origen ('*') — restríngelo a tu dominio.`, fixable: false });
+  }
+
+  // bcrypt para contraseñas.
+  const deps = loadDeps();
+  if (!deps.server.bcrypt && !deps.server.bcryptjs) {
+    findings.push({ sev: 'error', area: 'security', msg: `No hay bcrypt/bcryptjs instalado — verifica que las contraseñas NO se guarden en texto plano.`, fixable: false });
+  }
+
+  for (const f of prodFiles('server')) {
+    const c = read(f); if (!c) continue;
+
+    // JWT sin expiración → tokens eternos.
+    let idx = c.indexOf('jwt.sign(');
+    while (idx !== -1) {
+      const seg = c.slice(idx, idx + 220);
+      if (!/expiresIn|exp\b/.test(seg)) {
+        findings.push({ sev: 'warn', area: 'security', msg: `${f}: jwt.sign sin "expiresIn" — los tokens nunca caducan (si se roban, valen para siempre).`, fixable: false });
+        break;
+      }
+      idx = c.indexOf('jwt.sign(', idx + 1);
+    }
+
+    // Inyección NoSQL por $where.
+    if (/\$where/.test(c)) {
+      findings.push({ sev: 'warn', area: 'security', msg: `${f}: usa $where en una consulta — vector de inyección NoSQL, evítalo.`, fixable: false });
+    }
+
+    // Fuga de stack trace al cliente.
+    if (/res\.[a-z]*\s*\(\s*[^)]*error\.stack/.test(c) || /\.json\(\s*err\s*\)/.test(c)) {
+      findings.push({ sev: 'warn', area: 'security', msg: `${f}: parece devolver el error/stack crudo al cliente — filtra detalles internos. Manda un mensaje genérico.`, fixable: false });
+    }
+  }
+  return findings;
+}
+
 // ─── Auto-fixes seguros ─────────────────────────────────────────────────────────
 
 function applyFixes(findings, dryRun) {
@@ -543,7 +671,7 @@ function pushTasks(findings) {
 function printReport(report) {
   const { findings } = report;
   const icon = { error: '🔴', warn: '🟡', info: '🔵' };
-  const groups = { deploy: 'DESPLIEGUE / WEB', security: 'SEGURIDAD', payments: 'PAGOS (STRIPE)', env: 'VARIABLES DE ENTORNO', routes: 'CABLEADO DE RUTAS', integration: 'INTEGRACIONES', client: 'FRONTEND' };
+  const groups = { security: 'SEGURIDAD (modo pentester)', code: 'CÓDIGO (modo ingeniero)', deploy: 'DESPLIEGUE / WEB', payments: 'PAGOS (STRIPE)', env: 'VARIABLES DE ENTORNO', routes: 'CABLEADO DE RUTAS', integration: 'INTEGRACIONES', client: 'FRONTEND' };
 
   console.log('\n╔════════════════════════════════════════════════════════╗');
   console.log('║   KAIROS · ¿QUÉ LE FALTA A KRONOS PARA ESTAR EN LA WEB?  ║');
@@ -720,6 +848,8 @@ function audit() {
     ...auditRouteGuards(),
     ...auditPayments(),
     ...auditPhantomEndpoints(),
+    ...auditEngineering(),
+    ...auditHardening(),
     ...auditClientPages(),
   ];
   log(`Auditoría completada: ${findings.length} hallazgos`);
@@ -767,9 +897,34 @@ function run(options = {}) {
 
 // ─── CLI / módulo ───────────────────────────────────────────────────────────────
 
+// Modo vigilancia: re-audita cada vez que guardas un archivo (como un dev senior
+// mirándote el hombro). Ctrl+C para salir.
+function runWatch() {
+  console.log('👁️  KAIROS en modo vigilancia — revisa al guardar. Ctrl+C para salir.\n');
+  run({ reportOnly: true });
+  let timer = null;
+  const trigger = () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      console.clear();
+      console.log('🔄 Cambio detectado — re-revisando...\n');
+      run({ reportOnly: true });
+      console.log('\n👁️  Vigilando... (Ctrl+C para salir)');
+    }, 600);
+  };
+  for (const d of ['server', 'client/src', 'agents']) {
+    const base = path.join(ROOT, d);
+    if (!fs.existsSync(base)) continue;
+    try { fs.watch(base, { recursive: true }, trigger); }
+    catch { /* algunos FS no soportan recursive */ }
+  }
+}
+
 if (require.main === module) {
   const args = process.argv.slice(2);
-  if (args.includes('--study')) {
+  if (args.includes('--watch')) {
+    runWatch();
+  } else if (args.includes('--study')) {
     runStudy({ reportOnly: args.includes('--report') });
   } else {
     run({

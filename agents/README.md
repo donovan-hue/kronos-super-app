@@ -23,6 +23,14 @@ Kairos sabe qué ES y qué CONLLEVA KRONOS (red social + e-commerce + delivery +
 - **Seguridad** — secretos (claves Stripe/Google/AWS, llaves privadas, strings de Mongo con contraseña) escritos directo en el código en vez de en envs; rutas sensibles (wallet, admin, refunds, twofactor, tips, subscription) sin middleware de autenticación.
 - **Pagos (Stripe)** — planes de pago cuyo price ID no está documentado; webhook que no verifica la firma (`constructEvent`), lo que lo haría falsificable.
 - **Endpoints fantasma** — llamadas del cliente a `/api/...` que no existen como ruta en el servidor.
+- **Modo ingeniero (calidad de código)** — imports rotos que rompen el build, `require()` a archivos inexistentes, `eval`/ejecución de comandos con datos variables, `import.meta.env` (sintaxis Vite) en un proyecto Create React App, y URLs de localhost incrustadas sin variable de entorno.
+- **Modo pentester (seguridad)** — middlewares defensivos ausentes (helmet, mongo-sanitize, xss-clean, rate-limit), CORS abierto a `*`, JWT sin expiración, contraseñas sin bcrypt, `$where` (inyección NoSQL) y fugas de stack trace al cliente.
+
+### Modo vigilancia (`--watch`)
+
+`node agents/kairos.js --watch` deja a Kairos revisando en segundo plano: cada vez que
+guardas un archivo del servidor o del cliente, vuelve a auditar y te muestra al instante
+lo que esté roto — como un dev senior mirándote el hombro.
 
 ```powershell
 node agents/kairos.js            # auditoría + informe + encola tareas

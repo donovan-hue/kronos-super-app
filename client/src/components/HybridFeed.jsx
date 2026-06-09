@@ -110,8 +110,8 @@ function HybridFeed() {
       if (postImage) {
         const fd = new FormData();
         fd.append('file', postImage);
-        fd.append('upload_preset', import.meta.env.VITE_CLOUDINARY_PRESET || 'kronos_posts');
-        const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+        fd.append('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET || 'kronos_posts');
+        const cloudName = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
         if (cloudName) {
           const res = await axios.post(
             `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, fd

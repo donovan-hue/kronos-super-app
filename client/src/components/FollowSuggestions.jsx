@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { KronosImage } from './kronos';
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API = (process.env.REACT_APP_API_URL || 'http://localhost:5000/api').replace(/\/api\/?$/, '');
 
 export default function FollowSuggestions() {
   const [suggestions, setSuggestions] = useState([]);
