@@ -8,8 +8,7 @@ import Welcome from './pages/Welcome';
 import AdminDashboard from './admin/AdminDashboard';
 import ProtectedAdminRoute from './admin/ProtectedAdminRoute';
 import { AuthContext } from './context/AuthContext';
-import DesktopSidebar from './components/kronos/DesktopSidebar';
-import ExpandableBubbleNav from './components/kronos/ExpandableBubbleNav';
+import RadialMenu from './components/kronos/RadialMenu';
 
 class ErrorBoundary extends Component {
   state = { hasError: false };
@@ -17,10 +16,10 @@ class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
+        <div style={{ minHeight: '100vh', background: '#050506', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
           <div style={{ fontSize: 48 }}>⚠️</div>
-          <div style={{ color: '#0a0a14', fontSize: 18, fontWeight: 700 }}>Algo salió mal</div>
-          <button onClick={() => window.location.reload()} style={{ padding: '10px 28px', borderRadius: 24, background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: 600 }}>
+          <div className="metal-text" style={{ fontSize: 18, fontWeight: 700 }}>Algo salió mal</div>
+          <button onClick={() => window.location.reload()} className="btn-metal" style={{ padding: '10px 28px', borderRadius: 24, border: 'none', cursor: 'pointer', fontWeight: 600 }}>
             Recargar
           </button>
         </div>
@@ -36,15 +35,16 @@ function MyProfileRedirect() {
   return id ? <Navigate to={`/profile/${id}`} replace /> : <Navigate to="/auth/login" replace />;
 }
 
-// Layout con sidebar en desktop + Navbar + contenido
+// Layout único para celular/tablet/PC: fondo negro, contenido centrado que se
+// adapta al ancho, y el menú en abanico flotante abajo-centro. Sin barra lateral.
 function AppLayout({ children }) {
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: '#ffffff', position: 'relative' }}>
-      <DesktopSidebar />
-      <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
-        <Navbar />
+    <div style={{ minHeight: '100vh', background: '#050506', position: 'relative', display: 'flex', flexDirection: 'column' }}>
+      <Navbar />
+      <div style={{ flex: 1, width: '100%', maxWidth: 720, margin: '0 auto', minWidth: 0, padding: '0 0 120px' }}>
         {children}
       </div>
+      <RadialMenu />
     </div>
   );
 }
@@ -81,8 +81,8 @@ const Privacy         = lazy(() => import('./pages/Privacy'));
 const Terms           = lazy(() => import('./pages/Terms'));
 
 const LOADING = (
-  <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-    <div style={{ color: 'rgba(10,10,20,0.4)' }}>Cargando...</div>
+  <div style={{ minHeight: '100vh', background: '#050506', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ color: '#9aa0a7' }}>Cargando...</div>
   </div>
 );
 
@@ -107,7 +107,6 @@ function App() {
   return (
     <Router>
       <ErrorBoundary>
-        <ExpandableBubbleNav />
         <NotificationToast />
         <Toaster
           position="top-right"
