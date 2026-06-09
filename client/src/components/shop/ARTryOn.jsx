@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { FiCamera, FiShare2, FiDownload, FiX } from 'react-icons/fi';
-import useAR from '../hooks/useAR';
+import useAR from '../../hooks/useAR';
 import ARCamera from './ARCamera';
 import ARControls from './ARControls';
 
