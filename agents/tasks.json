@@ -691,5 +691,19 @@
     "description": "authController.followUser ahora llama createNotification(follow) al usuario seguido. Fire-and-forget con .catch para no interrumpir la respuesta.",
     "status": "done",
     "priority": 4
+  },
+  {
+    "id": "kairos-env-no-se-detect-un-archivo-env-loca",
+    "type": "improvement",
+    "priority": 4,
+    "title": "No se detectó un archivo .env local. Kairos recomienda crear uno basado en .env.example pa",
+    "description": "No se detectó un archivo .env local. Kairos recomienda crear uno basado en .env.example para que las integraciones funcionen localmente.",
+    "files": [],
+    "acceptance": [
+      "Resuelto y verificado en producción"
+    ],
+    "status": "needs_human",
+    "source": "kairos",
+    "detectedAt": "2026-06-10T12:52:09.484Z"
   }
 ]
