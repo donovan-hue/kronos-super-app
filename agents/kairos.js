@@ -121,7 +121,7 @@ const INTEGRATIONS = [
     dep: 'passport',   env: ['GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET'],
     code: [], critical: false,
   },
-q  {aa
+  {
     id: 'socketio',    name: 'Comunicación en tiempo real (Socket.io)',
     dep: 'socket.io',  env: ['REACT_APP_SOCKET_URL'],
     code: ['server/server.js'], critical: true,
@@ -144,7 +144,7 @@ function parseEnvKeys(content) {
     map[line.slice(0, eq).trim()] = line.slice(eq + 1).trim();
   }
   return map;
-} q áá
+}
 
 function parseRenderKeys(content) {
   if (!content) return [];
