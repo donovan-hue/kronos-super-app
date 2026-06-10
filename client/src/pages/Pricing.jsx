@@ -121,7 +121,7 @@ const TierCard = ({ tier, currentTier, onSelect, busy }) => {
             position: 'absolute',
             top: -12,
             right: 16,
-            background: 'linear-gradient(135deg, #7c3aed, #06b6d4)',
+            background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
             color: '#fff',
             fontSize: 11,
             fontWeight: 700,
@@ -203,9 +203,9 @@ const TierCard = ({ tier, currentTier, onSelect, busy }) => {
               border: 'none',
               cursor: busy ? 'wait' : 'pointer',
               background: isHighlighted
-                ? 'linear-gradient(135deg, #7c3aed, #06b6d4)'
+                ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)'
                 : tier.id === 'plus'
-                  ? 'linear-gradient(135deg, #eab308, #f97316)'
+                  ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)'
                   : 'linear-gradient(135deg, #3b82f6, #1e40af)',
               color: '#fff',
               fontWeight: 700,
@@ -237,7 +237,7 @@ export default function Pricing() {
     <div
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #0f0f1a 0%, #1a0528 50%, #0d1117 100%)',
+        background: 'radial-gradient(130% 110% at 50% 0%, #141517 0%, #0a0a0b 46%, #040405 100%)',
         padding: '64px 24px',
         color: '#fff'
       }}
@@ -247,7 +247,7 @@ export default function Pricing() {
           style={{
             fontSize: 42,
             margin: 0,
-            background: 'linear-gradient(135deg, #7c3aed, #06b6d4, #a855f7, #3b82f6)',
+            background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',

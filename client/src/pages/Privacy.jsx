@@ -207,7 +207,7 @@ export default function Privacy() {
               display: 'inline-block',
               background: 'rgba(124,58,237,0.15)',
               border: '1px solid rgba(124,58,237,0.3)',
-              color: '#a78bfa',
+              color: '#c9ced4',
               fontSize: 12,
               fontWeight: 600,
               padding: '4px 12px',
@@ -224,7 +224,7 @@ export default function Privacy() {
               fontSize: 36,
               fontWeight: 800,
               margin: '0 0 12px',
-              background: 'linear-gradient(135deg, #7c3aed, #06b6d4)',
+              background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent'
@@ -247,7 +247,7 @@ export default function Privacy() {
             marginBottom: 32
           }}
         >
-          <div style={{ color: '#06b6d4', fontWeight: 700, fontSize: 14, marginBottom: 10 }}>
+          <div style={{ color: '#c9ced4', fontWeight: 700, fontSize: 14, marginBottom: 10 }}>
             Resumen simple
           </div>
           <ul style={{ margin: 0, padding: '0 0 0 18px', color: 'rgba(255,255,255,0.7)', fontSize: 13, lineHeight: 1.9 }}>
@@ -347,7 +347,7 @@ export default function Privacy() {
               style={{
                 background: 'transparent',
                 border: 'none',
-                color: '#a78bfa',
+                color: '#c9ced4',
                 fontSize: 13,
                 cursor: 'pointer',
                 textDecoration: 'underline',
@@ -358,7 +358,7 @@ export default function Privacy() {
             </button>
             <a
               href="mailto:privacy@kronos.app"
-              style={{ color: '#a78bfa', fontSize: 13, textDecoration: 'underline' }}
+              style={{ color: '#c9ced4', fontSize: 13, textDecoration: 'underline' }}
             >
               privacy@kronos.app
             </a>

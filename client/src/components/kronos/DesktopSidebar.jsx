@@ -130,10 +130,10 @@ function SidebarItem({ item, isActive }) {
         padding: '9px 12px',
         borderRadius: 14,
         background: isActive
-          ? 'radial-gradient(circle at 30% 40%, rgba(79,172,254,0.2), rgba(243,160,255,0.12))'
+          ? 'radial-gradient(circle at 30% 40%, rgba(190,200,212,0.15), rgba(243,160,255,0.12))'
           : hovered ? 'rgba(255,255,255,0.05)' : 'transparent',
-        border: isActive ? '1px solid rgba(79,172,254,0.35)' : '1px solid transparent',
-        boxShadow: isActive ? '0 0 14px rgba(79,172,254,0.2), inset 0 1px 0 rgba(255,255,255,0.1)' : 'none',
+        border: isActive ? '1px solid rgba(190,200,212,0.22)' : '1px solid transparent',
+        boxShadow: isActive ? '0 0 14px rgba(190,200,212,0.15), inset 0 1px 0 rgba(255,255,255,0.1)' : 'none',
         transition: 'all 0.18s ease',
         cursor: 'pointer',
       }}>
@@ -142,14 +142,14 @@ function SidebarItem({ item, isActive }) {
           height: 36,
           borderRadius: '50%',
           background: isActive
-            ? 'radial-gradient(circle at 35% 35%, rgba(255,255,255,0.2), rgba(79,172,254,0.1))'
+            ? 'radial-gradient(circle at 35% 35%, rgba(255,255,255,0.2), rgba(190,200,212,0.07))'
             : 'rgba(255,255,255,0.05)',
           border: isActive ? '1px solid rgba(79,172,254,0.4)' : '1px solid rgba(255,255,255,0.08)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           flexShrink: 0,
-          boxShadow: isActive ? '0 0 10px rgba(79,172,254,0.3), inset 0 1px 0 rgba(255,255,255,0.2)' : 'none',
+          boxShadow: isActive ? '0 0 10px rgba(190,200,212,0.20), inset 0 1px 0 rgba(255,255,255,0.2)' : 'none',
           position: 'relative',
           overflow: 'hidden',
         }}>
@@ -165,7 +165,7 @@ function SidebarItem({ item, isActive }) {
           }
         </div>
         <span style={{
-          color: isActive ? '#4facfe' : 'rgba(10,10,20,0.65)',
+          color: isActive ? '#4facfe' : 'rgba(201,206,212,0.65)',
           fontWeight: isActive ? 700 : 400,
           fontSize: 13,
           fontFamily: "'Outfit', sans-serif",
@@ -194,11 +194,11 @@ export default function DesktopSidebar() {
       >
         <div style={{
           width: 38, height: 38, borderRadius: 12,
-          background: 'radial-gradient(circle at 35% 35%, rgba(255,255,255,0.3), rgba(79,172,254,0.2) 40%, rgba(243,160,255,0.15))',
+          background: 'radial-gradient(circle at 35% 35%, rgba(255,255,255,0.3), rgba(190,200,212,0.15) 40%, rgba(243,160,255,0.15))',
           border: '1.5px solid rgba(79,172,254,0.5)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: 18, fontWeight: 900, color: '#fff',
-          boxShadow: '0 0 16px rgba(79,172,254,0.3), inset 0 1px 0 rgba(255,255,255,0.3)',
+          boxShadow: '0 0 16px rgba(190,200,212,0.20), inset 0 1px 0 rgba(255,255,255,0.3)',
           position: 'relative', overflow: 'hidden',
         }}>
           <div style={{ position: 'absolute', top: 4, left: 6, width: 18, height: 9, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(255,255,255,0.5) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -222,11 +222,11 @@ export default function DesktopSidebar() {
 
       {/* User */}
       {user && (
-        <div style={{ borderTop: '1px solid rgba(79,172,254,0.12)', paddingTop: 16, marginTop: 8 }}>
+        <div style={{ borderTop: '1px solid rgba(190,200,212,0.10)', paddingTop: 16, marginTop: 8 }}>
           <div
             onClick={() => navigate(userId ? `/profile/${userId}` : '/profile/me')}
             style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 12px', borderRadius: 14, cursor: 'pointer', marginBottom: 8,
-              background: 'rgba(79,172,254,0.04)', border: '1px solid rgba(79,172,254,0.12)' }}
+              background: 'rgba(190,200,212,0.04)', border: '1px solid rgba(190,200,212,0.10)' }}
           >
             <img
               src={user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.username || 'K')}&background=7c3aed&color=fff&size=36`}
@@ -234,10 +234,10 @@ export default function DesktopSidebar() {
               style={{ width: 36, height: 36, borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(79,172,254,0.4)' }}
             />
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ color: '#0a0a14', fontWeight: 600, fontSize: 13, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <div style={{ color: '#c9ced4', fontWeight: 600, fontSize: 13, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {user.firstName || user.username}
               </div>
-              <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11 }}>@{user.username}</div>
+              <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 11 }}>@{user.username}</div>
             </div>
           </div>
           <button

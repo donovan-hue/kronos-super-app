@@ -128,7 +128,7 @@ const styles = {
   },
   title: {
     margin: 0, fontSize: '34px', fontWeight: 900,
-    background: 'linear-gradient(135deg, #7c3aed, #06b6d4)',
+    background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
     WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
     letterSpacing: '4px',
   },
@@ -139,7 +139,7 @@ const styles = {
   buttons: { width: '100%', display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '8px' },
   btnPrimary: {
     padding: '13px', borderRadius: '24px',
-    background: 'linear-gradient(135deg, #7c3aed, #06b6d4)',
+    background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
     color: '#fff', border: 'none', fontSize: '15px', fontWeight: 700,
     cursor: 'pointer', transition: 'all 0.3s',
     boxShadow: '0 0 20px rgba(124,58,237,0.4)',

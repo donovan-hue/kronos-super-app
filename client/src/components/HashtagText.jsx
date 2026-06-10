@@ -16,7 +16,7 @@ export default function HashtagText({ text, style = {} }) {
           <span
             key={i}
             onClick={e => { e.stopPropagation(); navigate(`/search?q=${encodeURIComponent(part.slice(1))}`); }}
-            style={{ color: '#a855f7', cursor: 'pointer', fontWeight: 600 }}
+            style={{ color: '#c9ced4', cursor: 'pointer', fontWeight: 600 }}
           >
             {part}
           </span>

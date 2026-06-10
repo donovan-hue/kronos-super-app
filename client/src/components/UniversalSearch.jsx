@@ -85,7 +85,7 @@ export default function UniversalSearch() {
     : 0;
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff', paddingBottom: 100 }}>
+    <div style={{ minHeight: '100vh', background: 'transparent', paddingBottom: 100 }}>
       <div style={{ maxWidth: 600, margin: '0 auto', padding: '16px' }}>
         <HoloText size={24} style={{ marginBottom: 16 }}>Buscar</HoloText>
 
@@ -93,35 +93,35 @@ export default function UniversalSearch() {
         <form onSubmit={handleSubmit} style={{ position: 'relative', marginBottom: 12 }}>
           <div style={{ display: 'flex', gap: 8 }}>
             <div style={{ flex: 1, position: 'relative' }}>
-              <span style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', fontSize: 16, color: 'rgba(10,10,20,0.35)' }}>🔍</span>
+              <span style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', fontSize: 16, color: 'rgba(201,206,212,0.35)' }}>🔍</span>
               <input
                 ref={inputRef}
                 value={query}
                 onChange={e => setQuery(e.target.value)}
                 placeholder="Usuarios, posts, hashtags, ropa..."
                 autoComplete="off"
-                style={{ width: '100%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.18)', borderRadius: 28, padding: '11px 40px 11px 42px', color: '#0a0a14', fontSize: 14, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
+                style={{ width: '100%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.14)', borderRadius: 28, padding: '11px 40px 11px 42px', color: '#c9ced4', fontSize: 14, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
               />
               {query && (
                 <button type="button" onClick={clearSearch}
-                  style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'rgba(10,10,20,0.5)', cursor: 'pointer', fontSize: 16, lineHeight: 1 }}>
+                  style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'rgba(201,206,212,0.50)', cursor: 'pointer', fontSize: 16, lineHeight: 1 }}>
                   ✕
                 </button>
               )}
             </div>
             <button type="submit"
-              style={{ padding: '11px 20px', borderRadius: 28, background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#fff', border: 'none', fontSize: 13, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}>
+              style={{ padding: '11px 20px', borderRadius: 28, background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', color: '#15171a', border: 'none', fontSize: 13, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}>
               Buscar
             </button>
           </div>
 
           {/* Suggestions dropdown */}
           {showDrop && suggestions.length > 0 && (
-            <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 50, background: 'rgba(255,255,255,0.98)', border: '1.5px solid rgba(79,172,254,0.2)', borderRadius: 16, marginTop: 6, overflow: 'hidden', boxShadow: '0 8px 32px rgba(79,172,254,0.15)' }}>
+            <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 50, background: 'rgba(255,255,255,0.98)', border: '1.5px solid rgba(190,200,212,0.15)', borderRadius: 16, marginTop: 6, overflow: 'hidden', boxShadow: '0 8px 32px rgba(190,200,212,0.12)' }}>
               {suggestions.map((s, i) => (
                 <button key={i} type="button"
                   onClick={() => { setQuery(s.text); setShowDrop(false); doSearch(s.text, category); setSearchParams({ q: s.text }); }}
-                  style={{ width: '100%', textAlign: 'left', padding: '10px 16px', background: 'none', border: 'none', color: '#0a0a14', cursor: 'pointer', fontSize: 13, display: 'flex', alignItems: 'center', gap: 10, borderBottom: i < suggestions.length - 1 ? '1px solid rgba(79,172,254,0.08)' : 'none' }}>
+                  style={{ width: '100%', textAlign: 'left', padding: '10px 16px', background: 'none', border: 'none', color: '#c9ced4', cursor: 'pointer', fontSize: 13, display: 'flex', alignItems: 'center', gap: 10, borderBottom: i < suggestions.length - 1 ? '1px solid rgba(190,200,212,0.06)' : 'none' }}>
                   <span style={{ fontSize: 15 }}>{s.type === 'user' ? '👤' : s.type === 'product' ? '👗' : '🔍'}</span>
                   <span>{s.text}</span>
                 </button>
@@ -134,7 +134,7 @@ export default function UniversalSearch() {
         <div style={{ display: 'flex', gap: 8, marginBottom: 20, overflowX: 'auto', paddingBottom: 2 }}>
           {CATEGORIES.map(cat => (
             <button key={cat.value} onClick={() => handleCategoryChange(cat.value)}
-              style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 5, padding: '7px 14px', borderRadius: 20, fontSize: 12, fontWeight: 600, border: '1.5px solid', borderColor: category === cat.value ? 'transparent' : 'rgba(79,172,254,0.2)', cursor: 'pointer', background: category === cat.value ? 'linear-gradient(135deg,#4facfe,#f3a0ff)' : 'rgba(255,255,255,0.8)', color: category === cat.value ? '#fff' : 'rgba(10,10,20,0.65)', transition: 'all 0.2s' }}>
+              style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 5, padding: '7px 14px', borderRadius: 20, fontSize: 12, fontWeight: 600, border: '1.5px solid', borderColor: category === cat.value ? 'transparent' : 'rgba(190,200,212,0.15)', cursor: 'pointer', background: category === cat.value ? 'linear-gradient(135deg,#4facfe,#f3a0ff)' : 'rgba(255,255,255,0.8)', color: category === cat.value ? '#fff' : 'rgba(201,206,212,0.65)', transition: 'all 0.2s' }}>
               <span>{cat.icon}</span><span>{cat.label}</span>
             </button>
           ))}
@@ -142,7 +142,7 @@ export default function UniversalSearch() {
 
         {/* Loading */}
         {loading && (
-          <div style={{ textAlign: 'center', padding: 60, color: 'rgba(10,10,20,0.5)' }}>
+          <div style={{ textAlign: 'center', padding: 60, color: 'rgba(201,206,212,0.50)' }}>
             <div style={{ fontSize: 36, marginBottom: 10 }}>🔍</div>
             <div>Buscando...</div>
           </div>
@@ -150,7 +150,7 @@ export default function UniversalSearch() {
 
         {/* No results */}
         {!loading && results && totalResults === 0 && (
-          <div style={{ textAlign: 'center', padding: 60, color: 'rgba(10,10,20,0.35)' }}>
+          <div style={{ textAlign: 'center', padding: 60, color: 'rgba(201,206,212,0.35)' }}>
             <div style={{ fontSize: 40, marginBottom: 10 }}>😶</div>
             <div style={{ fontSize: 15, fontWeight: 600 }}>Sin resultados para "{query}"</div>
             <div style={{ fontSize: 13, marginTop: 6 }}>Intenta con otras palabras o hashtags</div>
@@ -172,7 +172,7 @@ export default function UniversalSearch() {
             {/* Posts */}
             {results.posts?.length > 0 && (category === 'all' || category === 'posts') && (
               <section>
-                <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 10 }}>
+                <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 11, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 10 }}>
                   📝 Posts ({results.posts.length})
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -183,8 +183,8 @@ export default function UniversalSearch() {
                         <img src={post.author?.avatar || `https://ui-avatars.com/api/?name=${post.author?.username}&background=random&color=fff&size=32`}
                           alt="" style={{ width: 32, height: 32, borderRadius: '50%', objectFit: 'cover' }} />
                         <div>
-                          <div style={{ color: '#0a0a14', fontSize: 13, fontWeight: 600 }}>{post.author?.firstName || post.author?.username}</div>
-                          <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 11 }}>@{post.author?.username}</div>
+                          <div style={{ color: '#c9ced4', fontSize: 13, fontWeight: 600 }}>{post.author?.firstName || post.author?.username}</div>
+                          <div style={{ color: 'rgba(201,206,212,0.35)', fontSize: 11 }}>@{post.author?.username}</div>
                         </div>
                       </div>
                       <div style={{ color: 'rgba(255,255,255,0.75)', fontSize: 13, lineHeight: 1.5 }}>
@@ -205,7 +205,7 @@ export default function UniversalSearch() {
             {/* Users */}
             {results.users?.length > 0 && (category === 'all' || category === 'users') && (
               <section>
-                <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 10 }}>
+                <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 11, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 10 }}>
                   👤 Usuarios ({results.users.length})
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -216,8 +216,8 @@ export default function UniversalSearch() {
                         <img src={u.avatar || `https://ui-avatars.com/api/?name=${u.username}&background=random&color=fff&size=44`}
                           alt="" style={{ width: 44, height: 44, borderRadius: '50%', objectFit: 'cover' }} />
                         <div style={{ flex: 1 }}>
-                          <div style={{ color: '#0a0a14', fontSize: 14, fontWeight: 600 }}>{u.firstName} {u.lastName}</div>
-                          <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12 }}>@{u.username}</div>
+                          <div style={{ color: '#c9ced4', fontSize: 14, fontWeight: 600 }}>{u.firstName} {u.lastName}</div>
+                          <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 12 }}>@{u.username}</div>
                         </div>
                         <div style={{ color: 'rgba(255,255,255,0.25)', fontSize: 12 }}>
                           {u.followers?.length || 0} seguidores
@@ -232,7 +232,7 @@ export default function UniversalSearch() {
             {/* Products */}
             {results.products?.length > 0 && (category === 'all' || category === 'products') && (
               <section>
-                <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 10 }}>
+                <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 11, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 10 }}>
                   👗 Ropa ({results.products.length})
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 10 }}>
@@ -243,8 +243,8 @@ export default function UniversalSearch() {
                         <img src={p.images[0]} alt={p.name} style={{ width: '100%', height: 140, objectFit: 'cover' }} />
                       )}
                       <div style={{ padding: '10px 12px' }}>
-                        <div style={{ color: '#0a0a14', fontSize: 13, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.name}</div>
-                        <div style={{ color: '#a855f7', fontSize: 14, fontWeight: 800, marginTop: 2 }}>${p.price}</div>
+                        <div style={{ color: '#c9ced4', fontSize: 13, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.name}</div>
+                        <div style={{ color: '#c9ced4', fontSize: 14, fontWeight: 800, marginTop: 2 }}>${p.price}</div>
                       </div>
                     </GlassCard>
                   ))}

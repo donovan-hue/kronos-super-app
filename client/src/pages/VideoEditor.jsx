@@ -251,7 +251,7 @@ export default function VideoEditor() {
   const styles = {
     page: {
       minHeight: '100vh',
-      background: '#ffffff',
+      background: 'transparent',
       color: '#fff',
       fontFamily: "'Outfit', sans-serif",
       paddingTop: 72,
@@ -265,7 +265,7 @@ export default function VideoEditor() {
     title: {
       fontSize: 26,
       fontWeight: 800,
-      background: 'linear-gradient(135deg,#7c3aed,#06b6d4)',
+      background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
       margin: 0,
@@ -281,7 +281,7 @@ export default function VideoEditor() {
     sectionTitle: {
       fontSize: 13,
       fontWeight: 700,
-      color: 'rgba(10,10,20,0.5)',
+      color: 'rgba(201,206,212,0.50)',
       textTransform: 'uppercase',
       letterSpacing: 1,
       marginBottom: 12,
@@ -292,9 +292,9 @@ export default function VideoEditor() {
       border: 'none',
       cursor: 'pointer',
       background: color === 'red'
-        ? 'linear-gradient(135deg,#ef4444,#dc2626)'
+        ? 'linear-gradient(180deg,#565b62 0%,#3a3d42 100%)'
         : color === 'purple'
-          ? 'linear-gradient(135deg,#7c3aed,#06b6d4)'
+          ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)'
           : 'rgba(255,255,255,0.07)',
       color: '#fff',
       fontFamily: "'Outfit', sans-serif",
@@ -310,13 +310,13 @@ export default function VideoEditor() {
     btn: (active, variant) => ({
       padding: '8px 14px',
       borderRadius: 8,
-      border: variant === 'danger' ? '1px solid rgba(239,68,68,0.3)' : (active ? 'none' : '1px solid rgba(79,172,254,0.2)'),
+      border: variant === 'danger' ? '1px solid rgba(239,68,68,0.3)' : (active ? 'none' : '1px solid rgba(190,200,212,0.15)'),
       cursor: 'pointer',
       fontFamily: "'Outfit', sans-serif",
       fontWeight: 600,
       fontSize: 13,
       background: active
-        ? 'linear-gradient(135deg,#7c3aed,#06b6d4)'
+        ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)'
         : variant === 'danger'
           ? 'rgba(239,68,68,0.1)'
           : 'rgba(255,255,255,0.05)',
@@ -324,7 +324,7 @@ export default function VideoEditor() {
     }),
     input: {
       background: 'rgba(79,172,254,0.07)',
-      border: '1px solid rgba(79,172,254,0.2)',
+      border: '1px solid rgba(190,200,212,0.15)',
       borderRadius: 8,
       padding: '8px 12px',
       color: '#fff',
@@ -399,7 +399,7 @@ export default function VideoEditor() {
         {msg && <div style={styles.msgBox(msg.isError)}>{msg.text}</div>}
         <div style={styles.header}>
           <h1 style={styles.title}>Editor de Video</h1>
-          <p style={{ color: 'rgba(10,10,20,0.5)', fontSize: 14, margin: '6px 0 0' }}>
+          <p style={{ color: 'rgba(201,206,212,0.50)', fontSize: 14, margin: '6px 0 0' }}>
             Graba o sube un video para comenzar a editar
           </p>
         </div>
@@ -473,7 +473,7 @@ export default function VideoEditor() {
             <div style={{ padding: '12px 16px', display: 'flex', gap: 10, alignItems: 'center' }}>
               {!isRecording ? (
                 <button
-                  style={{ ...styles.btn(true, null), background: 'linear-gradient(135deg,#ef4444,#dc2626)', flex: 1 }}
+                  style={{ ...styles.btn(true, null), background: 'linear-gradient(180deg,#565b62 0%,#3a3d42 100%)', flex: 1 }}
                   onClick={startRecording}
                 >
                   🔴 Iniciar Grabacion
@@ -521,7 +521,7 @@ export default function VideoEditor() {
                   left: '50%',
                   transform: 'translateX(-50%)',
                   background: 'rgba(0,0,0,0.65)',
-                  color: '#0a0a14',
+                  color: '#c9ced4',
                   padding: '6px 14px',
                   borderRadius: 8,
                   fontSize: 18,
@@ -538,7 +538,7 @@ export default function VideoEditor() {
               )}
             </div>
             {duration > 0 && (
-              <div style={{ padding: '8px 16px', fontSize: 12, color: 'rgba(10,10,20,0.5)' }}>
+              <div style={{ padding: '8px 16px', fontSize: 12, color: 'rgba(201,206,212,0.50)' }}>
                 {formatTime(currentTime)} / {formatTime(duration)}
               </div>
             )}
@@ -600,13 +600,13 @@ export default function VideoEditor() {
             <GlassCard>
               <div style={styles.sectionTitle}>Recortar video</div>
               {duration > 0 && (
-                <div style={{ fontSize: 12, color: 'rgba(10,10,20,0.5)', marginBottom: 10 }}>
+                <div style={{ fontSize: 12, color: 'rgba(201,206,212,0.50)', marginBottom: 10 }}>
                   Duracion total: {formatTime(duration)}
                 </div>
               )}
               <div style={{ display: 'flex', gap: 10, alignItems: 'flex-end', flexWrap: 'wrap' }}>
                 <div style={{ flex: 1, minWidth: 100 }}>
-                  <div style={{ fontSize: 12, color: 'rgba(10,10,20,0.5)', marginBottom: 4 }}>
+                  <div style={{ fontSize: 12, color: 'rgba(201,206,212,0.50)', marginBottom: 4 }}>
                     Inicio (segundos)
                   </div>
                   <input
@@ -621,7 +621,7 @@ export default function VideoEditor() {
                   />
                 </div>
                 <div style={{ flex: 1, minWidth: 100 }}>
-                  <div style={{ fontSize: 12, color: 'rgba(10,10,20,0.5)', marginBottom: 4 }}>
+                  <div style={{ fontSize: 12, color: 'rgba(201,206,212,0.50)', marginBottom: 4 }}>
                     Fin (segundos)
                   </div>
                   <input
@@ -642,13 +642,13 @@ export default function VideoEditor() {
                   Previsualizar
                 </button>
                 <button
-                  style={{ ...styles.btn(false, null), padding: '9px 18px', background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#fff' }}
+                  style={{ ...styles.btn(false, null), padding: '9px 18px', background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', color: '#15171a' }}
                   onClick={handleExportTrimmed}
                 >
                   ✂️ Exportar
                 </button>
               </div>
-              <div style={{ fontSize: 11, color: 'rgba(10,10,20,0.35)', marginTop: 8 }}>
+              <div style={{ fontSize: 11, color: 'rgba(201,206,212,0.35)', marginTop: 8 }}>
                 "Previsualizar" reproduce el segmento. "Exportar" descarga el video recortado (sin audio).
               </div>
             </GlassCard>
@@ -665,7 +665,7 @@ export default function VideoEditor() {
                 maxLength={80}
               />
               {overlay && (
-                <div style={{ marginTop: 8, fontSize: 12, color: 'rgba(10,10,20,0.5)' }}>
+                <div style={{ marginTop: 8, fontSize: 12, color: 'rgba(201,206,212,0.50)' }}>
                   Texto visible sobre el video en reproduccion
                 </div>
               )}
@@ -674,7 +674,7 @@ export default function VideoEditor() {
             {/* EXPORT */}
             <GlassCard>
               <div style={styles.sectionTitle}>Exportar</div>
-              <div style={{ fontSize: 13, color: 'rgba(10,10,20,0.5)', marginBottom: 14 }}>
+              <div style={{ fontSize: 13, color: 'rgba(201,206,212,0.50)', marginBottom: 14 }}>
                 Descarga el video original con los ajustes visuales aplicados en el reproductor.
               </div>
               <button
@@ -684,7 +684,7 @@ export default function VideoEditor() {
                   borderRadius: 12,
                   border: 'none',
                   cursor: 'pointer',
-                  background: 'linear-gradient(135deg,#7c3aed,#06b6d4)',
+                  background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
                   color: '#fff',
                   fontFamily: "'Outfit', sans-serif",
                   fontWeight: 700,

@@ -22,7 +22,7 @@ export default function SubscriptionSuccess() {
     <div
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #0f0f1a 0%, #1a0528 50%, #0d1117 100%)',
+        background: 'radial-gradient(130% 110% at 50% 0%, #141517 0%, #0a0a0b 46%, #040405 100%)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -46,7 +46,7 @@ export default function SubscriptionSuccess() {
           style={{
             fontSize: 28,
             margin: '0 0 8px',
-            background: 'linear-gradient(135deg, #7c3aed, #06b6d4, #a855f7, #3b82f6)',
+            background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
@@ -65,7 +65,7 @@ export default function SubscriptionSuccess() {
             display: 'inline-block',
             padding: '12px 28px',
             borderRadius: 12,
-            background: 'linear-gradient(135deg, #7c3aed, #06b6d4)',
+            background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
             color: '#fff',
             textDecoration: 'none',
             fontWeight: 700,

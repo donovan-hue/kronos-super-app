@@ -19,7 +19,7 @@ function formatDateHeader() {
 }
 
 // ── Progress Bar ──────────────────────────────────────────────────────────────
-function ProgressBar({ value, max, color = '#7c3aed' }) {
+function ProgressBar({ value, max, color = '#9aa0a7' }) {
   const pct = Math.min(100, Math.round((value / max) * 100));
   return (
     <div style={{ width: '100%', height: 6, background: 'rgba(79,172,254,0.07)', borderRadius: 6, overflow: 'hidden', marginTop: 8 }}>
@@ -71,7 +71,7 @@ function MetricCard({ emoji, label, value, onChange, goal, unit, color, min = 0,
           {emoji}
         </div>
         <div>
-          <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11, letterSpacing: 0.5 }}>{label.toUpperCase()}</div>
+          <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 11, letterSpacing: 0.5 }}>{label.toUpperCase()}</div>
           {editing ? (
             <input
               autoFocus
@@ -97,9 +97,9 @@ function MetricCard({ emoji, label, value, onChange, goal, unit, color, min = 0,
               }}
             />
           ) : (
-            <div style={{ color: '#0a0a14', fontSize: 24, fontWeight: 800, lineHeight: 1.2 }}>
+            <div style={{ color: '#c9ced4', fontSize: 24, fontWeight: 800, lineHeight: 1.2 }}>
               {value.toLocaleString()}
-              <span style={{ color: 'rgba(10,10,20,0.35)', fontSize: 12, fontWeight: 400, marginLeft: 4 }}>{unit}</span>
+              <span style={{ color: 'rgba(201,206,212,0.35)', fontSize: 12, fontWeight: 400, marginLeft: 4 }}>{unit}</span>
             </div>
           )}
         </div>
@@ -108,7 +108,7 @@ function MetricCard({ emoji, label, value, onChange, goal, unit, color, min = 0,
       {goal && (
         <>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 2 }}>
-            <span style={{ color: 'rgba(10,10,20,0.35)', fontSize: 11 }}>Meta: {goal.toLocaleString()} {unit}</span>
+            <span style={{ color: 'rgba(201,206,212,0.35)', fontSize: 11 }}>Meta: {goal.toLocaleString()} {unit}</span>
             <span style={{ color: pct >= 100 ? '#10b981' : color, fontSize: 11, fontWeight: 700 }}>{pct}%</span>
           </div>
           <ProgressBar value={value} max={goal} color={color} />
@@ -127,7 +127,7 @@ function WeeklyChart({ history }) {
 
   return (
     <GlassCard style={{ marginBottom: 16 }}>
-      <div style={{ color: '#0a0a14', fontSize: 14, fontWeight: 700, marginBottom: 16 }}>
+      <div style={{ color: '#c9ced4', fontSize: 14, fontWeight: 700, marginBottom: 16 }}>
         📈 Pasos — Últimos 7 días
       </div>
       <div style={{ display: 'flex', alignItems: 'flex-end', gap: 8, height: 80 }}>
@@ -148,7 +148,7 @@ function WeeklyChart({ history }) {
                 background: reached
                   ? 'linear-gradient(180deg,#10b981,#06b6d4)'
                   : isToday
-                    ? 'linear-gradient(180deg,#7c3aed,#a855f7)'
+                    ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)'
                     : 'rgba(255,255,255,0.12)',
                 transition: 'height 0.3s ease',
                 position: 'relative',
@@ -164,7 +164,7 @@ function WeeklyChart({ history }) {
           );
         })}
       </div>
-      <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 10, marginTop: 10, textAlign: 'right' }}>
+      <div style={{ color: 'rgba(201,206,212,0.35)', fontSize: 10, marginTop: 10, textAlign: 'right' }}>
         ⭐ = meta 10,000 alcanzada
       </div>
     </GlassCard>
@@ -243,14 +243,14 @@ export default function Health() {
   };
 
   const toastColors = {
-    success: { bg: 'linear-gradient(135deg,#10b981,#06b6d4)', shadow: 'rgba(16,185,129,0.4)' },
-    error:   { bg: 'linear-gradient(135deg,#ef4444,#f97316)', shadow: 'rgba(239,68,68,0.4)' },
-    info:    { bg: 'linear-gradient(135deg,#7c3aed,#06b6d4)', shadow: 'rgba(124,58,237,0.4)' },
+    success: { bg: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', shadow: 'rgba(16,185,129,0.4)' },
+    error:   { bg: 'rgba(190,200,212,0.08)', shadow: 'rgba(239,68,68,0.4)' },
+    info:    { bg: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', shadow: 'rgba(124,58,237,0.4)' },
   };
   const tc = toastColors[toast.type] || toastColors.info;
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff', paddingBottom: 100 }}>
+    <div style={{ minHeight: '100vh', background: 'transparent', paddingBottom: 100 }}>
       {/* Toast */}
       {toast.msg && (
         <div style={{
@@ -268,12 +268,12 @@ export default function Health() {
       <div style={{ maxWidth: 480, margin: '0 auto', padding: '16px' }}>
         {/* Header */}
         <HoloText size={26} style={{ marginBottom: 4 }}>Health & Fitness</HoloText>
-        <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 13, marginBottom: 20, textTransform: 'capitalize' }}>
+        <div style={{ color: 'rgba(201,206,212,0.35)', fontSize: 13, marginBottom: 20, textTransform: 'capitalize' }}>
           {formatDateHeader()}
         </div>
 
         {loading ? (
-          <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.35)', padding: 60 }}>
+          <div style={{ textAlign: 'center', color: 'rgba(201,206,212,0.35)', padding: 60 }}>
             Cargando tu registro de salud...
           </div>
         ) : (
@@ -291,7 +291,7 @@ export default function Health() {
                   <div style={{ color: '#10b981', fontWeight: 700, fontSize: 14 }}>
                     +10 tokens ganados hoy
                   </div>
-                  <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12 }}>
+                  <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 12 }}>
                     Meta de 10,000 pasos alcanzada
                   </div>
                 </div>
@@ -307,7 +307,7 @@ export default function Health() {
                 onChange={v => setMetric('steps', v)}
                 goal={10000}
                 unit="pasos"
-                color="#7c3aed"
+                color="#9aa0a7"
                 min={0}
                 max={100000}
               />
@@ -346,7 +346,7 @@ export default function Health() {
 
             {/* Mood selector */}
             <GlassCard style={{ marginBottom: 16 }}>
-              <div style={{ color: '#0a0a14', fontSize: 14, fontWeight: 700, marginBottom: 14 }}>
+              <div style={{ color: '#c9ced4', fontSize: 14, fontWeight: 700, marginBottom: 14 }}>
                 ¿Cómo te sientes hoy?
               </div>
               <div style={{ display: 'flex', gap: 8, justifyContent: 'space-between' }}>
@@ -371,7 +371,7 @@ export default function Health() {
                         transform: active ? 'scale(1.06)' : 'scale(1)',
                       }}>
                       <span style={{ fontSize: 22 }}>{m.emoji}</span>
-                      <span style={{ color: active ? '#0a0a14' : 'rgba(10,10,20,0.5)', fontSize: 10, fontWeight: active ? 700 : 400 }}>
+                      <span style={{ color: active ? '#0a0a14' : 'rgba(201,206,212,0.50)', fontSize: 10, fontWeight: active ? 700 : 400 }}>
                         {m.label}
                       </span>
                     </button>
@@ -382,7 +382,7 @@ export default function Health() {
 
             {/* Notes */}
             <GlassCard style={{ marginBottom: 16 }}>
-              <div style={{ color: '#0a0a14', fontSize: 14, fontWeight: 700, marginBottom: 12 }}>
+              <div style={{ color: '#c9ced4', fontSize: 14, fontWeight: 700, marginBottom: 12 }}>
                 📝 Notas del día
               </div>
               <textarea
@@ -392,11 +392,11 @@ export default function Health() {
                 rows={3}
                 style={{
                   width: '100%',
-                  background: 'rgba(79,172,254,0.04)',
-                  border: '1px solid rgba(79,172,254,0.15)',
+                  background: 'rgba(190,200,212,0.04)',
+                  border: '1px solid rgba(190,200,212,0.12)',
                   borderRadius: 10,
                   padding: '10px 12px',
-                  color: '#0a0a14',
+                  color: '#c9ced4',
                   fontSize: 13,
                   outline: 'none',
                   resize: 'none',
@@ -418,7 +418,7 @@ export default function Health() {
                 width: '100%',
                 padding: '15px',
                 borderRadius: 16,
-                background: saving ? 'rgba(255,255,255,0.08)' : 'linear-gradient(135deg,#7c3aed,#06b6d4)',
+                background: saving ? 'rgba(255,255,255,0.08)' : 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
                 color: '#fff',
                 border: 'none',
                 fontSize: 16,

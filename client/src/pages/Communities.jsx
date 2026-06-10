@@ -42,7 +42,7 @@ function CreateCommunityModal({ onClose, onCreated }) {
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 999, background: 'rgba(0,0,0,0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <GlassCard style={{ width: '90%', maxWidth: 440 }}>
-        <div style={{ color: '#0a0a14', fontSize: 18, fontWeight: 700, marginBottom: 20 }}>Nueva Comunidad</div>
+        <div style={{ color: '#c9ced4', fontSize: 18, fontWeight: 700, marginBottom: 20 }}>Nueva Comunidad</div>
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           <input
             placeholder="Nombre de la comunidad *"
@@ -50,30 +50,30 @@ function CreateCommunityModal({ onClose, onCreated }) {
             onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
             maxLength={100}
             required
-            style={{ background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 10, padding: '10px 14px', color: '#0a0a14', fontSize: 14, outline: 'none', fontFamily: 'inherit' }}
+            style={{ background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 10, padding: '10px 14px', color: '#c9ced4', fontSize: 14, outline: 'none', fontFamily: 'inherit' }}
           />
           <textarea
             placeholder="Descripción (opcional)"
             value={form.description}
             onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
             maxLength={500}
-            style={{ background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 10, padding: '10px 14px', color: '#0a0a14', fontSize: 14, outline: 'none', resize: 'none', minHeight: 80, fontFamily: 'inherit' }}
+            style={{ background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 10, padding: '10px 14px', color: '#c9ced4', fontSize: 14, outline: 'none', resize: 'none', minHeight: 80, fontFamily: 'inherit' }}
           />
           <div style={{ display: 'flex', gap: 10 }}>
             <select value={form.category} onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
-              style={{ flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 10, padding: '10px 12px', color: '#0a0a14', fontSize: 13, outline: 'none' }}>
+              style={{ flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 10, padding: '10px 12px', color: '#c9ced4', fontSize: 13, outline: 'none' }}>
               {CATEGORIES.filter(c => c.value).map(c => <option key={c.value} value={c.value}>{c.label}</option>)}
             </select>
             <select value={form.privacy} onChange={e => setForm(f => ({ ...f, privacy: e.target.value }))}
-              style={{ flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 10, padding: '10px 12px', color: '#0a0a14', fontSize: 13, outline: 'none' }}>
+              style={{ flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 10, padding: '10px 12px', color: '#c9ced4', fontSize: 13, outline: 'none' }}>
               <option value="public">🌍 Pública</option>
               <option value="private">🔒 Privada</option>
             </select>
           </div>
           <div style={{ display: 'flex', gap: 10, marginTop: 8 }}>
-            <button type="button" onClick={onClose} style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'rgba(79,172,254,0.07)', color: '#0a0a14', border: 'none', cursor: 'pointer', fontSize: 14 }}>Cancelar</button>
+            <button type="button" onClick={onClose} style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'rgba(79,172,254,0.07)', color: '#c9ced4', border: 'none', cursor: 'pointer', fontSize: 14 }}>Cancelar</button>
             <button type="submit" disabled={loading || !form.name.trim()}
-              style={{ flex: 2, padding: '10px', borderRadius: 12, background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 14, fontWeight: 700 }}>
+              style={{ flex: 2, padding: '10px', borderRadius: 12, background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', color: '#15171a', border: 'none', cursor: 'pointer', fontSize: 14, fontWeight: 700 }}>
               {loading ? 'Creando...' : 'Crear Comunidad'}
             </button>
           </div>
@@ -94,28 +94,28 @@ function CommunityCard({ community, currentUserId, onJoin, onClick }) {
     >
       <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
         <div style={{
-          width: 56, height: 56, borderRadius: 16, background: 'linear-gradient(135deg,#7c3aed,#06b6d4)',
+          width: 56, height: 56, borderRadius: 16, background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
           flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, overflow: 'hidden'
         }}>
           {community.avatar ? <img src={community.avatar} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : label.split(' ')[0]}
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div style={{ color: '#0a0a14', fontSize: 15, fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{community.name}</div>
+            <div style={{ color: '#c9ced4', fontSize: 15, fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{community.name}</div>
             <span style={{ fontSize: 10, padding: '2px 8px', borderRadius: 20, background: community.privacy === 'private' ? 'rgba(239,68,68,0.2)' : 'rgba(16,185,129,0.2)', color: community.privacy === 'private' ? '#ef4444' : '#10b981', flexShrink: 0 }}>
               {community.privacy === 'private' ? '🔒' : '🌍'}
             </span>
           </div>
-          <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12, marginBottom: 8, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+          <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 12, marginBottom: 8, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
             {community.description || 'Sin descripción'}
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11 }}>👥 {community.members?.length || 0} miembros</span>
+            <span style={{ color: 'rgba(201,206,212,0.50)', fontSize: 11 }}>👥 {community.members?.length || 0} miembros</span>
             <button
               onClick={e => { e.stopPropagation(); onJoin(community._id); }}
               style={{
                 padding: '5px 14px', borderRadius: 20, fontSize: 12, fontWeight: 600, border: 'none', cursor: 'pointer',
-                background: isMember ? 'rgba(79,172,254,0.1)' : 'linear-gradient(135deg,#7c3aed,#06b6d4)',
+                background: isMember ? 'rgba(190,200,212,0.07)' : 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
                 color: '#fff'
               }}
             >
@@ -171,13 +171,13 @@ export default function Communities() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff', paddingBottom: 80 }}>
+    <div style={{ minHeight: '100vh', background: 'transparent', paddingBottom: 80 }}>
       {/* Header */}
       <div style={{ padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: 680, margin: '0 auto' }}>
         <HoloText size={26}>Comunidades</HoloText>
         <button
           onClick={() => setCreating(true)}
-          style={{ padding: '8px 18px', borderRadius: 20, background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#fff', border: 'none', fontSize: 13, fontWeight: 700, cursor: 'pointer' }}
+          style={{ padding: '8px 18px', borderRadius: 20, background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', color: '#15171a', border: 'none', fontSize: 13, fontWeight: 700, cursor: 'pointer' }}
         >
           + Nueva
         </button>
@@ -188,7 +188,7 @@ export default function Communities() {
         <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
           {[{ id: 'explore', label: 'Explorar' }, { id: 'mine', label: 'Mis Comunidades' }].map(t => (
             <button key={t.id} onClick={() => setTab(t.id)}
-              style={{ flex: 1, padding: '10px', borderRadius: 12, fontSize: 13, fontWeight: 600, border: 'none', cursor: 'pointer', background: tab === t.id ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(255,255,255,0.06)', color: '#fff', transition: 'all 0.2s' }}>
+              style={{ flex: 1, padding: '10px', borderRadius: 12, fontSize: 13, fontWeight: 600, border: 'none', cursor: 'pointer', background: tab === t.id ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)' : 'rgba(255,255,255,0.06)', color: '#fff', transition: 'all 0.2s' }}>
               {t.label}
             </button>
           ))}
@@ -202,16 +202,16 @@ export default function Communities() {
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 placeholder="Buscar comunidades..."
-                style={{ flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 20, padding: '9px 16px', color: '#0a0a14', fontSize: 13, outline: 'none', fontFamily: 'inherit' }}
+                style={{ flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 20, padding: '9px 16px', color: '#c9ced4', fontSize: 13, outline: 'none', fontFamily: 'inherit' }}
               />
-              <button type="submit" style={{ padding: '9px 18px', borderRadius: 20, background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 13 }}>
+              <button type="submit" style={{ padding: '9px 18px', borderRadius: 20, background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', color: '#15171a', border: 'none', cursor: 'pointer', fontSize: 13 }}>
                 Buscar
               </button>
             </form>
             <div style={{ display: 'flex', gap: 8, overflowX: 'auto', scrollbarWidth: 'none', paddingBottom: 4 }}>
               {CATEGORIES.map(c => (
                 <button key={c.value} onClick={() => setCategory(c.value)}
-                  style={{ padding: '5px 14px', borderRadius: 20, fontSize: 12, border: 'none', cursor: 'pointer', whiteSpace: 'nowrap', background: category === c.value ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(255,255,255,0.08)', color: '#fff', fontWeight: category === c.value ? 700 : 400 }}>
+                  style={{ padding: '5px 14px', borderRadius: 20, fontSize: 12, border: 'none', cursor: 'pointer', whiteSpace: 'nowrap', background: category === c.value ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)' : 'rgba(255,255,255,0.08)', color: '#fff', fontWeight: category === c.value ? 700 : 400 }}>
                   {c.label}
                 </button>
               ))}
@@ -221,9 +221,9 @@ export default function Communities() {
 
         {/* Communities list */}
         {loading ? (<div style={{padding:'0 16px'}}><SkeletonList count={4} /></div>) : communities.length === 0 ? (
-          <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.35)', padding: 60 }}>
+          <div style={{ textAlign: 'center', color: 'rgba(201,206,212,0.35)', padding: 60 }}>
             <div style={{ fontSize: 48, marginBottom: 12 }}>🏛️</div>
-            <div style={{ fontSize: 16, fontWeight: 600, color: 'rgba(10,10,20,0.5)' }}>
+            <div style={{ fontSize: 16, fontWeight: 600, color: 'rgba(201,206,212,0.50)' }}>
               {tab === 'mine' ? 'No perteneces a ninguna comunidad aún' : 'No hay comunidades'}
             </div>
             <div style={{ fontSize: 13, marginTop: 6 }}>¡Crea la primera!</div>

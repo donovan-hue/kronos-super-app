@@ -80,7 +80,7 @@ export default function UpgradePrompt({
             borderRadius: 10,
             border: 'none',
             cursor: 'pointer',
-            background: 'linear-gradient(135deg, #7c3aed, #06b6d4)',
+            background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
             color: '#fff',
             fontWeight: 700,
             fontSize: 13

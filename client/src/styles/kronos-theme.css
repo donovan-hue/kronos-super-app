@@ -1,178 +1,200 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap');
-
+/* ===================== KRONOSPACE · Sistema visual metálico negro/plata ===================== */
 :root {
-  /* Fondo blanco puro */
-  --kronos-bg: #ffffff;
-  --kronos-bg-elev: #f5f5fa;
-  --kronos-bg-card: #ffffff;
+  /* Negros */
+  --ink: #040405;
+  --ink-2: #0a0b0d;
+  --panel: rgba(255,255,255,.022);
+  --panel-2: rgba(255,255,255,.04);
+  --line: rgba(190,200,212,.10);
+  --line-2: rgba(190,200,212,.18);
 
-  /* Tornasol / iridescent */
-  --kronos-grad-holo: linear-gradient(135deg, #4facfe 0%, #00f2fe 30%, #f3a0ff 60%, #ff85a2 100%);
-  --kronos-grad-holo-soft: linear-gradient(135deg, rgba(79,172,254,0.15) 0%, rgba(0,242,254,0.1) 30%, rgba(243,160,255,0.12) 60%, rgba(255,133,162,0.1) 100%);
+  /* Plata */
+  --silver: #c9ced4;
+  --silver-dim: #7d838b;
+  --silver-faint: #565b62;
 
-  /* Textos oscuros sobre fondo blanco */
-  --kronos-text: #0a0a14;
-  --kronos-text-2: rgba(10,10,20,0.7);
-  --kronos-text-3: rgba(10,10,20,0.45);
-  --kronos-text-4: rgba(10,10,20,0.28);
+  /* Gradiente metálico platino */
+  --metal: conic-gradient(from 138deg,
+    #54585d 0%, #c9ced4 11%, #ffffff 19%, #9aa0a7 29%,
+    #686c71 41%, #e9ecf0 54%, #b4b9c0 65%,
+    #f5f7f9 77%, #7e8288 89%, #54585d 100%);
+  --metal-bright: conic-gradient(from 138deg,
+    #6b6f75 0%, #dfe3e8 11%, #ffffff 19%, #aeb4bb 29%,
+    #7a7e83 41%, #f3f5f8 54%, #c6cbd2 65%,
+    #ffffff 77%, #92969c 89%, #6b6f75 100%);
+  --brushed: repeating-linear-gradient(118deg,
+    rgba(255,255,255,.05) 0 1px, rgba(0,0,0,.05) 1px 2px, transparent 2px 4px);
 
-  /* Glass claro */
-  --kronos-glass: rgba(255,255,255,0.75);
-  --kronos-glass-border: rgba(79,172,254,0.2);
-  --kronos-glass-input: rgba(255,255,255,0.9);
-
-  /* Sombras suaves */
-  --kronos-shadow: 0 4px 24px rgba(79,172,254,0.12), 0 1px 4px rgba(0,0,0,0.06);
-  --kronos-shadow-hover: 0 8px 32px rgba(79,172,254,0.22), 0 2px 8px rgba(243,160,255,0.15);
-
+  /* Aliases de compatibilidad (componentes k- existentes) */
+  --kronos-bg: #040405;
+  --kronos-bg-elev: #0a0b0d;
+  --kronos-bg-card: rgba(255,255,255,.022);
+  --kronos-text: #c9ced4;
+  --kronos-text-2: rgba(201,206,212,.72);
+  --kronos-text-3: rgba(201,206,212,.45);
+  --kronos-text-4: rgba(201,206,212,.28);
+  --kronos-glass: rgba(255,255,255,.022);
+  --kronos-glass-border: rgba(190,200,212,.14);
+  --kronos-glass-input: rgba(255,255,255,.04);
+  --kronos-shadow: 0 4px 24px rgba(0,0,0,.55), 0 1px 4px rgba(0,0,0,.4);
+  --kronos-shadow-hover: 0 8px 32px rgba(0,0,0,.7), 0 0 20px rgba(190,200,212,.08);
   --kronos-radius-sm: 10px;
   --kronos-radius: 14px;
   --kronos-radius-lg: 20px;
-
-  --kronos-font: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --kronos-font: 'Outfit', 'Manrope', 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 /* Base */
 body {
-  background: #ffffff !important;
-  color: var(--kronos-text) !important;
+  background: var(--ink) !important;
+  color: var(--silver) !important;
   font-family: var(--kronos-font);
 }
 
 .k-theme {
-  background: var(--kronos-bg);
-  color: var(--kronos-text);
+  background: var(--ink);
+  color: var(--silver);
   font-family: var(--kronos-font);
 }
 
 .k-bg {
-  background: var(--kronos-bg-elev);
+  background: var(--ink-2);
 }
 
 .k-font {
   font-family: var(--kronos-font);
 }
 
-/* Texto tornasol animado */
+/* Texto metálico platino (reemplaza el tornasol colorido) */
 .k-holo-text {
   font-family: var(--kronos-font);
-  font-weight: 800;
-  background: var(--kronos-grad-holo);
-  background-size: 300% 300%;
+  font-weight: 700;
+  background: linear-gradient(180deg,
+    #ffffff 0%, #eef1f4 22%, #a9aeb5 48%, #7c8087 53%, #c6cbd2 70%, #f4f6f8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  letter-spacing: 2px;
-  animation: k-holo-shift 4s ease-in-out infinite;
+  letter-spacing: 0.02em;
 }
 
-/* Card glass blanco */
+.k-holo-animate {
+  /* Sin animación de colores; el texto platino no parpadea */
+}
+
+/* Panel / card oscuro con borde metálico sutil */
 .k-glass {
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1.5px solid rgba(79,172,254,0.18);
+  background: var(--panel);
+  border: 1px solid var(--line);
   border-radius: var(--kronos-radius-lg);
   box-shadow: var(--kronos-shadow);
+  color: var(--silver);
 }
 
 .k-glass:hover {
+  border-color: var(--line-2);
   box-shadow: var(--kronos-shadow-hover);
-  border-color: rgba(243,160,255,0.3);
 }
 
-/* Input claro */
+/* Input oscuro */
 .k-input {
-  background: rgba(255,255,255,0.95);
-  border: 1.5px solid rgba(79,172,254,0.25);
+  background: var(--panel-2);
+  border: 1px solid var(--line-2);
   border-radius: var(--kronos-radius);
   padding: 14px 16px;
-  color: var(--kronos-text);
+  color: var(--silver);
   font-size: 14px;
   outline: none;
   font-family: var(--kronos-font);
   width: 100%;
-  box-shadow: 0 2px 8px rgba(79,172,254,0.08);
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .k-input:focus {
-  border-color: rgba(79,172,254,0.55);
-  box-shadow: 0 0 0 3px rgba(79,172,254,0.12), 0 2px 8px rgba(79,172,254,0.1);
+  border-color: rgba(201,206,212,.4);
+  box-shadow: 0 0 0 3px rgba(190,200,212,.06);
 }
 
 .k-input::placeholder {
-  color: var(--kronos-text-3);
+  color: var(--silver-faint);
 }
 
-/* Botón primario tornasol */
+/* Botón metálico principal */
 .k-btn-primary {
-  padding: 14px 0;
+  padding: 2px;
   border-radius: var(--kronos-radius);
-  background: var(--kronos-grad-holo);
-  background-size: 200% 200%;
-  color: #fff;
-  font-weight: 700;
-  font-size: 15px;
-  font-family: var(--kronos-font);
-  letter-spacing: 0.5px;
+  background: var(--metal);
   border: none;
   cursor: pointer;
   width: 100%;
-  text-align: center;
-  box-shadow: 0 4px 16px rgba(79,172,254,0.35);
-  transition: all 0.2s;
-  animation: k-holo-shift 4s ease-in-out infinite;
+  box-shadow: 0 14px 30px -12px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.05);
+  font-family: var(--kronos-font);
+}
+
+.k-btn-primary > span,
+.k-btn-primary-inner {
+  display: grid;
+  place-items: center;
+  height: 52px;
+  border-radius: 13px;
+  background: radial-gradient(120% 160% at 50% -10%, #23252a, #0c0d0f);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--silver);
 }
 
 .k-btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(243,160,255,0.4);
+  filter: brightness(1.08);
 }
 
-/* Botón secundario */
+/* Botón secundario oscuro */
 .k-btn-secondary {
   padding: 10px 16px;
   border-radius: var(--kronos-radius-sm);
-  background: rgba(255,255,255,0.8);
-  border: 1.5px solid rgba(79,172,254,0.2);
-  color: var(--kronos-text-2);
+  background: var(--panel);
+  border: 1px solid var(--line-2);
+  color: var(--silver-dim);
   font-family: var(--kronos-font);
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(79,172,254,0.08);
   transition: all 0.2s;
 }
 
 .k-btn-secondary:hover {
-  border-color: rgba(243,160,255,0.4);
-  box-shadow: 0 4px 12px rgba(243,160,255,0.15);
+  border-color: var(--line-2);
+  background: var(--panel-2);
 }
 
-/* Chip */
+/* Chip / filtro */
 .k-chip {
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 11px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-size: 12px;
   font-family: var(--kronos-font);
   white-space: nowrap;
-  background: rgba(255,255,255,0.8);
-  color: var(--kronos-text-3);
-  border: 1.5px solid rgba(79,172,254,0.15);
+  background: var(--panel);
+  color: var(--silver-dim);
+  border: 1px solid var(--line-2);
   cursor: pointer;
+  letter-spacing: .06em;
   transition: all 0.15s;
 }
 
-.k-chip.active {
-  background: var(--kronos-grad-holo);
-  color: #fff;
-  border: none;
-  box-shadow: 0 2px 10px rgba(79,172,254,0.3);
+.k-chip.active,
+.k-chip.on {
+  background: var(--metal);
+  color: #15171a;
+  -webkit-text-fill-color: #15171a;
+  border-color: transparent;
+  font-weight: 600;
 }
 
-@keyframes k-holo-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
+/* Scrollbar oculto */
 .k-scroll-hide::-webkit-scrollbar { display: none; }
 .k-scroll-hide { scrollbar-width: none; }
+
+/* Utilidades de animación (vacías - motion reducida por defecto) */
+@keyframes k-holo-shift {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.95; }
+}

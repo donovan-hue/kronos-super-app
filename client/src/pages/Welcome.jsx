@@ -94,7 +94,7 @@ export default function Welcome() {
           </BotonBurbuja3D>
           <button onClick={() => setShowFeatures(v => !v)} style={{
             background: 'none', border: 'none', cursor: 'pointer',
-            color: 'rgba(10,10,20,0.4)', fontSize: 13, marginTop: 4,
+            color: 'rgba(201,206,212,0.40)', fontSize: 13, marginTop: 4,
             textDecoration: 'underline',
           }}>
             {showFeatures ? 'Ocultar features ↑' : 'Ver los 15 mundos ↓'}
@@ -141,8 +141,8 @@ export default function Welcome() {
               }} />
               <div style={{ position: 'relative', zIndex: 1 }}>
                 <div style={{ fontSize: 30, marginBottom: 8 }}>{f.icon}</div>
-                <div style={{ fontWeight: 800, fontSize: 13, color: '#0a0a14', marginBottom: 4 }}>{f.label}</div>
-                <div style={{ fontSize: 11, color: 'rgba(10,10,20,0.5)', lineHeight: 1.4 }}>{f.desc}</div>
+                <div style={{ fontWeight: 800, fontSize: 13, color: '#c9ced4', marginBottom: 4 }}>{f.label}</div>
+                <div style={{ fontSize: 11, color: 'rgba(201,206,212,0.50)', lineHeight: 1.4 }}>{f.desc}</div>
               </div>
             </div>
           ))}

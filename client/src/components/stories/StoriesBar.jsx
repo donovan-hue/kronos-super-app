@@ -11,7 +11,7 @@ function StoryRing({ group, onOpen, isMine }) {
   const name = author.firstName || author.username;
   const ringStyle = hasUnviewed
     ? { background: 'linear-gradient(135deg,#ec4899,#7c3aed,#06b6d4)', padding: 2 }
-    : { background: 'rgba(10,10,20,0.1)', padding: 2 };
+    : { background: 'rgba(255,255,255,0.06)', padding: 2 };
 
   return (
     <div
@@ -19,7 +19,7 @@ function StoryRing({ group, onOpen, isMine }) {
       style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, cursor: 'pointer', minWidth: 64 }}
     >
       <div style={{ ...ringStyle, borderRadius: '50%' }}>
-        <div style={{ width: 52, height: 52, borderRadius: '50%', background: '#ffffff', padding: 2 }}>
+        <div style={{ width: 52, height: 52, borderRadius: '50%', background: 'rgba(190,200,212,0.15)', padding: 2 }}>
           <img
             src={author.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=7c3aed&color=fff&size=52`}
             alt={name}
@@ -27,7 +27,7 @@ function StoryRing({ group, onOpen, isMine }) {
           />
         </div>
       </div>
-      <span style={{ color: 'rgba(10,10,20,0.65)', fontSize: 10, maxWidth: 60, textAlign: 'center', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+      <span style={{ color: 'rgba(201,206,212,0.65)', fontSize: 10, maxWidth: 60, textAlign: 'center', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
         {isMine ? 'Tu historia' : name}
       </span>
     </div>
@@ -40,10 +40,10 @@ function AddStoryButton({ onAdd }) {
       onClick={onAdd}
       style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, cursor: 'pointer', minWidth: 64 }}
     >
-      <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'rgba(79,172,254,0.08)', border: '2px dashed rgba(79,172,254,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22 }}>
+      <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'rgba(190,200,212,0.06)', border: '2px dashed rgba(79,172,254,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22 }}>
         +
       </div>
-      <span style={{ color: 'rgba(10,10,20,0.5)', fontSize: 10 }}>Añadir</span>
+      <span style={{ color: 'rgba(201,206,212,0.50)', fontSize: 10 }}>Añadir</span>
     </div>
   );
 }
@@ -152,8 +152,8 @@ function StoryViewer({ group, onClose, currentUser }) {
           style={{ width: 36, height: 36, borderRadius: '50%', border: '2px solid #fff' }}
         />
         <div>
-          <div style={{ color: '#0a0a14', fontSize: 13, fontWeight: 700 }}>{group.author.firstName} {group.author.lastName}</div>
-          <div style={{ color: 'rgba(10,10,20,0.65)', fontSize: 11 }}>
+          <div style={{ color: '#c9ced4', fontSize: 13, fontWeight: 700 }}>{group.author.firstName} {group.author.lastName}</div>
+          <div style={{ color: 'rgba(201,206,212,0.65)', fontSize: 11 }}>
             {new Date(story.createdAt).toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' })}
           </div>
         </div>
@@ -163,7 +163,7 @@ function StoryViewer({ group, onClose, currentUser }) {
       <div style={{ position: 'absolute', top: 32, right: 16, display: 'flex', gap: 8, zIndex: 1 }}>
         {isMyStory && (
           <button onClick={handleDeleteStory}
-            style={{ background: 'rgba(239,68,68,0.3)', border: '1px solid rgba(239,68,68,0.5)', color: '#0a0a14', fontSize: 14, cursor: 'pointer', borderRadius: 20, padding: '4px 10px', backdropFilter: 'blur(4px)' }}
+            style={{ background: 'rgba(239,68,68,0.3)', border: '1px solid rgba(239,68,68,0.5)', color: '#c9ced4', fontSize: 14, cursor: 'pointer', borderRadius: 20, padding: '4px 10px', backdropFilter: 'blur(4px)' }}
             title="Eliminar historia">
             🗑️
           </button>
@@ -270,7 +270,7 @@ function StoryCreator({ onClose, onCreated }) {
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 9998, background: 'rgba(0,0,0,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div style={{ background: '#13131f', border: '1px solid rgba(124,58,237,0.3)', borderRadius: 20, padding: 28, width: '90%', maxWidth: 380 }}>
-        <div style={{ color: '#0a0a14', fontSize: 18, fontWeight: 700, marginBottom: 20 }}>Nueva Historia</div>
+        <div style={{ color: '#c9ced4', fontSize: 18, fontWeight: 700, marginBottom: 20 }}>Nueva Historia</div>
 
         {/* Preview */}
         <div style={{ width: '100%', aspectRatio: '9/16', maxHeight: 220, background: bgColor, borderRadius: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16, overflow: 'hidden', position: 'relative' }}>
@@ -283,7 +283,7 @@ function StoryCreator({ onClose, onCreated }) {
           onChange={e => setText(e.target.value)}
           placeholder="Escribe algo..."
           maxLength={300}
-          style={{ width: '100%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.18)', borderRadius: 10, padding: '10px 14px', color: '#0a0a14', fontSize: 14, resize: 'none', outline: 'none', minHeight: 60, fontFamily: 'inherit', boxSizing: 'border-box', marginBottom: 12 }}
+          style={{ width: '100%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.14)', borderRadius: 10, padding: '10px 14px', color: '#c9ced4', fontSize: 14, resize: 'none', outline: 'none', minHeight: 60, fontFamily: 'inherit', boxSizing: 'border-box', marginBottom: 12 }}
         />
 
         <div style={{ display: 'flex', gap: 8, marginBottom: 12, flexWrap: 'wrap' }}>
@@ -293,7 +293,7 @@ function StoryCreator({ onClose, onCreated }) {
           ))}
         </div>
 
-        <label style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'rgba(10,10,20,0.65)', fontSize: 13, cursor: 'pointer', marginBottom: 16 }}>
+        <label style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'rgba(201,206,212,0.65)', fontSize: 13, cursor: 'pointer', marginBottom: 16 }}>
           <span>📷</span> Subir imagen/video
           <input type="file" accept="image/*,video/*" style={{ display: 'none' }} onChange={e => setFile(e.target.files[0])} />
         </label>

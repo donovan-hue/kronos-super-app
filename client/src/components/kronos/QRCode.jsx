@@ -60,7 +60,7 @@ export default function QRCode({ value, size = 180, className = '' }) {
       </div>
       <div style={{
         fontSize: Math.max(8, size * 0.06),
-        color: '#0a0a14',
+        color: '#c9ced4',
         marginTop: 6,
         textAlign: 'center',
         maxWidth: size - 20,

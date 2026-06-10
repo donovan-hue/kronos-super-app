@@ -38,7 +38,7 @@ export default function SubscriptionCancel() {
             style={{
               padding: '10px 20px',
               borderRadius: 10,
-              background: 'linear-gradient(135deg, #7c3aed, #06b6d4)',
+              background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
               color: '#fff',
               textDecoration: 'none',
               fontWeight: 700,

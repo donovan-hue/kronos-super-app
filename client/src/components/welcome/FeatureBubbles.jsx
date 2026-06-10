@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 
 const features = [
-  { icon: '🔗', name: 'Social',    color: '#7c3aed' },
-  { icon: '🛒', name: 'Shopping',  color: '#06b6d4' },
-  { icon: '🍔', name: 'Food',      color: '#ec4899' },
+  { icon: '🔗', name: 'Social',    color: '#c9ced4' },
+  { icon: '🛒', name: 'Shopping',  color: '#c9ced4' },
+  { icon: '🍔', name: 'Food',      color: '#c9ced4' },
   { icon: '🎬', name: 'Cinema',    color: '#f59e0b' },
   { icon: '💬', name: 'Chat',      color: '#10b981' },
   { icon: '💰', name: 'Tokens',    color: '#8b5cf6' },

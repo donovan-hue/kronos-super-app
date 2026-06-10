@@ -7,12 +7,12 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 const TYPE_META = {
   like:             { icon: '❤️', color: '#ef4444', label: 'Le dio like a tu post' },
-  comment:          { icon: '💬', color: '#3b82f6', label: 'Comentó en tu post' },
-  follow:           { icon: '👤', color: '#a855f7', label: 'Empezó a seguirte' },
-  message:          { icon: '📩', color: '#06b6d4', label: 'Te envió un mensaje' },
+  comment:          { icon: '💬', color: '#c9ced4', label: 'Comentó en tu post' },
+  follow:           { icon: '👤', color: '#c9ced4', label: 'Empezó a seguirte' },
+  message:          { icon: '📩', color: '#c9ced4', label: 'Te envió un mensaje' },
   transfer:         { icon: '💸', color: '#10b981', label: 'Te envió dinero' },
   community_invite: { icon: '🏛️', color: '#f59e0b', label: 'Te invitó a una comunidad' },
-  story_reaction:   { icon: '✨', color: '#ec4899', label: 'Reaccionó a tu historia' },
+  story_reaction:   { icon: '✨', color: '#c9ced4', label: 'Reaccionó a tu historia' },
 };
 
 function timeAgo(date) {
@@ -70,14 +70,14 @@ export default function NotificationsPage() {
     : notifications;
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff', paddingBottom: 100 }}>
+    <div style={{ minHeight: '100vh', background: 'transparent', paddingBottom: 100 }}>
       <div style={{ maxWidth: 480, margin: '0 auto', padding: '16px' }}>
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <HoloText size={24}>Notificaciones</HoloText>
           {unreadCount > 0 && (
             <button onClick={markAllRead}
-              style={{ padding: '7px 14px', borderRadius: 20, background: 'rgba(168,85,247,0.12)', border: '1px solid rgba(168,85,247,0.3)', color: '#a855f7', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>
+              style={{ padding: '7px 14px', borderRadius: 20, background: 'rgba(168,85,247,0.12)', border: '1px solid rgba(168,85,247,0.3)', color: '#c9ced4', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>
               Marcar todo leído
             </button>
           )}
@@ -90,7 +90,7 @@ export default function NotificationsPage() {
             { id: 'unread', label: `No leídas (${unreadCount})` },
           ].map(f => (
             <button key={f.id} onClick={() => setFilter(f.id)}
-              style={{ flex: 1, padding: '9px', borderRadius: 12, fontSize: 13, fontWeight: 600, border: 'none', cursor: 'pointer', background: filter === f.id ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(255,255,255,0.06)', color: '#fff' }}>
+              style={{ flex: 1, padding: '9px', borderRadius: 12, fontSize: 13, fontWeight: 600, border: 'none', cursor: 'pointer', background: filter === f.id ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)' : 'rgba(255,255,255,0.06)', color: '#fff' }}>
               {f.label}
             </button>
           ))}
@@ -98,9 +98,9 @@ export default function NotificationsPage() {
 
         {/* Content */}
         {loading ? (
-          <div style={{ textAlign: 'center', padding: 60, color: 'rgba(10,10,20,0.35)' }}>Cargando...</div>
+          <div style={{ textAlign: 'center', padding: 60, color: 'rgba(201,206,212,0.35)' }}>Cargando...</div>
         ) : filtered.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: 60, color: 'rgba(10,10,20,0.35)' }}>
+          <div style={{ textAlign: 'center', padding: 60, color: 'rgba(201,206,212,0.35)' }}>
             <div style={{ fontSize: 48, marginBottom: 12 }}>🔔</div>
             <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 4 }}>
               {filter === 'unread' ? 'Todo al día' : 'Sin notificaciones'}
@@ -112,7 +112,7 @@ export default function NotificationsPage() {
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {filtered.map(notif => {
-              const meta = TYPE_META[notif.type] || { icon: '🔔', color: '#a855f7', label: notif.type };
+              const meta = TYPE_META[notif.type] || { icon: '🔔', color: '#c9ced4', label: notif.type };
               const sender = notif.sender;
               return (
                 <GlassCard
@@ -136,7 +136,7 @@ export default function NotificationsPage() {
                         </div>
                       )}
                       {sender?.avatar && (
-                        <div style={{ position: 'absolute', bottom: -2, right: -2, width: 18, height: 18, borderRadius: '50%', background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10 }}>
+                        <div style={{ position: 'absolute', bottom: -2, right: -2, width: 18, height: 18, borderRadius: '50%', background: 'transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10 }}>
                           {meta.icon}
                         </div>
                       )}
@@ -144,18 +144,18 @@ export default function NotificationsPage() {
 
                     {/* Text */}
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ color: '#0a0a14', fontSize: 13, lineHeight: 1.4 }}>
+                      <div style={{ color: '#c9ced4', fontSize: 13, lineHeight: 1.4 }}>
                         {sender && (
                           <span style={{ fontWeight: 700 }}>
                             {sender.firstName || sender.username}{' '}
                           </span>
                         )}
-                        <span style={{ color: 'rgba(10,10,20,0.65)' }}>
+                        <span style={{ color: 'rgba(201,206,212,0.65)' }}>
                           {notif.body || meta.label}
                         </span>
                       </div>
                       {notif.title && notif.title !== notif.body && (
-                        <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 11, marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        <div style={{ color: 'rgba(201,206,212,0.35)', fontSize: 11, marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                           {notif.title}
                         </div>
                       )}
@@ -163,7 +163,7 @@ export default function NotificationsPage() {
 
                     {/* Time + unread dot */}
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6, flexShrink: 0 }}>
-                      <span style={{ color: 'rgba(10,10,20,0.35)', fontSize: 11 }}>{timeAgo(notif.createdAt)}</span>
+                      <span style={{ color: 'rgba(201,206,212,0.35)', fontSize: 11 }}>{timeAgo(notif.createdAt)}</span>
                       {!notif.read && (
                         <div style={{ width: 8, height: 8, borderRadius: '50%', background: meta.color }} />
                       )}

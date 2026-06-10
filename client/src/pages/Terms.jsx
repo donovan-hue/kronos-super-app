@@ -258,7 +258,7 @@ export default function Terms() {
               fontSize: 36,
               fontWeight: 800,
               margin: '0 0 12px',
-              background: 'linear-gradient(135deg, #3b82f6, #7c3aed)',
+              background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent'

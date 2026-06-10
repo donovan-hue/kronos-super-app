@@ -84,7 +84,7 @@ function NewReservationModal({ onClose, onCreated }) {
   const inputStyle = {
     width: '100%',
     background: 'rgba(79,172,254,0.07)',
-    border: '1px solid rgba(79,172,254,0.2)',
+    border: '1px solid rgba(190,200,212,0.15)',
     borderRadius: 12,
     padding: '11px 14px',
     color: '#fff',
@@ -95,7 +95,7 @@ function NewReservationModal({ onClose, onCreated }) {
   };
 
   const labelStyle = {
-    color: 'rgba(10,10,20,0.5)',
+    color: 'rgba(201,206,212,0.50)',
     fontSize: 11,
     letterSpacing: 0.5,
     marginBottom: 6,
@@ -107,8 +107,8 @@ function NewReservationModal({ onClose, onCreated }) {
     <div style={{ position: 'fixed', inset: 0, zIndex: 999, background: 'rgba(0,0,0,0.85)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
       <GlassCard style={{ width: '100%', maxWidth: 480, borderRadius: '20px 20px 0 0', paddingBottom: 32, maxHeight: '90vh', overflowY: 'auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-          <div style={{ color: '#0a0a14', fontSize: 18, fontWeight: 700 }}>Nueva Reservación</div>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'rgba(10,10,20,0.5)', fontSize: 22, cursor: 'pointer', lineHeight: 1 }}>✕</button>
+          <div style={{ color: '#c9ced4', fontSize: 18, fontWeight: 700 }}>Nueva Reservación</div>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'rgba(201,206,212,0.50)', fontSize: 22, cursor: 'pointer', lineHeight: 1 }}>✕</button>
         </div>
 
         {error && (
@@ -174,16 +174,16 @@ function NewReservationModal({ onClose, onCreated }) {
               <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
                 <button type="button"
                   onClick={() => set('partySize', Math.max(1, form.partySize - 1))}
-                  style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.18)', color: '#0a0a14', fontSize: 20, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.14)', color: '#c9ced4', fontSize: 20, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   −
                 </button>
-                <span style={{ color: '#0a0a14', fontSize: 22, fontWeight: 700, minWidth: 32, textAlign: 'center' }}>{form.partySize}</span>
+                <span style={{ color: '#c9ced4', fontSize: 22, fontWeight: 700, minWidth: 32, textAlign: 'center' }}>{form.partySize}</span>
                 <button type="button"
                   onClick={() => set('partySize', Math.min(20, form.partySize + 1))}
-                  style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.18)', color: '#0a0a14', fontSize: 20, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.14)', color: '#c9ced4', fontSize: 20, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   +
                 </button>
-                <span style={{ color: 'rgba(10,10,20,0.35)', fontSize: 13 }}>
+                <span style={{ color: 'rgba(201,206,212,0.35)', fontSize: 13 }}>
                   {form.partySize === 1 ? 'persona' : 'personas'}
                 </span>
               </div>
@@ -209,7 +209,7 @@ function NewReservationModal({ onClose, onCreated }) {
                 width: '100%',
                 padding: '14px',
                 borderRadius: 14,
-                background: loading ? 'rgba(255,255,255,0.08)' : 'linear-gradient(135deg,#7c3aed,#06b6d4)',
+                background: loading ? 'rgba(255,255,255,0.08)' : 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
                 color: '#fff',
                 border: 'none',
                 fontSize: 15,
@@ -259,22 +259,22 @@ function ReservationCard({ reservation, onCancel }) {
         {/* Info */}
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4, flexWrap: 'wrap' }}>
-            <span style={{ color: '#0a0a14', fontWeight: 700, fontSize: 15 }}>{reservation.businessName}</span>
+            <span style={{ color: '#c9ced4', fontWeight: 700, fontSize: 15 }}>{reservation.businessName}</span>
             <StatusBadge status={reservation.status} />
           </div>
 
-          <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11, marginBottom: 8 }}>
+          <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 11, marginBottom: 8 }}>
             {businessTypeLabel(reservation.businessType)}
           </div>
 
           <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'rgba(10,10,20,0.65)', fontSize: 13 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'rgba(201,206,212,0.65)', fontSize: 13 }}>
               <span>📅</span> {formatDate(reservation.date)}
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'rgba(10,10,20,0.65)', fontSize: 13 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'rgba(201,206,212,0.65)', fontSize: 13 }}>
               <span>🕐</span> {reservation.time}
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'rgba(10,10,20,0.65)', fontSize: 13 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'rgba(201,206,212,0.65)', fontSize: 13 }}>
               <span>👥</span> {reservation.partySize} {reservation.partySize === 1 ? 'persona' : 'personas'}
             </div>
           </div>
@@ -283,9 +283,9 @@ function ReservationCard({ reservation, onCancel }) {
             <div style={{
               marginTop: 10,
               padding: '8px 12px',
-              background: 'rgba(79,172,254,0.04)',
+              background: 'rgba(190,200,212,0.04)',
               borderRadius: 8,
-              color: 'rgba(10,10,20,0.5)',
+              color: 'rgba(201,206,212,0.50)',
               fontSize: 12,
               fontStyle: 'italic',
             }}>
@@ -370,12 +370,12 @@ export default function Reservations() {
   const filtered = filter === 'all' ? reservations : reservations.filter(r => r.status === filter);
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff', paddingBottom: 100 }}>
+    <div style={{ minHeight: '100vh', background: 'transparent', paddingBottom: 100 }}>
       {/* Toast */}
       {toast && (
         <div style={{
           position: 'fixed', top: 80, left: '50%', transform: 'translateX(-50%)',
-          background: 'linear-gradient(135deg,#7c3aed,#06b6d4)',
+          background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
           color: '#fff', padding: '10px 24px', borderRadius: 28,
           fontSize: 14, fontWeight: 600, zIndex: 9999,
           boxShadow: '0 8px 32px rgba(124,58,237,0.4)', whiteSpace: 'nowrap',
@@ -393,7 +393,7 @@ export default function Reservations() {
             style={{
               padding: '9px 18px',
               borderRadius: 24,
-              background: 'linear-gradient(135deg,#7c3aed,#06b6d4)',
+              background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
               color: '#fff',
               border: 'none',
               fontSize: 13,
@@ -415,7 +415,7 @@ export default function Reservations() {
             ].map(s => (
               <GlassCard key={s.label} style={{ textAlign: 'center', padding: '14px 10px' }}>
                 <div style={{ color: s.color, fontSize: 22, fontWeight: 900, marginBottom: 2 }}>{s.count}</div>
-                <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 10, letterSpacing: 0.5 }}>{s.label}</div>
+                <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 10, letterSpacing: 0.5 }}>{s.label}</div>
               </GlassCard>
             ))}
           </div>
@@ -436,7 +436,7 @@ export default function Reservations() {
                   border: 'none',
                   cursor: 'pointer',
                   whiteSpace: 'nowrap',
-                  background: filter === f.id ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(255,255,255,0.06)',
+                  background: filter === f.id ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)' : 'rgba(255,255,255,0.06)',
                   color: '#fff',
                   transition: 'background 0.2s',
                 }}>
@@ -448,16 +448,16 @@ export default function Reservations() {
 
         {/* Content */}
         {loading ? (
-          <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.35)', padding: 60 }}>
+          <div style={{ textAlign: 'center', color: 'rgba(201,206,212,0.35)', padding: 60 }}>
             Cargando reservaciones...
           </div>
         ) : filtered.length === 0 ? (
           <GlassCard style={{ textAlign: 'center', padding: '50px 24px' }}>
             <div style={{ fontSize: 52, marginBottom: 12 }}>📅</div>
-            <div style={{ color: '#0a0a14', fontSize: 17, fontWeight: 700, marginBottom: 6 }}>
+            <div style={{ color: '#c9ced4', fontSize: 17, fontWeight: 700, marginBottom: 6 }}>
               {filter === 'all' ? 'Sin reservaciones' : `Sin reservaciones ${FILTERS.find(f => f.id === filter)?.label.toLowerCase()}`}
             </div>
-            <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 13, marginBottom: 24 }}>
+            <div style={{ color: 'rgba(201,206,212,0.35)', fontSize: 13, marginBottom: 24 }}>
               {filter === 'all' ? 'Crea tu primera reservación con el botón de arriba' : 'Prueba otro filtro'}
             </div>
             {filter === 'all' && (
@@ -466,7 +466,7 @@ export default function Reservations() {
                 style={{
                   padding: '11px 28px',
                   borderRadius: 24,
-                  background: 'linear-gradient(135deg,#7c3aed,#06b6d4)',
+                  background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
                   color: '#fff',
                   border: 'none',
                   fontSize: 14,

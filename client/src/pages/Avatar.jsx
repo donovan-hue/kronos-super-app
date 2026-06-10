@@ -38,7 +38,7 @@ function AvatarCanvas({ avatar }) {
   const outfitItem = avatar.equippedItems?.find(e => e.category === 'outfit');
   const skinItem = avatar.equippedItems?.find(e => e.category === 'skin');
 
-  const bgColor = bgItem ? '#1a0a2e' : (avatar.backgroundColor || '#7c3aed');
+  const bgColor = bgItem ? '#1a1c1e' : (avatar.backgroundColor || '#1a1c1e');
   const bgEmoji = bgItem?.itemId?.imageEmoji || null;
 
   return (
@@ -239,7 +239,7 @@ export default function AvatarPage() {
   const styles = {
     page: {
       minHeight: '100vh',
-      background: '#ffffff',
+      background: 'transparent',
       color: '#fff',
       fontFamily: "'Outfit', sans-serif",
       paddingTop: 72,
@@ -253,7 +253,7 @@ export default function AvatarPage() {
     title: {
       fontSize: 26,
       fontWeight: 800,
-      background: 'linear-gradient(135deg,#7c3aed,#06b6d4)',
+      background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
       margin: 0,
@@ -265,7 +265,7 @@ export default function AvatarPage() {
       maxWidth: 600,
       marginLeft: 'auto',
       marginRight: 'auto',
-      background: 'rgba(79,172,254,0.04)',
+      background: 'rgba(190,200,212,0.04)',
       borderRadius: 12,
       padding: 4,
     },
@@ -279,7 +279,7 @@ export default function AvatarPage() {
       fontWeight: 600,
       fontSize: 14,
       transition: 'all 0.2s',
-      background: active ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'transparent',
+      background: active ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)' : 'transparent',
       color: active ? '#fff' : 'rgba(255,255,255,0.5)',
     }),
     content: {
@@ -297,12 +297,12 @@ export default function AvatarPage() {
       padding: '6px 14px',
       fontSize: 14,
       fontWeight: 700,
-      color: '#a78bfa',
+      color: '#c9ced4',
     },
     sectionTitle: {
       fontSize: 14,
       fontWeight: 700,
-      color: 'rgba(10,10,20,0.5)',
+      color: 'rgba(201,206,212,0.50)',
       textTransform: 'uppercase',
       letterSpacing: 1,
       marginBottom: 12,
@@ -313,7 +313,7 @@ export default function AvatarPage() {
       alignItems: 'center',
       justifyContent: 'space-between',
       padding: '10px 14px',
-      background: 'rgba(79,172,254,0.04)',
+      background: 'rgba(190,200,212,0.04)',
       borderRadius: 10,
       marginBottom: 8,
     },
@@ -334,14 +334,14 @@ export default function AvatarPage() {
       marginTop: 8,
     },
     itemCard: {
-      background: 'rgba(79,172,254,0.04)',
+      background: 'rgba(190,200,212,0.04)',
       borderRadius: 14,
       padding: 14,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       gap: 6,
-      border: '1px solid rgba(79,172,254,0.12)',
+      border: '1px solid rgba(190,200,212,0.10)',
       transition: 'transform 0.15s',
     },
     rarityBadge: (rarity) => ({
@@ -381,7 +381,7 @@ export default function AvatarPage() {
       fontWeight: 700,
       fontSize: 12,
       background: variant === 'buy'
-        ? 'linear-gradient(135deg,#7c3aed,#06b6d4)'
+        ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)'
         : variant === 'equip'
           ? 'rgba(6,182,212,0.2)'
           : 'rgba(255,255,255,0.06)',
@@ -407,7 +407,7 @@ export default function AvatarPage() {
   if (loading) {
     return (
       <div style={{ ...styles.page, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 16 }}>Cargando avatar...</div>
+        <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 16 }}>Cargando avatar...</div>
       </div>
     );
   }
@@ -418,7 +418,7 @@ export default function AvatarPage() {
 
       <div style={styles.header}>
         <h1 style={styles.title}>Mi Avatar</h1>
-        <p style={{ color: 'rgba(10,10,20,0.5)', fontSize: 14, margin: '6px 0 0' }}>
+        <p style={{ color: 'rgba(201,206,212,0.50)', fontSize: 14, margin: '6px 0 0' }}>
           Personaliza tu identidad en Kronos
         </p>
       </div>
@@ -447,7 +447,7 @@ export default function AvatarPage() {
             <GlassCard style={{ marginBottom: 20 }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, padding: '8px 0' }}>
                 <AvatarCanvas avatar={avatar} />
-                <div style={{ fontSize: 13, color: 'rgba(10,10,20,0.5)', textAlign: 'center' }}>
+                <div style={{ fontSize: 13, color: 'rgba(201,206,212,0.50)', textAlign: 'center' }}>
                   Equipa items desde la tienda para personalizar tu look
                 </div>
               </div>
@@ -456,7 +456,7 @@ export default function AvatarPage() {
             <div style={styles.sectionTitle}>Items equipados</div>
 
             {avatar?.equippedItems?.length === 0 ? (
-              <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 14, textAlign: 'center', padding: 20 }}>
+              <div style={{ color: 'rgba(201,206,212,0.35)', fontSize: 14, textAlign: 'center', padding: 20 }}>
                 No tienes items equipados
               </div>
             ) : (
@@ -542,7 +542,7 @@ export default function AvatarPage() {
             </div>
 
             {shopLoading ? (
-              <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.35)', padding: 40 }}>
+              <div style={{ textAlign: 'center', color: 'rgba(201,206,212,0.35)', padding: 40 }}>
                 Cargando tienda...
               </div>
             ) : (
@@ -562,11 +562,11 @@ export default function AvatarPage() {
                       <div style={{ fontWeight: 700, fontSize: 13, textAlign: 'center' }}>{item.name}</div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap', justifyContent: 'center' }}>
                         <span style={styles.rarityBadge(item.rarity)}>{RARITY_LABELS[item.rarity]}</span>
-                        <span style={{ fontSize: 11, color: 'rgba(10,10,20,0.5)' }}>
+                        <span style={{ fontSize: 11, color: 'rgba(201,206,212,0.50)' }}>
                           {CATEGORY_LABELS[item.category]}
                         </span>
                       </div>
-                      <div style={{ fontSize: 14, fontWeight: 700, color: '#a78bfa' }}>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: '#c9ced4' }}>
                         {item.price === 0 ? 'Gratis' : `🪙 ${item.price}`}
                       </div>
 
@@ -596,7 +596,7 @@ export default function AvatarPage() {
                 })}
 
                 {filteredItems.length === 0 && (
-                  <div style={{ gridColumn: '1/-1', textAlign: 'center', color: 'rgba(10,10,20,0.35)', padding: 40 }}>
+                  <div style={{ gridColumn: '1/-1', textAlign: 'center', color: 'rgba(201,206,212,0.35)', padding: 40 }}>
                     No hay items en esta categoría
                   </div>
                 )}

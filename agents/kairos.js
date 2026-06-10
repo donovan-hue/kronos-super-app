@@ -121,6 +121,11 @@ const INTEGRATIONS = [
     dep: 'passport',   env: ['GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET'],
     code: [], critical: false,
   },
+q  {aa
+    id: 'socketio',    name: 'Comunicación en tiempo real (Socket.io)',
+    dep: 'socket.io',  env: ['REACT_APP_SOCKET_URL'],
+    code: ['server/server.js'], critical: true,
+  },
 ];
 
 // Valores que delatan un secreto SIN configurar (placeholder dejado en el ejemplo).
@@ -139,7 +144,7 @@ function parseEnvKeys(content) {
     map[line.slice(0, eq).trim()] = line.slice(eq + 1).trim();
   }
   return map;
-}
+} q áá
 
 function parseRenderKeys(content) {
   if (!content) return [];
@@ -172,6 +177,15 @@ function auditEnv() {
   const envExample = parseEnvKeys(read('.env.example'));
   const renderKeys = parseRenderKeys(read('render.yaml'));
   const usage = collectEnvUsage();
+
+  // Verificar si existe el archivo .env real para desarrollo local
+  if (!exists('.env') && !exists('.env.local')) {
+    findings.push({
+      sev: 'warn', area: 'env',
+      msg: 'No se detectó un archivo .env local. Kairos recomienda crear uno basado en .env.example para que las integraciones funcionen localmente.',
+      fixable: false,
+    });
+  }
 
   const exampleKeys = new Set(Object.keys(envExample));
   const renderSet = new Set(renderKeys);
@@ -339,6 +353,17 @@ function auditDeploy() {
   const example = parseEnvKeys(read('.env.example'));
   if (example.REACT_APP_API_URL && /localhost/.test(example.REACT_APP_API_URL)) {
     findings.push({ sev: 'info', area: 'deploy', msg: 'REACT_APP_API_URL apunta a localhost en .env.example — en Vercel debe ser la URL de Render terminada en /api.', fixable: false });
+  }
+
+  // Validación de URL de Sockets
+  if (example.REACT_APP_SOCKET_URL) {
+    if (example.REACT_APP_SOCKET_URL.endsWith('/')) {
+      findings.push({ 
+        sev: 'warn', area: 'deploy', 
+        msg: 'REACT_APP_SOCKET_URL termina en "/". Socket.io a veces presenta problemas de handshake si la URL base incluye la barra final.', 
+        fixable: false 
+      });
+    }
   }
   return findings;
 }
@@ -839,6 +864,16 @@ function runStudy(options = {}) {
 
 function audit() {
   log('=== KAIROS iniciando auditoría completa de KRONOS ===');
+
+  // Validación de integridad de la estructura de la aplicación web
+  if (!exists('server') || !exists('client')) {
+    return [{
+      sev: 'error', area: 'deploy', 
+      msg: 'Kairos no detecta las carpetas /server o /client. Asegúrate de ejecutar el agente desde la raíz del proyecto KRONOS.',
+      fixable: false 
+    }];
+  }
+
   const findings = [
     ...auditDeploy(),
     ...auditEnv(),

@@ -66,14 +66,14 @@ export default function BottomNav({ items }) {
         right: 0,
         height: 64,
         background: 'rgba(255,255,255,0.97)',
-        borderTop: '1.5px solid rgba(79,172,254,0.15)',
+        borderTop: '1.5px solid rgba(190,200,212,0.12)',
         backdropFilter: 'blur(16px)',
         justifyContent: 'space-around',
         alignItems: 'center',
         padding: '0 8px',
         zIndex: 100,
         fontFamily: "'Outfit', sans-serif",
-        boxShadow: '0 -4px 24px rgba(79,172,254,0.08)',
+        boxShadow: '0 -4px 24px rgba(190,200,212,0.06)',
       }}
     >
       {navItems.map((it) => {
@@ -88,7 +88,7 @@ export default function BottomNav({ items }) {
               alignItems: 'center',
               gap: 2,
               textDecoration: 'none',
-              color: active ? '#4facfe' : 'rgba(10,10,20,0.45)',
+              color: active ? '#4facfe' : 'rgba(201,206,212,0.45)',
               fontSize: 9,
               position: 'relative',
             }}
