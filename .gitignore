@@ -77,3 +77,8 @@ tmp/
 
 # ===== Agentes — logs de ejecución =====
 agents/logs/
+
+# ===== Carpetas temporales de importacion de diseno =====
+.design-import/
+.design-import-2/
+.design-btn/
