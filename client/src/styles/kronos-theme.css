@@ -13,6 +13,15 @@
   --silver-dim: #7d838b;
   --silver-faint: #565b62;
 
+  /* ⚡ Acento de marca — Violeta eléctrico (firma de KRONOS) */
+  --accent: #8b5cf6;
+  --accent-bright: #a78bfa;
+  --accent-dim: #6d4bd0;
+  --accent-deep: #4c2f9e;
+  --accent-glow: rgba(139,92,246,.35);
+  --accent-soft: rgba(139,92,246,.12);
+  --accent-grad: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 45%, #6d4bd0 100%);
+
   /* Gradiente metálico platino */
   --metal: conic-gradient(from 138deg,
     #54585d 0%, #c9ced4 11%, #ffffff 19%, #9aa0a7 29%,
@@ -37,7 +46,7 @@
   --kronos-glass-border: rgba(190,200,212,.14);
   --kronos-glass-input: rgba(255,255,255,.04);
   --kronos-shadow: 0 4px 24px rgba(0,0,0,.55), 0 1px 4px rgba(0,0,0,.4);
-  --kronos-shadow-hover: 0 8px 32px rgba(0,0,0,.7), 0 0 20px rgba(190,200,212,.08);
+  --kronos-shadow-hover: 0 8px 32px rgba(0,0,0,.7), 0 0 22px rgba(139,92,246,.16);
   --kronos-radius-sm: 10px;
   --kronos-radius: 14px;
   --kronos-radius-lg: 20px;
@@ -110,8 +119,8 @@ body {
 }
 
 .k-input:focus {
-  border-color: rgba(201,206,212,.4);
-  box-shadow: 0 0 0 3px rgba(190,200,212,.06);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 .k-input::placeholder {
@@ -187,6 +196,116 @@ body {
   -webkit-text-fill-color: #15171a;
   border-color: transparent;
   font-weight: 600;
+}
+
+/* ===================== ⚡ SISTEMA DE ACENTO VIOLETA (firma KRONOS) ===================== */
+
+/* CTA de alto énfasis — botón violeta luminoso (para acciones que deben resaltar:
+   "Comprar KRO", "Crear", "Suscribirse", "En vivo"). Convive con .k-btn-primary metálico. */
+.k-btn-accent {
+  display: grid;
+  place-items: center;
+  height: 52px;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--kronos-radius);
+  background: var(--accent-grad);
+  color: #fff;
+  font-family: var(--kronos-font);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  box-shadow: 0 12px 30px -10px var(--accent-glow), 0 0 0 1px rgba(167,139,250,.25);
+  transition: filter .2s, box-shadow .2s, transform .1s;
+}
+.k-btn-accent:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 16px 38px -10px var(--accent-glow), 0 0 0 1px rgba(167,139,250,.4);
+}
+.k-btn-accent:active { transform: translateY(1px); }
+
+/* Chip activo en violeta (alternativa al metálico para filtros de marca) */
+.k-chip.accent {
+  background: var(--accent-soft);
+  color: var(--accent-bright);
+  border-color: var(--accent-dim);
+  font-weight: 600;
+}
+
+/* Texto/íconos de acento (token KRO, montos, destacados) */
+.k-accent { color: var(--accent-bright); }
+.k-accent-strong { color: #fff; text-shadow: 0 0 14px var(--accent-glow); }
+
+/* Token KRO con resplandor violeta */
+.k-kro {
+  color: var(--accent-bright);
+  font-weight: 700;
+  text-shadow: 0 0 12px var(--accent-glow);
+}
+
+/* Enlaces */
+.k-link { color: var(--accent-bright); text-decoration: none; }
+.k-link:hover { text-decoration: underline; }
+
+/* Punto de notificación / badge contador */
+.k-dot {
+  display: inline-block;
+  width: 9px; height: 9px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+.k-badge {
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+  letter-spacing: .04em;
+}
+
+/* Badge "EN VIVO" con pulso violeta */
+.k-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-soft);
+  color: var(--accent-bright);
+  border: 1px solid var(--accent-dim);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.k-live::before {
+  content: '';
+  width: 7px; height: 7px;
+  border-radius: 999px;
+  background: var(--accent-bright);
+  box-shadow: 0 0 8px var(--accent-glow);
+  animation: k-pulse 1.4s ease-in-out infinite;
+}
+@keyframes k-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .4; transform: scale(.7); }
+}
+
+/* Anillo de avatar/historia con borde violeta */
+.k-ring-accent {
+  background: var(--accent-grad);
+  padding: 2px;
+  border-radius: 999px;
+}
+
+/* Resplandor sutil de acento para tarjetas destacadas */
+.k-glass.featured {
+  border-color: var(--accent-dim);
+  box-shadow: var(--kronos-shadow), 0 0 26px -6px var(--accent-glow);
 }
 
 /* Scrollbar oculto */
