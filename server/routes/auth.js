@@ -13,7 +13,9 @@ const {
 } = require('../controllers/authController');
 const passport = require('../config/passport');
 
-const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:3000';
+// CLIENT_URL puede traer varias URLs separadas por coma (para el CORS).
+// Para los redirects de OAuth usamos solo la primera.
+const CLIENT_URL = (process.env.CLIENT_URL || 'http://localhost:3000').split(',')[0].trim();
 
 // ─── Rutas existentes ─────────────────────────────────────────────────────
 router.post('/register', register);
