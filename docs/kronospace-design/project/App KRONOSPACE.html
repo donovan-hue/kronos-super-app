@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>KRONOSPACE — Estructura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="kronospace/app.css" />
+</head>
+<body>
+
+<!-- gradientes metálicos compartidos -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <linearGradient id="ksV" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#ffffff"/><stop offset="16%" stop-color="#e9edf1"/>
+    <stop offset="44%" stop-color="#a4aab1"/><stop offset="51%" stop-color="#74787f"/>
+    <stop offset="58%" stop-color="#bcc1c8"/><stop offset="84%" stop-color="#eef0f3"/>
+    <stop offset="100%" stop-color="#c9ced4"/>
+  </linearGradient>
+  <radialGradient id="ksSph" cx="34%" cy="30%" r="80%">
+    <stop offset="0%" stop-color="#ffffff"/><stop offset="40%" stop-color="#c4c9cf"/>
+    <stop offset="100%" stop-color="#46494f"/>
+  </radialGradient>
+</defs></svg>
+
+<div class="viewport">
+  <div class="phone" id="phone">
+    <div class="bezel"></div>
+    <div class="screen" id="screen">
+
+      <!-- status bar -->
+      <div class="statusbar" id="statusbar">
+        <span class="sb-time metal-text">9:41</span>
+        <span class="sb-icons">
+          <svg viewBox="0 0 24 14"><path d="M1 11h2v2H1zM5 8h2v5H5zM9 5h2v8H9zM13 2h2v11h-2z" fill="url(#ksV)"/></svg>
+          <svg viewBox="0 0 20 14"><path d="M10 3.5c2.4 0 4.6.9 6.2 2.4l1.4-1.5A11 11 0 0 0 10 1 11 11 0 0 0 2.4 4.4l1.4 1.5A9 9 0 0 1 10 3.5z" fill="url(#ksV)"/><path d="M10 7c1.3 0 2.5.5 3.4 1.4l1.4-1.5A7 7 0 0 0 10 5a7 7 0 0 0-4.8 1.9l1.4 1.5A5 5 0 0 1 10 7z" fill="url(#ksV)"/><circle cx="10" cy="11" r="1.6" fill="url(#ksV)"/></svg>
+          <svg viewBox="0 0 28 14"><rect x="1" y="2.5" width="22" height="9" rx="2.5" fill="none" stroke="url(#ksV)" stroke-width="1.2"/><rect x="3" y="4.5" width="16" height="5" rx="1" fill="url(#ksV)"/><rect x="24.5" y="5" width="2" height="4" rx="1" fill="url(#ksV)"/></svg>
+        </span>
+      </div>
+
+      <!-- ====== SCREENS host ====== -->
+      <div class="stagewrap" id="stagewrap"></div>
+
+      <!-- ====== FAN NAV ====== -->
+      <div class="nav" id="nav" hidden>
+        <div class="scrim" id="scrim"></div>
+        <button class="orb sat" data-go="perfil"   style="--deg:-75"><span class="face"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5.4 19.6a6.6 6.6 0 0 1 13.2 0"/></svg></span><span class="olabel">Perfil</span></button>
+        <button class="orb sat" data-go="mensaje"   style="--deg:-45"><span class="face"><svg viewBox="0 0 24 24"><path d="M20 6.5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h1.4v3l3.6-3H18a2 2 0 0 0 2-2Z"/><path d="M8 9.3h8M8 12.4h5"/></svg></span><span class="olabel">Mensaje</span></button>
+        <button class="orb sat" data-go="notifica"  style="--deg:-15"><span class="face"><svg viewBox="0 0 24 24"><path d="M18 16v-5a6 6 0 0 0-12 0v5l-1.6 2h15.2Z"/><path d="M9.8 19.6a2.4 2.4 0 0 0 4.4 0"/></svg></span><span class="olabel">Notifica</span></button>
+        <button class="orb sat" data-go="publica"   style="--deg:15"><span class="face"><svg viewBox="0 0 24 24"><rect x="4.5" y="4.5" width="15" height="15" rx="3.2"/><path d="M12 8.7v6.6M8.7 12h6.6"/></svg></span><span class="olabel">Publica</span></button>
+        <button class="orb sat" data-go="game"      style="--deg:45"><span class="face"><svg viewBox="0 0 24 24"><path d="M7.5 8h9a3.8 3.8 0 0 1 3.8 4.1l-.4 3.3a2.4 2.4 0 0 1-4.3 1.1L14.4 15H9.6l-1.2 1.5a2.4 2.4 0 0 1-4.3-1.1l-.4-3.3A3.8 3.8 0 0 1 7.5 8Z"/><path d="M7 10.6v2.2M5.9 11.7h2.2"/><circle cx="15.4" cy="11.4" r=".7"/><circle cx="17" cy="13" r=".7"/></svg></span><span class="olabel">Game</span></button>
+        <button class="orb sat" data-go="market"    style="--deg:75"><span class="face"><svg viewBox="0 0 24 24"><path d="M3.2 4.5H5.4L7.3 15h9.1l1.7-7.4H6.1"/><circle cx="9" cy="18.6" r="1.3"/><circle cx="16" cy="18.6" r="1.3"/></svg></span><span class="olabel">Market</span></button>
+        <button class="orb home" id="orb" aria-label="Inicio"><span class="face"><svg viewBox="0 0 24 24"><path d="M3.5 11.4 12 4l8.5 7.4"/><path d="M5.6 9.8V20h12.8V9.8"/><path d="M9.8 20v-5.2h4.4V20"/></svg></span><span class="olabel home-label">Inicio</span></button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="kronospace/screens.js"></script>
+<script src="kronospace/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KRONOSPACE — Web</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="kronospace/web.css" />
+<link rel="stylesheet" href="kronospace/web2.css" />
+</head>
+<body>
+
+<!-- gradientes metálicos compartidos -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <linearGradient id="ksV" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#ffffff"/><stop offset="16%" stop-color="#e9edf1"/>
+    <stop offset="44%" stop-color="#a4aab1"/><stop offset="51%" stop-color="#74787f"/>
+    <stop offset="58%" stop-color="#bcc1c8"/><stop offset="84%" stop-color="#eef0f3"/>
+    <stop offset="100%" stop-color="#c9ced4"/>
+  </linearGradient>
+  <radialGradient id="ksSph" cx="34%" cy="30%" r="80%">
+    <stop offset="0%" stop-color="#ffffff"/><stop offset="40%" stop-color="#c4c9cf"/>
+    <stop offset="100%" stop-color="#46494f"/>
+  </radialGradient>
+</defs></svg>
+
+<!-- ====== TOP BAR ====== -->
+<header class="topbar" id="topbar">
+  <div class="brand">
+    <div class="logo"><svg viewBox="0 0 100 100">
+      <ellipse cx="50" cy="50" rx="44" ry="20" fill="none" stroke="url(#ksV)" stroke-width="1.6" transform="rotate(-26 50 50)" opacity=".8"/>
+      <circle cx="50" cy="50" r="36" fill="none" stroke="url(#ksV)" stroke-width="2.6"/>
+      <circle cx="50" cy="50" r="30.5" fill="none" stroke="url(#ksV)" stroke-width="4.2" stroke-dasharray="1.5 14.46"/>
+      <line x1="50" y1="50" x2="50" y2="24" stroke="url(#ksV)" stroke-width="3.2" stroke-linecap="round"/>
+      <line x1="50" y1="50" x2="65" y2="58" stroke="url(#ksV)" stroke-width="2.6" stroke-linecap="round"/>
+      <circle cx="86" cy="38" r="5.4" fill="url(#ksSph)"/><circle cx="50" cy="50" r="3.8" fill="url(#ksSph)"/>
+    </svg></div>
+    <div class="wm metal-text"><span class="k">KRONO</span><span class="s">SPACE</span></div>
+  </div>
+  <div class="searchbar">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg>
+    <div class="ph-bar"></div>
+  </div>
+  <div class="tb-actions">
+    <button class="iconbtn" data-go="admin" title="Admin"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.4-3 8-7 10-4-2-7-5.6-7-10V6Z" style="stroke-width: 2px"/><path d="M9.2 12l2 2 3.6-4"/></svg></button>
+    <button class="iconbtn badge" data-go="notifica" style="border-style: solid"><svg viewBox="0 0 24 24"><path d="M18 16v-5a6 6 0 0 0-12 0v5l-1.6 2h15.2Z"/><path d="M9.8 19.6a2.4 2.4 0 0 0 4.4 0"/></svg></button>
+    <button class="iconbtn"><svg viewBox="0 0 24 24"><path d="M20 6.5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h1.4v3l3.6-3H18a2 2 0 0 0 2-2Z"/></svg></button>
+    <span class="avatar av-40"><span><svg viewBox="0 0 24 24" style="fill:none;stroke:url(#ksV);stroke-width:1.6;opacity:.55"><circle cx="12" cy="8" r="3.6"/><path d="M5.4 19.6a6.6 6.6 0 0 1 13.2 0"/></svg></span></span>
+  </div>
+</header>
+
+<!-- ====== STAGE (host de pantallas) ====== -->
+<main class="stage">
+  <div class="wrap" id="wrap"></div>
+</main>
+
+<!-- ====== FAN NAV (launcher flotante) ====== -->
+<div class="fan" id="fan">
+  <div class="scrim" id="scrim"></div>
+  <button class="orb sat" data-go="perfil"   style="--deg:-75"><span class="face"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5.4 19.6a6.6 6.6 0 0 1 13.2 0"/></svg></span><span class="olabel">Perfil</span></button>
+  <button class="orb sat" data-go="mensaje"   style="--deg:-45"><span class="face"><svg viewBox="0 0 24 24"><path d="M20 6.5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h1.4v3l3.6-3H18a2 2 0 0 0 2-2Z"/><path d="M8 9.3h8M8 12.4h5"/></svg></span><span class="olabel">Mensaje</span></button>
+  <button class="orb sat" data-go="notifica"  style="--deg:-15"><span class="face"><svg viewBox="0 0 24 24"><path d="M18 16v-5a6 6 0 0 0-12 0v5l-1.6 2h15.2Z"/><path d="M9.8 19.6a2.4 2.4 0 0 0 4.4 0"/></svg></span><span class="olabel">Notifica</span></button>
+  <button class="orb sat" data-go="publica"   style="--deg:15"><span class="face"><svg viewBox="0 0 24 24"><rect x="4.5" y="4.5" width="15" height="15" rx="3.2"/><path d="M12 8.7v6.6M8.7 12h6.6"/></svg></span><span class="olabel">Publica</span></button>
+  <button class="orb sat" data-go="game"      style="--deg:45"><span class="face"><svg viewBox="0 0 24 24"><path d="M7.5 8h9a3.8 3.8 0 0 1 3.8 4.1l-.4 3.3a2.4 2.4 0 0 1-4.3 1.1L14.4 15H9.6l-1.2 1.5a2.4 2.4 0 0 1-4.3-1.1l-.4-3.3A3.8 3.8 0 0 1 7.5 8Z"/><path d="M7 10.6v2.2M5.9 11.7h2.2"/><circle cx="15.4" cy="11.4" r=".7"/><circle cx="17" cy="13" r=".7"/></svg></span><span class="olabel">Game</span></button>
+  <button class="orb sat" data-go="shop"      style="--deg:75"><span class="face"><svg viewBox="0 0 24 24"><path d="M3.2 4.5H5.4L7.3 15h9.1l1.7-7.4H6.1"/><circle cx="9" cy="18.6" r="1.3"/><circle cx="16" cy="18.6" r="1.3"/></svg></span><span class="olabel">Market</span></button>
+  <button class="orb home" id="orb" aria-label="Inicio"><span class="face"><svg viewBox="0 0 24 24"><path d="M3.5 11.4 12 4l8.5 7.4"/><path d="M5.6 9.8V20h12.8V9.8"/><path d="M9.8 20v-5.2h4.4V20"/></svg></span><span class="olabel home-label">Inicio</span></button>
+</div>
+
+<script src="kronospace/web-screens.js"></script>
+<script src="kronospace/web-screens2.js"></script>
+<script src="kronospace/web.js"></script>
+
+<!-- ====== TWEAKS ====== -->
+<style id="ks-tweak-static">
+  /* acabado metálico: tipografía cromada controlada por variable */
+  .metal-text{ background:var(--ks-textgrad)!important; -webkit-background-clip:text; background-clip:text; color:transparent; }
+  /* atmósfera: fondo controlado por variable */
+  body{ background:var(--ks-bg)!important; }
+  /* campo de estrellas (atmósfera Cósmico) */
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:0;
+    transition:opacity .9s ease;
+    background-image:
+      radial-gradient(1.3px 1.3px at 16% 20%, rgba(214,226,244,.9), transparent),
+      radial-gradient(1px 1px at 72% 14%, rgba(196,210,232,.8), transparent),
+      radial-gradient(1.4px 1.4px at 42% 60%, rgba(224,234,250,.85), transparent),
+      radial-gradient(1px 1px at 86% 48%, rgba(186,202,226,.7), transparent),
+      radial-gradient(1.2px 1.2px at 26% 80%, rgba(208,222,240,.8), transparent),
+      radial-gradient(1px 1px at 60% 86%, rgba(196,210,232,.7), transparent),
+      radial-gradient(1.3px 1.3px at 8% 54%, rgba(214,226,244,.75), transparent),
+      radial-gradient(1px 1px at 92% 78%, rgba(196,210,232,.7), transparent);
+  }
+  body.ks-cosmos::before{ opacity:.85; }
+
+  /* forma — Afilada (técnica / brutalista) */
+  body.ks-form-sharp .card, body.ks-form-sharp .tile, body.ks-form-sharp .post,
+  body.ks-form-sharp .composer, body.ks-form-sharp .minicard, body.ks-form-sharp .suggest,
+  body.ks-form-sharp .gen-tile, body.ks-form-sharp .kpi, body.ks-form-sharp .dtable,
+  body.ks-form-sharp .order, body.ks-form-sharp .profile-hero, body.ks-form-sharp .msg-grid,
+  body.ks-form-sharp .login-card, body.ks-form-sharp .util-card{ border-radius:4px; }
+  body.ks-form-sharp .media, body.ks-form-sharp .minicard .cover{ border-radius:3px; }
+  body.ks-form-sharp .field, body.ks-form-sharp .searchbar, body.ks-form-sharp .btn-metal,
+  body.ks-form-sharp .btn-metal > span, body.ks-form-sharp .btn-ghost, body.ks-form-sharp .stepper,
+  body.ks-form-sharp .sizebox, body.ks-form-sharp .minibtn, body.ks-form-sharp .navlink,
+  body.ks-form-sharp .gen-ic{ border-radius:5px; }
+  body.ks-form-sharp .chip, body.ks-form-sharp .statuschip{ border-radius:5px; }
+  body.ks-form-sharp .bubble{ border-radius:5px; }
+  body.ks-form-sharp .bubble.them{ border-bottom-left-radius:2px; }
+  body.ks-form-sharp .bubble.me{ border-bottom-right-radius:2px; }
+
+  /* forma — Orgánica (suave / humana) */
+  body.ks-form-soft .card, body.ks-form-soft .tile, body.ks-form-soft .post,
+  body.ks-form-soft .composer, body.ks-form-soft .minicard, body.ks-form-soft .suggest,
+  body.ks-form-soft .gen-tile, body.ks-form-soft .kpi, body.ks-form-soft .dtable,
+  body.ks-form-soft .order, body.ks-form-soft .profile-hero, body.ks-form-soft .msg-grid,
+  body.ks-form-soft .login-card, body.ks-form-soft .util-card{ border-radius:30px; }
+  body.ks-form-soft .media, body.ks-form-soft .minicard .cover{ border-radius:26px; }
+  body.ks-form-soft .field, body.ks-form-soft .searchbar, body.ks-form-soft .btn-metal,
+  body.ks-form-soft .btn-metal > span, body.ks-form-soft .btn-ghost, body.ks-form-soft .stepper,
+  body.ks-form-soft .sizebox, body.ks-form-soft .minibtn, body.ks-form-soft .navlink,
+  body.ks-form-soft .gen-ic{ border-radius:18px; }
+  body.ks-form-soft .bubble{ border-radius:22px; }
+  body.ks-form-soft .bubble.them{ border-bottom-left-radius:7px; }
+  body.ks-form-soft .bubble.me{ border-bottom-right-radius:7px; }
+</style>
+
+<div id="tweak-root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "aleacion": "cromo",
+  "atmosfera": "estudio",
+  "forma": "definida"
+}/*EDITMODE-END*/;
+
+/* ---- ALEACIÓN: retempla cada superficie metálica (conic --metal, tonos plata,
+        gradientes SVG ksV/ksSph y la tipografía cromada) ---- */
+const M_STOPS = [0,11,19,29,41,54,65,77,89,100];
+const conic = (c)=> 'conic-gradient(from 138deg,'+ c.map((x,i)=> x+' '+M_STOPS[i]+'%').join(',') +')';
+
+const ALEACIONES = {
+  cromo:{
+    metal:['#54585d','#c9ced4','#ffffff','#9aa0a7','#686c71','#e9ecf0','#b4b9c0','#f5f7f9','#7e8288','#54585d'],
+    bright:['#6b6f75','#dfe3e8','#ffffff','#aeb4bb','#7a7e83','#f3f5f8','#c6cbd2','#ffffff','#92969c','#6b6f75'],
+    silver:'#c9ced4', dim:'#7d838b', faint:'#565b62',
+    ksV:['#ffffff','#e9edf1','#a4aab1','#74787f','#bcc1c8','#eef0f3','#c9ced4'],
+    ksSph:['#ffffff','#c4c9cf','#46494f'],
+    text:'linear-gradient(180deg,#ffffff 0%,#eef1f4 24%,#a9aeb5 50%,#7c8087 55%,#c6cbd2 72%,#f4f6f8 100%)'
+  },
+  oro:{
+    metal:['#6b5a32','#e8d6a8','#fff8e6','#bda86f','#7a6838','#f3e6bf','#cdb87f','#fffaee','#8a7642','#6b5a32'],
+    bright:['#806b3c','#f1e2b2','#fffbed','#cbb574','#8a7642','#f8edcb','#dcc98c','#fffdf3','#9a8550','#806b3c'],
+    silver:'#d8c79a', dim:'#9a8a5f', faint:'#6e6242',
+    ksV:['#fffaee','#f0e2b8','#bda86f','#8a7438','#d6c187','#f5ecc6','#d8c79a'],
+    ksSph:['#fffaee','#d4bd84','#5a4d28'],
+    text:'linear-gradient(180deg,#fffaee 0%,#f3e6bf 24%,#c2ab6e 50%,#8a7642 55%,#dcc98c 72%,#fff6dc 100%)'
+  },
+  cobre:{
+    metal:['#6b3f32','#e0a98e','#fff0e6','#c08a6f','#7a4f38','#f0c9b2','#cd9c7f','#fff5ee','#8a5842','#6b3f32'],
+    bright:['#805040','#ecb89c','#fff3ec','#cf9b80','#8a5a44','#f5d4c0','#dcab90','#fff8f2','#9a6450','#805040'],
+    silver:'#dca890', dim:'#a07560', faint:'#6e4f42',
+    ksV:['#fff0e6','#f0c4ac','#c0917a','#8a5438','#d6a187','#f5d0bd','#dca890'],
+    ksSph:['#fff0e6','#d49e84','#5a3528'],
+    text:'linear-gradient(180deg,#fff0e6 0%,#f0c9b2 24%,#c28a6e 50%,#8a5642 55%,#dca890 72%,#ffe6d8 100%)'
+  },
+  titanio:{
+    metal:['#3a4654','#a8bcd0','#eef4fb','#8294a8','#566472','#c4d4e6','#9aacc0','#eef6ff','#6a7888','#3a4654'],
+    bright:['#4a5666','#bcccdf','#f3f8ff','#9aacc0','#667482','#d4e2f2','#aebccf','#fbffff','#7a8898','#4a5666'],
+    silver:'#bcc8d6', dim:'#74808f', faint:'#525c68',
+    ksV:['#ffffff','#dbe6f1','#9aacc0','#6a7888','#aebccf','#dfeaf3','#bcc8d6'],
+    ksSph:['#ffffff','#b6c4d4','#3e4654'],
+    text:'linear-gradient(180deg,#ffffff 0%,#e6eef6 24%,#9aacc0 50%,#6a7888 55%,#bcccdf 72%,#eef6ff 100%)'
+  }
+};
+
+/* ---- ATMÓSFERA: vacío negro / estudio carbón / cósmico azul / brasa cálida ---- */
+const ATMOSFERAS = {
+  vacio:{   bg:'radial-gradient(120% 90% at 50% -10%, #0a0a0b 0%, transparent 46%), #000000', ink:'#000000', ink2:'#050506', stars:false },
+  estudio:{ bg:'radial-gradient(120% 90% at 50% -10%, #101113 0%, transparent 46%), #040405', ink:'#040405', ink2:'#0a0b0d', stars:false },
+  cosmico:{ bg:'radial-gradient(135% 110% at 50% 22%, #0e1320 0%, transparent 52%), #02040a', ink:'#02040a', ink2:'#070b14', stars:true },
+  brasa:{   bg:'radial-gradient(135% 110% at 50% -8%, #1c1310 0%, transparent 50%), #0a0605', ink:'#0a0605', ink2:'#120b08', stars:false }
+};
+
+function setStops(id, colors){
+  const stops = document.querySelectorAll('#'+id+' stop');
+  colors.forEach((c,i)=>{ if(stops[i]) stops[i].setAttribute('stop-color', c); });
+}
+function applyAleacion(a){
+  const p = ALEACIONES[a] || ALEACIONES.cromo;
+  const r = document.documentElement.style;
+  r.setProperty('--metal', conic(p.metal));
+  r.setProperty('--metal-bright', conic(p.bright));
+  r.setProperty('--silver', p.silver);
+  r.setProperty('--silver-dim', p.dim);
+  r.setProperty('--silver-faint', p.faint);
+  r.setProperty('--ks-textgrad', p.text);
+  setStops('ksV', p.ksV);
+  setStops('ksSph', p.ksSph);
+}
+function applyAtmosfera(a){
+  const p = ATMOSFERAS[a] || ATMOSFERAS.estudio;
+  const r = document.documentElement.style;
+  r.setProperty('--ks-bg', p.bg);
+  r.setProperty('--ink', p.ink);
+  r.setProperty('--ink-2', p.ink2);
+  document.body.classList.toggle('ks-cosmos', p.stars);
+}
+function applyForma(f){
+  const b = document.body.classList;
+  b.toggle('ks-form-sharp', f==='afilada');
+  b.toggle('ks-form-soft',  f==='organica');
+}
+
+const { useTweaks, TweaksPanel, TweakSection, TweakRadio, TweakSelect } = window;
+
+function App(){
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  React.useEffect(()=>{ applyAleacion(t.aleacion); }, [t.aleacion]);
+  React.useEffect(()=>{ applyAtmosfera(t.atmosfera); }, [t.atmosfera]);
+  React.useEffect(()=>{ applyForma(t.forma); }, [t.forma]);
+
+  return (
+    <TweaksPanel title="Tweaks">
+      <TweakSection label="Aleación" />
+      <TweakSelect label="Acabado" value={t.aleacion}
+        options={[
+          {value:'cromo',   label:'Cromo · plata espejo'},
+          {value:'titanio', label:'Titanio · acero azul'},
+          {value:'oro',     label:'Oro · champán cálido'},
+          {value:'cobre',   label:'Cobre · rosa metal'}
+        ]}
+        onChange={(v)=>setTweak('aleacion', v)} />
+
+      <TweakSection label="Atmósfera" />
+      <TweakSelect label="Fondo" value={t.atmosfera}
+        options={[
+          {value:'estudio', label:'Estudio · carbón'},
+          {value:'vacio',   label:'Vacío · negro absoluto'},
+          {value:'cosmico', label:'Cósmico · azul profundo'},
+          {value:'brasa',   label:'Brasa · cálido'}
+        ]}
+        onChange={(v)=>setTweak('atmosfera', v)} />
+
+      <TweakSection label="Forma" />
+      <TweakRadio label="Geometría" value={t.forma}
+        options={[
+          {value:'afilada',  label:'Afilada'},
+          {value:'definida', label:'Definida'},
+          {value:'organica', label:'Orgánica'}
+        ]}
+        onChange={(v)=>setTweak('forma', v)} />
+    </TweaksPanel>
+  );
+}
+
+/* aplica el estado persistido de inmediato (antes de montar el panel) */
+applyAleacion(TWEAK_DEFAULTS.aleacion);
+applyAtmosfera(TWEAK_DEFAULTS.atmosfera);
+applyForma(TWEAK_DEFAULTS.forma);
+ReactDOM.createRoot(document.getElementById('tweak-root')).render(<App/>);
+</script>
+</body>
+</html>

@@ -137,19 +137,19 @@ class AIService {
     }
   }
 
-  async chatWithAssistant(messages, systemPrompt = null) {
+  async chatWithAssistant(messages, systemPrompt = null, opts = {}) {
     if (!this._isReady()) return AI_DISABLED_MSG;
 
     const systemMsg = systemPrompt || 'Eres KRONOS AI, el asistente inteligente de la plataforma KRONOS. Ayudas a los usuarios a crear contenido, gestionar su perfil y aprovechar al maximo la plataforma.';
 
     const response = await this.client.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: opts.model || 'gpt-4o-mini',
       messages: [
         { role: 'system', content: systemMsg },
         ...messages
       ],
-      max_tokens: 500,
-      temperature: 0.7,
+      max_tokens: opts.maxTokens || 1000,
+      temperature: opts.temperature ?? 0.7,
     });
 
     return response.choices[0].message.content;

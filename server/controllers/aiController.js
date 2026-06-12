@@ -22,9 +22,12 @@ exports.generateCaption = async (req, res) => {
 
 exports.generateImage = async (req, res) => {
   try {
-    const { prompt, size, quality } = req.body;
+    const { prompt, size } = req.body;
     if (!prompt) return res.status(400).json({ message: 'prompt is required' });
-    const imageUrl = await aiService.generateImage(prompt, size || '1024x1024', quality || 'standard');
+    // Calidad por plan del producto "media": premium/pro → HD, resto → standard.
+    const mediaPlan = req.user?.productPlans?.media || 'free';
+    const quality = ['premium', 'pro'].includes(mediaPlan) ? 'hd' : 'standard';
+    const imageUrl = await aiService.generateImage(prompt, size || '1024x1024', quality);
     res.json({ imageUrl });
   } catch (error) { handleAIError(res, error); }
 };
@@ -65,11 +68,19 @@ exports.generateHashtags = async (req, res) => {
   } catch (error) { handleAIError(res, error); }
 };
 
+// Modelo según el plan del producto "scripts": premium/pro usan gpt-4o (mejor
+// calidad), free/estandar usan gpt-4o-mini (más barato). Así se monetiza la calidad.
+const PREMIUM_TEXT_PLANS = ['premium', 'pro'];
+const modelForScriptsPlan = (req) => {
+  const plan = req.user?.productPlans?.scripts || 'free';
+  return PREMIUM_TEXT_PLANS.includes(plan) ? 'gpt-4o' : 'gpt-4o-mini';
+};
+
 exports.chat = async (req, res) => {
   try {
     const { messages, systemPrompt } = req.body;
     if (!messages || !Array.isArray(messages)) return res.status(400).json({ message: 'messages array is required' });
-    const reply = await aiService.chatWithAssistant(messages, systemPrompt);
+    const reply = await aiService.chatWithAssistant(messages, systemPrompt, { model: modelForScriptsPlan(req) });
     res.json({ reply });
   } catch (error) { handleAIError(res, error); }
 };

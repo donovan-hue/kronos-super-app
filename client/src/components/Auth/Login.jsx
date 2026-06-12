@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { HoloText, BotonBurbuja3D } from '../kronos';
+import KronosLogo from '../kronos/KronosLogo';
 
 const API_BASE = process.env.REACT_APP_API_URL
   ? process.env.REACT_APP_API_URL.replace('/api', '')
   : 'http://localhost:5000';
 
-const HOLO = 'linear-gradient(135deg,#4facfe,#00f2fe,#f3a0ff,#ff85a2)';
-
 const inputStyle = {
-  width: '100%', padding: '13px 16px', borderRadius: 12, outline: 'none',
-  background: 'rgba(79,172,254,0.05)', border: '1.5px solid rgba(190,200,212,0.15)',
+  width: '100%', padding: '14px 16px', borderRadius: 12, outline: 'none',
+  background: 'rgba(255,255,255,0.022)', border: '1px solid rgba(190,200,212,0.18)',
   color: '#c9ced4', fontSize: 14, fontFamily: 'inherit', boxSizing: 'border-box',
   transition: 'border-color 0.2s',
 };
@@ -49,55 +47,31 @@ function Login() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'radial-gradient(ellipse at 30% 20%, rgba(190,200,212,0.06), transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(190,200,212,0.06), transparent 50%), #040405',
+      background: 'radial-gradient(120% 100% at 50% 30%, #0c0d0f, #000 72%)',
       display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24,
-      fontFamily: "'Outfit', sans-serif",
+      fontFamily: "'Manrope', system-ui, sans-serif",
     }}>
-      <div style={{ width: '100%', maxWidth: 380, display: 'flex', flexDirection: 'column' }}>
+      <div style={{ width: '100%', maxWidth: 400, display: 'flex', flexDirection: 'column' }}>
 
-        <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          {/* Círculo K tornasol */}
-          <div style={{
-            width: 90, height: 90, borderRadius: '50%',
-            background: 'linear-gradient(135deg,#EC4899,#8B5CF6,#06B6D4)',
-            backgroundSize: '200% 200%',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            margin: '0 auto 20px',
-            boxShadow: '0 0 40px rgba(139,92,246,0.5), 0 0 70px rgba(6,182,212,0.2)',
-            animation: 'tornasol-k 5s ease-in-out infinite',
-            position: 'relative',
-          }}>
-            <div style={{
-              position: 'absolute', top: '10%', left: '18%', width: '55%', height: '32%',
-              background: 'linear-gradient(180deg,rgba(255,255,255,0.5) 0%,transparent 100%)',
-              borderRadius: '50%', filter: 'blur(3px)',
-            }} />
-            <span style={{ fontSize: 42, fontWeight: 900, color: '#fff', textShadow: '0 2px 12px rgba(0,0,0,0.3)', position: 'relative', zIndex: 1 }}>K</span>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 30 }}>
+          <KronosLogo markSize={88} fontSize={30} gap={16} />
+          <div style={{ fontSize: 11, letterSpacing: '.4em', textTransform: 'uppercase', color: '#565b62', marginTop: 12 }}>
+            Bienvenido de vuelta
           </div>
-          <div style={{
-            fontSize: 'clamp(36px, 10vw, 52px)', fontWeight: 900, letterSpacing: 8,
-            background: 'linear-gradient(90deg,#EC4899,#8B5CF6,#06B6D4,#8B5CF6,#EC4899)',
-            backgroundSize: '300% 300%',
-            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-            animation: 'tornasol-k 5s ease-in-out infinite',
-            filter: 'drop-shadow(0 3px 12px rgba(139,92,246,0.4))',
-            marginBottom: 6,
-          }}>KRONOS</div>
-          <style>{`@keyframes tornasol-k { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }`}</style>
         </div>
 
         {/* Selector Email / Teléfono */}
-        <div style={{ display: 'flex', gap: 4, marginBottom: 16, background: 'rgba(190,200,212,0.04)', borderRadius: 12, padding: 4 }}>
+        <div style={{ display: 'flex', gap: 4, marginBottom: 16, background: 'rgba(255,255,255,0.03)', borderRadius: 12, padding: 4 }}>
           {[
-            { id: 'email', label: '📧 Email' },
-            { id: 'phone', label: '📱 Teléfono' },
+            { id: 'email', label: 'Email' },
+            { id: 'phone', label: 'Teléfono' },
           ].map(opt => (
             <button key={opt.id} type="button" onClick={() => { setMethod(opt.id); setIdentifier(''); }}
               style={{
-                flex: 1, padding: '9px', borderRadius: 8, fontSize: 13, fontWeight: 600,
-                border: 'none', cursor: 'pointer',
-                background: method === opt.id ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)' : 'transparent',
-                color: method === opt.id ? '#fff' : 'rgba(201,206,212,0.55)',
+                flex: 1, padding: '10px', borderRadius: 8, fontSize: 12, fontWeight: 600,
+                letterSpacing: '.08em', border: 'none', cursor: 'pointer',
+                background: method === opt.id ? 'var(--metal)' : 'transparent',
+                color: method === opt.id ? '#15171a' : 'rgba(201,206,212,0.55)',
                 transition: 'all 0.2s',
               }}>
               {opt.label}
@@ -107,11 +81,11 @@ function Login() {
 
         {slowWarning && (
           <div style={{
-            background: 'rgba(190,200,212,0.06)', border: '1px solid rgba(190,200,212,0.20)',
-            color: '#4facfe', padding: '10px 14px', borderRadius: 12, fontSize: 12,
+            background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(190,200,212,0.20)',
+            color: 'var(--silver-dim)', padding: '10px 14px', borderRadius: 12, fontSize: 12,
             marginBottom: 14, textAlign: 'center',
           }}>
-            ⏳ El servidor está despertando, espera unos segundos...
+            El servidor está despertando, espera unos segundos…
           </div>
         )}
 
@@ -126,23 +100,11 @@ function Login() {
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {method === 'email' ? (
-            <input
-              type="email"
-              placeholder="Email"
-              value={identifier}
-              onChange={(e) => setIdentifier(e.target.value)}
-              required
-              style={inputStyle}
-            />
+            <input type="email" placeholder="Email" value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)} required style={inputStyle} />
           ) : (
-            <input
-              type="tel"
-              placeholder="Teléfono (ej. +521234567890)"
-              value={identifier}
-              onChange={(e) => setIdentifier(e.target.value)}
-              required
-              style={inputStyle}
-            />
+            <input type="tel" placeholder="Teléfono (ej. +521234567890)" value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)} required style={inputStyle} />
           )}
           <div style={{ position: 'relative' }}>
             <input
@@ -151,51 +113,44 @@ function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              style={{ ...inputStyle, paddingRight: 44 }}
+              style={{ ...inputStyle, paddingRight: 56 }}
             />
-            <button
-              type="button"
-              onClick={() => setShowPassword(v => !v)}
+            <button type="button" onClick={() => setShowPassword(v => !v)}
               style={{
-                position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)',
-                background: 'none', border: 'none', cursor: 'pointer', fontSize: 18,
-                color: 'rgba(201,206,212,0.40)', padding: 4,
-              }}
-            >
-              {showPassword ? '🙈' : '👁️'}
+                position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)',
+                background: 'none', border: 'none', cursor: 'pointer', fontSize: 11,
+                color: 'var(--silver-dim)', letterSpacing: '.1em', textTransform: 'uppercase', fontWeight: 600,
+              }}>
+              {showPassword ? 'Ocultar' : 'Ver'}
             </button>
           </div>
-          <BotonBurbuja3D
-            as="button"
-            type="submit"
-            size="md"
-            disabled={loading}
-            style={{ width: '100%', marginTop: 4 }}
-          >
-            {loading ? 'Entrando...' : 'ENTRAR'}
-          </BotonBurbuja3D>
+          <button type="submit" className="btn-metal" disabled={loading} style={{ width: '100%', marginTop: 4, opacity: loading ? 0.6 : 1 }}>
+            <span style={{ width: '100%' }}>{loading ? 'Entrando…' : 'Entrar'}</span>
+          </button>
         </form>
 
-        <div style={{ marginTop: 12, textAlign: 'center' }}>
-          <Link to="/forgot-password" style={{ color: 'rgba(201,206,212,0.45)', fontSize: 12, textDecoration: 'none' }}>
+        <div style={{ marginTop: 14, textAlign: 'center' }}>
+          <Link to="/forgot-password" style={{ color: 'var(--silver-faint)', fontSize: 12, textDecoration: 'none', letterSpacing: '.04em' }}>
             ¿Olvidaste tu contraseña?
           </Link>
         </div>
 
-        <div style={{ marginTop: 14 }}>
-          <button onClick={handleGoogleLogin} style={{
-            width: '100%', padding: '11px 0', borderRadius: 10, cursor: 'pointer',
-            background: '#fff', border: '1.5px solid rgba(190,200,212,0.15)',
-            color: '#c9ced4', fontSize: 13, fontFamily: 'inherit', fontWeight: 600,
-            boxShadow: '0 2px 8px rgba(190,200,212,0.06)',
-          }}>
-            🔵 Continuar con Google
-          </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 14, margin: '20px 0 16px' }}>
+          <div style={{ flex: 1, height: 1, background: 'rgba(190,200,212,0.12)' }} />
+          <span style={{ fontSize: 10, letterSpacing: '.3em', textTransform: 'uppercase', color: 'var(--silver-faint)' }}>o</span>
+          <div style={{ flex: 1, height: 1, background: 'rgba(190,200,212,0.12)' }} />
         </div>
 
-        <div style={{ marginTop: 24, textAlign: 'center', color: 'rgba(201,206,212,0.45)', fontSize: 13 }}>
+        <button onClick={handleGoogleLogin} className="btn-ghost" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" style={{ flex: 'none' }}>
+            <path fill="#c9ced4" d="M21.35 11.1H12v3.83h5.35c-.23 1.5-1.7 4.4-5.35 4.4-3.22 0-5.85-2.67-5.85-5.95S8.78 7.43 12 7.43c1.83 0 3.06.78 3.76 1.45l2.56-2.47C16.7 4.86 14.6 4 12 4 6.92 4 2.8 8.12 2.8 13.2S6.92 22.4 12 22.4c5.27 0 8.76-3.7 8.76-8.92 0-.6-.06-1.05-.16-1.5z" />
+          </svg>
+          Continuar con Google
+        </button>
+
+        <div style={{ marginTop: 24, textAlign: 'center', color: 'var(--silver-dim)', fontSize: 13 }}>
           ¿No tienes cuenta?{' '}
-          <Link to="/register" style={{ background: HOLO, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', textDecoration: 'none', fontWeight: 700 }}>
+          <Link to="/register" className="metal-text" style={{ textDecoration: 'none', fontWeight: 700 }}>
             Regístrate
           </Link>
         </div>

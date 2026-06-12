@@ -1,165 +1,98 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BotonBurbuja3D } from '../components/kronos';
+import KronosLogo from '../components/kronos/KronosLogo';
 
-const HOLO = 'linear-gradient(135deg,#EC4899,#8B5CF6,#06B6D4)';
+// Icono de línea plata (estética KRONOSPACE) — un solo trazo orbital reutilizable
+function LineIcon({ d }) {
+  return (
+    <svg viewBox="0 0 24 24" width="24" height="24"
+      style={{ fill: 'none', stroke: 'url(#ksV)', strokeWidth: 1.6, strokeLinecap: 'round', strokeLinejoin: 'round', opacity: 0.9 }}>
+      {d}
+    </svg>
+  );
+}
+
+const MODULES = [
+  { label: 'Social', desc: 'Feed, stories y chat en tiempo real', d: <><circle cx="12" cy="8" r="3.2" /><path d="M5 19a7 7 0 0 1 14 0" /></> },
+  { label: 'Tienda', desc: 'Compras con checkout Stripe', d: <><path d="M5 8h14l-1 11H6L5 8z" /><path d="M9 8a3 3 0 0 1 6 0" /></> },
+  { label: 'Wallet', desc: 'Pagos P2P entre usuarios', d: <><rect x="4" y="7" width="16" height="11" rx="2.5" /><path d="M16 12h2" /></> },
+  { label: 'Tokens', desc: 'Gana KRO por tu actividad', d: <><circle cx="12" cy="12" r="7" /><path d="M12 8v8M9.5 10h3.5a1.8 1.8 0 0 1 0 3.6H9.5" /></> },
+  { label: 'Eventos', desc: 'Boletos con QR y check-in', d: <><rect x="4" y="6" width="16" height="12" rx="2" /><path d="M4 11h16" /></> },
+  { label: 'Gamificación', desc: 'XP, niveles y badges', d: <><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" /><path d="M10 16h4v3h-4z" /></> },
+  { label: 'LIVE', desc: 'Streaming y videollamadas', d: <><rect x="3" y="7" width="12" height="10" rx="2" /><path d="M15 10l5-3v10l-5-3" /></> },
+  { label: 'Comunidades', desc: 'Grupos con roles y moderación', d: <><circle cx="8" cy="9" r="2.4" /><circle cx="16" cy="9" r="2.4" /><path d="M4 18a4 4 0 0 1 8 0M12 18a4 4 0 0 1 8 0" /></> },
+  { label: 'Marketplace', desc: 'P2P con escrow de seguridad', d: <><path d="M4 9l2-4h12l2 4" /><path d="M5 9v9h14V9" /><path d="M9 13h6" /></> },
+  { label: 'Avatar', desc: 'Personaliza tu avatar 3D', d: <><circle cx="12" cy="9" r="3.2" /><path d="M6 19a6 6 0 0 1 12 0" /></> },
+  { label: 'Health', desc: 'Metas diarias y tokens fitness', d: <><path d="M12 20s-7-4.3-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.7-7 9-7 9z" /></> },
+  { label: 'Reservas', desc: 'Restaurantes y servicios', d: <><circle cx="12" cy="12" r="8" /><path d="M12 8v4l3 2" /></> },
+];
 
 export default function Welcome() {
   const navigate = useNavigate();
   const [showFeatures, setShowFeatures] = useState(false);
 
-  const features = [
-    { icon: '💬', label: 'Social', desc: 'Feed, stories, chat en tiempo real' },
-    { icon: '🛒', label: 'Tienda', desc: 'Compras con checkout Stripe' },
-    { icon: '💰', label: 'Wallet', desc: 'Pagos P2P gratis entre usuarios' },
-    { icon: '🪙', label: 'Tokens', desc: 'Gana tokens diarios por actividad' },
-    { icon: '🎪', label: 'Eventos', desc: 'Boletos con QR y check-in' },
-    { icon: '🏆', label: 'Gamificación', desc: 'XP, niveles y badges únicos' },
-    { icon: '🎥', label: 'LIVE', desc: 'Streaming y videollamadas' },
-    { icon: '🌐', label: 'Comunidades', desc: 'Grupos con roles y moderación' },
-    { icon: '🏪', label: 'Marketplace', desc: 'P2P con escrow de seguridad' },
-    { icon: '🎮', label: 'Avatar', desc: 'Personaliza tu avatar 3D' },
-    { icon: '❤️', label: 'Health', desc: 'Metas diarias y tokens fitness' },
-    { icon: '📅', label: 'Reservas', desc: 'Restaurantes y servicios' },
-  ];
-
   return (
     <div style={{
       minHeight: '100vh',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '40px 20px 60px',
-      fontFamily: "'Outfit', sans-serif",
-      position: 'relative',
-      overflow: 'hidden',
+      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+      padding: '56px 22px 80px',
+      fontFamily: "'Manrope', system-ui, sans-serif",
+      position: 'relative', overflow: 'hidden',
+      background: 'radial-gradient(120% 90% at 50% -5%, #101113 0%, transparent 46%), #050506',
     }}>
       {/* ── HERO ── */}
-      <div style={{ textAlign: 'center', marginBottom: 40, position: 'relative', zIndex: 2 }}>
+      <div style={{ textAlign: 'center', marginBottom: 36, position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
-        {/* Círculo K tornasol — igual al de login/registro */}
+        <KronosLogo markSize={112} fontSize={46} gap={22}
+          style={{ filter: 'drop-shadow(0 0 26px rgba(174,186,200,.10))', marginBottom: 18 }} />
+
         <div style={{
-          width: 110, height: 110, borderRadius: '50%',
-          background: 'linear-gradient(135deg,#EC4899,#8B5CF6,#06B6D4)',
-          backgroundSize: '200% 200%',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          margin: '0 auto 24px',
-          boxShadow: '0 0 50px rgba(139,92,246,0.55), 0 0 90px rgba(6,182,212,0.25)',
-          animation: 'tornasol-hero 5s ease-in-out infinite',
-          position: 'relative',
+          width: 320, maxWidth: '80%', height: 1, margin: '8px 0 16px',
+          background: 'linear-gradient(90deg, transparent, rgba(190,200,212,.45), transparent)',
+        }} />
+
+        <div className="metal-text" style={{
+          fontFamily: "'Space Grotesk', sans-serif", fontSize: 12,
+          letterSpacing: '.42em', textTransform: 'uppercase', fontWeight: 600, marginBottom: 6,
         }}>
-          <div style={{
-            position: 'absolute', top: '10%', left: '18%', width: '55%', height: '32%',
-            background: 'linear-gradient(180deg,rgba(255,255,255,0.5) 0%,transparent 100%)',
-            borderRadius: '50%', filter: 'blur(3px)',
-          }} />
-          <span style={{
-            fontSize: 54, fontWeight: 900, color: '#fff',
-            textShadow: '0 3px 14px rgba(0,0,0,0.3)',
-            lineHeight: 1, position: 'relative', zIndex: 1,
-          }}>K</span>
+          Time × Space Platform
+        </div>
+        <div style={{ fontSize: 12, letterSpacing: '.28em', color: '#565b62', marginBottom: 40 }}>
+          Tu tiempo · Tu espacio · Tu orden
         </div>
 
-        <h1 style={{
-          fontSize: 'clamp(56px, 14vw, 80px)', fontWeight: 900, letterSpacing: 10, margin: '0 0 8px',
-          background: 'linear-gradient(90deg,#EC4899,#8B5CF6,#06B6D4,#8B5CF6,#EC4899)',
-          backgroundSize: '300% 300%',
-          WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          animation: 'tornasol-hero 5s ease-in-out infinite',
-          filter: 'drop-shadow(0 4px 16px rgba(139,92,246,0.4)) drop-shadow(0 0 40px rgba(6,182,212,0.2))',
-        }}>
-          KRONOS
-        </h1>
-        <p style={{
-          fontSize: 'clamp(11px, 3vw, 14px)', fontWeight: 300, letterSpacing: 2,
-          background: 'linear-gradient(90deg,rgba(236,72,153,0.6),#8B5CF6,#06B6D4,#8B5CF6,rgba(236,72,153,0.6))',
-          backgroundSize: '200% auto',
-          WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          animation: 'slogan-shimmer 6s linear infinite',
-          margin: '0 auto 36px',
-        }}>
-          Tu tiempo. Tu espacio. Tu orden.
-        </p>
-
-        {/* Botones burbuja del plan */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 14, alignItems: 'center' }}>
-          <BotonBurbuja3D size="lg" onClick={() => navigate('/auth/login')}>
-            🚀 Iniciar sesión
-          </BotonBurbuja3D>
-          <BotonBurbuja3D size="md" variant="outline" onClick={() => navigate('/auth/register')}>
-            ✨ Crear cuenta
-          </BotonBurbuja3D>
+        {/* Botones */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 14, alignItems: 'center', width: 300, maxWidth: '90vw' }}>
+          <button className="btn-metal" style={{ width: '100%' }} onClick={() => navigate('/auth/login')}>
+            <span style={{ width: '100%' }}>Iniciar sesión</span>
+          </button>
+          <button className="btn-ghost" style={{ width: '100%' }} onClick={() => navigate('/auth/register')}>
+            Crear cuenta
+          </button>
           <button onClick={() => setShowFeatures(v => !v)} style={{
             background: 'none', border: 'none', cursor: 'pointer',
-            color: 'rgba(201,206,212,0.40)', fontSize: 13, marginTop: 4,
-            textDecoration: 'underline',
+            color: 'var(--silver-faint)', fontSize: 12, letterSpacing: '.1em', marginTop: 6,
           }}>
-            {showFeatures ? 'Ocultar features ↑' : 'Ver los 15 mundos ↓'}
+            {showFeatures ? 'Ocultar módulos ↑' : 'Ver los 12 módulos ↓'}
           </button>
         </div>
       </div>
 
-      {/* ── GRID DE FEATURES ── */}
+      {/* ── GRID DE MÓDULOS ── */}
       {showFeatures && (
         <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
-          gap: 14, width: '100%', maxWidth: 680,
-          position: 'relative', zIndex: 2,
+          display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
+          gap: 14, width: '100%', maxWidth: 720, position: 'relative', zIndex: 2,
         }}>
-          {features.map(f => (
-            <div key={f.label} style={{
-              background: 'rgba(255,255,255,0.72)',
-              backdropFilter: 'blur(20px)',
-              border: '1.5px solid rgba(255,255,255,0.85)',
-              borderRadius: 20, padding: '20px 14px',
-              textAlign: 'center',
-              boxShadow: '0 8px 32px rgba(139,92,246,0.08), inset 0 1px 0 rgba(255,255,255,1)',
-              transition: 'transform 0.3s, box-shadow 0.3s',
-              cursor: 'default',
-              position: 'relative', overflow: 'hidden',
-            }}
-              onMouseEnter={e => {
-                e.currentTarget.style.transform = 'translateY(-6px) scale(1.03)';
-                e.currentTarget.style.boxShadow = '0 20px 50px rgba(139,92,246,0.18), inset 0 1px 0 rgba(255,255,255,1)';
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.transform = '';
-                e.currentTarget.style.boxShadow = '0 8px 32px rgba(139,92,246,0.08), inset 0 1px 0 rgba(255,255,255,1)';
-              }}
-            >
-              {/* Borde tornasol animado */}
-              <div style={{
-                position: 'absolute', inset: 0, borderRadius: 20,
-                background: 'linear-gradient(135deg,#EC4899,#8B5CF6,#06B6D4)',
-                backgroundSize: '200% 200%',
-                animation: 'tornasol-hero 4s linear infinite',
-                opacity: 0.18, zIndex: 0,
-              }} />
-              <div style={{ position: 'relative', zIndex: 1 }}>
-                <div style={{ fontSize: 30, marginBottom: 8 }}>{f.icon}</div>
-                <div style={{ fontWeight: 800, fontSize: 13, color: '#c9ced4', marginBottom: 4 }}>{f.label}</div>
-                <div style={{ fontSize: 11, color: 'rgba(201,206,212,0.50)', lineHeight: 1.4 }}>{f.desc}</div>
-              </div>
+          {MODULES.map(m => (
+            <div key={m.label} className="tile" style={{ padding: '20px 16px', textAlign: 'left', cursor: 'default' }}>
+              <div style={{ marginBottom: 12 }}><LineIcon d={m.d} /></div>
+              <div className="metal-text" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: 14, marginBottom: 4 }}>{m.label}</div>
+              <div style={{ fontSize: 11.5, color: 'var(--silver-dim)', lineHeight: 1.45 }}>{m.desc}</div>
             </div>
           ))}
         </div>
       )}
-
-      {/* ── KEYFRAMES ── */}
-      <style>{`
-        @keyframes tornasol-hero {
-          0%,100% { background-position: 0% 50%;   }
-          50%      { background-position: 100% 50%; }
-        }
-        @keyframes slogan-shimmer {
-          0%   { background-position: 200% center; }
-          100% { background-position: -200% center; }
-        }
-      `}</style>
     </div>
   );
 }

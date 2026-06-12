@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { HoloText, BotonBurbuja3D } from '../kronos';
-
-const HOLO = 'linear-gradient(135deg,#4facfe,#00f2fe,#f3a0ff,#ff85a2)';
+import KronosLogo from '../kronos/KronosLogo';
 
 const inputStyle = {
-  width: '100%', padding: '13px 16px', borderRadius: 12, outline: 'none',
-  background: 'rgba(79,172,254,0.05)', border: '1.5px solid rgba(190,200,212,0.15)',
+  width: '100%', padding: '14px 16px', borderRadius: 12, outline: 'none',
+  background: 'rgba(255,255,255,0.022)', border: '1px solid rgba(190,200,212,0.18)',
   color: '#c9ced4', fontSize: 14, fontFamily: 'inherit', boxSizing: 'border-box',
 };
 
@@ -57,55 +55,31 @@ function Register() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'radial-gradient(ellipse at 70% 20%, rgba(190,200,212,0.05), transparent 50%), radial-gradient(ellipse at 30% 80%, rgba(79,172,254,0.07), transparent 50%), #040405',
+      background: 'radial-gradient(120% 100% at 50% 25%, #0c0d0f, #000 72%)',
       display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24,
-      fontFamily: "'Outfit', sans-serif",
+      fontFamily: "'Manrope', system-ui, sans-serif",
     }}>
-      <div style={{ width: '100%', maxWidth: 400 }}>
+      <div style={{ width: '100%', maxWidth: 420 }}>
 
-        <div style={{ textAlign: 'center', marginBottom: 28 }}>
-          {/* Círculo K tornasol */}
-          <div style={{
-            width: 90, height: 90, borderRadius: '50%',
-            background: 'linear-gradient(135deg,#EC4899,#8B5CF6,#06B6D4)',
-            backgroundSize: '200% 200%',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            margin: '0 auto 20px',
-            boxShadow: '0 0 40px rgba(139,92,246,0.5), 0 0 70px rgba(6,182,212,0.2)',
-            animation: 'tornasol-k 5s ease-in-out infinite',
-            position: 'relative',
-          }}>
-            <div style={{
-              position: 'absolute', top: '10%', left: '18%', width: '55%', height: '32%',
-              background: 'linear-gradient(180deg,rgba(255,255,255,0.5) 0%,transparent 100%)',
-              borderRadius: '50%', filter: 'blur(3px)',
-            }} />
-            <span style={{ fontSize: 42, fontWeight: 900, color: '#fff', textShadow: '0 2px 12px rgba(0,0,0,0.3)', position: 'relative', zIndex: 1 }}>K</span>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 28 }}>
+          <KronosLogo markSize={84} fontSize={28} gap={14} />
+          <div style={{ fontSize: 11, letterSpacing: '.4em', textTransform: 'uppercase', color: '#565b62', marginTop: 12 }}>
+            Crea tu cuenta
           </div>
-          <div style={{
-            fontSize: 'clamp(36px, 10vw, 52px)', fontWeight: 900, letterSpacing: 8,
-            background: 'linear-gradient(90deg,#EC4899,#8B5CF6,#06B6D4,#8B5CF6,#EC4899)',
-            backgroundSize: '300% 300%',
-            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-            animation: 'tornasol-k 5s ease-in-out infinite',
-            filter: 'drop-shadow(0 3px 12px rgba(139,92,246,0.4))',
-            marginBottom: 6,
-          }}>KRONOS</div>
-          <style>{`@keyframes tornasol-k { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }`}</style>
         </div>
 
         {/* Selector Email / Teléfono */}
-        <div style={{ display: 'flex', gap: 4, marginBottom: 16, background: 'rgba(190,200,212,0.04)', borderRadius: 12, padding: 4 }}>
+        <div style={{ display: 'flex', gap: 4, marginBottom: 16, background: 'rgba(255,255,255,0.03)', borderRadius: 12, padding: 4 }}>
           {[
-            { id: 'email', label: '📧 Email' },
-            { id: 'phone', label: '📱 Teléfono' },
+            { id: 'email', label: 'Email' },
+            { id: 'phone', label: 'Teléfono' },
           ].map(opt => (
             <button key={opt.id} type="button" onClick={() => setMethod(opt.id)}
               style={{
-                flex: 1, padding: '9px', borderRadius: 8, fontSize: 13, fontWeight: 600,
-                border: 'none', cursor: 'pointer',
-                background: method === opt.id ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)' : 'transparent',
-                color: method === opt.id ? '#fff' : 'rgba(201,206,212,0.55)',
+                flex: 1, padding: '10px', borderRadius: 8, fontSize: 12, fontWeight: 600,
+                letterSpacing: '.08em', border: 'none', cursor: 'pointer',
+                background: method === opt.id ? 'var(--metal)' : 'transparent',
+                color: method === opt.id ? '#15171a' : 'rgba(201,206,212,0.55)',
                 transition: 'all 0.2s',
               }}>
               {opt.label}
@@ -115,11 +89,11 @@ function Register() {
 
         {slowWarning && (
           <div style={{
-            background: 'rgba(190,200,212,0.06)', border: '1px solid rgba(190,200,212,0.20)',
-            color: '#4facfe', padding: '10px 14px', borderRadius: 12, fontSize: 12,
+            background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(190,200,212,0.20)',
+            color: 'var(--silver-dim)', padding: '10px 14px', borderRadius: 12, fontSize: 12,
             marginBottom: 14, textAlign: 'center',
           }}>
-            ⏳ El servidor está despertando, espera unos segundos...
+            El servidor está despertando, espera unos segundos…
           </div>
         )}
 
@@ -147,7 +121,7 @@ function Register() {
 
           <div style={{ position: 'relative' }}>
             <input
-              style={{ ...inputStyle, paddingRight: 44 }}
+              style={{ ...inputStyle, paddingRight: 56 }}
               name="password"
               type={showPassword ? 'text' : 'password'}
               placeholder="Contraseña (mín. 6 caracteres)"
@@ -155,33 +129,24 @@ function Register() {
               onChange={handleChange}
               required
             />
-            <button
-              type="button"
-              onClick={() => setShowPassword(v => !v)}
+            <button type="button" onClick={() => setShowPassword(v => !v)}
               style={{
-                position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)',
-                background: 'none', border: 'none', cursor: 'pointer', fontSize: 18,
-                color: 'rgba(201,206,212,0.40)', padding: 4,
-              }}
-            >
-              {showPassword ? '🙈' : '👁️'}
+                position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)',
+                background: 'none', border: 'none', cursor: 'pointer', fontSize: 11,
+                color: 'var(--silver-dim)', letterSpacing: '.1em', textTransform: 'uppercase', fontWeight: 600,
+              }}>
+              {showPassword ? 'Ocultar' : 'Ver'}
             </button>
           </div>
 
-          <BotonBurbuja3D
-            as="button"
-            type="submit"
-            size="md"
-            disabled={loading}
-            style={{ width: '100%', marginTop: 4 }}
-          >
-            {loading ? 'Creando cuenta...' : 'REGISTRARSE'}
-          </BotonBurbuja3D>
+          <button type="submit" className="btn-metal" disabled={loading} style={{ width: '100%', marginTop: 4, opacity: loading ? 0.6 : 1 }}>
+            <span style={{ width: '100%' }}>{loading ? 'Creando cuenta…' : 'Registrarse'}</span>
+          </button>
         </form>
 
-        <div style={{ marginTop: 24, textAlign: 'center', color: 'rgba(201,206,212,0.45)', fontSize: 13 }}>
+        <div style={{ marginTop: 24, textAlign: 'center', color: 'var(--silver-dim)', fontSize: 13 }}>
           ¿Ya tienes cuenta?{' '}
-          <Link to="/login" style={{ background: HOLO, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', textDecoration: 'none', fontWeight: 700 }}>
+          <Link to="/login" className="metal-text" style={{ textDecoration: 'none', fontWeight: 700 }}>
             Inicia sesión
           </Link>
         </div>

@@ -3,31 +3,74 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#4facfe" />
-    <meta name="description" content="Kronos Super-App: Red social, tienda, wallet, comunidades y más" />
+    <meta name="theme-color" content="#050506" />
+    <meta name="description" content="KRONOSPACE — Time × Space Platform. Red social, tienda, wallet, comunidades y más." />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="Kronos" />
-    <meta name="application-name" content="Kronos" />
-    <meta name="msapplication-TileColor" content="#4facfe" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="KRONOSPACE" />
+    <meta name="application-name" content="KRONOSPACE" />
+    <meta name="msapplication-TileColor" content="#050506" />
     <meta name="msapplication-tap-highlight" content="no" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Kronos Super-App" />
-    <meta property="og:description" content="Red social, tienda, wallet, comunidades y más" />
+    <meta property="og:title" content="KRONOSPACE" />
+    <meta property="og:description" content="Time × Space Platform — Red social, tienda, wallet, comunidades y más." />
     <meta property="og:image" content="%PUBLIC_URL%/icons/icon-512.png" />
+
+    <!-- Tipografía KRONOSPACE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/icon-192.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/icons/icon-96.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/icons/icon-72.png" />
 
-    <title>Kronos</title>
+    <title>KRONOSPACE</title>
+    <style>
+      /* Fondo negro inmediato para evitar flash blanco antes de cargar React */
+      html, body { background:#050506; }
+    </style>
   </head>
   <body>
-    <noscript>Necesitas JavaScript para usar Kronos.</noscript>
+    <noscript>Necesitas JavaScript para usar KRONOSPACE.</noscript>
+
+    <!-- Gradientes metálicos compartidos KRONOSPACE (referenciados por stroke:url(#ksV) en todo el tema) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <linearGradient id="ksV" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ffffff" />
+          <stop offset="16%" stop-color="#e9edf1" />
+          <stop offset="44%" stop-color="#a4aab1" />
+          <stop offset="51%" stop-color="#74787f" />
+          <stop offset="58%" stop-color="#bcc1c8" />
+          <stop offset="84%" stop-color="#eef0f3" />
+          <stop offset="100%" stop-color="#c9ced4" />
+        </linearGradient>
+        <linearGradient id="ksDiag" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#fdfefe" />
+          <stop offset="30%" stop-color="#c2c7ce" />
+          <stop offset="50%" stop-color="#7a7e85" />
+          <stop offset="70%" stop-color="#c8cdd3" />
+          <stop offset="100%" stop-color="#f2f4f6" />
+        </linearGradient>
+        <radialGradient id="ksSphere" cx="34%" cy="30%" r="80%">
+          <stop offset="0%" stop-color="#ffffff" />
+          <stop offset="24%" stop-color="#dadfe4" />
+          <stop offset="58%" stop-color="#878c93" />
+          <stop offset="100%" stop-color="#34373c" />
+        </radialGradient>
+        <radialGradient id="ksSphereSm" cx="36%" cy="32%" r="80%">
+          <stop offset="0%" stop-color="#ffffff" />
+          <stop offset="40%" stop-color="#c4c9cf" />
+          <stop offset="100%" stop-color="#4a4e54" />
+        </radialGradient>
+      </defs>
+    </svg>
+
     <div id="root"></div>
   </body>
 </html>
