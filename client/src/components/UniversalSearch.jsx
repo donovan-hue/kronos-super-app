@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
-import { GlassCard, HoloText, HashtagText } from './kronos';
+import { GlassCard, HoloText, HashtagText, Icon } from './kronos';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 const CATEGORIES = [
-  { value: 'all',      label: 'Todo',     icon: '🔍' },
-  { value: 'posts',    label: 'Posts',    icon: '📝' },
-  { value: 'users',    label: 'Usuarios', icon: '👤' },
-  { value: 'products', label: 'Ropa',     icon: '👗' },
+  { value: 'all',      label: 'Todo',     icon: 'search' },
+  { value: 'posts',    label: 'Posts',    icon: 'message' },
+  { value: 'users',    label: 'Usuarios', icon: 'user' },
+  { value: 'products', label: 'Ropa',     icon: 'bag' },
 ];
 
 export default function UniversalSearch() {
@@ -93,7 +93,7 @@ export default function UniversalSearch() {
         <form onSubmit={handleSubmit} style={{ position: 'relative', marginBottom: 12 }}>
           <div style={{ display: 'flex', gap: 8 }}>
             <div style={{ flex: 1, position: 'relative' }}>
-              <span style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', fontSize: 16, color: 'rgba(201,206,212,0.35)' }}>🔍</span>
+              <span style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', display: 'flex' }}><Icon name="search" size={16} /></span>
               <input
                 ref={inputRef}
                 value={query}
@@ -104,8 +104,8 @@ export default function UniversalSearch() {
               />
               {query && (
                 <button type="button" onClick={clearSearch}
-                  style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'rgba(201,206,212,0.50)', cursor: 'pointer', fontSize: 16, lineHeight: 1 }}>
-                  ✕
+                  style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'rgba(201,206,212,0.50)', cursor: 'pointer', lineHeight: 1, display: 'flex' }}>
+                  <Icon name="close" size={16} stroke="currentColor" />
                 </button>
               )}
             </div>
@@ -117,12 +117,12 @@ export default function UniversalSearch() {
 
           {/* Suggestions dropdown */}
           {showDrop && suggestions.length > 0 && (
-            <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 50, background: 'rgba(255,255,255,0.98)', border: '1.5px solid rgba(190,200,212,0.15)', borderRadius: 16, marginTop: 6, overflow: 'hidden', boxShadow: '0 8px 32px rgba(190,200,212,0.12)' }}>
+            <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 50, background: 'var(--ink-2)', border: '1.5px solid var(--line-2)', borderRadius: 16, marginTop: 6, overflow: 'hidden', boxShadow: '0 8px 32px rgba(0,0,0,0.5)' }}>
               {suggestions.map((s, i) => (
                 <button key={i} type="button"
                   onClick={() => { setQuery(s.text); setShowDrop(false); doSearch(s.text, category); setSearchParams({ q: s.text }); }}
                   style={{ width: '100%', textAlign: 'left', padding: '10px 16px', background: 'none', border: 'none', color: '#c9ced4', cursor: 'pointer', fontSize: 13, display: 'flex', alignItems: 'center', gap: 10, borderBottom: i < suggestions.length - 1 ? '1px solid rgba(190,200,212,0.06)' : 'none' }}>
-                  <span style={{ fontSize: 15 }}>{s.type === 'user' ? '👤' : s.type === 'product' ? '👗' : '🔍'}</span>
+                  <span style={{ display: 'flex' }}><Icon name={s.type === 'user' ? 'user' : s.type === 'product' ? 'bag' : 'search'} size={15} /></span>
                   <span>{s.text}</span>
                 </button>
               ))}
@@ -134,8 +134,8 @@ export default function UniversalSearch() {
         <div style={{ display: 'flex', gap: 8, marginBottom: 20, overflowX: 'auto', paddingBottom: 2 }}>
           {CATEGORIES.map(cat => (
             <button key={cat.value} onClick={() => handleCategoryChange(cat.value)}
-              style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 5, padding: '7px 14px', borderRadius: 20, fontSize: 12, fontWeight: 600, border: '1.5px solid', borderColor: category === cat.value ? 'transparent' : 'rgba(190,200,212,0.15)', cursor: 'pointer', background: category === cat.value ? 'linear-gradient(135deg,#4facfe,#f3a0ff)' : 'rgba(255,255,255,0.8)', color: category === cat.value ? '#fff' : 'rgba(201,206,212,0.65)', transition: 'all 0.2s' }}>
-              <span>{cat.icon}</span><span>{cat.label}</span>
+              style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 5, padding: '7px 14px', borderRadius: 20, fontSize: 12, fontWeight: 600, border: '1.5px solid', borderColor: category === cat.value ? 'transparent' : 'var(--line-2)', cursor: 'pointer', background: category === cat.value ? 'linear-gradient(135deg,var(--accent),var(--accent-bright))' : 'var(--panel)', color: category === cat.value ? '#fff' : 'rgba(201,206,212,0.65)', transition: 'all 0.2s' }}>
+              <span style={{ display: 'flex' }}><Icon name={cat.icon} size={14} stroke={category === cat.value ? '#fff' : 'url(#ksV)'} /></span><span>{cat.label}</span>
             </button>
           ))}
         </div>
@@ -143,7 +143,7 @@ export default function UniversalSearch() {
         {/* Loading */}
         {loading && (
           <div style={{ textAlign: 'center', padding: 60, color: 'rgba(201,206,212,0.50)' }}>
-            <div style={{ fontSize: 36, marginBottom: 10 }}>🔍</div>
+            <div style={{ marginBottom: 10, display: 'flex', justifyContent: 'center' }}><Icon name="search" size={36} /></div>
             <div>Buscando...</div>
           </div>
         )}
@@ -151,7 +151,7 @@ export default function UniversalSearch() {
         {/* No results */}
         {!loading && results && totalResults === 0 && (
           <div style={{ textAlign: 'center', padding: 60, color: 'rgba(201,206,212,0.35)' }}>
-            <div style={{ fontSize: 40, marginBottom: 10 }}>😶</div>
+            <div style={{ marginBottom: 10, display: 'flex', justifyContent: 'center' }}><Icon name="search" size={40} /></div>
             <div style={{ fontSize: 15, fontWeight: 600 }}>Sin resultados para "{query}"</div>
             <div style={{ fontSize: 13, marginTop: 6 }}>Intenta con otras palabras o hashtags</div>
           </div>
@@ -160,7 +160,7 @@ export default function UniversalSearch() {
         {/* Empty state */}
         {!loading && !results && (
           <div style={{ textAlign: 'center', padding: 60, color: 'rgba(255,255,255,0.25)' }}>
-            <div style={{ fontSize: 48, marginBottom: 10 }}>🔎</div>
+            <div style={{ marginBottom: 10, display: 'flex', justifyContent: 'center' }}><Icon name="search" size={48} /></div>
             <div style={{ fontSize: 14 }}>Busca usuarios, posts, productos o #hashtags</div>
           </div>
         )}

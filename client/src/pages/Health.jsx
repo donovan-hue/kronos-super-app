@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { GlassCard, HoloText } from '../components/kronos';
+import { GlassCard, HoloText, Icon } from '../components/kronos';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 const MOODS = [
-  { value: 'great',   emoji: '😄', label: 'Genial' },
-  { value: 'good',    emoji: '🙂', label: 'Bien' },
-  { value: 'okay',    emoji: '😐', label: 'Regular' },
-  { value: 'bad',     emoji: '😕', label: 'Mal' },
-  { value: 'terrible',emoji: '😢', label: 'Terrible' },
+  { value: 'great',   icon: 'smileGreat',    label: 'Genial' },
+  { value: 'good',    icon: 'smileGood',     label: 'Bien' },
+  { value: 'okay',    icon: 'smileOkay',     label: 'Regular' },
+  { value: 'bad',     icon: 'smileBad',      label: 'Mal' },
+  { value: 'terrible',icon: 'smileTerrible', label: 'Terrible' },
 ];
 
 function formatDateHeader() {
@@ -35,7 +35,7 @@ function ProgressBar({ value, max, color = '#9aa0a7' }) {
 }
 
 // ── Metric Card ───────────────────────────────────────────────────────────────
-function MetricCard({ emoji, label, value, onChange, goal, unit, color, min = 0, max = 99999 }) {
+function MetricCard({ icon, label, value, onChange, goal, unit, color, min = 0, max = 99999 }) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(String(value));
 
@@ -66,9 +66,8 @@ function MetricCard({ emoji, label, value, onChange, goal, unit, color, min = 0,
           width: 40, height: 40, borderRadius: 12,
           background: `${color}20`,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 20,
         }}>
-          {emoji}
+          <Icon name={icon} size={20} stroke={color} />
         </div>
         <div>
           <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 11, letterSpacing: 0.5 }}>{label.toUpperCase()}</div>
@@ -127,8 +126,8 @@ function WeeklyChart({ history }) {
 
   return (
     <GlassCard style={{ marginBottom: 16 }}>
-      <div style={{ color: '#c9ced4', fontSize: 14, fontWeight: 700, marginBottom: 16 }}>
-        📈 Pasos — Últimos 7 días
+      <div style={{ color: '#c9ced4', fontSize: 14, fontWeight: 700, marginBottom: 16, display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+        <Icon name="trending" size={14} /> Pasos — Últimos 7 días
       </div>
       <div style={{ display: 'flex', alignItems: 'flex-end', gap: 8, height: 80 }}>
         {history.slice(-7).map((entry, i) => {
@@ -154,7 +153,7 @@ function WeeklyChart({ history }) {
                 position: 'relative',
               }}>
                 {reached && (
-                  <div style={{ position: 'absolute', top: -16, left: '50%', transform: 'translateX(-50%)', fontSize: 10 }}>⭐</div>
+                  <div style={{ position: 'absolute', top: -16, left: '50%', transform: 'translateX(-50%)', display: 'flex' }}><Icon name="star" size={12} /></div>
                 )}
               </div>
               <div style={{ color: isToday ? '#fff' : 'rgba(255,255,255,0.35)', fontSize: 10, fontWeight: isToday ? 700 : 400 }}>
@@ -164,8 +163,8 @@ function WeeklyChart({ history }) {
           );
         })}
       </div>
-      <div style={{ color: 'rgba(201,206,212,0.35)', fontSize: 10, marginTop: 10, textAlign: 'right' }}>
-        ⭐ = meta 10,000 alcanzada
+      <div style={{ color: 'rgba(201,206,212,0.35)', fontSize: 10, marginTop: 10, textAlign: 'right', display: 'inline-flex', alignItems: 'center', gap: 4, justifyContent: 'flex-end', width: '100%' }}>
+        <Icon name="star" size={10} /> = meta 10,000 alcanzada
       </div>
     </GlassCard>
   );
@@ -286,7 +285,7 @@ export default function Health() {
                 borderRadius: 16, padding: '14px 18px',
                 marginBottom: 20, display: 'flex', alignItems: 'center', gap: 12,
               }}>
-                <span style={{ fontSize: 28 }}>🏆</span>
+                <span style={{ display: 'flex' }}><Icon name="trophy" size={28} stroke="#10b981" /></span>
                 <div>
                   <div style={{ color: '#10b981', fontWeight: 700, fontSize: 14 }}>
                     +10 tokens ganados hoy
@@ -301,7 +300,7 @@ export default function Health() {
             {/* Metrics grid */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 20 }}>
               <MetricCard
-                emoji="👟"
+                icon="footsteps"
                 label="Pasos"
                 value={log.steps}
                 onChange={v => setMetric('steps', v)}
@@ -312,7 +311,7 @@ export default function Health() {
                 max={100000}
               />
               <MetricCard
-                emoji="🔥"
+                icon="flame"
                 label="Calorías"
                 value={log.calories}
                 onChange={v => setMetric('calories', v)}
@@ -322,7 +321,7 @@ export default function Health() {
                 max={10000}
               />
               <MetricCard
-                emoji="💧"
+                icon="drop"
                 label="Agua"
                 value={log.waterGlasses}
                 onChange={v => setMetric('waterGlasses', v)}
@@ -333,7 +332,7 @@ export default function Health() {
                 max={30}
               />
               <MetricCard
-                emoji="⏱️"
+                icon="clock"
                 label="Ejercicio"
                 value={log.workoutMinutes}
                 onChange={v => setMetric('workoutMinutes', v)}
@@ -370,7 +369,7 @@ export default function Health() {
                         gap: 4,
                         transform: active ? 'scale(1.06)' : 'scale(1)',
                       }}>
-                      <span style={{ fontSize: 22 }}>{m.emoji}</span>
+                      <span style={{ display: 'flex' }}><Icon name={m.icon} size={22} stroke={active ? '#a78bfa' : 'url(#ksV)'} /></span>
                       <span style={{ color: active ? '#0a0a14' : 'rgba(201,206,212,0.50)', fontSize: 10, fontWeight: active ? 700 : 400 }}>
                         {m.label}
                       </span>
@@ -382,8 +381,8 @@ export default function Health() {
 
             {/* Notes */}
             <GlassCard style={{ marginBottom: 16 }}>
-              <div style={{ color: '#c9ced4', fontSize: 14, fontWeight: 700, marginBottom: 12 }}>
-                📝 Notas del día
+              <div style={{ color: '#c9ced4', fontSize: 14, fontWeight: 700, marginBottom: 12, display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                <Icon name="message" size={14} /> Notas del día
               </div>
               <textarea
                 value={log.notes}
@@ -427,7 +426,7 @@ export default function Health() {
                 boxShadow: saving ? 'none' : '0 6px 24px rgba(124,58,237,0.35)',
                 transition: 'all 0.2s',
               }}>
-              {saving ? 'Guardando...' : '💾 Guardar registro'}
+              {saving ? 'Guardando...' : <><Icon name="save" size={16} stroke="currentColor" style={{ verticalAlign: 'middle', marginRight: 8 }} />Guardar registro</>}
             </button>
           </>
         )}

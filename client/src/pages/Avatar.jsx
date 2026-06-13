@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
-import { GlassCard } from '../components/kronos';
+import { GlassCard, Icon } from '../components/kronos';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
@@ -95,7 +95,7 @@ function AvatarCanvas({ avatar }) {
         zIndex: 2,
         marginTop: hairItem ? 20 : 0,
       }}>
-        {skinItem?.itemId?.imageEmoji || '😊'}
+        {skinItem?.itemId?.imageEmoji || <Icon name="user" size={36} stroke="rgba(0,0,0,0.5)" />}
       </div>
 
       {/* Accessory overlay */}
@@ -425,11 +425,11 @@ export default function AvatarPage() {
 
       {/* Tabs */}
       <div style={styles.tabs}>
-        <button style={styles.tab(activeTab === 'avatar')} onClick={() => setActiveTab('avatar')}>
-          🧑 Mi Avatar
+        <button style={{ ...styles.tab(activeTab === 'avatar'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6 }} onClick={() => setActiveTab('avatar')}>
+          <Icon name="user" size={14} stroke="currentColor" /> Mi Avatar
         </button>
-        <button style={styles.tab(activeTab === 'shop')} onClick={() => setActiveTab('shop')}>
-          🛍️ Tienda
+        <button style={{ ...styles.tab(activeTab === 'shop'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6 }} onClick={() => setActiveTab('shop')}>
+          <Icon name="bag" size={14} stroke="currentColor" /> Tienda
         </button>
       </div>
 
@@ -437,7 +437,7 @@ export default function AvatarPage() {
         {/* Token balance */}
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 16 }}>
           <div style={styles.tokenBadge}>
-            🪙 {tokenBalance.toLocaleString()} KRO
+            <Icon name="coin" size={14} stroke="currentColor" /> {tokenBalance.toLocaleString()} KRO
           </div>
         </div>
 
@@ -566,13 +566,13 @@ export default function AvatarPage() {
                           {CATEGORY_LABELS[item.category]}
                         </span>
                       </div>
-                      <div style={{ fontSize: 14, fontWeight: 700, color: '#c9ced4' }}>
-                        {item.price === 0 ? 'Gratis' : `🪙 ${item.price}`}
+                      <div style={{ fontSize: 14, fontWeight: 700, color: '#c9ced4', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                        {item.price === 0 ? 'Gratis' : <><Icon name="coin" size={14} /> {item.price}</>}
                       </div>
 
                       {equipped ? (
-                        <button style={styles.actionBtn('equipped')} disabled>
-                          Equipado ✓
+                        <button style={{ ...styles.actionBtn('equipped'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 5 }} disabled>
+                          Equipado <Icon name="check" size={12} stroke="currentColor" />
                         </button>
                       ) : owned ? (
                         <button

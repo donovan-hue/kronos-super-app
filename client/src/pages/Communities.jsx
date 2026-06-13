@@ -2,22 +2,22 @@ import { SkeletonList } from '../components/kronos';
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { GlassCard, HoloText } from '../components/kronos';
+import { GlassCard, HoloText, Icon } from '../components/kronos';
 import { AuthContext } from '../context/AuthContext';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 const CATEGORIES = [
-  { value: '', label: 'Todas' },
-  { value: 'tech', label: '💻 Tech' },
-  { value: 'art', label: '🎨 Arte' },
-  { value: 'sports', label: '⚽ Deportes' },
-  { value: 'music', label: '🎵 Música' },
-  { value: 'gaming', label: '🎮 Gaming' },
-  { value: 'travel', label: '✈️ Viajes' },
-  { value: 'fashion', label: '👗 Moda' },
-  { value: 'health', label: '💪 Salud' },
-  { value: 'other', label: '🌐 Otro' },
+  { value: '', icon: null, label: 'Todas' },
+  { value: 'tech', icon: 'laptop', label: 'Tech' },
+  { value: 'art', icon: 'image', label: 'Arte' },
+  { value: 'sports', icon: 'trophy', label: 'Deportes' },
+  { value: 'music', icon: 'bolt', label: 'Música' },
+  { value: 'gaming', icon: 'star', label: 'Gaming' },
+  { value: 'travel', icon: 'pin', label: 'Viajes' },
+  { value: 'fashion', icon: 'bag', label: 'Moda' },
+  { value: 'health', icon: 'heart', label: 'Salud' },
+  { value: 'other', icon: 'globe', label: 'Otro' },
 ];
 
 function CreateCommunityModal({ onClose, onCreated }) {
@@ -66,8 +66,8 @@ function CreateCommunityModal({ onClose, onCreated }) {
             </select>
             <select value={form.privacy} onChange={e => setForm(f => ({ ...f, privacy: e.target.value }))}
               style={{ flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 10, padding: '10px 12px', color: '#c9ced4', fontSize: 13, outline: 'none' }}>
-              <option value="public">🌍 Pública</option>
-              <option value="private">🔒 Privada</option>
+              <option value="public">Pública</option>
+              <option value="private">Privada</option>
             </select>
           </div>
           <div style={{ display: 'flex', gap: 10, marginTop: 8 }}>
@@ -85,7 +85,7 @@ function CreateCommunityModal({ onClose, onCreated }) {
 
 function CommunityCard({ community, currentUserId, onJoin, onClick }) {
   const isMember = community.members?.some(m => (m.user?._id || m.user || m._id || m)?.toString() === currentUserId?.toString());
-  const label = CATEGORIES.find(c => c.value === community.category)?.label || community.category;
+  const cat = CATEGORIES.find(c => c.value === community.category);
 
   return (
     <GlassCard
@@ -97,20 +97,20 @@ function CommunityCard({ community, currentUserId, onJoin, onClick }) {
           width: 56, height: 56, borderRadius: 16, background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
           flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, overflow: 'hidden'
         }}>
-          {community.avatar ? <img src={community.avatar} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : label.split(' ')[0]}
+          {community.avatar ? <img src={community.avatar} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <Icon name={cat?.icon || 'globe'} size={24} />}
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ color: '#c9ced4', fontSize: 15, fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{community.name}</div>
-            <span style={{ fontSize: 10, padding: '2px 8px', borderRadius: 20, background: community.privacy === 'private' ? 'rgba(239,68,68,0.2)' : 'rgba(16,185,129,0.2)', color: community.privacy === 'private' ? '#ef4444' : '#10b981', flexShrink: 0 }}>
-              {community.privacy === 'private' ? '🔒' : '🌍'}
+            <span style={{ padding: '3px 8px', borderRadius: 20, background: community.privacy === 'private' ? 'rgba(239,68,68,0.2)' : 'rgba(16,185,129,0.2)', color: community.privacy === 'private' ? '#ef4444' : '#10b981', flexShrink: 0, display: 'inline-flex' }}>
+              <Icon name={community.privacy === 'private' ? 'lock' : 'globe'} size={12} stroke="currentColor" />
             </span>
           </div>
           <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 12, marginBottom: 8, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
             {community.description || 'Sin descripción'}
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ color: 'rgba(201,206,212,0.50)', fontSize: 11 }}>👥 {community.members?.length || 0} miembros</span>
+            <span style={{ color: 'rgba(201,206,212,0.50)', fontSize: 11, display: 'inline-flex', alignItems: 'center', gap: 4 }}><Icon name="users" size={12} /> {community.members?.length || 0} miembros</span>
             <button
               onClick={e => { e.stopPropagation(); onJoin(community._id); }}
               style={{
@@ -211,8 +211,8 @@ export default function Communities() {
             <div style={{ display: 'flex', gap: 8, overflowX: 'auto', scrollbarWidth: 'none', paddingBottom: 4 }}>
               {CATEGORIES.map(c => (
                 <button key={c.value} onClick={() => setCategory(c.value)}
-                  style={{ padding: '5px 14px', borderRadius: 20, fontSize: 12, border: 'none', cursor: 'pointer', whiteSpace: 'nowrap', background: category === c.value ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)' : 'rgba(255,255,255,0.08)', color: '#fff', fontWeight: category === c.value ? 700 : 400 }}>
-                  {c.label}
+                  style={{ padding: '5px 14px', borderRadius: 20, fontSize: 12, border: 'none', cursor: 'pointer', whiteSpace: 'nowrap', background: category === c.value ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)' : 'rgba(255,255,255,0.08)', color: '#fff', fontWeight: category === c.value ? 700 : 400, display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+                  {c.icon && <Icon name={c.icon} size={12} />} {c.label}
                 </button>
               ))}
             </div>
@@ -222,7 +222,7 @@ export default function Communities() {
         {/* Communities list */}
         {loading ? (<div style={{padding:'0 16px'}}><SkeletonList count={4} /></div>) : communities.length === 0 ? (
           <div style={{ textAlign: 'center', color: 'rgba(201,206,212,0.35)', padding: 60 }}>
-            <div style={{ fontSize: 48, marginBottom: 12 }}>🏛️</div>
+            <div style={{ marginBottom: 12, display: 'flex', justifyContent: 'center' }}><Icon name="users" size={48} /></div>
             <div style={{ fontSize: 16, fontWeight: 600, color: 'rgba(201,206,212,0.50)' }}>
               {tab === 'mine' ? 'No perteneces a ninguna comunidad aún' : 'No hay comunidades'}
             </div>

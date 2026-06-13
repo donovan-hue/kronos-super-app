@@ -95,22 +95,22 @@ const IconGamification = () => (
 );
 
 const NAV_ITEMS = [
-  { Icon: IconHome,        label: 'Inicio',         to: '/feed',          emoji: '🏠' },
-  { Icon: IconSearch,      label: 'Buscar',          to: '/search',        emoji: '🔍' },
-  { Icon: IconChat,        label: 'Mensajes',        to: '/social/chat',   emoji: '💬' },
-  { Icon: IconNotif,       label: 'Notificaciones',  to: '/notifications', emoji: '🔔' },
-  { Icon: IconCommunities, label: 'Comunidades',     to: '/communities',   emoji: '🏘️' },
-  { Icon: IconShop,        label: 'Tienda',          to: '/shop',          emoji: '🛒' },
-  { Icon: IconMarket,      label: 'Marketplace',     to: '/marketplace',   emoji: '🛍️' },
-  { Icon: IconWallet,      label: 'Wallet',          to: '/wallet',        emoji: '💰' },
-  { Icon: IconLive,        label: 'LIVE',            to: '/live',          emoji: '🔴' },
-  { Icon: IconHealth,      label: 'Health',          to: '/health',        emoji: '❤️' },
-  { Icon: IconAvatar,      label: 'Avatar',          to: '/avatar',        emoji: '🎮' },
-  { Icon: IconReserv,      label: 'Reservaciones',   to: '/reservations',  emoji: '📅' },
-  { Icon: IconVideo,       label: 'Video Editor',    to: '/video-editor',  emoji: '🎬' },
-  { Icon: IconEvents,      label: 'Eventos',         to: '/events',        emoji: '🎪' },
-  { Icon: IconGamification, label: 'Gamificación',  to: '/gamification',  emoji: '🏆' },
-  { Icon: IconSettings,    label: 'Ajustes',         to: '/settings',      emoji: '⚙️' },
+  { Icon: IconHome,        label: 'Inicio',         to: '/feed' },
+  { Icon: IconSearch,      label: 'Buscar',          to: '/search' },
+  { Icon: IconChat,        label: 'Mensajes',        to: '/social/chat' },
+  { Icon: IconNotif,       label: 'Notificaciones',  to: '/notifications' },
+  { Icon: IconCommunities, label: 'Comunidades',     to: '/communities' },
+  { Icon: IconShop,        label: 'Tienda',          to: '/shop' },
+  { Icon: IconMarket,      label: 'Marketplace',     to: '/marketplace' },
+  { Icon: IconWallet,      label: 'Wallet',          to: '/wallet' },
+  { Icon: IconLive,        label: 'LIVE',            to: '/live' },
+  { Icon: IconHealth,      label: 'Health',          to: '/health' },
+  { Icon: IconAvatar,      label: 'Avatar',          to: '/avatar' },
+  { Icon: IconReserv,      label: 'Reservaciones',   to: '/reservations' },
+  { Icon: IconVideo,       label: 'Video Editor',    to: '/video-editor' },
+  { Icon: IconEvents,      label: 'Eventos',         to: '/events' },
+  { Icon: IconGamification, label: 'Gamificación',  to: '/gamification' },
+  { Icon: IconSettings,    label: 'Ajustes',         to: '/settings' },
 ];
 
 function SidebarItem({ item, isActive }) {
@@ -159,13 +159,10 @@ function SidebarItem({ item, isActive }) {
             background: 'radial-gradient(ellipse, rgba(255,255,255,0.4) 0%, transparent 70%)',
             pointerEvents: 'none',
           }} />
-          {item.emoji
-            ? <span style={{ fontSize: 18 }}>{item.emoji}</span>
-            : <item.Icon />
-          }
+          <item.Icon />
         </div>
         <span style={{
-          color: isActive ? '#4facfe' : 'rgba(201,206,212,0.65)',
+          color: isActive ? 'var(--accent-bright)' : 'rgba(201,206,212,0.65)',
           fontWeight: isActive ? 700 : 400,
           fontSize: 13,
           fontFamily: "'Outfit', sans-serif",

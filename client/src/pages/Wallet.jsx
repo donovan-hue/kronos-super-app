@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { GlassCard, HoloText } from '../components/kronos';
+import { GlassCard, HoloText, Icon } from '../components/kronos';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
@@ -33,7 +33,7 @@ function VirtualCardDisplay({ card, onFreeze }) {
         {card.frozen && (
           <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)', borderRadius: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2 }}>
             <div style={{ textAlign: 'center', color: '#fff' }}>
-              <div style={{ fontSize: 36, marginBottom: 4 }}>🔒</div>
+              <div style={{ marginBottom: 4, display: 'flex', justifyContent: 'center' }}><Icon name="lock" size={36} /></div>
               <div style={{ fontSize: 14, fontWeight: 700 }}>TARJETA CONGELADA</div>
             </div>
           </div>
@@ -76,12 +76,12 @@ function VirtualCardDisplay({ card, onFreeze }) {
       {/* Card actions */}
       <div style={{ display: 'flex', gap: 10, marginTop: 14 }}>
         <button onClick={() => setShowDetails(s => !s)}
-          style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'rgba(79,172,254,0.07)', color: '#c9ced4', border: '1px solid rgba(190,200,212,0.15)', fontSize: 13, cursor: 'pointer' }}>
-          {showDetails ? '🙈 Ocultar' : '👁️ Ver detalles'}
+          style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'var(--panel)', color: 'var(--silver)', border: '1px solid var(--line-2)', fontSize: 13, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+          <Icon name={showDetails ? 'eyeOff' : 'eye'} size={16} /> {showDetails ? 'Ocultar' : 'Ver detalles'}
         </button>
         <button onClick={onFreeze}
-          style={{ flex: 1, padding: '10px', borderRadius: 12, background: card.frozen ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)', color: card.frozen ? '#10b981' : '#ef4444', border: `1px solid ${card.frozen ? 'rgba(16,185,129,0.3)' : 'rgba(239,68,68,0.3)'}`, fontSize: 13, cursor: 'pointer' }}>
-          {card.frozen ? '✅ Activar' : '🔒 Congelar'}
+          style={{ flex: 1, padding: '10px', borderRadius: 12, background: card.frozen ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)', color: card.frozen ? '#10b981' : '#ef4444', border: `1px solid ${card.frozen ? 'rgba(16,185,129,0.3)' : 'rgba(239,68,68,0.3)'}`, fontSize: 13, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+          <Icon name={card.frozen ? 'check' : 'lock'} size={16} stroke="currentColor" /> {card.frozen ? 'Activar' : 'Congelar'}
         </button>
       </div>
     </div>
@@ -135,7 +135,7 @@ function SendModal({ balance, onClose, onSuccess }) {
       <GlassCard style={{ width: '100%', maxWidth: 480, borderRadius: '20px 20px 0 0', paddingBottom: 32 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <div style={{ color: '#c9ced4', fontSize: 17, fontWeight: 700 }}>Enviar dinero</div>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'rgba(201,206,212,0.50)', fontSize: 20, cursor: 'pointer' }}>✕</button>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'rgba(201,206,212,0.50)', cursor: 'pointer', display: 'inline-flex' }}><Icon name="close" size={20} /></button>
         </div>
 
         {step === 'search' && (
@@ -150,7 +150,7 @@ function SendModal({ balance, onClose, onSuccess }) {
                   <div style={{ color: '#c9ced4', fontWeight: 600, fontSize: 14 }}>{u.firstName} {u.lastName}</div>
                   <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 12 }}>@{u.username}</div>
                 </div>
-                <span style={{ marginLeft: 'auto', color: 'rgba(201,206,212,0.35)', fontSize: 18 }}>→</span>
+                <span style={{ marginLeft: 'auto', display: 'inline-flex' }}><Icon name="arrowRight" size={18} /></span>
               </div>
             ))}
           </>
@@ -229,7 +229,7 @@ function DepositModal({ onClose, onSuccess }) {
       <GlassCard style={{ width: '100%', maxWidth: 480, borderRadius: '20px 20px 0 0', paddingBottom: 32 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <div style={{ color: '#c9ced4', fontSize: 17, fontWeight: 700 }}>Recargar saldo</div>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'rgba(201,206,212,0.50)', fontSize: 20, cursor: 'pointer' }}>✕</button>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'rgba(201,206,212,0.50)', cursor: 'pointer', display: 'inline-flex' }}><Icon name="close" size={20} /></button>
         </div>
         <div style={{ textAlign: 'center', marginBottom: 20 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
@@ -291,13 +291,13 @@ function DailyRewardCard({ onClaimed }) {
   return (
     <GlassCard style={{ marginBottom: 16, background: canClaim ? 'linear-gradient(135deg,rgba(168,85,247,0.18),rgba(6,182,212,0.1))' : 'rgba(255,255,255,0.04)', border: canClaim ? '1px solid rgba(168,85,247,0.4)' : '1px solid rgba(255,255,255,0.06)' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-        <div style={{ fontSize: 40, lineHeight: 1 }}>{canClaim ? '🎁' : '✅'}</div>
+        <div style={{ lineHeight: 1, display: 'flex' }}><Icon name={canClaim ? 'gift' : 'check'} size={40} /></div>
         <div style={{ flex: 1 }}>
           <div style={{ color: '#c9ced4', fontWeight: 700, fontSize: 15, marginBottom: 2 }}>
             {canClaim ? `Recompensa diaria — +${amount} KRO` : 'Recompensa reclamada'}
           </div>
           <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 12 }}>
-            {streakDays > 0 ? `🔥 Racha de ${streakDays} día${streakDays !== 1 ? 's' : ''}` : 'Primer día — ¡comienza tu racha!'}
+            {streakDays > 0 ? <><Icon name="flame" size={12} style={{ verticalAlign: 'middle', marginRight: 4 }} />Racha de {streakDays} día{streakDays !== 1 ? 's' : ''}</> : 'Primer día — ¡comienza tu racha!'}
           </div>
           {/* Streak dots */}
           <div style={{ display: 'flex', gap: 4, marginTop: 8 }}>
@@ -310,7 +310,7 @@ function DailyRewardCard({ onClaimed }) {
           onClick={handleClaim}
           disabled={!canClaim || claiming}
           style={{ padding: '10px 18px', borderRadius: 28, fontWeight: 700, fontSize: 13, border: 'none', cursor: canClaim ? 'pointer' : 'default', background: canClaim ? 'linear-gradient(135deg,#a855f7,#06b6d4)' : 'rgba(255,255,255,0.06)', color: '#fff', opacity: canClaim ? 1 : 0.5, transition: 'opacity 0.2s', whiteSpace: 'nowrap' }}>
-          {claimed ? '¡Listo! 🎉' : claiming ? '...' : canClaim ? 'Reclamar' : 'Mañana'}
+          {claimed ? '¡Listo!' : claiming ? '...' : canClaim ? 'Reclamar' : 'Mañana'}
         </button>
       </div>
     </GlassCard>
@@ -353,7 +353,7 @@ export default function Wallet() {
     } catch { }
   };
 
-  const txIcon = { deposit: '⬇️', withdrawal: '⬆️', transfer_in: '📥', transfer_out: '📤', payment: '🛍️', refund: '↩️' };
+  const txIcon = { deposit: 'down', withdrawal: 'up', transfer_in: 'receive', transfer_out: 'send', payment: 'bag', refund: 'refund' };
   const txColor = { deposit: '#10b981', withdrawal: '#ef4444', transfer_in: '#10b981', transfer_out: '#ef4444', payment: '#f59e0b', refund: '#06b6d4' };
 
   return (
@@ -393,13 +393,13 @@ export default function Wallet() {
             {/* Quick actions */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10, marginBottom: 20 }}>
               {[
-                { icon: '📤', label: 'Enviar', action: () => setModal('send'), color: '#c9ced4' },
-                { icon: '📥', label: 'Recargar', action: () => setModal('deposit'), color: '#10b981' },
-                { icon: '💳', label: 'Mi Tarjeta', action: () => setTab('card'), color: '#f59e0b' },
+                { icon: 'send', label: 'Enviar', action: () => setModal('send'), color: '#c9ced4' },
+                { icon: 'receive', label: 'Recargar', action: () => setModal('deposit'), color: '#10b981' },
+                { icon: 'card', label: 'Mi Tarjeta', action: () => setTab('card'), color: '#f59e0b' },
               ].map(btn => (
                 <button key={btn.label} onClick={btn.action}
                   style={{ padding: '16px 8px', borderRadius: 16, background: `${btn.color}18`, border: `1px solid ${btn.color}30`, color: '#fff', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-                  <span style={{ fontSize: 24 }}>{btn.icon}</span>
+                  <span style={{ display: 'inline-flex' }}><Icon name={btn.icon} size={24} /></span>
                   <span style={{ fontSize: 12, fontWeight: 600 }}>{btn.label}</span>
                 </button>
               ))}
@@ -407,10 +407,10 @@ export default function Wallet() {
 
             {/* Tabs */}
             <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-              {[{ id: 'wallet', label: '📊 Actividad' }, { id: 'card', label: '💳 Tarjeta' }, { id: 'kro', label: '⭐ KRO' }].map(t => (
+              {[{ id: 'wallet', icon: 'chart', label: 'Actividad' }, { id: 'card', icon: 'card', label: 'Tarjeta' }, { id: 'kro', icon: 'star', label: 'KRO' }].map(t => (
                 <button key={t.id} onClick={() => setTab(t.id)}
-                  style={{ flex: 1, padding: '9px', borderRadius: 12, fontSize: 12, fontWeight: 600, border: 'none', cursor: 'pointer', background: tab === t.id ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)' : 'rgba(255,255,255,0.06)', color: '#fff' }}>
-                  {t.label}
+                  style={{ flex: 1, padding: '9px', borderRadius: 12, fontSize: 12, fontWeight: 600, border: 'none', cursor: 'pointer', background: tab === t.id ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)' : 'rgba(255,255,255,0.06)', color: '#fff', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}>
+                  <Icon name={t.icon} size={14} /> {t.label}
                 </button>
               ))}
             </div>
@@ -421,7 +421,7 @@ export default function Wallet() {
                 <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 11, marginBottom: 10, textTransform: 'uppercase', letterSpacing: 1 }}>Movimientos recientes</div>
                 {!data?.cash?.transactions?.length ? (
                   <div style={{ textAlign: 'center', color: 'rgba(201,206,212,0.35)', padding: 40 }}>
-                    <div style={{ fontSize: 40, marginBottom: 8 }}>💸</div>
+                    <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}><Icon name="money" size={40} /></div>
                     <div>Sin movimientos aún</div>
                     <div style={{ fontSize: 12, marginTop: 4 }}>Recarga tu saldo para empezar</div>
                   </div>
@@ -430,8 +430,8 @@ export default function Wallet() {
                     {data.cash.transactions.map((tx, i) => (
                       <GlassCard key={tx._id || i} style={{ padding: '12px 16px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                          <div style={{ width: 40, height: 40, borderRadius: '50%', background: `${txColor[tx.type]}20`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, flexShrink: 0 }}>
-                            {txIcon[tx.type] || '💰'}
+                          <div style={{ width: 40, height: 40, borderRadius: '50%', background: `${txColor[tx.type]}20`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                            <Icon name={txIcon[tx.type] || 'money'} size={18} />
                           </div>
                           <div style={{ flex: 1, minWidth: 0 }}>
                             <div style={{ color: '#c9ced4', fontSize: 13, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -460,13 +460,13 @@ export default function Wallet() {
                   <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 12, marginBottom: 12 }}>Detalles de la tarjeta</div>
                   {[
                     { label: 'Red', value: card?.network || 'VISA' },
-                    { label: 'Estado', value: card?.frozen ? '🔒 Congelada' : '✅ Activa' },
+                    { label: 'Estado', icon: card?.frozen ? 'lock' : 'check', value: card?.frozen ? 'Congelada' : 'Activa' },
                     { label: 'Límite de gasto', value: `$${card?.spendingLimit || 500}` },
                     { label: 'Total gastado', value: `$${(card?.totalSpent || 0).toFixed(2)}` },
                   ].map(item => (
                     <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
                       <span style={{ color: 'rgba(201,206,212,0.50)', fontSize: 13 }}>{item.label}</span>
-                      <span style={{ color: '#c9ced4', fontSize: 13, fontWeight: 600 }}>{item.value}</span>
+                      <span style={{ color: '#c9ced4', fontSize: 13, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 5 }}>{item.icon && <Icon name={item.icon} size={13} />}{item.value}</span>
                     </div>
                   ))}
                 </GlassCard>
@@ -483,25 +483,25 @@ export default function Wallet() {
 
                     <GlassCard style={{ marginBottom: 12 }}>
                       {[
-                        { label: '⭐ Balance KRO', value: `${parseFloat(data.kro.tokenBalance || 0).toFixed(2)} KRO` },
-                        { label: '🔒 En staking', value: `${parseFloat(data.kro.stakedTokens || 0).toFixed(2)} KRO` },
-                        { label: '🎁 Recompensas pendientes', value: `${parseFloat(data.kro.pendingRewards || 0).toFixed(4)} KRO` },
+                        { icon: 'star', label: 'Balance KRO', value: `${parseFloat(data.kro.tokenBalance || 0).toFixed(2)} KRO` },
+                        { icon: 'lock', label: 'En staking', value: `${parseFloat(data.kro.stakedTokens || 0).toFixed(2)} KRO` },
+                        { icon: 'gift', label: 'Recompensas pendientes', value: `${parseFloat(data.kro.pendingRewards || 0).toFixed(4)} KRO` },
                       ].map(item => (
                         <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
-                          <span style={{ color: 'rgba(201,206,212,0.50)', fontSize: 14 }}>{item.label}</span>
+                          <span style={{ color: 'rgba(201,206,212,0.50)', fontSize: 14, display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name={item.icon} size={14} /> {item.label}</span>
                           <span style={{ color: '#a78bfa', fontSize: 14, fontWeight: 700, textShadow: '0 0 12px rgba(139,92,246,0.35)' }}>{item.value}</span>
                         </div>
                       ))}
                     </GlassCard>
                     <div style={{ display: 'flex', gap: 10 }}>
-                      <a href="/tokens" style={{ flex: 1, padding: '12px', borderRadius: 14, background: 'linear-gradient(135deg,#a78bfa 0%,#8b5cf6 45%,#6d4bd0 100%)', color: '#fff', border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer', textAlign: 'center', textDecoration: 'none', boxShadow: '0 12px 30px -10px rgba(139,92,246,0.45)' }}>
-                        ⭐ Gestionar KRO
+                      <a href="/tokens" style={{ flex: 1, padding: '12px', borderRadius: 14, background: 'linear-gradient(135deg,#a78bfa 0%,#8b5cf6 45%,#6d4bd0 100%)', color: '#fff', border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer', textAlign: 'center', textDecoration: 'none', boxShadow: '0 12px 30px -10px rgba(139,92,246,0.45)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                        <Icon name="star" size={16} stroke="currentColor" /> Gestionar KRO
                       </a>
                     </div>
                   </>
                 ) : (
                   <div style={{ textAlign: 'center', color: 'rgba(201,206,212,0.35)', padding: 40 }}>
-                    <div style={{ fontSize: 40, marginBottom: 8 }}>⭐</div>
+                    <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}><Icon name="star" size={40} /></div>
                     <div>Wallet KRO no inicializada</div>
                     <button onClick={async () => { await axios.post(`${API_URL}/tokens/wallet/init`); fetchWallet(); }}
                       style={{ marginTop: 16, padding: '10px 24px', borderRadius: 20, background: 'linear-gradient(135deg,#a78bfa 0%,#8b5cf6 45%,#6d4bd0 100%)', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 14, fontWeight: 700, boxShadow: '0 12px 30px -10px rgba(139,92,246,0.45)' }}>

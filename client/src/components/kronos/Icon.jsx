@@ -49,6 +49,20 @@ const PATHS = {
   shield: <><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z" /><path d="M9 12l2 2 4-4" /></>,
   wallet: <><rect x="3" y="6" width="18" height="13" rx="2.5" /><path d="M16 12h2" /></>,
   flame: <path d="M13 3c.5 3-1.5 4.5-2.7 6C9 10.7 8 11.8 8 14a4 4 0 0 0 8 0c0-2-1-3.3-1-5 1 .5 1.5 1.3 1.7 2.3C18 9 16 5 13 3z" />,
+  footsteps: <><path d="M7 4c1.5 0 2.5 1.6 2.5 3.6S8.5 12 7 12s-2.5-1.6-2.5-4.4S5.5 4 7 4z" /><path d="M5 14c1.6-.4 3.6.6 3.6 2.6 0 1.6-1 2.4-2.4 2.4S4 18 4 16.6c0-1 .4-2.2 1-2.6z" /><path d="M17 8c1.5 0 2.5 1.6 2.5 3.6S18.5 16 17 16s-2.5-1.6-2.5-4.4S15.5 8 17 8z" /></>,
+  drop: <path d="M12 3c3 4 6 7 6 10.5A6 6 0 0 1 6 13.5C6 10 9 7 12 3z" />,
+  message: <><path d="M4 5h16v11H8l-4 4z" /><path d="M8 9h8M8 12h5" /></>,
+  laptop: <><rect x="4" y="5" width="16" height="11" rx="1.5" /><path d="M2 20h20" /></>,
+  link: <><path d="M9 15l6-6" /><path d="M11 6l1-1a4 4 0 0 1 6 6l-1 1M13 18l-1 1a4 4 0 0 1-6-6l1-1" /></>,
+  save: <><path d="M5 4h11l3 3v13H5z" /><path d="M8 4v5h7V4M8 20v-6h8v6" /></>,
+  qr: <><rect x="4" y="4" width="6" height="6" rx="1" /><rect x="14" y="4" width="6" height="6" rx="1" /><rect x="4" y="14" width="6" height="6" rx="1" /><path d="M14 14h3v3M20 14v6M14 20h3" /></>,
+  copy: <><rect x="9" y="9" width="11" height="11" rx="2" /><path d="M5 15V5a2 2 0 0 1 2-2h8" /></>,
+  globe: <><circle cx="12" cy="12" r="8.5" /><path d="M3.5 12h17M12 3.5c2.5 2.4 2.5 14.6 0 17M12 3.5c-2.5 2.4-2.5 14.6 0 17" /></>,
+  smileGreat: <><circle cx="12" cy="12" r="9" /><path d="M8 14a4 4 0 0 0 8 0z" /><path d="M8.5 9.5h.01M15.5 9.5h.01" /></>,
+  smileGood: <><circle cx="12" cy="12" r="9" /><path d="M8.5 14a4.5 4.5 0 0 0 7 0" /><path d="M8.5 9.5h.01M15.5 9.5h.01" /></>,
+  smileOkay: <><circle cx="12" cy="12" r="9" /><path d="M8.5 14.5h7" /><path d="M8.5 9.5h.01M15.5 9.5h.01" /></>,
+  smileBad: <><circle cx="12" cy="12" r="9" /><path d="M8.5 15a4.5 4.5 0 0 1 7 0" /><path d="M8.5 9.5h.01M15.5 9.5h.01" /></>,
+  smileTerrible: <><circle cx="12" cy="12" r="9" /><path d="M8 16a4 4 0 0 1 8 0z" /><path d="M8 10l1.5-1M16 10l-1.5-1" /></>,
 };
 
 export default function Icon({ name, size = 20, stroke = 'url(#ksV)', strokeWidth = 1.7, style, ...rest }) {

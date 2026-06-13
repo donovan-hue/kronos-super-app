@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
-import { GlassCard, BotonBurbuja3D } from '../components/kronos';
+import { GlassCard, BotonBurbuja3D, Icon } from '../components/kronos';
 
 const API = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
@@ -62,7 +62,7 @@ function BadgeCard({ badge, earned }) {
       {earned && (
         <div style={{ position: 'absolute', top: 6, right: 6, width: 8, height: 8, borderRadius: '50%', background: r.text, boxShadow: `0 0 6px ${r.text}` }} />
       )}
-      <div style={{ fontSize: 32, marginBottom: 6 }}>{earned ? badge.emoji : '🔒'}</div>
+      <div style={{ fontSize: 32, marginBottom: 6, display: 'flex', justifyContent: 'center', minHeight: 32, alignItems: 'center' }}>{earned ? badge.emoji : <Icon name="lock" size={28} />}</div>
       <div style={{ fontWeight: 700, fontSize: 12, color: '#c9ced4', marginBottom: 2 }}>{badge.name}</div>
       <div style={{ fontSize: 10, color: r.text, fontWeight: 600, marginBottom: 4 }}>{r.label}</div>
       <div style={{ fontSize: 10, color: 'rgba(201,206,212,0.45)', lineHeight: 1.4 }}>{badge.description}</div>
@@ -108,24 +108,24 @@ export default function Gamification() {
 
         {/* Header */}
         <div style={{ marginBottom: 20 }}>
-          <h1 style={{ margin: '0 0 4px', fontSize: 24, fontWeight: 900, color: '#c9ced4' }}>🏆 Gamificación</h1>
+          <h1 style={{ margin: '0 0 4px', fontSize: 24, fontWeight: 900, color: '#c9ced4', display: 'inline-flex', alignItems: 'center', gap: 8 }}><Icon name="trophy" size={24} /> Gamificación</h1>
           <div style={{ color: 'rgba(201,206,212,0.45)', fontSize: 13 }}>XP · Niveles · Badges · Leaderboard</div>
         </div>
 
         {/* Tabs */}
         <div style={{ display: 'flex', gap: 4, marginBottom: 20, background: 'rgba(190,200,212,0.04)', borderRadius: 14, padding: 4 }}>
           {[
-            { id: 'stats',       label: '⚡ Mi Perfil' },
-            { id: 'badges',      label: '🏅 Badges' },
-            { id: 'leaderboard', label: '🥇 Top 50' },
+            { id: 'stats',       icon: 'bolt',   label: 'Mi Perfil' },
+            { id: 'badges',      icon: 'star',   label: 'Badges' },
+            { id: 'leaderboard', icon: 'trophy', label: 'Top 50' },
           ].map(t => (
             <button key={t.id} onClick={() => setTab(t.id)} style={{
               flex: 1, padding: '9px', borderRadius: 10, fontSize: 12, fontWeight: 600,
               border: 'none', cursor: 'pointer',
               background: tab === t.id ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)' : 'transparent',
               color: tab === t.id ? '#fff' : 'rgba(201,206,212,0.55)',
-              transition: 'all 0.2s',
-            }}>{t.label}</button>
+              transition: 'all 0.2s', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 5,
+            }}><Icon name={t.icon} size={14} /> {t.label}</button>
           ))}
         </div>
 
@@ -166,12 +166,12 @@ export default function Gamification() {
             {/* Stats grid */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10 }}>
               {[
-                { label: 'XP Total', value: stats.totalXpEarned?.toLocaleString(), icon: '⚡' },
-                { label: 'Badges',   value: `${earnedCount}/${badges.length}`,      icon: '🏅' },
-                { label: 'Nivel',    value: stats.level,                             icon: '🎯' },
+                { label: 'XP Total', value: stats.totalXpEarned?.toLocaleString(), icon: 'bolt' },
+                { label: 'Badges',   value: `${earnedCount}/${badges.length}`,      icon: 'star' },
+                { label: 'Nivel',    value: stats.level,                             icon: 'trending' },
               ].map(s => (
                 <GlassCard key={s.label} style={{ padding: '14px 12px', textAlign: 'center' }}>
-                  <div style={{ fontSize: 24, marginBottom: 4 }}>{s.icon}</div>
+                  <div style={{ marginBottom: 4, display: 'flex', justifyContent: 'center' }}><Icon name={s.icon} size={24} /></div>
                   <div style={{ fontWeight: 900, fontSize: 18, color: '#c9ced4' }}>{s.value}</div>
                   <div style={{ fontSize: 11, color: 'rgba(201,206,212,0.45)' }}>{s.label}</div>
                 </GlassCard>
@@ -181,7 +181,7 @@ export default function Gamification() {
             {/* Badges recientes */}
             {stats.badges?.length > 0 && (
               <GlassCard style={{ padding: 16 }}>
-                <div style={{ fontWeight: 800, fontSize: 14, color: '#c9ced4', marginBottom: 12 }}>🏅 Últimos badges</div>
+                <div style={{ fontWeight: 800, fontSize: 14, color: '#c9ced4', marginBottom: 12, display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="star" size={14} /> Últimos badges</div>
                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                   {stats.badges.slice(-6).map(b => (
                     <div key={b.id} style={{
@@ -197,26 +197,27 @@ export default function Gamification() {
                 <button onClick={() => setTab('badges')} style={{
                   marginTop: 12, background: 'none', border: 'none', color: '#8B5CF6',
                   cursor: 'pointer', fontWeight: 700, fontSize: 13,
-                }}>Ver todos los badges →</button>
+                  display: 'inline-flex', alignItems: 'center', gap: 5,
+                }}>Ver todos los badges <Icon name="arrowRight" size={13} stroke="currentColor" /></button>
               </GlassCard>
             )}
 
             {/* Rachas */}
             <GlassCard style={{ padding: 16 }}>
-              <div style={{ fontWeight: 800, fontSize: 14, color: '#c9ced4', marginBottom: 12 }}>🔥 Rachas</div>
+              <div style={{ fontWeight: 800, fontSize: 14, color: '#c9ced4', marginBottom: 12, display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="flame" size={14} /> Rachas</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {[
-                  { label: 'Login diario', key: 'login',   icon: '📅' },
-                  { label: 'Publicando',   key: 'posting', icon: '📝' },
-                  { label: 'Fitness',      key: 'health',  icon: '🏃' },
+                  { label: 'Login diario', key: 'login',   icon: 'calendar' },
+                  { label: 'Publicando',   key: 'posting', icon: 'image' },
+                  { label: 'Fitness',      key: 'health',  icon: 'heart' },
                 ].map(s => (
                   <div key={s.key} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: 13, color: '#c9ced4' }}>{s.icon} {s.label}</span>
+                    <span style={{ fontSize: 13, color: '#c9ced4', display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name={s.icon} size={13} /> {s.label}</span>
                     <span style={{
-                      fontWeight: 800, fontSize: 13,
+                      fontWeight: 800, fontSize: 13, display: 'inline-flex', alignItems: 'center', gap: 4,
                       color: (stats.streaks?.[s.key]?.count || 0) > 0 ? '#f97316' : 'rgba(201,206,212,0.30)',
                     }}>
-                      {stats.streaks?.[s.key]?.count || 0} días 🔥
+                      {stats.streaks?.[s.key]?.count || 0} días <Icon name="flame" size={13} stroke="currentColor" />
                     </span>
                   </div>
                 ))}
@@ -252,11 +253,12 @@ export default function Gamification() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {leaderboard.length === 0 ? (
               <div style={{ textAlign: 'center', padding: 48, color: 'rgba(201,206,212,0.35)' }}>
-                <div style={{ fontSize: 40, marginBottom: 8 }}>🏆</div>
+                <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}><Icon name="trophy" size={40} /></div>
                 <div>El leaderboard se está llenando...</div>
               </div>
             ) : leaderboard.map((entry, i) => {
-              const rankIcon = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `#${entry.rank}`;
+              const medalColor = i === 0 ? '#facc15' : i === 1 ? '#cbd5e1' : '#d08b5b';
+              const rankIcon = i < 3 ? <Icon name="trophy" size={24} stroke={medalColor} /> : `#${entry.rank}`;
               const isMe = entry.user?._id === (user?._id || user?.id);
               return (
                 <GlassCard key={entry.user?._id || i} style={{
@@ -265,13 +267,13 @@ export default function Gamification() {
                   background: isMe ? 'rgba(139,92,246,0.04)' : undefined,
                 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                    <div style={{ fontSize: i < 3 ? 24 : 16, fontWeight: 800, minWidth: 36, textAlign: 'center', color: i < 3 ? undefined : 'rgba(201,206,212,0.40)' }}>{rankIcon}</div>
+                    <div style={{ fontSize: 16, fontWeight: 800, minWidth: 36, textAlign: 'center', color: i < 3 ? undefined : 'rgba(201,206,212,0.40)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>{rankIcon}</div>
                     <img src={entry.user?.avatar || `https://ui-avatars.com/api/?name=${entry.user?.username}&background=random`}
                       alt="" style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover' }} />
                     <div style={{ flex: 1 }}>
                       <div style={{ fontWeight: 700, fontSize: 14, color: '#c9ced4' }}>
                         {entry.user?.firstName || entry.user?.username}
-                        {entry.user?.isVerified && ' ✅'}
+                        {entry.user?.isVerified && <Icon name="check" size={12} style={{ verticalAlign: 'middle', marginLeft: 4 }} />}
                         {isMe && <span style={{ marginLeft: 6, fontSize: 11, color: '#8B5CF6', fontWeight: 700 }}>(tú)</span>}
                       </div>
                       <div style={{ fontSize: 11, color: 'rgba(201,206,212,0.45)' }}>

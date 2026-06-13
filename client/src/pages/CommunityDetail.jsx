@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { GlassCard, HashtagText } from '../components/kronos';
+import { GlassCard, HashtagText, Icon } from '../components/kronos';
 import { AuthContext } from '../context/AuthContext';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
@@ -133,8 +133,8 @@ export default function CommunityDetail() {
     <div style={{ minHeight: '100vh', background: 'transparent', paddingBottom: 80 }}>
       {/* Cover/Header */}
       <div style={{ height: 140, background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', position: 'relative' }}>
-        <button onClick={() => navigate('/communities')} style={{ position: 'absolute', top: 16, left: 16, background: 'rgba(0,0,0,0.4)', border: 'none', color: '#c9ced4', fontSize: 18, cursor: 'pointer', borderRadius: '50%', width: 36, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          ←
+        <button onClick={() => navigate('/communities')} style={{ position: 'absolute', top: 16, left: 16, background: 'rgba(0,0,0,0.4)', border: 'none', color: '#c9ced4', cursor: 'pointer', borderRadius: '50%', width: 36, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', transform: 'scaleX(-1)' }}>
+          <Icon name="arrowRight" size={18} />
         </button>
       </div>
 
@@ -148,9 +148,9 @@ export default function CommunityDetail() {
                 <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 13, marginBottom: 10, lineHeight: 1.4 }}>{community.description}</div>
               )}
               <div style={{ display: 'flex', gap: 16, color: 'rgba(201,206,212,0.50)', fontSize: 12 }}>
-                <span>👥 {community.members?.length || 0} miembros</span>
-                <span>📝 {community.posts?.length || 0} posts</span>
-                <span>{community.privacy === 'private' ? '🔒 Privada' : '🌍 Pública'}</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}><Icon name="users" size={12} /> {community.members?.length || 0} miembros</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}><Icon name="message" size={12} /> {community.posts?.length || 0} posts</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}><Icon name={community.privacy === 'private' ? 'lock' : 'globe'} size={12} /> {community.privacy === 'private' ? 'Privada' : 'Pública'}</span>
               </div>
             </div>
             <button onClick={handleJoin}
@@ -162,10 +162,10 @@ export default function CommunityDetail() {
 
         {/* Tabs */}
         <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-          {[{ id: 'posts', label: '📝 Posts' }, { id: 'members', label: '👥 Miembros' }].map(t => (
+          {[{ id: 'posts', icon: 'message', label: 'Posts' }, { id: 'members', icon: 'users', label: 'Miembros' }].map(t => (
             <button key={t.id} onClick={() => setTab(t.id)}
-              style={{ flex: 1, padding: '9px', borderRadius: 12, fontSize: 13, fontWeight: 600, border: 'none', cursor: 'pointer', background: tab === t.id ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)' : 'rgba(255,255,255,0.06)', color: '#fff' }}>
-              {t.label}
+              style={{ flex: 1, padding: '9px', borderRadius: 12, fontSize: 13, fontWeight: 600, border: 'none', cursor: 'pointer', background: tab === t.id ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)' : 'rgba(255,255,255,0.06)', color: '#fff', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+              <Icon name={t.icon} size={14} /> {t.label}
             </button>
           ))}
         </div>
@@ -198,7 +198,7 @@ export default function CommunityDetail() {
             {/* Posts */}
             {(community.posts || []).length === 0 ? (
               <div style={{ textAlign: 'center', color: 'rgba(201,206,212,0.35)', padding: 40 }}>
-                <div style={{ fontSize: 40, marginBottom: 12 }}>📭</div>
+                <div style={{ marginBottom: 12, display: 'flex', justifyContent: 'center' }}><Icon name="message" size={40} /></div>
                 <div>Aún no hay posts en esta comunidad</div>
               </div>
             ) : (
@@ -221,9 +221,9 @@ export default function CommunityDetail() {
                         {(isMod || post.author?._id?.toString() === user?._id?.toString()) && (
                           <button
                             onClick={() => handleDeletePost(post._id)}
-                            style={{ background: 'none', border: 'none', color: 'rgba(239,68,68,0.6)', cursor: 'pointer', fontSize: 14, padding: '4px 6px' }}
+                            style={{ background: 'none', border: 'none', color: 'rgba(239,68,68,0.6)', cursor: 'pointer', padding: '4px 6px', display: 'inline-flex' }}
                             title="Eliminar post"
-                          >🗑️</button>
+                          ><Icon name="close" size={14} stroke="currentColor" /></button>
                         )}
                       </div>
                       <div style={{ color: 'rgba(201,206,212,0.65)', fontSize: 14, marginBottom: 10, lineHeight: 1.5 }}>
@@ -232,11 +232,11 @@ export default function CommunityDetail() {
                       <div style={{ display: 'flex', gap: 24, color: 'rgba(201,206,212,0.50)', fontSize: 13, paddingTop: 8, borderTop: '1px solid rgba(190,200,212,0.10)' }}>
                         <button onClick={() => handleLike(post._id)}
                           style={{ background: 'none', border: 'none', color: isLiked ? '#ec4899' : 'rgba(255,255,255,0.5)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit' }}>
-                          {isLiked ? '❤️' : '🤍'} {post.likes?.length || 0}
+                          <Icon name="heart" size={15} stroke={isLiked ? '#ec4899' : 'currentColor'} /> {post.likes?.length || 0}
                         </button>
                         <button onClick={() => { setCommentOpen(isOpen ? null : post._id); setCommentText(''); }}
                           style={{ background: 'none', border: 'none', color: isOpen ? '#06b6d4' : 'rgba(255,255,255,0.5)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit' }}>
-                          💬 {post.comments?.length || 0}
+                          <Icon name="message" size={15} stroke="currentColor" /> {post.comments?.length || 0}
                         </button>
                       </div>
                       {isOpen && (
@@ -261,7 +261,7 @@ export default function CommunityDetail() {
                               placeholder="Comenta..."
                               style={{ flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 20, padding: '7px 12px', color: '#c9ced4', fontSize: 13, outline: 'none', fontFamily: 'inherit' }} />
                             <button onClick={() => handleComment(post._id)} disabled={!commentText.trim()}
-                              style={{ padding: '7px 14px', borderRadius: 20, background: commentText.trim() ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)' : 'rgba(255,255,255,0.08)', color: '#fff', border: 'none', fontSize: 13, cursor: 'pointer' }}>→</button>
+                              style={{ padding: '7px 14px', borderRadius: 20, background: commentText.trim() ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)' : 'rgba(255,255,255,0.08)', color: '#fff', border: 'none', cursor: 'pointer', display: 'inline-flex', alignItems: 'center' }}><Icon name="send" size={14} stroke="currentColor" /></button>
                           </div>
                         </div>
                       )}

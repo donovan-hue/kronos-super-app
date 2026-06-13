@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
-import { GlassCard, BotonBurbuja3D, QRCode } from '../components/kronos';
+import { GlassCard, BotonBurbuja3D, QRCode, Icon } from '../components/kronos';
 
 const API = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
@@ -104,7 +104,7 @@ function CreateEventModal({ onClose, onCreated }) {
     <div style={{ position: 'fixed', inset: 0, background: 'rgba(201,206,212,0.50)', backdropFilter: 'blur(6px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
       <div style={{ background: 'transparent', borderRadius: 20, width: '100%', maxWidth: 520, maxHeight: '90vh', overflowY: 'auto', padding: 28 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-          <h2 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: '#c9ced4' }}>🎪 Crear Evento</h2>
+          <h2 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: '#c9ced4', display: 'inline-flex', alignItems: 'center', gap: 8 }}><Icon name="ticket" size={20} /> Crear Evento</h2>
           <button onClick={onClose} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer', color: '#c9ced4' }}>×</button>
         </div>
 
@@ -144,7 +144,7 @@ function CreateEventModal({ onClose, onCreated }) {
           {/* Tipos de boleto */}
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-              <div style={{ fontWeight: 700, fontSize: 14, color: '#c9ced4' }}>🎟️ Tipos de boleto</div>
+              <div style={{ fontWeight: 700, fontSize: 14, color: '#c9ced4', display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="ticket" size={14} /> Tipos de boleto</div>
               <button type="button" onClick={addTicket} style={{ background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', color: '#15171a', border: 'none', borderRadius: 8, padding: '5px 12px', cursor: 'pointer', fontSize: 12, fontWeight: 700 }}>+ Añadir</button>
             </div>
             {form.ticketTypes.map((tt, i) => (
@@ -157,7 +157,7 @@ function CreateEventModal({ onClose, onCreated }) {
                 <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                   <input style={{ ...inp, flex: 1 }} placeholder="Descripción del boleto" value={tt.description} onChange={e => setTicket(i, 'description', e.target.value)} />
                   {form.ticketTypes.length > 1 && (
-                    <button type="button" onClick={() => removeTicket(i)} style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', color: '#ef4444', borderRadius: 8, padding: '8px 10px', cursor: 'pointer', fontSize: 14 }}>✕</button>
+                    <button type="button" onClick={() => removeTicket(i)} style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', color: '#ef4444', borderRadius: 8, padding: '8px 10px', cursor: 'pointer', display: 'inline-flex' }}><Icon name="close" size={14} stroke="currentColor" /></button>
                   )}
                 </div>
               </div>
@@ -165,7 +165,7 @@ function CreateEventModal({ onClose, onCreated }) {
           </div>
 
           <BotonBurbuja3D as="button" type="submit" size="md" disabled={loading} style={{ width: '100%', marginTop: 8 }}>
-            {loading ? 'Creando...' : '🎪 Publicar Evento'}
+            {loading ? 'Creando...' : <><Icon name="ticket" size={16} stroke="currentColor" style={{ verticalAlign: 'middle', marginRight: 6 }} />Publicar Evento</>}
           </BotonBurbuja3D>
         </form>
       </div>
@@ -206,7 +206,7 @@ function TicketModal({ event, onClose }) {
     <div style={{ position: 'fixed', inset: 0, background: 'rgba(201,206,212,0.60)', backdropFilter: 'blur(8px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
       <div style={{ background: 'transparent', borderRadius: 24, width: '100%', maxWidth: 400, padding: 28, textAlign: 'center' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-          <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#c9ced4' }}>🎟️ Boleto</h3>
+          <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#c9ced4', display: 'inline-flex', alignItems: 'center', gap: 8 }}><Icon name="ticket" size={18} /> Boleto</h3>
           <button onClick={onClose} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer', color: '#c9ced4' }}>×</button>
         </div>
 
@@ -221,7 +221,7 @@ function TicketModal({ event, onClose }) {
               <QRDisplay value={ticket.qrCode} size={180} />
             </div>
             <div style={{ background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.3)', color: '#16a34a', borderRadius: 12, padding: '10px 16px', fontSize: 13, fontWeight: 600, marginBottom: 8 }}>
-              ✅ Boleto activo
+              <Icon name="check" size={14} stroke="currentColor" style={{ verticalAlign: 'middle', marginRight: 6 }} />Boleto activo
             </div>
             <div style={{ fontSize: 12, color: 'rgba(201,206,212,0.40)', fontFamily: 'monospace' }}>
               ID: {ticket.qrCode?.slice(0, 12).toUpperCase()}
@@ -255,7 +255,7 @@ function TicketModal({ event, onClose }) {
               </div>
             </div>
             <BotonBurbuja3D size="md" disabled={buying} onClick={buyTicket} style={{ width: '100%' }}>
-              {buying ? 'Procesando...' : `🎟️ Obtener boleto${selType?.price ? ` — $${selType.price}` : ' gratis'}`}
+              {buying ? 'Procesando...' : <><Icon name="ticket" size={16} stroke="currentColor" style={{ verticalAlign: 'middle', marginRight: 6 }} />Obtener boleto{selType?.price ? ` — $${selType.price}` : ' gratis'}</>}
             </BotonBurbuja3D>
           </div>
         )}
@@ -326,7 +326,7 @@ export default function Events() {
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <div>
-            <h1 style={{ margin: 0, fontSize: 24, fontWeight: 900, color: '#c9ced4' }}>🎪 Eventos</h1>
+            <h1 style={{ margin: 0, fontSize: 24, fontWeight: 900, color: '#c9ced4', display: 'inline-flex', alignItems: 'center', gap: 8 }}><Icon name="ticket" size={24} /> Eventos</h1>
             <div style={{ color: 'rgba(201,206,212,0.45)', fontSize: 13 }}>Descubre y crea eventos</div>
           </div>
           <BotonBurbuja3D size="sm" onClick={() => setShowCreate(true)}>+ Crear</BotonBurbuja3D>
@@ -335,17 +335,17 @@ export default function Events() {
         {/* Tabs */}
         <div style={{ display: 'flex', gap: 4, marginBottom: 16, background: 'rgba(190,200,212,0.04)', borderRadius: 14, padding: 4 }}>
           {[
-            { id: 'discover', label: '🔍 Descubrir' },
-            { id: 'my-tickets', label: '🎟️ Mis boletos' },
-            { id: 'my-events', label: '🎪 Mis eventos' },
+            { id: 'discover', icon: 'search', label: 'Descubrir' },
+            { id: 'my-tickets', icon: 'ticket', label: 'Mis boletos' },
+            { id: 'my-events', icon: 'ticket', label: 'Mis eventos' },
           ].map(t => (
             <button key={t.id} onClick={() => setTab(t.id)} style={{
               flex: 1, padding: '9px', borderRadius: 10, fontSize: 12, fontWeight: 600,
               border: 'none', cursor: 'pointer',
               background: tab === t.id ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)' : 'transparent',
               color: tab === t.id ? '#fff' : 'rgba(201,206,212,0.55)',
-              transition: 'all 0.2s',
-            }}>{t.label}</button>
+              transition: 'all 0.2s', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 5,
+            }}><Icon name={t.icon} size={14} /> {t.label}</button>
           ))}
         </div>
 
@@ -385,7 +385,7 @@ export default function Events() {
             </div>
           ) : (
             <div style={{ textAlign: 'center', padding: 48, color: 'rgba(201,206,212,0.35)' }}>
-              <div style={{ fontSize: 40, marginBottom: 8 }}>🎪</div>
+              <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}><Icon name="ticket" size={40} /></div>
               <div>No hay eventos disponibles</div>
             </div>
           )
@@ -396,9 +396,9 @@ export default function Events() {
             </div>
           ) : (
             <div style={{ textAlign: 'center', padding: 48, color: 'rgba(201,206,212,0.35)' }}>
-              <div style={{ fontSize: 40, marginBottom: 8 }}>🎟️</div>
+              <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}><Icon name="ticket" size={40} /></div>
               <div>No tienes boletos aún</div>
-              <button onClick={() => setTab('discover')} style={{ marginTop: 12, background: 'none', border: 'none', color: '#8B5CF6', cursor: 'pointer', fontWeight: 700, fontSize: 13 }}>Descubrir eventos →</button>
+              <button onClick={() => setTab('discover')} style={{ marginTop: 12, background: 'none', border: 'none', color: '#8B5CF6', cursor: 'pointer', fontWeight: 700, fontSize: 13, display: 'inline-flex', alignItems: 'center', gap: 5 }}>Descubrir eventos <Icon name="arrowRight" size={13} stroke="currentColor" /></button>
             </div>
           )
         ) : (
@@ -408,7 +408,7 @@ export default function Events() {
             </div>
           ) : (
             <div style={{ textAlign: 'center', padding: 48, color: 'rgba(201,206,212,0.35)' }}>
-              <div style={{ fontSize: 40, marginBottom: 8 }}>🎪</div>
+              <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}><Icon name="ticket" size={40} /></div>
               <div>No has creado eventos</div>
               <BotonBurbuja3D size="sm" style={{ marginTop: 16 }} onClick={() => setShowCreate(true)}>Crear mi primer evento</BotonBurbuja3D>
             </div>
@@ -426,7 +426,7 @@ function EventCard({ event, onSelect, isOrganizer }) {
   const minPrice = event.ticketTypes?.length
     ? Math.min(...event.ticketTypes.map(t => t.price))
     : null;
-  const typeIcon = { physical: '📍', online: '💻', hybrid: '🌐' }[event.type] || '🎪';
+  const typeIcon = { physical: 'pin', online: 'video', hybrid: 'sparkle' }[event.type] || 'ticket';
 
   return (
     <GlassCard style={{ padding: 0, overflow: 'hidden', cursor: 'pointer' }} onClick={onSelect}>
@@ -441,9 +441,9 @@ function EventCard({ event, onSelect, isOrganizer }) {
           )}
         </div>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 10 }}>
-          <span style={{ fontSize: 12, color: 'rgba(201,206,212,0.50)' }}>📅 {fmt(event.startDate)}</span>
-          <span style={{ fontSize: 12, color: 'rgba(201,206,212,0.50)' }}>{typeIcon} {event.location || 'Online'}</span>
-          <span style={{ background: 'rgba(190,200,212,0.07)', color: '#4facfe', borderRadius: 6, padding: '1px 7px', fontSize: 11, fontWeight: 600 }}>{event.category}</span>
+          <span style={{ fontSize: 12, color: 'rgba(201,206,212,0.50)', display: 'inline-flex', alignItems: 'center', gap: 4 }}><Icon name="calendar" size={12} /> {fmt(event.startDate)}</span>
+          <span style={{ fontSize: 12, color: 'rgba(201,206,212,0.50)', display: 'inline-flex', alignItems: 'center', gap: 4 }}><Icon name={typeIcon} size={12} /> {event.location || 'Online'}</span>
+          <span style={{ background: 'rgba(190,200,212,0.07)', color: 'var(--accent-bright)', borderRadius: 6, padding: '1px 7px', fontSize: 11, fontWeight: 600 }}>{event.category}</span>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ fontSize: 13, color: 'rgba(201,206,212,0.45)' }}>
@@ -463,16 +463,17 @@ function TicketCard({ ticket }) {
   const [showQR, setShowQR] = useState(false);
   const ev = ticket.event;
   const statusColor = { active: '#16a34a', used: '#6b7280', cancelled: '#ef4444', refunded: '#f97316' }[ticket.status] || '#6b7280';
-  const statusLabel = { active: '✅ Activo', used: '✓ Usado', cancelled: 'Cancelado', refunded: 'Reembolsado' }[ticket.status] || ticket.status;
+  const statusIcon = { active: 'check', used: 'check' }[ticket.status] || null;
+  const statusLabel = { active: 'Activo', used: 'Usado', cancelled: 'Cancelado', refunded: 'Reembolsado' }[ticket.status] || ticket.status;
 
   return (
     <GlassCard style={{ padding: '14px 16px' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
         <div style={{ fontWeight: 800, fontSize: 15, color: '#c9ced4' }}>{ev?.title || 'Evento'}</div>
-        <span style={{ fontSize: 12, fontWeight: 700, color: statusColor }}>{statusLabel}</span>
+        <span style={{ fontSize: 12, fontWeight: 700, color: statusColor, display: 'inline-flex', alignItems: 'center', gap: 4 }}>{statusIcon && <Icon name={statusIcon} size={12} stroke="currentColor" />}{statusLabel}</span>
       </div>
-      <div style={{ fontSize: 12, color: 'rgba(201,206,212,0.50)', marginBottom: 12 }}>
-        📅 {ev?.startDate ? fmt(ev.startDate) : ''} · {ticket.price === 0 ? 'Gratis' : `$${ticket.price}`}
+      <div style={{ fontSize: 12, color: 'rgba(201,206,212,0.50)', marginBottom: 12, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+        <Icon name="calendar" size={12} /> {ev?.startDate ? fmt(ev.startDate) : ''} · {ticket.price === 0 ? 'Gratis' : `$${ticket.price}`}
       </div>
       {ticket.status === 'active' && (
         <div>
@@ -480,7 +481,7 @@ function TicketCard({ ticket }) {
             background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', color: '#fff', border: 'none',
             borderRadius: 10, padding: '8px 16px', cursor: 'pointer', fontSize: 13, fontWeight: 700,
           }}>
-            {showQR ? 'Ocultar QR' : '📱 Ver QR'}
+            {showQR ? 'Ocultar QR' : <><Icon name="image" size={13} stroke="currentColor" style={{ verticalAlign: 'middle', marginRight: 5 }} />Ver QR</>}
           </button>
           {showQR && (
             <div style={{ marginTop: 16, display: 'flex', justifyContent: 'center' }}>

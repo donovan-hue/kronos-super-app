@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { GlassCard } from '../components/kronos';
+import { GlassCard, Icon } from '../components/kronos';
 
 const CSS_FILTERS = [
   { label: 'Normal', value: 'none' },
@@ -415,13 +415,13 @@ export default function VideoEditor() {
 
           <div style={{ display: 'flex', gap: 12 }}>
             <button style={styles.bigBtn('red')} onClick={startCamera}>
-              <span style={{ fontSize: 36 }}>📹</span>
+              <span style={{ display: 'flex' }}><Icon name="video" size={36} stroke="currentColor" /></span>
               <span>Grabar</span>
               <span style={{ fontSize: 11, opacity: 0.7, fontWeight: 400 }}>Usar camara</span>
             </button>
 
             <label style={{ ...styles.bigBtn('purple'), cursor: 'pointer' }}>
-              <span style={{ fontSize: 36 }}>📁</span>
+              <span style={{ display: 'flex' }}><Icon name="image" size={36} stroke="currentColor" /></span>
               <span>Subir</span>
               <span style={{ fontSize: 11, opacity: 0.7, fontWeight: 400 }}>Desde dispositivo</span>
               <input
@@ -476,14 +476,14 @@ export default function VideoEditor() {
                   style={{ ...styles.btn(true, null), background: 'linear-gradient(180deg,#565b62 0%,#3a3d42 100%)', flex: 1 }}
                   onClick={startRecording}
                 >
-                  🔴 Iniciar Grabacion
+                  <span style={{ display: 'inline-block', width: 10, height: 10, borderRadius: '50%', background: '#ef4444', marginRight: 8, verticalAlign: 'middle' }} />Iniciar Grabacion
                 </button>
               ) : (
                 <button
                   style={{ ...styles.btn(false, null), flex: 1, background: 'rgba(239,68,68,0.2)', border: '1px solid rgba(239,68,68,0.5)', color: '#f87171' }}
                   onClick={stopRecording}
                 >
-                  ⏹ Detener Grabacion
+                  <span style={{ display: 'inline-block', width: 10, height: 10, borderRadius: 2, background: '#f87171', marginRight: 8, verticalAlign: 'middle' }} />Detener Grabacion
                 </button>
               )}
               <button style={styles.btn(false, 'danger')} onClick={stopCamera}>
@@ -548,11 +548,11 @@ export default function VideoEditor() {
         {/* UPLOAD MORE */}
         {videoUrl && !isCameraActive && (
           <div style={{ display: 'flex', gap: 10 }}>
-            <button style={styles.btn(false, null)} onClick={startCamera}>
-              📹 Grabar otro
+            <button style={{ ...styles.btn(false, null), display: 'inline-flex', alignItems: 'center', gap: 6 }} onClick={startCamera}>
+              <Icon name="video" size={14} stroke="currentColor" /> Grabar otro
             </button>
-            <label style={{ ...styles.btn(false, null), cursor: 'pointer', display: 'inline-flex', alignItems: 'center' }}>
-              📁 Subir otro
+            <label style={{ ...styles.btn(false, null), cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+              <Icon name="image" size={14} stroke="currentColor" /> Subir otro
               <input type="file" accept="video/*" style={{ display: 'none' }} onChange={handleFileUpload} />
             </label>
           </div>
@@ -645,7 +645,7 @@ export default function VideoEditor() {
                   style={{ ...styles.btn(false, null), padding: '9px 18px', background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', color: '#15171a' }}
                   onClick={handleExportTrimmed}
                 >
-                  ✂️ Exportar
+                  Exportar
                 </button>
               </div>
               <div style={{ fontSize: 11, color: 'rgba(201,206,212,0.35)', marginTop: 8 }}>
@@ -692,7 +692,7 @@ export default function VideoEditor() {
                 }}
                 onClick={handleDownload}
               >
-                💾 Descargar Video
+                <Icon name="save" size={16} stroke="currentColor" style={{ verticalAlign: 'middle', marginRight: 8 }} />Descargar Video
               </button>
             </GlassCard>
           </>
