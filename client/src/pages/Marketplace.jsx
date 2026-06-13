@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, useCallback, useRef } from 'react';
 import axios from 'axios';
-import { GlassCard, HoloText } from '../components/kronos';
+import { GlassCard, HoloText, Icon } from '../components/kronos';
 import { AuthContext } from '../context/AuthContext';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
@@ -93,9 +93,8 @@ function ListingCard({ listing, onClick }) {
         alignItems: 'center',
         justifyContent: 'center',
         background: 'linear-gradient(135deg,rgba(124,58,237,0.18),rgba(6,182,212,0.1))',
-        fontSize: 42,
       }}>
-        🛍️
+        <Icon name="bag" size={42} />
       </div>
       <div style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', gap: 6 }}>
         <div style={{ color: '#c9ced4', fontWeight: 700, fontSize: 14, lineHeight: 1.3, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
@@ -302,8 +301,8 @@ function ListingDetailModal({ listing: initialListing, user, onClose, onUpdate }
             onError={e => { e.target.style.display = 'none'; }}
           />
         ) : (
-          <div style={{ width: '100%', height: 160, borderRadius: 12, marginBottom: 16, background: 'linear-gradient(135deg,rgba(124,58,237,0.2),rgba(6,182,212,0.1))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 56 }}>
-            🛍️
+          <div style={{ width: '100%', height: 160, borderRadius: 12, marginBottom: 16, background: 'linear-gradient(135deg,rgba(124,58,237,0.2),rgba(6,182,212,0.1))', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Icon name="bag" size={56} />
           </div>
         )}
 
@@ -335,7 +334,7 @@ function ListingDetailModal({ listing: initialListing, user, onClose, onUpdate }
 
         {listing.status === 'escrow' && (
           <div style={{ background: 'rgba(245,158,11,0.12)', border: '1px solid rgba(251,191,36,0.25)', borderRadius: 12, padding: '12px 14px', marginBottom: 14 }}>
-            <div style={{ color: '#fbbf24', fontWeight: 700, fontSize: 13, marginBottom: 4 }}>🔒 Fondos en Escrow</div>
+            <div style={{ color: '#fbbf24', fontWeight: 700, fontSize: 13, marginBottom: 4, display: 'flex', alignItems: 'center', gap: 6 }}><Icon name="lock" size={15} stroke="#fbbf24" /> Fondos en Escrow</div>
             <div style={{ color: 'rgba(201,206,212,0.65)', fontSize: 12 }}>
               Monto retenido: <strong style={{ color: '#fbbf24' }}>${listing.escrow?.amount?.toLocaleString('es-MX', { minimumFractionDigits: 2 })}</strong>
             </div>
@@ -423,7 +422,7 @@ function MyListingItem({ listing, onUpdate }) {
         {firstImage ? (
           <img src={firstImage} alt={listing.title} style={{ width: 60, height: 60, borderRadius: 10, objectFit: 'cover', flexShrink: 0, background: '#18182a' }} />
         ) : (
-          <div style={{ width: 60, height: 60, borderRadius: 10, background: 'linear-gradient(135deg,rgba(124,58,237,0.2),rgba(6,182,212,0.1))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, flexShrink: 0 }}>🛍️</div>
+          <div style={{ width: 60, height: 60, borderRadius: 10, background: 'linear-gradient(135deg,rgba(124,58,237,0.2),rgba(6,182,212,0.1))', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><Icon name="bag" size={24} /></div>
         )}
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ color: '#c9ced4', fontWeight: 700, fontSize: 14, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', marginBottom: 4 }}>
@@ -622,7 +621,7 @@ export default function Marketplace() {
               </div>
             ) : listings.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '60px 0', color: 'rgba(201,206,212,0.35)', fontSize: 14 }}>
-                <div style={{ fontSize: 48, marginBottom: 12 }}>🛍️</div>
+                <div style={{ marginBottom: 12 }}><Icon name="bag" size={48} /></div>
                 No hay listings disponibles
               </div>
             ) : (
@@ -665,7 +664,7 @@ export default function Marketplace() {
               </div>
             ) : myListings.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '60px 0', color: 'rgba(201,206,212,0.35)', fontSize: 14 }}>
-                <div style={{ fontSize: 48, marginBottom: 12 }}>📦</div>
+                <div style={{ marginBottom: 12 }}><Icon name="gift" size={48} /></div>
                 No has publicado nada aún
               </div>
             ) : (
