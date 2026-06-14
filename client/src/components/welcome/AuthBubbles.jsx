@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaGoogle, FaApple, FaFacebookF } from 'react-icons/fa';
+import Icon from '../kronos/Icon';
 
 const options = [
-  { id: 'register', label: 'Crear Cuenta', icon: '✨', route: '/register' },
-  { id: 'login',    label: 'Iniciar Sesión', icon: '🔐', route: '/login' },
-  { id: 'google',   label: 'Google',    icon: '🔍', oauth: true },
-  { id: 'apple',    label: 'Apple',     icon: '🍎', oauth: true },
-  { id: 'facebook', label: 'Facebook',  icon: 'f',  oauth: true },
+  { id: 'register', label: 'Crear Cuenta',    icon: <Icon name="sparkle" size={26} stroke="#fff" />, route: '/register' },
+  { id: 'login',    label: 'Iniciar Sesión',  icon: <Icon name="lock" size={26} stroke="#fff" />,    route: '/login' },
+  { id: 'google',   label: 'Google',    icon: <FaGoogle size={24} />,     oauth: true },
+  { id: 'apple',    label: 'Apple',     icon: <FaApple size={26} />,      oauth: true },
+  { id: 'facebook', label: 'Facebook',  icon: <FaFacebookF size={24} />,  oauth: true },
 ];
 
 const AuthBubbles = ({ onClose }) => {

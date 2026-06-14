@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { FaApple, FaGoogle, FaFacebookF } from 'react-icons/fa';
 
 const MainBubble = ({ onGetStarted, onExplore }) => {
   useEffect(() => {
@@ -82,7 +83,7 @@ const MainBubble = ({ onGetStarted, onExplore }) => {
         </div>
 
         <div style={styles.socialRow}>
-          {['🍎','🔍','f'].map((ic, i) => (
+          {[<FaApple key="apple" size={20} />, <FaGoogle key="google" size={18} />, <FaFacebookF key="facebook" size={18} />].map((ic, i) => (
             <button key={i} style={styles.socialBtn}>{ic}</button>
           ))}
         </div>

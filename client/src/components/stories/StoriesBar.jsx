@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import Icon from '../kronos/Icon';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
@@ -163,16 +164,16 @@ function StoryViewer({ group, onClose, currentUser }) {
       <div style={{ position: 'absolute', top: 32, right: 16, display: 'flex', gap: 8, zIndex: 1 }}>
         {isMyStory && (
           <button onClick={handleDeleteStory}
-            style={{ background: 'rgba(239,68,68,0.3)', border: '1px solid rgba(239,68,68,0.5)', color: '#c9ced4', fontSize: 14, cursor: 'pointer', borderRadius: 20, padding: '4px 10px', backdropFilter: 'blur(4px)' }}
+            style={{ background: 'rgba(239,68,68,0.3)', border: '1px solid rgba(239,68,68,0.5)', cursor: 'pointer', borderRadius: 20, padding: '6px 10px', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center' }}
             title="Eliminar historia">
-            🗑️
+            <Icon name="trash" size={15} stroke="#c9ced4" />
           </button>
         )}
         <button
           onClick={e => { e.stopPropagation(); onClose(); }}
-          style={{ background: 'none', border: 'none', color: '#fff', fontSize: 24, cursor: 'pointer' }}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
         >
-          ✕
+          <Icon name="close" size={22} stroke="#fff" />
         </button>
       </div>
 
@@ -294,7 +295,7 @@ function StoryCreator({ onClose, onCreated }) {
         </div>
 
         <label style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'rgba(201,206,212,0.65)', fontSize: 13, cursor: 'pointer', marginBottom: 16 }}>
-          <span>📷</span> Subir imagen/video
+          <Icon name="image" size={16} stroke="rgba(201,206,212,0.65)" /> Subir imagen/video
           <input type="file" accept="image/*,video/*" style={{ display: 'none' }} onChange={e => setFile(e.target.files[0])} />
         </label>
 

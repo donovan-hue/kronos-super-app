@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
+import Icon from '../kronos/Icon';
 
 const features = [
-  { icon: '🔗', name: 'Social',    color: '#c9ced4' },
-  { icon: '🛒', name: 'Shopping',  color: '#c9ced4' },
-  { icon: '🍔', name: 'Food',      color: '#c9ced4' },
-  { icon: '🎬', name: 'Cinema',    color: '#f59e0b' },
-  { icon: '💬', name: 'Chat',      color: '#10b981' },
-  { icon: '💰', name: 'Tokens',    color: '#8b5cf6' },
+  { icon: 'users',   name: 'Social',    color: '#c9ced4' },
+  { icon: 'bag',     name: 'Shopping',  color: '#c9ced4' },
+  { icon: 'food',    name: 'Food',      color: '#c9ced4' },
+  { icon: 'video',   name: 'Cinema',    color: '#f59e0b' },
+  { icon: 'message', name: 'Chat',      color: '#10b981' },
+  { icon: 'coin',    name: 'Tokens',    color: '#8b5cf6' },
 ];
 
 const FeatureBubbles = () => {
@@ -35,7 +36,7 @@ const FeatureBubbles = () => {
             animation: `popIn 0.5s ease-out ${i * 0.08}s both`,
           }}
         >
-          <span style={styles.icon}>{f.icon}</span>
+          <span style={styles.icon}><Icon name={f.icon} size={28} stroke="#fff" /></span>
           <span style={styles.label}>{f.name}</span>
         </div>
       ))}

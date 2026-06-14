@@ -83,6 +83,9 @@ const PATHS = {
   note: <><rect x="5" y="3" width="14" height="18" rx="2" /><path d="M9 8h6M9 12h6M9 16h3" /></>,
   home: <><path d="M3 11l9-7 9 7" /><path d="M5 10v9h5v-6h4v6h5v-9" /></>,
   book: <><path d="M12 6C10 4.5 6.5 4.5 4 5v13c2.5-.5 6-.5 8 1 2-1.5 5.5-1.5 8-1V5c-2.5-.5-6-.5-8 1z" /><path d="M12 6v14" /></>,
+  trash: <><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M6 7l1 13h10l1-13" /><path d="M10 11v6M14 11v6" /></>,
+  gem: <><path d="M3 9l4-5h10l4 5-9 12z" /><path d="M3 9h18M8 4L7 9l5 12 5-12-1-5" /></>,
+  food: <><path d="M4 13a8 8 0 0 1 16 0" /><path d="M3 13h18M12 4v1.2" /></>,
 };
 
 export default function Icon({ name, size = 20, stroke = 'url(#ksV)', strokeWidth = 1.7, style, ...rest }) {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Icon from '../kronos/Icon';
 import './StoryList.css';
 
 const StoryList = ({ userOnly = false }) => {
@@ -53,9 +54,9 @@ const StoryList = ({ userOnly = false }) => {
               <p className="genre">{story.genre}</p>
               <p className="description">{story.description}</p>
               <div className="stats">
-                <span>👁️ {story.stats.views}</span>
-                <span>▶️ {story.stats.plays}</span>
-                <span>⭐ {story.rating.average.toFixed(1)}</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}><Icon name="eye" size={13} /> {story.stats.views}</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}><Icon name="play" size={13} /> {story.stats.plays}</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}><Icon name="star" size={13} /> {story.rating.average.toFixed(1)}</span>
               </div>
               <a href={`/story/${story._id}`} className="play-btn">Play Story</a>
             </div>

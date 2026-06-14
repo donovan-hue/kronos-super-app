@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
+import Icon from '../kronos/Icon';
 
 const API = process.env.REACT_APP_API_URL;
 const QUICK_AMOUNTS = [5, 10, 25, 50, 100];
@@ -56,15 +57,15 @@ export default function TipModal({ isOpen, onClose, targetUser, targetId, target
           >
             {success ? (
               <div className="text-center py-6">
-                <div className="text-5xl mb-3">🎉</div>
+                <div className="mb-3 flex justify-center"><Icon name="sparkle" size={44} stroke="#a855f7" /></div>
                 <p className="text-white text-lg font-semibold">Propina enviada!</p>
                 <p className="text-white/50 text-sm mt-1">{amount} KRO para @{targetUser?.username}</p>
               </div>
             ) : (
               <>
                 <div className="flex items-center justify-between mb-5">
-                  <h3 className="text-white font-bold text-lg">Enviar Propina 💎</h3>
-                  <button onClick={onClose} className="text-white/40 hover:text-white text-xl">✕</button>
+                  <h3 className="text-white font-bold text-lg flex items-center gap-2">Enviar Propina <Icon name="gem" size={18} stroke="#a855f7" /></h3>
+                  <button onClick={onClose} className="text-white/40 hover:text-white flex items-center"><Icon name="close" size={18} stroke="currentColor" /></button>
                 </div>
 
                 {/* Target user */}
@@ -137,7 +138,7 @@ export default function TipModal({ isOpen, onClose, targetUser, targetId, target
                   disabled={loading || amount < 1}
                   className="w-full py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl text-white font-bold text-sm disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:opacity-90"
                 >
-                  {loading ? 'Enviando...' : `Enviar ${amount} KRO 💎`}
+                  {loading ? 'Enviando...' : <span className="inline-flex items-center justify-center gap-2">Enviar {amount} KRO <Icon name="gem" size={15} stroke="#fff" /></span>}
                 </button>
               </>
             )}
