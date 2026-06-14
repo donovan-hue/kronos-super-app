@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useSubscription from '../hooks/useSubscription';
+import Icon from '../components/kronos/Icon';
 
 export default function SubscriptionSuccess() {
   const { tier, refresh } = useSubscription();
@@ -41,7 +42,7 @@ export default function SubscriptionSuccess() {
           textAlign: 'center'
         }}
       >
-        <div style={{ fontSize: 56, marginBottom: 8 }}>🎉</div>
+        <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}><Icon name="sparkle" size={52} stroke="#a855f7" /></div>
         <h1
           style={{
             fontSize: 28,

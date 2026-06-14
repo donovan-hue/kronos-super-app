@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Icon from './kronos/Icon';
 
 /**
  * Banner / modal reutilizable cuando un usuario free intenta usar
@@ -53,16 +54,17 @@ export default function UpgradePrompt({
             background: 'transparent',
             border: 'none',
             color: 'rgba(255,255,255,0.5)',
-            fontSize: 18,
-            cursor: 'pointer'
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center'
           }}
         >
-          ×
+          <Icon name="close" size={18} stroke="rgba(255,255,255,0.5)" />
         </button>
       )}
 
       <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-        <div style={{ fontSize: 28 }}>{tier === 'business' ? '💼' : '⭐'}</div>
+        <div style={{ display: 'flex' }}><Icon name={tier === 'business' ? 'briefcase' : 'star'} size={28} stroke="#a855f7" /></div>
         <div style={{ flex: 1 }}>
           <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 4 }}>{title}</div>
           <div style={{ color: 'rgba(255,255,255,0.65)', fontSize: 13, lineHeight: 1.4 }}>

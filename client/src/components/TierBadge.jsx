@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Icon from './kronos/Icon';
 
 /**
  * Badge que muestra el tier del usuario en la Navbar.
@@ -26,7 +27,7 @@ export default function TierBadge({ tier = 'free' }) {
           textTransform: 'uppercase'
         }}
       >
-        ⭐ Pro
+        <Icon name="star" size={11} stroke="#1f1300" /> Pro
       </span>
     );
   }
@@ -49,7 +50,7 @@ export default function TierBadge({ tier = 'free' }) {
           textTransform: 'uppercase'
         }}
       >
-        💼 Biz
+        <Icon name="briefcase" size={11} stroke="#fff" /> Biz
       </span>
     );
   }

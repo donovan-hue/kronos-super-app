@@ -180,9 +180,9 @@ function UserProfile() {
       {/* Tabs */}
       <div className="flex space-x-4 mb-6 border-b border-gray-300">
         {[
-          { id: 'posts', label: 'Posts', icon: '📝' },
-          { id: 'orders', label: 'Órdenes', icon: '🍕' },
-          { id: 'followers', label: 'Followers', icon: '👥' }
+          { id: 'posts', label: 'Posts', icon: 'note' },
+          { id: 'orders', label: 'Órdenes', icon: 'food' },
+          { id: 'followers', label: 'Followers', icon: 'users' }
         ].map((tab) => (
           <button
             key={tab.id}
@@ -193,7 +193,7 @@ function UserProfile() {
                 : 'border-transparent text-gray-600 hover:text-gray-900'
             }`}
           >
-            <span>{tab.icon}</span>
+            <span style={{ display: 'inline-flex' }}><Icon name={tab.icon} size={16} stroke="currentColor" /></span>
             <span>{tab.label}</span>
           </button>
         ))}
@@ -213,8 +213,8 @@ function UserProfile() {
                   <div className="flex justify-between items-center text-sm text-gray-600 border-t pt-3">
                     <span>{new Date(post.createdAt).toLocaleDateString()}</span>
                     <div className="flex space-x-4">
-                      <span>👍 {post.likes?.length || 0}</span>
-                      <span>💬 {post.comments?.length || 0}</span>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}><Icon name="thumbsUp" size={14} stroke="currentColor" /> {post.likes?.length || 0}</span>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}><Icon name="message" size={14} stroke="currentColor" /> {post.comments?.length || 0}</span>
                     </div>
                   </div>
                 </div>

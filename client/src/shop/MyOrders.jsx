@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import api from '../services/api';
+import Icon from '../components/kronos/Icon';
 
 const REASON_LABELS = {
   item_not_received: 'Item not received',
@@ -303,7 +304,7 @@ function MyOrders() {
 
       {!loading && orders.length === 0 && !error && (
         <div className="text-center py-16 text-gray-500">
-          <p className="text-5xl mb-4">📦</p>
+          <p className="mb-4 flex justify-center"><Icon name="box" size={48} stroke="currentColor" /></p>
           <p className="text-xl font-semibold mb-2">No orders yet</p>
           <p className="text-sm">Your order history will appear here once you make a purchase.</p>
         </div>

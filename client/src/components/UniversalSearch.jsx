@@ -173,7 +173,7 @@ export default function UniversalSearch() {
             {results.posts?.length > 0 && (category === 'all' || category === 'posts') && (
               <section>
                 <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 11, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 10 }}>
-                  📝 Posts ({results.posts.length})
+                  <Icon name="note" size={13} stroke="currentColor" style={{ verticalAlign: -2, marginRight: 5 }} />Posts ({results.posts.length})
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                   {results.posts.map(post => (
@@ -194,7 +194,7 @@ export default function UniversalSearch() {
                         <img src={post.image} alt="" style={{ width: '100%', borderRadius: 10, marginTop: 8, maxHeight: 200, objectFit: 'cover' }} />
                       )}
                       <div style={{ color: 'rgba(255,255,255,0.25)', fontSize: 11, marginTop: 6 }}>
-                        ❤️ {post.likes?.length || 0} · 💬 {post.comments?.length || 0}
+                        <Icon name="heart" size={11} stroke="currentColor" style={{ verticalAlign: -1, marginRight: 3 }} />{post.likes?.length || 0} · <Icon name="message" size={11} stroke="currentColor" style={{ verticalAlign: -1, margin: '0 3px 0 2px' }} />{post.comments?.length || 0}
                       </div>
                     </GlassCard>
                   ))}
@@ -206,7 +206,7 @@ export default function UniversalSearch() {
             {results.users?.length > 0 && (category === 'all' || category === 'users') && (
               <section>
                 <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 11, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 10 }}>
-                  👤 Usuarios ({results.users.length})
+                  <Icon name="user" size={13} stroke="currentColor" style={{ verticalAlign: -2, marginRight: 5 }} />Usuarios ({results.users.length})
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {results.users.map(u => (
@@ -233,7 +233,7 @@ export default function UniversalSearch() {
             {results.products?.length > 0 && (category === 'all' || category === 'products') && (
               <section>
                 <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 11, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 10 }}>
-                  👗 Ropa ({results.products.length})
+                  <Icon name="bag" size={13} stroke="currentColor" style={{ verticalAlign: -2, marginRight: 5 }} />Ropa ({results.products.length})
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 10 }}>
                   {results.products.map(p => (

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FaStar, FaShoppingCart } from 'react-icons/fa';
+import Icon from '../components/kronos/Icon';
 
 function ProductDetail({ products, addToCart }) {
   const { id } = useParams();
@@ -134,9 +135,9 @@ function ProductDetail({ products, addToCart }) {
           </button>
 
           {product.inStock ? (
-            <p className="text-green-600 text-sm">✓ In Stock</p>
+            <p className="text-green-600 text-sm"><Icon name="check" size={13} stroke="currentColor" style={{ verticalAlign: -2, marginRight: 3 }} />In Stock</p>
           ) : (
-            <p className="text-red-600 text-sm">✗ Out of Stock</p>
+            <p className="text-red-600 text-sm"><Icon name="close" size={13} stroke="currentColor" style={{ verticalAlign: -2, marginRight: 3 }} />Out of Stock</p>
           )}
         </div>
       </div>

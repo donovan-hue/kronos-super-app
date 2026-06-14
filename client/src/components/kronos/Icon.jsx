@@ -86,6 +86,9 @@ const PATHS = {
   trash: <><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M6 7l1 13h10l1-13" /><path d="M10 11v6M14 11v6" /></>,
   gem: <><path d="M3 9l4-5h10l4 5-9 12z" /><path d="M3 9h18M8 4L7 9l5 12 5-12-1-5" /></>,
   food: <><path d="M4 13a8 8 0 0 1 16 0" /><path d="M3 13h18M12 4v1.2" /></>,
+  cart: <><circle cx="9" cy="20" r="1.4" /><circle cx="17" cy="20" r="1.4" /><path d="M3 4h2l2.4 11a1.5 1.5 0 0 0 1.5 1.2h7.6a1.5 1.5 0 0 0 1.5-1.2L20 8H6" /></>,
+  box: <><path d="M3 8l9-5 9 5v8l-9 5-9-5z" /><path d="M3 8l9 5 9-5M12 13v8" /></>,
+  briefcase: <><rect x="3" y="7" width="18" height="13" rx="2" /><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18" /></>,
 };
 
 export default function Icon({ name, size = 20, stroke = 'url(#ksV)', strokeWidth = 1.7, style, ...rest }) {

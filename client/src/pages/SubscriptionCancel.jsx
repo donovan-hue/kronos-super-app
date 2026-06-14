@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Icon from '../components/kronos/Icon';
 
 export default function SubscriptionCancel() {
   return (
@@ -25,7 +26,7 @@ export default function SubscriptionCancel() {
           textAlign: 'center'
         }}
       >
-        <div style={{ fontSize: 48, marginBottom: 8 }}>👋</div>
+        <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}><Icon name="smileOkay" size={46} stroke="rgba(255,255,255,0.6)" /></div>
         <h1 style={{ fontSize: 24, margin: '0 0 8px', color: '#fff' }}>
           Pago cancelado
         </h1>

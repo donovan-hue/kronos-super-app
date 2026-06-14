@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import Icon from '../components/kronos/Icon';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
@@ -48,7 +49,7 @@ function ProductCard({ product, onAddToCart, onClick }) {
         {img ? (
           <img src={img} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         ) : (
-          <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 48 }}>🛍️</div>
+          <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="bag" size={48} stroke="rgba(10,10,20,0.25)" /></div>
         )}
         {product.stock === 0 && (
           <div style={{ position: 'absolute', top: 10, right: 10, background: '#ef4444', color: '#fff', fontSize: 10, fontWeight: 700, padding: '3px 8px', borderRadius: 20 }}>
@@ -59,7 +60,7 @@ function ProductCard({ product, onAddToCart, onClick }) {
       <div style={{ padding: '14px 16px' }}>
         {product.seller?.username && (
           <div style={{ fontSize: 10, color: '#4facfe', fontWeight: 700, marginBottom: 3, textTransform: 'uppercase', letterSpacing: 0.5 }}>
-            🏪 {product.seller.firstName || product.seller.username}
+            <Icon name="bag" size={11} stroke="#4facfe" style={{ verticalAlign: -1, marginRight: 4 }} />{product.seller.firstName || product.seller.username}
           </div>
         )}
         <div style={{ fontWeight: 700, fontSize: 14, color: '#0a0a14', marginBottom: 4, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -120,14 +121,14 @@ function ProductList({ products, cart, onAddToCart, onViewProduct }) {
             </button>
             <button onClick={() => navigate('/shop/cart')}
               style={{ padding: '8px 16px', borderRadius: 20, border: 'none', background: HOLO, color: '#fff', fontSize: 12, fontWeight: 700, cursor: 'pointer', boxShadow: '0 2px 10px rgba(79,172,254,0.3)', position: 'relative' }}>
-              🛒 {cartCount > 0 && <span style={{ position: 'absolute', top: -6, right: -6, background: '#ff85a2', color: '#fff', fontSize: 9, fontWeight: 800, width: 16, height: 16, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{cartCount}</span>}
+              <Icon name="cart" size={16} stroke="#fff" style={{ verticalAlign: -3, marginRight: 4 }} /> {cartCount > 0 && <span style={{ position: 'absolute', top: -6, right: -6, background: '#ff85a2', color: '#fff', fontSize: 9, fontWeight: 800, width: 16, height: 16, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{cartCount}</span>}
               Carrito
             </button>
           </div>
         </div>
         <input
           value={search} onChange={e => setSearch(e.target.value)}
-          placeholder="🔍 Buscar productos..."
+          placeholder="Buscar productos..."
           style={{ width: '100%', padding: '10px 16px', borderRadius: 20, border: '1.5px solid rgba(79,172,254,0.2)', background: 'rgba(79,172,254,0.04)', fontSize: 13, outline: 'none', color: '#0a0a14', fontFamily: 'inherit', marginBottom: 12, boxSizing: 'border-box' }}
         />
         <div style={{ display: 'flex', gap: 8, overflowX: 'auto', paddingBottom: 4 }}>
@@ -148,7 +149,7 @@ function ProductList({ products, cart, onAddToCart, onViewProduct }) {
       <div style={{ padding: '20px 16px' }}>
         {filtered.length === 0 ? (
           <div style={{ textAlign: 'center', padding: 60, color: 'rgba(10,10,20,0.35)' }}>
-            <div style={{ fontSize: 48, marginBottom: 12 }}>🛍️</div>
+            <div style={{ marginBottom: 12, display: 'flex', justifyContent: 'center' }}><Icon name="bag" size={48} stroke="rgba(10,10,20,0.3)" /></div>
             <div style={{ fontSize: 16, fontWeight: 600 }}>No hay productos</div>
           </div>
         ) : (
@@ -174,7 +175,7 @@ function ProductDetail({ products, onAddToCart }) {
   if (!product) return (
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff' }}>
       <div style={{ textAlign: 'center' }}>
-        <div style={{ fontSize: 48 }}>😕</div>
+        <div style={{ display: 'flex', justifyContent: 'center' }}><Icon name="smileOkay" size={48} /></div>
         <div style={{ fontWeight: 700, color: '#0a0a14', marginTop: 12 }}>Producto no encontrado</div>
         <button onClick={() => navigate('/shop')} style={{ marginTop: 16, padding: '10px 24px', borderRadius: 20, background: HOLO, border: 'none', color: '#fff', fontWeight: 700, cursor: 'pointer' }}>Volver</button>
       </div>
@@ -186,13 +187,13 @@ function ProductDetail({ products, onAddToCart }) {
   return (
     <div style={{ minHeight: '100vh', background: '#fff', fontFamily: "'Outfit',sans-serif", paddingBottom: 100 }}>
       <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1.5px solid rgba(79,172,254,0.1)' }}>
-        <button onClick={() => navigate(-1)} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer' }}>←</button>
+        <button onClick={() => navigate(-1)} style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}><Icon name="back" size={22} stroke="#0a0a14" /></button>
         <span style={{ fontWeight: 700, fontSize: 16, color: '#0a0a14' }}>Detalle del producto</span>
       </div>
 
       <div style={{ height: 280, background: 'linear-gradient(135deg,rgba(79,172,254,0.08),rgba(243,160,255,0.08))', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         {img ? <img src={img} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-          : <span style={{ fontSize: 80 }}>🛍️</span>}
+          : <Icon name="bag" size={80} stroke="rgba(10,10,20,0.2)" />}
       </div>
 
       <div style={{ padding: '24px 20px' }}>
@@ -213,7 +214,7 @@ function ProductDetail({ products, onAddToCart }) {
           onClick={() => { for (let i = 0; i < qty; i++) onAddToCart(product); setAdded(true); setTimeout(() => setAdded(false), 2000); }}
           disabled={product.stock === 0}
           style={{ width: '100%', padding: '16px', borderRadius: 20, border: 'none', background: product.stock === 0 ? 'rgba(0,0,0,0.08)' : HOLO, color: '#fff', fontWeight: 800, fontSize: 16, cursor: product.stock === 0 ? 'not-allowed' : 'pointer', boxShadow: '0 4px 20px rgba(79,172,254,0.3)', fontFamily: 'inherit' }}>
-          {added ? '✓ Agregado al carrito' : product.stock === 0 ? 'Agotado' : '🛒 Agregar al carrito'}
+          {added ? <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="check" size={16} stroke="#fff" /> Agregado al carrito</span> : product.stock === 0 ? 'Agotado' : <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="cart" size={16} stroke="#fff" /> Agregar al carrito</span>}
         </button>
       </div>
     </div>
@@ -233,14 +234,14 @@ function Cart({ cart, setCart }) {
   return (
     <div style={{ minHeight: '100vh', background: '#fff', fontFamily: "'Outfit',sans-serif", paddingBottom: 100 }}>
       <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1.5px solid rgba(79,172,254,0.1)' }}>
-        <button onClick={() => navigate(-1)} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer' }}>←</button>
+        <button onClick={() => navigate(-1)} style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}><Icon name="back" size={22} stroke="#0a0a14" /></button>
         <span style={{ fontWeight: 700, fontSize: 16, color: '#0a0a14' }}>Carrito ({cart.length})</span>
       </div>
 
       <div style={{ padding: '16px 20px' }}>
         {cart.length === 0 ? (
           <div style={{ textAlign: 'center', padding: 60 }}>
-            <div style={{ fontSize: 56, marginBottom: 12 }}>🛒</div>
+            <div style={{ marginBottom: 12, display: 'flex', justifyContent: 'center' }}><Icon name="cart" size={56} stroke="rgba(10,10,20,0.3)" /></div>
             <div style={{ fontWeight: 700, color: '#0a0a14', fontSize: 18 }}>Tu carrito está vacío</div>
             <button onClick={() => navigate('/shop')} style={{ marginTop: 20, padding: '12px 28px', borderRadius: 20, background: HOLO, border: 'none', color: '#fff', fontWeight: 700, cursor: 'pointer' }}>Explorar tienda</button>
           </div>
@@ -249,7 +250,7 @@ function Cart({ cart, setCart }) {
             {cart.map(item => (
               <div key={item.productId} style={{ ...CARD_STYLE, marginBottom: 12, display: 'flex', gap: 14, padding: 14 }}>
                 <div style={{ width: 70, height: 70, borderRadius: 14, background: 'rgba(79,172,254,0.08)', flexShrink: 0, overflow: 'hidden' }}>
-                  {item.image ? <img src={item.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28 }}>🛍️</div>}
+                  {item.image ? <img src={item.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="bag" size={28} stroke="rgba(10,10,20,0.3)" /></div>}
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontWeight: 700, fontSize: 13, color: '#0a0a14', marginBottom: 4, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.name}</div>
@@ -258,7 +259,7 @@ function Cart({ cart, setCart }) {
                     <button onClick={() => update(item.productId, item.quantity - 1)} style={{ width: 28, height: 28, borderRadius: '50%', border: '1.5px solid rgba(79,172,254,0.3)', background: '#fff', cursor: 'pointer', fontWeight: 700, color: '#4facfe', fontSize: 16 }}>−</button>
                     <span style={{ fontWeight: 700, color: '#0a0a14' }}>{item.quantity}</span>
                     <button onClick={() => update(item.productId, item.quantity + 1)} style={{ width: 28, height: 28, borderRadius: '50%', border: '1.5px solid rgba(79,172,254,0.3)', background: '#fff', cursor: 'pointer', fontWeight: 700, color: '#4facfe', fontSize: 16 }}>+</button>
-                    <button onClick={() => update(item.productId, 0)} style={{ marginLeft: 'auto', background: 'none', border: 'none', color: '#ef4444', fontSize: 16, cursor: 'pointer' }}>🗑️</button>
+                    <button onClick={() => update(item.productId, 0)} style={{ marginLeft: 'auto', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}><Icon name="trash" size={16} stroke="#ef4444" /></button>
                   </div>
                 </div>
               </div>
@@ -279,7 +280,7 @@ function Cart({ cart, setCart }) {
               </div>
               <button onClick={() => navigate('/shop/checkout')}
                 style={{ width: '100%', padding: 16, borderRadius: 20, border: 'none', background: HOLO, color: '#fff', fontWeight: 800, fontSize: 16, cursor: 'pointer', boxShadow: '0 4px 20px rgba(79,172,254,0.3)', fontFamily: 'inherit' }}>
-                Proceder al pago →
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>Proceder al pago <Icon name="arrowRight" size={16} stroke="#fff" /></span>
               </button>
             </div>
           </>
@@ -317,7 +318,7 @@ function Checkout({ cart }) {
   if (done) return (
     <div style={{ minHeight: '100vh', background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Outfit',sans-serif" }}>
       <div style={{ textAlign: 'center', padding: 32 }}>
-        <div style={{ fontSize: 72, marginBottom: 16 }}>✅</div>
+        <div style={{ marginBottom: 16, display: 'flex', justifyContent: 'center' }}><Icon name="check" size={64} stroke="#10b981" /></div>
         <div style={{ fontWeight: 800, fontSize: 24, background: HOLO, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', marginBottom: 8 }}>¡Orden confirmada!</div>
         <div style={{ color: 'rgba(10,10,20,0.5)', marginBottom: 24 }}>Tu pedido ha sido procesado exitosamente</div>
         <button onClick={() => navigate('/shop')} style={{ padding: '12px 32px', borderRadius: 20, background: HOLO, border: 'none', color: '#fff', fontWeight: 700, cursor: 'pointer', boxShadow: '0 4px 16px rgba(79,172,254,0.3)' }}>
@@ -330,7 +331,7 @@ function Checkout({ cart }) {
   return (
     <div style={{ minHeight: '100vh', background: '#fff', fontFamily: "'Outfit',sans-serif", paddingBottom: 100 }}>
       <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1.5px solid rgba(79,172,254,0.1)' }}>
-        <button onClick={() => navigate(-1)} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer' }}>←</button>
+        <button onClick={() => navigate(-1)} style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}><Icon name="back" size={22} stroke="#0a0a14" /></button>
         <span style={{ fontWeight: 700, fontSize: 16, color: '#0a0a14' }}>Finalizar compra</span>
       </div>
 
@@ -373,7 +374,7 @@ function Checkout({ cart }) {
 
         <button type="submit" disabled={loading}
           style={{ width: '100%', padding: 16, borderRadius: 20, border: 'none', background: loading ? 'rgba(0,0,0,0.08)' : HOLO, color: '#fff', fontWeight: 800, fontSize: 16, cursor: loading ? 'wait' : 'pointer', boxShadow: '0 4px 20px rgba(79,172,254,0.3)', fontFamily: 'inherit' }}>
-          {loading ? 'Procesando...' : '✓ Confirmar orden'}
+          {loading ? 'Procesando...' : <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="check" size={16} stroke="#fff" /> Confirmar orden</span>}
         </button>
       </form>
     </div>
@@ -409,7 +410,7 @@ function MyOrders() {
   return (
     <div style={{ minHeight: '100vh', background: '#fff', fontFamily: "'Outfit',sans-serif", paddingBottom: 100 }}>
       <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1.5px solid rgba(79,172,254,0.1)' }}>
-        <button onClick={() => navigate(-1)} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer' }}>←</button>
+        <button onClick={() => navigate(-1)} style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}><Icon name="back" size={22} stroke="#0a0a14" /></button>
         <span style={{ fontWeight: 700, fontSize: 16, color: '#0a0a14' }}>Mis Órdenes</span>
       </div>
 
@@ -418,7 +419,7 @@ function MyOrders() {
           <div style={{ textAlign: 'center', padding: 60, color: 'rgba(10,10,20,0.35)' }}>Cargando...</div>
         ) : orders.length === 0 ? (
           <div style={{ textAlign: 'center', padding: 60 }}>
-            <div style={{ fontSize: 56, marginBottom: 12 }}>📦</div>
+            <div style={{ marginBottom: 12, display: 'flex', justifyContent: 'center' }}><Icon name="box" size={56} stroke="rgba(10,10,20,0.3)" /></div>
             <div style={{ fontWeight: 700, color: '#0a0a14', fontSize: 18 }}>Sin órdenes aún</div>
             <button onClick={() => navigate('/shop')} style={{ marginTop: 20, padding: '12px 28px', borderRadius: 20, background: HOLO, border: 'none', color: '#fff', fontWeight: 700, cursor: 'pointer' }}>Ir a la tienda</button>
           </div>
