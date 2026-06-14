@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { GlassCard, HoloText } from '../components/kronos';
+import { GlassCard, HoloText, Icon } from '../components/kronos';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 const TYPE_META = {
-  like:             { icon: '❤️', color: '#ef4444', label: 'Le dio like a tu post' },
-  comment:          { icon: '💬', color: '#c9ced4', label: 'Comentó en tu post' },
-  follow:           { icon: '👤', color: '#c9ced4', label: 'Empezó a seguirte' },
-  message:          { icon: '📩', color: '#c9ced4', label: 'Te envió un mensaje' },
-  transfer:         { icon: '💸', color: '#10b981', label: 'Te envió dinero' },
-  community_invite: { icon: '🏛️', color: '#f59e0b', label: 'Te invitó a una comunidad' },
-  story_reaction:   { icon: '✨', color: '#c9ced4', label: 'Reaccionó a tu historia' },
+  like:             { icon: 'heart',   color: '#ef4444', label: 'Le dio like a tu post' },
+  comment:          { icon: 'message', color: '#c9ced4', label: 'Comentó en tu post' },
+  follow:           { icon: 'user',    color: '#c9ced4', label: 'Empezó a seguirte' },
+  message:          { icon: 'message', color: '#c9ced4', label: 'Te envió un mensaje' },
+  transfer:         { icon: 'money',   color: '#10b981', label: 'Te envió dinero' },
+  community_invite: { icon: 'users',   color: '#f59e0b', label: 'Te invitó a una comunidad' },
+  story_reaction:   { icon: 'sparkle', color: '#c9ced4', label: 'Reaccionó a tu historia' },
 };
 
 function timeAgo(date) {
@@ -101,7 +101,7 @@ export default function NotificationsPage() {
           <div style={{ textAlign: 'center', padding: 60, color: 'rgba(201,206,212,0.35)' }}>Cargando...</div>
         ) : filtered.length === 0 ? (
           <div style={{ textAlign: 'center', padding: 60, color: 'rgba(201,206,212,0.35)' }}>
-            <div style={{ fontSize: 48, marginBottom: 12 }}>🔔</div>
+            <div style={{ marginBottom: 12 }}><Icon name="bell" size={48} /></div>
             <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 4 }}>
               {filter === 'unread' ? 'Todo al día' : 'Sin notificaciones'}
             </div>
@@ -112,7 +112,7 @@ export default function NotificationsPage() {
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {filtered.map(notif => {
-              const meta = TYPE_META[notif.type] || { icon: '🔔', color: '#c9ced4', label: notif.type };
+              const meta = TYPE_META[notif.type] || { icon: 'bell', color: '#c9ced4', label: notif.type };
               const sender = notif.sender;
               return (
                 <GlassCard
@@ -131,13 +131,13 @@ export default function NotificationsPage() {
                       {sender?.avatar ? (
                         <img src={sender.avatar} alt="" style={{ width: 44, height: 44, borderRadius: '50%', objectFit: 'cover' }} />
                       ) : (
-                        <div style={{ width: 44, height: 44, borderRadius: '50%', background: `${meta.color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>
-                          {meta.icon}
+                        <div style={{ width: 44, height: 44, borderRadius: '50%', background: `${meta.color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <Icon name={meta.icon} size={20} stroke={meta.color} />
                         </div>
                       )}
                       {sender?.avatar && (
-                        <div style={{ position: 'absolute', bottom: -2, right: -2, width: 18, height: 18, borderRadius: '50%', background: 'transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10 }}>
-                          {meta.icon}
+                        <div style={{ position: 'absolute', bottom: -2, right: -2, width: 18, height: 18, borderRadius: '50%', background: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <Icon name={meta.icon} size={11} stroke={meta.color} />
                         </div>
                       )}
                     </div>

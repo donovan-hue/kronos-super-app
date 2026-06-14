@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 import axios from 'axios';
-import { GlassCard, HoloText } from '../components/kronos';
+import { GlassCard, HoloText, Icon } from '../components/kronos';
 import { AuthContext } from '../context/AuthContext';
 
 const SOCKET_URL = (process.env.REACT_APP_API_URL || 'http://localhost:5000/api').replace('/api', '');
@@ -90,12 +89,12 @@ function VideoCall({ socket, targetUserId, targetName, onEnd }) {
       </div>
       <div style={{ display: 'flex', gap: 16, marginTop: 24 }}>
         {[
-          { icon: muted ? '🔇' : '🎤', action: toggleMute, bg: muted ? 'rgba(239,68,68,0.3)' : 'rgba(255,255,255,0.12)' },
-          { icon: camOff ? '📵' : '📷', action: toggleCam, bg: camOff ? 'rgba(239,68,68,0.3)' : 'rgba(255,255,255,0.12)' },
-          { icon: '📞', action: hangUp, bg: '#ef4444' },
+          { icon: muted ? 'micOff' : 'mic', action: toggleMute, bg: muted ? 'rgba(239,68,68,0.3)' : 'rgba(255,255,255,0.12)' },
+          { icon: camOff ? 'camOff' : 'video', action: toggleCam, bg: camOff ? 'rgba(239,68,68,0.3)' : 'rgba(255,255,255,0.12)' },
+          { icon: 'phoneEnd', action: hangUp, bg: '#ef4444' },
         ].map((btn, i) => (
-          <button key={i} onClick={btn.action} style={{ width: 56, height: 56, borderRadius: '50%', background: btn.bg, border: 'none', fontSize: 22, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            {btn.icon}
+          <button key={i} onClick={btn.action} style={{ width: 56, height: 56, borderRadius: '50%', background: btn.bg, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Icon name={btn.icon} size={24} stroke="#fff" />
           </button>
         ))}
       </div>
@@ -108,12 +107,12 @@ function IncomingCallModal({ callerName, onAccept, onReject }) {
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 9100, background: 'rgba(0,0,0,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <GlassCard style={{ textAlign: 'center', padding: 40, maxWidth: 320 }}>
-        <div style={{ fontSize: 48, marginBottom: 12 }}>📲</div>
+        <div style={{ marginBottom: 12 }}><Icon name="phone" size={48} /></div>
         <div style={{ color: '#c9ced4', fontSize: 18, fontWeight: 700, marginBottom: 4 }}>Llamada entrante</div>
         <div style={{ color: 'rgba(201,206,212,0.65)', fontSize: 14, marginBottom: 28 }}>{callerName}</div>
         <div style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
-          <button onClick={onReject} style={{ width: 56, height: 56, borderRadius: '50%', background: '#ef4444', border: 'none', fontSize: 22, cursor: 'pointer' }}>📵</button>
-          <button onClick={onAccept} style={{ width: 56, height: 56, borderRadius: '50%', background: '#10b981', border: 'none', fontSize: 22, cursor: 'pointer' }}>📞</button>
+          <button onClick={onReject} style={{ width: 56, height: 56, borderRadius: '50%', background: '#ef4444', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="phoneEnd" size={24} stroke="#fff" /></button>
+          <button onClick={onAccept} style={{ width: 56, height: 56, borderRadius: '50%', background: '#10b981', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="phone" size={24} stroke="#fff" /></button>
         </div>
       </GlassCard>
     </div>
@@ -172,7 +171,7 @@ function LiveStreamer({ socket, streamerId, streamerName, onStop }) {
     <div style={{ display: 'flex', gap: 16, height: 480 }}>
       <div style={{ flex: 1, position: 'relative', background: '#111', borderRadius: 16, overflow: 'hidden' }}>
         <video ref={videoRef} autoPlay muted playsInline style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-        {live && <div style={{ position: 'absolute', top: 12, left: 12, background: '#ef4444', color: '#c9ced4', fontSize: 12, fontWeight: 700, padding: '4px 10px', borderRadius: 20 }}>🔴 EN VIVO</div>}
+        {live && <div style={{ position: 'absolute', top: 12, left: 12, background: '#ef4444', color: '#c9ced4', fontSize: 12, fontWeight: 700, padding: '4px 10px', borderRadius: 20 }}>EN VIVO</div>}
         <div style={{ position: 'absolute', bottom: 16, left: 0, right: 0, display: 'flex', justifyContent: 'center' }}>
           {!live
             ? <button onClick={startStream} style={{ padding: '12px 32px', borderRadius: 28, background: '#ef4444', color: '#fff', border: 'none', fontSize: 15, fontWeight: 700, cursor: 'pointer' }}>Iniciar Stream</button>
@@ -267,8 +266,8 @@ function LiveViewer({ socket, stream, currentUser }) {
       <div style={{ flex: 1, background: '#111', borderRadius: 16, overflow: 'hidden', position: 'relative' }}>
         <video ref={videoRef} autoPlay playsInline style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         <div style={{ position: 'absolute', top: 12, left: 12, display: 'flex', gap: 8, alignItems: 'center' }}>
-          <div style={{ background: '#ef4444', color: '#c9ced4', fontSize: 12, fontWeight: 700, padding: '4px 10px', borderRadius: 20 }}>🔴 EN VIVO</div>
-          <div style={{ background: 'rgba(0,0,0,0.6)', color: '#c9ced4', fontSize: 12, padding: '4px 10px', borderRadius: 20 }}>👁 {viewerCount}</div>
+          <div style={{ background: '#ef4444', color: '#c9ced4', fontSize: 12, fontWeight: 700, padding: '4px 10px', borderRadius: 20 }}>EN VIVO</div>
+          <div style={{ background: 'rgba(0,0,0,0.6)', color: '#c9ced4', fontSize: 12, padding: '4px 10px', borderRadius: 20, display: 'inline-flex', alignItems: 'center', gap: 4 }}><Icon name="eye" size={13} stroke="#c9ced4" /> {viewerCount}</div>
         </div>
         <div style={{ position: 'absolute', bottom: 12, left: 0, right: 0, textAlign: 'center', color: 'rgba(201,206,212,0.65)', fontSize: 13, fontWeight: 600, textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>
           {stream.streamerName}
@@ -285,7 +284,7 @@ function LiveViewer({ socket, stream, currentUser }) {
       <div style={{ width: 240, display: 'flex', flexDirection: 'column', gap: 8 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 12 }}>Chat en vivo</div>
-          <div style={{ color: 'rgba(201,206,212,0.35)', fontSize: 11 }}>👁 {viewerCount} viendo</div>
+          <div style={{ color: 'rgba(201,206,212,0.35)', fontSize: 11, display: 'inline-flex', alignItems: 'center', gap: 4 }}><Icon name="eye" size={12} stroke="rgba(201,206,212,0.35)" /> {viewerCount} viendo</div>
         </div>
 
         {/* Messages */}
@@ -329,7 +328,6 @@ function LiveViewer({ socket, stream, currentUser }) {
 
 // ─── MAIN LIVE PAGE ────────────────────────────────────────────────────────────
 export default function Live() {
-  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [socket, setSocket] = useState(null);
   const [tab, setTab] = useState('streams');
@@ -412,8 +410,8 @@ export default function Live() {
         {/* Tabs */}
         <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
           {[
-            { id: 'streams', label: '📺 Streams' },
-            { id: 'videocall', label: '📹 Videollamada' },
+            { id: 'streams', label: 'Streams' },
+            { id: 'videocall', label: 'Videollamada' },
           ].map(t => (
             <button key={t.id} onClick={() => setTab(t.id)}
               style={{ flex: 1, padding: '10px', borderRadius: 12, fontSize: 13, fontWeight: 600, border: 'none', cursor: 'pointer', background: tab === t.id ? 'linear-gradient(135deg,#a78bfa 0%,#8b5cf6 45%,#6d4bd0 100%)' : 'rgba(255,255,255,0.06)', color: '#fff' }}>
@@ -428,12 +426,12 @@ export default function Live() {
             {!streaming && !watchingStream && (
               <>
                 <GlassCard style={{ marginBottom: 20, textAlign: 'center' }}>
-                  <div style={{ fontSize: 40, marginBottom: 8 }}>🎬</div>
+                  <div style={{ marginBottom: 8 }}><Icon name="video" size={40} /></div>
                   <div style={{ color: '#c9ced4', fontSize: 16, fontWeight: 700, marginBottom: 6 }}>¿Quieres transmitir?</div>
                   <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 13, marginBottom: 16 }}>Tu audiencia te está esperando</div>
                   <button onClick={() => setStreaming(true)}
                     style={{ padding: '12px 32px', borderRadius: 28, background: 'linear-gradient(135deg,#a78bfa 0%,#8b5cf6 45%,#6d4bd0 100%)', color: '#fff', border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer', boxShadow: '0 12px 30px -10px rgba(139,92,246,0.5)' }}>
-                    🔴 Ir en Vivo
+                    Ir en Vivo
                   </button>
                 </GlassCard>
 
@@ -442,7 +440,7 @@ export default function Live() {
                 </div>
                 {activeStreams.length === 0 ? (
                   <div style={{ textAlign: 'center', color: 'rgba(201,206,212,0.35)', padding: 40 }}>
-                    <div style={{ fontSize: 40, marginBottom: 8 }}>📡</div>
+                    <div style={{ marginBottom: 8 }}><Icon name="broadcast" size={40} /></div>
                     <div>No hay streams activos ahora</div>
                     <div style={{ fontSize: 12, marginTop: 4 }}>¡Sé el primero en transmitir!</div>
                   </div>
@@ -450,10 +448,10 @@ export default function Live() {
                   <GlassCard key={s.streamerId} style={{ cursor: 'pointer', marginBottom: 10, padding: 0, overflow: 'hidden' }} onClick={() => setWatchingStream(s)}>
                     {/* Thumbnail banner */}
                     <div style={{ height: 100, background: 'linear-gradient(135deg,#1a0533,#0c1a3d)', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <div style={{ fontSize: 36 }}>📺</div>
-                      <div style={{ position: 'absolute', top: 8, left: 8, background: '#ef4444', color: '#c9ced4', fontSize: 10, fontWeight: 700, padding: '3px 8px', borderRadius: 20 }}>🔴 LIVE</div>
+                      <div><Icon name="tv" size={36} /></div>
+                      <div style={{ position: 'absolute', top: 8, left: 8, background: '#ef4444', color: '#c9ced4', fontSize: 10, fontWeight: 700, padding: '3px 8px', borderRadius: 20 }}>LIVE</div>
                       {s.viewers > 0 && (
-                        <div style={{ position: 'absolute', top: 8, right: 8, background: 'rgba(0,0,0,0.6)', color: '#c9ced4', fontSize: 10, padding: '3px 8px', borderRadius: 20 }}>👁 {s.viewers}</div>
+                        <div style={{ position: 'absolute', top: 8, right: 8, background: 'rgba(0,0,0,0.6)', color: '#c9ced4', fontSize: 10, padding: '3px 8px', borderRadius: 20, display: 'inline-flex', alignItems: 'center', gap: 3 }}><Icon name="eye" size={11} stroke="#c9ced4" /> {s.viewers}</div>
                       )}
                     </div>
                     <div style={{ padding: '10px 14px', display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -500,13 +498,13 @@ export default function Live() {
                 </div>
                 <button onClick={() => startCall(u)}
                   style={{ padding: '8px 18px', borderRadius: 20, background: 'linear-gradient(135deg,#a78bfa 0%,#8b5cf6 45%,#6d4bd0 100%)', color: '#fff', border: 'none', fontSize: 13, fontWeight: 700, cursor: 'pointer', boxShadow: '0 8px 22px -8px rgba(139,92,246,0.5)' }}>
-                  📹 Llamar
+                  Llamar
                 </button>
               </div>
             ))}
             {!searchQuery && (
               <div style={{ textAlign: 'center', color: 'rgba(201,206,212,0.35)', padding: 32 }}>
-                <div style={{ fontSize: 40, marginBottom: 8 }}>📹</div>
+                <div style={{ marginBottom: 8 }}><Icon name="video" size={40} /></div>
                 <div>Busca un usuario para iniciar una videollamada</div>
               </div>
             )}

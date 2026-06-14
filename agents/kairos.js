@@ -27,6 +27,39 @@ const ROOT = path.resolve(__dirname, '..');
 const TASKS_FILE = path.join(__dirname, 'tasks.json');
 const LOG_FILE = path.join(__dirname, 'logs', 'kairos.log');
 const REPORT_FILE = path.join(__dirname, 'logs', 'kairos-report.json');
+const JUNK_FILE = path.join(__dirname, 'logs', 'kairos-junk.json');
+
+// ─── Modo limpieza (verdugo) ────────────────────────────────────────────────────
+// Kairos conoce la estructura real del proyecto, así que distingue el código vivo
+// de la basura: réplicas, versiones viejas, copias y artefactos regenerables.
+// Borra en CUARENTENA (reversible): mueve a _KAIROS_TRASH/<fecha>/ con un manifiesto.
+
+const TRASH_DIRNAME = '_KAIROS_TRASH';
+const DISK_E_ROOT = 'E:\\';
+
+// Nunca descender ni tocar estas carpetas (código vivo, dependencias, sistema).
+const CLEAN_SKIP_DIRS = new Set([
+  '.git', 'node_modules', TRASH_DIRNAME,
+  '$RECYCLE.BIN', 'System Volume Information', 'Config.Msi', 'Recovery',
+]);
+
+// La raíz REAL del proyecto vivo: su server/client/agents no se tocan jamás.
+const LIVE_DIRS = ['server', 'client', 'agents'].map(d => path.join(ROOT, d).toLowerCase());
+
+// Carpetas de apps instaladas en E: (editores, runtimes…). NO son basura aunque
+// contengan dist/build/out. Se saltan completas para no romper programas.
+const APP_INSTALL_RE = /^(cursor|microsoft vs code|vscode|nodejs|node-v|python\d*|git|obs-studio|programs?|program files.*|windowsapps|steam|androidstudio|jdk|jre)$/i;
+
+const underRoot = abs => abs.toLowerCase().startsWith(ROOT.toLowerCase() + path.sep);
+
+// Basura del SO / editor — segura de mover.
+const JUNK_FILE_RE = /(^|[\\/])(\.DS_Store|Thumbs\.db|desktop\.ini)$|\.(tmp|temp|swp|orig|rej|old|log~)$|~$/i;
+
+// Réplicas / versiones viejas por nombre: "copia", "copy", "(1)", "-old", "-backup", "viejo".
+const REPLICA_RE = /( - copia| copia \d+| copy\b| - copy|\(\d+\)\.|-old\b|_old\b|-backup\b|_backup\b|-viejo\b|_viejo\b|\.bak$|\.bak\.)/i;
+
+// Carpetas regenerables (build/cache) — seguras de mover.
+const JUNK_DIR_RE = /^(build|dist|coverage|\.cache|\.next|\.parcel-cache|out|tmp|temp)$/i;
 
 // ─── Utilidades base ──────────────────────────────────────────────────────────
 
@@ -860,6 +893,151 @@ function runStudy(options = {}) {
   return { present, missingStakes, missingCommon, ideas: DIFFERENTIATORS };
 }
 
+// ─── Limpieza: detección de basura, réplicas y versiones viejas ─────────────────
+
+function isLiveProjectDir(abs) {
+  const low = abs.toLowerCase();
+  return LIVE_DIRS.some(d => low === d || low.startsWith(d + path.sep));
+}
+
+function dirSize(abs) {
+  let total = 0;
+  let stack = [abs];
+  while (stack.length) {
+    const d = stack.pop();
+    let entries;
+    try { entries = fs.readdirSync(d, { withFileTypes: true }); } catch { continue; }
+    for (const e of entries) {
+      const full = path.join(d, e.name);
+      if (e.isDirectory()) stack.push(full);
+      else { try { total += fs.statSync(full).size; } catch { /* skip */ } }
+    }
+  }
+  return total;
+}
+
+/** Recorre scanRoot y clasifica basura. No desciende a código vivo ni a node_modules/.git. */
+function scanJunk(scanRoot) {
+  const safe = [];     // se mueve a cuarentena
+  const review = [];   // solo se reporta (decisión humana)
+  const stack = [scanRoot];
+
+  while (stack.length) {
+    const dir = stack.pop();
+    let entries;
+    try { entries = fs.readdirSync(dir, { withFileTypes: true }); } catch { continue; }
+
+    for (const e of entries) {
+      const full = path.join(dir, e.name);
+
+      const isTopLevel = path.dirname(full) === scanRoot; // hijo directo de la raíz escaneada
+
+      if (e.isDirectory()) {
+        if (CLEAN_SKIP_DIRS.has(e.name)) continue;          // jamás tocar
+        if (APP_INSTALL_RE.test(e.name)) continue;          // app instalada: no descender
+        // build/dist/out/cache: SOLO basura si está dentro del proyecto (fuera son apps).
+        if (JUNK_DIR_RE.test(e.name) && underRoot(full) && !isLiveProjectDir(full)) {
+          safe.push({ abs: full, kind: 'dir', reason: `carpeta regenerable (${e.name})`, bytes: dirSize(full) });
+          continue;
+        }
+        // Réplica/copia completa: dentro del proyecto, o una copia del proyecto al
+        // tope de E:\ (p.ej. "kronos-super-app - copia"). No tocar copias dentro de apps.
+        if (REPLICA_RE.test(e.name) && (underRoot(full) || isTopLevel) && !isLiveProjectDir(full)) {
+          safe.push({ abs: full, kind: 'dir', reason: 'réplica/versión vieja (carpeta)', bytes: dirSize(full) });
+          continue;
+        }
+        stack.push(full);                                    // seguir bajando
+        continue;
+      }
+
+      // Archivos
+      let size = 0;
+      try { size = fs.statSync(full).size; } catch { /* skip */ }
+
+      if (JUNK_FILE_RE.test(e.name)) {
+        safe.push({ abs: full, kind: 'file', reason: 'archivo basura del SO/editor', bytes: size });
+      } else if (REPLICA_RE.test(e.name) && (underRoot(full) || isTopLevel)) {
+        // Réplica nombrada (App copy.jsx, server (1).js) dentro del proyecto: se mueve,
+        // es una copia y la cuarentena es reversible. Fuera del proyecto no, para no
+        // tocar archivos de programas instalados.
+        safe.push({ abs: full, kind: 'file', reason: 'réplica/copia/versión vieja (por nombre)', bytes: size });
+      }
+    }
+  }
+  return { safe, review };
+}
+
+/** Mueve los items a _KAIROS_TRASH/<fecha>/ conservando su ruta y deja un manifiesto. */
+function quarantine(items, scanRoot) {
+  const ts = new Date().toISOString().replace(/[:.]/g, '-');
+  const trashBase = path.join(scanRoot, TRASH_DIRNAME, ts);
+  const manifest = [];
+  for (const it of items) {
+    const relInside = path.relative(scanRoot, it.abs);
+    const dest = path.join(trashBase, relInside);
+    try {
+      fs.mkdirSync(path.dirname(dest), { recursive: true });
+      fs.renameSync(it.abs, dest);
+      manifest.push({ from: it.abs, to: dest, kind: it.kind, reason: it.reason });
+    } catch (err) {
+      log(`No se pudo mover ${it.abs}: ${err.message}`);
+    }
+  }
+  fs.mkdirSync(trashBase, { recursive: true });
+  fs.writeFileSync(path.join(trashBase, '_manifest.json'), JSON.stringify(manifest, null, 2));
+  return { trashBase, count: manifest.length };
+}
+
+function fmtBytes(n) {
+  if (n > 1e9) return (n / 1e9).toFixed(1) + ' GB';
+  if (n > 1e6) return (n / 1e6).toFixed(1) + ' MB';
+  if (n > 1e3) return (n / 1e3).toFixed(1) + ' KB';
+  return n + ' B';
+}
+
+/**
+ * Modo verdugo. options:
+ *   apply  → mueve a cuarentena (si false, solo reporta).
+ *   diskE  → escanea todo E:\ (por defecto). Si false, solo el proyecto.
+ */
+function runClean(options = {}) {
+  const { apply = false, diskE = true } = options;
+  const scanRoot = diskE ? DISK_E_ROOT : ROOT;
+  log(`=== KAIROS modo verdugo — escaneando ${scanRoot} (apply=${apply}) ===`);
+  console.log(`\n🧹 KAIROS limpieza · objetivo: ${scanRoot} · modo: ${apply ? 'CUARENTENA' : 'solo reporte'}\n`);
+
+  const { safe, review } = scanJunk(scanRoot);
+  const totalBytes = safe.reduce((a, b) => a + (b.bytes || 0), 0);
+
+  if (safe.length === 0) {
+    console.log('  ✨ Nada de basura encontrada. Disco limpio.');
+  } else {
+    console.log(`  Encontré ${safe.length} elementos basura (${fmtBytes(totalBytes)} recuperables):\n`);
+    for (const it of safe.slice(0, 40)) {
+      console.log(`   ${it.kind === 'dir' ? '📁' : '📄'} ${path.relative(scanRoot, it.abs)}  — ${it.reason}`);
+    }
+    if (safe.length > 40) console.log(`   …y ${safe.length - 40} más (ver agents/logs/kairos-junk.json)`);
+  }
+
+  try {
+    fs.mkdirSync(path.dirname(JUNK_FILE), { recursive: true });
+    fs.writeFileSync(JUNK_FILE, JSON.stringify({ generatedAt: new Date().toISOString(), scanRoot, safe, review }, null, 2));
+  } catch { /* best-effort */ }
+
+  if (apply && safe.length) {
+    const res = quarantine(safe, scanRoot);
+    log(`Cuarentena: ${res.count} elementos movidos a ${res.trashBase}`);
+    console.log(`\n  ✅ ${res.count} elementos movidos a cuarentena (reversibles):`);
+    console.log(`     ${res.trashBase}`);
+    console.log(`     Restaurar: revisa _manifest.json ahí. Borrar definitivo: elimina esa carpeta a mano.\n`);
+  } else if (safe.length) {
+    console.log(`\n  💡 Esto fue solo reporte. Para mover a cuarentena: node agents/kairos.js --clean --apply\n`);
+  }
+
+  log('=== KAIROS modo verdugo finalizado ===');
+  return { safe, review };
+}
+
 // ─── Orquestación del agente ────────────────────────────────────────────────────
 
 function audit() {
@@ -961,6 +1139,9 @@ if (require.main === module) {
     runWatch();
   } else if (args.includes('--study')) {
     runStudy({ reportOnly: args.includes('--report') });
+  } else if (args.includes('--clean')) {
+    // Modo verdugo: por defecto escanea todo E:\. --solo-proyecto lo acota.
+    runClean({ apply: args.includes('--apply'), diskE: !args.includes('--solo-proyecto') });
   } else {
     run({
       reportOnly: args.includes('--report'),
@@ -969,5 +1150,5 @@ if (require.main === module) {
     });
   }
 } else {
-  module.exports = { run, audit, runStudy };
+  module.exports = { run, audit, runStudy, runClean };
 }

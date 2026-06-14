@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext, useRef, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { HoloText, GlassCard, KronosImage } from './kronos';
 import { AuthContext } from '../context/AuthContext';
@@ -47,7 +46,6 @@ function HybridFeed() {
   const [bookmarks, setBookmarks] = useState(new Set());
   const sentinelRef = useRef(null);
   const fileInputRef = useRef(null);
-  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
   const fetchFeed = useCallback(async (cursorId = null) => {

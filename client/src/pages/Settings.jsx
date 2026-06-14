@@ -4,18 +4,18 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import TwoFactorSetup from '../components/security/TwoFactorSetup';
 import ActiveSessions from '../components/security/ActiveSessions';
-import { GlassCard } from '../components/kronos';
+import { GlassCard, Icon } from '../components/kronos';
 import { AuthContext } from '../context/AuthContext';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 const TABS = [
-  { id: '2fa',           label: '2FA',          icon: '🔐' },
-  { id: 'sessions',      label: 'Sesiones',      icon: '📱' },
-  { id: 'privacy',       label: 'Privacidad',    icon: '🛡️' },
-  { id: 'notifications', label: 'Alertas',       icon: '🔔' },
-  { id: 'appearance',    label: 'Apariencia',    icon: '🎨' },
-  { id: 'account',       label: 'Cuenta',        icon: '⚙️' },
+  { id: '2fa',           label: '2FA',          icon: 'lock' },
+  { id: 'sessions',      label: 'Sesiones',      icon: 'laptop' },
+  { id: 'privacy',       label: 'Privacidad',    icon: 'shield' },
+  { id: 'notifications', label: 'Alertas',       icon: 'bell' },
+  { id: 'appearance',    label: 'Apariencia',    icon: 'sparkle' },
+  { id: 'account',       label: 'Cuenta',        icon: 'settings' },
 ];
 
 // ── Privacy Tab ───────────────────────────────────────────────────────────────
@@ -62,7 +62,7 @@ function PrivacyTab() {
       </GlassCard>
       <button onClick={save}
         style={{ width: '100%', padding: '13px', borderRadius: 14, background: saved ? 'rgba(16,185,129,0.3)' : 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', color: '#fff', border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>
-        {saved ? '✅ Guardado' : 'Guardar cambios'}
+        {saved ? 'Guardado' : 'Guardar cambios'}
       </button>
     </div>
   );
@@ -80,13 +80,13 @@ function NotificationsTab() {
   const toggle = (key) => setPrefs(s => ({ ...s, [key]: !s[key] }));
 
   const items = [
-    { key: 'likes',        label: 'Likes en tus posts',         icon: '❤️' },
-    { key: 'comments',     label: 'Comentarios',                 icon: '💬' },
-    { key: 'follows',      label: 'Nuevos seguidores',           icon: '👤' },
-    { key: 'messages',     label: 'Mensajes directos',           icon: '📩' },
-    { key: 'transfers',    label: 'Transferencias recibidas',    icon: '💸' },
-    { key: 'communities',  label: 'Actividad en comunidades',    icon: '🏛️' },
-    { key: 'pushEnabled',  label: 'Notificaciones push',         icon: '📲' },
+    { key: 'likes',        label: 'Likes en tus posts',         icon: 'heart' },
+    { key: 'comments',     label: 'Comentarios',                 icon: 'message' },
+    { key: 'follows',      label: 'Nuevos seguidores',           icon: 'user' },
+    { key: 'messages',     label: 'Mensajes directos',           icon: 'message' },
+    { key: 'transfers',    label: 'Transferencias recibidas',    icon: 'money' },
+    { key: 'communities',  label: 'Actividad en comunidades',    icon: 'users' },
+    { key: 'pushEnabled',  label: 'Notificaciones push',         icon: 'bell' },
   ];
 
   return (
@@ -95,7 +95,7 @@ function NotificationsTab() {
         {items.map((item, i) => (
           <div key={item.key} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 0', borderBottom: i < items.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-              <span style={{ fontSize: 20 }}>{item.icon}</span>
+              <Icon name={item.icon} size={20} />
               <div style={{ color: '#c9ced4', fontSize: 14, fontWeight: 600 }}>{item.label}</div>
             </div>
             <button onClick={() => toggle(item.key)}
@@ -107,7 +107,7 @@ function NotificationsTab() {
       </GlassCard>
       <button onClick={() => setSaved(true)}
         style={{ width: '100%', padding: '13px', borderRadius: 14, background: saved ? 'rgba(16,185,129,0.3)' : 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', color: '#fff', border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>
-        {saved ? '✅ Guardado' : 'Guardar preferencias'}
+        {saved ? 'Guardado' : 'Guardar preferencias'}
       </button>
     </div>
   );
@@ -168,7 +168,7 @@ function AppearanceTab() {
 
       <button onClick={() => setSaved(true)}
         style={{ width: '100%', padding: '13px', borderRadius: 14, background: saved ? 'rgba(16,185,129,0.3)' : 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', color: '#fff', border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>
-        {saved ? '✅ Guardado' : 'Aplicar cambios'}
+        {saved ? 'Guardado' : 'Aplicar cambios'}
       </button>
     </div>
   );
@@ -211,7 +211,7 @@ function AccountTab() {
         {[
           { label: 'Usuario', value: `@${user?.username}` },
           { label: 'Email', value: user?.email },
-          { label: 'Plan', value: user?.tier === 'pro' ? '⭐ Pro' : user?.tier === 'business' ? '🏢 Business' : '🆓 Free' },
+          { label: 'Plan', value: user?.tier === 'pro' ? 'Pro' : user?.tier === 'business' ? 'Business' : 'Free' },
           { label: 'Miembro desde', value: user?.createdAt ? new Date(user.createdAt).toLocaleDateString('es-MX', { year: 'numeric', month: 'long' }) : '—' },
         ].map(item => (
           <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', padding: '11px 0', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
@@ -223,12 +223,12 @@ function AccountTab() {
 
       <button onClick={handleExportData}
         style={{ width: '100%', padding: '13px', borderRadius: 14, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.15)', color: '#c9ced4', fontSize: 14, fontWeight: 600, cursor: 'pointer', marginBottom: 10 }}>
-        📦 Exportar mis datos
+        Exportar mis datos
       </button>
 
       <button onClick={logout}
         style={{ width: '100%', padding: '13px', borderRadius: 14, background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', color: '#ef4444', fontSize: 14, fontWeight: 600, cursor: 'pointer', marginBottom: 20 }}>
-        🚪 Cerrar sesión
+        Cerrar sesión
       </button>
 
       {/* Delete account */}
@@ -239,7 +239,7 @@ function AccountTab() {
         </button>
       ) : (
         <GlassCard style={{ border: '1px solid rgba(239,68,68,0.4)', background: 'rgba(239,68,68,0.06)' }}>
-          <div style={{ color: '#ef4444', fontWeight: 700, fontSize: 14, marginBottom: 8 }}>⚠️ Esto no se puede deshacer</div>
+          <div style={{ color: '#ef4444', fontWeight: 700, fontSize: 14, marginBottom: 8 }}>Esto no se puede deshacer</div>
           <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 12, marginBottom: 12 }}>
             Se eliminarán tu cuenta, posts, wallet y todos tus datos. Escribe <strong style={{ color: '#fff' }}>ELIMINAR</strong> para confirmar.
           </div>
@@ -279,7 +279,7 @@ export default function Settings() {
           {TABS.map(tab => (
             <button key={tab.id} onClick={() => setActiveTab(tab.id)}
               style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 6, padding: '8px 14px', borderRadius: 20, fontSize: 12, fontWeight: 600, border: 'none', cursor: 'pointer', whiteSpace: 'nowrap', background: activeTab === tab.id ? 'rgba(190,200,212,0.10)' : 'rgba(255,255,255,0.06)', color: activeTab === tab.id ? '#fff' : 'rgba(255,255,255,0.45)', outline: activeTab === tab.id ? '1px solid rgba(190,200,212,0.20)' : 'none' }}>
-              <span>{tab.icon}</span>
+              <Icon name={tab.icon} size={15} stroke={activeTab === tab.id ? 'url(#ksV)' : 'rgba(255,255,255,0.45)'} />
               <span>{tab.label}</span>
             </button>
           ))}

@@ -63,6 +63,15 @@ const PATHS = {
   smileOkay: <><circle cx="12" cy="12" r="9" /><path d="M8.5 14.5h7" /><path d="M8.5 9.5h.01M15.5 9.5h.01" /></>,
   smileBad: <><circle cx="12" cy="12" r="9" /><path d="M8.5 15a4.5 4.5 0 0 1 7 0" /><path d="M8.5 9.5h.01M15.5 9.5h.01" /></>,
   smileTerrible: <><circle cx="12" cy="12" r="9" /><path d="M8 16a4 4 0 0 1 8 0z" /><path d="M8 10l1.5-1M16 10l-1.5-1" /></>,
+  mic: <><rect x="9" y="3" width="6" height="11" rx="3" /><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6" /></>,
+  micOff: <><path d="M9 5a3 3 0 0 1 6 0v5M15 13a3 3 0 0 1-4.6 1.5" /><path d="M6 11a6 6 0 0 0 9.2 5M12 17v4M9 21h6" /><path d="M4 4l16 16" /></>,
+  camOff: <><path d="M16 10l5-3v10l-3-1.8" /><path d="M3 6h11v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" opacity="0" /><path d="M3 8v9a1 1 0 0 0 1 1h10M14 8H7" /><path d="M4 4l16 16" /></>,
+  phone: <path d="M6 3c1 0 1.6.4 2 1.5l1 2.6c.3.8.1 1.4-.5 1.9l-1 .8a11 11 0 0 0 4.2 4.2l.8-1c.5-.6 1.1-.8 1.9-.5l2.6 1c1.1.4 1.5 1 1.5 2v2c0 1.3-.9 2.2-2.3 2C9.7 21.2 2.8 14.3 4 6.3 4.2 5 5 4 6 4z" />,
+  phoneEnd: <><path d="M3 11c5-3.5 13-3.5 18 0v3l-4-1v-2c-3-1.5-7-1.5-10 0v2l-4 1z" /><path d="M3 11l18 0" opacity="0" /></>,
+  broadcast: <><circle cx="12" cy="12" r="2.2" /><path d="M7.5 7.5a6 6 0 0 0 0 9M16.5 16.5a6 6 0 0 0 0-9M4.5 4.5a10 10 0 0 0 0 15M19.5 19.5a10 10 0 0 0 0-15" /></>,
+  tv: <><rect x="3" y="6" width="18" height="13" rx="2" /><path d="M8 3l4 3 4-3" /></>,
+  play: <path d="M7 4l13 8-13 8z" />,
+  music: <><circle cx="7" cy="17" r="2.5" /><circle cx="17" cy="15" r="2.5" /><path d="M9.5 17V6l10-2v11" /></>,
 };
 
 export default function Icon({ name, size = 20, stroke = 'url(#ksV)', strokeWidth = 1.7, style, ...rest }) {

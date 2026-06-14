@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { GlassCard, HoloText } from '../components/kronos';
+import { GlassCard, HoloText, Icon } from '../components/kronos';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 const BUSINESS_TYPES = [
-  { value: 'restaurant', label: '🍽️ Restaurante' },
-  { value: 'salon', label: '💇 Salón de belleza' },
-  { value: 'medical', label: '🏥 Médico / Clínica' },
-  { value: 'hotel', label: '🏨 Hotel' },
-  { value: 'other', label: '📌 Otro' },
+  { value: 'restaurant', label: 'Restaurante' },
+  { value: 'salon', label: 'Salón de belleza' },
+  { value: 'medical', label: 'Médico / Clínica' },
+  { value: 'hotel', label: 'Hotel' },
+  { value: 'other', label: 'Otro' },
 ];
 
 const STATUS_CONFIG = {
@@ -216,8 +216,9 @@ function NewReservationModal({ onClose, onCreated }) {
                 fontWeight: 700,
                 cursor: loading ? 'default' : 'pointer',
                 marginTop: 4,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
               }}>
-              {loading ? 'Creando...' : '📅 Crear Reservación'}
+              {loading ? 'Creando...' : <><Icon name="calendar" size={17} stroke="#0a0a0f" /> Crear Reservación</>}
             </button>
           </div>
         </form>
@@ -240,9 +241,6 @@ function ReservationCard({ reservation, onCancel }) {
     }
   };
 
-  const typeEmojis = { restaurant: '🍽️', salon: '💇', medical: '🏥', hotel: '🏨', other: '📌' };
-  const emoji = typeEmojis[reservation.businessType] || '📌';
-
   return (
     <GlassCard style={{ marginBottom: 12, padding: '16px 18px' }}>
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
@@ -251,9 +249,9 @@ function ReservationCard({ reservation, onCancel }) {
           width: 46, height: 46, borderRadius: 14,
           background: 'linear-gradient(135deg,rgba(124,58,237,0.25),rgba(6,182,212,0.15))',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 22, flexShrink: 0,
+          flexShrink: 0,
         }}>
-          {emoji}
+          <Icon name="calendar" size={22} />
         </div>
 
         {/* Info */}
@@ -269,13 +267,13 @@ function ReservationCard({ reservation, onCancel }) {
 
           <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'rgba(201,206,212,0.65)', fontSize: 13 }}>
-              <span>📅</span> {formatDate(reservation.date)}
+              <Icon name="calendar" size={14} /> {formatDate(reservation.date)}
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'rgba(201,206,212,0.65)', fontSize: 13 }}>
-              <span>🕐</span> {reservation.time}
+              <Icon name="clock" size={14} /> {reservation.time}
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'rgba(201,206,212,0.65)', fontSize: 13 }}>
-              <span>👥</span> {reservation.partySize} {reservation.partySize === 1 ? 'persona' : 'personas'}
+              <Icon name="users" size={14} /> {reservation.partySize} {reservation.partySize === 1 ? 'persona' : 'personas'}
             </div>
           </div>
 
@@ -453,7 +451,7 @@ export default function Reservations() {
           </div>
         ) : filtered.length === 0 ? (
           <GlassCard style={{ textAlign: 'center', padding: '50px 24px' }}>
-            <div style={{ fontSize: 52, marginBottom: 12 }}>📅</div>
+            <div style={{ marginBottom: 12 }}><Icon name="calendar" size={52} /></div>
             <div style={{ color: '#c9ced4', fontSize: 17, fontWeight: 700, marginBottom: 6 }}>
               {filter === 'all' ? 'Sin reservaciones' : `Sin reservaciones ${FILTERS.find(f => f.id === filter)?.label.toLowerCase()}`}
             </div>
@@ -472,8 +470,9 @@ export default function Reservations() {
                   fontSize: 14,
                   fontWeight: 700,
                   cursor: 'pointer',
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
                 }}>
-                📅 Nueva Reservación
+                <Icon name="calendar" size={16} /> Nueva Reservación
               </button>
             )}
           </GlassCard>

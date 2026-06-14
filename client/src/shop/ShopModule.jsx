@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
-import { BottomNav } from '../components/kronos';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 

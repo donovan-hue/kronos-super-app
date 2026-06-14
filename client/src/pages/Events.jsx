@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { AuthContext } from '../context/AuthContext';
-import { GlassCard, BotonBurbuja3D, QRCode, Icon } from '../components/kronos';
+import { GlassCard, BotonBurbuja3D, Icon } from '../components/kronos';
 
 const API = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
@@ -266,7 +265,6 @@ function TicketModal({ event, onClose }) {
 
 /* ───────────────────────────────────────────────────── página principal */
 export default function Events() {
-  const { user } = useContext(AuthContext);
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState('todos');

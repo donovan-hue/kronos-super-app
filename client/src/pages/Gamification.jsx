@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
-import { GlassCard, BotonBurbuja3D, Icon } from '../components/kronos';
+import { GlassCard, Icon } from '../components/kronos';
 
 const API = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
