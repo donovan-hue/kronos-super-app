@@ -1,5 +1,6 @@
 import React from 'react';
 import BotonBurbuja3D from './BotonBurbuja3D';
+import Icon from './Icon';
 import { useToast } from '../../hooks/useToast';
 
 /**
@@ -52,7 +53,7 @@ const KeepShareButton = ({ order }) => {
       onClick={handleShare}
       style={{ gap: '8px', display: 'flex', alignItems: 'center' }}
     >
-      <span>💡</span> Guardar en Keep
+      <Icon name="save" size={16} /> Guardar en Keep
     </BotonBurbuja3D>
   );
 };

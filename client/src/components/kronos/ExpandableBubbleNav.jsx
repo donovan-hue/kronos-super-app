@@ -1,54 +1,55 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import Icon from './Icon';
 
 const BUBBLES = [
   {
     id: 'inicio',
-    emoji: '🏠',
+    icon: 'home',
     corner: { bottom: 90, left: 16 },
     fanDirection: 'up-right',
     subs: [
-      { emoji: '📝', label: 'Post',     path: '/feed' },
-      { emoji: '📸', label: 'Foto',     path: '/feed?type=photo' },
-      { emoji: '🎥', label: 'Video',    path: '/video-editor' },
-      { emoji: '📖', label: 'Historia', path: '/social/stories' },
-      { emoji: '🔴', label: 'LIVE',     path: '/live' },
+      { icon: 'note',      label: 'Post',     path: '/feed' },
+      { icon: 'image',     label: 'Foto',     path: '/feed?type=photo' },
+      { icon: 'video',     label: 'Video',    path: '/video-editor' },
+      { icon: 'book',      label: 'Historia', path: '/social/stories' },
+      { icon: 'broadcast', label: 'LIVE',     path: '/live' },
     ],
   },
   {
     id: 'buscar',
-    emoji: '🔍',
+    icon: 'search',
     corner: { bottom: 90, right: 16 },
     fanDirection: 'up-left',
     subs: [
-      { emoji: '👤', label: 'Personas',    path: '/search?type=people' },
-      { emoji: '🏪', label: 'Tiendas',     path: '/search?type=shops' },
-      { emoji: '🏘️', label: 'Comunidades', path: '/communities' },
+      { icon: 'user',  label: 'Personas',    path: '/search?type=people' },
+      { icon: 'bag',   label: 'Tiendas',     path: '/search?type=shops' },
+      { icon: 'users', label: 'Comunidades', path: '/communities' },
     ],
   },
   {
     id: 'chat',
-    emoji: '💬',
+    icon: 'message',
     corner: { bottom: 16, left: 16 },
     fanDirection: 'up-right',
     subs: [
-      { emoji: '💬', label: 'Chat',           path: '/social/chat' },
-      { emoji: '👥', label: 'Grupos',         path: '/social/groups' },
-      { emoji: '🔔', label: 'Notificaciones', path: '/notifications' },
+      { icon: 'message', label: 'Chat',           path: '/social/chat' },
+      { icon: 'users',   label: 'Grupos',         path: '/social/groups' },
+      { icon: 'bell',    label: 'Notificaciones', path: '/notifications' },
     ],
   },
   {
     id: 'perfil',
-    emoji: '👤',
+    icon: 'user',
     corner: { bottom: 16, right: 16 },
     fanDirection: 'up-left',
     subs: [
-      { emoji: '👁️', label: 'Mi perfil',    path: '/profile/me' },
-      { emoji: '🏆', label: 'Gamificación', path: '/gamification' },
-      { emoji: '💰', label: 'Wallet',       path: '/wallet' },
-      { emoji: '🎪', label: 'Eventos',      path: '/events' },
-      { emoji: '⚙️', label: 'Ajustes',      path: '/settings' },
+      { icon: 'eye',      label: 'Mi perfil',    path: '/profile/me' },
+      { icon: 'trophy',   label: 'Gamificación', path: '/gamification' },
+      { icon: 'wallet',   label: 'Wallet',       path: '/wallet' },
+      { icon: 'ticket',   label: 'Eventos',      path: '/events' },
+      { icon: 'settings', label: 'Ajustes',      path: '/settings' },
     ],
   },
 ];
@@ -67,7 +68,7 @@ function getFanPositions(direction, count) {
 }
 
 // Esfera de vidrio 3D realista usando múltiples capas CSS
-function GlassSphere({ size, emoji, isOpen, onClick, style = {} }) {
+function GlassSphere({ size, icon, isOpen, onClick, style = {} }) {
   return (
     <div
       onClick={onClick}
@@ -136,14 +137,13 @@ function GlassSphere({ size, emoji, isOpen, onClick, style = {} }) {
         boxSizing: 'border-box',
       }} />
 
-      {/* Emoji centrado */}
+      {/* Icono centrado */}
       <div style={{
         position: 'absolute', inset: 0,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        fontSize: size * 0.38,
         filter: 'drop-shadow(0 1px 3px rgba(0,0,0,0.5))',
       }}>
-        {emoji}
+        <Icon name={icon} size={Math.round(size * 0.44)} stroke="#fff" />
       </div>
     </div>
   );
@@ -223,7 +223,7 @@ export default function ExpandableBubbleNav() {
                     cursor: 'pointer',
                   }}
                 >
-                  <GlassSphere size={SUB_SIZE} emoji={sub.emoji} isOpen={false} onClick={() => {}} />
+                  <GlassSphere size={SUB_SIZE} icon={sub.icon} isOpen={false} onClick={() => {}} />
                 </div>
               );
             })}
@@ -232,7 +232,7 @@ export default function ExpandableBubbleNav() {
             <div style={{ animation: isOpen ? 'none' : 'bubbleFloat 4s ease-in-out infinite' }}>
               <GlassSphere
                 size={MAIN_SIZE}
-                emoji={bubble.emoji}
+                icon={bubble.icon}
                 isOpen={isOpen}
                 onClick={() => toggle(bubble.id)}
               />

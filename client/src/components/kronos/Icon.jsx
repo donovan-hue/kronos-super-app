@@ -81,6 +81,8 @@ const PATHS = {
   edit: <><path d="M4 20h4L19 9l-4-4L4 16z" /><path d="M14 6l4 4" /></>,
   bookmark: <path d="M6 4h12v16l-6-4-6 4z" />,
   note: <><rect x="5" y="3" width="14" height="18" rx="2" /><path d="M9 8h6M9 12h6M9 16h3" /></>,
+  home: <><path d="M3 11l9-7 9 7" /><path d="M5 10v9h5v-6h4v6h5v-9" /></>,
+  book: <><path d="M12 6C10 4.5 6.5 4.5 4 5v13c2.5-.5 6-.5 8 1 2-1.5 5.5-1.5 8-1V5c-2.5-.5-6-.5-8 1z" /><path d="M12 6v14" /></>,
 };
 
 export default function Icon({ name, size = 20, stroke = 'url(#ksV)', strokeWidth = 1.7, style, ...rest }) {

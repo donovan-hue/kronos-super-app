@@ -3,6 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import io from 'socket.io-client';
 import { AuthContext } from '../../context/AuthContext';
+import Icon, { ICON_NAMES } from './Icon';
 
 const API = (process.env.REACT_APP_API_URL || 'http://localhost:5000/api').replace(/\/api$/, '');
 
@@ -47,11 +48,11 @@ export default function BottomNav({ items }) {
   const userId = user?._id || user?.id;
 
   const DEFAULT_ITEMS = [
-    { icon: '🏠', label: 'Inicio',       to: '/feed' },
-    { icon: '💳', label: 'Wallet',        to: '/wallet' },
-    { icon: '💬', label: 'Chat',          to: '/social/chat' },
-    { icon: '🔔', label: 'Alertas',       to: '/notifications', badge: unread },
-    { icon: '👤', label: 'Perfil',        to: userId ? `/profile/${userId}` : '/profile/me' },
+    { icon: 'home',    label: 'Inicio',  to: '/feed' },
+    { icon: 'wallet',  label: 'Wallet',  to: '/wallet' },
+    { icon: 'message', label: 'Chat',    to: '/social/chat' },
+    { icon: 'bell',    label: 'Alertas', to: '/notifications', badge: unread },
+    { icon: 'user',    label: 'Perfil',  to: userId ? `/profile/${userId}` : '/profile/me' },
   ];
 
   const navItems = items || DEFAULT_ITEMS;
@@ -93,8 +94,10 @@ export default function BottomNav({ items }) {
               position: 'relative',
             }}
           >
-            <div style={{ position: 'relative', display: 'inline-block' }}>
-              <span style={{ fontSize: 20 }}>{it.icon}</span>
+            <div style={{ position: 'relative', display: 'inline-flex' }}>
+              {typeof it.icon === 'string' && ICON_NAMES.includes(it.icon)
+                ? <Icon name={it.icon} size={22} stroke={active ? '#4facfe' : 'rgba(160,170,182,0.7)'} />
+                : <span style={{ fontSize: 20 }}>{it.icon}</span>}
               {it.badge > 0 && (
                 <div style={{
                   position: 'absolute',
