@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { FaImage, FaVideo, FaMusic, FaTimesCircle, FaGlobe, FaUsers, FaLock } from 'react-icons/fa';
+import { FaImage, FaVideo, FaMusic, FaTimesCircle } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
-import { GlassCard, HoloText } from '../components/kronos';
+import { GlassCard, Icon } from '../components/kronos';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
@@ -171,10 +171,10 @@ function Feed({ posts, setPosts, refreshFeed }) {
                   </p>
                 </div>
               </div>
-              <span style={{ fontSize: 16 }}>
-                {post.visibility === 'public' && '🌍'}
-                {post.visibility === 'followers' && '👥'}
-                {post.visibility === 'private' && '🔒'}
+              <span style={{ display: 'flex' }}>
+                {post.visibility === 'public' && <Icon name="globe" size={16} />}
+                {post.visibility === 'followers' && <Icon name="users" size={16} />}
+                {post.visibility === 'private' && <Icon name="lock" size={16} />}
               </span>
             </div>
 
@@ -195,10 +195,10 @@ function Feed({ posts, setPosts, refreshFeed }) {
               borderTop: '1px solid rgba(79,172,254,0.15)', paddingTop: 12, marginTop: 4
             }}>
               {[
-                { emoji: '👍', count: post.likes?.length || 0, action: () => handleLike(post._id), label: 'Me gusta' },
-                { emoji: '💬', count: post.comments?.length || 0, action: null, label: 'Comentar' },
-                { emoji: '↗️', count: post.shares || 0, action: null, label: 'Compartir' },
-              ].map(({ emoji, count, action, label }) => (
+                { icon: 'thumbsUp', count: post.likes?.length || 0, action: () => handleLike(post._id), label: 'Me gusta' },
+                { icon: 'message', count: post.comments?.length || 0, action: null, label: 'Comentar' },
+                { icon: 'share', count: post.shares || 0, action: null, label: 'Compartir' },
+              ].map(({ icon, count, action, label }) => (
                 <button
                   key={label}
                   onClick={action || undefined}
@@ -212,7 +212,7 @@ function Feed({ posts, setPosts, refreshFeed }) {
                   onMouseEnter={(e) => action && (e.currentTarget.style.background = 'rgba(79,172,254,0.1)')}
                   onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
                 >
-                  <span style={{ fontSize: 16 }}>{emoji}</span>
+                  <span style={{ display: 'flex' }}><Icon name={icon} size={16} stroke="rgba(10,10,20,0.6)" /></span>
                   <span>{count}</span>
                 </button>
               ))}

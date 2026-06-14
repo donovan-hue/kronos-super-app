@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { GlassCard, HoloText } from '../components/kronos';
+import { GlassCard, HoloText, Icon } from '../components/kronos';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
@@ -51,7 +51,7 @@ function CreateGroupModal({ onClose, onCreated }) {
           <div key={u._id} onClick={() => toggle(u)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 4px', cursor: 'pointer' }}>
             <img src={u.avatar || `https://ui-avatars.com/api/?name=${u.username}&background=random&color=fff&size=32`} alt="" style={{ width: 32, height: 32, borderRadius: '50%' }} />
             <div style={{ flex: 1, color: '#0a0a14', fontSize: 13 }}>{u.firstName} {u.lastName} <span style={{ color: 'rgba(10,10,20,0.5)' }}>@{u.username}</span></div>
-            <span style={{ fontSize: 16 }}>{selected.find(p => p._id === u._id) ? '✅' : '⬜'}</span>
+            <Icon name={selected.find(p => p._id === u._id) ? 'checkSquare' : 'square'} size={18} />
           </div>
         ))}
         {selected.length > 0 && (
@@ -109,8 +109,8 @@ export default function ConversationList() {
           <HoloText size={26}>Mensajes</HoloText>
           <div style={{ display: 'flex', gap: 8 }}>
             <button onClick={() => navigate('/live')}
-              style={{ padding: '7px 14px', borderRadius: 20, background: 'linear-gradient(135deg,#ef4444,#f59e0b)', color: '#fff', border: 'none', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>
-              🔴 LIVE
+              style={{ padding: '7px 14px', borderRadius: 20, background: 'linear-gradient(135deg,#ef4444,#f59e0b)', color: '#fff', border: 'none', fontSize: 12, fontWeight: 700, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+              <Icon name="broadcast" size={13} stroke="#fff" /> LIVE
             </button>
             {tab === 'grupos' && (
               <button onClick={() => setCreatingGroup(true)}
@@ -123,10 +123,10 @@ export default function ConversationList() {
 
         {/* Tabs */}
         <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-          {[{ id: 'directos', label: '💬 Directos' }, { id: 'grupos', label: '👥 Grupos' }].map(t => (
+          {[{ id: 'directos', icon: 'message', label: 'Directos' }, { id: 'grupos', icon: 'users', label: 'Grupos' }].map(t => (
             <button key={t.id} onClick={() => setTab(t.id)}
-              style={{ flex: 1, padding: '9px', borderRadius: 12, fontSize: 13, fontWeight: 600, border: 'none', cursor: 'pointer', background: tab === t.id ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(255,255,255,0.06)', color: '#fff' }}>
-              {t.label}
+              style={{ flex: 1, padding: '9px', borderRadius: 12, fontSize: 13, fontWeight: 600, border: 'none', cursor: 'pointer', background: tab === t.id ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(255,255,255,0.06)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+              <Icon name={t.icon} size={15} stroke="#fff" /> {t.label}
             </button>
           ))}
         </div>
@@ -134,7 +134,7 @@ export default function ConversationList() {
         {/* Buscador (solo directos) */}
         {tab === 'directos' && (
           <div style={{ position: 'relative', marginBottom: 16 }}>
-            <span style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', fontSize: 16 }}>🔍</span>
+            <span style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', display: 'flex' }}><Icon name="search" size={16} stroke="rgba(10,10,20,0.5)" /></span>
             <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Buscar personas..."
               style={{ width: '100%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 24, padding: '10px 14px 10px 40px', color: '#0a0a14', fontSize: 14, outline: 'none', boxSizing: 'border-box', fontFamily: 'inherit' }} />
           </div>
@@ -154,7 +154,7 @@ export default function ConversationList() {
                     <div style={{ color: '#0a0a14', fontWeight: 600, fontSize: 14 }}>{u.firstName} {u.lastName}</div>
                     <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12 }}>@{u.username}</div>
                   </div>
-                  <span style={{ marginLeft: 'auto', fontSize: 18 }}>💬</span>
+                  <span style={{ marginLeft: 'auto', display: 'flex' }}><Icon name="message" size={18} /></span>
                 </div>
               </GlassCard>
             ))}
@@ -170,7 +170,7 @@ export default function ConversationList() {
             <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 }}>Conversaciones</div>
             {chats.length === 0 ? (
               <div style={{ textAlign: 'center', padding: 60, color: 'rgba(10,10,20,0.35)' }}>
-                <div style={{ fontSize: 48, marginBottom: 12 }}>💬</div>
+                <div style={{ marginBottom: 12, display: 'flex', justifyContent: 'center' }}><Icon name="message" size={48} /></div>
                 <div style={{ fontSize: 16, fontWeight: 600, color: 'rgba(10,10,20,0.5)' }}>Sin conversaciones aún</div>
                 <div style={{ fontSize: 13, marginTop: 6 }}>Busca personas arriba</div>
               </div>
@@ -197,14 +197,14 @@ export default function ConversationList() {
             <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 }}>Tus grupos</div>
             {groups.length === 0 ? (
               <div style={{ textAlign: 'center', padding: 60, color: 'rgba(10,10,20,0.35)' }}>
-                <div style={{ fontSize: 48, marginBottom: 12 }}>👥</div>
+                <div style={{ marginBottom: 12, display: 'flex', justifyContent: 'center' }}><Icon name="users" size={48} /></div>
                 <div style={{ fontSize: 16, fontWeight: 600, color: 'rgba(10,10,20,0.5)' }}>Sin grupos aún</div>
                 <div style={{ fontSize: 13, marginTop: 6 }}>Crea uno con el botón + Grupo</div>
               </div>
             ) : groups.map(g => (
               <GlassCard key={g._id} onClick={() => navigate(`/social/group/${g._id}`)} style={{ cursor: 'pointer', marginBottom: 8 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, flexShrink: 0 }}>👥</div>
+                  <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><Icon name="users" size={20} stroke="#fff" /></div>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ color: '#0a0a14', fontWeight: 600, fontSize: 14 }}>{g.name}</div>
                     <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>

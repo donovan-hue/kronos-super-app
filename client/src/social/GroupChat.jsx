@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import io from 'socket.io-client';
 import { AuthContext } from '../context/AuthContext';
+import { Icon } from '../components/kronos';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 const SOCKET_URL = (process.env.REACT_APP_API_URL || 'http://localhost:5000/api').replace('/api', '');
@@ -79,8 +80,8 @@ export default function GroupChat() {
     <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
       <div style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12, background: '#ffffff', borderBottom: '1px solid rgba(79,172,254,0.12)', backdropFilter: 'blur(12px)', position: 'sticky', top: 0, zIndex: 50 }}>
-        <button onClick={() => navigate('/social/chat')} style={{ background: 'none', border: 'none', color: 'rgba(10,10,20,0.65)', fontSize: 22, cursor: 'pointer', padding: 4 }}>←</button>
-        <div style={{ width: 38, height: 38, borderRadius: '50%', background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>👥</div>
+        <button onClick={() => navigate('/social/chat')} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, display: 'flex', alignItems: 'center' }}><Icon name="back" size={22} stroke="rgba(10,10,20,0.65)" /></button>
+        <div style={{ width: 38, height: 38, borderRadius: '50%', background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="users" size={18} stroke="#fff" /></div>
         <div style={{ flex: 1 }}>
           <div style={{ color: '#0a0a14', fontWeight: 600, fontSize: 14 }}>{group?.name || 'Grupo'}</div>
           <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 11 }}>
@@ -102,7 +103,7 @@ export default function GroupChat() {
         <div style={{ flex: 1, overflowY: 'auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: 8, paddingBottom: 80 }}>
           {messages.length === 0 && (
             <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.35)', padding: 40 }}>
-              <div style={{ fontSize: 40, marginBottom: 8 }}>👥</div>
+              <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}><Icon name="users" size={40} /></div>
               <div>Empieza la conversación grupal</div>
             </div>
           )}
@@ -167,8 +168,8 @@ export default function GroupChat() {
           style={{ flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 24, padding: '10px 16px', color: '#0a0a14', fontSize: 14, outline: 'none', fontFamily: 'inherit' }}
         />
         <button onClick={handleSend} disabled={!input.trim()}
-          style={{ width: 42, height: 42, borderRadius: '50%', background: input.trim() ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(255,255,255,0.08)', border: 'none', color: '#0a0a14', fontSize: 18, cursor: input.trim() ? 'pointer' : 'default', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          ➤
+          style={{ width: 42, height: 42, borderRadius: '50%', background: input.trim() ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(255,255,255,0.08)', border: 'none', cursor: input.trim() ? 'pointer' : 'default', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Icon name="send" size={18} stroke={input.trim() ? '#fff' : 'rgba(10,10,20,0.4)'} />
         </button>
       </div>
     </div>
