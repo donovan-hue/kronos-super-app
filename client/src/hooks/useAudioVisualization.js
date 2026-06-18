@@ -54,8 +54,8 @@ export const useAudioVisualization = () => {
 
       // Limpiar canvas con gradiente
       const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-      gradient.addColorStop(0, 'rgba(100, 200, 255, 0.1)');
-      gradient.addColorStop(1, 'rgba(200, 100, 255, 0.1)');
+      gradient.addColorStop(0, 'rgba(201,206,212, 0.1)');
+      gradient.addColorStop(1, 'rgba(201,206,212, 0.1)');
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 

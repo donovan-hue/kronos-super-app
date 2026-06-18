@@ -2,9 +2,9 @@
   max-width: 600px;
   margin: 20px auto;
   padding: 30px;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+  background: linear-gradient(135deg, rgba(154,160,167, 0.1), rgba(86,91,98, 0.1));
   border-radius: 15px;
-  border: 1px solid rgba(102, 126, 234, 0.3);
+  border: 1px solid rgba(154,160,167, 0.3);
 }
 
 .security-container h2 {
@@ -20,7 +20,7 @@
 
 .setup-btn {
   padding: 15px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #9aa0a7, #565b62);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -41,7 +41,7 @@
   width: 250px;
   height: 250px;
   margin: 20px 0;
-  border: 2px solid rgba(102, 126, 234, 0.5);
+  border: 2px solid rgba(154,160,167, 0.5);
   border-radius: 8px;
   padding: 10px;
   background: #fff;
@@ -72,7 +72,7 @@
 
 .confirm-btn {
   padding: 12px 30px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #9aa0a7, #565b62);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -126,7 +126,7 @@
   background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
   margin-bottom: 10px;
-  border-left: 3px solid #667eea;
+  border-left: 3px solid #9aa0a7;
 }
 
 .session-info {

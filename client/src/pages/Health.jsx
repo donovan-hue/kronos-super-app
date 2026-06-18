@@ -22,11 +22,11 @@ function formatDateHeader() {
 function ProgressBar({ value, max, color = '#9aa0a7' }) {
   const pct = Math.min(100, Math.round((value / max) * 100));
   return (
-    <div style={{ width: '100%', height: 6, background: 'rgba(79,172,254,0.07)', borderRadius: 6, overflow: 'hidden', marginTop: 8 }}>
+    <div style={{ width: '100%', height: 6, background: 'rgba(201,206,212,0.07)', borderRadius: 6, overflow: 'hidden', marginTop: 8 }}>
       <div style={{
         height: '100%',
         width: `${pct}%`,
-        background: pct >= 100 ? 'linear-gradient(90deg,#10b981,#06b6d4)' : `linear-gradient(90deg,${color},#06b6d4)`,
+        background: pct >= 100 ? 'linear-gradient(90deg,#10b981,#9aa0a7)' : `linear-gradient(90deg,${color},#9aa0a7)`,
         borderRadius: 6,
         transition: 'width 0.4s ease',
       }} />
@@ -146,7 +146,7 @@ function WeeklyChart({ history }) {
                 height,
                 borderRadius: '4px 4px 0 0',
                 background: reached
-                  ? 'linear-gradient(180deg,#10b981,#06b6d4)'
+                  ? 'linear-gradient(180deg,#10b981,#9aa0a7)'
                   : isToday
                     ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)'
                     : 'rgba(255,255,255,0.12)',
@@ -245,7 +245,7 @@ export default function Health() {
   const toastColors = {
     success: { bg: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', shadow: 'rgba(16,185,129,0.4)' },
     error:   { bg: 'rgba(190,200,212,0.08)', shadow: 'rgba(239,68,68,0.4)' },
-    info:    { bg: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', shadow: 'rgba(124,58,237,0.4)' },
+    info:    { bg: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', shadow: 'rgba(126,130,136,0.4)' },
   };
   const tc = toastColors[toast.type] || toastColors.info;
 
@@ -281,7 +281,7 @@ export default function Health() {
             {/* Token reward banner */}
             {(tokensEarned > 0 || log.steps >= 10000) && (
               <div style={{
-                background: 'linear-gradient(135deg,rgba(16,185,129,0.2),rgba(6,182,212,0.15))',
+                background: 'linear-gradient(135deg,rgba(16,185,129,0.2),rgba(126,130,136,0.15))',
                 border: '1px solid rgba(16,185,129,0.4)',
                 borderRadius: 16, padding: '14px 18px',
                 marginBottom: 20, display: 'flex', alignItems: 'center', gap: 12,
@@ -328,7 +328,7 @@ export default function Health() {
                 onChange={v => setMetric('waterGlasses', v)}
                 goal={8}
                 unit="vasos"
-                color="#06b6d4"
+                color="#9aa0a7"
                 min={0}
                 max={30}
               />
@@ -360,8 +360,8 @@ export default function Health() {
                         flex: 1,
                         padding: '10px 4px',
                         borderRadius: 14,
-                        background: active ? 'linear-gradient(135deg,rgba(124,58,237,0.4),rgba(6,182,212,0.25))' : 'rgba(255,255,255,0.05)',
-                        border: active ? '1px solid rgba(124,58,237,0.6)' : '1px solid rgba(255,255,255,0.07)',
+                        background: active ? 'linear-gradient(135deg,rgba(126,130,136,0.4),rgba(126,130,136,0.25))' : 'rgba(255,255,255,0.05)',
+                        border: active ? '1px solid rgba(126,130,136,0.6)' : '1px solid rgba(255,255,255,0.07)',
                         cursor: 'pointer',
                         transition: 'all 0.2s',
                         display: 'flex',
@@ -371,7 +371,7 @@ export default function Health() {
                         transform: active ? 'scale(1.06)' : 'scale(1)',
                       }}>
                       <span style={{ fontSize: 22 }}>{m.emoji}</span>
-                      <span style={{ color: active ? '#0a0a14' : 'rgba(201,206,212,0.50)', fontSize: 10, fontWeight: active ? 700 : 400 }}>
+                      <span style={{ color: active ? '#0a0b0d' : 'rgba(201,206,212,0.50)', fontSize: 10, fontWeight: active ? 700 : 400 }}>
                         {m.label}
                       </span>
                     </button>
@@ -424,7 +424,7 @@ export default function Health() {
                 fontSize: 16,
                 fontWeight: 700,
                 cursor: saving ? 'default' : 'pointer',
-                boxShadow: saving ? 'none' : '0 6px 24px rgba(124,58,237,0.35)',
+                boxShadow: saving ? 'none' : '0 6px 24px rgba(126,130,136,0.35)',
                 transition: 'all 0.2s',
               }}>
               {saving ? 'Guardando...' : '💾 Guardar registro'}

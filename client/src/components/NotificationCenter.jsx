@@ -80,7 +80,7 @@ export default function NotificationCenter() {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', borderBottom: '1px solid rgba(190,200,212,0.07)' }}>
               <span style={{ fontSize: 14, fontWeight: 700, color: '#c9ced4', fontFamily: "'Outfit', sans-serif" }}>Notificaciones</span>
               {unread > 0 && (
-                <button onClick={markAllRead} style={{ background: 'none', border: 'none', fontSize: 12, color: '#4facfe', cursor: 'pointer', fontWeight: 600, fontFamily: "'Outfit', sans-serif" }}>
+                <button onClick={markAllRead} style={{ background: 'none', border: 'none', fontSize: 12, color: '#c9ced4', cursor: 'pointer', fontWeight: 600, fontFamily: "'Outfit', sans-serif" }}>
                   Marcar todas
                 </button>
               )}
@@ -92,7 +92,7 @@ export default function NotificationCenter() {
                 <button
                   key={n._id}
                   onClick={() => handleClick(n)}
-                  style={{ width: '100%', textAlign: 'left', padding: '12px 16px', background: !n.read ? 'rgba(190,200,212,0.05)' : 'none', border: 'none', borderBottom: '1px solid rgba(79,172,254,0.07)', cursor: 'pointer', transition: 'background 0.15s' }}
+                  style={{ width: '100%', textAlign: 'left', padding: '12px 16px', background: !n.read ? 'rgba(190,200,212,0.05)' : 'none', border: 'none', borderBottom: '1px solid rgba(201,206,212,0.07)', cursor: 'pointer', transition: 'background 0.15s' }}
                 >
                   <p style={{ fontSize: 14, color: '#c9ced4', fontWeight: 600, margin: 0, fontFamily: "'Outfit', sans-serif" }}>{n.title}</p>
                   {n.body && <p style={{ fontSize: 12, color: 'rgba(201,206,212,0.50)', marginTop: 2, marginBottom: 0, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical' }}>{n.body}</p>}

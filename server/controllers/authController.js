@@ -17,7 +17,8 @@ exports.register = async (req, res) => {
       return res.status(503).json({ message: DB_DOWN_MESSAGE });
     }
 
-    const { username, email, phone, password, firstName, lastName } = req.body;
+    const { username, phone, password, firstName, lastName } = req.body;
+    const email = req.body.email ? req.body.email.trim().toLowerCase() : req.body.email;
 
     if (!email && !phone) {
       return res.status(400).json({ message: 'Se requiere email o número de teléfono' });
@@ -89,8 +90,13 @@ exports.login = async (req, res) => {
       return res.status(400).json({ message: 'Proporciona email o teléfono y contraseña' });
     }
 
-    // Buscar por email o teléfono
-    const query = email ? { email } : { phone };
+    // Normalizar email (minúsculas + sin espacios) y buscar sin distinguir
+    // mayúsculas, para que entren también las cuentas guardadas con otra
+    // capitalización antes de normalizar el modelo.
+    const normalizedEmail = email ? email.trim().toLowerCase() : null;
+    const query = normalizedEmail
+      ? { email: new RegExp(`^${normalizedEmail.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') }
+      : { phone };
     const user = await User.findOne(query).select('+password');
     if (!user) {
       return res.status(401).json({ message: 'Credenciales incorrectas' });

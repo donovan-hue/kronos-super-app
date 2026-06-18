@@ -114,17 +114,17 @@ function Bubble({ item, active, badge }) {
         height: 56,
         borderRadius: '50%',
         background: active
-          ? 'radial-gradient(circle at 35% 35%, rgba(255,255,255,0.25), rgba(190,200,212,0.12) 50%, rgba(243,160,255,0.1))'
+          ? 'radial-gradient(circle at 35% 35%, rgba(255,255,255,0.25), rgba(190,200,212,0.12) 50%, rgba(201,206,212,0.1))'
           : 'radial-gradient(circle at 35% 35%, rgba(255,255,255,0.1), rgba(255,255,255,0.03))',
         border: active
-          ? '1.5px solid rgba(79,172,254,0.6)'
+          ? '1.5px solid rgba(201,206,212,0.6)'
           : '1.5px solid rgba(255,255,255,0.12)',
         backdropFilter: 'blur(12px)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         boxShadow: active
-          ? '0 0 18px rgba(79,172,254,0.4), 0 0 35px rgba(243,160,255,0.2), inset 0 1px 0 rgba(255,255,255,0.3)'
+          ? '0 0 18px rgba(201,206,212,0.4), 0 0 35px rgba(201,206,212,0.2), inset 0 1px 0 rgba(255,255,255,0.3)'
           : '0 4px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.15)',
         transform: pressed ? 'scale(0.88)' : active ? 'scale(1.08)' : 'scale(1)',
         transition: 'all 0.18s cubic-bezier(0.34,1.56,0.64,1)',
@@ -147,7 +147,7 @@ function Bubble({ item, active, badge }) {
             position: 'absolute',
             top: 2,
             right: 2,
-            background: 'linear-gradient(135deg,#ff85a2,#f3a0ff)',
+            background: 'linear-gradient(135deg,#c9ced4,#e9ecf0)',
             color: '#fff',
             fontSize: 9,
             fontWeight: 800,
@@ -157,8 +157,8 @@ function Bubble({ item, active, badge }) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            border: '1.5px solid rgba(10,10,18,0.9)',
-            boxShadow: '0 0 8px rgba(243,160,255,0.6)',
+            border: '1.5px solid rgba(10,11,13,0.9)',
+            boxShadow: '0 0 8px rgba(201,206,212,0.6)',
           }}>
             {badge > 9 ? '9+' : badge}
           </div>
@@ -167,7 +167,7 @@ function Bubble({ item, active, badge }) {
       <span style={{
         fontSize: 9,
         fontWeight: active ? 700 : 400,
-        color: active ? '#4facfe' : 'rgba(201,206,212,0.40)',
+        color: active ? '#c9ced4' : 'rgba(201,206,212,0.40)',
         fontFamily: "'Outfit', sans-serif",
         letterSpacing: 0.3,
       }}>

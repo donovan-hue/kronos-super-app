@@ -66,7 +66,7 @@ const styles = {
     background: 'rgba(255,255,255,0.04)',
     backdropFilter: 'blur(16px)',
     border: '1px solid rgba(255,255,255,0.12)',
-    boxShadow: '0 0 60px rgba(124,58,237,0.5)',
+    boxShadow: '0 0 60px rgba(126,130,136,0.5)',
   },
   title: {
     margin: '0 0 28px', fontSize: '22px', fontWeight: 700,

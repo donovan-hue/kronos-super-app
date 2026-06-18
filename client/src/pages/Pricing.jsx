@@ -50,8 +50,8 @@ const TIERS = [
     name: 'Pro',
     price: '$9.99',
     cadence: 'al mes',
-    accent: 'linear-gradient(135deg, rgba(139,92,246,0.20), rgba(109,75,208,0.10))',
-    border: 'rgba(139,92,246,0.50)',
+    accent: 'linear-gradient(135deg, rgba(201,206,212,0.20), rgba(126,130,136,0.10))',
+    border: 'rgba(201,206,212,0.50)',
     highlighted: true,
     features: [
       { label: 'Posts ilimitados', ok: true },
@@ -72,8 +72,8 @@ const TIERS = [
     name: 'Business',
     price: '$29.99',
     cadence: 'al mes',
-    accent: 'linear-gradient(135deg, rgba(59,130,246,0.18), rgba(34,197,94,0.10))',
-    border: 'rgba(59,130,246,0.45)',
+    accent: 'linear-gradient(135deg, rgba(126,130,136,0.18), rgba(34,197,94,0.10))',
+    border: 'rgba(126,130,136,0.45)',
     features: [
       { label: 'Todo lo de Pro', ok: true },
       { label: 'Analytics avanzado', ok: true },
@@ -110,7 +110,7 @@ const TierCard = ({ tier, currentTier, onSelect, busy }) => {
         gap: 16,
         position: 'relative',
         boxShadow: isHighlighted
-          ? '0 12px 36px rgba(139,92,246,0.28), 0 0 0 1px rgba(139,92,246,0.30)'
+          ? '0 12px 36px rgba(201,206,212,0.28), 0 0 0 1px rgba(201,206,212,0.30)'
           : '0 6px 16px rgba(0,0,0,0.25)',
         transform: isHighlighted ? 'scale(1.03)' : 'none'
       }}
@@ -121,7 +121,7 @@ const TierCard = ({ tier, currentTier, onSelect, busy }) => {
             position: 'absolute',
             top: -12,
             right: 16,
-            background: 'linear-gradient(135deg,#a78bfa 0%,#8b5cf6 45%,#6d4bd0 100%)',
+            background: 'linear-gradient(135deg,#e9ecf0 0%,#c9ced4 45%,#7e8288 100%)',
             color: '#fff',
             fontSize: 11,
             fontWeight: 700,
@@ -129,7 +129,7 @@ const TierCard = ({ tier, currentTier, onSelect, busy }) => {
             borderRadius: 10,
             letterSpacing: 1,
             textTransform: 'uppercase',
-            boxShadow: '0 6px 16px -4px rgba(139,92,246,0.6)'
+            boxShadow: '0 6px 16px -4px rgba(201,206,212,0.6)'
           }}
         >
           Recomendado
@@ -204,11 +204,11 @@ const TierCard = ({ tier, currentTier, onSelect, busy }) => {
               border: 'none',
               cursor: busy ? 'wait' : 'pointer',
               background: isHighlighted
-                ? 'linear-gradient(135deg,#a78bfa 0%,#8b5cf6 45%,#6d4bd0 100%)'
+                ? 'linear-gradient(135deg,#e9ecf0 0%,#c9ced4 45%,#7e8288 100%)'
                 : tier.id === 'plus'
                   ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)'
-                  : 'linear-gradient(135deg, #3b82f6, #1e40af)',
-              boxShadow: isHighlighted ? '0 12px 30px -10px rgba(139,92,246,0.5)' : 'none',
+                  : 'linear-gradient(135deg, #9aa0a7, #565b62)',
+              boxShadow: isHighlighted ? '0 12px 30px -10px rgba(201,206,212,0.5)' : 'none',
               color: '#fff',
               fontWeight: 700,
               fontSize: 14,
@@ -249,7 +249,7 @@ export default function Pricing() {
           style={{
             fontSize: 42,
             margin: 0,
-            background: 'linear-gradient(135deg,#ffffff 0%,#c9ced4 35%,#a78bfa 100%)',
+            background: 'linear-gradient(135deg,#ffffff 0%,#c9ced4 35%,#e9ecf0 100%)',
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',

@@ -42,7 +42,7 @@ function QRDisplay({ value, size = 200 }) {
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
         {grid.map(({ r, c, dark }) => {
           const isFinder = isFinderPattern(r, c);
-          const fill = isFinder ? '#1a0040' : (dark ? '#0a0a14' : '#ffffff');
+          const fill = isFinder ? '#0a0b0d' : (dark ? '#0a0b0d' : '#ffffff');
           return (
             <rect
               key={`${r}-${c}`}
@@ -96,7 +96,7 @@ function CreateEventModal({ onClose, onCreated }) {
 
   const inp = {
     width: '100%', padding: '11px 14px', borderRadius: 10, outline: 'none',
-    background: 'rgba(79,172,254,0.05)', border: '1.5px solid rgba(190,200,212,0.15)',
+    background: 'rgba(201,206,212,0.05)', border: '1.5px solid rgba(190,200,212,0.15)',
     color: '#c9ced4', fontSize: 14, fontFamily: 'inherit', boxSizing: 'border-box',
   };
 
@@ -237,15 +237,15 @@ function TicketModal({ event, onClose }) {
                   style={{
                     display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                     padding: '10px 14px', borderRadius: 10, marginBottom: 6, cursor: 'pointer',
-                    border: `2px solid ${selectedType === tt._id ? '#8B5CF6' : 'rgba(190,200,212,0.15)'}`,
-                    background: selectedType === tt._id ? 'rgba(139,92,246,0.06)' : 'transparent',
+                    border: `2px solid ${selectedType === tt._id ? '#c9ced4' : 'rgba(190,200,212,0.15)'}`,
+                    background: selectedType === tt._id ? 'rgba(201,206,212,0.06)' : 'transparent',
                     transition: 'all 0.2s',
                   }}>
                   <div>
                     <div style={{ fontWeight: 700, fontSize: 14, color: '#c9ced4' }}>{tt.name}</div>
                     {tt.description && <div style={{ fontSize: 11, color: 'rgba(201,206,212,0.45)' }}>{tt.description}</div>}
                   </div>
-                  <div style={{ fontWeight: 800, fontSize: 15, color: '#8B5CF6' }}>
+                  <div style={{ fontWeight: 800, fontSize: 15, color: '#c9ced4' }}>
                     {tt.price === 0 ? 'GRATIS' : `$${tt.price}`}
                   </div>
                 </div>
@@ -366,7 +366,7 @@ export default function Events() {
               {TYPES.map(t => (
                 <button key={t.v} onClick={() => setEventType(t.v)} style={{
                   padding: '6px 14px', borderRadius: 20, border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 600,
-                  background: eventType === t.v ? 'linear-gradient(135deg,#06B6D4,#8B5CF6)' : 'rgba(190,200,212,0.06)',
+                  background: eventType === t.v ? 'linear-gradient(135deg,#9aa0a7,#c9ced4)' : 'rgba(190,200,212,0.06)',
                   color: eventType === t.v ? '#fff' : 'rgba(201,206,212,0.60)',
                   transition: 'all 0.2s',
                 }}>{t.l}</button>
@@ -398,7 +398,7 @@ export default function Events() {
             <div style={{ textAlign: 'center', padding: 48, color: 'rgba(201,206,212,0.35)' }}>
               <div style={{ fontSize: 40, marginBottom: 8 }}>🎟️</div>
               <div>No tienes boletos aún</div>
-              <button onClick={() => setTab('discover')} style={{ marginTop: 12, background: 'none', border: 'none', color: '#8B5CF6', cursor: 'pointer', fontWeight: 700, fontSize: 13 }}>Descubrir eventos →</button>
+              <button onClick={() => setTab('discover')} style={{ marginTop: 12, background: 'none', border: 'none', color: '#c9ced4', cursor: 'pointer', fontWeight: 700, fontSize: 13 }}>Descubrir eventos →</button>
             </div>
           )
         ) : (
@@ -437,13 +437,13 @@ function EventCard({ event, onSelect, isOrganizer }) {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
           <div style={{ fontWeight: 800, fontSize: 16, color: '#c9ced4', flex: 1, marginRight: 8 }}>{event.title}</div>
           {isOrganizer && (
-            <span style={{ background: 'rgba(139,92,246,0.1)', color: '#8B5CF6', borderRadius: 8, padding: '2px 8px', fontSize: 11, fontWeight: 700, whiteSpace: 'nowrap' }}>Tu evento</span>
+            <span style={{ background: 'rgba(201,206,212,0.1)', color: '#c9ced4', borderRadius: 8, padding: '2px 8px', fontSize: 11, fontWeight: 700, whiteSpace: 'nowrap' }}>Tu evento</span>
           )}
         </div>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 10 }}>
           <span style={{ fontSize: 12, color: 'rgba(201,206,212,0.50)' }}>📅 {fmt(event.startDate)}</span>
           <span style={{ fontSize: 12, color: 'rgba(201,206,212,0.50)' }}>{typeIcon} {event.location || 'Online'}</span>
-          <span style={{ background: 'rgba(190,200,212,0.07)', color: '#4facfe', borderRadius: 6, padding: '1px 7px', fontSize: 11, fontWeight: 600 }}>{event.category}</span>
+          <span style={{ background: 'rgba(190,200,212,0.07)', color: '#c9ced4', borderRadius: 6, padding: '1px 7px', fontSize: 11, fontWeight: 600 }}>{event.category}</span>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ fontSize: 13, color: 'rgba(201,206,212,0.45)' }}>
@@ -462,7 +462,7 @@ function EventCard({ event, onSelect, isOrganizer }) {
 function TicketCard({ ticket }) {
   const [showQR, setShowQR] = useState(false);
   const ev = ticket.event;
-  const statusColor = { active: '#16a34a', used: '#6b7280', cancelled: '#ef4444', refunded: '#f97316' }[ticket.status] || '#6b7280';
+  const statusColor = { active: '#16a34a', used: '#6b7280', cancelled: '#ef4444', refunded: '#f59e0b' }[ticket.status] || '#6b7280';
   const statusLabel = { active: '✅ Activo', used: '✓ Usado', cancelled: 'Cancelado', refunded: 'Reembolsado' }[ticket.status] || ticket.status;
 
   return (

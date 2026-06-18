@@ -7,11 +7,11 @@ const API_BASE = process.env.REACT_APP_API_URL
   ? process.env.REACT_APP_API_URL.replace('/api', '')
   : 'http://localhost:5000';
 
-const HOLO = 'linear-gradient(135deg,#4facfe,#00f2fe,#f3a0ff,#ff85a2)';
+const HOLO = 'linear-gradient(135deg,#c9ced4,#e9ecf0,#e9ecf0,#c9ced4)';
 
 const inputStyle = {
   width: '100%', padding: '13px 16px', borderRadius: 12, outline: 'none',
-  background: 'rgba(79,172,254,0.05)', border: '1.5px solid rgba(190,200,212,0.15)',
+  background: 'rgba(201,206,212,0.05)', border: '1.5px solid rgba(190,200,212,0.15)',
   color: '#c9ced4', fontSize: 14, fontFamily: 'inherit', boxSizing: 'border-box',
   transition: 'border-color 0.2s',
 };
@@ -59,11 +59,11 @@ function Login() {
           {/* Círculo K tornasol */}
           <div style={{
             width: 90, height: 90, borderRadius: '50%',
-            background: 'linear-gradient(135deg,#EC4899,#8B5CF6,#06B6D4)',
+            background: 'linear-gradient(135deg,#9aa0a7,#c9ced4,#9aa0a7)',
             backgroundSize: '200% 200%',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             margin: '0 auto 20px',
-            boxShadow: '0 0 40px rgba(139,92,246,0.5), 0 0 70px rgba(6,182,212,0.2)',
+            boxShadow: '0 0 40px rgba(201,206,212,0.5), 0 0 70px rgba(126,130,136,0.2)',
             animation: 'tornasol-k 5s ease-in-out infinite',
             position: 'relative',
           }}>
@@ -76,11 +76,11 @@ function Login() {
           </div>
           <div style={{
             fontSize: 'clamp(36px, 10vw, 52px)', fontWeight: 900, letterSpacing: 8,
-            background: 'linear-gradient(90deg,#EC4899,#8B5CF6,#06B6D4,#8B5CF6,#EC4899)',
+            background: 'linear-gradient(90deg,#9aa0a7,#c9ced4,#9aa0a7,#c9ced4,#9aa0a7)',
             backgroundSize: '300% 300%',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
             animation: 'tornasol-k 5s ease-in-out infinite',
-            filter: 'drop-shadow(0 3px 12px rgba(139,92,246,0.4))',
+            filter: 'drop-shadow(0 3px 12px rgba(201,206,212,0.4))',
             marginBottom: 6,
           }}>KRONOS</div>
           <style>{`@keyframes tornasol-k { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }`}</style>
@@ -108,7 +108,7 @@ function Login() {
         {slowWarning && (
           <div style={{
             background: 'rgba(190,200,212,0.06)', border: '1px solid rgba(190,200,212,0.20)',
-            color: '#4facfe', padding: '10px 14px', borderRadius: 12, fontSize: 12,
+            color: '#c9ced4', padding: '10px 14px', borderRadius: 12, fontSize: 12,
             marginBottom: 14, textAlign: 'center',
           }}>
             ⏳ El servidor está despertando, espera unos segundos...

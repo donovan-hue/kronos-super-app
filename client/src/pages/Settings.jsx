@@ -115,12 +115,12 @@ function NotificationsTab() {
 
 // ── Appearance Tab ────────────────────────────────────────────────────────────
 function AppearanceTab() {
-  const [accent, setAccent] = useState('#7c3aed');
+  const [accent, setAccent] = useState('#9aa0a7');
   const [fontSize, setFontSize] = useState('normal');
   const [animations, setAnimations] = useState(true);
   const [saved, setSaved] = useState(false);
 
-  const accents = ['#7c3aed', '#ec4899', '#06b6d4', '#10b981', '#f59e0b', '#ef4444'];
+  const accents = ['#9aa0a7', '#9aa0a7', '#9aa0a7', '#10b981', '#f59e0b', '#ef4444'];
 
   return (
     <div>
@@ -222,7 +222,7 @@ function AccountTab() {
       </GlassCard>
 
       <button onClick={handleExportData}
-        style={{ width: '100%', padding: '13px', borderRadius: 14, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.15)', color: '#c9ced4', fontSize: 14, fontWeight: 600, cursor: 'pointer', marginBottom: 10 }}>
+        style={{ width: '100%', padding: '13px', borderRadius: 14, background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(190,200,212,0.15)', color: '#c9ced4', fontSize: 14, fontWeight: 600, cursor: 'pointer', marginBottom: 10 }}>
         📦 Exportar mis datos
       </button>
 
@@ -244,10 +244,10 @@ function AccountTab() {
             Se eliminarán tu cuenta, posts, wallet y todos tus datos. Escribe <strong style={{ color: '#fff' }}>ELIMINAR</strong> para confirmar.
           </div>
           <input value={deleteInput} onChange={e => setDeleteInput(e.target.value)} placeholder="Escribe ELIMINAR"
-            style={{ width: '100%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 10, padding: '10px 14px', color: '#c9ced4', fontSize: 14, outline: 'none', marginBottom: 10, boxSizing: 'border-box', fontFamily: 'inherit' }} />
+            style={{ width: '100%', background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 10, padding: '10px 14px', color: '#c9ced4', fontSize: 14, outline: 'none', marginBottom: 10, boxSizing: 'border-box', fontFamily: 'inherit' }} />
           <div style={{ display: 'flex', gap: 8 }}>
             <button onClick={() => { setConfirmDelete(false); setDeleteInput(''); }}
-              style={{ flex: 1, padding: '10px', borderRadius: 10, background: 'rgba(79,172,254,0.07)', border: 'none', color: '#c9ced4', cursor: 'pointer', fontSize: 13 }}>
+              style={{ flex: 1, padding: '10px', borderRadius: 10, background: 'rgba(201,206,212,0.07)', border: 'none', color: '#c9ced4', cursor: 'pointer', fontSize: 13 }}>
               Cancelar
             </button>
             <button onClick={handleDeleteAccount} disabled={deleteInput !== 'ELIMINAR' || deleting}

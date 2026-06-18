@@ -110,7 +110,7 @@ export default function CommunityDetail() {
   if (loading) {
     return (
       <div style={{ minHeight: '100vh', background: 'transparent', paddingBottom: 80 }}>
-        <div style={{ height: 140, background: 'linear-gradient(135deg,rgba(124,58,237,0.3),rgba(6,182,212,0.2))' }} />
+        <div style={{ height: 140, background: 'linear-gradient(135deg,rgba(126,130,136,0.3),rgba(126,130,136,0.2))' }} />
         <div style={{ maxWidth: 680, margin: '0 auto', padding: '0 16px' }}>
           {[1,2,3].map(i => (
             <div key={i} style={{ background: 'rgba(190,200,212,0.04)', borderRadius: 16, marginBottom: 14, height: i === 1 ? 100 : 140, animation: 'pulse 1.5s ease-in-out infinite' }} />
@@ -184,7 +184,7 @@ export default function CommunityDetail() {
                   value={postText}
                   onChange={e => setPostText(e.target.value)}
                   placeholder={`Escribe en ${community.name}...`}
-                  style={{ flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 12, padding: '10px 14px', color: '#c9ced4', fontSize: 14, resize: 'none', outline: 'none', minHeight: 70, fontFamily: 'inherit' }}
+                  style={{ flex: 1, background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 12, padding: '10px 14px', color: '#c9ced4', fontSize: 14, resize: 'none', outline: 'none', minHeight: 70, fontFamily: 'inherit' }}
                 />
               </div>
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -231,11 +231,11 @@ export default function CommunityDetail() {
                       </div>
                       <div style={{ display: 'flex', gap: 24, color: 'rgba(201,206,212,0.50)', fontSize: 13, paddingTop: 8, borderTop: '1px solid rgba(190,200,212,0.10)' }}>
                         <button onClick={() => handleLike(post._id)}
-                          style={{ background: 'none', border: 'none', color: isLiked ? '#ec4899' : 'rgba(255,255,255,0.5)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit' }}>
+                          style={{ background: 'none', border: 'none', color: isLiked ? '#9aa0a7' : 'rgba(255,255,255,0.5)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit' }}>
                           {isLiked ? '❤️' : '🤍'} {post.likes?.length || 0}
                         </button>
                         <button onClick={() => { setCommentOpen(isOpen ? null : post._id); setCommentText(''); }}
-                          style={{ background: 'none', border: 'none', color: isOpen ? '#06b6d4' : 'rgba(255,255,255,0.5)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit' }}>
+                          style={{ background: 'none', border: 'none', color: isOpen ? '#9aa0a7' : 'rgba(255,255,255,0.5)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit' }}>
                           💬 {post.comments?.length || 0}
                         </button>
                       </div>
@@ -248,7 +248,7 @@ export default function CommunityDetail() {
                                 alt=""
                                 style={{ width: 26, height: 26, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
                               />
-                              <div style={{ background: 'rgba(79,172,254,0.07)', borderRadius: 10, padding: '6px 10px', flex: 1 }}>
+                              <div style={{ background: 'rgba(201,206,212,0.07)', borderRadius: 10, padding: '6px 10px', flex: 1 }}>
                                 {c.author?.username && (
                                   <div style={{ color: '#c9ced4', fontSize: 10, fontWeight: 700, marginBottom: 2 }}>@{c.author.username}</div>
                                 )}
@@ -259,7 +259,7 @@ export default function CommunityDetail() {
                           <div style={{ display: 'flex', gap: 8 }}>
                             <input value={commentText} onChange={e => setCommentText(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleComment(post._id)}
                               placeholder="Comenta..."
-                              style={{ flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 20, padding: '7px 12px', color: '#c9ced4', fontSize: 13, outline: 'none', fontFamily: 'inherit' }} />
+                              style={{ flex: 1, background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 20, padding: '7px 12px', color: '#c9ced4', fontSize: 13, outline: 'none', fontFamily: 'inherit' }} />
                             <button onClick={() => handleComment(post._id)} disabled={!commentText.trim()}
                               style={{ padding: '7px 14px', borderRadius: 20, background: commentText.trim() ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)' : 'rgba(255,255,255,0.08)', color: '#fff', border: 'none', fontSize: 13, cursor: 'pointer' }}>→</button>
                           </div>
@@ -283,7 +283,7 @@ export default function CommunityDetail() {
               const roleBadge = role === 'admin'
                 ? { label: 'Admin', bg: 'linear-gradient(135deg,#f59e0b,#ef4444)' }
                 : role === 'mod'
-                  ? { label: 'Mod', bg: 'linear-gradient(135deg,#7c3aed,#3b82f6)' }
+                  ? { label: 'Mod', bg: 'linear-gradient(135deg,#9aa0a7,#9aa0a7)' }
                   : null;
 
               return (
@@ -311,7 +311,7 @@ export default function CommunityDetail() {
                           onChange={e => handleAssignRole(memberId, e.target.value)}
                           onClick={e => e.stopPropagation()}
                           style={{
-                            background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.14)',
+                            background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(190,200,212,0.14)',
                             borderRadius: 8, padding: '3px 8px', color: '#c9ced4', fontSize: 11, cursor: 'pointer', outline: 'none',
                           }}
                         >

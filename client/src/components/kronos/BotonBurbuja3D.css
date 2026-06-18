@@ -10,7 +10,7 @@
   min-width: 160px;
   height: 64px;
   border-radius: 32px;
-  background: linear-gradient(135deg, #EC4899 0%, #8B5CF6 50%, #06B6D4 100%);
+  background: linear-gradient(135deg, #9aa0a7 0%, #c9ced4 50%, #9aa0a7 100%);
   background-size: 200% 200%;
   color: white;
   font-family: 'Outfit', 'Inter', sans-serif;
@@ -23,7 +23,7 @@
   transform-style: preserve-3d;
   perspective: 1000px;
   box-shadow:
-    0 10px 30px rgba(139, 92, 246, 0.4),
+    0 10px 30px rgba(201,206,212, 0.4),
     0 0 40px rgba(236, 72, 153, 0.3),
     inset 0 2px 0 rgba(255, 255, 255, 0.4),
     inset 0 -2px 0 rgba(0, 0, 0, 0.2);
@@ -69,9 +69,9 @@
 .btn-burbuja-3d:hover {
   transform: translateY(-4px) scale(1.08);
   box-shadow:
-    0 20px 50px rgba(139, 92, 246, 0.6),
+    0 20px 50px rgba(201,206,212, 0.6),
     0 0 80px rgba(236, 72, 153, 0.5),
-    0 0 100px rgba(6, 182, 212, 0.4),
+    0 0 100px rgba(126,130,136, 0.4),
     inset 0 2px 0 rgba(255, 255, 255, 0.5),
     inset 0 -2px 0 rgba(0, 0, 0, 0.2);
   animation-play-state: paused;
@@ -137,19 +137,19 @@
   border: 2.5px solid transparent;
   background-image:
     linear-gradient(white, white),
-    linear-gradient(135deg, #EC4899, #8B5CF6, #06B6D4);
+    linear-gradient(135deg, #9aa0a7, #c9ced4, #9aa0a7);
   background-origin: border-box;
   background-clip: content-box, border-box;
-  color: #8B5CF6;
+  color: #c9ced4;
   box-shadow:
-    0 5px 20px rgba(139, 92, 246, 0.2),
+    0 5px 20px rgba(201,206,212, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
   animation: float-bubble 4s ease-in-out infinite;
 }
 
 .btn-burbuja-3d.outline:hover {
   box-shadow:
-    0 10px 30px rgba(139, 92, 246, 0.35),
+    0 10px 30px rgba(201,206,212, 0.35),
     0 0 40px rgba(236, 72, 153, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
@@ -169,15 +169,15 @@
 @keyframes pulse-glow {
   0%, 100% {
     box-shadow:
-      0 10px 30px rgba(139, 92, 246, 0.4),
+      0 10px 30px rgba(201,206,212, 0.4),
       0 0 40px rgba(236, 72, 153, 0.3),
       inset 0 2px 0 rgba(255, 255, 255, 0.4);
   }
   50% {
     box-shadow:
-      0 15px 40px rgba(139, 92, 246, 0.6),
+      0 15px 40px rgba(201,206,212, 0.6),
       0 0 60px rgba(236, 72, 153, 0.5),
-      0 0 80px rgba(6, 182, 212, 0.4),
+      0 0 80px rgba(126,130,136, 0.4),
       inset 0 2px 0 rgba(255, 255, 255, 0.5);
   }
 }

@@ -40,29 +40,29 @@ function CreateGroupModal({ onClose, onCreated }) {
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 999, background: 'rgba(0,0,0,0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <GlassCard style={{ width: '90%', maxWidth: 420 }}>
-        <div style={{ color: '#0a0a14', fontSize: 17, fontWeight: 700, marginBottom: 16 }}>Nuevo Grupo</div>
+        <div style={{ color: '#0a0b0d', fontSize: 17, fontWeight: 700, marginBottom: 16 }}>Nuevo Grupo</div>
         <input value={name} onChange={e => setName(e.target.value)} placeholder="Nombre del grupo *"
-          style={{ width: '100%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 10, padding: '9px 14px', color: '#0a0a14', fontSize: 14, outline: 'none', marginBottom: 10, boxSizing: 'border-box', fontFamily: 'inherit' }} />
+          style={{ width: '100%', background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(201,206,212,0.2)', borderRadius: 10, padding: '9px 14px', color: '#0a0b0d', fontSize: 14, outline: 'none', marginBottom: 10, boxSizing: 'border-box', fontFamily: 'inherit' }} />
         <input value={description} onChange={e => setDescription(e.target.value)} placeholder="Descripción (opcional)"
-          style={{ width: '100%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 10, padding: '9px 14px', color: '#0a0a14', fontSize: 14, outline: 'none', marginBottom: 10, boxSizing: 'border-box', fontFamily: 'inherit' }} />
+          style={{ width: '100%', background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(201,206,212,0.2)', borderRadius: 10, padding: '9px 14px', color: '#0a0b0d', fontSize: 14, outline: 'none', marginBottom: 10, boxSizing: 'border-box', fontFamily: 'inherit' }} />
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Buscar y añadir miembros..."
-          style={{ width: '100%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 10, padding: '9px 14px', color: '#0a0a14', fontSize: 14, outline: 'none', marginBottom: 8, boxSizing: 'border-box', fontFamily: 'inherit' }} />
+          style={{ width: '100%', background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(201,206,212,0.2)', borderRadius: 10, padding: '9px 14px', color: '#0a0b0d', fontSize: 14, outline: 'none', marginBottom: 8, boxSizing: 'border-box', fontFamily: 'inherit' }} />
         {results.map(u => (
           <div key={u._id} onClick={() => toggle(u)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 4px', cursor: 'pointer' }}>
             <img src={u.avatar || `https://ui-avatars.com/api/?name=${u.username}&background=random&color=fff&size=32`} alt="" style={{ width: 32, height: 32, borderRadius: '50%' }} />
-            <div style={{ flex: 1, color: '#0a0a14', fontSize: 13 }}>{u.firstName} {u.lastName} <span style={{ color: 'rgba(10,10,20,0.5)' }}>@{u.username}</span></div>
+            <div style={{ flex: 1, color: '#0a0b0d', fontSize: 13 }}>{u.firstName} {u.lastName} <span style={{ color: 'rgba(10,11,13,0.5)' }}>@{u.username}</span></div>
             <span style={{ fontSize: 16 }}>{selected.find(p => p._id === u._id) ? '✅' : '⬜'}</span>
           </div>
         ))}
         {selected.length > 0 && (
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 8, marginBottom: 4 }}>
-            {selected.map(u => <span key={u._id} style={{ background: 'rgba(124,58,237,0.3)', color: '#a855f7', borderRadius: 20, padding: '3px 10px', fontSize: 12 }}>{u.firstName || u.username}</span>)}
+            {selected.map(u => <span key={u._id} style={{ background: 'rgba(126,130,136,0.3)', color: '#b4b9c0', borderRadius: 20, padding: '3px 10px', fontSize: 12 }}>{u.firstName || u.username}</span>)}
           </div>
         )}
         <div style={{ display: 'flex', gap: 10, marginTop: 16 }}>
-          <button onClick={onClose} style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'rgba(79,172,254,0.07)', color: '#0a0a14', border: 'none', cursor: 'pointer' }}>Cancelar</button>
+          <button onClick={onClose} style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'rgba(201,206,212,0.07)', color: '#0a0b0d', border: 'none', cursor: 'pointer' }}>Cancelar</button>
           <button onClick={handleCreate} disabled={loading || !name.trim()}
-            style={{ flex: 2, padding: '10px', borderRadius: 12, background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: 700 }}>
+            style={{ flex: 2, padding: '10px', borderRadius: 12, background: 'linear-gradient(135deg,#9aa0a7,#9aa0a7)', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: 700 }}>
             {loading ? 'Creando...' : 'Crear Grupo'}
           </button>
         </div>
@@ -114,7 +114,7 @@ export default function ConversationList() {
             </button>
             {tab === 'grupos' && (
               <button onClick={() => setCreatingGroup(true)}
-                style={{ padding: '7px 14px', borderRadius: 20, background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#fff', border: 'none', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>
+                style={{ padding: '7px 14px', borderRadius: 20, background: 'linear-gradient(135deg,#9aa0a7,#9aa0a7)', color: '#fff', border: 'none', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>
                 + Grupo
               </button>
             )}
@@ -125,7 +125,7 @@ export default function ConversationList() {
         <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
           {[{ id: 'directos', label: '💬 Directos' }, { id: 'grupos', label: '👥 Grupos' }].map(t => (
             <button key={t.id} onClick={() => setTab(t.id)}
-              style={{ flex: 1, padding: '9px', borderRadius: 12, fontSize: 13, fontWeight: 600, border: 'none', cursor: 'pointer', background: tab === t.id ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(255,255,255,0.06)', color: '#fff' }}>
+              style={{ flex: 1, padding: '9px', borderRadius: 12, fontSize: 13, fontWeight: 600, border: 'none', cursor: 'pointer', background: tab === t.id ? 'linear-gradient(135deg,#9aa0a7,#9aa0a7)' : 'rgba(255,255,255,0.06)', color: '#fff' }}>
               {t.label}
             </button>
           ))}
@@ -136,14 +136,14 @@ export default function ConversationList() {
           <div style={{ position: 'relative', marginBottom: 16 }}>
             <span style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', fontSize: 16 }}>🔍</span>
             <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Buscar personas..."
-              style={{ width: '100%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 24, padding: '10px 14px 10px 40px', color: '#0a0a14', fontSize: 14, outline: 'none', boxSizing: 'border-box', fontFamily: 'inherit' }} />
+              style={{ width: '100%', background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(201,206,212,0.2)', borderRadius: 24, padding: '10px 14px 10px 40px', color: '#0a0b0d', fontSize: 14, outline: 'none', boxSizing: 'border-box', fontFamily: 'inherit' }} />
           </div>
         )}
 
         {/* Resultados búsqueda */}
         {tab === 'directos' && search.trim() && (
           <div style={{ marginBottom: 16 }}>
-            <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 }}>
+            <div style={{ color: 'rgba(10,11,13,0.5)', fontSize: 11, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 }}>
               {searching ? 'Buscando...' : `${searchResults.length} resultado(s)`}
             </div>
             {searchResults.map(u => (
@@ -151,15 +151,15 @@ export default function ConversationList() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                   <img src={u.avatar || `https://ui-avatars.com/api/?name=${u.username}&background=random&color=fff&size=40`} alt="" style={{ width: 44, height: 44, borderRadius: '50%', objectFit: 'cover' }} />
                   <div>
-                    <div style={{ color: '#0a0a14', fontWeight: 600, fontSize: 14 }}>{u.firstName} {u.lastName}</div>
-                    <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12 }}>@{u.username}</div>
+                    <div style={{ color: '#0a0b0d', fontWeight: 600, fontSize: 14 }}>{u.firstName} {u.lastName}</div>
+                    <div style={{ color: 'rgba(10,11,13,0.5)', fontSize: 12 }}>@{u.username}</div>
                   </div>
                   <span style={{ marginLeft: 'auto', fontSize: 18 }}>💬</span>
                 </div>
               </GlassCard>
             ))}
             {!searching && searchResults.length === 0 && (
-              <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 13, textAlign: 'center', padding: 16 }}>No encontrado</div>
+              <div style={{ color: 'rgba(10,11,13,0.35)', fontSize: 13, textAlign: 'center', padding: 16 }}>No encontrado</div>
             )}
           </div>
         )}
@@ -167,11 +167,11 @@ export default function ConversationList() {
         {/* Conversaciones directas */}
         {tab === 'directos' && !search.trim() && (
           <>
-            <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 }}>Conversaciones</div>
+            <div style={{ color: 'rgba(10,11,13,0.5)', fontSize: 11, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 }}>Conversaciones</div>
             {chats.length === 0 ? (
-              <div style={{ textAlign: 'center', padding: 60, color: 'rgba(10,10,20,0.35)' }}>
+              <div style={{ textAlign: 'center', padding: 60, color: 'rgba(10,11,13,0.35)' }}>
                 <div style={{ fontSize: 48, marginBottom: 12 }}>💬</div>
-                <div style={{ fontSize: 16, fontWeight: 600, color: 'rgba(10,10,20,0.5)' }}>Sin conversaciones aún</div>
+                <div style={{ fontSize: 16, fontWeight: 600, color: 'rgba(10,11,13,0.5)' }}>Sin conversaciones aún</div>
                 <div style={{ fontSize: 13, marginTop: 6 }}>Busca personas arriba</div>
               </div>
             ) : chats.map(chat => (
@@ -179,11 +179,11 @@ export default function ConversationList() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                   <img src={chat.avatar || `https://ui-avatars.com/api/?name=${chat.username}&background=random&color=fff&size=40`} alt="" style={{ width: 44, height: 44, borderRadius: '50%', objectFit: 'cover' }} />
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ color: '#0a0a14', fontWeight: 600, fontSize: 14 }}>{chat.firstName || chat.username}</div>
-                    <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{chat.lastMessage || 'Sin mensajes aún'}</div>
+                    <div style={{ color: '#0a0b0d', fontWeight: 600, fontSize: 14 }}>{chat.firstName || chat.username}</div>
+                    <div style={{ color: 'rgba(10,11,13,0.5)', fontSize: 12, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{chat.lastMessage || 'Sin mensajes aún'}</div>
                   </div>
                   {chat.unread > 0 && (
-                    <span style={{ background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#fff', borderRadius: '50%', width: 20, height: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700 }}>{chat.unread}</span>
+                    <span style={{ background: 'linear-gradient(135deg,#9aa0a7,#9aa0a7)', color: '#fff', borderRadius: '50%', width: 20, height: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700 }}>{chat.unread}</span>
                   )}
                 </div>
               </GlassCard>
@@ -194,20 +194,20 @@ export default function ConversationList() {
         {/* Grupos */}
         {tab === 'grupos' && (
           <>
-            <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 }}>Tus grupos</div>
+            <div style={{ color: 'rgba(10,11,13,0.5)', fontSize: 11, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 }}>Tus grupos</div>
             {groups.length === 0 ? (
-              <div style={{ textAlign: 'center', padding: 60, color: 'rgba(10,10,20,0.35)' }}>
+              <div style={{ textAlign: 'center', padding: 60, color: 'rgba(10,11,13,0.35)' }}>
                 <div style={{ fontSize: 48, marginBottom: 12 }}>👥</div>
-                <div style={{ fontSize: 16, fontWeight: 600, color: 'rgba(10,10,20,0.5)' }}>Sin grupos aún</div>
+                <div style={{ fontSize: 16, fontWeight: 600, color: 'rgba(10,11,13,0.5)' }}>Sin grupos aún</div>
                 <div style={{ fontSize: 13, marginTop: 6 }}>Crea uno con el botón + Grupo</div>
               </div>
             ) : groups.map(g => (
               <GlassCard key={g._id} onClick={() => navigate(`/social/group/${g._id}`)} style={{ cursor: 'pointer', marginBottom: 8 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'linear-gradient(135deg,#7c3aed,#06b6d4)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, flexShrink: 0 }}>👥</div>
+                  <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'linear-gradient(135deg,#9aa0a7,#9aa0a7)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, flexShrink: 0 }}>👥</div>
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ color: '#0a0a14', fontWeight: 600, fontSize: 14 }}>{g.name}</div>
-                    <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 12, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    <div style={{ color: '#0a0b0d', fontWeight: 600, fontSize: 14 }}>{g.name}</div>
+                    <div style={{ color: 'rgba(10,11,13,0.5)', fontSize: 12, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       {g.lastMessage?.content || `${g.members?.length || 0} miembros`}
                     </div>
                   </div>

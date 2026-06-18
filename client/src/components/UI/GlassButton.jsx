@@ -19,17 +19,17 @@ const StyledButton = styled(motion.button)`
   background: ${props => {
     switch (props.variant) {
       case 'primary':
-        return 'linear-gradient(135deg, #b344ff 0%, #5b8fff 50%, #00d4ff 100%)';
+        return 'linear-gradient(135deg, #c9ced4 0%, #c9ced4 50%, #c9ced4 100%)';
       case 'secondary':
         return 'rgba(255, 255, 255, 0.18)';
       case 'success':
-        return 'linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(59, 130, 246, 0.2) 100%)';
+        return 'linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(126,130,136, 0.2) 100%)';
       case 'danger':
-        return 'linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(249, 115, 22, 0.2) 100%)';
+        return 'linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(245,158,11, 0.2) 100%)';
       case 'ghost':
         return 'rgba(248, 249, 250, 0.5)';
       default:
-        return 'linear-gradient(135deg, rgba(179, 68, 255, 0.2) 0%, rgba(0, 212, 255, 0.2) 100%)';
+        return 'linear-gradient(135deg, rgba(201,206,212, 0.2) 0%, rgba(201,206,212, 0.2) 100%)';
     }
   }};
   
@@ -43,22 +43,22 @@ const StyledButton = styled(motion.button)`
       case 'primary':
         return '#ffffff';
       case 'secondary':
-        return '#b344ff';
+        return '#c9ced4';
       case 'success':
         return '#22c55e';
       case 'danger':
         return '#ef4444';
       case 'ghost':
-        return '#1a1a2e';
+        return '#15171a';
       default:
-        return '#1a1a2e';
+        return '#15171a';
     }
   }};
   
   /* Shadow */
   box-shadow: ${props => props.variant === 'primary'
-    ? '0 8px 24px rgba(179, 68, 255, 0.35)'
-    : '0 8px 24px rgba(31, 38, 135, 0.1)'};
+    ? '0 8px 24px rgba(201,206,212, 0.35)'
+    : '0 8px 24px rgba(0,0,0, 0.1)'};
   
   /* Size Variants */
   ${props => {
@@ -73,9 +73,9 @@ const StyledButton = styled(motion.button)`
     border-color: ${props => {
       switch (props.variant) {
         case 'primary':
-          return 'rgba(179, 68, 255, 0.6)';
+          return 'rgba(201,206,212, 0.6)';
         case 'secondary':
-          return 'rgba(179, 68, 255, 0.4)';
+          return 'rgba(201,206,212, 0.4)';
         case 'success':
           return 'rgba(34, 197, 94, 0.4)';
         case 'danger':
@@ -87,15 +87,15 @@ const StyledButton = styled(motion.button)`
     box-shadow: ${props => {
       switch (props.variant) {
         case 'primary':
-          return '0 0 30px rgba(179, 68, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.3), 0 8px 32px rgba(179, 68, 255, 0.2)';
+          return '0 0 30px rgba(201,206,212, 0.5), 0 0 20px rgba(201,206,212, 0.3), 0 8px 32px rgba(201,206,212, 0.2)';
         case 'secondary':
-          return '0 0 20px rgba(179, 68, 255, 0.2), 0 8px 32px rgba(31, 38, 135, 0.1)';
+          return '0 0 20px rgba(201,206,212, 0.2), 0 8px 32px rgba(0,0,0, 0.1)';
         case 'success':
-          return '0 0 30px rgba(34, 197, 94, 0.4), 0 8px 32px rgba(31, 38, 135, 0.15)';
+          return '0 0 30px rgba(34, 197, 94, 0.4), 0 8px 32px rgba(0,0,0, 0.15)';
         case 'danger':
-          return '0 0 30px rgba(239, 68, 68, 0.4), 0 8px 32px rgba(31, 38, 135, 0.15)';
+          return '0 0 30px rgba(239, 68, 68, 0.4), 0 8px 32px rgba(0,0,0, 0.15)';
         default:
-          return '0 12px 40px rgba(31, 38, 135, 0.15)';
+          return '0 12px 40px rgba(0,0,0, 0.15)';
       }
     }};
   }

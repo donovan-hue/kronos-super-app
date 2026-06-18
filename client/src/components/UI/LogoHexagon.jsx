@@ -10,13 +10,13 @@ const HexagonContainer = styled(motion.div)`
 `;
 
 const HexagonSVG = styled.svg`
-  filter: drop-shadow(0 8px 24px rgba(255, 110, 199, 0.2));
+  filter: drop-shadow(0 8px 24px rgba(201,206,212, 0.2));
   transition: all 0.3s ease;
   
   &:hover {
-    filter: drop-shadow(0 0 30px rgba(255, 110, 199, 0.4)),
-            drop-shadow(0 0 20px rgba(0, 212, 255, 0.3)),
-            drop-shadow(0 8px 24px rgba(31, 38, 135, 0.15));
+    filter: drop-shadow(0 0 30px rgba(201,206,212, 0.4)),
+            drop-shadow(0 0 20px rgba(201,206,212, 0.3)),
+            drop-shadow(0 8px 24px rgba(0,0,0, 0.15));
   }
 `;
 
@@ -76,9 +76,9 @@ const LogoHexagon = ({ size = 120, animate = true }) => {
             x2="100%"
             y2="100%"
           >
-            <stop offset="0%" style={{ stopColor: '#ff6ec7', stopOpacity: 1 }} />
-            <stop offset="50%" style={{ stopColor: '#b344ff', stopOpacity: 1 }} />
-            <stop offset="100%" style={{ stopColor: '#00d4ff', stopOpacity: 1 }} />
+            <stop offset="0%" style={{ stopColor: '#c9ced4', stopOpacity: 1 }} />
+            <stop offset="50%" style={{ stopColor: '#c9ced4', stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: '#c9ced4', stopOpacity: 1 }} />
           </linearGradient>
           
           <linearGradient
@@ -88,8 +88,8 @@ const LogoHexagon = ({ size = 120, animate = true }) => {
             x2="100%"
             y2="100%"
           >
-            <stop offset="0%" style={{ stopColor: 'rgba(255, 110, 199, 0.1)', stopOpacity: 1 }} />
-            <stop offset="100%" style={{ stopColor: 'rgba(0, 212, 255, 0.1)', stopOpacity: 1 }} />
+            <stop offset="0%" style={{ stopColor: 'rgba(201,206,212, 0.1)', stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: 'rgba(201,206,212, 0.1)', stopOpacity: 1 }} />
           </linearGradient>
           
           <filter id="glow">

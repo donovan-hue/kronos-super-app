@@ -209,7 +209,7 @@ function HybridFeed() {
                 onChange={e => setPostText(e.target.value.slice(0, 280))}
                 placeholder="¿Qué está pasando?"
                 style={{
-                  width: '100%', background: 'rgba(79,172,254,0.07)', border: `1px solid ${postText.length > 260 ? (postText.length >= 280 ? '#ef4444' : '#f59e0b') : 'rgba(190,200,212,0.14)'}`,
+                  width: '100%', background: 'rgba(201,206,212,0.07)', border: `1px solid ${postText.length > 260 ? (postText.length >= 280 ? '#ef4444' : '#f59e0b') : 'rgba(190,200,212,0.14)'}`,
                   borderRadius: 12, padding: '10px 14px', color: '#c9ced4', fontSize: 14, resize: 'none',
                   outline: 'none', minHeight: 70, fontFamily: 'inherit', boxSizing: 'border-box',
                 }}
@@ -300,13 +300,13 @@ function HybridFeed() {
                     <div style={{ display: 'flex', gap: 24, color: 'rgba(201,206,212,0.50)', fontSize: 13, paddingTop: 8, borderTop: '1px solid rgba(255,255,255,0.05)' }}>
                       <button
                         onClick={() => handleLike(post._id)}
-                        style={{ background: 'none', border: 'none', color: isLiked ? '#ec4899' : 'rgba(201,206,212,0.40)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit' }}
+                        style={{ background: 'none', border: 'none', color: isLiked ? '#9aa0a7' : 'rgba(201,206,212,0.40)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit' }}
                       >
                         {isLiked ? '❤️' : '🤍'} {post.likes?.length || 0}
                       </button>
                       <button
                         onClick={() => { setCommentOpen(isOpen ? null : post._id); setCommentText(''); }}
-                        style={{ background: 'none', border: 'none', color: isOpen ? '#06b6d4' : 'rgba(201,206,212,0.40)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit' }}
+                        style={{ background: 'none', border: 'none', color: isOpen ? '#9aa0a7' : 'rgba(201,206,212,0.40)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit' }}
                       >
                         💬 {post.comments?.length || 0}
                       </button>
@@ -318,7 +318,7 @@ function HybridFeed() {
                       </button>
                       <button
                         onClick={() => handleBookmark(post._id)}
-                        style={{ background: 'none', border: 'none', color: bookmarks.has(post._id) ? '#a855f7' : 'rgba(201,206,212,0.40)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit', marginLeft: 'auto' }}
+                        style={{ background: 'none', border: 'none', color: bookmarks.has(post._id) ? '#b4b9c0' : 'rgba(201,206,212,0.40)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontFamily: 'inherit', marginLeft: 'auto' }}
                       >
                         {bookmarks.has(post._id) ? '🔖' : '🏷️'}
                       </button>
@@ -332,7 +332,7 @@ function HybridFeed() {
                             {post.comments.slice(-3).map((c, i) => (
                               <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
                                 <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12 }}>👤</div>
-                                <div style={{ background: 'rgba(79,172,254,0.07)', borderRadius: 10, padding: '6px 10px', flex: 1 }}>
+                                <div style={{ background: 'rgba(201,206,212,0.07)', borderRadius: 10, padding: '6px 10px', flex: 1 }}>
                                   <div style={{ color: '#c9ced4', fontSize: 13 }}>{c.text}</div>
                                 </div>
                               </div>
@@ -346,7 +346,7 @@ function HybridFeed() {
                             onKeyDown={e => e.key === 'Enter' && handleComment(post._id)}
                             placeholder="Escribe un comentario..."
                             style={{
-                              flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.14)',
+                              flex: 1, background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(190,200,212,0.14)',
                               borderRadius: 20, padding: '8px 14px', color: '#c9ced4', fontSize: 13, outline: 'none', fontFamily: 'inherit',
                             }}
                           />

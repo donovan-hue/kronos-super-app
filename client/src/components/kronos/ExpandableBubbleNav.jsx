@@ -87,25 +87,25 @@ function GlassSphere({ size, emoji, isOpen, onClick, style = {} }) {
       <div style={{
         position: 'absolute', inset: 0, borderRadius: '50%',
         background: isOpen
-          ? 'radial-gradient(circle at 38% 38%, rgba(255,255,255,0.35) 0%, rgba(139,92,246,0.18) 40%, rgba(6,182,212,0.12) 70%, rgba(255,255,255,0.05) 100%)'
-          : 'radial-gradient(circle at 38% 38%, rgba(255,255,255,0.28) 0%, rgba(139,92,246,0.12) 40%, rgba(6,182,212,0.08) 70%, rgba(255,255,255,0.03) 100%)',
+          ? 'radial-gradient(circle at 38% 38%, rgba(255,255,255,0.35) 0%, rgba(201,206,212,0.18) 40%, rgba(126,130,136,0.12) 70%, rgba(255,255,255,0.05) 100%)'
+          : 'radial-gradient(circle at 38% 38%, rgba(255,255,255,0.28) 0%, rgba(201,206,212,0.12) 40%, rgba(126,130,136,0.08) 70%, rgba(255,255,255,0.03) 100%)',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
         boxShadow: isOpen
-          ? '0 8px 32px rgba(124,58,237,0.35), 0 2px 8px rgba(0,0,0,0.1), inset 0 -2px 8px rgba(139,92,246,0.15)'
-          : '0 4px 20px rgba(109,40,217,0.2), 0 2px 6px rgba(0,0,0,0.08), inset 0 -2px 6px rgba(6,182,212,0.1)',
+          ? '0 8px 32px rgba(126,130,136,0.35), 0 2px 8px rgba(0,0,0,0.1), inset 0 -2px 8px rgba(201,206,212,0.15)'
+          : '0 4px 20px rgba(84,88,93,0.2), 0 2px 6px rgba(0,0,0,0.08), inset 0 -2px 6px rgba(126,130,136,0.1)',
       }} />
 
       {/* Sombra interna inferior suave */}
       <div style={{
         position: 'absolute', inset: 0, borderRadius: '50%',
-        background: 'radial-gradient(circle at 50% 80%, rgba(139,92,246,0.12) 0%, transparent 60%)',
+        background: 'radial-gradient(circle at 50% 80%, rgba(201,206,212,0.12) 0%, transparent 60%)',
       }} />
 
       {/* Reflejo lateral tornasol */}
       <div style={{
         position: 'absolute', inset: 0, borderRadius: '50%',
-        background: 'radial-gradient(circle at 75% 50%, rgba(6,182,212,0.12) 0%, transparent 55%)',
+        background: 'radial-gradient(circle at 75% 50%, rgba(126,130,136,0.12) 0%, transparent 55%)',
       }} />
 
       {/* Brillo especular principal — punto de luz superior izquierdo */}

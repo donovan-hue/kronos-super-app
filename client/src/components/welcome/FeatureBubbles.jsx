@@ -6,7 +6,7 @@ const features = [
   { icon: '🍔', name: 'Food',      color: '#c9ced4' },
   { icon: '🎬', name: 'Cinema',    color: '#f59e0b' },
   { icon: '💬', name: 'Chat',      color: '#10b981' },
-  { icon: '💰', name: 'Tokens',    color: '#8b5cf6' },
+  { icon: '💰', name: 'Tokens',    color: '#c9ced4' },
 ];
 
 const FeatureBubbles = () => {

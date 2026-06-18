@@ -29,8 +29,8 @@ const StyledSocialButton = styled(motion.button)`
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 24px;
-  color: #1a1a2e;
-  box-shadow: 0 8px 24px rgba(31, 38, 135, 0.1);
+  color: #15171a;
+  box-shadow: 0 8px 24px rgba(0,0,0, 0.1);
   
   /* Border Gradient */
   background-image: 
@@ -41,8 +41,8 @@ const StyledSocialButton = styled(motion.button)`
     ),
     linear-gradient(
       135deg,
-      rgba(255, 110, 199, 0.3) 0%,
-      rgba(0, 212, 255, 0.3) 100%
+      rgba(201,206,212, 0.3) 0%,
+      rgba(201,206,212, 0.3) 100%
     );
   background-origin: border-box;
   background-clip: padding-box, border-box;
@@ -52,10 +52,10 @@ const StyledSocialButton = styled(motion.button)`
     transform: translateY(-4px);
     backdrop-filter: blur(15px);
     box-shadow: 
-      0 0 20px rgba(255, 110, 199, 0.3),
-      0 0 30px rgba(0, 212, 255, 0.2),
-      0 12px 40px rgba(31, 38, 135, 0.15);
-    border-color: rgba(255, 110, 199, 0.4);
+      0 0 20px rgba(201,206,212, 0.3),
+      0 0 30px rgba(201,206,212, 0.2),
+      0 12px 40px rgba(0,0,0, 0.15);
+    border-color: rgba(201,206,212, 0.4);
   }
   
   &:active {
@@ -99,14 +99,14 @@ const SocialButtons = ({ onApple, onGoogle, onFacebook }) => {
       icon: FaGoogle,
       onClick: onGoogle,
       label: 'Sign in with Google',
-      color: '#4285F4',
+      color: '#9aa0a7',
     },
     {
       id: 'facebook',
       icon: FaFacebook,
       onClick: onFacebook,
       label: 'Sign in with Facebook',
-      color: '#1877F2',
+      color: '#9aa0a7',
     },
   ];
 

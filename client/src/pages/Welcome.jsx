@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BotonBurbuja3D } from '../components/kronos';
 
-const HOLO = 'linear-gradient(135deg,#EC4899,#8B5CF6,#06B6D4)';
+const HOLO = 'linear-gradient(135deg,#9aa0a7,#c9ced4,#9aa0a7)';
 
 export default function Welcome() {
   const navigate = useNavigate();
@@ -41,11 +41,11 @@ export default function Welcome() {
         {/* Círculo K tornasol — igual al de login/registro */}
         <div style={{
           width: 110, height: 110, borderRadius: '50%',
-          background: 'linear-gradient(135deg,#EC4899,#8B5CF6,#06B6D4)',
+          background: 'linear-gradient(135deg,#9aa0a7,#c9ced4,#9aa0a7)',
           backgroundSize: '200% 200%',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           margin: '0 auto 24px',
-          boxShadow: '0 0 50px rgba(139,92,246,0.55), 0 0 90px rgba(6,182,212,0.25)',
+          boxShadow: '0 0 50px rgba(201,206,212,0.55), 0 0 90px rgba(126,130,136,0.25)',
           animation: 'tornasol-hero 5s ease-in-out infinite',
           position: 'relative',
         }}>
@@ -63,18 +63,18 @@ export default function Welcome() {
 
         <h1 style={{
           fontSize: 'clamp(56px, 14vw, 80px)', fontWeight: 900, letterSpacing: 10, margin: '0 0 8px',
-          background: 'linear-gradient(90deg,#EC4899,#8B5CF6,#06B6D4,#8B5CF6,#EC4899)',
+          background: 'linear-gradient(90deg,#9aa0a7,#c9ced4,#9aa0a7,#c9ced4,#9aa0a7)',
           backgroundSize: '300% 300%',
           WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',
           animation: 'tornasol-hero 5s ease-in-out infinite',
-          filter: 'drop-shadow(0 4px 16px rgba(139,92,246,0.4)) drop-shadow(0 0 40px rgba(6,182,212,0.2))',
+          filter: 'drop-shadow(0 4px 16px rgba(201,206,212,0.4)) drop-shadow(0 0 40px rgba(126,130,136,0.2))',
         }}>
           KRONOS
         </h1>
         <p style={{
           fontSize: 'clamp(11px, 3vw, 14px)', fontWeight: 300, letterSpacing: 2,
-          background: 'linear-gradient(90deg,rgba(236,72,153,0.6),#8B5CF6,#06B6D4,#8B5CF6,rgba(236,72,153,0.6))',
+          background: 'linear-gradient(90deg,rgba(126,130,136,0.6),#c9ced4,#9aa0a7,#c9ced4,rgba(126,130,136,0.6))',
           backgroundSize: '200% auto',
           WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',
@@ -117,24 +117,24 @@ export default function Welcome() {
               border: '1.5px solid rgba(255,255,255,0.85)',
               borderRadius: 20, padding: '20px 14px',
               textAlign: 'center',
-              boxShadow: '0 8px 32px rgba(139,92,246,0.08), inset 0 1px 0 rgba(255,255,255,1)',
+              boxShadow: '0 8px 32px rgba(201,206,212,0.08), inset 0 1px 0 rgba(255,255,255,1)',
               transition: 'transform 0.3s, box-shadow 0.3s',
               cursor: 'default',
               position: 'relative', overflow: 'hidden',
             }}
               onMouseEnter={e => {
                 e.currentTarget.style.transform = 'translateY(-6px) scale(1.03)';
-                e.currentTarget.style.boxShadow = '0 20px 50px rgba(139,92,246,0.18), inset 0 1px 0 rgba(255,255,255,1)';
+                e.currentTarget.style.boxShadow = '0 20px 50px rgba(201,206,212,0.18), inset 0 1px 0 rgba(255,255,255,1)';
               }}
               onMouseLeave={e => {
                 e.currentTarget.style.transform = '';
-                e.currentTarget.style.boxShadow = '0 8px 32px rgba(139,92,246,0.08), inset 0 1px 0 rgba(255,255,255,1)';
+                e.currentTarget.style.boxShadow = '0 8px 32px rgba(201,206,212,0.08), inset 0 1px 0 rgba(255,255,255,1)';
               }}
             >
               {/* Borde tornasol animado */}
               <div style={{
                 position: 'absolute', inset: 0, borderRadius: 20,
-                background: 'linear-gradient(135deg,#EC4899,#8B5CF6,#06B6D4)',
+                background: 'linear-gradient(135deg,#9aa0a7,#c9ced4,#9aa0a7)',
                 backgroundSize: '200% 200%',
                 animation: 'tornasol-hero 4s linear infinite',
                 opacity: 0.18, zIndex: 0,

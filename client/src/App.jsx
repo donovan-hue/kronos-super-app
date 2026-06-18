@@ -114,10 +114,10 @@ function App() {
             duration: 4000,
             style: {
               background: 'rgba(255,255,255,0.98)',
-              color: '#0a0a14',
-              border: '1.5px solid rgba(79,172,254,0.2)',
+              color: '#0a0b0d',
+              border: '1.5px solid rgba(201,206,212,0.2)',
               backdropFilter: 'blur(20px)',
-              boxShadow: '0 4px 20px rgba(79,172,254,0.15)',
+              boxShadow: '0 4px 20px rgba(201,206,212,0.15)',
             }
           }}
         />

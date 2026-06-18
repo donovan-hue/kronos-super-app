@@ -77,7 +77,7 @@ export default function NotificationsPage() {
           <HoloText size={24}>Notificaciones</HoloText>
           {unreadCount > 0 && (
             <button onClick={markAllRead}
-              style={{ padding: '7px 14px', borderRadius: 20, background: 'rgba(168,85,247,0.12)', border: '1px solid rgba(168,85,247,0.3)', color: '#c9ced4', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>
+              style={{ padding: '7px 14px', borderRadius: 20, background: 'rgba(180,185,192,0.12)', border: '1px solid rgba(180,185,192,0.3)', color: '#c9ced4', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>
               Marcar todo leído
             </button>
           )}
@@ -121,7 +121,7 @@ export default function NotificationsPage() {
                   style={{
                     cursor: notif.link ? 'pointer' : 'default',
                     padding: '12px 14px',
-                    background: notif.read ? 'rgba(255,255,255,0.03)' : 'rgba(168,85,247,0.08)',
+                    background: notif.read ? 'rgba(255,255,255,0.03)' : 'rgba(180,185,192,0.08)',
                     borderLeft: notif.read ? '3px solid transparent' : `3px solid ${meta.color}`,
                     transition: 'background 0.2s',
                   }}>

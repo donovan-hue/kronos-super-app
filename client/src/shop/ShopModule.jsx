@@ -6,12 +6,12 @@ import { BottomNav } from '../components/kronos';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
-const HOLO = 'linear-gradient(135deg,#4facfe,#00f2fe,#f3a0ff,#ff85a2)';
+const HOLO = 'linear-gradient(135deg,#c9ced4,#e9ecf0,#e9ecf0,#c9ced4)';
 const CARD_STYLE = {
   background: '#fff',
   borderRadius: 20,
-  border: '1.5px solid rgba(79,172,254,0.15)',
-  boxShadow: '0 4px 20px rgba(79,172,254,0.08)',
+  border: '1.5px solid rgba(201,206,212,0.15)',
+  boxShadow: '0 4px 20px rgba(201,206,212,0.08)',
   overflow: 'hidden',
   transition: 'all 0.2s',
 };
@@ -41,11 +41,11 @@ function ProductCard({ product, onAddToCart, onClick }) {
         cursor: 'pointer',
         transform: hovered ? 'translateY(-4px)' : 'none',
         boxShadow: hovered
-          ? '0 8px 32px rgba(79,172,254,0.18), 0 0 0 1.5px rgba(243,160,255,0.3)'
-          : '0 4px 20px rgba(79,172,254,0.08)',
+          ? '0 8px 32px rgba(201,206,212,0.18), 0 0 0 1.5px rgba(201,206,212,0.3)'
+          : '0 4px 20px rgba(201,206,212,0.08)',
       }}
     >
-      <div style={{ position: 'relative', height: 180, background: 'linear-gradient(135deg,rgba(79,172,254,0.06),rgba(243,160,255,0.06))' }}>
+      <div style={{ position: 'relative', height: 180, background: 'linear-gradient(135deg,rgba(201,206,212,0.06),rgba(201,206,212,0.06))' }}>
         {img ? (
           <img src={img} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         ) : (
@@ -59,14 +59,14 @@ function ProductCard({ product, onAddToCart, onClick }) {
       </div>
       <div style={{ padding: '14px 16px' }}>
         {product.seller?.username && (
-          <div style={{ fontSize: 10, color: '#4facfe', fontWeight: 700, marginBottom: 3, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+          <div style={{ fontSize: 10, color: '#c9ced4', fontWeight: 700, marginBottom: 3, textTransform: 'uppercase', letterSpacing: 0.5 }}>
             🏪 {product.seller.firstName || product.seller.username}
           </div>
         )}
-        <div style={{ fontWeight: 700, fontSize: 14, color: '#0a0a14', marginBottom: 4, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        <div style={{ fontWeight: 700, fontSize: 14, color: '#0a0b0d', marginBottom: 4, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
           {product.name}
         </div>
-        <div style={{ fontSize: 12, color: 'rgba(10,10,20,0.45)', marginBottom: 10, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        <div style={{ fontSize: 12, color: 'rgba(10,11,13,0.45)', marginBottom: 10, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
           {product.description}
         </div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -80,7 +80,7 @@ function ProductCard({ product, onAddToCart, onClick }) {
               padding: '7px 14px', borderRadius: 20, border: 'none', cursor: product.stock === 0 ? 'not-allowed' : 'pointer',
               background: product.stock === 0 ? 'rgba(0,0,0,0.06)' : HOLO,
               color: '#fff', fontSize: 12, fontWeight: 700,
-              boxShadow: product.stock === 0 ? 'none' : '0 2px 10px rgba(79,172,254,0.3)',
+              boxShadow: product.stock === 0 ? 'none' : '0 2px 10px rgba(201,206,212,0.3)',
             }}
           >
             + Carrito
@@ -108,20 +108,20 @@ function ProductList({ products, cart, onAddToCart, onViewProduct }) {
   return (
     <div style={{ minHeight: '100vh', background: '#fff', paddingBottom: 100, fontFamily: "'Outfit',sans-serif" }}>
       {/* Header */}
-      <div style={{ background: '#fff', borderBottom: '1.5px solid rgba(79,172,254,0.1)', padding: '16px 20px', position: 'sticky', top: 0, zIndex: 10 }}>
+      <div style={{ background: '#fff', borderBottom: '1.5px solid rgba(201,206,212,0.1)', padding: '16px 20px', position: 'sticky', top: 0, zIndex: 10 }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
           <div>
             <div style={{ fontWeight: 800, fontSize: 22, background: HOLO, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Tienda Kronos</div>
-            <div style={{ fontSize: 12, color: 'rgba(10,10,20,0.45)' }}>{products.length} productos disponibles</div>
+            <div style={{ fontSize: 12, color: 'rgba(10,11,13,0.45)' }}>{products.length} productos disponibles</div>
           </div>
           <div style={{ display: 'flex', gap: 10 }}>
             <button onClick={() => navigate('/shop/my-orders')}
-              style={{ padding: '8px 14px', borderRadius: 20, border: '1.5px solid rgba(79,172,254,0.2)', background: '#fff', fontSize: 12, fontWeight: 600, color: '#4facfe', cursor: 'pointer' }}>
+              style={{ padding: '8px 14px', borderRadius: 20, border: '1.5px solid rgba(201,206,212,0.2)', background: '#fff', fontSize: 12, fontWeight: 600, color: '#c9ced4', cursor: 'pointer' }}>
               Mis Órdenes
             </button>
             <button onClick={() => navigate('/shop/cart')}
-              style={{ padding: '8px 16px', borderRadius: 20, border: 'none', background: HOLO, color: '#fff', fontSize: 12, fontWeight: 700, cursor: 'pointer', boxShadow: '0 2px 10px rgba(79,172,254,0.3)', position: 'relative' }}>
-              🛒 {cartCount > 0 && <span style={{ position: 'absolute', top: -6, right: -6, background: '#ff85a2', color: '#fff', fontSize: 9, fontWeight: 800, width: 16, height: 16, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{cartCount}</span>}
+              style={{ padding: '8px 16px', borderRadius: 20, border: 'none', background: HOLO, color: '#fff', fontSize: 12, fontWeight: 700, cursor: 'pointer', boxShadow: '0 2px 10px rgba(201,206,212,0.3)', position: 'relative' }}>
+              🛒 {cartCount > 0 && <span style={{ position: 'absolute', top: -6, right: -6, background: '#c9ced4', color: '#fff', fontSize: 9, fontWeight: 800, width: 16, height: 16, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{cartCount}</span>}
               Carrito
             </button>
           </div>
@@ -129,15 +129,15 @@ function ProductList({ products, cart, onAddToCart, onViewProduct }) {
         <input
           value={search} onChange={e => setSearch(e.target.value)}
           placeholder="🔍 Buscar productos..."
-          style={{ width: '100%', padding: '10px 16px', borderRadius: 20, border: '1.5px solid rgba(79,172,254,0.2)', background: 'rgba(79,172,254,0.04)', fontSize: 13, outline: 'none', color: '#0a0a14', fontFamily: 'inherit', marginBottom: 12, boxSizing: 'border-box' }}
+          style={{ width: '100%', padding: '10px 16px', borderRadius: 20, border: '1.5px solid rgba(201,206,212,0.2)', background: 'rgba(201,206,212,0.04)', fontSize: 13, outline: 'none', color: '#0a0b0d', fontFamily: 'inherit', marginBottom: 12, boxSizing: 'border-box' }}
         />
         <div style={{ display: 'flex', gap: 8, overflowX: 'auto', paddingBottom: 4 }}>
           {CATEGORIES.map(cat => (
             <button key={cat.value} onClick={() => setCategory(cat.value)}
               style={{ padding: '6px 14px', borderRadius: 20, border: '1.5px solid', whiteSpace: 'nowrap', fontSize: 12, fontWeight: 600, cursor: 'pointer', flexShrink: 0, fontFamily: 'inherit',
-                borderColor: category === cat.value ? 'transparent' : 'rgba(79,172,254,0.2)',
+                borderColor: category === cat.value ? 'transparent' : 'rgba(201,206,212,0.2)',
                 background: category === cat.value ? HOLO : '#fff',
-                color: category === cat.value ? '#fff' : 'rgba(10,10,20,0.5)',
+                color: category === cat.value ? '#fff' : 'rgba(10,11,13,0.5)',
               }}>
               {cat.label}
             </button>
@@ -148,7 +148,7 @@ function ProductList({ products, cart, onAddToCart, onViewProduct }) {
       {/* Grid */}
       <div style={{ padding: '20px 16px' }}>
         {filtered.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: 60, color: 'rgba(10,10,20,0.35)' }}>
+          <div style={{ textAlign: 'center', padding: 60, color: 'rgba(10,11,13,0.35)' }}>
             <div style={{ fontSize: 48, marginBottom: 12 }}>🛍️</div>
             <div style={{ fontSize: 16, fontWeight: 600 }}>No hay productos</div>
           </div>
@@ -176,7 +176,7 @@ function ProductDetail({ products, onAddToCart }) {
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff' }}>
       <div style={{ textAlign: 'center' }}>
         <div style={{ fontSize: 48 }}>😕</div>
-        <div style={{ fontWeight: 700, color: '#0a0a14', marginTop: 12 }}>Producto no encontrado</div>
+        <div style={{ fontWeight: 700, color: '#0a0b0d', marginTop: 12 }}>Producto no encontrado</div>
         <button onClick={() => navigate('/shop')} style={{ marginTop: 16, padding: '10px 24px', borderRadius: 20, background: HOLO, border: 'none', color: '#fff', fontWeight: 700, cursor: 'pointer' }}>Volver</button>
       </div>
     </div>
@@ -186,34 +186,34 @@ function ProductDetail({ products, onAddToCart }) {
 
   return (
     <div style={{ minHeight: '100vh', background: '#fff', fontFamily: "'Outfit',sans-serif", paddingBottom: 100 }}>
-      <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1.5px solid rgba(79,172,254,0.1)' }}>
+      <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1.5px solid rgba(201,206,212,0.1)' }}>
         <button onClick={() => navigate(-1)} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer' }}>←</button>
-        <span style={{ fontWeight: 700, fontSize: 16, color: '#0a0a14' }}>Detalle del producto</span>
+        <span style={{ fontWeight: 700, fontSize: 16, color: '#0a0b0d' }}>Detalle del producto</span>
       </div>
 
-      <div style={{ height: 280, background: 'linear-gradient(135deg,rgba(79,172,254,0.08),rgba(243,160,255,0.08))', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ height: 280, background: 'linear-gradient(135deg,rgba(201,206,212,0.08),rgba(201,206,212,0.08))', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         {img ? <img src={img} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           : <span style={{ fontSize: 80 }}>🛍️</span>}
       </div>
 
       <div style={{ padding: '24px 20px' }}>
-        <div style={{ fontWeight: 800, fontSize: 22, color: '#0a0a14', marginBottom: 6 }}>{product.name}</div>
+        <div style={{ fontWeight: 800, fontSize: 22, color: '#0a0b0d', marginBottom: 6 }}>{product.name}</div>
         <div style={{ fontSize: 28, fontWeight: 900, background: HOLO, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', marginBottom: 16 }}>${product.price}</div>
-        <div style={{ fontSize: 14, color: 'rgba(10,10,20,0.6)', lineHeight: 1.6, marginBottom: 24 }}>{product.description}</div>
+        <div style={{ fontSize: 14, color: 'rgba(10,11,13,0.6)', lineHeight: 1.6, marginBottom: 24 }}>{product.description}</div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 24 }}>
-          <span style={{ fontSize: 13, color: 'rgba(10,10,20,0.5)', fontWeight: 600 }}>Cantidad:</span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, background: 'rgba(79,172,254,0.06)', borderRadius: 20, padding: '4px 12px', border: '1.5px solid rgba(79,172,254,0.15)' }}>
-            <button onClick={() => setQty(q => Math.max(1, q - 1))} style={{ background: 'none', border: 'none', fontSize: 18, cursor: 'pointer', color: '#4facfe', fontWeight: 700 }}>−</button>
-            <span style={{ fontWeight: 700, fontSize: 16, color: '#0a0a14', minWidth: 20, textAlign: 'center' }}>{qty}</span>
-            <button onClick={() => setQty(q => q + 1)} style={{ background: 'none', border: 'none', fontSize: 18, cursor: 'pointer', color: '#4facfe', fontWeight: 700 }}>+</button>
+          <span style={{ fontSize: 13, color: 'rgba(10,11,13,0.5)', fontWeight: 600 }}>Cantidad:</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, background: 'rgba(201,206,212,0.06)', borderRadius: 20, padding: '4px 12px', border: '1.5px solid rgba(201,206,212,0.15)' }}>
+            <button onClick={() => setQty(q => Math.max(1, q - 1))} style={{ background: 'none', border: 'none', fontSize: 18, cursor: 'pointer', color: '#c9ced4', fontWeight: 700 }}>−</button>
+            <span style={{ fontWeight: 700, fontSize: 16, color: '#0a0b0d', minWidth: 20, textAlign: 'center' }}>{qty}</span>
+            <button onClick={() => setQty(q => q + 1)} style={{ background: 'none', border: 'none', fontSize: 18, cursor: 'pointer', color: '#c9ced4', fontWeight: 700 }}>+</button>
           </div>
         </div>
 
         <button
           onClick={() => { for (let i = 0; i < qty; i++) onAddToCart(product); setAdded(true); setTimeout(() => setAdded(false), 2000); }}
           disabled={product.stock === 0}
-          style={{ width: '100%', padding: '16px', borderRadius: 20, border: 'none', background: product.stock === 0 ? 'rgba(0,0,0,0.08)' : HOLO, color: '#fff', fontWeight: 800, fontSize: 16, cursor: product.stock === 0 ? 'not-allowed' : 'pointer', boxShadow: '0 4px 20px rgba(79,172,254,0.3)', fontFamily: 'inherit' }}>
+          style={{ width: '100%', padding: '16px', borderRadius: 20, border: 'none', background: product.stock === 0 ? 'rgba(0,0,0,0.08)' : HOLO, color: '#fff', fontWeight: 800, fontSize: 16, cursor: product.stock === 0 ? 'not-allowed' : 'pointer', boxShadow: '0 4px 20px rgba(201,206,212,0.3)', fontFamily: 'inherit' }}>
           {added ? '✓ Agregado al carrito' : product.stock === 0 ? 'Agotado' : '🛒 Agregar al carrito'}
         </button>
       </div>
@@ -233,32 +233,32 @@ function Cart({ cart, setCart }) {
 
   return (
     <div style={{ minHeight: '100vh', background: '#fff', fontFamily: "'Outfit',sans-serif", paddingBottom: 100 }}>
-      <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1.5px solid rgba(79,172,254,0.1)' }}>
+      <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1.5px solid rgba(201,206,212,0.1)' }}>
         <button onClick={() => navigate(-1)} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer' }}>←</button>
-        <span style={{ fontWeight: 700, fontSize: 16, color: '#0a0a14' }}>Carrito ({cart.length})</span>
+        <span style={{ fontWeight: 700, fontSize: 16, color: '#0a0b0d' }}>Carrito ({cart.length})</span>
       </div>
 
       <div style={{ padding: '16px 20px' }}>
         {cart.length === 0 ? (
           <div style={{ textAlign: 'center', padding: 60 }}>
             <div style={{ fontSize: 56, marginBottom: 12 }}>🛒</div>
-            <div style={{ fontWeight: 700, color: '#0a0a14', fontSize: 18 }}>Tu carrito está vacío</div>
+            <div style={{ fontWeight: 700, color: '#0a0b0d', fontSize: 18 }}>Tu carrito está vacío</div>
             <button onClick={() => navigate('/shop')} style={{ marginTop: 20, padding: '12px 28px', borderRadius: 20, background: HOLO, border: 'none', color: '#fff', fontWeight: 700, cursor: 'pointer' }}>Explorar tienda</button>
           </div>
         ) : (
           <>
             {cart.map(item => (
               <div key={item.productId} style={{ ...CARD_STYLE, marginBottom: 12, display: 'flex', gap: 14, padding: 14 }}>
-                <div style={{ width: 70, height: 70, borderRadius: 14, background: 'rgba(79,172,254,0.08)', flexShrink: 0, overflow: 'hidden' }}>
+                <div style={{ width: 70, height: 70, borderRadius: 14, background: 'rgba(201,206,212,0.08)', flexShrink: 0, overflow: 'hidden' }}>
                   {item.image ? <img src={item.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28 }}>🛍️</div>}
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontWeight: 700, fontSize: 13, color: '#0a0a14', marginBottom: 4, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.name}</div>
+                  <div style={{ fontWeight: 700, fontSize: 13, color: '#0a0b0d', marginBottom: 4, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.name}</div>
                   <div style={{ fontWeight: 800, fontSize: 16, background: HOLO, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>${(item.price * item.quantity).toFixed(2)}</div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 8 }}>
-                    <button onClick={() => update(item.productId, item.quantity - 1)} style={{ width: 28, height: 28, borderRadius: '50%', border: '1.5px solid rgba(79,172,254,0.3)', background: '#fff', cursor: 'pointer', fontWeight: 700, color: '#4facfe', fontSize: 16 }}>−</button>
-                    <span style={{ fontWeight: 700, color: '#0a0a14' }}>{item.quantity}</span>
-                    <button onClick={() => update(item.productId, item.quantity + 1)} style={{ width: 28, height: 28, borderRadius: '50%', border: '1.5px solid rgba(79,172,254,0.3)', background: '#fff', cursor: 'pointer', fontWeight: 700, color: '#4facfe', fontSize: 16 }}>+</button>
+                    <button onClick={() => update(item.productId, item.quantity - 1)} style={{ width: 28, height: 28, borderRadius: '50%', border: '1.5px solid rgba(201,206,212,0.3)', background: '#fff', cursor: 'pointer', fontWeight: 700, color: '#c9ced4', fontSize: 16 }}>−</button>
+                    <span style={{ fontWeight: 700, color: '#0a0b0d' }}>{item.quantity}</span>
+                    <button onClick={() => update(item.productId, item.quantity + 1)} style={{ width: 28, height: 28, borderRadius: '50%', border: '1.5px solid rgba(201,206,212,0.3)', background: '#fff', cursor: 'pointer', fontWeight: 700, color: '#c9ced4', fontSize: 16 }}>+</button>
                     <button onClick={() => update(item.productId, 0)} style={{ marginLeft: 'auto', background: 'none', border: 'none', color: '#ef4444', fontSize: 16, cursor: 'pointer' }}>🗑️</button>
                   </div>
                 </div>
@@ -267,19 +267,19 @@ function Cart({ cart, setCart }) {
 
             <div style={{ ...CARD_STYLE, padding: 20, marginTop: 20 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
-                <span style={{ color: 'rgba(10,10,20,0.5)', fontSize: 14 }}>Subtotal</span>
-                <span style={{ fontWeight: 700, color: '#0a0a14' }}>${total.toFixed(2)}</span>
+                <span style={{ color: 'rgba(10,11,13,0.5)', fontSize: 14 }}>Subtotal</span>
+                <span style={{ fontWeight: 700, color: '#0a0b0d' }}>${total.toFixed(2)}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 16 }}>
-                <span style={{ color: 'rgba(10,10,20,0.5)', fontSize: 14 }}>Envío</span>
+                <span style={{ color: 'rgba(10,11,13,0.5)', fontSize: 14 }}>Envío</span>
                 <span style={{ fontWeight: 700, color: '#10b981' }}>Gratis</span>
               </div>
-              <div style={{ borderTop: '1.5px solid rgba(79,172,254,0.1)', paddingTop: 16, display: 'flex', justifyContent: 'space-between', marginBottom: 20 }}>
-                <span style={{ fontWeight: 800, fontSize: 18, color: '#0a0a14' }}>Total</span>
+              <div style={{ borderTop: '1.5px solid rgba(201,206,212,0.1)', paddingTop: 16, display: 'flex', justifyContent: 'space-between', marginBottom: 20 }}>
+                <span style={{ fontWeight: 800, fontSize: 18, color: '#0a0b0d' }}>Total</span>
                 <span style={{ fontWeight: 900, fontSize: 22, background: HOLO, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>${total.toFixed(2)}</span>
               </div>
               <button onClick={() => navigate('/shop/checkout')}
-                style={{ width: '100%', padding: 16, borderRadius: 20, border: 'none', background: HOLO, color: '#fff', fontWeight: 800, fontSize: 16, cursor: 'pointer', boxShadow: '0 4px 20px rgba(79,172,254,0.3)', fontFamily: 'inherit' }}>
+                style={{ width: '100%', padding: 16, borderRadius: 20, border: 'none', background: HOLO, color: '#fff', fontWeight: 800, fontSize: 16, cursor: 'pointer', boxShadow: '0 4px 20px rgba(201,206,212,0.3)', fontFamily: 'inherit' }}>
                 Proceder al pago →
               </button>
             </div>
@@ -320,8 +320,8 @@ function Checkout({ cart }) {
       <div style={{ textAlign: 'center', padding: 32 }}>
         <div style={{ fontSize: 72, marginBottom: 16 }}>✅</div>
         <div style={{ fontWeight: 800, fontSize: 24, background: HOLO, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', marginBottom: 8 }}>¡Orden confirmada!</div>
-        <div style={{ color: 'rgba(10,10,20,0.5)', marginBottom: 24 }}>Tu pedido ha sido procesado exitosamente</div>
-        <button onClick={() => navigate('/shop')} style={{ padding: '12px 32px', borderRadius: 20, background: HOLO, border: 'none', color: '#fff', fontWeight: 700, cursor: 'pointer', boxShadow: '0 4px 16px rgba(79,172,254,0.3)' }}>
+        <div style={{ color: 'rgba(10,11,13,0.5)', marginBottom: 24 }}>Tu pedido ha sido procesado exitosamente</div>
+        <button onClick={() => navigate('/shop')} style={{ padding: '12px 32px', borderRadius: 20, background: HOLO, border: 'none', color: '#fff', fontWeight: 700, cursor: 'pointer', boxShadow: '0 4px 16px rgba(201,206,212,0.3)' }}>
           Seguir comprando
         </button>
       </div>
@@ -330,13 +330,13 @@ function Checkout({ cart }) {
 
   return (
     <div style={{ minHeight: '100vh', background: '#fff', fontFamily: "'Outfit',sans-serif", paddingBottom: 100 }}>
-      <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1.5px solid rgba(79,172,254,0.1)' }}>
+      <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1.5px solid rgba(201,206,212,0.1)' }}>
         <button onClick={() => navigate(-1)} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer' }}>←</button>
-        <span style={{ fontWeight: 700, fontSize: 16, color: '#0a0a14' }}>Finalizar compra</span>
+        <span style={{ fontWeight: 700, fontSize: 16, color: '#0a0b0d' }}>Finalizar compra</span>
       </div>
 
       <form onSubmit={handleSubmit} style={{ padding: '20px 20px' }}>
-        <div style={{ fontWeight: 700, fontSize: 15, color: '#0a0a14', marginBottom: 14 }}>Datos de envío</div>
+        <div style={{ fontWeight: 700, fontSize: 15, color: '#0a0b0d', marginBottom: 14 }}>Datos de envío</div>
 
         {[
           { key: 'name', label: 'Nombre completo', placeholder: 'Tu nombre' },
@@ -346,34 +346,34 @@ function Checkout({ cart }) {
           { key: 'zip', label: 'Código postal', placeholder: '00000' },
         ].map(f => (
           <div key={f.key} style={{ marginBottom: 14 }}>
-            <label style={{ fontSize: 12, fontWeight: 600, color: 'rgba(10,10,20,0.5)', display: 'block', marginBottom: 6 }}>{f.label}</label>
+            <label style={{ fontSize: 12, fontWeight: 600, color: 'rgba(10,11,13,0.5)', display: 'block', marginBottom: 6 }}>{f.label}</label>
             <input
               type={f.type || 'text'}
               value={form[f.key]}
               onChange={e => setForm(p => ({ ...p, [f.key]: e.target.value }))}
               placeholder={f.placeholder}
               required
-              style={{ width: '100%', padding: '12px 16px', borderRadius: 14, border: '1.5px solid rgba(79,172,254,0.2)', background: 'rgba(79,172,254,0.03)', fontSize: 14, outline: 'none', color: '#0a0a14', fontFamily: 'inherit', boxSizing: 'border-box' }}
+              style={{ width: '100%', padding: '12px 16px', borderRadius: 14, border: '1.5px solid rgba(201,206,212,0.2)', background: 'rgba(201,206,212,0.03)', fontSize: 14, outline: 'none', color: '#0a0b0d', fontFamily: 'inherit', boxSizing: 'border-box' }}
             />
           </div>
         ))}
 
         <div style={{ ...CARD_STYLE, padding: 20, marginTop: 8, marginBottom: 20 }}>
-          <div style={{ fontWeight: 700, fontSize: 14, color: '#0a0a14', marginBottom: 12 }}>Resumen del pedido</div>
+          <div style={{ fontWeight: 700, fontSize: 14, color: '#0a0b0d', marginBottom: 12 }}>Resumen del pedido</div>
           {cart.map(i => (
             <div key={i.productId} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8, fontSize: 13 }}>
-              <span style={{ color: 'rgba(10,10,20,0.6)' }}>{i.name} x{i.quantity}</span>
-              <span style={{ fontWeight: 700, color: '#0a0a14' }}>${(i.price * i.quantity).toFixed(2)}</span>
+              <span style={{ color: 'rgba(10,11,13,0.6)' }}>{i.name} x{i.quantity}</span>
+              <span style={{ fontWeight: 700, color: '#0a0b0d' }}>${(i.price * i.quantity).toFixed(2)}</span>
             </div>
           ))}
-          <div style={{ borderTop: '1.5px solid rgba(79,172,254,0.1)', paddingTop: 12, marginTop: 4, display: 'flex', justifyContent: 'space-between' }}>
+          <div style={{ borderTop: '1.5px solid rgba(201,206,212,0.1)', paddingTop: 12, marginTop: 4, display: 'flex', justifyContent: 'space-between' }}>
             <span style={{ fontWeight: 800 }}>Total</span>
             <span style={{ fontWeight: 900, fontSize: 18, background: HOLO, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>${total.toFixed(2)}</span>
           </div>
         </div>
 
         <button type="submit" disabled={loading}
-          style={{ width: '100%', padding: 16, borderRadius: 20, border: 'none', background: loading ? 'rgba(0,0,0,0.08)' : HOLO, color: '#fff', fontWeight: 800, fontSize: 16, cursor: loading ? 'wait' : 'pointer', boxShadow: '0 4px 20px rgba(79,172,254,0.3)', fontFamily: 'inherit' }}>
+          style={{ width: '100%', padding: 16, borderRadius: 20, border: 'none', background: loading ? 'rgba(0,0,0,0.08)' : HOLO, color: '#fff', fontWeight: 800, fontSize: 16, cursor: loading ? 'wait' : 'pointer', boxShadow: '0 4px 20px rgba(201,206,212,0.3)', fontFamily: 'inherit' }}>
           {loading ? 'Procesando...' : '✓ Confirmar orden'}
         </button>
       </form>
@@ -401,26 +401,26 @@ function MyOrders() {
 
   const STATUS = {
     pending:    { label: 'Pendiente',  color: '#f59e0b', bg: 'rgba(245,158,11,0.1)' },
-    processing: { label: 'En proceso', color: '#3b82f6', bg: 'rgba(59,130,246,0.1)' },
-    shipped:    { label: 'Enviado',    color: '#8b5cf6', bg: 'rgba(139,92,246,0.1)' },
+    processing: { label: 'En proceso', color: '#9aa0a7', bg: 'rgba(126,130,136,0.1)' },
+    shipped:    { label: 'Enviado',    color: '#c9ced4', bg: 'rgba(201,206,212,0.1)' },
     delivered:  { label: 'Entregado',  color: '#10b981', bg: 'rgba(16,185,129,0.1)' },
     cancelled:  { label: 'Cancelado',  color: '#ef4444', bg: 'rgba(239,68,68,0.1)' },
   };
 
   return (
     <div style={{ minHeight: '100vh', background: '#fff', fontFamily: "'Outfit',sans-serif", paddingBottom: 100 }}>
-      <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1.5px solid rgba(79,172,254,0.1)' }}>
+      <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1.5px solid rgba(201,206,212,0.1)' }}>
         <button onClick={() => navigate(-1)} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer' }}>←</button>
-        <span style={{ fontWeight: 700, fontSize: 16, color: '#0a0a14' }}>Mis Órdenes</span>
+        <span style={{ fontWeight: 700, fontSize: 16, color: '#0a0b0d' }}>Mis Órdenes</span>
       </div>
 
       <div style={{ padding: '16px 20px' }}>
         {loading ? (
-          <div style={{ textAlign: 'center', padding: 60, color: 'rgba(10,10,20,0.35)' }}>Cargando...</div>
+          <div style={{ textAlign: 'center', padding: 60, color: 'rgba(10,11,13,0.35)' }}>Cargando...</div>
         ) : orders.length === 0 ? (
           <div style={{ textAlign: 'center', padding: 60 }}>
             <div style={{ fontSize: 56, marginBottom: 12 }}>📦</div>
-            <div style={{ fontWeight: 700, color: '#0a0a14', fontSize: 18 }}>Sin órdenes aún</div>
+            <div style={{ fontWeight: 700, color: '#0a0b0d', fontSize: 18 }}>Sin órdenes aún</div>
             <button onClick={() => navigate('/shop')} style={{ marginTop: 20, padding: '12px 28px', borderRadius: 20, background: HOLO, border: 'none', color: '#fff', fontWeight: 700, cursor: 'pointer' }}>Ir a la tienda</button>
           </div>
         ) : orders.map(order => {
@@ -428,17 +428,17 @@ function MyOrders() {
           return (
             <div key={order._id} style={{ ...CARD_STYLE, padding: 16, marginBottom: 14 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-                <span style={{ fontSize: 11, color: 'rgba(10,10,20,0.4)', fontWeight: 600 }}>#{order._id?.slice(-8).toUpperCase()}</span>
+                <span style={{ fontSize: 11, color: 'rgba(10,11,13,0.4)', fontWeight: 600 }}>#{order._id?.slice(-8).toUpperCase()}</span>
                 <span style={{ fontSize: 11, fontWeight: 700, color: st.color, background: st.bg, padding: '3px 10px', borderRadius: 20 }}>{st.label}</span>
               </div>
               {(order.items || []).map((item, i) => (
                 <div key={i} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, marginBottom: 4 }}>
-                  <span style={{ color: 'rgba(10,10,20,0.6)' }}>{item.product?.name || 'Producto'} x{item.quantity}</span>
+                  <span style={{ color: 'rgba(10,11,13,0.6)' }}>{item.product?.name || 'Producto'} x{item.quantity}</span>
                   <span style={{ fontWeight: 700 }}>${(item.price * item.quantity).toFixed(2)}</span>
                 </div>
               ))}
-              <div style={{ borderTop: '1.5px solid rgba(79,172,254,0.1)', marginTop: 10, paddingTop: 10, display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: 12, color: 'rgba(10,10,20,0.4)' }}>{new Date(order.createdAt).toLocaleDateString()}</span>
+              <div style={{ borderTop: '1.5px solid rgba(201,206,212,0.1)', marginTop: 10, paddingTop: 10, display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: 12, color: 'rgba(10,11,13,0.4)' }}>{new Date(order.createdAt).toLocaleDateString()}</span>
                 <span style={{ fontWeight: 800, background: HOLO, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>${order.total?.toFixed(2)}</span>
               </div>
             </div>

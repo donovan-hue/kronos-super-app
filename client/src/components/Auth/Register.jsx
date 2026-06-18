@@ -3,11 +3,11 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { HoloText, BotonBurbuja3D } from '../kronos';
 
-const HOLO = 'linear-gradient(135deg,#4facfe,#00f2fe,#f3a0ff,#ff85a2)';
+const HOLO = 'linear-gradient(135deg,#c9ced4,#e9ecf0,#e9ecf0,#c9ced4)';
 
 const inputStyle = {
   width: '100%', padding: '13px 16px', borderRadius: 12, outline: 'none',
-  background: 'rgba(79,172,254,0.05)', border: '1.5px solid rgba(190,200,212,0.15)',
+  background: 'rgba(201,206,212,0.05)', border: '1.5px solid rgba(190,200,212,0.15)',
   color: '#c9ced4', fontSize: 14, fontFamily: 'inherit', boxSizing: 'border-box',
 };
 
@@ -57,7 +57,7 @@ function Register() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'radial-gradient(ellipse at 70% 20%, rgba(190,200,212,0.05), transparent 50%), radial-gradient(ellipse at 30% 80%, rgba(79,172,254,0.07), transparent 50%), #040405',
+      background: 'radial-gradient(ellipse at 70% 20%, rgba(190,200,212,0.05), transparent 50%), radial-gradient(ellipse at 30% 80%, rgba(201,206,212,0.07), transparent 50%), #040405',
       display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24,
       fontFamily: "'Outfit', sans-serif",
     }}>
@@ -67,11 +67,11 @@ function Register() {
           {/* Círculo K tornasol */}
           <div style={{
             width: 90, height: 90, borderRadius: '50%',
-            background: 'linear-gradient(135deg,#EC4899,#8B5CF6,#06B6D4)',
+            background: 'linear-gradient(135deg,#9aa0a7,#c9ced4,#9aa0a7)',
             backgroundSize: '200% 200%',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             margin: '0 auto 20px',
-            boxShadow: '0 0 40px rgba(139,92,246,0.5), 0 0 70px rgba(6,182,212,0.2)',
+            boxShadow: '0 0 40px rgba(201,206,212,0.5), 0 0 70px rgba(126,130,136,0.2)',
             animation: 'tornasol-k 5s ease-in-out infinite',
             position: 'relative',
           }}>
@@ -84,11 +84,11 @@ function Register() {
           </div>
           <div style={{
             fontSize: 'clamp(36px, 10vw, 52px)', fontWeight: 900, letterSpacing: 8,
-            background: 'linear-gradient(90deg,#EC4899,#8B5CF6,#06B6D4,#8B5CF6,#EC4899)',
+            background: 'linear-gradient(90deg,#9aa0a7,#c9ced4,#9aa0a7,#c9ced4,#9aa0a7)',
             backgroundSize: '300% 300%',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
             animation: 'tornasol-k 5s ease-in-out infinite',
-            filter: 'drop-shadow(0 3px 12px rgba(139,92,246,0.4))',
+            filter: 'drop-shadow(0 3px 12px rgba(201,206,212,0.4))',
             marginBottom: 6,
           }}>KRONOS</div>
           <style>{`@keyframes tornasol-k { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }`}</style>
@@ -116,7 +116,7 @@ function Register() {
         {slowWarning && (
           <div style={{
             background: 'rgba(190,200,212,0.06)', border: '1px solid rgba(190,200,212,0.20)',
-            color: '#4facfe', padding: '10px 14px', borderRadius: 12, fontSize: 12,
+            color: '#c9ced4', padding: '10px 14px', borderRadius: 12, fontSize: 12,
             marginBottom: 14, textAlign: 'center',
           }}>
             ⏳ El servidor está despertando, espera unos segundos...

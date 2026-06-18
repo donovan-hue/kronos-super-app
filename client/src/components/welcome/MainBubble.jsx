@@ -24,9 +24,9 @@ const MainBubble = ({ onGetStarted, onExplore }) => {
         <svg style={styles.svg} viewBox="0 0 200 230" preserveAspectRatio="xMidYMid meet">
           <defs>
             <linearGradient id="hexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%"   stopColor="#7c3aed" />
-              <stop offset="50%"  stopColor="#06b6d4" />
-              <stop offset="100%" stopColor="#a855f7" />
+              <stop offset="0%"   stopColor="#9aa0a7" />
+              <stop offset="50%"  stopColor="#9aa0a7" />
+              <stop offset="100%" stopColor="#b4b9c0" />
             </linearGradient>
             <filter id="hexGlow">
               <feGaussianBlur stdDeviation="3" result="blur" />
@@ -62,15 +62,15 @@ const MainBubble = ({ onGetStarted, onExplore }) => {
           <button
             style={styles.btnPrimary}
             onClick={onGetStarted}
-            onMouseEnter={e => { e.currentTarget.style.transform='scale(1.05)'; e.currentTarget.style.boxShadow='0 0 30px rgba(124,58,237,0.8)'; }}
-            onMouseLeave={e => { e.currentTarget.style.transform='scale(1)';    e.currentTarget.style.boxShadow='0 0 20px rgba(124,58,237,0.4)'; }}
+            onMouseEnter={e => { e.currentTarget.style.transform='scale(1.05)'; e.currentTarget.style.boxShadow='0 0 30px rgba(126,130,136,0.8)'; }}
+            onMouseLeave={e => { e.currentTarget.style.transform='scale(1)';    e.currentTarget.style.boxShadow='0 0 20px rgba(126,130,136,0.4)'; }}
           >
             Get Started
           </button>
           <button
             style={styles.btnSecondary}
             onClick={onExplore}
-            onMouseEnter={e => { e.currentTarget.style.borderColor='#06b6d4'; e.currentTarget.style.color='#06b6d4'; }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor='#9aa0a7'; e.currentTarget.style.color='#9aa0a7'; }}
             onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(255,255,255,0.3)'; e.currentTarget.style.color='rgba(255,255,255,0.6)'; }}
           >
             Explore Features
@@ -102,7 +102,7 @@ const styles = {
     position: 'absolute', top: '50%', left: '50%',
     transform: 'translate(-50%,-50%)',
     width: '500px', height: '500px', borderRadius: '50%',
-    background: 'radial-gradient(circle, rgba(124,58,237,0.25) 0%, transparent 70%)',
+    background: 'radial-gradient(circle, rgba(126,130,136,0.25) 0%, transparent 70%)',
     filter: 'blur(60px)', zIndex: -1, pointerEvents: 'none',
   },
   hexContainer: {
@@ -112,12 +112,12 @@ const styles = {
   },
   svg: {
     width: '100%', height: '100%',
-    filter: 'drop-shadow(0 0 30px rgba(124,58,237,0.5))',
+    filter: 'drop-shadow(0 0 30px rgba(126,130,136,0.5))',
   },
   kLetter: {
     position: 'absolute',
     fontSize: '90px', fontWeight: 900, color: '#fff',
-    textShadow: '0 0 20px rgba(124,58,237,0.8)',
+    textShadow: '0 0 20px rgba(126,130,136,0.8)',
     zIndex: 10, lineHeight: 1,
     top: '50%', left: '50%',
     transform: 'translate(-50%, -58%)',
@@ -142,7 +142,7 @@ const styles = {
     background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
     color: '#fff', border: 'none', fontSize: '15px', fontWeight: 700,
     cursor: 'pointer', transition: 'all 0.3s',
-    boxShadow: '0 0 20px rgba(124,58,237,0.4)',
+    boxShadow: '0 0 20px rgba(126,130,136,0.4)',
   },
   btnSecondary: {
     padding: '12px', borderRadius: '24px', background: 'transparent',

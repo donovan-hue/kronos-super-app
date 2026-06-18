@@ -16,9 +16,9 @@ export default function Navbar() {
           100% { background-position: 0% 50%; }
         }
         @keyframes kronos-glow-fade {
-          0%,100% { text-shadow: 0 0 18px rgba(236,72,153,0.5), 0 0 40px rgba(139,92,246,0.3), 0 0 80px rgba(6,182,212,0.15); }
-          33%     { text-shadow: 0 0 24px rgba(139,92,246,0.6), 0 0 48px rgba(6,182,212,0.35), 0 0 90px rgba(236,72,153,0.15); }
-          66%     { text-shadow: 0 0 20px rgba(6,182,212,0.55), 0 0 44px rgba(236,72,153,0.3), 0 0 85px rgba(139,92,246,0.15); }
+          0%,100% { text-shadow: 0 0 18px rgba(126,130,136,0.5), 0 0 40px rgba(201,206,212,0.3), 0 0 80px rgba(126,130,136,0.15); }
+          33%     { text-shadow: 0 0 24px rgba(201,206,212,0.6), 0 0 48px rgba(126,130,136,0.35), 0 0 90px rgba(126,130,136,0.15); }
+          66%     { text-shadow: 0 0 20px rgba(126,130,136,0.55), 0 0 44px rgba(126,130,136,0.3), 0 0 85px rgba(201,206,212,0.15); }
         }
         @keyframes slogan-shimmer {
           0%   { background-position: 200% center; }
@@ -29,7 +29,7 @@ export default function Navbar() {
       <nav style={{
         position: 'sticky', top: 0, zIndex: 200,
         background: 'rgba(255,255,255,0.92)',
-        borderBottom: '1px solid rgba(139,92,246,0.12)',
+        borderBottom: '1px solid rgba(201,206,212,0.12)',
         backdropFilter: 'blur(20px)',
         fontFamily: "'Outfit', sans-serif",
         padding: '10px 16px',
@@ -50,9 +50,9 @@ export default function Navbar() {
           >
             <div style={{
               width: 40, height: 40, borderRadius: '50%',
-              background: 'linear-gradient(135deg,#EC4899,#8B5CF6,#06B6D4)',
+              background: 'linear-gradient(135deg,#9aa0a7,#c9ced4,#9aa0a7)',
               padding: 2,
-              boxShadow: '0 0 12px rgba(139,92,246,0.4)',
+              boxShadow: '0 0 12px rgba(201,206,212,0.4)',
             }}>
               <img
                 src={user?.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.username || 'K')}&background=8B5CF6&color=fff&size=40`}
@@ -76,7 +76,7 @@ export default function Navbar() {
               fontWeight: 900,
               letterSpacing: '0.18em',
               fontFamily: "'Outfit', sans-serif",
-              background: 'linear-gradient(90deg, #EC4899, #8B5CF6, #06B6D4, #8B5CF6, #EC4899)',
+              background: 'linear-gradient(90deg, #9aa0a7, #c9ced4, #9aa0a7, #c9ced4, #9aa0a7)',
               backgroundSize: '300% 300%',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
@@ -85,7 +85,7 @@ export default function Navbar() {
               textTransform: 'uppercase',
               lineHeight: 1.1,
               // Sombra desvanecida tornasol (filtro sobre el contenedor)
-              filter: 'drop-shadow(0 2px 8px rgba(139,92,246,0.35)) drop-shadow(0 0 20px rgba(6,182,212,0.2))',
+              filter: 'drop-shadow(0 2px 8px rgba(201,206,212,0.35)) drop-shadow(0 0 20px rgba(126,130,136,0.2))',
             }}>
               KRONOS
             </div>
@@ -95,7 +95,7 @@ export default function Navbar() {
               fontSize: 'clamp(9px, 2.2vw, 11px)',
               fontWeight: 300,
               letterSpacing: '0.08em',
-              background: 'linear-gradient(90deg, rgba(236,72,153,0.5), #8B5CF6, #06B6D4, #8B5CF6, rgba(236,72,153,0.5))',
+              background: 'linear-gradient(90deg, rgba(126,130,136,0.5), #c9ced4, #9aa0a7, #c9ced4, rgba(126,130,136,0.5))',
               backgroundSize: '200% auto',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
@@ -115,17 +115,17 @@ export default function Navbar() {
               flexShrink: 0,
               width: 40, height: 40,
               borderRadius: '50%',
-              background: 'radial-gradient(circle at 35% 30%, rgba(255,255,255,0.5), rgba(139,92,246,0.12))',
-              border: '1.5px solid rgba(139,92,246,0.25)',
+              background: 'radial-gradient(circle at 35% 30%, rgba(255,255,255,0.5), rgba(201,206,212,0.12))',
+              border: '1.5px solid rgba(201,206,212,0.25)',
               backdropFilter: 'blur(10px)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: 18,
               cursor: 'pointer',
-              boxShadow: '0 2px 12px rgba(139,92,246,0.2), inset 0 1px 0 rgba(255,255,255,0.6)',
+              boxShadow: '0 2px 12px rgba(201,206,212,0.2), inset 0 1px 0 rgba(255,255,255,0.6)',
               transition: 'all 0.2s ease',
             }}
-            onMouseEnter={e => e.currentTarget.style.boxShadow = '0 4px 20px rgba(139,92,246,0.4), inset 0 1px 0 rgba(255,255,255,0.6)'}
-            onMouseLeave={e => e.currentTarget.style.boxShadow = '0 2px 12px rgba(139,92,246,0.2), inset 0 1px 0 rgba(255,255,255,0.6)'}
+            onMouseEnter={e => e.currentTarget.style.boxShadow = '0 4px 20px rgba(201,206,212,0.4), inset 0 1px 0 rgba(255,255,255,0.6)'}
+            onMouseLeave={e => e.currentTarget.style.boxShadow = '0 2px 12px rgba(201,206,212,0.2), inset 0 1px 0 rgba(255,255,255,0.6)'}
           >
             🔍
           </div>

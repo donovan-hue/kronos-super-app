@@ -7,7 +7,7 @@ const CameraContainer = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #9aa0a7 0%, #565b62 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -81,11 +81,11 @@ const CameraPermissionPrompt = styled(motion.div)`
       transition: all 0.3s ease;
 
       &.allow {
-        background: #667eea;
+        background: #9aa0a7;
         color: white;
 
         &:hover {
-          background: #764ba2;
+          background: #565b62;
         }
       }
 

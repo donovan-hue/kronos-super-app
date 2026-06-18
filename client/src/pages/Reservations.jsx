@@ -83,7 +83,7 @@ function NewReservationModal({ onClose, onCreated }) {
 
   const inputStyle = {
     width: '100%',
-    background: 'rgba(79,172,254,0.07)',
+    background: 'rgba(201,206,212,0.07)',
     border: '1px solid rgba(190,200,212,0.15)',
     borderRadius: 12,
     padding: '11px 14px',
@@ -140,7 +140,7 @@ function NewReservationModal({ onClose, onCreated }) {
                 style={{ ...inputStyle, cursor: 'pointer' }}
               >
                 {BUSINESS_TYPES.map(t => (
-                  <option key={t.value} value={t.value} style={{ background: '#1a1a2e' }}>{t.label}</option>
+                  <option key={t.value} value={t.value} style={{ background: '#15171a' }}>{t.label}</option>
                 ))}
               </select>
             </div>
@@ -174,13 +174,13 @@ function NewReservationModal({ onClose, onCreated }) {
               <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
                 <button type="button"
                   onClick={() => set('partySize', Math.max(1, form.partySize - 1))}
-                  style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.14)', color: '#c9ced4', fontSize: 20, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(190,200,212,0.14)', color: '#c9ced4', fontSize: 20, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   −
                 </button>
                 <span style={{ color: '#c9ced4', fontSize: 22, fontWeight: 700, minWidth: 32, textAlign: 'center' }}>{form.partySize}</span>
                 <button type="button"
                   onClick={() => set('partySize', Math.min(20, form.partySize + 1))}
-                  style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.14)', color: '#c9ced4', fontSize: 20, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(190,200,212,0.14)', color: '#c9ced4', fontSize: 20, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   +
                 </button>
                 <span style={{ color: 'rgba(201,206,212,0.35)', fontSize: 13 }}>
@@ -249,7 +249,7 @@ function ReservationCard({ reservation, onCancel }) {
         {/* Icon */}
         <div style={{
           width: 46, height: 46, borderRadius: 14,
-          background: 'linear-gradient(135deg,rgba(124,58,237,0.25),rgba(6,182,212,0.15))',
+          background: 'linear-gradient(135deg,rgba(126,130,136,0.25),rgba(126,130,136,0.15))',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: 22, flexShrink: 0,
         }}>
@@ -378,7 +378,7 @@ export default function Reservations() {
           background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
           color: '#fff', padding: '10px 24px', borderRadius: 28,
           fontSize: 14, fontWeight: 600, zIndex: 9999,
-          boxShadow: '0 8px 32px rgba(124,58,237,0.4)', whiteSpace: 'nowrap',
+          boxShadow: '0 8px 32px rgba(126,130,136,0.4)', whiteSpace: 'nowrap',
         }}>
           {toast}
         </div>
@@ -399,7 +399,7 @@ export default function Reservations() {
               fontSize: 13,
               fontWeight: 700,
               cursor: 'pointer',
-              boxShadow: '0 4px 16px rgba(124,58,237,0.35)',
+              boxShadow: '0 4px 16px rgba(126,130,136,0.35)',
             }}>
             + Nueva
           </button>

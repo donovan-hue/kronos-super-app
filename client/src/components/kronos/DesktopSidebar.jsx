@@ -130,7 +130,7 @@ function SidebarItem({ item, isActive }) {
         padding: '9px 12px',
         borderRadius: 14,
         background: isActive
-          ? 'radial-gradient(circle at 30% 40%, rgba(190,200,212,0.15), rgba(243,160,255,0.12))'
+          ? 'radial-gradient(circle at 30% 40%, rgba(190,200,212,0.15), rgba(201,206,212,0.12))'
           : hovered ? 'rgba(255,255,255,0.05)' : 'transparent',
         border: isActive ? '1px solid rgba(190,200,212,0.22)' : '1px solid transparent',
         boxShadow: isActive ? '0 0 14px rgba(190,200,212,0.15), inset 0 1px 0 rgba(255,255,255,0.1)' : 'none',
@@ -144,7 +144,7 @@ function SidebarItem({ item, isActive }) {
           background: isActive
             ? 'radial-gradient(circle at 35% 35%, rgba(255,255,255,0.2), rgba(190,200,212,0.07))'
             : 'rgba(255,255,255,0.05)',
-          border: isActive ? '1px solid rgba(79,172,254,0.4)' : '1px solid rgba(255,255,255,0.08)',
+          border: isActive ? '1px solid rgba(201,206,212,0.4)' : '1px solid rgba(255,255,255,0.08)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -165,7 +165,7 @@ function SidebarItem({ item, isActive }) {
           }
         </div>
         <span style={{
-          color: isActive ? '#4facfe' : 'rgba(201,206,212,0.65)',
+          color: isActive ? '#c9ced4' : 'rgba(201,206,212,0.65)',
           fontWeight: isActive ? 700 : 400,
           fontSize: 13,
           fontFamily: "'Outfit', sans-serif",
@@ -194,8 +194,8 @@ export default function DesktopSidebar() {
       >
         <div style={{
           width: 38, height: 38, borderRadius: 12,
-          background: 'radial-gradient(circle at 35% 35%, rgba(255,255,255,0.3), rgba(190,200,212,0.15) 40%, rgba(243,160,255,0.15))',
-          border: '1.5px solid rgba(79,172,254,0.5)',
+          background: 'radial-gradient(circle at 35% 35%, rgba(255,255,255,0.3), rgba(190,200,212,0.15) 40%, rgba(201,206,212,0.15))',
+          border: '1.5px solid rgba(201,206,212,0.5)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: 18, fontWeight: 900, color: '#fff',
           boxShadow: '0 0 16px rgba(190,200,212,0.20), inset 0 1px 0 rgba(255,255,255,0.3)',
@@ -206,7 +206,7 @@ export default function DesktopSidebar() {
         </div>
         <span style={{
           fontWeight: 800, fontSize: 18, letterSpacing: -0.5,
-          background: 'linear-gradient(135deg,#4facfe,#00f2fe,#f3a0ff,#ff85a2)',
+          background: 'linear-gradient(135deg,#c9ced4,#e9ecf0,#e9ecf0,#c9ced4)',
           WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
         }}>Kronos</span>
       </div>
@@ -231,7 +231,7 @@ export default function DesktopSidebar() {
             <img
               src={user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.username || 'K')}&background=7c3aed&color=fff&size=36`}
               alt=""
-              style={{ width: 36, height: 36, borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(79,172,254,0.4)' }}
+              style={{ width: 36, height: 36, borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(201,206,212,0.4)' }}
             />
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ color: '#c9ced4', fontWeight: 600, fontSize: 13, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>

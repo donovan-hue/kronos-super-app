@@ -15,7 +15,7 @@ export default function QRCode({ value, size = 180, className = '' }) {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        border: '3px solid #0a0a14',
+        border: '3px solid #0a0b0d',
         position: 'relative',
         padding: 8,
         boxSizing: 'border-box',
@@ -30,7 +30,7 @@ export default function QRCode({ value, size = 180, className = '' }) {
           left: i % 2 === 0 ? 6 : undefined,
           right: i % 2 === 1 ? 6 : undefined,
           width: 18, height: 18,
-          border: '3px solid #0a0a14',
+          border: '3px solid #0a0b0d',
           borderRadius: 3,
         }} />
       ))}
@@ -52,7 +52,7 @@ export default function QRCode({ value, size = 180, className = '' }) {
             <div key={i} style={{
               width: '100%',
               aspectRatio: '1',
-              background: filled ? '#0a0a14' : 'transparent',
+              background: filled ? '#0a0b0d' : 'transparent',
               borderRadius: 1,
             }} />
           );

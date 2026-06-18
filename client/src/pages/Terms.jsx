@@ -213,7 +213,7 @@ export default function Terms() {
     <div
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #0f0f1a 0%, #1a0528 50%, #0d1117 100%)',
+        background: 'linear-gradient(135deg, #0b0c0d 0%, #0a0b0d 50%, #0b0c0d 100%)',
         padding: '64px 24px 80px',
         color: '#fff'
       }}
@@ -239,9 +239,9 @@ export default function Terms() {
           <div
             style={{
               display: 'inline-block',
-              background: 'rgba(59,130,246,0.12)',
-              border: '1px solid rgba(59,130,246,0.3)',
-              color: '#60a5fa',
+              background: 'rgba(126,130,136,0.12)',
+              border: '1px solid rgba(126,130,136,0.3)',
+              color: '#b4b9c0',
               fontSize: 12,
               fontWeight: 600,
               padding: '4px 12px',
@@ -274,14 +274,14 @@ export default function Terms() {
         {/* Resumen rápido */}
         <div
           style={{
-            background: 'rgba(59,130,246,0.06)',
-            border: '1px solid rgba(59,130,246,0.2)',
+            background: 'rgba(126,130,136,0.06)',
+            border: '1px solid rgba(126,130,136,0.2)',
             borderRadius: 16,
             padding: '20px 24px',
             marginBottom: 32
           }}
         >
-          <div style={{ color: '#60a5fa', fontWeight: 700, fontSize: 14, marginBottom: 10 }}>
+          <div style={{ color: '#b4b9c0', fontWeight: 700, fontSize: 14, marginBottom: 10 }}>
             Puntos clave
           </div>
           <ul style={{ margin: 0, padding: '0 0 0 18px', color: 'rgba(255,255,255,0.7)', fontSize: 13, lineHeight: 1.9 }}>
@@ -302,9 +302,9 @@ export default function Terms() {
                 key={sec.id}
                 style={{
                   background: isOpen
-                    ? 'rgba(59,130,246,0.06)'
+                    ? 'rgba(126,130,136,0.06)'
                     : 'rgba(255,255,255,0.03)',
-                  border: `1px solid ${isOpen ? 'rgba(59,130,246,0.3)' : 'rgba(255,255,255,0.08)'}`,
+                  border: `1px solid ${isOpen ? 'rgba(126,130,136,0.3)' : 'rgba(255,255,255,0.08)'}`,
                   borderRadius: 14,
                   overflow: 'hidden',
                   transition: 'border-color 0.2s'
@@ -381,7 +381,7 @@ export default function Terms() {
               style={{
                 background: 'transparent',
                 border: 'none',
-                color: '#60a5fa',
+                color: '#b4b9c0',
                 fontSize: 13,
                 cursor: 'pointer',
                 textDecoration: 'underline',
@@ -392,7 +392,7 @@ export default function Terms() {
             </button>
             <a
               href="mailto:legal@kronos.app"
-              style={{ color: '#60a5fa', fontSize: 13, textDecoration: 'underline' }}
+              style={{ color: '#b4b9c0', fontSize: 13, textDecoration: 'underline' }}
             >
               legal@kronos.app
             </a>

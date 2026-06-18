@@ -19,7 +19,7 @@ function VirtualCardDisplay({ card, onFreeze }) {
         background: card.frozen
           ? 'linear-gradient(135deg,#374151,#1f2937)'
           : 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
-        borderRadius: 20, padding: '28px 28px 24px', boxShadow: '0 20px 60px rgba(124,58,237,0.4)',
+        borderRadius: 20, padding: '28px 28px 24px', boxShadow: '0 20px 60px rgba(126,130,136,0.4)',
         position: 'relative', overflow: 'hidden', minHeight: 200,
       }}>
         {/* Background pattern */}
@@ -76,7 +76,7 @@ function VirtualCardDisplay({ card, onFreeze }) {
       {/* Card actions */}
       <div style={{ display: 'flex', gap: 10, marginTop: 14 }}>
         <button onClick={() => setShowDetails(s => !s)}
-          style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'rgba(79,172,254,0.07)', color: '#c9ced4', border: '1px solid rgba(190,200,212,0.15)', fontSize: 13, cursor: 'pointer' }}>
+          style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'rgba(201,206,212,0.07)', color: '#c9ced4', border: '1px solid rgba(190,200,212,0.15)', fontSize: 13, cursor: 'pointer' }}>
           {showDetails ? '🙈 Ocultar' : '👁️ Ver detalles'}
         </button>
         <button onClick={onFreeze}
@@ -141,7 +141,7 @@ function SendModal({ balance, onClose, onSuccess }) {
         {step === 'search' && (
           <>
             <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Buscar usuario..."
-              style={{ width: '100%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 12, padding: '10px 14px', color: '#c9ced4', fontSize: 14, outline: 'none', marginBottom: 12, boxSizing: 'border-box', fontFamily: 'inherit' }} />
+              style={{ width: '100%', background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 12, padding: '10px 14px', color: '#c9ced4', fontSize: 14, outline: 'none', marginBottom: 12, boxSizing: 'border-box', fontFamily: 'inherit' }} />
             {results.map(u => (
               <div key={u._id} onClick={() => { setSelected(u); setStep('amount'); }}
                 style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 4px', cursor: 'pointer', borderRadius: 10 }}>
@@ -191,7 +191,7 @@ function SendModal({ balance, onClose, onSuccess }) {
             </div>
 
             <input value={note} onChange={e => setNote(e.target.value)} placeholder="Nota (opcional)"
-              style={{ width: '100%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 12, padding: '10px 14px', color: '#c9ced4', fontSize: 14, outline: 'none', marginBottom: 16, boxSizing: 'border-box', fontFamily: 'inherit' }} />
+              style={{ width: '100%', background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 12, padding: '10px 14px', color: '#c9ced4', fontSize: 14, outline: 'none', marginBottom: 16, boxSizing: 'border-box', fontFamily: 'inherit' }} />
 
             <button onClick={handleSend} disabled={loading || !amount || Number(amount) <= 0 || Number(amount) > balance}
               style={{ width: '100%', padding: '14px', borderRadius: 14, background: amount && Number(amount) > 0 && Number(amount) <= balance ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)' : 'rgba(255,255,255,0.08)', color: '#fff', border: 'none', fontSize: 15, fontWeight: 700, cursor: 'pointer' }}>
@@ -289,7 +289,7 @@ function DailyRewardCard({ onClaimed }) {
   const canClaim = !reward.claimed;
 
   return (
-    <GlassCard style={{ marginBottom: 16, background: canClaim ? 'linear-gradient(135deg,rgba(168,85,247,0.18),rgba(6,182,212,0.1))' : 'rgba(255,255,255,0.04)', border: canClaim ? '1px solid rgba(168,85,247,0.4)' : '1px solid rgba(255,255,255,0.06)' }}>
+    <GlassCard style={{ marginBottom: 16, background: canClaim ? 'linear-gradient(135deg,rgba(180,185,192,0.18),rgba(126,130,136,0.1))' : 'rgba(255,255,255,0.04)', border: canClaim ? '1px solid rgba(180,185,192,0.4)' : '1px solid rgba(255,255,255,0.06)' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
         <div style={{ fontSize: 40, lineHeight: 1 }}>{canClaim ? '🎁' : '✅'}</div>
         <div style={{ flex: 1 }}>
@@ -302,14 +302,14 @@ function DailyRewardCard({ onClaimed }) {
           {/* Streak dots */}
           <div style={{ display: 'flex', gap: 4, marginTop: 8 }}>
             {[...Array(7)].map((_, i) => (
-              <div key={i} style={{ width: 10, height: 10, borderRadius: '50%', background: i < (streakDays % 7) ? 'linear-gradient(135deg,#a855f7,#06b6d4)' : 'rgba(255,255,255,0.12)' }} />
+              <div key={i} style={{ width: 10, height: 10, borderRadius: '50%', background: i < (streakDays % 7) ? 'linear-gradient(135deg,#b4b9c0,#9aa0a7)' : 'rgba(255,255,255,0.12)' }} />
             ))}
           </div>
         </div>
         <button
           onClick={handleClaim}
           disabled={!canClaim || claiming}
-          style={{ padding: '10px 18px', borderRadius: 28, fontWeight: 700, fontSize: 13, border: 'none', cursor: canClaim ? 'pointer' : 'default', background: canClaim ? 'linear-gradient(135deg,#a855f7,#06b6d4)' : 'rgba(255,255,255,0.06)', color: '#fff', opacity: canClaim ? 1 : 0.5, transition: 'opacity 0.2s', whiteSpace: 'nowrap' }}>
+          style={{ padding: '10px 18px', borderRadius: 28, fontWeight: 700, fontSize: 13, border: 'none', cursor: canClaim ? 'pointer' : 'default', background: canClaim ? 'linear-gradient(135deg,#b4b9c0,#9aa0a7)' : 'rgba(255,255,255,0.06)', color: '#fff', opacity: canClaim ? 1 : 0.5, transition: 'opacity 0.2s', whiteSpace: 'nowrap' }}>
           {claimed ? '¡Listo! 🎉' : claiming ? '...' : canClaim ? 'Reclamar' : 'Mañana'}
         </button>
       </div>
@@ -354,13 +354,13 @@ export default function Wallet() {
   };
 
   const txIcon = { deposit: '⬇️', withdrawal: '⬆️', transfer_in: '📥', transfer_out: '📤', payment: '🛍️', refund: '↩️' };
-  const txColor = { deposit: '#10b981', withdrawal: '#ef4444', transfer_in: '#10b981', transfer_out: '#ef4444', payment: '#f59e0b', refund: '#06b6d4' };
+  const txColor = { deposit: '#10b981', withdrawal: '#ef4444', transfer_in: '#10b981', transfer_out: '#ef4444', payment: '#f59e0b', refund: '#9aa0a7' };
 
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', paddingBottom: 100 }}>
       {/* Toast */}
       {toast && (
-        <div style={{ position: 'fixed', top: 80, left: '50%', transform: 'translateX(-50%)', background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', color: '#15171a', padding: '10px 24px', borderRadius: 28, fontSize: 14, fontWeight: 600, zIndex: 9999, boxShadow: '0 8px 32px rgba(124,58,237,0.4)' }}>
+        <div style={{ position: 'fixed', top: 80, left: '50%', transform: 'translateX(-50%)', background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', color: '#15171a', padding: '10px 24px', borderRadius: 28, fontSize: 14, fontWeight: 600, zIndex: 9999, boxShadow: '0 8px 32px rgba(126,130,136,0.4)' }}>
           {toast}
         </div>
       )}
@@ -373,7 +373,7 @@ export default function Wallet() {
         ) : (
           <>
             {/* Balance principal */}
-            <GlassCard style={{ textAlign: 'center', marginBottom: 20, padding: '32px 24px', background: 'linear-gradient(135deg,rgba(124,58,237,0.15),rgba(6,182,212,0.08))' }}>
+            <GlassCard style={{ textAlign: 'center', marginBottom: 20, padding: '32px 24px', background: 'linear-gradient(135deg,rgba(126,130,136,0.15),rgba(126,130,136,0.08))' }}>
               <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 13, marginBottom: 6, letterSpacing: 1 }}>SALDO DISPONIBLE</div>
               <div style={{ color: '#c9ced4', fontSize: 52, fontWeight: 900, letterSpacing: -2, marginBottom: 4 }}>
                 ${(data?.cash?.balance || 0).toFixed(2)}
@@ -381,8 +381,8 @@ export default function Wallet() {
               <div style={{ color: 'rgba(201,206,212,0.35)', fontSize: 12 }}>{data?.cash?.currency || 'USD'}</div>
 
               {data?.kro && (
-                <div style={{ marginTop: 16, padding: '10px 20px', background: 'rgba(139,92,246,0.14)', border: '1px solid rgba(139,92,246,0.35)', borderRadius: 12, display: 'inline-block' }}>
-                  <span style={{ color: '#a78bfa', fontSize: 14, fontWeight: 700, textShadow: '0 0 12px rgba(139,92,246,0.35)' }}>
+                <div style={{ marginTop: 16, padding: '10px 20px', background: 'rgba(201,206,212,0.14)', border: '1px solid rgba(201,206,212,0.35)', borderRadius: 12, display: 'inline-block' }}>
+                  <span style={{ color: '#e9ecf0', fontSize: 14, fontWeight: 700, textShadow: '0 0 12px rgba(201,206,212,0.35)' }}>
                     {parseFloat(data.kro.tokenBalance || 0).toFixed(0)} KRO
                   </span>
                   <span style={{ color: 'rgba(201,206,212,0.35)', fontSize: 12 }}> tokens</span>
@@ -489,12 +489,12 @@ export default function Wallet() {
                       ].map(item => (
                         <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
                           <span style={{ color: 'rgba(201,206,212,0.50)', fontSize: 14 }}>{item.label}</span>
-                          <span style={{ color: '#a78bfa', fontSize: 14, fontWeight: 700, textShadow: '0 0 12px rgba(139,92,246,0.35)' }}>{item.value}</span>
+                          <span style={{ color: '#e9ecf0', fontSize: 14, fontWeight: 700, textShadow: '0 0 12px rgba(201,206,212,0.35)' }}>{item.value}</span>
                         </div>
                       ))}
                     </GlassCard>
                     <div style={{ display: 'flex', gap: 10 }}>
-                      <a href="/tokens" style={{ flex: 1, padding: '12px', borderRadius: 14, background: 'linear-gradient(135deg,#a78bfa 0%,#8b5cf6 45%,#6d4bd0 100%)', color: '#fff', border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer', textAlign: 'center', textDecoration: 'none', boxShadow: '0 12px 30px -10px rgba(139,92,246,0.45)' }}>
+                      <a href="/tokens" style={{ flex: 1, padding: '12px', borderRadius: 14, background: 'linear-gradient(135deg,#e9ecf0 0%,#c9ced4 45%,#7e8288 100%)', color: '#fff', border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer', textAlign: 'center', textDecoration: 'none', boxShadow: '0 12px 30px -10px rgba(201,206,212,0.45)' }}>
                         ⭐ Gestionar KRO
                       </a>
                     </div>
@@ -504,7 +504,7 @@ export default function Wallet() {
                     <div style={{ fontSize: 40, marginBottom: 8 }}>⭐</div>
                     <div>Wallet KRO no inicializada</div>
                     <button onClick={async () => { await axios.post(`${API_URL}/tokens/wallet/init`); fetchWallet(); }}
-                      style={{ marginTop: 16, padding: '10px 24px', borderRadius: 20, background: 'linear-gradient(135deg,#a78bfa 0%,#8b5cf6 45%,#6d4bd0 100%)', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 14, fontWeight: 700, boxShadow: '0 12px 30px -10px rgba(139,92,246,0.45)' }}>
+                      style={{ marginTop: 16, padding: '10px 24px', borderRadius: 20, background: 'linear-gradient(135deg,#e9ecf0 0%,#c9ced4 45%,#7e8288 100%)', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 14, fontWeight: 700, boxShadow: '0 12px 30px -10px rgba(201,206,212,0.45)' }}>
                       Inicializar KRO Wallet
                     </button>
                   </div>

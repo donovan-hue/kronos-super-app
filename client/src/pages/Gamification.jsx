@@ -7,9 +7,9 @@ const API = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 const RARITY_COLOR = {
   common:    { bg: 'rgba(107,114,128,0.12)', border: 'rgba(107,114,128,0.3)', text: '#6b7280', label: 'Común'    },
-  rare:      { bg: 'rgba(59,130,246,0.1)',   border: 'rgba(59,130,246,0.4)', text: '#3b82f6',  label: 'Raro'     },
-  epic:      { bg: 'rgba(139,92,246,0.1)',   border: 'rgba(139,92,246,0.4)', text: '#8B5CF6',  label: 'Épico'    },
-  legendary: { bg: 'rgba(236,72,153,0.1)',   border: 'rgba(236,72,153,0.5)', text: '#EC4899',  label: 'Legendario'},
+  rare:      { bg: 'rgba(126,130,136,0.1)',   border: 'rgba(126,130,136,0.4)', text: '#9aa0a7',  label: 'Raro'     },
+  epic:      { bg: 'rgba(201,206,212,0.1)',   border: 'rgba(201,206,212,0.4)', text: '#c9ced4',  label: 'Épico'    },
+  legendary: { bg: 'rgba(126,130,136,0.1)',   border: 'rgba(126,130,136,0.5)', text: '#9aa0a7',  label: 'Legendario'},
 };
 
 const LEVEL_TITLES = [
@@ -33,10 +33,10 @@ function XPBar({ progress, xpForNext }) {
       <div style={{ height: 10, background: 'rgba(190,200,212,0.07)', borderRadius: 99, overflow: 'hidden' }}>
         <div style={{
           height: '100%', borderRadius: 99,
-          background: 'linear-gradient(90deg,#EC4899,#8B5CF6,#06B6D4)',
+          background: 'linear-gradient(90deg,#9aa0a7,#c9ced4,#9aa0a7)',
           width: `${Math.min(progress, 100)}%`,
           transition: 'width 1s ease',
-          boxShadow: '0 0 8px rgba(139,92,246,0.5)',
+          boxShadow: '0 0 8px rgba(201,206,212,0.5)',
         }} />
       </div>
     </div>
@@ -48,7 +48,7 @@ function BadgeCard({ badge, earned }) {
   const r = RARITY_COLOR[badge.rarity] || RARITY_COLOR.common;
   return (
     <div style={{
-      background: earned ? r.bg : 'rgba(10,10,20,0.03)',
+      background: earned ? r.bg : 'rgba(10,11,13,0.03)',
       border: `1.5px solid ${earned ? r.border : 'rgba(255,255,255,0.05)'}`,
       borderRadius: 16, padding: '14px 12px', textAlign: 'center',
       opacity: earned ? 1 : 0.45,
@@ -138,16 +138,16 @@ export default function Gamification() {
             <GlassCard style={{ padding: 24, position: 'relative', overflow: 'hidden' }}>
               <div style={{
                 position: 'absolute', top: -40, right: -40, width: 160, height: 160, borderRadius: '50%',
-                background: 'linear-gradient(135deg,rgba(236,72,153,0.15),rgba(139,92,246,0.1))',
+                background: 'linear-gradient(135deg,rgba(126,130,136,0.15),rgba(201,206,212,0.1))',
                 filter: 'blur(30px)',
               }} />
               <div style={{ display: 'flex', alignItems: 'center', gap: 20, marginBottom: 20, position: 'relative' }}>
                 {/* Círculo de nivel */}
                 <div style={{
                   width: 88, height: 88, borderRadius: '50%', flexShrink: 0,
-                  background: 'linear-gradient(135deg,#EC4899,#8B5CF6,#06B6D4)',
+                  background: 'linear-gradient(135deg,#9aa0a7,#c9ced4,#9aa0a7)',
                   display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                  boxShadow: '0 0 30px rgba(139,92,246,0.4)',
+                  boxShadow: '0 0 30px rgba(201,206,212,0.4)',
                 }}>
                   <div style={{ color: '#fff', fontSize: 11, fontWeight: 600, opacity: 0.85 }}>NIVEL</div>
                   <div style={{ color: '#fff', fontSize: 32, fontWeight: 900, lineHeight: 1 }}>{stats.level}</div>
@@ -195,7 +195,7 @@ export default function Gamification() {
                   ))}
                 </div>
                 <button onClick={() => setTab('badges')} style={{
-                  marginTop: 12, background: 'none', border: 'none', color: '#8B5CF6',
+                  marginTop: 12, background: 'none', border: 'none', color: '#c9ced4',
                   cursor: 'pointer', fontWeight: 700, fontSize: 13,
                 }}>Ver todos los badges →</button>
               </GlassCard>
@@ -214,7 +214,7 @@ export default function Gamification() {
                     <span style={{ fontSize: 13, color: '#c9ced4' }}>{s.icon} {s.label}</span>
                     <span style={{
                       fontWeight: 800, fontSize: 13,
-                      color: (stats.streaks?.[s.key]?.count || 0) > 0 ? '#f97316' : 'rgba(201,206,212,0.30)',
+                      color: (stats.streaks?.[s.key]?.count || 0) > 0 ? '#f59e0b' : 'rgba(201,206,212,0.30)',
                     }}>
                       {stats.streaks?.[s.key]?.count || 0} días 🔥
                     </span>
@@ -261,8 +261,8 @@ export default function Gamification() {
               return (
                 <GlassCard key={entry.user?._id || i} style={{
                   padding: '12px 16px',
-                  border: isMe ? '1.5px solid rgba(139,92,246,0.5)' : undefined,
-                  background: isMe ? 'rgba(139,92,246,0.04)' : undefined,
+                  border: isMe ? '1.5px solid rgba(201,206,212,0.5)' : undefined,
+                  background: isMe ? 'rgba(201,206,212,0.04)' : undefined,
                 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                     <div style={{ fontSize: i < 3 ? 24 : 16, fontWeight: 800, minWidth: 36, textAlign: 'center', color: i < 3 ? undefined : 'rgba(201,206,212,0.40)' }}>{rankIcon}</div>
@@ -272,7 +272,7 @@ export default function Gamification() {
                       <div style={{ fontWeight: 700, fontSize: 14, color: '#c9ced4' }}>
                         {entry.user?.firstName || entry.user?.username}
                         {entry.user?.isVerified && ' ✅'}
-                        {isMe && <span style={{ marginLeft: 6, fontSize: 11, color: '#8B5CF6', fontWeight: 700 }}>(tú)</span>}
+                        {isMe && <span style={{ marginLeft: 6, fontSize: 11, color: '#c9ced4', fontWeight: 700 }}>(tú)</span>}
                       </div>
                       <div style={{ fontSize: 11, color: 'rgba(201,206,212,0.45)' }}>
                         Nivel {entry.level} · {entry.badgeCount} badges

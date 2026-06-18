@@ -39,7 +39,7 @@ export default function TierBadge({ tier = 'free' }) {
           display: 'inline-flex',
           alignItems: 'center',
           gap: 4,
-          background: 'linear-gradient(135deg, #3b82f6, #1e40af)',
+          background: 'linear-gradient(135deg, #9aa0a7, #565b62)',
           color: '#fff',
           fontSize: 10,
           fontWeight: 800,

@@ -7,15 +7,15 @@ import { GlassCard, HoloText } from '../components/kronos';
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
-const HOLO = 'linear-gradient(135deg, #4facfe 0%, #00f2fe 40%, #f3a0ff 70%, #ff85a2 100%)';
+const HOLO = 'linear-gradient(135deg, #c9ced4 0%, #e9ecf0 40%, #e9ecf0 70%, #c9ced4 100%)';
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
     base: {
       fontSize: '15px',
       fontFamily: "'Outfit', 'Inter', sans-serif",
-      color: '#0a0a14',
-      '::placeholder': { color: 'rgba(10,10,20,0.4)' },
+      color: '#0a0b0d',
+      '::placeholder': { color: 'rgba(10,11,13,0.4)' },
     },
     invalid: { color: '#ef4444' },
   },
@@ -53,9 +53,9 @@ function CheckoutForm({ cart }) {
     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
       <div style={{
         padding: '14px 16px', borderRadius: 14,
-        border: '1.5px solid rgba(79,172,254,0.25)',
+        border: '1.5px solid rgba(201,206,212,0.25)',
         background: 'rgba(255,255,255,0.95)',
-        boxShadow: '0 2px 8px rgba(79,172,254,0.08)',
+        boxShadow: '0 2px 8px rgba(201,206,212,0.08)',
       }}>
         <CardElement options={CARD_ELEMENT_OPTIONS} />
       </div>
@@ -71,10 +71,10 @@ function CheckoutForm({ cart }) {
         disabled={!stripe || loading}
         style={{
           width: '100%', padding: '14px 0', borderRadius: 14, border: 'none',
-          background: (!stripe || loading) ? 'rgba(79,172,254,0.3)' : HOLO,
+          background: (!stripe || loading) ? 'rgba(201,206,212,0.3)' : HOLO,
           color: '#fff', fontWeight: 700, fontSize: 16,
           cursor: (!stripe || loading) ? 'not-allowed' : 'pointer',
-          boxShadow: '0 4px 16px rgba(79,172,254,0.35)',
+          boxShadow: '0 4px 16px rgba(201,206,212,0.35)',
           transition: 'all 0.2s ease',
           letterSpacing: 0.3
         }}
@@ -101,7 +101,7 @@ function Checkout({ cart }) {
       }}>
         {/* Resumen de orden */}
         <GlassCard padding={24}>
-          <p style={{ fontWeight: 700, fontSize: 18, color: '#0a0a14', margin: '0 0 20px' }}>
+          <p style={{ fontWeight: 700, fontSize: 18, color: '#0a0b0d', margin: '0 0 20px' }}>
             Resumen del pedido
           </p>
 
@@ -111,16 +111,16 @@ function Checkout({ cart }) {
                 key={item.productId}
                 style={{
                   display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                  paddingBottom: 12, borderBottom: '1px solid rgba(79,172,254,0.15)'
+                  paddingBottom: 12, borderBottom: '1px solid rgba(201,206,212,0.15)'
                 }}
               >
                 <div>
-                  <p style={{ fontWeight: 600, fontSize: 14, color: '#0a0a14', margin: 0 }}>{item.name}</p>
-                  <p style={{ fontSize: 12, color: 'rgba(10,10,20,0.5)', margin: '2px 0 0' }}>
+                  <p style={{ fontWeight: 600, fontSize: 14, color: '#0a0b0d', margin: 0 }}>{item.name}</p>
+                  <p style={{ fontSize: 12, color: 'rgba(10,11,13,0.5)', margin: '2px 0 0' }}>
                     x{item.quantity}
                   </p>
                 </div>
-                <p style={{ fontWeight: 700, fontSize: 14, color: '#0a0a14', margin: 0 }}>
+                <p style={{ fontWeight: 700, fontSize: 14, color: '#0a0b0d', margin: 0 }}>
                   ${(item.price * item.quantity).toFixed(2)}
                 </p>
               </div>
@@ -129,9 +129,9 @@ function Checkout({ cart }) {
 
           <div style={{
             display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-            marginTop: 20, paddingTop: 16, borderTop: '1.5px solid rgba(79,172,254,0.2)'
+            marginTop: 20, paddingTop: 16, borderTop: '1.5px solid rgba(201,206,212,0.2)'
           }}>
-            <span style={{ fontWeight: 700, fontSize: 16, color: '#0a0a14' }}>Total</span>
+            <span style={{ fontWeight: 700, fontSize: 16, color: '#0a0b0d' }}>Total</span>
             <span style={{
               fontWeight: 800, fontSize: 20,
               background: HOLO, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
@@ -143,7 +143,7 @@ function Checkout({ cart }) {
 
         {/* Método de pago */}
         <GlassCard padding={24}>
-          <p style={{ fontWeight: 700, fontSize: 18, color: '#0a0a14', margin: '0 0 20px' }}>
+          <p style={{ fontWeight: 700, fontSize: 18, color: '#0a0b0d', margin: '0 0 20px' }}>
             Método de pago
           </p>
 

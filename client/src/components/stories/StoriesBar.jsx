@@ -10,7 +10,7 @@ function StoryRing({ group, onOpen, isMine }) {
   const { author, hasUnviewed } = group;
   const name = author.firstName || author.username;
   const ringStyle = hasUnviewed
-    ? { background: 'linear-gradient(135deg,#ec4899,#7c3aed,#06b6d4)', padding: 2 }
+    ? { background: 'linear-gradient(135deg,#9aa0a7,#9aa0a7,#9aa0a7)', padding: 2 }
     : { background: 'rgba(255,255,255,0.06)', padding: 2 };
 
   return (
@@ -40,7 +40,7 @@ function AddStoryButton({ onAdd }) {
       onClick={onAdd}
       style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, cursor: 'pointer', minWidth: 64 }}
     >
-      <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'rgba(190,200,212,0.06)', border: '2px dashed rgba(79,172,254,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22 }}>
+      <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'rgba(190,200,212,0.06)', border: '2px dashed rgba(201,206,212,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22 }}>
         +
       </div>
       <span style={{ color: 'rgba(201,206,212,0.50)', fontSize: 10 }}>Añadir</span>
@@ -111,7 +111,7 @@ function StoryViewer({ group, onClose, currentUser }) {
 
   const bgStyle = story.mediaUrl
     ? { backgroundImage: `url(${story.mediaUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' }
-    : { background: story.bgColor || '#7c3aed' };
+    : { background: story.bgColor || '#9aa0a7' };
 
   return (
     <div
@@ -238,11 +238,11 @@ function StoryViewer({ group, onClose, currentUser }) {
 
 function StoryCreator({ onClose, onCreated }) {
   const [text, setText] = useState('');
-  const [bgColor, setBgColor] = useState('#7c3aed');
+  const [bgColor, setBgColor] = useState('#9aa0a7');
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const colors = ['#7c3aed', '#ec4899', '#06b6d4', '#f59e0b', '#10b981', '#ef4444', '#3b82f6'];
+  const colors = ['#9aa0a7', '#9aa0a7', '#9aa0a7', '#f59e0b', '#10b981', '#ef4444', '#9aa0a7'];
 
   const handleCreate = async () => {
     if (!text.trim() && !file) return;
@@ -269,7 +269,7 @@ function StoryCreator({ onClose, onCreated }) {
 
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 9998, background: 'rgba(0,0,0,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div style={{ background: '#13131f', border: '1px solid rgba(124,58,237,0.3)', borderRadius: 20, padding: 28, width: '90%', maxWidth: 380 }}>
+      <div style={{ background: '#13131f', border: '1px solid rgba(126,130,136,0.3)', borderRadius: 20, padding: 28, width: '90%', maxWidth: 380 }}>
         <div style={{ color: '#c9ced4', fontSize: 18, fontWeight: 700, marginBottom: 20 }}>Nueva Historia</div>
 
         {/* Preview */}
@@ -283,7 +283,7 @@ function StoryCreator({ onClose, onCreated }) {
           onChange={e => setText(e.target.value)}
           placeholder="Escribe algo..."
           maxLength={300}
-          style={{ width: '100%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.14)', borderRadius: 10, padding: '10px 14px', color: '#c9ced4', fontSize: 14, resize: 'none', outline: 'none', minHeight: 60, fontFamily: 'inherit', boxSizing: 'border-box', marginBottom: 12 }}
+          style={{ width: '100%', background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(190,200,212,0.14)', borderRadius: 10, padding: '10px 14px', color: '#c9ced4', fontSize: 14, resize: 'none', outline: 'none', minHeight: 60, fontFamily: 'inherit', boxSizing: 'border-box', marginBottom: 12 }}
         />
 
         <div style={{ display: 'flex', gap: 8, marginBottom: 12, flexWrap: 'wrap' }}>
@@ -301,7 +301,7 @@ function StoryCreator({ onClose, onCreated }) {
         <div style={{ display: 'flex', gap: 10 }}>
           <button onClick={onClose} style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'rgba(255,255,255,0.08)', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 14 }}>Cancelar</button>
           <button onClick={handleCreate} disabled={loading || (!text.trim() && !file)}
-            style={{ flex: 2, padding: '10px', borderRadius: 12, background: 'linear-gradient(135deg,#7c3aed,#ec4899)', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 14, fontWeight: 700 }}>
+            style={{ flex: 2, padding: '10px', borderRadius: 12, background: 'linear-gradient(135deg,#9aa0a7,#9aa0a7)', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 14, fontWeight: 700 }}>
             {loading ? 'Publicando...' : 'Publicar Historia'}
           </button>
         </div>

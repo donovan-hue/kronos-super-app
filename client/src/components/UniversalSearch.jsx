@@ -100,7 +100,7 @@ export default function UniversalSearch() {
                 onChange={e => setQuery(e.target.value)}
                 placeholder="Usuarios, posts, hashtags, ropa..."
                 autoComplete="off"
-                style={{ width: '100%', background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.14)', borderRadius: 28, padding: '11px 40px 11px 42px', color: '#c9ced4', fontSize: 14, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
+                style={{ width: '100%', background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(190,200,212,0.14)', borderRadius: 28, padding: '11px 40px 11px 42px', color: '#c9ced4', fontSize: 14, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
               />
               {query && (
                 <button type="button" onClick={clearSearch}
@@ -134,7 +134,7 @@ export default function UniversalSearch() {
         <div style={{ display: 'flex', gap: 8, marginBottom: 20, overflowX: 'auto', paddingBottom: 2 }}>
           {CATEGORIES.map(cat => (
             <button key={cat.value} onClick={() => handleCategoryChange(cat.value)}
-              style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 5, padding: '7px 14px', borderRadius: 20, fontSize: 12, fontWeight: 600, border: '1.5px solid', borderColor: category === cat.value ? 'transparent' : 'rgba(190,200,212,0.15)', cursor: 'pointer', background: category === cat.value ? 'linear-gradient(135deg,#4facfe,#f3a0ff)' : 'rgba(255,255,255,0.8)', color: category === cat.value ? '#fff' : 'rgba(201,206,212,0.65)', transition: 'all 0.2s' }}>
+              style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 5, padding: '7px 14px', borderRadius: 20, fontSize: 12, fontWeight: 600, border: '1.5px solid', borderColor: category === cat.value ? 'transparent' : 'rgba(190,200,212,0.15)', cursor: 'pointer', background: category === cat.value ? 'linear-gradient(135deg,#c9ced4,#e9ecf0)' : 'rgba(255,255,255,0.8)', color: category === cat.value ? '#fff' : 'rgba(201,206,212,0.65)', transition: 'all 0.2s' }}>
               <span>{cat.icon}</span><span>{cat.label}</span>
             </button>
           ))}

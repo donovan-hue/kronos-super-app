@@ -320,10 +320,10 @@ export default function VideoEditor() {
         : variant === 'danger'
           ? 'rgba(239,68,68,0.1)'
           : 'rgba(255,255,255,0.05)',
-      color: variant === 'danger' ? '#f87171' : '#0a0a14',
+      color: variant === 'danger' ? '#f87171' : '#0a0b0d',
     }),
     input: {
-      background: 'rgba(79,172,254,0.07)',
+      background: 'rgba(201,206,212,0.07)',
       border: '1px solid rgba(190,200,212,0.15)',
       borderRadius: 8,
       padding: '8px 12px',
@@ -350,7 +350,7 @@ export default function VideoEditor() {
       bottom: 90,
       left: '50%',
       transform: 'translateX(-50%)',
-      background: isError ? 'rgba(239,68,68,0.95)' : 'rgba(6,182,212,0.95)',
+      background: isError ? 'rgba(239,68,68,0.95)' : 'rgba(126,130,136,0.95)',
       color: '#fff',
       padding: '10px 22px',
       borderRadius: 10,
@@ -364,24 +364,24 @@ export default function VideoEditor() {
     filterBtn: (active) => ({
       padding: '7px 12px',
       borderRadius: 8,
-      border: active ? '1px solid #7c3aed' : '1px solid rgba(255,255,255,0.1)',
+      border: active ? '1px solid #9aa0a7' : '1px solid rgba(255,255,255,0.1)',
       cursor: 'pointer',
       fontFamily: "'Outfit', sans-serif",
       fontSize: 12,
       fontWeight: 600,
-      background: active ? 'rgba(124,58,237,0.25)' : 'rgba(255,255,255,0.04)',
-      color: active ? '#a78bfa' : 'rgba(255,255,255,0.6)',
+      background: active ? 'rgba(126,130,136,0.25)' : 'rgba(255,255,255,0.04)',
+      color: active ? '#e9ecf0' : 'rgba(255,255,255,0.6)',
     }),
     speedBtn: (active) => ({
       padding: '6px 12px',
       borderRadius: 8,
-      border: active ? '1px solid #06b6d4' : '1px solid rgba(255,255,255,0.1)',
+      border: active ? '1px solid #9aa0a7' : '1px solid rgba(255,255,255,0.1)',
       cursor: 'pointer',
       fontFamily: "'Outfit', sans-serif",
       fontSize: 12,
       fontWeight: 700,
-      background: active ? 'rgba(6,182,212,0.2)' : 'rgba(255,255,255,0.04)',
-      color: active ? '#67e8f9' : 'rgba(255,255,255,0.5)',
+      background: active ? 'rgba(126,130,136,0.2)' : 'rgba(255,255,255,0.04)',
+      color: active ? '#c9ced4' : 'rgba(255,255,255,0.5)',
     }),
   };
 

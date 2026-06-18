@@ -31,8 +31,8 @@ export default function UpgradePrompt({
   const card = (
     <div
       style={{
-        background: 'linear-gradient(135deg, rgba(124,58,237,0.18), rgba(6,182,212,0.10))',
-        border: '1px solid rgba(168,85,247,0.4)',
+        background: 'linear-gradient(135deg, rgba(126,130,136,0.18), rgba(126,130,136,0.10))',
+        border: '1px solid rgba(180,185,192,0.4)',
         backdropFilter: 'blur(14px)',
         WebkitBackdropFilter: 'blur(14px)',
         borderRadius: 16,

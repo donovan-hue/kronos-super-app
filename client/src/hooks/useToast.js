@@ -6,7 +6,7 @@ export function useToast() {
     error: (msg) =>
       toast.error(msg, {
         style: {
-          background: 'rgba(15,15,26,0.95)',
+          background: 'rgba(11,12,13,0.95)',
           color: '#fff',
           border: '1px solid rgba(239,68,68,0.4)',
         },
@@ -15,9 +15,9 @@ export function useToast() {
       toast(msg, {
         icon: 'ℹ️',
         style: {
-          background: 'rgba(15,15,26,0.95)',
+          background: 'rgba(11,12,13,0.95)',
           color: '#fff',
-          border: '1px solid rgba(179,68,255,0.3)',
+          border: '1px solid rgba(201,206,212,0.3)',
         },
       }),
     loading: (msg) => toast.loading(msg),

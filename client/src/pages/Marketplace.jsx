@@ -44,7 +44,7 @@ function statusBadge(status) {
 }
 
 const inputStyle = {
-  background: 'rgba(79,172,254,0.07)',
+  background: 'rgba(201,206,212,0.07)',
   border: '1px solid rgba(190,200,212,0.14)',
   borderRadius: 10,
   padding: '10px 14px',
@@ -76,14 +76,14 @@ function ListingCard({ listing, onClick }) {
         display: 'flex',
         flexDirection: 'column',
       }}
-      onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 8px 30px rgba(124,58,237,0.2)'; }}
+      onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 8px 30px rgba(126,130,136,0.2)'; }}
       onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
     >
       {firstImage ? (
         <img
           src={firstImage}
           alt={listing.title}
-          style={{ width: '100%', height: 150, objectFit: 'cover', display: 'block', background: '#18182a' }}
+          style={{ width: '100%', height: 150, objectFit: 'cover', display: 'block', background: '#141517' }}
           onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
         />
       ) : null}
@@ -92,7 +92,7 @@ function ListingCard({ listing, onClick }) {
         height: 150,
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'linear-gradient(135deg,rgba(124,58,237,0.18),rgba(6,182,212,0.1))',
+        background: 'linear-gradient(135deg,rgba(126,130,136,0.18),rgba(126,130,136,0.1))',
         fontSize: 42,
       }}>
         🛍️
@@ -208,14 +208,14 @@ function CreateListingModal({ onClose, onCreated }) {
             <button
               type="button"
               onClick={onClose}
-              style={{ flex: 1, padding: '11px 0', borderRadius: 12, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.15)', color: '#c9ced4', fontSize: 14, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}
+              style={{ flex: 1, padding: '11px 0', borderRadius: 12, background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(190,200,212,0.15)', color: '#c9ced4', fontSize: 14, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}
             >
               Cancelar
             </button>
             <button
               type="submit"
               disabled={loading}
-              style={{ flex: 2, padding: '11px 0', borderRadius: 12, background: loading ? 'rgba(124,58,237,0.4)' : 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', border: 'none', color: '#c9ced4', fontSize: 14, fontWeight: 700, cursor: loading ? 'default' : 'pointer', fontFamily: 'inherit' }}
+              style={{ flex: 2, padding: '11px 0', borderRadius: 12, background: loading ? 'rgba(126,130,136,0.4)' : 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', border: 'none', color: '#c9ced4', fontSize: 14, fontWeight: 700, cursor: loading ? 'default' : 'pointer', fontFamily: 'inherit' }}
             >
               {loading ? 'Publicando...' : 'Publicar'}
             </button>
@@ -298,11 +298,11 @@ function ListingDetailModal({ listing: initialListing, user, onClose, onUpdate }
           <img
             src={firstImage}
             alt={listing.title}
-            style={{ width: '100%', height: 220, objectFit: 'cover', borderRadius: 12, marginBottom: 16, background: '#18182a', display: 'block' }}
+            style={{ width: '100%', height: 220, objectFit: 'cover', borderRadius: 12, marginBottom: 16, background: '#141517', display: 'block' }}
             onError={e => { e.target.style.display = 'none'; }}
           />
         ) : (
-          <div style={{ width: '100%', height: 160, borderRadius: 12, marginBottom: 16, background: 'linear-gradient(135deg,rgba(124,58,237,0.2),rgba(6,182,212,0.1))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 56 }}>
+          <div style={{ width: '100%', height: 160, borderRadius: 12, marginBottom: 16, background: 'linear-gradient(135deg,rgba(126,130,136,0.2),rgba(126,130,136,0.1))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 56 }}>
             🛍️
           </div>
         )}
@@ -359,7 +359,7 @@ function ListingDetailModal({ listing: initialListing, user, onClose, onUpdate }
         )}
 
         {msg && (
-          <div style={{ background: 'rgba(124,58,237,0.15)', border: '1px solid rgba(124,58,237,0.3)', borderRadius: 10, padding: '10px 14px', color: '#c9ced4', fontSize: 13, marginBottom: 14 }}>
+          <div style={{ background: 'rgba(126,130,136,0.15)', border: '1px solid rgba(126,130,136,0.3)', borderRadius: 10, padding: '10px 14px', color: '#c9ced4', fontSize: 13, marginBottom: 14 }}>
             {msg}
           </div>
         )}
@@ -369,7 +369,7 @@ function ListingDetailModal({ listing: initialListing, user, onClose, onUpdate }
             <button
               onClick={handleBuy}
               disabled={loading}
-              style={{ width: '100%', padding: '13px 0', borderRadius: 12, background: loading ? 'rgba(124,58,237,0.4)' : 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', border: 'none', color: '#c9ced4', fontSize: 15, fontWeight: 700, cursor: loading ? 'default' : 'pointer', fontFamily: 'inherit' }}
+              style={{ width: '100%', padding: '13px 0', borderRadius: 12, background: loading ? 'rgba(126,130,136,0.4)' : 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', border: 'none', color: '#c9ced4', fontSize: 15, fontWeight: 700, cursor: loading ? 'default' : 'pointer', fontFamily: 'inherit' }}
             >
               {loading ? 'Procesando...' : 'Comprar · Poner en Escrow'}
             </button>
@@ -421,9 +421,9 @@ function MyListingItem({ listing, onUpdate }) {
     <GlassCard style={{ marginBottom: 12, padding: '14px 16px' }}>
       <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
         {firstImage ? (
-          <img src={firstImage} alt={listing.title} style={{ width: 60, height: 60, borderRadius: 10, objectFit: 'cover', flexShrink: 0, background: '#18182a' }} />
+          <img src={firstImage} alt={listing.title} style={{ width: 60, height: 60, borderRadius: 10, objectFit: 'cover', flexShrink: 0, background: '#141517' }} />
         ) : (
-          <div style={{ width: 60, height: 60, borderRadius: 10, background: 'linear-gradient(135deg,rgba(124,58,237,0.2),rgba(6,182,212,0.1))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, flexShrink: 0 }}>🛍️</div>
+          <div style={{ width: 60, height: 60, borderRadius: 10, background: 'linear-gradient(135deg,rgba(126,130,136,0.2),rgba(126,130,136,0.1))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, flexShrink: 0 }}>🛍️</div>
         )}
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ color: '#c9ced4', fontWeight: 700, fontSize: 14, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', marginBottom: 4 }}>
@@ -553,8 +553,8 @@ export default function Marketplace() {
                 padding: '12px 0',
                 background: 'none',
                 border: 'none',
-                borderBottom: tab === t ? '2px solid #7c3aed' : '2px solid transparent',
-                color: tab === t ? '#a78bfa' : 'rgba(255,255,255,0.4)',
+                borderBottom: tab === t ? '2px solid #9aa0a7' : '2px solid transparent',
+                color: tab === t ? '#e9ecf0' : 'rgba(255,255,255,0.4)',
                 fontSize: 14,
                 fontWeight: tab === t ? 700 : 500,
                 cursor: 'pointer',
@@ -577,7 +577,7 @@ export default function Marketplace() {
                 style={{
                   width: '100%',
                   boxSizing: 'border-box',
-                  background: 'rgba(79,172,254,0.07)',
+                  background: 'rgba(201,206,212,0.07)',
                   border: '1px solid rgba(190,200,212,0.15)',
                   borderRadius: 12,
                   padding: '11px 16px',
@@ -598,9 +598,9 @@ export default function Marketplace() {
                     flexShrink: 0,
                     padding: '7px 14px',
                     borderRadius: 20,
-                    border: category === c.value ? '1.5px solid #7c3aed' : '1px solid rgba(255,255,255,0.1)',
-                    background: category === c.value ? 'rgba(124,58,237,0.2)' : 'rgba(255,255,255,0.04)',
-                    color: category === c.value ? '#a78bfa' : 'rgba(255,255,255,0.6)',
+                    border: category === c.value ? '1.5px solid #9aa0a7' : '1px solid rgba(255,255,255,0.1)',
+                    background: category === c.value ? 'rgba(126,130,136,0.2)' : 'rgba(255,255,255,0.04)',
+                    color: category === c.value ? '#e9ecf0' : 'rgba(255,255,255,0.6)',
                     fontSize: 13,
                     fontWeight: category === c.value ? 700 : 500,
                     cursor: 'pointer',
@@ -638,7 +638,7 @@ export default function Marketplace() {
                 <button
                   onClick={() => setPage(p => Math.max(1, p - 1))}
                   disabled={page <= 1}
-                  style={{ padding: '8px 20px', borderRadius: 10, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.15)', color: page <= 1 ? 'rgba(255,255,255,0.2)' : '#fff', cursor: page <= 1 ? 'default' : 'pointer', fontFamily: 'inherit' }}
+                  style={{ padding: '8px 20px', borderRadius: 10, background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(190,200,212,0.15)', color: page <= 1 ? 'rgba(255,255,255,0.2)' : '#fff', cursor: page <= 1 ? 'default' : 'pointer', fontFamily: 'inherit' }}
                 >
                   ← Anterior
                 </button>
@@ -648,7 +648,7 @@ export default function Marketplace() {
                 <button
                   onClick={() => setPage(p => Math.min(totalPages, p + 1))}
                   disabled={page >= totalPages}
-                  style={{ padding: '8px 20px', borderRadius: 10, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.15)', color: page >= totalPages ? 'rgba(255,255,255,0.2)' : '#fff', cursor: page >= totalPages ? 'default' : 'pointer', fontFamily: 'inherit' }}
+                  style={{ padding: '8px 20px', borderRadius: 10, background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(190,200,212,0.15)', color: page >= totalPages ? 'rgba(255,255,255,0.2)' : '#fff', cursor: page >= totalPages ? 'default' : 'pointer', fontFamily: 'inherit' }}
                 >
                   Siguiente →
                 </button>
@@ -692,7 +692,7 @@ export default function Marketplace() {
             color: '#fff',
             fontSize: 28,
             cursor: 'pointer',
-            boxShadow: '0 4px 20px rgba(124,58,237,0.5)',
+            boxShadow: '0 4px 20px rgba(126,130,136,0.5)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

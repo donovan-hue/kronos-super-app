@@ -61,7 +61,7 @@ const ARButton = styled(motion.button)`
   justify-content: center;
   gap: 12px;
   padding: 16px 24px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #9aa0a7 0%, #565b62 100%);
   color: white;
   border: none;
   border-radius: 12px;
@@ -69,11 +69,11 @@ const ARButton = styled(motion.button)`
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 15px rgba(154,160,167, 0.4);
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+    box-shadow: 0 8px 25px rgba(154,160,167, 0.6);
   }
 
   &:active {
@@ -127,7 +127,7 @@ const PriceSection = styled.div`
   .current-price {
     font-size: 32px;
     font-weight: 700;
-    color: #667eea;
+    color: #9aa0a7;
   }
 
   .discount {
@@ -186,13 +186,13 @@ const OptionButton = styled(motion.button)`
   ${(props) =>
     props.selected &&
     `
-    border-color: #667eea;
-    background: #667eea;
+    border-color: #9aa0a7;
+    background: #9aa0a7;
     color: white;
   `}
 
   &:hover {
-    border-color: #667eea;
+    border-color: #9aa0a7;
   }
 `;
 
@@ -222,7 +222,7 @@ const ARBadge = styled.div`
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #9aa0a7 0%, #565b62 100%);
   color: white;
   padding: 6px 12px;
   border-radius: 20px;

@@ -92,8 +92,8 @@ export const useThemeColors = () => {
   const { isDark } = useTheme();
 
   return {
-    primary: '#6366f1',
-    secondary: '#ec4899',
+    primary: '#9aa0a7',
+    secondary: '#9aa0a7',
     accent: '#f59e0b',
     background: isDark ? '#1f2937' : '#ffffff',
     surfaceLight: isDark ? '#111827' : '#f9fafb',
@@ -103,6 +103,6 @@ export const useThemeColors = () => {
     success: '#10b981',
     warning: '#f59e0b',
     error: '#ef4444',
-    info: '#3b82f6'
+    info: '#9aa0a7'
   };
 };

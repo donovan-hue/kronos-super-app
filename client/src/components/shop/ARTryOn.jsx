@@ -12,7 +12,7 @@ const ARTryOnContainer = styled(motion.div)`
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #9aa0a7 0%, #565b62 100%);
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -115,8 +115,8 @@ const ActionBar = styled.div`
     }
 
     &.primary {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      background: linear-gradient(135deg, #9aa0a7 0%, #565b62 100%);
+      box-shadow: 0 4px 15px rgba(154,160,167, 0.4);
     }
 
     &.danger {
@@ -208,13 +208,13 @@ const ShareModal = styled(motion.div)`
 
         &:focus {
           outline: none;
-          border-color: #667eea;
+          border-color: #9aa0a7;
         }
       }
 
       button {
         padding: 10px 16px;
-        background: #667eea;
+        background: #9aa0a7;
         color: white;
         border: none;
         border-radius: 8px;
@@ -222,7 +222,7 @@ const ShareModal = styled(motion.div)`
         font-weight: 600;
 
         &:hover {
-          background: #764ba2;
+          background: #565b62;
         }
       }
     }
@@ -246,7 +246,7 @@ const ShareModal = styled(motion.div)`
         transition: all 0.3s ease;
 
         &:hover {
-          background: #667eea;
+          background: #9aa0a7;
           color: white;
         }
       }

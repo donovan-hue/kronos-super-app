@@ -69,7 +69,7 @@ export default function FollowSuggestions() {
                 style={{
                   padding: '5px 14px', borderRadius: 20, fontSize: 12, fontWeight: 600,
                   border: isFollowing ? '1px solid rgba(190,200,212,0.20)' : 'none',
-                  background: isFollowing ? 'transparent' : 'linear-gradient(135deg,#4facfe,#f3a0ff)',
+                  background: isFollowing ? 'transparent' : 'linear-gradient(135deg,#c9ced4,#e9ecf0)',
                   color: isFollowing ? 'rgba(201,206,212,0.50)' : '#fff', cursor: isFollowing ? 'default' : 'pointer', flexShrink: 0,
                 }}
               >

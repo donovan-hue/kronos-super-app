@@ -48,7 +48,7 @@ function ConfirmModal({ message, onConfirm, onCancel, loading }) {
         animate={{ scale: 1 }}
         exit={{ scale: 0.9 }}
         className="w-full max-w-sm p-6 rounded-3xl"
-        style={{ background: '#0f0f1a', border: '1px solid rgba(255,255,255,0.1)' }}
+        style={{ background: '#0b0c0d', border: '1px solid rgba(255,255,255,0.1)' }}
       >
         <p className="text-white text-sm text-center mb-5">{message}</p>
         <div className="flex gap-3">
@@ -160,7 +160,7 @@ export default function ActiveSessions() {
       <div className="flex items-center gap-3 mb-6">
         <div
           className="w-12 h-12 flex items-center justify-center text-2xl rounded-2xl"
-          style={{ background: 'linear-gradient(135deg, rgba(59,130,246,0.3), rgba(6,182,212,0.2))', border: '1px solid rgba(59,130,246,0.3)' }}
+          style={{ background: 'linear-gradient(135deg, rgba(126,130,136,0.3), rgba(126,130,136,0.2))', border: '1px solid rgba(126,130,136,0.3)' }}
         >
           📱
         </div>
@@ -224,8 +224,8 @@ export default function ActiveSessions() {
                 transition={{ delay: index * 0.04 }}
                 className="flex items-center gap-4 p-4 rounded-2xl transition-all"
                 style={{
-                  background: isCurrentMarked ? 'rgba(59,130,246,0.07)' : 'rgba(255,255,255,0.03)',
-                  border: isCurrentMarked ? '1px solid rgba(59,130,246,0.2)' : '1px solid rgba(255,255,255,0.07)'
+                  background: isCurrentMarked ? 'rgba(126,130,136,0.07)' : 'rgba(255,255,255,0.03)',
+                  border: isCurrentMarked ? '1px solid rgba(126,130,136,0.2)' : '1px solid rgba(255,255,255,0.07)'
                 }}
               >
                 {/* Device icon */}
@@ -249,7 +249,7 @@ export default function ActiveSessions() {
                     {isCurrentMarked && (
                       <span
                         className="px-2 py-0.5 rounded-full text-xs font-bold flex-shrink-0"
-                        style={{ background: 'rgba(59,130,246,0.2)', color: '#93c5fd' }}
+                        style={{ background: 'rgba(126,130,136,0.2)', color: '#e9ecf0' }}
                       >
                         Actual
                       </span>

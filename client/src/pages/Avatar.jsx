@@ -7,8 +7,8 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 const RARITY_COLORS = {
   common: '#9ca3af',
-  rare: '#3b82f6',
-  epic: '#a855f7',
+  rare: '#9aa0a7',
+  epic: '#b4b9c0',
   legendary: '#f59e0b',
 };
 
@@ -47,16 +47,16 @@ function AvatarCanvas({ avatar }) {
       height: 200,
       borderRadius: 24,
       background: bgEmoji
-        ? `radial-gradient(ellipse at center, #1a0a2e 0%, #ffffff 100%)`
+        ? `radial-gradient(ellipse at center, #0a0b0d 0%, #ffffff 100%)`
         : bgColor,
-      border: '2px solid rgba(124,58,237,0.5)',
+      border: '2px solid rgba(126,130,136,0.5)',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
       position: 'relative',
       overflow: 'hidden',
-      boxShadow: '0 0 32px rgba(124,58,237,0.3)',
+      boxShadow: '0 0 32px rgba(126,130,136,0.3)',
       margin: '0 auto',
     }}>
       {bgEmoji && (
@@ -291,8 +291,8 @@ export default function AvatarPage() {
       display: 'inline-flex',
       alignItems: 'center',
       gap: 6,
-      background: 'rgba(124,58,237,0.2)',
-      border: '1px solid rgba(124,58,237,0.4)',
+      background: 'rgba(126,130,136,0.2)',
+      border: '1px solid rgba(126,130,136,0.4)',
       borderRadius: 20,
       padding: '6px 14px',
       fontSize: 14,
@@ -363,9 +363,9 @@ export default function AvatarPage() {
     filterChip: (active) => ({
       padding: '5px 12px',
       borderRadius: 20,
-      border: `1px solid ${active ? '#7c3aed' : 'rgba(255,255,255,0.12)'}`,
-      background: active ? 'rgba(124,58,237,0.2)' : 'transparent',
-      color: active ? '#a78bfa' : 'rgba(255,255,255,0.5)',
+      border: `1px solid ${active ? '#9aa0a7' : 'rgba(255,255,255,0.12)'}`,
+      background: active ? 'rgba(126,130,136,0.2)' : 'transparent',
+      color: active ? '#e9ecf0' : 'rgba(255,255,255,0.5)',
       cursor: 'pointer',
       fontSize: 12,
       fontWeight: 600,
@@ -375,7 +375,7 @@ export default function AvatarPage() {
       width: '100%',
       padding: '7px 0',
       borderRadius: 8,
-      border: variant === 'equip' ? '1px solid rgba(6,182,212,0.4)' : 'none',
+      border: variant === 'equip' ? '1px solid rgba(126,130,136,0.4)' : 'none',
       cursor: 'pointer',
       fontFamily: "'Outfit', sans-serif",
       fontWeight: 700,
@@ -383,7 +383,7 @@ export default function AvatarPage() {
       background: variant === 'buy'
         ? 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)'
         : variant === 'equip'
-          ? 'rgba(6,182,212,0.2)'
+          ? 'rgba(126,130,136,0.2)'
           : 'rgba(255,255,255,0.06)',
       color: variant === 'equipped' ? 'rgba(255,255,255,0.4)' : '#fff',
     }),
@@ -392,7 +392,7 @@ export default function AvatarPage() {
       bottom: 90,
       left: '50%',
       transform: 'translateX(-50%)',
-      background: isError ? 'rgba(239,68,68,0.9)' : 'rgba(6,182,212,0.9)',
+      background: isError ? 'rgba(239,68,68,0.9)' : 'rgba(126,130,136,0.9)',
       color: '#fff',
       padding: '10px 20px',
       borderRadius: 10,
@@ -508,7 +508,7 @@ export default function AvatarPage() {
                         </div>
                       </div>
                       <button
-                        style={{ ...styles.unequipBtn, borderColor: 'rgba(6,182,212,0.4)', background: 'rgba(6,182,212,0.1)', color: '#67e8f9' }}
+                        style={{ ...styles.unequipBtn, borderColor: 'rgba(126,130,136,0.4)', background: 'rgba(126,130,136,0.1)', color: '#c9ced4' }}
                         disabled={actionLoading === item._id}
                         onClick={() => handleEquip(item._id)}
                       >

@@ -10,7 +10,7 @@ import '../../src/styles/glassmorphism.css';
 const styles = {
   wrapper: {
     minHeight: '100vh',
-    background: 'linear-gradient(135deg, #1a0533 0%, #0d1b2a 50%, #1a0533 100%)',
+    background: 'linear-gradient(135deg, #0a0b0d 0%, #0d1b2a 50%, #0a0b0d 100%)',
     padding: '24px',
     fontFamily: 'system-ui, -apple-system, sans-serif',
   },
@@ -21,7 +21,7 @@ const styles = {
     width: '400px',
     height: '400px',
     borderRadius: '50%',
-    background: 'radial-gradient(circle, rgba(179,68,255,0.25) 0%, transparent 70%)',
+    background: 'radial-gradient(circle, rgba(201,206,212,0.25) 0%, transparent 70%)',
     pointerEvents: 'none',
     zIndex: 0,
   },
@@ -32,7 +32,7 @@ const styles = {
     width: '500px',
     height: '500px',
     borderRadius: '50%',
-    background: 'radial-gradient(circle, rgba(0,212,255,0.2) 0%, transparent 70%)',
+    background: 'radial-gradient(circle, rgba(201,206,212,0.2) 0%, transparent 70%)',
     pointerEvents: 'none',
     zIndex: 0,
   },
@@ -51,7 +51,7 @@ const styles = {
   headerTitle: {
     fontSize: '28px',
     fontWeight: '800',
-    background: 'linear-gradient(135deg, #b344ff, #00d4ff)',
+    background: 'linear-gradient(135deg, #c9ced4, #c9ced4)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundClip: 'text',
@@ -99,10 +99,10 @@ const styles = {
     fontWeight: '600',
     transition: 'all 0.3s',
     background: active
-      ? 'linear-gradient(135deg, rgba(179,68,255,0.5), rgba(0,212,255,0.5))'
+      ? 'linear-gradient(135deg, rgba(201,206,212,0.5), rgba(201,206,212,0.5))'
       : 'transparent',
     color: active ? '#fff' : 'rgba(255,255,255,0.55)',
-    boxShadow: active ? '0 4px 15px rgba(179,68,255,0.3)' : 'none',
+    boxShadow: active ? '0 4px 15px rgba(201,206,212,0.3)' : 'none',
     backdropFilter: active ? 'blur(20px)' : 'none',
   }),
   grid4: {
@@ -119,7 +119,7 @@ const styles = {
     borderRadius: '16px',
     padding: '24px',
     textAlign: 'center',
-    boxShadow: '0 8px 32px rgba(31,38,135,0.37)',
+    boxShadow: '0 8px 32px rgba(0,0,0,0.37)',
     transition: 'all 0.3s',
   }),
   statLabel: {
@@ -147,7 +147,7 @@ const styles = {
     border: '1px solid rgba(255,255,255,0.12)',
     borderRadius: '20px',
     padding: '24px',
-    boxShadow: '0 8px 32px rgba(31,38,135,0.37)',
+    boxShadow: '0 8px 32px rgba(0,0,0,0.37)',
   },
   panelTitle: {
     color: '#fff',
@@ -200,7 +200,7 @@ const styles = {
     height: '34px',
     borderRadius: '50%',
     objectFit: 'cover',
-    border: '2px solid rgba(179,68,255,0.4)',
+    border: '2px solid rgba(201,206,212,0.4)',
   },
   badge: (color) => ({
     padding: '4px 12px',
@@ -216,7 +216,7 @@ const styles = {
   }),
   actionBtn: (variant) => {
     const map = {
-      primary: { bg: 'rgba(179,68,255,0.2)', color: '#c97aff', border: 'rgba(179,68,255,0.4)' },
+      primary: { bg: 'rgba(201,206,212,0.2)', color: '#c9ced4', border: 'rgba(201,206,212,0.4)' },
       danger:  { bg: 'rgba(255,80,80,0.15)',  color: '#ff7070', border: 'rgba(255,80,80,0.35)' },
       success: { bg: 'rgba(50,200,120,0.15)', color: '#55d989', border: 'rgba(50,200,120,0.35)' },
       warn:    { bg: 'rgba(255,190,50,0.15)', color: '#ffcd3c', border: 'rgba(255,190,50,0.35)' },
@@ -240,7 +240,7 @@ const styles = {
   reportCard: {
     background: 'rgba(255,255,255,0.04)',
     border: '1px solid rgba(255,255,255,0.09)',
-    borderLeft: '4px solid #b344ff',
+    borderLeft: '4px solid #c9ced4',
     borderRadius: '12px',
     padding: '16px 20px',
     marginBottom: '12px',
@@ -300,9 +300,9 @@ const styles = {
   filterBtn: (active) => ({
     padding: '8px 18px',
     borderRadius: '10px',
-    border: active ? '1px solid rgba(179,68,255,0.6)' : '1px solid rgba(255,255,255,0.15)',
-    background: active ? 'rgba(179,68,255,0.25)' : 'rgba(255,255,255,0.06)',
-    color: active ? '#c97aff' : 'rgba(255,255,255,0.6)',
+    border: active ? '1px solid rgba(201,206,212,0.6)' : '1px solid rgba(255,255,255,0.15)',
+    background: active ? 'rgba(201,206,212,0.25)' : 'rgba(255,255,255,0.06)',
+    color: active ? '#c9ced4' : 'rgba(255,255,255,0.6)',
     cursor: 'pointer',
     fontSize: '13px',
     fontWeight: '600',
@@ -338,8 +338,8 @@ const styles = {
    Helpers
    ========================================================= */
 const roleColor = (role) => {
-  if (role === 'admin') return '#b344ff';
-  if (role === 'seller') return '#00d4ff';
+  if (role === 'admin') return '#c9ced4';
+  if (role === 'seller') return '#c9ced4';
   return '#55d989';
 };
 const statusColor = (s) => {
@@ -349,12 +349,12 @@ const statusColor = (s) => {
 };
 const reportStatusColor = (s) => {
   if (s === 'pending') return '#ffcd3c';
-  if (s === 'reviewing') return '#00d4ff';
+  if (s === 'reviewing') return '#c9ced4';
   if (s === 'resolved') return '#55d989';
   return '#aaa';
 };
 const orderStatusColor = (s) => {
-  const map = { pending: '#ffcd3c', processing: '#00d4ff', delivered: '#55d989', cancelled: '#ff7070', completed: '#b344ff' };
+  const map = { pending: '#ffcd3c', processing: '#c9ced4', delivered: '#55d989', cancelled: '#ff7070', completed: '#c9ced4' };
   return map[s] || '#aaa';
 };
 const fmt = (d) => (d ? new Date(d).toLocaleDateString('es-ES') : '—');
@@ -369,17 +369,17 @@ function OverviewTab({ stats, analytics, loading }) {
     <>
       {/* Stat cards */}
       <div style={styles.grid4}>
-        <div style={styles.statCard('#b344ff')}>
+        <div style={styles.statCard('#c9ced4')}>
           <div style={styles.statIcon}>&#128101;</div>
           <div style={styles.statLabel}>Total Usuarios</div>
           <div style={styles.statValue}>{stats?.totalUsers ?? '—'}</div>
         </div>
-        <div style={styles.statCard('#00d4ff')}>
+        <div style={styles.statCard('#c9ced4')}>
           <div style={styles.statIcon}>&#128172;</div>
           <div style={styles.statLabel}>Total Posts</div>
           <div style={styles.statValue}>{stats?.totalPosts ?? '—'}</div>
         </div>
-        <div style={styles.statCard('#ff6ec7')}>
+        <div style={styles.statCard('#c9ced4')}>
           <div style={styles.statIcon}>&#9888;</div>
           <div style={styles.statLabel}>Reportes Pendientes</div>
           <div style={styles.statValue}>{stats?.pendingReports ?? '—'}</div>
@@ -398,15 +398,15 @@ function OverviewTab({ stats, analytics, loading }) {
             <span>&#128202;</span> Analitica — {analytics.period}
           </div>
           <div style={styles.analyticsGrid}>
-            <div style={styles.analyticsCard('#b344ff')}>
+            <div style={styles.analyticsCard('#c9ced4')}>
               <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: '12px', marginBottom: '8px' }}>NUEVOS USUARIOS</div>
               <div style={{ fontSize: '36px', fontWeight: '800', color: '#fff' }}>{analytics.newUsers}</div>
             </div>
-            <div style={styles.analyticsCard('#00d4ff')}>
+            <div style={styles.analyticsCard('#c9ced4')}>
               <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: '12px', marginBottom: '8px' }}>NUEVOS POSTS</div>
               <div style={{ fontSize: '36px', fontWeight: '800', color: '#fff' }}>{analytics.newPosts}</div>
             </div>
-            <div style={styles.analyticsCard('#ff6ec7')}>
+            <div style={styles.analyticsCard('#c9ced4')}>
               <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: '12px', marginBottom: '8px' }}>NUEVOS REPORTES</div>
               <div style={{ fontSize: '36px', fontWeight: '800', color: '#fff' }}>{analytics.newReports}</div>
             </div>
@@ -648,7 +648,7 @@ function ReportsTab() {
                 Tipo: {r.contentType || 'post'} &bull; Reportado por: {r.reportedBy?.username || 'anonimo'} &bull; {fmt(r.createdAt)}
               </span>
               {r.adminNotes && (
-                <span style={{ ...styles.reportSub, color: 'rgba(0,212,255,0.7)' }}>Nota: {r.adminNotes}</span>
+                <span style={{ ...styles.reportSub, color: 'rgba(201,206,212,0.7)' }}>Nota: {r.adminNotes}</span>
               )}
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', alignItems: 'center' }}>

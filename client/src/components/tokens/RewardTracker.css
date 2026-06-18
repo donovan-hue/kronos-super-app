@@ -1,6 +1,6 @@
 .reward-tracker {
   padding: 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #9aa0a7 0%, #565b62 100%);
   border-radius: 12px;
   color: white;
 }
@@ -53,7 +53,7 @@
 }
 
 .period-selector select option {
-  background: #667eea;
+  background: #9aa0a7;
   color: white;
 }
 

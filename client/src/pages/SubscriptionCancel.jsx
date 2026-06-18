@@ -6,7 +6,7 @@ export default function SubscriptionCancel() {
     <div
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #0f0f1a 0%, #1a0528 50%, #0d1117 100%)',
+        background: 'linear-gradient(135deg, #0b0c0d 0%, #0a0b0d 50%, #0b0c0d 100%)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

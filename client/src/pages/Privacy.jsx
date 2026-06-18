@@ -179,7 +179,7 @@ export default function Privacy() {
     <div
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #0f0f1a 0%, #1a0528 50%, #0d1117 100%)',
+        background: 'linear-gradient(135deg, #0b0c0d 0%, #0a0b0d 50%, #0b0c0d 100%)',
         padding: '64px 24px 80px',
         color: '#fff'
       }}
@@ -205,8 +205,8 @@ export default function Privacy() {
           <div
             style={{
               display: 'inline-block',
-              background: 'rgba(124,58,237,0.15)',
-              border: '1px solid rgba(124,58,237,0.3)',
+              background: 'rgba(126,130,136,0.15)',
+              border: '1px solid rgba(126,130,136,0.3)',
               color: '#c9ced4',
               fontSize: 12,
               fontWeight: 600,
@@ -240,8 +240,8 @@ export default function Privacy() {
         {/* Resumen rápido */}
         <div
           style={{
-            background: 'rgba(6,182,212,0.06)',
-            border: '1px solid rgba(6,182,212,0.2)',
+            background: 'rgba(126,130,136,0.06)',
+            border: '1px solid rgba(126,130,136,0.2)',
             borderRadius: 16,
             padding: '20px 24px',
             marginBottom: 32
@@ -268,9 +268,9 @@ export default function Privacy() {
                 key={sec.id}
                 style={{
                   background: isOpen
-                    ? 'rgba(124,58,237,0.08)'
+                    ? 'rgba(126,130,136,0.08)'
                     : 'rgba(255,255,255,0.03)',
-                  border: `1px solid ${isOpen ? 'rgba(124,58,237,0.3)' : 'rgba(255,255,255,0.08)'}`,
+                  border: `1px solid ${isOpen ? 'rgba(126,130,136,0.3)' : 'rgba(255,255,255,0.08)'}`,
                   borderRadius: 14,
                   overflow: 'hidden',
                   transition: 'border-color 0.2s'

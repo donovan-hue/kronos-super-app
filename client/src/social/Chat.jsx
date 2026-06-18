@@ -117,14 +117,14 @@ function Chat() {
   return (
     <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
-      <div style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12, background: '#ffffff', borderBottom: '1px solid rgba(79,172,254,0.12)', backdropFilter: 'blur(12px)', position: 'sticky', top: 0, zIndex: 50 }}>
-        <button onClick={() => navigate('/social/chat')} style={{ background: 'none', border: 'none', color: 'rgba(10,10,20,0.65)', fontSize: 22, cursor: 'pointer', padding: 4 }}>←</button>
+      <div style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12, background: '#ffffff', borderBottom: '1px solid rgba(201,206,212,0.12)', backdropFilter: 'blur(12px)', position: 'sticky', top: 0, zIndex: 50 }}>
+        <button onClick={() => navigate('/social/chat')} style={{ background: 'none', border: 'none', color: 'rgba(10,11,13,0.65)', fontSize: 22, cursor: 'pointer', padding: 4 }}>←</button>
         {otherUser && (
           <>
             <img src={otherUser.avatar || `https://ui-avatars.com/api/?name=${otherUser.username}&background=random&color=fff&size=40`} alt={otherUser.username} style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover' }} />
             <div>
-              <div style={{ color: '#0a0a14', fontWeight: 600, fontSize: 14 }}>{otherUser.firstName} {otherUser.lastName || otherUser.username}</div>
-              <div style={{ color: 'rgba(10,10,20,0.35)', fontSize: 11 }}>{isTyping ? 'escribiendo...' : `@${otherUser.username}`}</div>
+              <div style={{ color: '#0a0b0d', fontWeight: 600, fontSize: 14 }}>{otherUser.firstName} {otherUser.lastName || otherUser.username}</div>
+              <div style={{ color: 'rgba(10,11,13,0.35)', fontSize: 11 }}>{isTyping ? 'escribiendo...' : `@${otherUser.username}`}</div>
             </div>
           </>
         )}
@@ -133,7 +133,7 @@ function Chat() {
       {/* Messages */}
       <div ref={containerRef} style={{ flex: 1, overflowY: 'auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: 8, paddingBottom: 80 }}>
         {messages.length === 0 && (
-          <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.35)', padding: 40 }}>
+          <div style={{ textAlign: 'center', color: 'rgba(10,11,13,0.35)', padding: 40 }}>
             <div style={{ fontSize: 40, marginBottom: 8 }}>💬</div>
             <div>Inicia la conversación</div>
           </div>
@@ -144,8 +144,8 @@ function Chat() {
             <div key={i} style={{ display: 'flex', justifyContent: isMine ? 'flex-end' : 'flex-start' }}>
               <div style={{
                 maxWidth: '70%', padding: '10px 14px', borderRadius: isMine ? '18px 18px 4px 18px' : '18px 18px 18px 4px',
-                background: isMine ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(255,255,255,0.08)',
-                color: '#0a0a14', fontSize: 14, lineHeight: 1.4,
+                background: isMine ? 'linear-gradient(135deg,#9aa0a7,#9aa0a7)' : 'rgba(255,255,255,0.08)',
+                color: '#0a0b0d', fontSize: 14, lineHeight: 1.4,
               }}>
                 {msg.content}
               </div>
@@ -156,7 +156,7 @@ function Chat() {
       </div>
 
       {/* Input */}
-      <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, padding: '12px 16px', background: '#ffffff', borderTop: '1px solid rgba(79,172,254,0.12)', backdropFilter: 'blur(12px)', display: 'flex', gap: 8, alignItems: 'center' }}>
+      <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, padding: '12px 16px', background: '#ffffff', borderTop: '1px solid rgba(201,206,212,0.12)', backdropFilter: 'blur(12px)', display: 'flex', gap: 8, alignItems: 'center' }}>
         {/* Micrófono — voz a texto */}
         <button
           onClick={handleVoiceToggle}
@@ -166,7 +166,7 @@ function Chat() {
             width: 42, height: 42, borderRadius: '50%', border: 'none', cursor: 'pointer', flexShrink: 0,
             background: isRecordingVoice
               ? 'linear-gradient(135deg,#ef4444,#dc2626)'
-              : 'rgba(79,172,254,0.1)',
+              : 'rgba(201,206,212,0.1)',
             fontSize: isTranscribing ? 12 : 18,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             animation: isRecordingVoice ? 'micPulse 1s ease-in-out infinite' : 'none',
@@ -180,12 +180,12 @@ function Chat() {
           onChange={e => { setInput(e.target.value); socket?.emit('typing', { receiverId: userId, userId: myId }); }}
           onKeyDown={e => e.key === 'Enter' && handleSend()}
           placeholder={isRecordingVoice ? 'Grabando...' : 'Escribe un mensaje...'}
-          style={{ flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(79,172,254,0.2)', borderRadius: 24, padding: '10px 16px', color: '#0a0a14', fontSize: 14, outline: 'none', fontFamily: 'inherit' }}
+          style={{ flex: 1, background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(201,206,212,0.2)', borderRadius: 24, padding: '10px 16px', color: '#0a0b0d', fontSize: 14, outline: 'none', fontFamily: 'inherit' }}
         />
         <button
           onClick={handleSend}
           disabled={!input.trim()}
-          style={{ width: 42, height: 42, borderRadius: '50%', background: input.trim() ? 'linear-gradient(135deg,#7c3aed,#06b6d4)' : 'rgba(255,255,255,0.08)', border: 'none', color: '#0a0a14', fontSize: 18, cursor: input.trim() ? 'pointer' : 'default', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}
+          style={{ width: 42, height: 42, borderRadius: '50%', background: input.trim() ? 'linear-gradient(135deg,#9aa0a7,#9aa0a7)' : 'rgba(255,255,255,0.08)', border: 'none', color: '#0a0b0d', fontSize: 18, cursor: input.trim() ? 'pointer' : 'default', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}
         >
           ➤
         </button>

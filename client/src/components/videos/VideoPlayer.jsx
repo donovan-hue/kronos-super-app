@@ -6,7 +6,7 @@ const containerStyle = {
   borderRadius: '16px',
   overflow: 'hidden',
   background: '#000',
-  boxShadow: '0 8px 32px rgba(31,38,135,0.37)',
+  boxShadow: '0 8px 32px rgba(0,0,0,0.37)',
 };
 
 const videoStyle = {

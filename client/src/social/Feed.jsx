@@ -6,7 +6,7 @@ import { GlassCard, HoloText } from '../components/kronos';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
-const HOLO = 'linear-gradient(135deg, #4facfe 0%, #00f2fe 40%, #f3a0ff 70%, #ff85a2 100%)';
+const HOLO = 'linear-gradient(135deg, #c9ced4 0%, #e9ecf0 40%, #e9ecf0 70%, #c9ced4 100%)';
 
 function Feed({ posts, setPosts, refreshFeed }) {
   const [content, setContent] = useState('');
@@ -69,11 +69,11 @@ function Feed({ posts, setPosts, refreshFeed }) {
             onChange={(e) => setContent(e.target.value)}
             style={{
               flex: 1, padding: '12px 16px', borderRadius: 14,
-              border: '1.5px solid rgba(79,172,254,0.25)',
+              border: '1.5px solid rgba(201,206,212,0.25)',
               background: 'rgba(255,255,255,0.95)',
               fontSize: 14, outline: 'none',
-              boxShadow: '0 2px 8px rgba(79,172,254,0.08)',
-              color: '#0a0a14'
+              boxShadow: '0 2px 8px rgba(201,206,212,0.08)',
+              color: '#0a0b0d'
             }}
           />
         </div>
@@ -103,9 +103,9 @@ function Feed({ posts, setPosts, refreshFeed }) {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10 }}>
           <div style={{ display: 'flex', gap: 16 }}>
             {[
-              { icon: <FaImage />, color: '#4facfe', label: 'Foto', accept: 'image/*', onChange: (e) => setImage(e.target.files[0]) },
-              { icon: <FaVideo />, color: '#f3a0ff', label: 'Video', accept: 'video/*', onChange: () => {} },
-              { icon: <FaMusic />, color: '#00f2fe', label: 'Música', accept: 'audio/*', onChange: () => {} },
+              { icon: <FaImage />, color: '#c9ced4', label: 'Foto', accept: 'image/*', onChange: (e) => setImage(e.target.files[0]) },
+              { icon: <FaVideo />, color: '#e9ecf0', label: 'Video', accept: 'video/*', onChange: () => {} },
+              { icon: <FaMusic />, color: '#e9ecf0', label: 'Música', accept: 'audio/*', onChange: () => {} },
             ].map(({ icon, color, label, accept, onChange }) => (
               <label key={label} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, color, fontSize: 13, fontWeight: 600 }}>
                 {icon} <span>{label}</span>
@@ -120,9 +120,9 @@ function Feed({ posts, setPosts, refreshFeed }) {
               onChange={(e) => setVisibility(e.target.value)}
               style={{
                 padding: '8px 12px', borderRadius: 10, fontSize: 13,
-                border: '1.5px solid rgba(79,172,254,0.25)',
+                border: '1.5px solid rgba(201,206,212,0.25)',
                 background: 'rgba(255,255,255,0.9)', cursor: 'pointer',
-                color: '#0a0a14', outline: 'none'
+                color: '#0a0b0d', outline: 'none'
               }}
             >
               <option value="public">🌍 Público</option>
@@ -135,10 +135,10 @@ function Feed({ posts, setPosts, refreshFeed }) {
               disabled={!content.trim() || posting}
               style={{
                 padding: '10px 24px', borderRadius: 14, border: 'none',
-                background: (!content.trim() || posting) ? 'rgba(79,172,254,0.3)' : HOLO,
+                background: (!content.trim() || posting) ? 'rgba(201,206,212,0.3)' : HOLO,
                 color: '#fff', fontWeight: 700, fontSize: 14,
                 cursor: (!content.trim() || posting) ? 'not-allowed' : 'pointer',
-                boxShadow: '0 4px 16px rgba(79,172,254,0.3)',
+                boxShadow: '0 4px 16px rgba(201,206,212,0.3)',
                 transition: 'all 0.2s ease'
               }}
             >
@@ -163,10 +163,10 @@ function Feed({ posts, setPosts, refreshFeed }) {
                   />
                 </div>
                 <div>
-                  <p style={{ fontWeight: 700, fontSize: 14, color: '#0a0a14', margin: 0 }}>
+                  <p style={{ fontWeight: 700, fontSize: 14, color: '#0a0b0d', margin: 0 }}>
                     {post.author?.username}
                   </p>
-                  <p style={{ fontSize: 11, color: 'rgba(10,10,20,0.45)', margin: 0 }}>
+                  <p style={{ fontSize: 11, color: 'rgba(10,11,13,0.45)', margin: 0 }}>
                     {new Date(post.createdAt).toLocaleDateString('es', { day: 'numeric', month: 'short', year: 'numeric' })}
                   </p>
                 </div>
@@ -178,7 +178,7 @@ function Feed({ posts, setPosts, refreshFeed }) {
               </span>
             </div>
 
-            <p style={{ color: '#0a0a14', fontSize: 15, lineHeight: 1.6, margin: '0 0 12px' }}>
+            <p style={{ color: '#0a0b0d', fontSize: 15, lineHeight: 1.6, margin: '0 0 12px' }}>
               {post.content}
             </p>
 
@@ -192,7 +192,7 @@ function Feed({ posts, setPosts, refreshFeed }) {
 
             <div style={{
               display: 'flex', justifyContent: 'space-around',
-              borderTop: '1px solid rgba(79,172,254,0.15)', paddingTop: 12, marginTop: 4
+              borderTop: '1px solid rgba(201,206,212,0.15)', paddingTop: 12, marginTop: 4
             }}>
               {[
                 { emoji: '👍', count: post.likes?.length || 0, action: () => handleLike(post._id), label: 'Me gusta' },
@@ -205,11 +205,11 @@ function Feed({ posts, setPosts, refreshFeed }) {
                   style={{
                     display: 'flex', alignItems: 'center', gap: 6,
                     background: 'none', border: 'none', cursor: action ? 'pointer' : 'default',
-                    color: 'rgba(10,10,20,0.6)', fontSize: 13, fontWeight: 600,
+                    color: 'rgba(10,11,13,0.6)', fontSize: 13, fontWeight: 600,
                     padding: '6px 12px', borderRadius: 10,
                     transition: 'all 0.2s',
                   }}
-                  onMouseEnter={(e) => action && (e.currentTarget.style.background = 'rgba(79,172,254,0.1)')}
+                  onMouseEnter={(e) => action && (e.currentTarget.style.background = 'rgba(201,206,212,0.1)')}
                   onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
                 >
                   <span style={{ fontSize: 16 }}>{emoji}</span>

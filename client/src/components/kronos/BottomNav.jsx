@@ -88,7 +88,7 @@ export default function BottomNav({ items }) {
               alignItems: 'center',
               gap: 2,
               textDecoration: 'none',
-              color: active ? '#4facfe' : 'rgba(201,206,212,0.45)',
+              color: active ? '#c9ced4' : 'rgba(201,206,212,0.45)',
               fontSize: 9,
               position: 'relative',
             }}

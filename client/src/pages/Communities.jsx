@@ -50,28 +50,28 @@ function CreateCommunityModal({ onClose, onCreated }) {
             onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
             maxLength={100}
             required
-            style={{ background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 10, padding: '10px 14px', color: '#c9ced4', fontSize: 14, outline: 'none', fontFamily: 'inherit' }}
+            style={{ background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 10, padding: '10px 14px', color: '#c9ced4', fontSize: 14, outline: 'none', fontFamily: 'inherit' }}
           />
           <textarea
             placeholder="Descripción (opcional)"
             value={form.description}
             onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
             maxLength={500}
-            style={{ background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 10, padding: '10px 14px', color: '#c9ced4', fontSize: 14, outline: 'none', resize: 'none', minHeight: 80, fontFamily: 'inherit' }}
+            style={{ background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 10, padding: '10px 14px', color: '#c9ced4', fontSize: 14, outline: 'none', resize: 'none', minHeight: 80, fontFamily: 'inherit' }}
           />
           <div style={{ display: 'flex', gap: 10 }}>
             <select value={form.category} onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
-              style={{ flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 10, padding: '10px 12px', color: '#c9ced4', fontSize: 13, outline: 'none' }}>
+              style={{ flex: 1, background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 10, padding: '10px 12px', color: '#c9ced4', fontSize: 13, outline: 'none' }}>
               {CATEGORIES.filter(c => c.value).map(c => <option key={c.value} value={c.value}>{c.label}</option>)}
             </select>
             <select value={form.privacy} onChange={e => setForm(f => ({ ...f, privacy: e.target.value }))}
-              style={{ flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 10, padding: '10px 12px', color: '#c9ced4', fontSize: 13, outline: 'none' }}>
+              style={{ flex: 1, background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 10, padding: '10px 12px', color: '#c9ced4', fontSize: 13, outline: 'none' }}>
               <option value="public">🌍 Pública</option>
               <option value="private">🔒 Privada</option>
             </select>
           </div>
           <div style={{ display: 'flex', gap: 10, marginTop: 8 }}>
-            <button type="button" onClick={onClose} style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'rgba(79,172,254,0.07)', color: '#c9ced4', border: 'none', cursor: 'pointer', fontSize: 14 }}>Cancelar</button>
+            <button type="button" onClick={onClose} style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'rgba(201,206,212,0.07)', color: '#c9ced4', border: 'none', cursor: 'pointer', fontSize: 14 }}>Cancelar</button>
             <button type="submit" disabled={loading || !form.name.trim()}
               style={{ flex: 2, padding: '10px', borderRadius: 12, background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', color: '#15171a', border: 'none', cursor: 'pointer', fontSize: 14, fontWeight: 700 }}>
               {loading ? 'Creando...' : 'Crear Comunidad'}
@@ -202,7 +202,7 @@ export default function Communities() {
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 placeholder="Buscar comunidades..."
-                style={{ flex: 1, background: 'rgba(79,172,254,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 20, padding: '9px 16px', color: '#c9ced4', fontSize: 13, outline: 'none', fontFamily: 'inherit' }}
+                style={{ flex: 1, background: 'rgba(201,206,212,0.07)', border: '1px solid rgba(190,200,212,0.15)', borderRadius: 20, padding: '9px 16px', color: '#c9ced4', fontSize: 13, outline: 'none', fontFamily: 'inherit' }}
               />
               <button type="submit" style={{ padding: '9px 18px', borderRadius: 20, background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)', color: '#15171a', border: 'none', cursor: 'pointer', fontSize: 13 }}>
                 Buscar

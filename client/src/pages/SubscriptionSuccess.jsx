@@ -34,7 +34,7 @@ export default function SubscriptionSuccess() {
         style={{
           background: 'rgba(255,255,255,0.04)',
           backdropFilter: 'blur(14px)',
-          border: '1px solid rgba(168,85,247,0.35)',
+          border: '1px solid rgba(180,185,192,0.35)',
           borderRadius: 18,
           padding: '40px 32px',
           maxWidth: 460,

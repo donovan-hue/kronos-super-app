@@ -9,7 +9,7 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 function PostGrid({ posts, onLike }) {
   if (!posts.length) {
     return (
-      <div style={{ textAlign: 'center', padding: 48, color: 'rgba(10,10,20,0.35)' }}>
+      <div style={{ textAlign: 'center', padding: 48, color: 'rgba(10,11,13,0.35)' }}>
         <div style={{ fontSize: 40, marginBottom: 8 }}>📝</div>
         <div>Sin publicaciones aún</div>
       </div>
@@ -22,8 +22,8 @@ function PostGrid({ posts, onLike }) {
           {post.image && (
             <img src={post.image} alt="" style={{ width: '100%', borderRadius: 12, marginBottom: 10, maxHeight: 320, objectFit: 'cover' }} />
           )}
-          <div style={{ color: '#0a0a14', fontSize: 14, lineHeight: 1.55, marginBottom: 10 }}>{post.content}</div>
-          <div style={{ display: 'flex', gap: 16, color: 'rgba(10,10,20,0.5)', fontSize: 12 }}>
+          <div style={{ color: '#0a0b0d', fontSize: 14, lineHeight: 1.55, marginBottom: 10 }}>{post.content}</div>
+          <div style={{ display: 'flex', gap: 16, color: 'rgba(10,11,13,0.5)', fontSize: 12 }}>
             <span>❤️ {post.likes?.length || 0}</span>
             <span>💬 {post.comments?.length || 0}</span>
             <span style={{ marginLeft: 'auto' }}>{new Date(post.createdAt).toLocaleDateString('es-MX', { day: 'numeric', month: 'short' })}</span>
@@ -45,10 +45,10 @@ function BookmarksTab({ userId }) {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <div style={{ textAlign: 'center', padding: 40, color: 'rgba(10,10,20,0.35)' }}>Cargando...</div>;
+  if (loading) return <div style={{ textAlign: 'center', padding: 40, color: 'rgba(10,11,13,0.35)' }}>Cargando...</div>;
   if (!posts.length) {
     return (
-      <div style={{ textAlign: 'center', padding: 48, color: 'rgba(10,10,20,0.35)' }}>
+      <div style={{ textAlign: 'center', padding: 48, color: 'rgba(10,11,13,0.35)' }}>
         <div style={{ fontSize: 40, marginBottom: 8 }}>🔖</div>
         <div>Sin guardados aún</div>
         <div style={{ fontSize: 12, marginTop: 4 }}>Guarda posts con el botón 🔖 del feed</div>
@@ -154,7 +154,7 @@ function Profile() {
   if (loading) {
     return (
       <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: 'rgba(10,10,20,0.5)' }}>Cargando perfil...</div>
+        <div style={{ color: 'rgba(10,11,13,0.5)' }}>Cargando perfil...</div>
       </div>
     );
   }
@@ -162,7 +162,7 @@ function Profile() {
   if (!profile) {
     return (
       <div style={{ minHeight: '100vh', background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ textAlign: 'center', color: 'rgba(10,10,20,0.5)' }}>
+        <div style={{ textAlign: 'center', color: 'rgba(10,11,13,0.5)' }}>
           <div style={{ fontSize: 40, marginBottom: 8 }}>😕</div>
           <div>Perfil no encontrado</div>
         </div>
@@ -175,34 +175,34 @@ function Profile() {
       {/* Back button */}
       {userId && (
         <button onClick={() => navigate(-1)}
-          style={{ position: 'fixed', top: 16, left: 16, zIndex: 10, background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(79,172,254,0.18)', borderRadius: '50%', width: 40, height: 40, color: '#0a0a14', fontSize: 18, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          style={{ position: 'fixed', top: 16, left: 16, zIndex: 10, background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(201,206,212,0.18)', borderRadius: '50%', width: 40, height: 40, color: '#0a0b0d', fontSize: 18, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           ←
         </button>
       )}
 
       {/* Cover + Avatar */}
-      <div style={{ position: 'relative', height: 180, background: 'linear-gradient(135deg,rgba(79,172,254,0.2),rgba(0,242,254,0.15),rgba(243,160,255,0.18))', overflow: 'hidden' }}>
+      <div style={{ position: 'relative', height: 180, background: 'linear-gradient(135deg,rgba(201,206,212,0.2),rgba(201,206,212,0.15),rgba(201,206,212,0.18))', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, opacity: 0.3 }}>
           {[...Array(8)].map((_, i) => (
-            <div key={i} style={{ position: 'absolute', width: 240, height: 240, borderRadius: '50%', border: '1px solid rgba(168,85,247,0.3)', top: i * 10 - 60, left: i * 25 - 80 }} />
+            <div key={i} style={{ position: 'absolute', width: 240, height: 240, borderRadius: '50%', border: '1px solid rgba(180,185,192,0.3)', top: i * 10 - 60, left: i * 25 - 80 }} />
           ))}
         </div>
         <div style={{ position: 'absolute', bottom: -40, left: '50%', transform: 'translateX(-50%)' }}>
           <img src={profile.avatar} alt={profile.username}
-            style={{ width: 90, height: 90, borderRadius: '50%', objectFit: 'cover', border: '3px solid rgba(168,85,247,0.8)', boxShadow: '0 0 30px rgba(168,85,247,0.4)' }} />
+            style={{ width: 90, height: 90, borderRadius: '50%', objectFit: 'cover', border: '3px solid rgba(180,185,192,0.8)', boxShadow: '0 0 30px rgba(180,185,192,0.4)' }} />
         </div>
       </div>
 
       <div style={{ maxWidth: 480, margin: '0 auto', padding: '0 16px' }}>
         {/* Profile info */}
         <div style={{ paddingTop: 56, textAlign: 'center', marginBottom: 20 }}>
-          <div style={{ color: '#0a0a14', fontSize: 20, fontWeight: 800, marginBottom: 2 }}>
+          <div style={{ color: '#0a0b0d', fontSize: 20, fontWeight: 800, marginBottom: 2 }}>
             {profile.firstName || ''} {profile.lastName || ''}
             {profile.isVerified && <span style={{ marginLeft: 6, fontSize: 16 }}>✅</span>}
           </div>
-          <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 13, marginBottom: 8 }}>@{profile.username}</div>
+          <div style={{ color: 'rgba(10,11,13,0.5)', fontSize: 13, marginBottom: 8 }}>@{profile.username}</div>
           {profile.bio && (
-            <div style={{ color: 'rgba(10,10,20,0.7)', fontSize: 13, lineHeight: 1.5, maxWidth: 320, margin: '0 auto 12px' }}>{profile.bio}</div>
+            <div style={{ color: 'rgba(10,11,13,0.7)', fontSize: 13, lineHeight: 1.5, maxWidth: 320, margin: '0 auto 12px' }}>{profile.bio}</div>
           )}
 
           {/* Stats row */}
@@ -213,8 +213,8 @@ function Profile() {
               { label: 'Siguiendo', value: profile.following?.length || 0 },
             ].map(stat => (
               <div key={stat.label} style={{ textAlign: 'center' }}>
-                <div style={{ color: '#0a0a14', fontSize: 18, fontWeight: 800 }}>{stat.value}</div>
-                <div style={{ color: 'rgba(10,10,20,0.5)', fontSize: 11 }}>{stat.label}</div>
+                <div style={{ color: '#0a0b0d', fontSize: 18, fontWeight: 800 }}>{stat.value}</div>
+                <div style={{ color: 'rgba(10,11,13,0.5)', fontSize: 11 }}>{stat.label}</div>
               </div>
             ))}
           </div>
@@ -223,7 +223,7 @@ function Profile() {
           {!isOwnProfile && currentUser && (
             <div style={{ display: 'flex', gap: 10, justifyContent: 'center' }}>
               <button onClick={handleFollow}
-                style={{ padding: '9px 28px', borderRadius: 28, fontWeight: 700, fontSize: 13, border: 'none', cursor: 'pointer', background: isFollowing ? 'rgba(79,172,254,0.1)' : 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#0a0a14' }}>
+                style={{ padding: '9px 28px', borderRadius: 28, fontWeight: 700, fontSize: 13, border: 'none', cursor: 'pointer', background: isFollowing ? 'rgba(201,206,212,0.1)' : 'linear-gradient(135deg,#9aa0a7,#9aa0a7)', color: '#0a0b0d' }}>
                 {isFollowing ? 'Siguiendo ✓' : 'Seguir'}
               </button>
               <button onClick={handleBlock} disabled={blockLoading}
@@ -234,20 +234,20 @@ function Profile() {
           )}
           {isOwnProfile && (
             <button onClick={() => navigate('/settings')}
-              style={{ padding: '9px 24px', borderRadius: 28, fontWeight: 700, fontSize: 13, border: '1px solid rgba(79,172,254,0.25)', background: 'transparent', color: '#0a0a14', cursor: 'pointer' }}>
+              style={{ padding: '9px 24px', borderRadius: 28, fontWeight: 700, fontSize: 13, border: '1px solid rgba(201,206,212,0.25)', background: 'transparent', color: '#0a0b0d', cursor: 'pointer' }}>
               ✏️ Editar perfil
             </button>
           )}
         </div>
 
         {/* Tabs */}
-        <div style={{ display: 'flex', gap: 4, marginBottom: 16, background: 'rgba(79,172,254,0.04)', borderRadius: 14, padding: 4 }}>
+        <div style={{ display: 'flex', gap: 4, marginBottom: 16, background: 'rgba(201,206,212,0.04)', borderRadius: 14, padding: 4 }}>
           {[
             { id: 'posts', label: '📝 Posts' },
             ...(isOwnProfile ? [{ id: 'bookmarks', label: '🔖 Guardados' }] : []),
           ].map(t => (
             <button key={t.id} onClick={() => setTab(t.id)}
-              style={{ flex: 1, padding: '9px', borderRadius: 10, fontSize: 13, fontWeight: 600, border: 'none', cursor: 'pointer', background: tab === t.id ? 'rgba(124,58,237,0.6)' : 'transparent', color: '#0a0a14', transition: 'background 0.2s' }}>
+              style={{ flex: 1, padding: '9px', borderRadius: 10, fontSize: 13, fontWeight: 600, border: 'none', cursor: 'pointer', background: tab === t.id ? 'rgba(126,130,136,0.6)' : 'transparent', color: '#0a0b0d', transition: 'background 0.2s' }}>
               {t.label}
             </button>
           ))}

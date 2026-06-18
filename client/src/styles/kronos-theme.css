@@ -13,14 +13,14 @@
   --silver-dim: #7d838b;
   --silver-faint: #565b62;
 
-  /* ⚡ Acento de marca — Violeta eléctrico (firma de KRONOS) */
-  --accent: #8b5cf6;
-  --accent-bright: #a78bfa;
-  --accent-dim: #6d4bd0;
-  --accent-deep: #4c2f9e;
-  --accent-glow: rgba(139,92,246,.35);
-  --accent-soft: rgba(139,92,246,.12);
-  --accent-grad: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 45%, #6d4bd0 100%);
+  /* Acento de marca — Plata metálica (firma KRONOS: negro profundo + plata) */
+  --accent: #c9ced4;
+  --accent-bright: #f5f7f9;
+  --accent-dim: #7e8288;
+  --accent-deep: #54585d;
+  --accent-glow: rgba(201,206,212,.28);
+  --accent-soft: rgba(201,206,212,.10);
+  --accent-grad: linear-gradient(135deg, #f5f7f9 0%, #c9ced4 45%, #7e8288 100%);
 
   /* Gradiente metálico platino */
   --metal: conic-gradient(from 138deg,
@@ -46,7 +46,7 @@
   --kronos-glass-border: rgba(190,200,212,.14);
   --kronos-glass-input: rgba(255,255,255,.04);
   --kronos-shadow: 0 4px 24px rgba(0,0,0,.55), 0 1px 4px rgba(0,0,0,.4);
-  --kronos-shadow-hover: 0 8px 32px rgba(0,0,0,.7), 0 0 22px rgba(139,92,246,.16);
+  --kronos-shadow-hover: 0 8px 32px rgba(0,0,0,.7), 0 0 22px rgba(201,206,212,.14);
   --kronos-radius-sm: 10px;
   --kronos-radius: 14px;
   --kronos-radius-lg: 20px;
@@ -211,18 +211,18 @@ body {
   cursor: pointer;
   border-radius: var(--kronos-radius);
   background: var(--accent-grad);
-  color: #fff;
+  color: #15171a;
   font-family: var(--kronos-font);
   font-weight: 600;
   font-size: 15px;
   letter-spacing: .1em;
   text-transform: uppercase;
-  box-shadow: 0 12px 30px -10px var(--accent-glow), 0 0 0 1px rgba(167,139,250,.25);
+  box-shadow: 0 12px 30px -10px var(--accent-glow), 0 0 0 1px rgba(201,206,212,.30);
   transition: filter .2s, box-shadow .2s, transform .1s;
 }
 .k-btn-accent:hover {
   filter: brightness(1.1);
-  box-shadow: 0 16px 38px -10px var(--accent-glow), 0 0 0 1px rgba(167,139,250,.4);
+  box-shadow: 0 16px 38px -10px var(--accent-glow), 0 0 0 1px rgba(201,206,212,.45);
 }
 .k-btn-accent:active { transform: translateY(1px); }
 
@@ -259,7 +259,7 @@ body {
 }
 .k-badge {
   background: var(--accent);
-  color: #fff;
+  color: #15171a;
   font-size: 11px;
   font-weight: 700;
   padding: 2px 7px;

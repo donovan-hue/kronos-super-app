@@ -234,11 +234,11 @@ const ARControls = ({ onSnapshot, onRecording, isRecording, onShare }) => {
     { name: 'Black', hex: '#000000' },
     { name: 'White', hex: '#FFFFFF' },
     { name: 'Red', hex: '#EF4444' },
-    { name: 'Blue', hex: '#3B82F6' },
+    { name: 'Blue', hex: '#9aa0a7' },
     { name: 'Green', hex: '#10B981' },
     { name: 'Yellow', hex: '#FBBF24' },
-    { name: 'Purple', hex: '#A855F7' },
-    { name: 'Pink', hex: '#EC4899' },
+    { name: 'Purple', hex: '#b4b9c0' },
+    { name: 'Pink', hex: '#9aa0a7' },
   ];
 
   const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];

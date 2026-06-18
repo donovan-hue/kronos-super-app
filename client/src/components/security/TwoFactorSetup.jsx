@@ -123,7 +123,7 @@ export default function TwoFactorSetup() {
       <div className="flex items-center gap-3 mb-6">
         <div
           className="w-12 h-12 flex items-center justify-center text-2xl rounded-2xl"
-          style={{ background: 'linear-gradient(135deg, rgba(139,92,246,0.3), rgba(236,72,153,0.2))', border: '1px solid rgba(139,92,246,0.3)' }}
+          style={{ background: 'linear-gradient(135deg, rgba(201,206,212,0.3), rgba(126,130,136,0.2))', border: '1px solid rgba(201,206,212,0.3)' }}
         >
           🔐
         </div>
@@ -155,7 +155,7 @@ export default function TwoFactorSetup() {
               <div>
                 <div
                   className="p-4 rounded-xl mb-5"
-                  style={{ background: 'rgba(139,92,246,0.08)', border: '1px solid rgba(139,92,246,0.15)' }}
+                  style={{ background: 'rgba(201,206,212,0.08)', border: '1px solid rgba(201,206,212,0.15)' }}
                 >
                   <p className="text-white/60 text-sm leading-relaxed">
                     La autenticacion en dos pasos (2FA) agrega una capa de seguridad extra a tu cuenta.
@@ -166,7 +166,7 @@ export default function TwoFactorSetup() {
                   onClick={handleSetup}
                   disabled={loading}
                   className="w-full py-3.5 rounded-xl font-bold text-sm transition-all disabled:opacity-50"
-                  style={{ background: 'linear-gradient(135deg, #7c3aed, #db2777)', color: 'white' }}
+                  style={{ background: 'linear-gradient(135deg, #9aa0a7, #9aa0a7)', color: 'white' }}
                 >
                   {loading ? (
                     <span className="flex items-center justify-center gap-2">
@@ -227,7 +227,7 @@ export default function TwoFactorSetup() {
                     <button
                       onClick={copySecret}
                       className="px-3 py-1.5 rounded-lg text-xs transition-all"
-                      style={{ background: 'rgba(139,92,246,0.15)', border: '1px solid rgba(139,92,246,0.25)', color: '#c4b5fd' }}
+                      style={{ background: 'rgba(201,206,212,0.15)', border: '1px solid rgba(201,206,212,0.25)', color: '#e9ecf0' }}
                     >
                       {copied ? '✓ Copiado' : 'Copiar'}
                     </button>
@@ -290,7 +290,7 @@ export default function TwoFactorSetup() {
                   onClick={handleVerify}
                   disabled={loading || code.length < 6}
                   className="flex-1 py-3 rounded-xl font-bold text-sm transition-all disabled:opacity-50"
-                  style={{ background: 'linear-gradient(135deg, #7c3aed, #db2777)', color: 'white' }}
+                  style={{ background: 'linear-gradient(135deg, #9aa0a7, #9aa0a7)', color: 'white' }}
                 >
                   {loading ? (
                     <span className="flex items-center justify-center gap-2">
@@ -322,9 +322,9 @@ export default function TwoFactorSetup() {
               onClick={resetFlow}
               className="px-6 py-2.5 rounded-xl font-medium text-sm transition-all"
               style={{
-                background: 'rgba(139,92,246,0.15)',
-                border: '1px solid rgba(139,92,246,0.25)',
-                color: '#c4b5fd'
+                background: 'rgba(201,206,212,0.15)',
+                border: '1px solid rgba(201,206,212,0.25)',
+                color: '#e9ecf0'
               }}
             >
               Aceptar

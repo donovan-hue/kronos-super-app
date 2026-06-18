@@ -13,7 +13,7 @@ function ProtectedAdminRoute({ children }) {
           alignItems: 'center',
           justifyContent: 'center',
           height: '100vh',
-          background: 'linear-gradient(135deg, #1a0533 0%, #0d1b2a 100%)',
+          background: 'linear-gradient(135deg, #0a0b0d 0%, #0d1b2a 100%)',
           color: '#fff',
           fontSize: '18px',
           gap: '12px'
