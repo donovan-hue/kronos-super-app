@@ -1,8 +1,27 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import styled from 'styled-components';
+import {
+  PageContainer,
+  ContentWrapper,
+  HeaderSection,
+  PlansTag,
+  Title,
+  Subtitle,
+  ErrorMessage,
+  ProductsContainer,
+  ProductSection,
+  ProductHeader,
+  ProductIconWrapper,
+  ProductName,
+  ProductTagline,
+  PlansGrid,
+  PlanCardWrapper,
+  FeaturedBadge, PlanName, PriceDisplay, PriceUnit, QuotaText, NoteText, FeatureList, FeatureItem, CurrentPlanBadge, FreePlanBadge, ActivateButton, FooterContainer, BackButtonFooter
+} from './Pricing.styles';
 
-const API_URL = process.env.REACT_APP_API_URL || 'https://kronos-api-qq0o.onrender.com/api';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 /* Icono de línea plata (estética KRONOSPACE) */
 function LineIcon({ d, size = 22 }) {
@@ -79,6 +98,7 @@ function PlanCard({ product, plan, current, busy, onActivate }) {
         boxShadow: featured ? '0 22px 50px -26px rgba(0,0,0,.9), 0 0 0 1px rgba(167,139,250,.22)' : undefined,
       }}
     >
+    <PlanCardWrapper className="tile" $featured={featured}>
       {featured && (
         <span style={{
           position: 'absolute', top: -10, right: 16,
@@ -87,37 +107,50 @@ function PlanCard({ product, plan, current, busy, onActivate }) {
           color: 'var(--accent-bright)', background: 'var(--accent-soft)',
           border: '1px solid rgba(167,139,250,.32)', borderRadius: 8, padding: '3px 9px',
         }}>
+        <FeaturedBadge>
           Recomendado
         </span>
+        </FeaturedBadge>
       )}
 
       <div className="metal-text" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: 13, letterSpacing: '.04em' }}>
+      <PlanName className="metal-text">
         {plan.name}
       </div>
+      </PlanName>
 
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
         <span className="metal-text" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 30, fontWeight: 700 }}>
+        <PriceDisplay className="metal-text">
           {priceLabel(plan.price)}
         </span>
         {!isFree && <span style={{ fontSize: 12, color: 'var(--silver-faint)' }}>/mes</span>}
+        </PriceDisplay>
+        {!isFree && <PriceUnit>/mes</PriceUnit>}
       </div>
 
       {plan.quota && (
         <div style={{ fontSize: 12.5, color: 'var(--silver)', fontWeight: 600 }}>{plan.quota}</div>
+        <QuotaText>{plan.quota}</QuotaText>
       )}
       {plan.note && (
         <div style={{ fontSize: 11.5, color: 'var(--silver-faint)', letterSpacing: '.02em' }}>{plan.note}</div>
+        <NoteText>{plan.note}</NoteText>
       )}
 
       {plan.features && (
         <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 7 }}>
+        <FeatureList>
           {plan.features.map((f) => (
             <li key={f} style={{ display: 'flex', alignItems: 'center', gap: 9, fontSize: 12.5, color: 'var(--silver-dim)' }}>
+            <FeatureItem key={f}>
               <LineIcon size={14} d={<path d="M5 12l4 4 10-10" />} />
               {f}
             </li>
+            </FeatureItem>
           ))}
         </ul>
+        </FeatureList>
       )}
 
       <div style={{ marginTop: 'auto', paddingTop: 4 }}>
@@ -126,25 +159,34 @@ function PlanCard({ product, plan, current, busy, onActivate }) {
             textAlign: 'center', fontSize: 12, color: 'var(--silver-faint)',
             border: '1px dashed var(--line-2)', borderRadius: 11, padding: '11px 0',
           }}>
+          <CurrentPlanBadge>
             Tu plan actual
           </div>
+          </CurrentPlanBadge>
         ) : isFree ? (
           <div style={{ textAlign: 'center', fontSize: 12, color: 'var(--silver-faint)', padding: '11px 0' }}>
+          <FreePlanBadge>
             Incluido por defecto
           </div>
+          </FreePlanBadge>
         ) : (
           <button
+          <ActivateButton
             className={featured ? 'btn-metal' : 'btn-ghost'}
             style={{ width: '100%', opacity: busy ? 0.6 : 1, cursor: busy ? 'wait' : 'pointer' }}
             disabled={busy}
+            $busy={busy}
+            disabled={busy} // Use disabled prop directly
             onClick={() => onActivate(product.id, plan.key)}
           >
             {featured ? <span style={{ width: '100%' }}>{busy ? 'Redirigiendo…' : `Activar ${plan.name}`}</span>
               : (busy ? 'Redirigiendo…' : `Activar ${plan.name}`)}
           </button>
+          </ActivateButton>
         )}
       </div>
     </div>
+    </PlanCardWrapper>
   );
 }
 
@@ -193,15 +235,23 @@ export default function Pricing() {
       color: 'var(--silver)',
     }}>
       <div style={{ maxWidth: 1120, margin: '0 auto' }}>
+    <PageContainer>
+      <ContentWrapper>
         {/* Cabecera */}
         <div style={{ textAlign: 'center', marginBottom: 52 }}>
           <div style={{ fontSize: 11, letterSpacing: '.34em', textTransform: 'uppercase', color: 'var(--silver-faint)', fontWeight: 600, marginBottom: 12 }}>
+        <HeaderSection>
+          <PlansTag>
             Planes
           </div>
           <h1 className="metal-text" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: 40, margin: 0, letterSpacing: '.01em' }}>
+          </PlansTag>
+          <Title className="metal-text">
             Tres productos. Paga solo lo que usas.
           </h1>
           <p style={{ color: 'var(--silver-dim)', marginTop: 14, fontSize: 15, maxWidth: 620, marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.5 }}>
+          </Title>
+          <Subtitle>
             La red social, el generador de guiones y el estudio de IA son independientes.
             Activa uno, otro o todos — nunca van amarrados.
           </p>
@@ -209,20 +259,31 @@ export default function Pricing() {
             <div style={{ color: 'var(--accent-bright)', fontSize: 13, marginTop: 14 }}>{error}</div>
           )}
         </div>
+          </Subtitle>
+          {error && <ErrorMessage>{error}</ErrorMessage>}
+        </HeaderSection>
 
         {/* Productos */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 44 }}>
+        <ProductsContainer>
           {CATALOG.map((product) => (
             <section key={product.id}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 18 }}>
                 <span className="iconbtn" style={{ flex: 'none' }}><LineIcon d={product.icon} /></span>
+            <ProductSection key={product.id}>
+              <ProductHeader>
+                <ProductIconWrapper className="iconbtn"><LineIcon d={product.icon} /></ProductIconWrapper>
                 <div>
                   <div className="metal-text" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: 20 }}>
+                  <ProductName className="metal-text">
                     {product.name}
                   </div>
                   <div style={{ fontSize: 12.5, color: 'var(--silver-faint)', marginTop: 2 }}>{product.tagline}</div>
+                  </ProductName>
+                  <ProductTagline>{product.tagline}</ProductTagline>
                 </div>
               </div>
+              </ProductHeader>
 
               <div style={{
                 display: 'grid',
@@ -230,6 +291,7 @@ export default function Pricing() {
                 gap: 16,
                 alignItems: 'stretch',
               }}>
+              <PlansGrid $planCount={product.plans.length}>
                 {product.plans.map((plan) => (
                   <PlanCard
                     key={plan.key}
@@ -242,16 +304,25 @@ export default function Pricing() {
                 ))}
               </div>
             </section>
+              </PlansGrid>
+            </ProductSection>
           ))}
         </div>
+        </ProductsContainer>
 
         {/* Volver */}
         <div style={{ textAlign: 'center', marginTop: 56 }}>
           <button className="btn-ghost" onClick={() => navigate(-1)} style={{ cursor: 'pointer' }}>
+        <FooterContainer>
+          <BackButtonFooter className="btn-ghost" onClick={() => navigate(-1)}>
             ← Volver
           </button>
         </div>
       </div>
     </div>
+          </BackButtonFooter>
+        </FooterContainer>
+      </ContentWrapper>
+    </PageContainer>
   );
 }

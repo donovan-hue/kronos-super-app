@@ -176,7 +176,7 @@ export default function AvatarPage() {
     if (activeTab === 'shop' && shopItems.length === 0) {
       fetchShop();
     }
-  }, [activeTab]);
+  }, [activeTab, fetchShop]);
 
   const handleBuy = async (itemId) => {
     setActionLoading(itemId);

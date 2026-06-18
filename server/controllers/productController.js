@@ -1,6 +1,8 @@
 const Product = require('../models/Product');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
+const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 // Crear producto
 exports.createProduct = async (req, res) => {
   try {
@@ -41,17 +43,17 @@ exports.getAllProducts = async (req, res) => {
     }
 
     if (search) {
+      const escapedSearch = escapeRegex(search);
       filter.$or = [
-        { name: { $regex: search, $options: 'i' } },
-        { description: { $regex: search, $options: 'i' } }
+        { name: { $regex: escapedSearch, $options: 'i' } },
+        { description: { $regex: escapedSearch, $options: 'i' } }
       ];
     }
 
-    if (minPrice || maxPrice) {
-      filter.price = {};
-      if (minPrice) filter.price.$gte = minPrice;
-      if (maxPrice) filter.price.$lte = maxPrice;
-    }
+    const minNum = Number(minPrice);
+    const maxNum = Number(maxPrice);
+    if (!isNaN(minNum) && minPrice) filter.price = { ...filter.price, $gte: minNum };
+    if (!isNaN(maxNum) && maxPrice) filter.price = { ...filter.price, $lte: maxNum };
 
     const products = await Product.find(filter)
       .populate('seller', 'username avatar')

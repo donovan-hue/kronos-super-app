@@ -60,7 +60,7 @@ const useTokens = () => {
     } finally {
       setLoading(false);
     }
-  }, [getBalance]);
+  }, [getBalance, getTransactions]);
 
   // Stake tokens
   const stakeTokens = useCallback(async (amount, lockPeriod) => {
@@ -77,7 +77,7 @@ const useTokens = () => {
     } finally {
       setLoading(false);
     }
-  }, [getBalance]);
+  }, [getBalance, getStakes]);
 
   // Get stakes
   const getStakes = useCallback(async () => {

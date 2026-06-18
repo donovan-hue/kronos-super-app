@@ -3,13 +3,15 @@ const router = express.Router();
 const { protect } = require('../middleware/auth');
 const { stripe } = require('../config/stripe');
 const subscriptionService = require('../services/subscriptionService');
+const { validateProductId } = require('../middleware/validateProduct');
+const { validateCheckout, validateCancel } = require('../middleware/subscriptionValidator');
 
 /**
  * POST /api/subscription/checkout
  * Nuevo modelo (3 productos):  Body: { productId: 'social'|'scripts'|'media', planKey: 'premium'|'estandar'|'pro' }
  * Legacy (compat):             Body: { tier: 'plus'|'pro'|'business' }
  */
-router.post('/checkout', protect, async (req, res) => {
+router.post('/checkout', protect, validateCheckout, validateProductId, async (req, res) => {
   try {
     const { productId, planKey, tier } = req.body;
 
@@ -68,7 +70,7 @@ router.get('/status', protect, async (req, res) => {
  * POST /api/subscription/cancel
  * Cancela al final del periodo actual.
  */
-router.post('/cancel', protect, async (req, res) => {
+router.post('/cancel', protect, validateCancel, validateProductId, async (req, res) => {
   try {
     const { productId } = req.body || {};
     const sub = productId
@@ -84,10 +86,12 @@ router.post('/cancel', protect, async (req, res) => {
 /**
  * POST /api/subscription/reactivate
  * Reactiva una suscripción que estaba marcada para cancelar.
+ * Rectificación: Se añaden validadores y soporte para productId.
  */
-router.post('/reactivate', protect, async (req, res) => {
+router.post('/reactivate', protect, validateCancel, validateProductId, async (req, res) => {
   try {
-    const sub = await subscriptionService.reactivateSubscription(req.user._id);
+    const { productId } = req.body || {};
+    const sub = await subscriptionService.reactivateSubscription(req.user._id, productId);
     return res.json({ success: true, subscription: sub });
   } catch (err) {
     console.error('subscription/reactivate error:', err);

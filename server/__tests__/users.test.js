@@ -96,7 +96,7 @@ describe('POST /api/users/:id/block', () => {
 
     expect(res.status).toBe(201);
     expect(res.body.success).toBe(true);
-    expect(res.body.message).toMatch(/blocked/i);
+    expect(res.body.message).toMatch(/bloqueado/i);
   });
 
   it('deberia devolver 400 si el usuario intenta bloquearse a si mismo', async () => {
@@ -107,7 +107,7 @@ describe('POST /api/users/:id/block', () => {
       .set('Authorization', `Bearer ${token}`);
 
     expect(res.status).toBe(400);
-    expect(res.body.message).toMatch(/cannot block yourself/i);
+    expect(res.body.message).toMatch(/no puedes bloquearte/i);
   });
 
   it('deberia devolver 400 si el usuario ya esta bloqueado', async () => {
@@ -125,7 +125,7 @@ describe('POST /api/users/:id/block', () => {
       .set('Authorization', `Bearer ${token}`);
 
     expect(res.status).toBe(400);
-    expect(res.body.message).toMatch(/already blocked/i);
+    expect(res.body.message).toMatch(/ya está bloqueado/i);
   });
 
   it('deberia devolver 401 si no hay token al intentar bloquear', async () => {

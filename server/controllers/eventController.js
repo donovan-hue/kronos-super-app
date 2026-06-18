@@ -3,6 +3,8 @@ const { createNotification } = require('./notificationController');
 const { stripe } = require('../config/stripe');
 const { ensureCustomer } = require('../services/subscriptionService');
 
+const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 // GET /api/events — Listar eventos publicados (con filtros)
 exports.getEvents = async (req, res) => {
   try {
@@ -12,7 +14,7 @@ exports.getEvents = async (req, res) => {
     const filter = { status: 'published', startDate: { $gte: new Date() } };
     if (category) filter.category = category;
     if (type) filter.type = type;
-    if (search) filter.title = { $regex: search, $options: 'i' };
+    if (search) filter.title = { $regex: escapeRegex(search), $options: 'i' };
 
     const [events, total] = await Promise.all([
       Event.find(filter)

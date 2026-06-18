@@ -412,10 +412,13 @@ const handleSubscriptionWebhook = async (event) => {
 
 /**
  * Cancela la suscripción al final del periodo actual.
+ * @param {String} userId
+ * @param {String} [productId] - Opcional para asegurar que cancelamos el producto correcto
  */
-const cancelSubscription = async (userId) => {
+const cancelSubscription = async (userId, productId = null) => {
   const sub = await Subscription.findOne({
     userId,
+    ...(productId ? { productId } : {}),
     status: { $in: ['active', 'trialing', 'past_due'] }
   }).sort({ createdAt: -1 });
 
@@ -436,10 +439,12 @@ const cancelSubscription = async (userId) => {
 
 /**
  * Reactiva una suscripción que estaba marcada para cancelar.
+ * Rectificación: Se añade productId para soportar el modelo de 3 productos independientes.
  */
-const reactivateSubscription = async (userId) => {
+const reactivateSubscription = async (userId, productId = null) => {
   const sub = await Subscription.findOne({
     userId,
+    ...(productId ? { productId } : {}),
     cancelAtPeriodEnd: true,
     status: { $in: ['active', 'trialing'] }
   }).sort({ createdAt: -1 });

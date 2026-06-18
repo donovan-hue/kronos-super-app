@@ -2,6 +2,8 @@ const Post = require('../models/Post');
 const Product = require('../models/Product');
 const User = require('../models/User');
 
+const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 // Buscar globalmente en todas las entidades
 exports.globalSearch = async (req, res) => {
   try {
@@ -11,7 +13,7 @@ exports.globalSearch = async (req, res) => {
       return res.status(400).json({ message: 'Search query is required' });
     }
 
-    const searchRegex = { $regex: query, $options: 'i' };
+    const searchRegex = { $regex: escapeRegex(query), $options: 'i' };
     const results = {
       users: [],
       posts: [],
@@ -79,11 +81,12 @@ exports.searchUsers = async (req, res) => {
       return res.status(400).json({ message: 'Search query is required' });
     }
 
+    const escaped = escapeRegex(query);
     const users = await User.find({
       $or: [
-        { username: { $regex: query, $options: 'i' } },
-        { firstName: { $regex: query, $options: 'i' } },
-        { lastName: { $regex: query, $options: 'i' } }
+        { username: { $regex: escaped, $options: 'i' } },
+        { firstName: { $regex: escaped, $options: 'i' } },
+        { lastName: { $regex: escaped, $options: 'i' } }
       ]
     })
       .select('_id username firstName lastName avatar bio followers')
@@ -110,7 +113,7 @@ exports.searchSuggestions = async (req, res) => {
       });
     }
 
-    const searchRegex = { $regex: `^${query}`, $options: 'i' };
+    const searchRegex = { $regex: `^${escapeRegex(query)}`, $options: 'i' };
 
     const [usernames, productNames] = await Promise.all([
       User.find({ username: searchRegex })

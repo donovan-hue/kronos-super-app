@@ -24,10 +24,13 @@ exports.markAllRead = async (req, res) => {
 
 exports.markOneRead = async (req, res) => {
   try {
-    await Notification.findOneAndUpdate(
+    const result = await Notification.updateOne(
       { _id: req.params.id, recipient: req.user._id },
-      { read: true }
+      { $set: { read: true } }
     );
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ message: 'Notificación no encontrada' });
+    }
     res.json({ message: 'OK' });
   } catch (err) {
     res.status(500).json({ message: 'Error al actualizar notificación' });
@@ -35,6 +38,11 @@ exports.markOneRead = async (req, res) => {
 };
 
 exports.createNotification = async ({ recipient, sender, type, title, body = '', link = '', meta = {} }) => {
-  if (recipient?.toString() === sender?.toString()) return;
-  return Notification.create({ recipient, sender, type, title, body, link, meta });
+  try {
+    if (recipient?.toString() === sender?.toString()) return null;
+    return await Notification.create({ recipient, sender, type, title, body, link, meta });
+  } catch (err) {
+    console.error('Error silencioso al crear notificación:', err);
+    return null;
+  }
 };

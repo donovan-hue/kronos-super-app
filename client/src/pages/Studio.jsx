@@ -50,7 +50,7 @@ export default function Studio() {
 
   const generar = async () => {
     if (!prompt.trim() || loading || !current.ready) return;
-    setLoading(true); setErr(''); setImages([]);
+    setLoading(true); setErr('');
     try {
       if (tool === 'variants') {
         const { data } = await axios.post(`${API_URL}/ai/image/variants`, { prompt, count: 3 });

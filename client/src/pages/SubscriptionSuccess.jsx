@@ -47,7 +47,7 @@ export default function SubscriptionSuccess() {
           style={{
             fontSize: 28,
             margin: '0 0 8px',
-            background: 'linear-gradient(180deg,#2c2f32 0%,#1a1c1e 100%)',
+            background: 'linear-gradient(180deg,#ffffff 0%,#d8b4fe 100%)',
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',

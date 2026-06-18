@@ -152,13 +152,15 @@ exports.getTrendingNow = async (req, res) => {
     const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
 
     const [trendingPosts, trendingProducts, trendingUsers] = await Promise.all([
-      Post.find({
-        createdAt: { $gte: thirtyDaysAgo },
-        visibility: 'public'
-      })
-        .populate('author', 'username avatar')
-        .sort({ 'likes.length': -1 })
-        .limit(10),
+      Post.aggregate([
+        { $match: { createdAt: { $gte: thirtyDaysAgo }, visibility: 'public' } },
+        { $addFields: { likesCount: { $size: { $ifNull: ['$likes', []] } } } },
+        { $sort: { likesCount: -1 } },
+        { $limit: 10 },
+        { $lookup: { from: 'users', localField: 'author', foreignField: '_id', as: 'author' } },
+        { $unwind: { path: '$author', preserveNullAndEmptyArrays: true } },
+        { $project: { 'author.password': 0, 'author.email': 0, 'author.tokens': 0 } }
+      ]),
 
       Product.find({
         createdAt: { $gte: thirtyDaysAgo }
@@ -167,12 +169,13 @@ exports.getTrendingNow = async (req, res) => {
         .sort({ totalSales: -1, rating: -1 })
         .limit(10),
 
-      User.find({
-        createdAt: { $gte: thirtyDaysAgo }
-      })
-        .select('_id username avatar firstName lastName followers')
-        .sort({ 'followers.length': -1 })
-        .limit(10)
+      User.aggregate([
+        { $match: { createdAt: { $gte: thirtyDaysAgo } } },
+        { $addFields: { followersCount: { $size: { $ifNull: ['$followers', []] } } } },
+        { $sort: { followersCount: -1 } },
+        { $limit: 10 },
+        { $project: { _id: 1, username: 1, avatar: 1, firstName: 1, lastName: 1, followers: 1 } }
+      ])
     ]);
 
     res.status(200).json({

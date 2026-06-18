@@ -11,7 +11,7 @@ const TEST_USER = {
 
 beforeAll(async () => {
   process.env.NODE_ENV = 'test';
-  app = require('../server');
+  app = require('../server').app;
   // Register and login a test user
   try {
     await request(app).post('/api/auth/register').send(TEST_USER);

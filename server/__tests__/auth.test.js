@@ -114,14 +114,14 @@ describe('POST /api/auth/login', () => {
     const res = await loginUser('test@kronos.com', 'WrongPassword');
 
     expect(res.status).toBe(401);
-    expect(res.body.message).toMatch(/invalid credentials/i);
+    expect(res.body.message).toMatch(/credenciales incorrectas/i);
   });
 
   it('deberia devolver 401 si el email no existe', async () => {
     const res = await loginUser('noexiste@kronos.com', 'Password123');
 
     expect(res.status).toBe(401);
-    expect(res.body.message).toMatch(/invalid credentials/i);
+    expect(res.body.message).toMatch(/credenciales incorrectas/i);
   });
 
   it('deberia devolver 400 si no se proporciona password', async () => {

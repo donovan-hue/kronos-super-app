@@ -538,20 +538,22 @@ if (process.env.NODE_ENV !== 'test') {
 
 // Iniciar servidor
 const PORT = process.env.PORT || 5000;
-server.on('error', (err) => {
-  if (err.code === 'EADDRINUSE') {
-    console.error(`\n[ERROR] Puerto ${PORT} ya está en uso. Cierra el proceso anterior y vuelve a intentar.\n`);
-    process.exit(1);
-  } else {
-    throw err;
-  }
-});
-server.listen(PORT, () => {
-  console.log(`\n╔════════════════════════════════════════╗`);
-  console.log(`║  🚀 Super-App Server Running          ║`);
-  console.log(`║  Port: ${PORT}                              ║`);
-  console.log(`║  URL: http://localhost:${PORT}              ║`);
-  console.log(`╚════════════════════════════════════════╝\n`);
-});
+if (require.main === module) {
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.error(`\n[ERROR] Puerto ${PORT} ya está en uso. Cierra el proceso anterior y vuelve a intentar.\n`);
+      process.exit(1);
+    } else {
+      throw err;
+    }
+  });
+  server.listen(PORT, () => {
+    console.log(`\n╔════════════════════════════════════════╗`);
+    console.log(`║  🚀 Super-App Server Running          ║`);
+    console.log(`║  Port: ${PORT}                              ║`);
+    console.log(`║  URL: http://localhost:${PORT}              ║`);
+    console.log(`╚════════════════════════════════════════╝\n`);
+  });
+}
 
 module.exports = { app, server, io };
