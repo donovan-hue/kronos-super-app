@@ -17,7 +17,6 @@ exports.sendTip = async (req, res) => {
     }
 
     // Check sender wallet balance
-    const senderWallet = await UserWallet.findOne({ userId: fromUserId });
     const senderWallet = await UserWallet.findOne({ userId: fromUserId }).session(session);
     if (!senderWallet || senderWallet.balance < amount) {
       return res.status(400).json({ message: 'Insufficient KRO balance' });
@@ -26,7 +25,6 @@ exports.sendTip = async (req, res) => {
     // Debit sender
     await UserWallet.findOneAndUpdate(
       { userId: fromUserId },
-      { $inc: { balance: -amount } }
       { $inc: { balance: -amount } },
       { session }
     );
@@ -35,7 +33,6 @@ exports.sendTip = async (req, res) => {
     await UserWallet.findOneAndUpdate(
       { userId: toUserId },
       { $inc: { balance: amount } },
-      { upsert: true }
       { upsert: true, session }
     );
 
@@ -47,7 +44,6 @@ exports.sendTip = async (req, res) => {
       targetType: targetType || 'general',
       message,
       anonymous: anonymous || false
-    });
     }, { session });
 
     const populated = await tip.populate([
