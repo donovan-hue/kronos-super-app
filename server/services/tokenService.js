@@ -1,4 +1,5 @@
 const ethers = require('ethers');
+const mongoose = require('mongoose');
 const KronosToken = require('../models/KronosToken');
 const UserWallet = require('../models/UserWallet');
 const Stake = require('../models/Stake');
@@ -71,7 +72,7 @@ class TokenService {
 
   // Transfer tokens between users
   async transferTokens(fromUserId, toUserId, amount) {
-    const session = await require('mongoose').startSession();
+    const session = await mongoose.startSession();
     session.startTransaction();
 
     try {
@@ -82,20 +83,16 @@ class TokenService {
         throw new Error('Wallet not found');
       }
 
-      const transferAmount = ethers.parseUnits(amount.toString(), 18);
-      const fromBalance = ethers.parseUnits(fromWallet.tokenBalance.toString());
+      const transferAmountBI = ethers.parseUnits(amount.toString(), 18);
+      const fromBalanceBI = ethers.parseUnits(fromWallet.tokenBalance.toString(), 18);
 
-      if (fromBalance < transferAmount) {
+      if (fromBalanceBI < transferAmountBI) {
         throw new Error('Insufficient balance');
       }
 
       // Update balances
-      fromWallet.tokenBalance = ethers.parseUnits(
-        (ethers.formatUnits(fromBalance) - amount).toString()
-      );
-      toWallet.tokenBalance = ethers.parseUnits(
-        (ethers.formatUnits(ethers.parseUnits(toWallet.tokenBalance.toString())) + amount).toString()
-      );
+      fromWallet.tokenBalance = mongoose.Types.Decimal128.fromString(ethers.formatUnits(fromBalanceBI - transferAmountBI, 18));
+      toWallet.tokenBalance = mongoose.Types.Decimal128.fromString(ethers.formatUnits(ethers.parseUnits(toWallet.tokenBalance.toString(), 18) + transferAmountBI, 18));
 
       await fromWallet.save({ session });
       await toWallet.save({ session });
@@ -103,8 +100,7 @@ class TokenService {
       // Record transaction
       const transaction = new Transaction({
         fromWalletId: fromWallet._id,
-        toWalletId: toWallet._id,
-        amount: transferAmount,
+        toWalletId: toWallet._id,        amount: mongoose.Types.Decimal128.fromString(amount.toString()),
         type: 'transfer',
         status: 'completed',
         description: `Transfer from ${fromUserId} to ${toUserId}`,
@@ -130,7 +126,7 @@ class TokenService {
 
   // Stake tokens
   async stakeTokens(userId, amount, lockPeriod) {
-    const session = await require('mongoose').startSession();
+    const session = await mongoose.startSession();
     session.startTransaction();
 
     try {
@@ -139,10 +135,10 @@ class TokenService {
         throw new Error('Wallet not found');
       }
 
-      const stakeAmount = ethers.parseUnits(amount.toString(), 18);
-      const balance = ethers.parseUnits(wallet.tokenBalance.toString());
+      const stakeAmountBI = ethers.parseUnits(amount.toString(), 18);
+      const balanceBI = ethers.parseUnits(wallet.tokenBalance.toString(), 18);
 
-      if (balance < stakeAmount) {
+      if (balanceBI < stakeAmountBI) {
         throw new Error('Insufficient balance to stake');
       }
 
@@ -158,7 +154,7 @@ class TokenService {
       const stake = new Stake({
         walletId: wallet._id,
         userId,
-        amount: stakeAmount,
+        amount: mongoose.Types.Decimal128.fromString(amount.toString()),
         lockPeriod,
         apy,
         startDate,
@@ -168,20 +164,15 @@ class TokenService {
       await stake.save({ session });
 
       // Update wallet
-      wallet.tokenBalance = ethers.parseUnits(
-        (ethers.formatUnits(balance) - amount).toString()
-      );
-      wallet.stakedTokens = ethers.parseUnits(
-        (ethers.formatUnits(ethers.parseUnits(wallet.stakedTokens.toString())) + amount).toString()
-      );
+      wallet.tokenBalance = mongoose.Types.Decimal128.fromString(ethers.formatUnits(balanceBI - stakeAmountBI, 18));
+      wallet.stakedTokens = mongoose.Types.Decimal128.fromString(ethers.formatUnits(ethers.parseUnits(wallet.stakedTokens.toString(), 18) + stakeAmountBI, 18));
       wallet.stakes.push(stake._id);
 
       await wallet.save({ session });
 
       // Record transaction
       const transaction = new Transaction({
-        toWalletId: wallet._id,
-        amount: stakeAmount,
+        toWalletId: wallet._id,        amount: mongoose.Types.Decimal128.fromString(amount.toString()),
         type: 'stake',
         status: 'completed',
         description: `Stake ${lockPeriod} days at ${apy}% APY`,
@@ -205,7 +196,7 @@ class TokenService {
 
   // Claim staking rewards
   async claimStakingRewards(userId, stakeId) {
-    const session = await require('mongoose').startSession();
+    const session = await mongoose.startSession();
     session.startTransaction();
 
     try {
@@ -224,37 +215,31 @@ class TokenService {
       }
 
       // Calculate rewards
-      const principal = ethers.formatUnits(ethers.parseUnits(stake.amount.toString()));
-      const rewardAmount = (principal * stake.apy * stake.lockPeriod) / 36500;
+      const principalBI = ethers.parseUnits(stake.amount.toString(), 18);
+      // Use BigInt math for precision. Multiply by 10000 to handle decimals in APY.
+      const rewardAmountBI = (principalBI * BigInt(stake.apy * 10000) * BigInt(stake.lockPeriod)) / BigInt(36500 * 10000);
 
       const wallet = await UserWallet.findOne({ _id: stake.walletId }).session(session);
+      const currentBalanceBI = ethers.parseUnits(wallet.tokenBalance.toString(), 18);
+      const currentStakedBI = ethers.parseUnits(wallet.stakedTokens.toString(), 18);
+      const currentEarnedBI = ethers.parseUnits(wallet.totalEarned.toString(), 18);
 
       // Add rewards to wallet
-      wallet.tokenBalance = ethers.parseUnits(
-        (ethers.formatUnits(ethers.parseUnits(wallet.tokenBalance.toString())) +
-          principal +
-          rewardAmount).toString()
-      );
-      wallet.stakedTokens = ethers.parseUnits(
-        (ethers.formatUnits(ethers.parseUnits(wallet.stakedTokens.toString())) -
-          principal).toString()
-      );
-      wallet.totalEarned = ethers.parseUnits(
-        (ethers.formatUnits(ethers.parseUnits(wallet.totalEarned.toString())) +
-          rewardAmount).toString()
-      );
+      wallet.tokenBalance = mongoose.Types.Decimal128.fromString(ethers.formatUnits(currentBalanceBI + principalBI + rewardAmountBI, 18));
+      wallet.stakedTokens = mongoose.Types.Decimal128.fromString(ethers.formatUnits(currentStakedBI - principalBI, 18));
+      wallet.totalEarned = mongoose.Types.Decimal128.fromString(ethers.formatUnits(currentEarnedBI + rewardAmountBI, 18));
 
-      stake.rewardsEarned = ethers.parseUnits(rewardAmount.toString(), 18);
+      stake.rewardsEarned = mongoose.Types.Decimal128.fromString(ethers.formatUnits(rewardAmountBI, 18));
       stake.status = 'completed';
       stake.claimedAt = now;
 
       await stake.save({ session });
       await wallet.save({ session });
 
+      const totalClaimedBI = principalBI + rewardAmountBI;
       // Record transaction
       const transaction = new Transaction({
-        toWalletId: wallet._id,
-        amount: ethers.parseUnits((principal + rewardAmount).toString(), 18),
+        toWalletId: wallet._id,        amount: mongoose.Types.Decimal128.fromString(ethers.formatUnits(totalClaimedBI, 18)),
         type: 'unstake',
         status: 'completed',
         description: `Unstake with ${stake.apy}% APY rewards`,
@@ -268,9 +253,9 @@ class TokenService {
       await session.commitTransaction();
 
       return {
-        principal,
-        rewards: rewardAmount,
-        total: principal + rewardAmount,
+        principal: ethers.formatUnits(principalBI, 18),
+        rewards: ethers.formatUnits(rewardAmountBI, 18),
+        total: ethers.formatUnits(totalClaimedBI, 18),
       };
     } catch (error) {
       await session.abortTransaction();
@@ -282,7 +267,7 @@ class TokenService {
 
   // Process attention rewards
   async processAttentionRewards() {
-    const session = await require('mongoose').startSession();
+    const session = await mongoose.startSession();
     session.startTransaction();
 
     try {
@@ -312,9 +297,7 @@ class TokenService {
       });
 
       const token = await KronosToken.findOne().session(session);
-      const totalRewardPool = ethers.formatUnits(
-        ethers.parseUnits(token.dailyRewardPool.toString())
-      );
+      const totalRewardPool = parseFloat(token.dailyRewardPool.toString());
       const totalAttentionSeconds = Object.values(creatorMetrics).reduce(
         (sum, data) => sum + data.totalTimeSeconds,
         0
@@ -333,25 +316,19 @@ class TokenService {
         }).session(session);
 
         if (creatorWallet) {
-          creatorWallet.pendingRewards = ethers.parseUnits(
-            (ethers.formatUnits(ethers.parseUnits(creatorWallet.pendingRewards.toString())) +
-              creatorReward).toString()
-          );
-          creatorWallet.totalEarned = ethers.parseUnits(
-            (ethers.formatUnits(ethers.parseUnits(creatorWallet.totalEarned.toString())) +
-              creatorReward).toString()
-          );
+          const currentPendingBI = ethers.parseUnits(creatorWallet.pendingRewards.toString(), 18);
+          const currentEarnedBI = ethers.parseUnits(creatorWallet.totalEarned.toString(), 18);
+          const rewardBI = ethers.parseUnits(creatorReward.toFixed(18), 18);
+
+          creatorWallet.pendingRewards = mongoose.Types.Decimal128.fromString(ethers.formatUnits(currentPendingBI + rewardBI, 18));
+          creatorWallet.totalEarned = mongoose.Types.Decimal128.fromString(ethers.formatUnits(currentEarnedBI + rewardBI, 18));
 
           await creatorWallet.save({ session });
         }
 
         // Mark metrics as rewarded
         for (const metric of data.metrics) {
-          metric.isRewarded = true;
-          metric.tokensEarned = ethers.parseUnits(
-            ((metric.timeSpentSeconds * tokensPerSecond).toFixed(18)).toString(),
-            18
-          );
+          metric.isRewarded = true;          metric.tokensEarned = mongoose.Types.Decimal128.fromString((metric.timeSpentSeconds * tokensPerSecond).toFixed(18));
           metric.rewardDate = new Date();
           await metric.save({ session });
         }
@@ -399,8 +376,8 @@ class TokenService {
         userId: wallet.userId._id,
         username: wallet.userId.username,
         [type === 'earners' ? 'totalEarned' : type === 'stakers' ? 'stakedTokens' : 'tokenBalance']:
-          ethers.formatUnits(ethers.parseUnits(wallet.totalEarned.toString())),
-        tokenBalance: ethers.formatUnits(ethers.parseUnits(wallet.tokenBalance.toString())),
+          wallet.totalEarned.toString(),
+        tokenBalance: wallet.tokenBalance.toString(),
       }));
     } catch (error) {
       throw new Error(`Leaderboard fetch failed: ${error.message}`);
@@ -419,8 +396,7 @@ class TokenService {
         userId,
         contentId,
         creatorId,
-        timeSpentSeconds,
-        tokensEarned: ethers.parseUnits(tokensEarned.toFixed(18), 18),
+        timeSpentSeconds,        tokensEarned: mongoose.Types.Decimal128.fromString(tokensEarned.toFixed(18)),
         sessionId,
       });
 

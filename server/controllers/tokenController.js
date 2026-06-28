@@ -194,7 +194,7 @@ const getCreatorEarnings = async (req, res) => {
     }).populate('contentId', 'title');
 
     const earnings = metrics.reduce((total, metric) => {
-      return total + parseFloat(ethers.formatUnits(ethers.parseUnits(metric.tokensEarned.toString())));
+      return total + parseFloat(metric.tokensEarned.toString());
     }, 0);
 
     const byContent = metrics.reduce((acc, metric) => {
@@ -207,7 +207,7 @@ const getCreatorEarnings = async (req, res) => {
           views: 0,
         };
       }
-      acc[contentId].earnings += parseFloat(ethers.formatUnits(ethers.parseUnits(metric.tokensEarned.toString())));
+      acc[contentId].earnings += parseFloat(metric.tokensEarned.toString());
       acc[contentId].views += 1;
       return acc;
     }, {});
@@ -226,16 +226,18 @@ const getCreatorEarnings = async (req, res) => {
 // Get token info
 const getTokenInfo = async (req, res) => {
   try {
-    const token = await KronosToken.findOne();
+    const token = await KronosToken.findOne();    if (!token) {
+      return res.status(404).json({ error: 'Token info not found' });
+    }
     res.json({
       name: token.name,
       symbol: token.symbol,
-      totalSupply: ethers.formatUnits(ethers.parseUnits(token.totalSupply.toString())),
-      circulatingSupply: ethers.formatUnits(ethers.parseUnits(token.circulatingSupply.toString())),
-      burnedSupply: ethers.formatUnits(ethers.parseUnits(token.burnedSupply.toString())),
+      totalSupply: token.totalSupply.toString(),
+      circulatingSupply: token.circulatingSupply.toString(),
+      burnedSupply: token.burnedSupply.toString(),
       attentionRate: token.attentionRate,
       stakingAPY: Object.fromEntries(token.stakingAPY),
-      dailyRewardPool: ethers.formatUnits(ethers.parseUnits(token.dailyRewardPool.toString())),
+      dailyRewardPool: token.dailyRewardPool.toString(),
       contractAddress: token.contractAddress,
       network: token.network,
     });

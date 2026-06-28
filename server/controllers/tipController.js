@@ -1,7 +1,10 @@
 const Tip = require('../models/Tip');
 const UserWallet = require('../models/UserWallet');
+const mongoose = require('mongoose');
 
 exports.sendTip = async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
   try {
     const { toUserId, amount, targetId, targetType, message, anonymous } = req.body;
     const fromUserId = req.user.id;
@@ -15,6 +18,7 @@ exports.sendTip = async (req, res) => {
 
     // Check sender wallet balance
     const senderWallet = await UserWallet.findOne({ userId: fromUserId });
+    const senderWallet = await UserWallet.findOne({ userId: fromUserId }).session(session);
     if (!senderWallet || senderWallet.balance < amount) {
       return res.status(400).json({ message: 'Insufficient KRO balance' });
     }
@@ -23,6 +27,8 @@ exports.sendTip = async (req, res) => {
     await UserWallet.findOneAndUpdate(
       { userId: fromUserId },
       { $inc: { balance: -amount } }
+      { $inc: { balance: -amount } },
+      { session }
     );
 
     // Credit receiver (create wallet if it doesn't exist)
@@ -30,6 +36,7 @@ exports.sendTip = async (req, res) => {
       { userId: toUserId },
       { $inc: { balance: amount } },
       { upsert: true }
+      { upsert: true, session }
     );
 
     const tip = await Tip.create({
@@ -41,6 +48,7 @@ exports.sendTip = async (req, res) => {
       message,
       anonymous: anonymous || false
     });
+    }, { session });
 
     const populated = await tip.populate([
       { path: 'fromUser', select: 'username avatar' },
@@ -48,9 +56,13 @@ exports.sendTip = async (req, res) => {
     ]);
 
     res.status(201).json({ tip: populated, message: `Propina de ${amount} KRO enviada exitosamente` });
+    await session.commitTransaction();
   } catch (error) {
     console.error('Error sending tip:', error);
+    await session.abortTransaction();
     res.status(500).json({ message: 'Error sending tip' });
+  } finally {
+    session.endSession();
   }
 };
 
