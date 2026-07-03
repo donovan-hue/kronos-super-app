@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "🚀 KRONOS - Red Social + E-commerce + Delivery integrados con Glassmorphism",
   "private": true,
+  "workspaces": [
+    "server",
+    "client"
+  ],
   "scripts": {
     "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
     "server": "npm run dev --prefix server",

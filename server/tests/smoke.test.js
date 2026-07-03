@@ -1,29 +1,66 @@
 const request = require('supertest');
 const mongoose = require('mongoose');
+const { MongoMemoryServer } = require('mongodb-memory-server');
 
 let app;
 let authToken;
-const TEST_USER = {
-  username: 'smoketest_' + Date.now(),
-  email: `smoke${Date.now()}@test.com`,
-  password: 'TestPass123!',
+let mongod;
+
+const createTestUser = () => {
+  const suffix = `${Date.now()}_${Math.random().toString(36).slice(2)}`;
+  return {
+    username: `smoketest_${suffix}`,
+    email: `smoke${suffix}@test.com`,
+    password: 'TestPass123!'
+  };
+};
+
+const waitForMongoConnection = async (timeoutMs = 10000) => {
+  const start = Date.now();
+  while (mongoose.connection.readyState !== 1) {
+    if (Date.now() - start > timeoutMs) {
+      throw new Error('MongoDB did not connect within timeout');
+    }
+    await new Promise((resolve) => setTimeout(resolve, 50));
+  }
 };
 
 beforeAll(async () => {
   process.env.NODE_ENV = 'test';
-  app = require('../server');
-  // Register and login a test user
-  try {
-    await request(app).post('/api/auth/register').send(TEST_USER);
-    const res = await request(app).post('/api/auth/login').send({
-      email: TEST_USER.email,
-      password: TEST_USER.password,
-    });
-    authToken = res.body.token;
-  } catch (e) {
-    console.warn('Could not create test user:', e.message);
+  process.env.JWT_SECRET = 'test_jwt_secret_kronos';
+
+  if (mongoose.connection.readyState !== 0) {
+    await mongoose.disconnect();
   }
+
+  mongod = await MongoMemoryServer.create();
+  process.env.MONGODB_URI = mongod.getUri();
+  const serverModule = require('../server');
+  app = serverModule.app;
+
+  await waitForMongoConnection();
 }, 30000);
+
+beforeEach(async () => {
+  const TEST_USER = createTestUser();
+  await request(app).post('/api/auth/register').send(TEST_USER);
+
+  const res = await request(app).post('/api/auth/login').send({
+    email: TEST_USER.email,
+    password: TEST_USER.password,
+  });
+
+  authToken = res.body.token;
+});
+
+afterAll(async () => {
+  if (mongoose.connection.readyState !== 0) {
+    await mongoose.connection.close();
+  }
+  if (mongod) {
+    await mongod.stop();
+  }
+});
 
 afterAll(async () => {
   if (mongoose.connection.readyState !== 0) {

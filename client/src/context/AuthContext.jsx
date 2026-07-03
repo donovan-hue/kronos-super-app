@@ -43,10 +43,14 @@ export const AuthProvider = ({ children }) => {
 
   // Configurar axios con token
   const setupAxios = useCallback((authToken) => {
-    if (authToken) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
+    const authorizationHeader = authToken ? `Bearer ${authToken}` : null;
+
+    if (authorizationHeader) {
+      axios.defaults.headers.common['Authorization'] = authorizationHeader;
+      api.defaults.headers.common['Authorization'] = authorizationHeader;
     } else {
       delete axios.defaults.headers.common['Authorization'];
+      delete api.defaults.headers.common['Authorization'];
     }
   }, []);
 

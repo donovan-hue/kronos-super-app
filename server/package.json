@@ -56,7 +56,7 @@
     "testEnvironment": "node",
     "testTimeout": 30000,
     "setupFilesAfterEnv": [
-      "<rootDir>/__tests__/setup.js"
+      "<rootDir>/test/setup.js"
     ]
   }
 }
