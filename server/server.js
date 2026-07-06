@@ -312,8 +312,6 @@ io.on('connection', (socket) => {
   socket.on('order_status_updated', (data) => {
     const { orderId, status, location, estimatedTime } = data;
     io.to(`order_${orderId}`).emit('order_status_change', {
-      orderId,
-      status,
       location,
       estimatedTime,
       timestamp: new Date()
@@ -482,9 +480,10 @@ app.use(errorHandler);
 
 // Initialize Kronos Token Scheduler
 const { scheduleRewardDistribution } = require('./services/scheduler');
-if (process.env.NODE_ENV !== 'test') {
-  scheduleRewardDistribution();
-}
+
+// ...
+
+// scheduleRewardDistribution();
 
 
 // Seed Avatar default items

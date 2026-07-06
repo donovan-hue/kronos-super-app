@@ -18,8 +18,16 @@ class TokenService {
     this.provider = new ethers.JsonRpcProvider(
       process.env.SEPOLIA_RPC_URL || 'https://sepolia.infura.io/v3/YOUR_INFURA_KEY'
     );
-    this.privateKey = process.env.PRIVATE_KEY;
-    this.signer = this.privateKey ? new ethers.Wallet(this.privateKey, this.provider) : null;
+    if (
+  this.privateKey &&
+  this.privateKey.startsWith('0x') &&
+  !this.privateKey.includes('tu_clave_privada')
+) {
+  this.signer = new ethers.Wallet(this.privateKey, this.provider);
+} else {
+  this.signer = null;
+  console.log('[BLOCKCHAIN] Desactivado (sin PRIVATE_KEY válida)');
+}
   }
 
   // Initialize token contract on blockchain

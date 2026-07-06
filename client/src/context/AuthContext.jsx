@@ -2,37 +2,25 @@ import React, { createContext, useState, useCallback } from 'react';
 import axios from 'axios';
 
 export const AuthContext = createContext();
-
-const API_URL = process.env.REACT_APP_API_URL || 'https://kronos-api-qq0o.onrender.com/api';
-const API_ORIGIN = API_URL.replace(/\/api\/?$/, '');
-
-// Timeout de 60s para sobrevivir el arranque en frío de Render (free tier ~30-60s)
-const api = axios.create({ baseURL: API_URL, timeout: 60000 });
-
-// Despierta el servidor: pega a /api/health hasta que responda 200 o se agote el tiempo.
-const wakeServer = async (maxWaitMs = 50000) => {
-  const deadline = Date.now() + maxWaitMs;
-  while (Date.now() < deadline) {
-    try {
-      const res = await fetch(`${API_ORIGIN}/api/health`, { signal: AbortSignal.timeout(10000) });
-      if (res.ok) return true; // 200 = servidor + DB listos
-    } catch {
-      /* sigue intentando */
-    }
-    await new Promise(r => setTimeout(r, 2000));
-  }
-  return false;
-};
-
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const api = axios.create({
+  baseURL: API_URL,
+  timeout: 15000,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
 // Traduce un error de axios a un mensaje claro para el usuario.
 const messageFromError = (err, fallback) => {
   if (err.code === 'ECONNABORTED') {
-    return 'El servidor tardó demasiado (arranque en frío). Vuelve a intentarlo.';
+    return 'El servidor tardó demasiado en responder. Intenta nuevamente.';
   }
+
   if (!err.response) {
-    return 'No se pudo conectar con el servidor. Revisa tu conexión e intenta de nuevo.';
+    return 'No se pudo conectar con el servidor.';
   }
-  return err.response.data?.message || fallback;
+
+  return err.response?.data?.message || fallback;
 };
 
 export const AuthProvider = ({ children }) => {
@@ -61,35 +49,29 @@ export const AuthProvider = ({ children }) => {
     setUser(authUser);
     setupAxios(authToken);
   }, [setupAxios]);
+// Llama a un endpoint de autenticación
+const authRequest = useCallback(async (endpoint, body, fallbackMsg) => {
+  setLoading(true);
+  setError(null);
 
-  // Llama a un endpoint de auth con wake + reintento automático:
-  // si no hay respuesta (servidor dormido/red), despierta el server y reintenta una vez.
-  const authRequest = useCallback(async (endpoint, body, fallbackMsg) => {
-    setLoading(true);
-    setError(null);
-    try {
-      let response;
-      try {
-        response = await api.post(endpoint, body);
-      } catch (err) {
-        // Sin respuesta o timeout: pudo ser arranque en frío. Despierta y reintenta 1 vez.
-        if (!err.response || err.code === 'ECONNABORTED') {
-          await wakeServer();
-          response = await api.post(endpoint, body);
-        } else {
-          throw err;
-        }
-      }
-      persistSession(response.data.token, response.data.user);
-      return { success: true };
-    } catch (err) {
-      const message = messageFromError(err, fallbackMsg);
-      setError(message);
-      return { success: false, message };
-    } finally {
-      setLoading(false);
-    }
-  }, [persistSession]);
+  try {
+    const response = await api.post(endpoint, body);
+
+    persistSession(response.data.token, response.data.user);
+
+    return { success: true };
+  } catch (err) {
+    const message = messageFromError(err, fallbackMsg);
+    setError(message);
+
+    return {
+      success: false,
+      message,
+    };
+  } finally {
+    setLoading(false);
+  }
+}, [persistSession]);
 
   // Registrar
   const register = useCallback((username, email, password, firstName, lastName, phone) => {
