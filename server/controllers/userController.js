@@ -2,7 +2,7 @@ const User = require('../models/User');
 const Post = require('../models/Post');
 const Order = require('../models/Order');
 const UserBlock = require('../models/UserBlock');
-const { cloudinary } = require('../middleware/upload');
+const { handleUpload } = require('../utils/cloudinaryUploader');
 
 // Obtener perfil completo del usuario
 exports.getUserProfile = async (req, res) => {
@@ -112,19 +112,9 @@ exports.updateAvatar = async (req, res) => {
       return res.status(400).json({ message: 'No file uploaded' });
     }
 
+    const result = await handleUpload(req.file.buffer, 'image', 'super-app/profiles');
     const user = await User.findById(userId);
-
-    // Eliminar avatar anterior si existe
-    if (user.avatar && user.avatar.includes('cloudinary')) {
-      try {
-        const publicId = user.avatar.split('/').pop().split('.')[0];
-        await cloudinary.uploader.destroy(`super-app/profiles/${publicId}`);
-      } catch (err) {
-        console.error('Error deleting old avatar:', err);
-      }
-    }
-
-    user.avatar = req.file.path;
+    user.avatar = result.secure_url;
     await user.save();
 
     res.status(200).json({

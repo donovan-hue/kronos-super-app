@@ -1,6 +1,5 @@
 const multer = require('multer');
 const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 // Configurar Cloudinary
 cloudinary.config({
@@ -9,39 +8,12 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-// Storage para imágenes
-const imageStorage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'super-app/images',
-    resource_type: 'auto',
-    allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp']
-  }
-});
-
-// Storage para videos
-const videoStorage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'super-app/videos',
-    resource_type: 'video',
-    allowed_formats: ['mp4', 'mov', 'avi', 'webm']
-  }
-});
-
-// Storage para música
-const musicStorage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'super-app/music',
-    resource_type: 'auto',
-    allowed_formats: ['mp3', 'wav', 'flac', 'aac', 'm4a']
-  }
-});
+// Storage para todos los archivos en memoria
+const memoryStorage = multer.memoryStorage();
 
 // Middleware
 const uploadImage = multer({
-  storage: imageStorage,
+  storage: memoryStorage,
   limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
   fileFilter: (req, file, cb) => {
     const allowedMimes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
@@ -54,7 +26,7 @@ const uploadImage = multer({
 });
 
 const uploadVideo = multer({
-  storage: videoStorage,
+  storage: memoryStorage,
   limits: { fileSize: 500 * 1024 * 1024 }, // 500MB
   fileFilter: (req, file, cb) => {
     const allowedMimes = ['video/mp4', 'video/quicktime', 'video/x-msvideo', 'video/webm'];
@@ -67,7 +39,7 @@ const uploadVideo = multer({
 });
 
 const uploadMusic = multer({
-  storage: musicStorage,
+  storage: memoryStorage,
   limits: { fileSize: 100 * 1024 * 1024 }, // 100MB
   fileFilter: (req, file, cb) => {
     const allowedMimes = ['audio/mpeg', 'audio/wav', 'audio/flac', 'audio/aac', 'audio/mp4'];
@@ -80,7 +52,7 @@ const uploadMusic = multer({
 });
 
 const uploadProfileImage = multer({
-  storage: imageStorage,
+  storage: memoryStorage,
   limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
   fileFilter: (req, file, cb) => {
     const allowedMimes = ['image/jpeg', 'image/png', 'image/webp'];
@@ -92,10 +64,24 @@ const uploadProfileImage = multer({
   }
 });
 
+const uploadStory = multer({
+    storage: memoryStorage,
+    limits: { fileSize: 50 * 1024 * 1024 }, // 50MB
+    fileFilter: (req, file, cb) => {
+        const allowedMimes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'video/mp4', 'video/quicktime'];
+        if (allowedMimes.includes(file.mimetype)) {
+            cb(null, true);
+        } else {
+            cb(new Error('Invalid file format for story'));
+        }
+    }
+});
+
 module.exports = {
   uploadImage,
   uploadVideo,
   uploadMusic,
   uploadProfileImage,
+  uploadStory,
   cloudinary
 };

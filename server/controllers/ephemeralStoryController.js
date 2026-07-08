@@ -1,16 +1,6 @@
 const EphemeralStory = require('../models/EphemeralStory');
 const User = require('../models/User');
-const cloudinary = require('cloudinary').v2;
-const multer = require('multer');
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
-
-const storage = new CloudinaryStorage({
-  cloudinary,
-  params: { folder: 'kronos/stories', allowed_formats: ['jpg', 'png', 'gif', 'webp', 'mp4', 'mov'] }
-});
-const upload = multer({ storage, limits: { fileSize: 50 * 1024 * 1024 } });
-
-exports.uploadMiddleware = upload.single('media');
+const { handleUpload } = require('../utils/cloudinaryUploader');
 
 exports.createStory = async (req, res) => {
   try {
@@ -23,8 +13,10 @@ exports.createStory = async (req, res) => {
     };
 
     if (req.file) {
-      storyData.mediaUrl = req.file.path;
-      storyData.mediaType = req.file.mimetype.startsWith('video') ? 'video' : 'image';
+      const resourceType = req.file.mimetype.startsWith('video') ? 'video' : 'image';
+      const result = await handleUpload(req.file.buffer, resourceType, 'kronos/stories');
+      storyData.mediaUrl = result.secure_url;
+      storyData.mediaType = resourceType;
     }
 
     const story = await EphemeralStory.create(storyData);

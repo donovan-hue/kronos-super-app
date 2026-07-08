@@ -1,5 +1,5 @@
 const Video = require('../models/Video');
-const cloudinary = require('cloudinary').v2;
+const { handleUpload } = require('../utils/cloudinaryUploader');
 
 exports.uploadVideo = async (req, res) => {
   try {
@@ -9,14 +9,7 @@ exports.uploadVideo = async (req, res) => {
       return res.status(400).json({ success: false, error: 'No video file provided' });
     }
 
-    const result = await cloudinary.uploader.upload(req.file.path, {
-      resource_type: 'video',
-      folder: 'kronos/videos',
-      transformation: [
-        { quality: 'auto' },
-        { fetch_format: 'auto' }
-      ]
-    });
+    const result = await handleUpload(req.file.buffer, 'video', 'kronos/videos');
 
     const video = new Video({
       uploadedBy: req.user.id,
