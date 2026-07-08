@@ -1,0 +1,11 @@
+{
+    "id": 83,
+    "group": "group-09",
+    "name": "Gestor del Despachador de Webhooks de Salida (Event Subscriptions)",
+    "objective": "Permitir a los desarrolladores clientes crear integraciones reactivas mediante el envío automatizado de eventos JSON ante cambios de estado de Kronos.",
+    "tasks": [
+        "Implementar la infraestructura de envío de webhooks con soporte para reintentos automatizados ante caídas de los servidores destino.",
+        "Firmar de manera criptográfica cada payload del webhook (SHA256 HMAC) para garantizar su procedencia y evitar suplantación.",
+        "Proveer a los desarrolladores de un panel de inspección donde puedan auditar las respuestas HTTP de sus endpoints receptores."
+    ]
+}

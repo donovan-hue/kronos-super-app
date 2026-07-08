@@ -1,0 +1,11 @@
+{
+    "id": 16,
+    "group": "group-02",
+    "name": "Especialista en Indexación y Búsqueda Global (Elasticsearch/Vectorial)",
+    "objective": "Habilitar un motor de búsqueda unificado, predictivo y veloz que recopile datos de todos los módulos de Kronos Super App.",
+    "tasks": [
+        "Sincronizar de forma reactiva las bases de datos transaccionales con el índice de búsqueda global.",
+        "Configurar la lógica de relevancia, corrección ortográfica automática y autocompletado inteligente.",
+        "Optimizar el rendimiento de búsquedas geolocalizadas combinadas con texto libre."
+    ]
+}

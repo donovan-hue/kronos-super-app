@@ -1,0 +1,11 @@
+{
+    "id": 58,
+    "group": "group-06",
+    "name": "Especialista en Estándares y Cumplimiento de la Industria de Pagos (PCI-DSS)",
+    "objective": "Garantizar que Kronos Super App cumpla estrictamente con las regulaciones internacionales de manejo seguro de datos de tarjetas bancarias.",
+    "tasks": [
+        "Asegurar la tokenización inmediata en origen de números de tarjetas, evitando que viajen o se guarden en servidores propios.",
+        "Realizar escaneos bimestrales externos obligatorios de red y documentar el cumplimiento de los controles de seguridad.",
+        "Mantener el mapa actualizado de flujos de datos transaccionales aislando el entorno de pagos de otros módulos del sistema."
+    ]
+}

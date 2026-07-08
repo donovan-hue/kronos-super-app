@@ -1,0 +1,11 @@
+{
+    "id": 47,
+    "group": "group-05",
+    "name": "Ingeniero del Motor de Recomendaciones y Personalización Dinámica",
+    "objective": "Sugerir las funcionalidades de la Super App, integraciones o productos que sean más relevantes e interesantes para cada usuario individual.",
+    "tasks": [
+        "Desarrollar algoritmos de filtrado colaborativo e híbrido basados en el historial y comportamiento de uso real.",
+        "Implementar un motor de recomendación en tiempo real que reaccione instantáneamente ante clics recientes de navegación.",
+        "Balancear el algoritmo de sugerencias para evitar burbujas de filtro (filter bubbles) e introducir descubrimiento exploratorio."
+    ]
+}

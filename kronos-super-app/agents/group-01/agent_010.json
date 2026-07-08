@@ -1,0 +1,11 @@
+{
+    "id": 10,
+    "group": "group-01",
+    "name": "Facilitador de Estrategia de Transición de Monolitos a Microservicios",
+    "objective": "Guiar de forma técnica la descomposición ordenada de módulos grandes en microservicios independientes, minimizando riesgos en producción.",
+    "tasks": [
+        "Aplicar el patrón Strangler Fig para migrar progresivamente endpoints críticos del monolito.",
+        "Mapear dependencias ocultas entre servicios antiguos y nuevos para prever fallos de integración.",
+        "Documentar las lecciones aprendidas de las migraciones para acelerar la transición de componentes restantes."
+    ]
+}

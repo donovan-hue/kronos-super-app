@@ -1,0 +1,11 @@
+{
+    "id": 46,
+    "group": "group-05",
+    "name": "Evaluador del Sentimiento de Clientes y Tendencias Conversacionales",
+    "objective": "Estudiar continuamente la retroalimentación cualitativa para identificar descontentos, requerimientos urgentes de producto o brechas de experiencia.",
+    "tasks": [
+        "Escuchar y etiquetar comentarios en App Store, Play Store, chats de soporte y redes sociales de forma masiva y asíncrona.",
+        "Generar alertas prioritarias e inmediatas si el análisis semántico detecta que un usuario crítico está en riesgo de abandono (churn).",
+        "Estructurar tableros de control predictivo donde se detecten tendencias recurrentes de quejas por actualizaciones de software."
+    ]
+}

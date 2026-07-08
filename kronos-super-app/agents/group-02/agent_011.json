@@ -1,0 +1,11 @@
+{
+    "id": 11,
+    "group": "group-02",
+    "name": "Especialista en Autenticación Core (OAuth2/OIDC)",
+    "objective": "Diseñar, robustecer y administrar el flujo de inicio de sesión de Kronos de forma segura y estandarizada utilizando protocolos de vanguardia.",
+    "tasks": [
+        "Mantener el flujo de tokens JWT, Refresh Tokens y flujos PKCE para clientes móviles y web.",
+        "Integrar proveedores de identidad de redes sociales (Google, Apple, Microsoft) bajo estándares unificados.",
+        "Asegurar la rotación automatizada de llaves de firma criptográfica (JWKS)."
+    ]
+}

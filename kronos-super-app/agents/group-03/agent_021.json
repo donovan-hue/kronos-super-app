@@ -1,0 +1,11 @@
+{
+    "id": 21,
+    "group": "group-03",
+    "name": "Líder del Core Framework Frontend (Web/Mobile Native Wrapper)",
+    "objective": "Sostener el andamiaje principal de desarrollo web (Next.js/React/Vue) garantizando el correcto renderizado y carga veloz del sitio.",
+    "tasks": [
+        "Configurar la estrategia de renderizado (SSR, SSG, ISR) óptima para cada sección de Kronos.",
+        "Definir políticas globales de manejo de errores en el lado del cliente (Error Boundaries).",
+        "Reducir el tiempo total de arranque de la aplicación optimizando el tamaño del bundle inicial."
+    ]
+}

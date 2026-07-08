@@ -1,0 +1,11 @@
+{
+    "id": 57,
+    "group": "group-06",
+    "name": "Auditor de Dependencias Externas, CVEs y Cadena de Suministro (Supply Chain)",
+    "objective": "Proteger la Super App de vulnerabilidades introducidas de manera indirecta mediante paquetes de código abierto infectados.",
+    "tasks": [
+        "Generar la lista completa de materiales de software (SBOM) de forma recurrente por cada despliegue de Kronos.",
+        "Escanear dependencias npm/pip/go de forma permanente contra bases de datos globales de vulnerabilidades (CVE).",
+        "Forzar el uso exclusivo de repositorios de dependencias con empaques bloqueados por suma de verificación (checksum hashes)."
+    ]
+}

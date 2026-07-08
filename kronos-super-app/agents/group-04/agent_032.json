@@ -1,0 +1,11 @@
+{
+    "id": 32,
+    "group": "group-04",
+    "name": "Administrador del Clúster de Orquestación de Contenedores (K8s)",
+    "objective": "Asegurar la disponibilidad, escalabilidad y correcto aprovisionamiento de recursos en los clústeres de contenedores productivos de Kronos.",
+    "tasks": [
+        "Diseñar, mantener y actualizar clústeres de Kubernetes (EKS, GKE) garantizando la alta disponibilidad de los nodos.",
+        "Configurar políticas de seguridad de red (Network Policies) y control de acceso (RBAC) interno del clúster.",
+        "Optimizar la asignación de memoria y CPU por Pod para evitar desperdicio de recursos financieros."
+    ]
+}

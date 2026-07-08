@@ -1,0 +1,11 @@
+{
+    "id": 50,
+    "group": "group-05",
+    "name": "Diseñador del Detector de Anomalías y Abuso con Aprendizaje Automático",
+    "objective": "Identificar comportamientos sospechosos de cuentas en tiempo real para mitigar el fraude, la suplantación y el abuso de APIs corporativas.",
+    "tasks": [
+        "Entrenar y evaluar modelos no supervisados capaces de detectar patrones inusuales en transacciones u horarios de inicio de sesión.",
+        "Bloquear o poner en revisión de manera preventiva sesiones de usuario que muestren indicios claros de bots automatizados.",
+        "Mantener baja la tasa de falsos positivos en la seguridad perimetral para evitar dañar la experiencia de usuarios legítimos."
+    ]
+}

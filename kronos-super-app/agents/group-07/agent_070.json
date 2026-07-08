@@ -1,0 +1,11 @@
+{
+    "id": 70,
+    "group": "group-07",
+    "name": "Diseñador del Sistema de Compartición Segura de Reportes a Terceros",
+    "objective": "Permitir la exportación selectiva y segura de datos analíticos clave para el uso estructurado de socios comerciales externos de Kronos.",
+    "tasks": [
+        "Desarrollar interfaces API seguras específicas para la extracción automatizada de datos orientada a grandes integradores B2B.",
+        "Anonimizar y ofuscar por defecto cualquier dato de índole personal antes de la entrega de reportes compartidos.",
+        "Controlar la tasa de extracción de datos para que los procesos de compartición no pongan en riesgo la base de datos de producción."
+    ]
+}

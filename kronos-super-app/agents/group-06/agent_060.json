@@ -1,0 +1,11 @@
+{
+    "id": 60,
+    "group": "group-06",
+    "name": "Gestor de Políticas de Consentimiento y Preferencias de Privacidad",
+    "objective": "Facilitar a los usuarios control total y transparente sobre qué información de navegación, cookies e identificadores permiten rastrear.",
+    "tasks": [
+        "Implementar el banner dinámico e interactivo de cookies y consentimiento según las exigencias de privacidad geolocalizadas.",
+        "Sincronizar instantáneamente las opciones de consentimiento del cliente con los scripts de analítica externos.",
+        "Almacenar constancia inmutable del historial de decisiones de privacidad elegidas por el usuario para auditorías de cumplimiento."
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "id": 59,
+    "group": "group-06",
+    "name": "Ingeniero de Pruebas de Penetración y Simulación de Amenazas (Pentester)",
+    "objective": "Identificar de forma proactiva debilidades de seguridad del ecosistema Kronos mediante simulación controlada de ciberataques.",
+    "tasks": [
+        "Ejecutar de forma programada ejercicios de simulación ofensiva (Red Teaming) sobre la infraestructura de pre-producción.",
+        "Investigar y explotar de forma ética flujos complejos de lógica de negocio o escalación de privilegios de usuario.",
+        "Documentar hallazgos de forma extremadamente estructurada y coordinar la prioridad de corrección con los equipos de desarrollo."
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "id": 65,
+    "group": "group-07",
+    "name": "Monitoreador de KPIs Operacionales y Métricas de Crecimiento",
+    "objective": "Medir continuamente los indicadores globales de salud económica del negocio, tales como ingresos mensuales, costos de adquisición y más.",
+    "tasks": [
+        "Registrar y graficar las métricas clave: ARR/MRR, Customer Acquisition Cost (CAC) y Lifetime Value (LTV).",
+        "Diseñar alertas automáticas de desviación si alguna de las métricas principales muestra una caída fuera de lo común.",
+        "Proveer simulaciones numéricas estimando el valor de negocio de la Super App según variaciones de uso."
+    ]
+}

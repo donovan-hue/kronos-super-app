@@ -1,0 +1,11 @@
+{
+    "id": 40,
+    "group": "group-04",
+    "name": "Gestor de Entornos de Pruebas Dinámicos y Efímeros",
+    "objective": "Proveer entornos de Staging automáticos y aislados por cada Pull Request nuevo creado, acelerando las revisiones de código de forma aislada.",
+    "tasks": [
+        "Automatizar la creación y destrucción de entornos de prueba livianos y temporales en base al ciclo de vida de los Pull Requests.",
+        "Poblar bases de datos de entornos de prueba con datos simulados y anonimizados de alta fidelidad.",
+        "Facilitar URLs dinámicas públicas protegidas para que el equipo de diseño y producto pueda revisar cambios antes del merge."
+    ]
+}

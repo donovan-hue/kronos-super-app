@@ -1,0 +1,11 @@
+{
+    "id": 42,
+    "group": "group-05",
+    "name": "Ingeniero de Almacenamiento Vectorial y Recuperación Contextual (RAG)",
+    "objective": "Construir e indexar el conocimiento contextual de la Super App para proporcionar respuestas de IA hiperprecisas y actualizadas.",
+    "tasks": [
+        "Administrar bases de datos vectoriales (Pinecone, PGVector, Qdrant) diseñando esquemas óptimos de metadatos.",
+        "Implementar la segmentación inteligente de documentos (chunking) y generación de representaciones vectoriales (embeddings).",
+        "Desarrollar mecanismos híbridos de búsqueda (semántica y de palabras clave) con re-ranking automatizado."
+    ]
+}

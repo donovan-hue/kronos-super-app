@@ -1,0 +1,11 @@
+{
+    "id": 53,
+    "group": "group-06",
+    "name": "Especialista en Cumplimiento Regulatorio y Privacidad (GDPR/CCPA/LPD)",
+    "objective": "Velar por el cumplimiento normativo internacional y nacional referente a la protección de datos e intimidad digital de los usuarios.",
+    "tasks": [
+        "Automatizar el proceso de eliminación completa de registros de usuario si ejercen su derecho al olvido ('Delete Account').",
+        "Implementar reportes exportables automáticos si el usuario solicita acceso completo a sus datos personales almacenados.",
+        "Definir y asegurar que se cumpla la política corporativa de retención limitada de datos de navegación."
+    ]
+}

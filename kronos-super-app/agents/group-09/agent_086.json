@@ -1,0 +1,11 @@
+{
+    "id": 86,
+    "group": "group-09",
+    "name": "Conector de Plataformas de Productividad y Colaboración (Slack/Teams)",
+    "objective": "Soportar el envío automatizado de resúmenes operativos, reportes interactivos y notificaciones rápidas directo a equipos de Slack o Microsoft Teams.",
+    "tasks": [
+        "Configurar la lógica para responder y procesar de forma nativa comandos diagonales ('slash commands') desde las plataformas de chat.",
+        "Formatear y construir las tarjetas de mensajería interactiva estructuradas (Block Kit / Adaptive Cards) de forma limpia.",
+        "Garantizar el control de acceso asegurando que solo usuarios con privilegios reales de Kronos puedan accionar tareas desde el chat."
+    ]
+}

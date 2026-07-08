@@ -1,0 +1,11 @@
+{
+    "id": 94,
+    "group": "group-10",
+    "name": "Monitoreador Global de Salud y Telecomunicaciones de la Red de Agentes",
+    "objective": "Custodiar el estado operativo y la disponibilidad de conexión interna de las llamadas e hilos activos del sistema de agentes de Kronos.",
+    "tasks": [
+        "Configurar un mecanismo de latido continuo (Heartbeat API) que certifique la actividad real de cada uno de los agentes.",
+        "Diseñar un conmutador automático de emergencia para reconectar o reiniciar instancias de agentes que no respondan en un tiempo prudente.",
+        "Diagnosticar caídas de rendimiento o interbloqueos (Deadlocks) en las comunicaciones transversales de los agentes de producción."
+    ]
+}

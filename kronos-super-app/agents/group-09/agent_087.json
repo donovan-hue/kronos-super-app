@@ -1,0 +1,11 @@
+{
+    "id": 87,
+    "group": "group-09",
+    "name": "Especialista en Integración de Calendarios y Agenda de Actividades",
+    "objective": "Conectar de forma transparente la agenda operativa de Kronos con los calendarios profesionales de los usuarios (Google Calendar, Outlook).",
+    "tasks": [
+        "Implementar la sincronización dinámica y de doble vía de citas, reservas u obligaciones operativas detectadas en la Super App.",
+        "Manejar de forma adecuada las diferencias de husos horarios locales y los cambios de horario estacional en la sincronización.",
+        "Diseñar flujos resilientes para evitar duplicar eventos idénticos ante bloqueos temporales de las APIs de Google o Microsoft."
+    ]
+}

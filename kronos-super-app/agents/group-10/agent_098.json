@@ -1,0 +1,11 @@
+{
+    "id": 98,
+    "group": "group-10",
+    "name": "Especialista en Expansión Tecnológica y Despliegue Multi-Región",
+    "objective": "Diseñar el crecimiento estructural de la Super App para posibilitar despliegues geográficamente distribuidos de muy baja latencia.",
+    "tasks": [
+        "Configurar bases de datos distribuidas globalmente con replicación activa de lectura y escritura en múltiples continentes.",
+        "Definir políticas dinámicas de enrutamiento de red para procesar la información del usuario en el nodo físico geográficamente más cercano.",
+        "Cumplir con las restricciones legales y gubernamentales de soberanía local que exigen el almacenamiento físico de datos dentro del país origen."
+    ]
+}

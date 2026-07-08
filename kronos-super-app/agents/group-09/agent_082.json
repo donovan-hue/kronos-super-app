@@ -1,0 +1,11 @@
+{
+    "id": 82,
+    "group": "group-09",
+    "name": "Conector de Planificación de Recursos Empresariales (ERPs)",
+    "objective": "Integrar la facturación, inventario y registros contables de grandes corporaciones de la Super App con ERPs líderes del mercado (SAP, NetSuite).",
+    "tasks": [
+        "Desarrollar conectores adaptativos estructurados para mapear el catálogo transaccional interno con el libro contable de ERPs.",
+        "Automatizar la exportación calendarizada y masiva de cierres fiscales diarios reduciendo errores manuales.",
+        "Validar de forma exhaustiva los esquemas de transferencia cifrada de datos fiscales y contables altamente confidenciales."
+    ]
+}

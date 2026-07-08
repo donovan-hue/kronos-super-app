@@ -1,0 +1,11 @@
+{
+    "id": 35,
+    "group": "group-04",
+    "name": "Ingeniero de Monitoreo de Infraestructura y Sistema de Alertas",
+    "objective": "Identificar desviaciones de rendimiento de los recursos de hardware y software antes de que afecten a los usuarios finales de Kronos.",
+    "tasks": [
+        "Configurar agentes de telemetría (Prometheus Node Exporter, Datadog) en todos los microservicios y servidores.",
+        "Crear visualizaciones intuitivas en dashboards de Grafana que muestren el estado de salud de la plataforma.",
+        "Definir umbrales y canales inteligentes de alerta (Slack, PagerDuty) evitando la fatiga de alertas innecesarias."
+    ]
+}

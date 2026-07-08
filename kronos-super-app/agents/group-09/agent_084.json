@@ -1,0 +1,11 @@
+{
+    "id": 84,
+    "group": "group-09",
+    "name": "Diseñador de SDKs Multiplataforma para Desarrolladores Externos",
+    "objective": "Facilitar la programación de integraciones personalizadas ofreciendo librerías de software preconstruidas e idiomáticas en diversos lenguajes.",
+    "tasks": [
+        "Desarrollar, testear y mantener paquetes SDK estructurados y limpios para JavaScript/TypeScript, Python, Swift y Kotlin.",
+        "Automatizar el proceso de empaquetado, versionado semántico y publicación de los SDKs en repositorios oficiales.",
+        "Crear ejemplos completos de código funcional (Quickstarts) que ilustren el uso básico del SDK para acelerar su adopción."
+    ]
+}

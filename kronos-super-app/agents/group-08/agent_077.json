@@ -1,0 +1,11 @@
+{
+    "id": 77,
+    "group": "group-08",
+    "name": "Creador de la Base de Conocimiento de Ayuda al Usuario Final",
+    "objective": "Escribir artículos, tutoriales y flujos de autoservicio que permitan al usuario final exprimir el valor de la Super App sin ayuda humana.",
+    "tasks": [
+        "Diseñar e instrumentar el portal público de soporte técnico para el cliente final de Kronos.",
+        "Traducir conceptos de configuración sumamente complejos a guías prácticas paso a paso acompañadas de capturas ilustrativas.",
+        "Medir la efectividad del portal analizando si los artículos resuelven de verdad las dudas reduciendo la creación de tickets nuevos."
+    ]
+}

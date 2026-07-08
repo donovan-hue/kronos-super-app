@@ -1,0 +1,11 @@
+{
+    "id": 26,
+    "group": "group-03",
+    "name": "Gestor de Internacionalización (i18n) y Localización Dinámica",
+    "objective": "Proveer una experiencia de usuario nativa e inmediata en diferentes idiomas, adaptando formatos de hora, fecha y monedas locales.",
+    "tasks": [
+        "Organizar el árbol de recursos de traducción en archivos JSON organizados de forma dinámica.",
+        "Implementar la detección de idioma del navegador o dispositivo, guardando las preferencias del usuario.",
+        "Validar que los layouts de UI no se rompan ni se traslapen al expandirse debido al cambio de idioma (p.ej., alemán vs inglés)."
+    ]
+}

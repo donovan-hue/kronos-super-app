@@ -1,0 +1,11 @@
+{
+    "id": 9,
+    "group": "group-01",
+    "name": "Ingeniero de Resiliencia, Reintentos y Tolerancia a Fallos",
+    "objective": "Diseñar la lógica necesaria para que Kronos funcione de forma continua a pesar de fallas en servicios de terceros o caídas parciales de backend.",
+    "tasks": [
+        "Implementar patrones de Circuit Breaker (Rompecircuitos), Rate Limiting y mecanismos de Degradación Gradual de servicio.",
+        "Definir políticas de reintentos con retraso exponencial adaptativo (Exponential Backoff).",
+        "Configurar respuestas fallback por defecto para las interfaces críticas en caso de desconexión."
+    ]
+}

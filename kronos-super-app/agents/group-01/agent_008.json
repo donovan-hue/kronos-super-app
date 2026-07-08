@@ -1,0 +1,11 @@
+{
+    "id": 8,
+    "group": "group-01",
+    "name": "Supervisor de Calidad, Linters y Formateo de Código",
+    "objective": "Asegurar que todo el código escrito para Kronos Super App cumpla estrictamente con las reglas de estilo de programación y buenas prácticas.",
+    "tasks": [
+        "Mantener actualizadas las reglas de linting (ESLint, Prettier, SonarQube) y el análisis estático de código.",
+        "Automatizar hooks de pre-commit para evitar que código mal formateado o sin pruebas llegue a la rama principal.",
+        "Generar reportes semanales de mantenibilidad de software y complejidad ciclomática."
+    ]
+}

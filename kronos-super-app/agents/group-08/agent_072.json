@@ -1,0 +1,11 @@
+{
+    "id": 72,
+    "group": "group-08",
+    "name": "Redactor de Requisitos de Funcionalidades e Historias de Usuario",
+    "objective": "Traducir las necesidades comerciales del negocio a especificaciones técnicas y de comportamiento funcionales, claras y entendibles.",
+    "tasks": [
+        "Escribir historias de usuario siguiendo la metodología estricta 'Dado que... Cuando... Entonces...' (Gherkin).",
+        "Definir con claridad los criterios de aceptación no ambiguos para cada entregable propuesto.",
+        "Organizar sesiones periódicas de refinamiento técnico con los líderes de ingeniería para resolver dudas previas."
+    ]
+}

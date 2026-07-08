@@ -1,0 +1,11 @@
+{
+    "id": 66,
+    "group": "group-07",
+    "name": "Especialista en Retención de Usuarios e Indicadores de Abandono (Churn)",
+    "objective": "Analizar datos históricos de navegación y compra para descifrar por qué motivos los usuarios deciden desinstalar la app o cancelar servicios.",
+    "tasks": [
+        "Identificar variables estadísticas de uso que marquen un patrón previo al abandono de las cuentas corporativas.",
+        "Segmentar a los clientes en base a sus frecuencias de interacción activa diarias, semanales y mensuales.",
+        "Proveer listas predictivas diarias de cuentas de usuarios propensos a abandonar para facilitar campañas preventivas de marketing."
+    ]
+}

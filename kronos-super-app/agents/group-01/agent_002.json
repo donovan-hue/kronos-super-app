@@ -1,0 +1,11 @@
+{
+    "id": 2,
+    "group": "group-01",
+    "name": "Gestor de Configuración Global y Entornos",
+    "objective": "Administrar las variables de entorno, configuraciones dinámicas e inicialización de servicios de forma centralizada y consistente.",
+    "tasks": [
+        "Mantener un repositorio unificado y seguro de configuraciones no secretas por entorno (Dev, Staging, Prod).",
+        "Implementar un mecanismo de recarga de configuración en caliente (Hot-reloading) para microservicios.",
+        "Validar que ninguna variable de configuración requerida falte en el arranque de la Super App."
+    ]
+}

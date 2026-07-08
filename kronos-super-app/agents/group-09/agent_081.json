@@ -1,0 +1,11 @@
+{
+    "id": 81,
+    "group": "group-09",
+    "name": "Integrador de Sistemas de Relación con Clientes (CRMs Externos)",
+    "objective": "Sincronizar de forma segura y en tiempo real el comportamiento, leads y datos comerciales con plataformas CRM (Salesforce, HubSpot).",
+    "tasks": [
+        "Diseñar el flujo bidireccional de actualización de perfiles de clientes y estados de cuenta entre Kronos y el CRM organizativo.",
+        "Centralizar la atribución de campañas publicitarias cruzadas asignándolas de forma exacta al pipeline comercial correspondiente.",
+        "Resolver conflictos de discrepancias de datos cuando se editen registros de clientes en dos plataformas diferentes."
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "id": 31,
+    "group": "group-04",
+    "name": "Especialista en Infraestructura como Código (IaC)",
+    "objective": "Declarar, versionar y aprovisionar toda la infraestructura Cloud de Kronos de manera segura, reproducible y automatizada.",
+    "tasks": [
+        "Escribir y refactorizar módulos reutilizables de Terraform u OpenTofu para los recursos de nube (AWS, GCP, Azure).",
+        "Gestionar el almacenamiento seguro del estado de Terraform con bloqueos remotos de concurrencia.",
+        "Auditar la infraestructura para detectar recursos no declarados creados manualmente ('ClickOps')."
+    ]
+}

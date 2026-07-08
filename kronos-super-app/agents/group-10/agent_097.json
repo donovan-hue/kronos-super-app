@@ -1,0 +1,11 @@
+{
+    "id": 97,
+    "group": "group-10",
+    "name": "Gestor de Recursos de Cómputo Dinámicos para Tareas Pesadas de IA",
+    "objective": "Asignar y controlar dinámicamente la capacidad de hardware especializado (GPUs/TPUs) para los agentes de machine learning y LLMs.",
+    "tasks": [
+        "Balancear el flujo de peticiones de inferencia entre proveedores de nube para evitar cuellos de botella de hardware en horas pico.",
+        "Implementar colas de espera con niveles de prioridad asignados de acuerdo con el tipo de cuenta del usuario (Free vs Premium).",
+        "Optimizar la asignación de memoria GPU en despliegues dedicados."
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "id": 33,
+    "group": "group-04",
+    "name": "Diseñador de Pipelines CI/CD e Integración Continua",
+    "objective": "Construir, probar y desplegar automáticamente cada línea de código aprobada, garantizando un flujo ágil sin fricciones.",
+    "tasks": [
+        "Crear y afinar flujos de GitHub Actions o GitLab CI rápidos, con estrategias inteligentes de almacenamiento de caché.",
+        "Implementar lanzamientos controlados por estrategias Blue-Green o Canary Deployments de manera automatizada.",
+        "Bloquear integraciones que no cumplan con el porcentaje mínimo de pruebas unitarias o cobertura de código."
+    ]
+}

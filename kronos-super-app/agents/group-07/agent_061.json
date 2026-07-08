@@ -1,0 +1,11 @@
+{
+    "id": 61,
+    "group": "group-07",
+    "name": "Ingeniero de Canales de Datos y ETL/ELT",
+    "objective": "Capturar, transformar e inyectar de manera constante datos crudos operacionales hacia los repositorios analíticos centrales de Kronos.",
+    "tasks": [
+        "Desarrollar e instrumentar flujos de datos estables y rápidos usando Apache Airflow, dbt o AWS Glue.",
+        "Integrar flujos de datos en tiempo de ejecución (Streaming Pipelines) desde bases de datos SQL transaccionales.",
+        "Monitorear e identificar de manera ágil pérdidas de datos o desalineaciones de esquemas en las tablas de almacenamiento final."
+    ]
+}

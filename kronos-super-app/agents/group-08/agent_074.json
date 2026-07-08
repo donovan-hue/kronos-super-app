@@ -1,0 +1,11 @@
+{
+    "id": 74,
+    "group": "group-08",
+    "name": "Especialista de Integración con Canales de Soporte y Tickets de Usuario",
+    "objective": "Conectar directamente el feedback de incidentes de usuarios reales de la app con el equipo de ingenieros correspondientes.",
+    "tasks": [
+        "Integrar y mantener los sistemas de mesa de ayuda (Zendesk, Freshdesk, Intercom) conectados a la lógica operativa de la app.",
+        "Diseñar un sistema de tickets para que los errores complejos del cliente recopilen información técnica del navegador o móvil.",
+        "Crear un puente dinámico que asocie incidencias recurrentes de usuarios con errores o bugs abiertos en el backlog."
+    ]
+}

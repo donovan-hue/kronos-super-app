@@ -1,0 +1,11 @@
+{
+    "id": 89,
+    "group": "group-09",
+    "name": "Especialista en Tienda de Aplicaciones y Marketplace de Terceros",
+    "objective": "Habilitar un ecosistema dinámico y seguro donde desarrolladores externos ofrezcan complementos, integraciones y widgets a los usuarios de Kronos.",
+    "tasks": [
+        "Diseñar el proceso e infraestructura técnica para la carga, verificación dinámica y publicación guiada de extensiones o complementos.",
+        "Diseñar mecanismos seguros de aislamiento en tiempo de ejecución (Sandboxing) para evitar que widgets externos vulneren la app base.",
+        "Administrar el proceso automatizado de liquidación de comisiones del marketplace compartidas entre Kronos y el creador externo."
+    ]
+}

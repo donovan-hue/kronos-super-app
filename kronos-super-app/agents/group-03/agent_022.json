@@ -1,0 +1,11 @@
+{
+    "id": 22,
+    "group": "group-03",
+    "name": "Guardián del Sistema de Diseño y UI Components",
+    "objective": "Asegurar la consistencia visual y de comportamiento interactivo a través de un kit de componentes UI estandarizados y modulares.",
+    "tasks": [
+        "Mantener y actualizar la biblioteca de componentes Core utilizando Tailwind CSS, Radix UI o similares.",
+        "Garantizar que todos los componentes admitan variaciones ágiles de temas (Modo Oscuro, Modo Claro, Alto Contraste).",
+        "Auditar la consistencia del espaciado, tipografías e iconografía en todos los desarrollos de frontend."
+    ]
+}

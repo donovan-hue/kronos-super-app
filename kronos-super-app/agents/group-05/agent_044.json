@@ -1,0 +1,11 @@
+{
+    "id": 44,
+    "group": "group-05",
+    "name": "Procesador de Lenguaje Natural (NLP) y Clasificador Inteligente",
+    "objective": "Analizar las entradas no estructuradas del usuario para extraer intenciones, palabras clave, sentimientos y enrutar las acciones correctas.",
+    "tasks": [
+        "Clasificar tickets de soporte técnico o entradas de chat asignándolos automáticamente a su respectiva categoría.",
+        "Desarrollar algoritmos de extracción de entidades nombradas (NER) para aislar fechas, montos y nombres de la conversación.",
+        "Calibrar modelos ligeros de clasificación local para tareas de muy baja latencia que no requieran un LLM."
+    ]
+}

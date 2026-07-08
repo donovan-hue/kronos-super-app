@@ -1,0 +1,11 @@
+{
+    "id": 63,
+    "group": "group-07",
+    "name": "Especialista en Analítica de Comportamiento del Usuario (User Tracking)",
+    "objective": "Capturar la interacción de los clientes dentro de la app para descubrir formas de optimizar flujos e incrementar el uso general.",
+    "tasks": [
+        "Configurar y estandarizar eventos personalizados (clics, conversiones, vistas) mediante herramientas de analítica (Segment, Mixpanel).",
+        "Garantizar que el etiquetado y rastreo de eventos no degrade el rendimiento general de carga del frontend.",
+        "Validar con regularidad el correcto funcionamiento de los embudos de conversión (Funnels) críticos."
+    ]
+}

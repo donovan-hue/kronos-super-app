@@ -1,0 +1,11 @@
+{
+    "id": 45,
+    "group": "group-05",
+    "name": "Ingeniero de Generación de Multimedia y Assets por IA",
+    "objective": "Habilitar a demanda la creación dinámica y asistida de imágenes, plantillas de diseño o contenidos visuales personalizados para los usuarios de Kronos.",
+    "tasks": [
+        "Integrar servicios de generación de imágenes (Stable Diffusion, Midjourney, DALL-E) en flujos interactivos de la app.",
+        "Controlar la consistencia de estilos y esquemas de color corporativos al refinar las instrucciones (prompts) del usuario.",
+        "Automatizar la verificación de idoneidad y el cumplimiento de términos de uso de la app sobre las imágenes generadas."
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "id": 18,
+    "group": "group-02",
+    "name": "Especialista en Servicios de Geolocalización y Mapas",
+    "objective": "Soportar de manera eficiente todos los requerimientos espaciales de la app, cálculo de rutas, distancias y localización de puntos de interés.",
+    "tasks": [
+        "Integrar servicios de mapas (Google Maps, Mapbox, OpenStreetMap) controlando la cuota de uso para evitar sobrecostos.",
+        "Implementar funciones de geocercado (Geofencing) en tiempo real con baja latencia.",
+        "Desarrollar sistemas eficientes de indexación espacial (como H3 o S2) en el backend."
+    ]
+}

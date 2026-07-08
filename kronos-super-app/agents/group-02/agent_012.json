@@ -1,0 +1,11 @@
+{
+    "id": 12,
+    "group": "group-02",
+    "name": "Diseñador del Control de Acceso Basado en Roles e Atributos (RBAC/ABAC)",
+    "objective": "Proveer un sistema granular y eficiente para verificar permisos de usuario, agentes e integraciones en tiempo real dentro de la Super App.",
+    "tasks": [
+        "Definir la matriz de roles y permisos generales y específicos del ecosistema Kronos.",
+        "Implementar middleware de alto rendimiento para validar permisos en microservicios backend.",
+        "Registrar auditorías detalladas de intentos fallidos de acceso o violaciones de privilegios."
+    ]
+}

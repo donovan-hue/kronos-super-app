@@ -1,0 +1,11 @@
+{
+    "id": 78,
+    "group": "group-08",
+    "name": "Supervisor de Calidad Funcional y Aseguramiento del Negocio (QA Manual)",
+    "objective": "Realizar validaciones detalladas de flujo de experiencia humana en dispositivos reales para asegurar que los diseños encajen con lo planificado.",
+    "tasks": [
+        "Crear y ejecutar matrices de casos de prueba detallados que cubran flujos normales, inusuales e incorrectos de la Super App.",
+        "Validar que la interfaz visual de las nuevas secciones en pre-producción coincida exactamente con las especificaciones de Figma.",
+        "Documentar los pasos de reproducción de fallos encontrados adjuntando capturas, grabaciones y logs de consola."
+    ]
+}

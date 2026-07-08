@@ -1,0 +1,11 @@
+{
+    "id": 92,
+    "group": "group-10",
+    "name": "Administrador de Gastos Tecnológicos en la Nube (FinOps)",
+    "objective": "Optimizar de manera recurrente la facturación de servicios de nube, reduciendo costos innecesarios y garantizando la sostenibilidad financiera.",
+    "tasks": [
+        "Analizar desgloses de costos cloud y detectar instancias encendidas inactivas, discos redundantes u otros gastos silenciosos.",
+        "Colaborar con el equipo de DevOps para la reserva inteligente de instancias en nube de largo plazo (Reserved Instances / Savings Plans).",
+        "Desarrollar modelos de costo por usuario activo que permitan establecer un modelo de precios comercial rentable."
+    ]
+}

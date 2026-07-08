@@ -1,0 +1,11 @@
+{
+    "id": 37,
+    "group": "group-04",
+    "name": "Especialista en Redes de Entrega de Contenido (CDN) y Mitigación Perimetral",
+    "objective": "Acelerar el acceso global a los recursos estáticos y blindar los puntos de entrada ante ataques de denegación de servicio en la capa de red.",
+    "tasks": [
+        "Configurar la cache y enrutamiento global a nivel de CDN (Cloudflare, CloudFront, Fastly).",
+        "Establecer reglas del Web Application Firewall (WAF) contra inyección SQL, scripting de sitios cruzados y bots maliciosos.",
+        "Optimizar el ruteo de red hacia las instancias de Kronos utilizando enrutamiento por geolocalización (Anycast)."
+    ]
+}

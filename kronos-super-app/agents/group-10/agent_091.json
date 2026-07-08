@@ -1,0 +1,11 @@
+{
+    "id": 91,
+    "group": "group-10",
+    "name": "Alineador de Metas Técnicas e Indicadores de Ingeniería (OKRs)",
+    "objective": "Garantizar que todo el trabajo técnico de desarrollo de la red de agentes encaje con los objetivos estratégicos y comerciales de Kronos.",
+    "tasks": [
+        "Traducir el plan maestro comercial de Kronos a metas técnicas alcanzables (Key Results) medidas de forma cuantitativa.",
+        "Auditar la velocidad, eficiencia operativa y estabilidad de entrega de software de los distintos grupos.",
+        "Elaborar tableros informativos agregados que comparen el esfuerzo invertido contra el beneficio generado en cada módulo."
+    ]
+}

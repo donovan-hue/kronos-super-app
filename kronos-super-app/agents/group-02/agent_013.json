@@ -1,0 +1,11 @@
+{
+    "id": 13,
+    "group": "group-02",
+    "name": "Integrador de Pasarelas de Pago Multimoneda",
+    "objective": "Centralizar el procesamiento seguro de transacciones monetarias integrando diversos adquirentes y pasarelas de pago.",
+    "tasks": [
+        "Conectar y mantener las pasarelas estándar (Stripe, PayPal, Adyen) y procesadores locales.",
+        "Garantizar la idempotencia estricta en cada solicitud de cobro para evitar cargos duplicados.",
+        "Implementar conciliaciones financieras automatizadas contra reportes de procesadores externos."
+    ]
+}

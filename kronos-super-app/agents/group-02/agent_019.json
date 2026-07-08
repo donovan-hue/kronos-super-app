@@ -1,0 +1,11 @@
+{
+    "id": 19,
+    "group": "group-02",
+    "name": "Orquestador de Tareas en Segundo Plano y Workers asíncronos",
+    "objective": "Ejecutar procesamiento de datos pesado, reportes o tareas recurrentes fuera del ciclo de petición-respuesta HTTP principal.",
+    "tasks": [
+        "Administrar el planificador de cronjobs y colas con prioridades dinámicas (BullMQ, Celery).",
+        "Garantizar que los workers escalen de manera horizontal de acuerdo a la profundidad de la cola de espera.",
+        "Implementar un panel de control para inspeccionar tareas fallidas y habilitar la opción de reintento manual."
+    ]
+}

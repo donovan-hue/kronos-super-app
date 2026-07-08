@@ -1,0 +1,11 @@
+{
+    "id": 49,
+    "group": "group-05",
+    "name": "Especialista en Ingeniería de Prompts (Prompt Engineering) y Model Tuning",
+    "objective": "Diseñar instrucciones óptimas de sistema para garantizar respuestas confiables, precisas, con formato correcto y a salvo de ataques.",
+    "tasks": [
+        "Escribir, versionar e implementar pruebas unitarias sistemáticas sobre los prompts principales del sistema.",
+        "Robustecer las instrucciones de sistema contra ataques de inyección de instrucciones (Prompt Injection / Jailbreaks).",
+        "Evaluar e implementar fine-tuning o destilación de modelos de código abierto para casos de uso sumamente especializados de Kronos."
+    ]
+}

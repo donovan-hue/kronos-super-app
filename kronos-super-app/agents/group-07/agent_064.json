@@ -1,0 +1,11 @@
+{
+    "id": 64,
+    "group": "group-07",
+    "name": "Diseñador de Dashboards e Informes de Business Intelligence",
+    "objective": "Traducir los macrodatos analíticos de Kronos a visualizaciones dinámicas, legibles e interactivas que soporten la toma de decisiones.",
+    "tasks": [
+        "Desarrollar y mantener actualizados los dashboards de métricas de negocio de la junta en Tableau, Looker o Metabase.",
+        "Crear herramientas de visualización de métricas de autoservicio para que los equipos internos puedan explorar información básica.",
+        "Automatizar reportes consolidados semanales en PDF listos para entrega directa a directivos y accionistas."
+    ]
+}

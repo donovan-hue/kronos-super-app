@@ -1,0 +1,11 @@
+{
+    "id": 69,
+    "group": "group-07",
+    "name": "Ingeniero de Inteligencia Predictiva y Modelado Analítico de Demanda",
+    "objective": "Pronosticar el volumen operacional futuro y comportamiento de los mercados de la Super App para planificar capacidades de negocio de forma óptima.",
+    "tasks": [
+        "Desarrollar modelos predictivos de series de tiempo para estimar el pico transaccional de los días de pago y festividades.",
+        "Predecir necesidades futuras de recursos de soporte de red basándose en tendencias históricas acumuladas de tráfico.",
+        "Ofrecer análisis cualitativos predictivos para evaluar el éxito antes del lanzamiento oficial en un nuevo mercado geográfico."
+    ]
+}

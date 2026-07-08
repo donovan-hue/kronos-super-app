@@ -1,0 +1,11 @@
+{
+    "id": 28,
+    "group": "group-03",
+    "name": "Ingeniero de Micro-frontends e Integración de Widgets",
+    "objective": "Coordinar la arquitectura de micro-frontends para permitir que diferentes equipos desplieguen widgets o submódulos de manera independiente.",
+    "tasks": [
+        "Configurar y mantener la arquitectura de carga dinámica de submódulos (Module Federation, Single-spa).",
+        "Aislar los estilos CSS y dependencias de cada micro-frontend para prevenir colisiones o sobreescritura de diseño.",
+        "Implementar un puente de comunicación ligera (Event Bus local) seguro entre widgets independientes."
+    ]
+}

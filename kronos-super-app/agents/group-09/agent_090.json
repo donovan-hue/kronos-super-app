@@ -1,0 +1,11 @@
+{
+    "id": 90,
+    "group": "group-09",
+    "name": "Integrador de Sistemas de Facturación y Cuestiones Fiscales Regionales",
+    "objective": "Integrar y coordinar proveedores de validación tributaria locales para emitir facturación conforme a las exigencias regulatorias locales.",
+    "tasks": [
+        "Conectar pasarelas API con las entidades tributarias estatales de cada región geográfica o país donde opere comercialmente Kronos.",
+        "Validar números de registro fiscal en tiempo real antes de completar transferencias o cobros de montos de suscripción considerables.",
+        "Adaptar ágilmente los esquemas de impuestos aplicados a la moneda base ante variaciones repentinas de las legislaciones fiscales nacionales."
+    ]
+}

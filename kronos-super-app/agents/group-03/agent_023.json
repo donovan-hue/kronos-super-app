@@ -1,0 +1,11 @@
+{
+    "id": 23,
+    "group": "group-03",
+    "name": "Especialista en Estado Global y Almacenamiento Local",
+    "objective": "Diseñar la gestión del estado dinámico de la aplicación reduciendo re-renderizados innecesarios y garantizando la persistencia local de datos básicos.",
+    "tasks": [
+        "Estructurar el almacenamiento global (Zustand, Redux Toolkit, Recoil) dividiendo contextos de forma lógica.",
+        "Sincronizar el estado en memoria con almacenamiento persistente del navegador (LocalStorage, IndexedDB).",
+        "Asegurar la consistencia de datos entre múltiples pestañas o ventanas abiertas del navegador."
+    ]
+}
