@@ -1,23 +1,7 @@
-/**
- * KRONOS AGENT ORCHESTRATOR
- * Runs all three agents in sequence: Task Master → Builder Alpha → Pelos
- * Can be run manually or scheduled via cron.
- *
- * Usage:
- *   node agents/orchestrator.js              → full cycle
- *   node agents/orchestrator.js --audit      → only run Kairos (auditoría experta)
- *   node agents/orchestrator.js --plan       → only generate tasks (Task Master)
- *   node agents/orchestrator.js --build      → only run Builder Alpha
- *   node agents/orchestrator.js --fix        → only run Pelos
- *   node agents/orchestrator.js --dry        → dry run, no file writes
- *   node agents/orchestrator.js --all        → run all agents until queue empty
- *   node agents/orchestrator.js --status     → show current task queue status
- */
-
 const fs = require('fs');
 const path = require('path');
 
-const AGENTS_DIR = path.resolve(__dirname, '..', 'server', 'agents');
+const AGENTS_DIR = __dirname;
 const LOG_FILE = path.join(AGENTS_DIR, 'logs', 'orchestrator.log');
 const TASKS_FILE = path.join(AGENTS_DIR, 'tasks.json');
 
@@ -37,7 +21,7 @@ function printBanner(title) {
 
 function showStatus() {
   if (!fs.existsSync(TASKS_FILE)) {
-    console.log('\nNo hay tareas generadas. Corre: node agents/orchestrator.js --plan\n');
+    console.log('\nNo hay tareas generadas. Corre: node server/agents/orchestrator.js --plan\n');
     return;
   }
   const tasks = JSON.parse(fs.readFileSync(TASKS_FILE, 'utf8'));
@@ -81,8 +65,6 @@ async function runCycle(options = {}) {
   printBanner('KRONOS AGENT ORCHESTRATOR');
   log(`Mode: ${runAll ? 'ALL' : 'SINGLE CYCLE'} | DryRun: ${dryRun}`);
 
-  // ── Step 0: Kairos — auditoría experta (qué falta para estar en la web) ───
-  log('');
   log('STEP 0: Kairos — auditando proyecto y encolando gaps de producción...');
   try {
     const { run: runKairos } = require('./kairos');
@@ -92,8 +74,6 @@ async function runCycle(options = {}) {
     log(`Kairos ERROR: ${err.message}`);
   }
 
-  // ── Step 1: Task Master ──────────────────────────────────────────────────
-  log('');
   log('STEP 1: Task Master — generando cola de tareas...');
   try {
     const { run: runTaskMaster } = require('./task-master');
@@ -104,8 +84,6 @@ async function runCycle(options = {}) {
     process.exit(1);
   }
 
-  // ── Step 2: Pelos — auto-fix primero ────────────────────────────
-  log('');
   log('STEP 2: Pelos — auto-detect & fix...');
   try {
     const { run: runFixer } = require('./pelos');
@@ -115,20 +93,15 @@ async function runCycle(options = {}) {
     log(`Pelos (auto-fix) ERROR: ${err.message}`);
   }
 
-  // ── Step 3: Builder Alpha ────────────────────────────────────────────────
-  log('');
   log('STEP 3: Builder Alpha — implementando features...');
 
   if (runAll) {
     let iterations = 0;
     const MAX = 20;
     while (iterations++ < MAX) {
-      const tasks = fs.existsSync(TASKS_FILE)
-        ? JSON.parse(fs.readFileSync(TASKS_FILE, 'utf8'))
-        : [];
+      const tasks = fs.existsSync(TASKS_FILE) ? JSON.parse(fs.readFileSync(TASKS_FILE, 'utf8')) : [];
       const pending = tasks.filter(t => t.status === 'pending' && ['feature', 'improvement'].includes(t.type));
       if (pending.length === 0) break;
-
       try {
         const { run: runBuilder } = require('./builder-alpha');
         runBuilder({ dryRun });
@@ -146,20 +119,15 @@ async function runCycle(options = {}) {
     }
   }
 
-  // ── Step 4: Pelos — security/test tasks ─────────────────────────
-  log('');
   log('STEP 4: Pelos — seguridad y tests...');
 
   if (runAll) {
     let iterations = 0;
     const MAX = 10;
     while (iterations++ < MAX) {
-      const tasks = fs.existsSync(TASKS_FILE)
-        ? JSON.parse(fs.readFileSync(TASKS_FILE, 'utf8'))
-        : [];
+      const tasks = fs.existsSync(TASKS_FILE) ? JSON.parse(fs.readFileSync(TASKS_FILE, 'utf8')) : [];
       const pending = tasks.filter(t => t.status === 'pending' && ['security', 'test'].includes(t.type));
       if (pending.length === 0) break;
-
       try {
         const { run: runFixer } = require('./pelos');
         runFixer({ dryRun });
@@ -177,56 +145,17 @@ async function runCycle(options = {}) {
     }
   }
 
-  // ── Summary ──────────────────────────────────────────────────────────────
   log('');
   printBanner('CICLO COMPLETADO');
   showStatus();
 }
 
-// ─── CLI ─────────────────────────────────────────────────────────────────────
-
 const args = process.argv.slice(2);
-
-if (args.includes('--status')) {
-  showStatus();
-  process.exit(0);
-}
-
-if (args.includes('--audit')) {
-  log('Running Kairos only...');
-  const { run } = require('./kairos');
-  run({ reportOnly: args.includes('--dry'), fix: args.includes('--fix') });
-  process.exit(0);
-}
-
-if (args.includes('--plan')) {
-  log('Running Task Master only...');
-  const { run } = require('./task-master');
-  run();
-  showStatus();
-  process.exit(0);
-}
-
-if (args.includes('--build')) {
-  log('Running Builder Alpha only...');
-  const { run } = require('./builder-alpha');
-  run({ dryRun: args.includes('--dry') });
-  showStatus();
-  process.exit(0);
-}
-
-if (args.includes('--fix')) {
-  log('Running Pelos only...');
-  const { run } = require('./pelos');
-  run({ dryRun: args.includes('--dry') });
-  showStatus();
-  process.exit(0);
-}
-
+if (args.includes('--status')) { showStatus(); process.exit(0); }
+if (args.includes('--audit')) { log('Running Kairos only...'); const { run } = require('./kairos'); run({ reportOnly: args.includes('--dry'), fix: args.includes('--fix') }); process.exit(0); }
+if (args.includes('--plan')) { log('Running Task Master only...'); const { run } = require('./task-master'); run(); showStatus(); process.exit(0); }
+if (args.includes('--build')) { log('Running Builder Alpha only...'); const { run } = require('./builder-alpha'); run({ dryRun: args.includes('--dry') }); showStatus(); process.exit(0); }
+if (args.includes('--fix')) { log('Running Pelos only...'); const { run } = require('./pelos'); run({ dryRun: args.includes('--dry') }); showStatus(); process.exit(0); }
 const dryRun = args.includes('--dry');
 const runAll = args.includes('--all');
-
-runCycle({ dryRun, runAll }).catch(err => {
-  log(`FATAL: ${err.message}`);
-  process.exit(1);
-});
+runCycle({ dryRun, runAll }).catch(err => { log(`FATAL: ${err.message}`); process.exit(1); });

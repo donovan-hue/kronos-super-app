@@ -82,3 +82,10 @@ agents/logs/
 .design-import/
 .design-import-2/
 .design-btn/
+
+# ===== Binarios y documentos que no pertenecen al repo =====
+*.pptx
+*.ppt
+*.docx
+*.pdf
+*.psd

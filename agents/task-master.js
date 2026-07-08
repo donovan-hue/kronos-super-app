@@ -9,8 +9,9 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..');
-const TASKS_FILE = path.join(__dirname, 'tasks.json');
-const LOG_FILE = path.join(__dirname, 'logs', 'task-master.log');
+const AGENTS_DIR = path.resolve(__dirname, '..', 'server', 'agents');
+const TASKS_FILE = path.join(AGENTS_DIR, 'tasks.json');
+const LOG_FILE = path.join(AGENTS_DIR, 'logs', 'task-master.log');
 
 function log(msg) {
   const line = `[${new Date().toISOString()}] [TASK-MASTER] ${msg}`;

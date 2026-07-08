@@ -103,3 +103,16 @@ echo Para más info: ver INSTALLATION.md o DEPLOYMENT.md
 echo ═══════════════════════════════════════════════════════════════
 echo.
 pause
+// /workspaces/kronos-super-app/package.json
+{
+  // ...
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "server": "npm run dev --prefix server",
+    "client": "npm run dev --prefix client",
+    "install-all": "npm install --prefix server && npm install --prefix client",
+    "build": "npm run build --prefix server && npm run build --prefix client",
+    "start": "npm run start --prefix server"
+  },
+  // ...
+}

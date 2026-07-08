@@ -1,4 +1,4 @@
-# Politica de Privacidad - Kronos Super-App
+revisa porq no puedo # Politica de Privacidad - Kronos Super-App
 
 **Ultima actualizacion:** [FECHA]
 

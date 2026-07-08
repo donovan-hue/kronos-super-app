@@ -9,9 +9,10 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const TASKS_FILE = path.join(__dirname, 'tasks.json');
-const LOG_FILE = path.join(__dirname, 'logs', 'builder-alpha.log');
-const DONE_FILE = path.join(__dirname, 'logs', 'completed.json');
+const AGENTS_DIR = path.resolve(__dirname, '..', 'server', 'agents');
+const TASKS_FILE = path.join(AGENTS_DIR, 'tasks.json');
+const LOG_FILE = path.join(AGENTS_DIR, 'logs', 'builder-alpha.log');
+const DONE_FILE = path.join(AGENTS_DIR, 'logs', 'completed.json');
 
 function log(msg) {
   const line = `[${new Date().toISOString()}] [BUILDER-ALPHA] ${msg}`;

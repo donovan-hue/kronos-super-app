@@ -7,28 +7,17 @@ Una plataforma revolucionaria que combina **red social**, **e-commerce** y **del
 ## 🎯 ¿ERES NUEVO? EMPIEZA AQUÍ
 
 ### Punto de Entrada Único
-👉 **[SETUP.md](SETUP.md)** ← Abre este primero
-
-Este documento tiene:
-- Roadmap completo (4 fases)
-- Links a todos los guías
-- Timeline estimado
-- FAQ rápida
+👉 **[DEPLOYMENT.md](DEPLOYMENT.md)** ← Guía de despliegue definitiva
 
 ---
 
 ## 📚 DOCUMENTACIÓN COMPLETA
 
-| Documento | Descripción | Tiempo |
-|-----------|-------------|--------|
-| **[SETUP.md](SETUP.md)** | ⭐ **PUNTO DE ENTRADA** - Mapa de ruta completo | 2 min |
-| **[CREDENTIALS.md](CREDENTIALS.md)** | Cómo obtener cada credencial (API keys) | 10-15 min |
-| **[INSTALLATION.md](INSTALLATION.md)** | Instalar localmente en tu computadora | 15-20 min |
-| **[DEPLOYMENT.md](DEPLOYMENT.md)** | Subir a Vercel (frontend) + Render (backend) | 20-30 min |
-| **[QUICK_START.md](QUICK_START.md)** | Setup rápido en 5 minutos | 5 min |
-| **[FEATURES.md](FEATURES.md)** | Lista completa de 50+ features | - |
-| **[INTEGRATION_COMPLETE.md](INTEGRATION_COMPLETE.md)** | Detalles técnicos de 35+ endpoints | - |
-| **[UI_DESIGN_SYSTEM.md](client/UI_DESIGN_SYSTEM.md)** | Componentes glassmorphism y CSS | - |
+La documentación principal del proyecto se ha consolidado en los siguientes archivos:
+
+- **[DEPLOYMENT.md](DEPLOYMENT.md):** Guía única y definitiva para desplegar el frontend en Vercel y el backend en Koyeb.
+- **[FEATURES.md](FEATURES.md):** Lista completa de las características del proyecto.
+- **[docs/PLANO-KRONOS.md](docs/PLANO-KRONOS.md):** Plano maestro con el mapa de funciones y arquitectura.
 
 ---
 
@@ -161,48 +150,34 @@ super-app/
 
 ## ⚡ Instalación y Setup
 
-### Requisitos
-- Node.js v16+
-- MongoDB local o Atlas
-- Yarn o npm
+El flujo de trabajo ha sido estandarizado para seguir las mejores prácticas de la industria.
 
-### Backend
+### 1. Instalar dependencias
+
+Este comando instalará las dependencias tanto para el `server` como para el `client`.
 
 ```bash
-cd server
-npm install
+npm run install-all
+```
+
+### 2. Configurar variables de entorno
+
+Copia el archivo `.env.example` a un nuevo archivo `.env` en la raíz del proyecto y rellena tus credenciales para los servicios externos (MongoDB, Stripe, Cloudinary, etc.).
+
+```bash
 cp .env.example .env
-# Configura las variables en .env
+```
+
+### 3. Iniciar el proyecto
+
+Este comando unificado levantará el backend y el frontend simultáneamente.
+
+```bash
 npm run dev
 ```
 
-**Variables de entorno necesarias:**
-```env
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/super-app
-JWT_SECRET=tu_secreto_jwt
-CLIENT_URL=http://localhost:3000
-CLOUDINARY_NAME=tu_cloudinary_name
-CLOUDINARY_API_KEY=tu_api_key
-CLOUDINARY_API_SECRET=tu_api_secret
-STRIPE_PUBLIC_KEY=pk_test_...
-STRIPE_SECRET_KEY=sk_test_...
-```
-
-### Frontend
-
-```bash
-cd client
-npm install
-# Crea .env.local
-REACT_APP_API_URL=http://localhost:5000/api
-REACT_APP_SOCKET_URL=http://localhost:5000
-REACT_APP_STRIPE_PUBLIC_KEY=pk_test_...
-```
-
-```bash
-npm start
-```
+La aplicación estará disponible en `http://localhost:3000`.
+No se usan scripts de arranque alternativos; el flujo estándar es este comando único.
 
 ## 🔑 Flujos Principales
 
@@ -297,20 +272,8 @@ npm test
 
 ## 🚀 Deploy
 
-### Backend (Heroku)
-```bash
-cd server
-heroku create super-app-backend
-git push heroku main
-heroku config:set JWT_SECRET=...
-```
-
-### Frontend (Vercel)
-```bash
-cd client
-npm run build
-vercel --prod
-```
+El despliegue se realiza en **Koyeb (backend)** y **Vercel (frontend)**.
+Sigue las instrucciones detalladas en **[DEPLOYMENT.md](DEPLOYMENT.md)**.
 
 ## 📝 Notas Importantes
 
@@ -327,5 +290,6 @@ Este es un proyecto de demostración. Siéntete libre de mejorar cualquier parte
 ## 📄 Licencia
 
 MIT License
-#   K R O N O S - S U P E R - A P P  
+#   K R O N O S - S U P E R - A P P 
+ 
  

@@ -24,10 +24,11 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const TASKS_FILE = path.join(__dirname, 'tasks.json');
-const LOG_FILE = path.join(__dirname, 'logs', 'kairos.log');
-const REPORT_FILE = path.join(__dirname, 'logs', 'kairos-report.json');
-const JUNK_FILE = path.join(__dirname, 'logs', 'kairos-junk.json');
+const AGENTS_DIR = path.resolve(__dirname, '..', 'server', 'agents');
+const TASKS_FILE = path.join(AGENTS_DIR, 'tasks.json');
+const LOG_FILE = path.join(AGENTS_DIR, 'logs', 'kairos.log');
+const REPORT_FILE = path.join(AGENTS_DIR, 'logs', 'kairos-report.json');
+const JUNK_FILE = path.join(AGENTS_DIR, 'logs', 'kairos-junk.json');
 
 // ─── Modo limpieza (verdugo) ────────────────────────────────────────────────────
 // Kairos conoce la estructura real del proyecto, así que distingue el código vivo
