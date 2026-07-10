@@ -1,6 +1,7 @@
 /**
  * KRONOS · AGENTE 00.7 — DIRECTOR DE SEGURIDAD TÉCNICA
  */
+const kairos = require('../kairos');
 
 module.exports = {
   id: '00.7',
@@ -14,9 +15,21 @@ module.exports = {
     'Priorizar correcciones de vulnerabilidades.',
   ],
   run() {
+    const { findings } = kairos.audit();
+    const securityFindings = findings.filter(f => f.area === 'security');
+
+    if (securityFindings.length === 0) {
+      return {
+        status: 'complete',
+        summary: 'No se encontraron vulnerabilidades de seguridad evidentes. Las defensas básicas están activas.',
+        findings: [],
+      };
+    }
+
     return {
-      status: 'ready',
-      message: 'Agente preparado para vigilar seguridad técnica y controles de acceso.',
+      status: 'complete',
+      summary: `Se detectaron ${securityFindings.length} posibles problemas de seguridad. Se requiere revisión manual.`,
+      findings: securityFindings,
     };
   },
 };
