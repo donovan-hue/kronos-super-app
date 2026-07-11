@@ -51,7 +51,7 @@ function BookmarksTab({ userId }) {
       <div style={{ textAlign: 'center', padding: 48, color: 'rgba(10,10,20,0.35)' }}>
         <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}><Icon name="bookmark" size={40} /></div>
         <div>Sin guardados aún</div>
-        <div style={{ fontSize: 12, marginTop: 4, display: 'inline-flex', alignItems: 'center', gap: 4, justifyContent: 'center' }}>Guarda posts con el botón <Icon name="bookmark" size={12} stroke="rgba(10,10,20,0.5)" /> del feed</div>
+        <div style={{ fontSize: 12, marginTop: 4, display: 'inline-flex', alignItems: 'center', gap: 4, justifyContent: 'center' }}>Guarda posts con el botón <Icon name="bookmark" size={12} stroke="rgba(10,10,20,0.5)" /></div>
       </div>
     );
   }
@@ -113,7 +113,7 @@ function Profile() {
 
     fetchProfile();
     fetchBlockStatus();
-  }, [targetId]);
+  }, [targetId, currentUser, isOwnProfile]);
 
   const handleFollow = async () => {
     try {
@@ -223,18 +223,18 @@ function Profile() {
           {!isOwnProfile && currentUser && (
             <div style={{ display: 'flex', gap: 10, justifyContent: 'center' }}>
               <button onClick={handleFollow}
-                style={{ padding: '9px 28px', borderRadius: 28, fontWeight: 700, fontSize: 13, border: 'none', cursor: 'pointer', background: isFollowing ? 'rgba(79,172,254,0.1)' : 'linear-gradient(135deg,#7c3aed,#06b6d4)', color: '#0a0a14' }}>
+                style={{ padding: '9px 28px', borderRadius: 28, fontWeight: 700, fontSize: 13, border: 'none', cursor: 'pointer', background: isFollowing ? 'rgba(79,172,254,0.1)' : 'linear-gradient(135deg,rgba(124,58,237,0.6),rgba(168,85,247,0.5))', color: '#0a0a14' }}>
                 {isFollowing ? <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>Siguiendo <Icon name="check" size={14} stroke="#0a0a14" /></span> : 'Seguir'}
               </button>
               <button onClick={handleBlock} disabled={blockLoading}
-                style={{ padding: '9px 20px', borderRadius: 28, fontWeight: 700, fontSize: 13, border: `1px solid ${isBlocked ? 'rgba(251,191,36,0.5)' : 'rgba(239,68,68,0.4)'}`, background: 'transparent', color: isBlocked ? '#fbbf24' : '#ef4444', cursor: 'pointer', opacity: blockLoading ? 0.5 : 1 }}>
+                style={{ padding: '9px 20px', borderRadius: 28, fontWeight: 700, fontSize: 13, border: `1px solid ${isBlocked ? 'rgba(251,191,36,0.5)' : 'rgba(239,68,68,0.4)'}`, background: 'transparent', color: isBlocked ? 'rgba(251,191,36,0.8)' : 'rgba(239,68,68,0.6)', cursor: 'pointer', opacity: blockLoading ? 0.6 : 1 }}>
                 {blockLoading ? '...' : isBlocked ? 'Desbloquear' : 'Bloquear'}
               </button>
             </div>
           )}
           {isOwnProfile && (
             <button onClick={() => navigate('/settings')}
-              style={{ padding: '9px 24px', borderRadius: 28, fontWeight: 700, fontSize: 13, border: '1px solid rgba(79,172,254,0.25)', background: 'transparent', color: '#0a0a14', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+              style={{ padding: '9px 24px', borderRadius: 28, fontWeight: 700, fontSize: 13, border: '1px solid rgba(79,172,254,0.25)', background: 'transparent', color: '#0a0a14', cursor: 'pointer' }}>
               <Icon name="edit" size={14} stroke="#0a0a14" /> Editar perfil
             </button>
           )}
@@ -247,7 +247,7 @@ function Profile() {
             ...(isOwnProfile ? [{ id: 'bookmarks', icon: 'bookmark', label: 'Guardados' }] : []),
           ].map(t => (
             <button key={t.id} onClick={() => setTab(t.id)}
-              style={{ flex: 1, padding: '9px', borderRadius: 10, fontSize: 13, fontWeight: 600, border: 'none', cursor: 'pointer', background: tab === t.id ? 'rgba(124,58,237,0.6)' : 'transparent', color: '#0a0a14', transition: 'background 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+              style={{ flex: 1, padding: '9px', borderRadius: 10, fontSize: 13, fontWeight: 600, border: 'none', cursor: 'pointer', background: tab === t.id ? 'rgba(124,58,237,0.6)' : 'transparent', color: '#0a0a14' }}>
               <Icon name={t.icon} size={15} stroke="#0a0a14" /> {t.label}
             </button>
           ))}
