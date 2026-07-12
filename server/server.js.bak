@@ -6,7 +6,6 @@ const cors = require('cors');
 const http = require('http');
 const socketIo = require('socket.io');
 const connectDB = require('./config/database');
-const kronosOrchestrator = require('./orchestrator');
 
 // Security & performance middleware
 const helmet = require('helmet');
@@ -203,7 +202,7 @@ app.use('/api/translation',   require('./routes/translation')); // Traducción I
 app.use('/api/ar',            require('./routes/ar'));           // Realidad Aumentada
 app.use('/api/gamification',  require('./routes/gamification')); // Reservaciones
 app.use('/api/health', require('./routes/health')); // Health & Fitness
-app.use('/api/orchestrator', require('./routes/orchestrator'));
+
 // Initialize Socket.io singleton (para que controllers/routes puedan emitir eventos)
 const socketService = require('./services/socketService');
 socketService.init(io);
@@ -552,13 +551,6 @@ server.listen(PORT, () => {
   console.log(`║  Port: ${PORT}                              ║`);
   console.log(`║  URL: http://localhost:${PORT}              ║`);
   console.log(`╚════════════════════════════════════════╝\n`);
-
-  try {
-    kronosOrchestrator.initialize();
-    console.log("✓ KRONOS ORCHESTRATOR ONLINE");
-  } catch (err) {
-    console.error("✗ Error iniciando KRONOS ORCHESTRATOR:", err.message);
-  }
 });
 
 module.exports = { app, server, io };
