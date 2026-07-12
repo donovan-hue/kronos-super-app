@@ -13,7 +13,7 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const compression = require('compression');
 const morgan = require('morgan');
-
+const configureSecurity = require('./startup/security');
 // Verificar variables de entorno críticas al arranque
 const REQUIRED_ENV = ['MONGODB_URI', 'JWT_SECRET'];
 REQUIRED_ENV.forEach(key => {
