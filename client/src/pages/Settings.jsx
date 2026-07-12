@@ -175,6 +175,19 @@ function AppearanceTab() {
 }
 
 // ── Account Tab ───────────────────────────────────────────────────────────────
+function ProfileTab() {
+  return (
+    <GlassCard style={{ padding: 20 }}>
+      <div style={{ color: "#c9ced4", fontSize: 20, fontWeight: 700 }}>
+        Perfil
+      </div>
+
+      <div style={{ color: "rgba(201,206,212,.5)", marginTop: 10 }}>
+        Aquí irá el editor de perfil.
+      </div>
+    </GlassCard>
+  );
+}
 function AccountTab() {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -298,6 +311,7 @@ export default function Settings() {
             {activeTab === 'privacy'       && <PrivacyTab />}
             {activeTab === 'notifications' && <NotificationsTab />}
             {activeTab === 'appearance'    && <AppearanceTab />}
+            {activeTab === 'profile'       && <ProfileTab />}
             {activeTab === 'account'       && <AccountTab />}
           </motion.div>
         </AnimatePresence>
