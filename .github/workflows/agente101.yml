@@ -9,3 +9,38 @@ kronos-super-app
 └── .github
     └── workflows
         └── agente101.yml
+name: Agente101 Auto Upload
+
+on:
+  push:
+    branches:
+      - main
+      - agente-101
+      - paquete-2-backend
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Comprimir proyecto
+        run: zip -r paquete.zip . -x "*.git*" "node_modules/*"
+
+      - name: Instalar AWS CLI
+        run: |
+          sudo apt update
+          sudo apt install -y awscli
+
+      - name: Subir a Cloudflare R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          aws s3 cp paquete.zip s3://${{ secrets.R2_BUCKET }}/paquete-${{ github.run_number }}.zip --endpoint-url=${{ secrets.R2_ENDPOINT }}
+
+      - name: Finalizado
+        run: echo "Paquete subido correctamente."
