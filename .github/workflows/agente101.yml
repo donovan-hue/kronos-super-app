@@ -19,9 +19,7 @@ jobs:
         run: zip -r paquete.zip . -x "*.git*" "node_modules/*"
 
       - name: Instalar AWS CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y awscli
+        uses: unfor19/install-aws-cli-action@v1
 
       - name: Subir a Cloudflare R2
         env:
