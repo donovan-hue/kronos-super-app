@@ -4,6 +4,7 @@
   "description": "Frontend KRONOS - React 18 con Glassmorphism",
   "private": true,
   "dependencies": {
+    "@mediapipe/selfie_segmentation": "^0.1.1675465747",
     "@react-three/drei": "^9.92.0",
     "@react-three/fiber": "^8.15.0",
     "@stripe/react-stripe-js": "^2.2.0",
@@ -15,6 +16,7 @@
     "axios": "^1.5.0",
     "cloudinary-react": "^1.8.1",
     "deepmerge": "^4.3.1",
+    "eslint-config-react-app": "^7.0.1",
     "ethers": "^6.9.0",
     "framer-motion": "^10.16.4",
     "postcss": "^8.4.31",
@@ -30,6 +32,8 @@
     "styled-components": "^6.1.0",
     "tailwindcss": "^3.3.0",
     "three": "^0.160.0",
+    "tweetnacl": "^1.0.3",
+    "tweetnacl-util": "^0.15.1",
     "zustand": "^4.4.1"
   },
   "scripts": {
@@ -60,6 +64,7 @@
     "node": ">=18"
   },
   "devDependencies": {
+    "@capacitor/cli": "^8.4.1",
     "webpack": "^5.107.2"
   }
 }
