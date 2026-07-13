@@ -1,0 +1,623 @@
+{
+  "__tests__/auth.test.js": [
+    "controllers/authController.js",
+    "middleware/auth.js"
+  ],
+  "__tests__/posts.test.js": [
+    "controllers/authController.js",
+    "controllers/postController.js",
+    "middleware/auth.js"
+  ],
+  "__tests__/subscription.test.js": [
+    "controllers/authController.js",
+    "controllers/postController.js",
+    "middleware/auth.js",
+    "middleware/postLimiter.js",
+    "middleware/requireTier.js",
+    "models/Subscription.js",
+    "models/User.js",
+    "routes/subscription.js",
+    "services/subscriptionService.js"
+  ],
+  "__tests__/users.test.js": [
+    "controllers/authController.js",
+    "controllers/userBlockController.js",
+    "controllers/userController.js",
+    "middleware/auth.js"
+  ],
+  "agents/builder-alpha.js": [],
+  "agents/kairos.js": [],
+  "agents/orchestrator.js": [
+    "agents/builder-alpha.js",
+    "agents/kairos.js",
+    "agents/pelos.js",
+    "agents/task-master.js"
+  ],
+  "agents/pelos.js": [],
+  "agents/task-master.js": [],
+  "config/database.js": [],
+  "config/passport.js": [
+    "models/User.js"
+  ],
+  "config/stripe.js": [],
+  "config/subscriptionPlans.js": [],
+  "controllers/adminController.js": [
+    "models/Post.js",
+    "models/Subscription.js",
+    "models/User.js"
+  ],
+  "controllers/aiController.js": [
+    "services/aiService.js"
+  ],
+  "controllers/analyticsController.js": [
+    "models/AttentionMetrics.js",
+    "models/UserInteraction.js"
+  ],
+  "controllers/arController.js": [
+    "models/Product.js"
+  ],
+  "controllers/audioController.js": [],
+  "controllers/authController.js": [
+    "controllers/notificationController.js",
+    "models/User.js",
+    "services/emailService.js"
+  ],
+  "controllers/avatarController.js": [
+    "models/AvatarItem.js",
+    "models/CashWallet.js",
+    "models/UserAvatar.js"
+  ],
+  "controllers/communityController.js": [
+    "models/Community.js"
+  ],
+  "controllers/ephemeralStoryController.js": [
+    "models/EphemeralStory.js",
+    "models/User.js"
+  ],
+  "controllers/eventController.js": [
+    "config/stripe.js",
+    "controllers/notificationController.js",
+    "models/Event.js",
+    "models/User.js",
+    "services/subscriptionService.js"
+  ],
+  "controllers/feedController.js": [
+    "models/Post.js",
+    "models/Product.js",
+    "models/User.js",
+    "models/UserBlock.js"
+  ],
+  "controllers/gamificationController.js": [
+    "models/Gamification.js"
+  ],
+  "controllers/groupChatController.js": [
+    "models/GroupConversation.js",
+    "models/GroupMessage.js"
+  ],
+  "controllers/healthController.js": [
+    "controllers/gamificationController.js",
+    "models/HealthLog.js",
+    "models/User.js"
+  ],
+  "controllers/listingController.js": [
+    "models/Listing.js",
+    "models/User.js"
+  ],
+  "controllers/messageController.js": [
+    "models/Message.js"
+  ],
+  "controllers/multimediaController.js": [
+    "middleware/upload.js",
+    "models/Post.js"
+  ],
+  "controllers/notificationController.js": [
+    "models/Notification.js"
+  ],
+  "controllers/orderController.js": [
+    "models/Order.js",
+    "models/User.js",
+    "services/emailService.js"
+  ],
+  "controllers/postController.js": [
+    "models/Post.js",
+    "models/User.js",
+    "models/UserBlock.js",
+    "services/aiService.js",
+    "services/socketService.js"
+  ],
+  "controllers/productController.js": [
+    "models/Product.js"
+  ],
+  "controllers/recommendationController.js": [
+    "services/recommendationService.js"
+  ],
+  "controllers/refundController.js": [
+    "models/Order.js",
+    "models/Refund.js",
+    "services/emailService.js"
+  ],
+  "controllers/reportingController.js": [
+    "models/ContentReport.js",
+    "models/Post.js",
+    "models/User.js",
+    "models/UserBlock.js"
+  ],
+  "controllers/reservationController.js": [
+    "models/Reservation.js"
+  ],
+  "controllers/searchController.js": [
+    "models/Post.js",
+    "models/Product.js",
+    "models/User.js"
+  ],
+  "controllers/sessionController.js": [
+    "models/ActiveSession.js"
+  ],
+  "controllers/storyController.js": [
+    "models/Story.js",
+    "models/StoryNode.js",
+    "models/StoryProgress.js"
+  ],
+  "controllers/tipController.js": [
+    "models/Tip.js",
+    "models/UserWallet.js"
+  ],
+  "controllers/tokenController.js": [
+    "models/AttentionMetrics.js",
+    "models/KronosToken.js",
+    "models/Stake.js",
+    "models/UserWallet.js",
+    "services/tokenService.js"
+  ],
+  "controllers/translationController.js": [
+    "services/aiService.js"
+  ],
+  "controllers/twoFactorController.js": [
+    "models/ActiveSession.js",
+    "models/TwoFactorAuth.js",
+    "models/User.js",
+    "services/emailService.js",
+    "services/twoFactorService.js"
+  ],
+  "controllers/userBlockController.js": [
+    "models/User.js",
+    "models/UserBlock.js"
+  ],
+  "controllers/userController.js": [
+    "middleware/upload.js",
+    "models/Order.js",
+    "models/Post.js",
+    "models/User.js",
+    "models/UserBlock.js"
+  ],
+  "controllers/videoController.js": [
+    "models/Video.js"
+  ],
+  "controllers/walletController.js": [
+    "models/CashWallet.js",
+    "models/User.js",
+    "models/UserWallet.js",
+    "models/VirtualCard.js"
+  ],
+  "final-validation.js": [
+    "controllers/authController.js",
+    "models/User.js",
+    "routes/auth.js"
+  ],
+  "middleware/adminAuth.js": [
+    "models/AdminUser.js"
+  ],
+  "middleware/auth.js": [
+    "models/User.js"
+  ],
+  "middleware/errorHandler.js": [],
+  "middleware/postLimiter.js": [
+    "models/User.js"
+  ],
+  "middleware/rateLimit.js": [],
+  "middleware/requireAdmin.js": [],
+  "middleware/requireProductQuota.js": [
+    "config/subscriptionPlans.js",
+    "models/User.js"
+  ],
+  "middleware/requireTier.js": [],
+  "middleware/upload.js": [],
+  "middleware/web3Auth.js": [
+    "models/Web3User.js"
+  ],
+  "models/ActiveSession.js": [],
+  "models/AdminUser.js": [],
+  "models/AttentionMetrics.js": [],
+  "models/AvatarItem.js": [],
+  "models/Cart.js": [],
+  "models/CashWallet.js": [],
+  "models/Community.js": [],
+  "models/ContentReport.js": [],
+  "models/EmailQueue.js": [],
+  "models/Emoji.js": [],
+  "models/EphemeralStory.js": [],
+  "models/Event.js": [],
+  "models/Gamification.js": [],
+  "models/GroupConversation.js": [],
+  "models/GroupMessage.js": [],
+  "models/HealthLog.js": [],
+  "models/KronosToken.js": [],
+  "models/Listing.js": [],
+  "models/MenuItem.js": [],
+  "models/Message.js": [],
+  "models/Notification.js": [],
+  "models/Order.js": [],
+  "models/Post.js": [],
+  "models/Product.js": [],
+  "models/Refund.js": [],
+  "models/Reservation.js": [],
+  "models/RewardPool.js": [],
+  "models/Stake.js": [],
+  "models/Story.js": [],
+  "models/StoryNode.js": [],
+  "models/StoryProgress.js": [],
+  "models/Subscription.js": [],
+  "models/Tip.js": [],
+  "models/Transaction.js": [],
+  "models/TwoFactorAuth.js": [],
+  "models/User.js": [],
+  "models/UserAvatar.js": [],
+  "models/UserBlock.js": [],
+  "models/UserInteraction.js": [],
+  "models/UserWallet.js": [],
+  "models/Video.js": [],
+  "models/VirtualCard.js": [],
+  "models/Web3User.js": [],
+  "orchestrator/engine/ExecutionEngine.js": [
+    "orchestrator/memory/MemoryManager.js",
+    "orchestrator/memory/PersistentMemory.js"
+  ],
+  "orchestrator/index.js": [
+    "orchestrator/loader/AgentLoader.js",
+    "orchestrator/registry/AgentRegistry.js"
+  ],
+  "orchestrator/loader/AgentLoader.js": [],
+  "orchestrator/memory/MemoryManager.js": [],
+  "orchestrator/memory/PersistentMemory.js": [
+    "orchestrator/models/ExecutionLog.js"
+  ],
+  "orchestrator/models/ExecutionLog.js": [],
+  "orchestrator/planner/GoalPlanner.js": [],
+  "orchestrator/queue/TaskQueue.js": [],
+  "orchestrator/refactor/architecture/ArchitectureEngine.js": [
+    "orchestrator/refactor/architecture/CycleDetector.js",
+    "orchestrator/refactor/architecture/ForbiddenDependencyRule.js",
+    "orchestrator/refactor/architecture/LayerValidator.js",
+    "orchestrator/refactor/architecture/ModuleBoundaryValidator.js"
+  ],
+  "orchestrator/refactor/architecture/ArchitectureRule.js": [],
+  "orchestrator/refactor/architecture/CycleDetector.js": [],
+  "orchestrator/refactor/architecture/ForbiddenDependencyRule.js": [
+    "orchestrator/refactor/architecture/ArchitectureRule.js"
+  ],
+  "orchestrator/refactor/architecture/LayerValidator.js": [
+    "orchestrator/refactor/architecture/ArchitectureRule.js"
+  ],
+  "orchestrator/refactor/architecture/ModuleBoundaryValidator.js": [],
+  "orchestrator/refactor/architecture/architecture.config.js": [],
+  "orchestrator/refactor/reports/ArchitectureReport.js": [],
+  "orchestrator/registry/AgentRegistry.js": [],
+  "orchestrator/run-agent.js": [
+    "orchestrator/engine/ExecutionEngine.js",
+    "orchestrator/index.js"
+  ],
+  "orchestrator/test-engine.js": [
+    "orchestrator/engine/ExecutionEngine.js",
+    "orchestrator/index.js"
+  ],
+  "orchestrator/test-loader.js": [
+    "orchestrator/loader/AgentLoader.js"
+  ],
+  "orchestrator/test-orchestrator.js": [
+    "orchestrator/index.js"
+  ],
+  "orchestrator/test-queue.js": [
+    "orchestrator/queue/TaskQueue.js"
+  ],
+  "orchestrator/workflows/WorkflowEngine.js": [
+    "orchestrator/engine/ExecutionEngine.js",
+    "orchestrator/queue/TaskQueue.js"
+  ],
+  "routes/admin.js": [
+    "controllers/adminController.js",
+    "middleware/auth.js",
+    "middleware/requireAdmin.js",
+    "models/MenuItem.js",
+    "models/Post.js",
+    "models/Product.js",
+    "models/User.js"
+  ],
+  "routes/ai.js": [
+    "controllers/aiController.js",
+    "middleware/auth.js",
+    "middleware/requireProductQuota.js"
+  ],
+  "routes/analytics.js": [
+    "controllers/analyticsController.js",
+    "middleware/auth.js",
+    "middleware/requireTier.js"
+  ],
+  "routes/ar.js": [
+    "controllers/arController.js",
+    "middleware/auth.js"
+  ],
+  "routes/audio.js": [
+    "controllers/audioController.js",
+    "middleware/auth.js"
+  ],
+  "routes/auth.js": [
+    "config/passport.js",
+    "controllers/authController.js",
+    "middleware/auth.js",
+    "middleware/rateLimit.js"
+  ],
+  "routes/avatar.js": [
+    "controllers/avatarController.js",
+    "middleware/auth.js"
+  ],
+  "routes/cart.js": [
+    "middleware/auth.js",
+    "models/Cart.js"
+  ],
+  "routes/checkout.js": [
+    "config/stripe.js",
+    "middleware/auth.js",
+    "models/Order.js",
+    "services/emailService.js",
+    "services/socketService.js"
+  ],
+  "routes/communities.js": [
+    "controllers/communityController.js",
+    "middleware/auth.js"
+  ],
+  "routes/ephemeralStories.js": [
+    "controllers/ephemeralStoryController.js",
+    "middleware/auth.js"
+  ],
+  "routes/events.js": [
+    "controllers/eventController.js",
+    "middleware/auth.js"
+  ],
+  "routes/feed.js": [
+    "controllers/feedController.js",
+    "middleware/auth.js"
+  ],
+  "routes/gamification.js": [
+    "controllers/gamificationController.js",
+    "middleware/auth.js"
+  ],
+  "routes/groupChats.js": [
+    "controllers/groupChatController.js",
+    "middleware/auth.js"
+  ],
+  "routes/health.js": [
+    "controllers/healthController.js",
+    "middleware/auth.js"
+  ],
+  "routes/interactions.js": [
+    "controllers/analyticsController.js",
+    "middleware/auth.js"
+  ],
+  "routes/listings.js": [
+    "controllers/listingController.js",
+    "middleware/auth.js"
+  ],
+  "routes/messages.js": [
+    "controllers/messageController.js",
+    "middleware/auth.js"
+  ],
+  "routes/multimedia.js": [
+    "controllers/multimediaController.js",
+    "middleware/auth.js",
+    "middleware/upload.js"
+  ],
+  "routes/notifications.js": [
+    "controllers/notificationController.js",
+    "middleware/auth.js"
+  ],
+  "routes/orchestrator.js": [
+    "orchestrator/engine/ExecutionEngine.js",
+    "orchestrator/index.js",
+    "orchestrator/memory/MemoryManager.js",
+    "orchestrator/planner/GoalPlanner.js",
+    "orchestrator/workflows/WorkflowEngine.js"
+  ],
+  "routes/orders.js": [
+    "controllers/orderController.js",
+    "middleware/auth.js"
+  ],
+  "routes/posts.js": [
+    "controllers/postController.js",
+    "middleware/auth.js"
+  ],
+  "routes/products.js": [
+    "controllers/productController.js",
+    "middleware/auth.js"
+  ],
+  "routes/recommendations.js": [
+    "controllers/recommendationController.js",
+    "middleware/auth.js"
+  ],
+  "routes/refunds.js": [
+    "controllers/refundController.js",
+    "middleware/auth.js"
+  ],
+  "routes/reporting.js": [
+    "controllers/reportingController.js",
+    "middleware/auth.js"
+  ],
+  "routes/reservations.js": [
+    "controllers/reservationController.js",
+    "middleware/auth.js"
+  ],
+  "routes/search.js": [
+    "controllers/searchController.js",
+    "middleware/auth.js"
+  ],
+  "routes/sessions.js": [
+    "controllers/sessionController.js",
+    "middleware/auth.js"
+  ],
+  "routes/stories.js": [
+    "controllers/storyController.js",
+    "middleware/auth.js"
+  ],
+  "routes/subscription.js": [
+    "config/stripe.js",
+    "middleware/auth.js",
+    "services/subscriptionService.js"
+  ],
+  "routes/tips.js": [
+    "controllers/tipController.js",
+    "middleware/auth.js"
+  ],
+  "routes/tokens.js": [
+    "controllers/tokenController.js",
+    "middleware/auth.js",
+    "middleware/web3Auth.js"
+  ],
+  "routes/translation.js": [
+    "controllers/translationController.js",
+    "middleware/auth.js"
+  ],
+  "routes/twofactor.js": [
+    "controllers/twoFactorController.js",
+    "middleware/auth.js"
+  ],
+  "routes/users.js": [
+    "controllers/userBlockController.js",
+    "controllers/userController.js",
+    "middleware/auth.js",
+    "middleware/upload.js",
+    "models/User.js",
+    "services/pushService.js"
+  ],
+  "routes/videos.js": [
+    "controllers/videoController.js",
+    "middleware/auth.js",
+    "middleware/upload.js"
+  ],
+  "routes/wallet.js": [
+    "controllers/walletController.js",
+    "middleware/auth.js",
+    "middleware/rateLimit.js"
+  ],
+  "seedData.js": [
+    "models/MenuItem.js",
+    "models/Post.js",
+    "models/Product.js",
+    "models/User.js"
+  ],
+  "server-inmemory.js": [],
+  "server-test.js": [],
+  "server.js": [
+    "config/database.js",
+    "config/passport.js",
+    "controllers/avatarController.js",
+    "middleware/errorHandler.js",
+    "models/Product.js",
+    "models/User.js",
+    "orchestrator/index.js",
+    "routes/admin.js",
+    "routes/ai.js",
+    "routes/analytics.js",
+    "routes/ar.js",
+    "routes/audio.js",
+    "routes/auth.js",
+    "routes/avatar.js",
+    "routes/cart.js",
+    "routes/checkout.js",
+    "routes/communities.js",
+    "routes/ephemeralStories.js",
+    "routes/events.js",
+    "routes/feed.js",
+    "routes/gamification.js",
+    "routes/groupChats.js",
+    "routes/health.js",
+    "routes/interactions.js",
+    "routes/listings.js",
+    "routes/messages.js",
+    "routes/multimedia.js",
+    "routes/notifications.js",
+    "routes/orchestrator.js",
+    "routes/orders.js",
+    "routes/posts.js",
+    "routes/products.js",
+    "routes/recommendations.js",
+    "routes/refunds.js",
+    "routes/reporting.js",
+    "routes/reservations.js",
+    "routes/search.js",
+    "routes/sessions.js",
+    "routes/stories.js",
+    "routes/subscription.js",
+    "routes/tips.js",
+    "routes/tokens.js",
+    "routes/translation.js",
+    "routes/twofactor.js",
+    "routes/users.js",
+    "routes/videos.js",
+    "routes/wallet.js",
+    "services/aiService.js",
+    "services/scheduler.js",
+    "services/socketService.js",
+    "startup/security.js"
+  ],
+  "services/aiService.js": [],
+  "services/cacheService.js": [],
+  "services/emailService.js": [],
+  "services/pushService.js": [
+    "models/User.js"
+  ],
+  "services/recommendationService.js": [
+    "models/Listing.js",
+    "models/Post.js",
+    "models/Product.js",
+    "models/User.js",
+    "models/UserInteraction.js"
+  ],
+  "services/scheduler.js": [
+    "services/tokenService.js"
+  ],
+  "services/socketService.js": [],
+  "services/subscriptionService.js": [
+    "config/stripe.js",
+    "config/subscriptionPlans.js",
+    "models/Subscription.js",
+    "models/User.js"
+  ],
+  "services/tokenService.js": [
+    "models/AttentionMetrics.js",
+    "models/KronosToken.js",
+    "models/Stake.js",
+    "models/Transaction.js",
+    "models/UserWallet.js"
+  ],
+  "services/twoFactorService.js": [
+    "models/TwoFactorAuth.js"
+  ],
+  "simple-server.js": [],
+  "startup/middlewares.js": [],
+  "startup/routes.js": [],
+  "startup/security.js": [],
+  "startup/socket.js": [],
+  "test-auth-server.js": [],
+  "test-dependencies.js": [],
+  "test/setup.js": [],
+  "tests/smoke.test.js": [
+    "server.js"
+  ],
+  "tests/wallet.test.js": [
+    "controllers/walletController.js",
+    "models/CashWallet.js"
+  ],
+  "utils/apiKeyUtils.js": [],
+  "verify-install.js": [
+    "server.js"
+  ]
+}

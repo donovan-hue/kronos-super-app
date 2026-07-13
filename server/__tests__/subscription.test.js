@@ -448,3 +448,7 @@ describe('POST /api/subscription/cancel', () => {
     expect(res.status).toBe(400);
   });
 });
+afterAll(async () => {
+  const mongoose = require('mongoose');
+  await mongoose.connection.close();
+});
