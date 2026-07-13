@@ -1,0 +1,11 @@
+kronos-super-app
+│
+├── packages
+│   ├── releases
+│   ├── manifests
+│   ├── logs
+│   └── manifest.json
+│
+└── .github
+    └── workflows
+        └── agente101.yml
