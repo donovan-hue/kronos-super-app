@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { GlassCard, HoloText, Icon } from '../components/kronos';
@@ -30,7 +30,10 @@ export default function NotificationsPage() {
   const [filter, setFilter] = useState('all');
 
   const token = localStorage.getItem('token');
-  const headers = { Authorization: `Bearer ${token}` };
+  const headers = useMemo(
+  () => ({ Authorization: `Bearer ${token}` }),
+  [token]
+);
 
   const fetchNotifications = useCallback(async () => {
     try {
@@ -38,7 +41,7 @@ export default function NotificationsPage() {
       setNotifications(data.notifications || []);
     } catch {}
     finally { setLoading(false); }
-  }, []);
+  }, [headers]);
 
   useEffect(() => {
     fetchNotifications();

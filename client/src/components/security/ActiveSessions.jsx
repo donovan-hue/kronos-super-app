@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 
@@ -87,11 +87,15 @@ export default function ActiveSessions() {
   const [successMsg, setSuccessMsg] = useState('');
 
   const token = localStorage.getItem('token');
-  const headers = { Authorization: `Bearer ${token}` };
 
-  useEffect(() => { fetchSessions(); }, []);
+const headers = useMemo(
+  () => ({
+    Authorization: `Bearer ${token}`,
+  }),
+  [token]
+);
 
-  const fetchSessions = async () => {
+  const fetchSessions = useCallback(async () => {
     setLoading(true);
     try {
       const { data } = await axios.get(`${API}/sessions`, { headers });
@@ -102,13 +106,15 @@ export default function ActiveSessions() {
         const { data } = await axios.get(`${API}/twofactor/sessions`, { headers });
         setSessions(data.data || []);
       } catch {
-        setSessions([]);
+       setSessions([]);
       }
     } finally {
       setLoading(false);
     }
-  };
-
+  }, [headers]);
+  useEffect(() => {
+  fetchSessions();
+}, [fetchSessions]);
   const closeSession = async (id) => {
     setClosingId(id);
     try {
@@ -117,8 +123,7 @@ export default function ActiveSessions() {
       showSuccess('Sesion cerrada');
     } catch {
       try {
-        await axios.post(`${API}/twofactor/sessions/${id}/logout`, {}, { headers });
-        setSessions(prev => prev.filter(s => s._id !== id));
+        await axios.post(`${API}/twofactor/sessions/${id}/logout`, {}, { headers });        setSessions(prev => prev.filter(s => s._id !== id));
         showSuccess('Sesion cerrada');
       } catch {
         showSuccess('Error al cerrar la sesion');

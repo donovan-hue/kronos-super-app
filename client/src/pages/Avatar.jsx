@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react';
+import React, { useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import { GlassCard, Icon } from '../components/kronos';
@@ -128,7 +128,12 @@ export default function AvatarPage() {
   const [filterCategory, setFilterCategory] = useState('all');
 
   const token = localStorage.getItem('token');
-  const headers = { Authorization: `Bearer ${token}` };
+  const headers = useMemo(
+  () => ({
+    Authorization: `Bearer ${token}`,
+  }),
+  [token]
+  );
 
   const showMsg = (text, isError = false) => {
     setMsg({ text, isError });
@@ -142,14 +147,14 @@ export default function AvatarPage() {
     } catch (err) {
       showMsg('Error cargando avatar', true);
     }
-  }, []);
+  }, [headers]);
 
   const fetchTokens = useCallback(async () => {
     try {
       const { data } = await axios.get(`${API_URL}/wallet`, { headers });
       setTokenBalance(data.cash?.kroTokens ?? data.kroTokens ?? 0);
     } catch {}
-  }, []);
+  }, [headers]);
 
   const fetchShop = useCallback(async () => {
     setShopLoading(true);
@@ -161,7 +166,7 @@ export default function AvatarPage() {
     } finally {
       setShopLoading(false);
     }
-  }, []);
+  }, [headers]);
 
   useEffect(() => {
     const init = async () => {
@@ -170,13 +175,13 @@ export default function AvatarPage() {
       setLoading(false);
     };
     init();
-  }, []);
+  }, [fetchAvatar, fetchTokens]);
 
   useEffect(() => {
     if (activeTab === 'shop' && shopItems.length === 0) {
       fetchShop();
     }
-  }, [activeTab]);
+  }, [activeTab, fetchShop, shopItems.length]);
 
   const handleBuy = async (itemId) => {
     setActionLoading(itemId);

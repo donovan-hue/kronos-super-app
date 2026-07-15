@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { GlassCard, HashtagText, Icon } from '../components/kronos';
@@ -18,7 +18,7 @@ export default function CommunityDetail() {
   const [commentText, setCommentText] = useState('');
   const [tab, setTab] = useState('posts');
 
-  const fetchCommunity = async () => {
+  const fetchCommunity = useCallback(async () => {
     try {
       const res = await axios.get(`${API_URL}/communities/${id}`);
       setCommunity(res.data.data);
@@ -27,9 +27,9 @@ export default function CommunityDetail() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
 
-  useEffect(() => { fetchCommunity(); }, [id]);
+  useEffect(() => { fetchCommunity(); }, [fetchCommunity]);
 
   const myEntry = community?.members?.find(m => (m.user?._id || m.user)?.toString() === user?._id?.toString());
   const isMember = !!myEntry;

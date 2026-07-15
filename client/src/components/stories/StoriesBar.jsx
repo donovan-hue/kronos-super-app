@@ -106,7 +106,7 @@ function StoryViewer({ group, onClose, currentUser }) {
       }
     }, 50);
     return () => clearInterval(timerRef.current);
-  }, [current, story]);
+  }, [current, story, group.stories.length, onClose]);
 
   if (!story) return null;
 

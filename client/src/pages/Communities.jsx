@@ -1,5 +1,5 @@
 import { SkeletonList } from '../components/kronos';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { GlassCard, HoloText, Icon } from '../components/kronos';
@@ -138,7 +138,7 @@ export default function Communities() {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
-  const fetchCommunities = async () => {
+  const fetchCommunities = useCallback(async () => {
     setLoading(true);
     try {
       const params = {};
@@ -152,9 +152,11 @@ export default function Communities() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [category, search, tab]);
 
-  useEffect(() => { fetchCommunities(); }, [category, tab]);
+  useEffect(() => {
+  fetchCommunities();
+}, [category, tab, fetchCommunities]);
 
   const handleSearch = e => {
     e.preventDefault();
