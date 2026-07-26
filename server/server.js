@@ -166,16 +166,11 @@ app.use(passport.initialize());
 // Rutas
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/posts', require('./routes/posts'));
-app.use('/api/products', require('./routes/products'));
-app.use('/api/orders', require('./routes/orders'));
 app.use('/api/messages', require('./routes/messages'));
 app.use('/api/search', require('./routes/search'));
 app.use('/api/feed', require('./routes/feed'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/multimedia', require('./routes/multimedia'));
-app.use('/api/checkout', require('./routes/checkout')); // Stripe payment routes
-app.use('/api/cart',     require('./routes/cart'));     // Carrito sincronizado
-app.use('/api/tokens', require('./routes/tokens')); // Kronos Token
 app.use('/api/stories', require('./routes/stories')); // Stories 24h
 app.use('/api/admin', require('./routes/admin')); // Admin Dashboard
 app.use('/api/reporting', require('./routes/reporting')); // Report & Block System
@@ -183,18 +178,14 @@ app.use('/api/refunds', require('./routes/refunds')); // Refund Management
 app.use('/api/twofactor', require('./routes/twofactor')); // 2FA Authentication
 app.use('/api/videos', require('./routes/videos')); // Video Upload & Streaming
 app.use('/api/recommendations', require('./routes/recommendations')); // Recommendation Engine
-app.use('/api/tips', require('./routes/tips')); // Propinas Directas
 app.use('/api/ai', require('./routes/ai')); // IA Generativa (OpenAI)
 app.use('/api/sessions', require('./routes/sessions')); // Sesiones activas
 app.use('/api/analytics', require('./routes/analytics')); // Métricas
 app.use('/api/interactions', require('./routes/interactions')); // Interacciones
-app.use('/api/wallet', require('./routes/wallet')); // Wallet
 app.use('/api/ephemeral-stories', require('./routes/ephemeralStories')); // Instagram-style Stories 24h
 app.use('/api/communities', require('./routes/communities')); // Comunidades / Grupos
-app.use('/api/listings', require('./routes/listings')); // Marketplace P2P con Escrow
 app.use('/api/group-chats', require('./routes/groupChats')); // Chat Grupal
 app.use('/api/notifications', require('./routes/notifications')); // Centro de notificaciones
-app.use('/api/avatar', require('./routes/avatar')); // Avatar 3D Customizable + Tienda
 app.use('/api/subscription', subscriptionRoutes); // Kronos Pro / Suscripciones (Stripe)
 app.use('/api/reservations', require('./routes/reservations'));
 app.use('/api/events',        eventsRoutes);
@@ -480,22 +471,11 @@ const errorHandler = require('./middleware/errorHandler');
 app.use(errorHandler);
 
 // Initialize Kronos Token Scheduler
-const { scheduleRewardDistribution } = require('./services/scheduler');
 
 // ...
 
-// scheduleRewardDistribution();
 
 
-// Seed Avatar default items
-const { seedDefaultItems } = require('./controllers/avatarController');
-if (process.env.NODE_ENV !== 'test') {
-  seedDefaultItems().catch(err => {
-    console.error('Failed to seed avatar items:', err);
-  });
-}
-
-// Auto-seed demo products if collection is empty
 if (process.env.NODE_ENV !== 'test') {
   const mongoose = require('mongoose');
   const seedProducts = async () => {
