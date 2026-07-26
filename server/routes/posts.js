@@ -9,6 +9,7 @@ const {
   commentPost,
   deletePost,
   bookmarkPost,
+  sharePost,
   getBookmarkedPosts,
 } = require('../controllers/postController');
 
@@ -19,6 +20,7 @@ router.get('/bookmarked', protect, getBookmarkedPosts);
 router.get('/user/:userId', getUserPosts);
 router.post('/:postId/like', protect, likePost);
 router.post('/:postId/comment', protect, commentPost);
+router.post('/:postId/share', protect, sharePost);
 router.post('/:postId/bookmark', protect, bookmarkPost);
 router.delete('/:postId', protect, deletePost);
 

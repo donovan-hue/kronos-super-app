@@ -51,6 +51,7 @@ function AppLayout({ children }) {
 
 // Lazy load modules
 const SocialModule    = lazy(() => import('./social/SocialModule'));
+const ShopModule      = lazy(() => import('./shop/ShopModule'));
 const Login           = lazy(() => import('./components/Auth/Login'));
 const Register        = lazy(() => import('./components/Auth/Register'));
 const OAuthCallback   = lazy(() => import('./components/Auth/OAuthCallback'));
@@ -143,6 +144,7 @@ function App() {
             <Route path="/profile/me"            element={<ProtectedRoute><MyProfileRedirect /></ProtectedRoute>} />
             <Route path="/profile/:userId"       element={<P><UserProfile /></P>} />
             <Route path="/social/*"              element={<P><SocialModule /></P>} />
+            <Route path="/shop/*"                element={<P><ShopModule /></P>} />
             <Route path="/settings"              element={<P><Settings /></P>} />
             <Route path="/settings/:tab"         element={<P><Settings /></P>} />
             <Route path="/live"                  element={<P><Live /></P>} />

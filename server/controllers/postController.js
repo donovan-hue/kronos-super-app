@@ -130,12 +130,16 @@ exports.likePost = async (req, res) => {
     if (!post) {
       return res.status(404).json({ message: 'Post not found' });
     }
+    const likeIndex = post.likes.findIndex(
+  id => id.toString() === req.user.id.toString()
+    );
 
-    if (post.likes.includes(req.user.id)) {
-      return res.status(400).json({ message: 'Already liked this post' });
+    if (likeIndex >= 0) {
+    post.likes.splice(likeIndex, 1);
+    } else {
+    post.likes.push(req.user.id);
     }
 
-    post.likes.push(req.user.id);
     await post.save();
 
     // Notificar al autor del post (si no es el mismo usuario)
@@ -223,7 +227,28 @@ exports.deletePost = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+// Share post
+exports.sharePost = async (req, res) => {
+  try {
+    const { postId } = req.params;
 
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    post.shares = (post.shares || 0) + 1;
+    await post.save();
+
+    res.json({
+      success: true,
+      shares: post.shares
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 // Toggle bookmark
 exports.bookmarkPost = async (req, res) => {
   try {

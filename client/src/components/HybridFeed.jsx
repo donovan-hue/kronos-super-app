@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, useRef, useCallback } from 'react';
 import axios from 'axios';
+import api from '../services/api';
 import { HoloText, GlassCard, KronosImage } from './kronos';
 import { AuthContext } from '../context/AuthContext';
 import StoriesBar from './stories/StoriesBar';
@@ -117,7 +118,7 @@ function HybridFeed() {
           imageUrl = res.data.secure_url;
         }
       }
-      await axios.post(`${API_URL}/posts`, { content: postText, image: imageUrl });
+      await api.post(`${API_URL}/posts`, { content: postText, image: imageUrl });
       setPostText('');
       clearImage();
       fetchFeed();
