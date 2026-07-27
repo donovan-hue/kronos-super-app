@@ -67,7 +67,6 @@ const Communities     = lazy(() => import('./pages/Communities'));
 const CommunityDetail = lazy(() => import('./pages/CommunityDetail'));
 const Live            = lazy(() => import('./pages/Live'));
 const NotificationsPage = lazy(() => import('./pages/Notifications'));
-const Health          = lazy(() => import('./pages/Health'));
 const VideoEditorPage = lazy(() => import('./pages/VideoEditor'));
 const EventsPage      = lazy(() => import('./pages/Events'));
 const Privacy         = lazy(() => import('./pages/Privacy'));
@@ -144,7 +143,6 @@ function App() {
             <Route path="/notifications"         element={<P><NotificationsPage /></P>} />
             <Route path="/communities"           element={<P><Communities /></P>} />
             <Route path="/communities/:id"       element={<P><CommunityDetail /></P>} />
-            <Route path="/health"                element={<P><Health /></P>} />
             <Route path="/video-editor"          element={<P><VideoEditorPage /></P>} />
             <Route path="/events"                element={<P><EventsPage /></P>} />
             <Route path="/kairos"                element={<P><Kairos /></P>} />

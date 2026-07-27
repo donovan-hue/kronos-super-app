@@ -193,7 +193,6 @@ app.use('/api/audio',         require('./routes/audio'));       // Audio Rooms
 app.use('/api/translation',   require('./routes/translation')); // Traducción IA
 app.use('/api/ar',            require('./routes/ar'));           // Realidad Aumentada
 app.use('/api/gamification',  require('./routes/gamification')); // Reservaciones
-app.use('/api/health', require('./routes/health')); // Health & Fitness
 app.use('/api/orchestrator', require('./routes/orchestrator'));
 // Initialize Socket.io singleton (para que controllers/routes puedan emitir eventos)
 const socketService = require('./services/socketService');
