@@ -60,7 +60,6 @@ const UniversalSearch = lazy(() => import('./pages/Search'));
 const HybridFeed      = lazy(() => import('./pages/Feed'));
 const UserProfile     = lazy(() => import('./pages/Profile'));
 const Settings        = lazy(() => import('./pages/Settings'));
-const KronosMockups   = lazy(() => import('./pages/KronosMockups'));
 const Pricing         = lazy(() => import('./pages/Pricing'));
 const SubscriptionSuccess = lazy(() => import('./pages/SubscriptionSuccess'));
 const SubscriptionCancel  = lazy(() => import('./pages/SubscriptionCancel'));
@@ -123,7 +122,6 @@ function App() {
           <Routes>
             {/* Públicas */}
             <Route path="/"                      element={<Welcome />} />
-            <Route path="/mockups"               element={<KronosMockups />} />
             <Route path="/pricing"               element={<Pricing />} />
             <Route path="/privacy"               element={<Privacy />} />
             <Route path="/terms"                 element={<Terms />} />
