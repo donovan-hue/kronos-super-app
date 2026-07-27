@@ -95,7 +95,6 @@ const NAV_ITEMS = [
   { Icon: IconWallet,      label: 'Wallet',          to: '/wallet' },
   { Icon: IconLive,        label: 'LIVE',            to: '/live' },
   { Icon: IconAvatar,      label: 'Avatar',          to: '/avatar' },
-  { Icon: IconReserv,      label: 'Reservaciones',   to: '/reservations' },
   { Icon: IconVideo,       label: 'Video Editor',    to: '/video-editor' },
   { Icon: IconGamification, label: 'Gamificación',  to: '/gamification' },
   { Icon: IconSettings,    label: 'Ajustes',         to: '/settings' },
