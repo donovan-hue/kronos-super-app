@@ -60,9 +60,6 @@ const UniversalSearch = lazy(() => import('./pages/Search'));
 const HybridFeed      = lazy(() => import('./pages/Feed'));
 const UserProfile     = lazy(() => import('./pages/Profile'));
 const Settings        = lazy(() => import('./pages/Settings'));
-const Pricing         = lazy(() => import('./pages/Pricing'));
-const SubscriptionSuccess = lazy(() => import('./pages/SubscriptionSuccess'));
-const SubscriptionCancel  = lazy(() => import('./pages/SubscriptionCancel'));
 const Communities     = lazy(() => import('./pages/Communities'));
 const CommunityDetail = lazy(() => import('./pages/CommunityDetail'));
 const Live            = lazy(() => import('./pages/Live'));
@@ -119,10 +116,8 @@ function App() {
           <Routes>
             {/* Públicas */}
             <Route path="/"                      element={<Welcome />} />
-            <Route path="/pricing"               element={<Pricing />} />
             <Route path="/privacy"               element={<Privacy />} />
             <Route path="/terms"                 element={<Terms />} />
-            <Route path="/subscription/cancel"   element={<SubscriptionCancel />} />
             <Route path="/auth/login"            element={<Login />} />
             <Route path="/auth/register"         element={<Register />} />
             <Route path="/auth/callback"         element={<OAuthCallback />} />
@@ -147,7 +142,6 @@ function App() {
             <Route path="/events"                element={<P><EventsPage /></P>} />
             <Route path="/kairos"                element={<P><Kairos /></P>} />
             <Route path="/studio"                element={<P><Studio /></P>} />
-            <Route path="/subscription/success"  element={<ProtectedRoute><SubscriptionSuccess /></ProtectedRoute>} />
 
             {/* Admin */}
             <Route path="/admin/*" element={<ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>} />
