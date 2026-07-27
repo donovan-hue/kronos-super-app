@@ -187,14 +187,10 @@ app.use('/api/communities', require('./routes/communities')); // Comunidades / G
 app.use('/api/group-chats', require('./routes/groupChats')); // Chat Grupal
 app.use('/api/notifications', require('./routes/notifications')); // Centro de notificaciones
 app.use('/api/subscription', subscriptionRoutes); // Kronos Pro / Suscripciones (Stripe)
-app.use('/api/reservations', require('./routes/reservations'));
-app.use('/api/events',        eventsRoutes);
 app.use('/api/audio',         require('./routes/audio'));       // Audio Rooms
 app.use('/api/translation',   require('./routes/translation')); // Traducción IA
 app.use('/api/ar',            require('./routes/ar'));           // Realidad Aumentada
-app.use('/api/gamification',  require('./routes/gamification')); // Reservaciones
 app.use('/api/orchestrator', require('./routes/orchestrator'));
-// Initialize Socket.io singleton (para que controllers/routes puedan emitir eventos)
 const socketService = require('./services/socketService');
 socketService.init(io);
 

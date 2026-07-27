@@ -67,7 +67,6 @@ const MENU = [
       { label: 'Estudio IA', icon: 'sparkle', to: '/studio' },
       { label: 'Video',      icon: 'film',    to: '/video-editor' },
       { label: 'Eventos',    icon: 'ticket',  to: '/events' },
-      { label: 'Health',     icon: 'heart',   to: '/health' },
   ] },
   { id: 'search', label: 'Buscar',  icon: 'search', to: '/search' },
 ];

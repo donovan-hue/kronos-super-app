@@ -50,11 +50,7 @@ const IconLive = () => (
     <text x="12" y="14" fontFamily="Arial" fontWeight="bold" fontSize="6" fill="url(#iridescent-grad)" textAnchor="middle">LIVE</text>
   </svg>
 );
-const IconHealth = () => (
-  <svg viewBox="0 0 24 24" width="22" height="22" filter="url(#3d-glass)">
-    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.5 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="url(#iridescent-grad)"/>
-  </svg>
-);
+
 const IconAvatar = () => (
   <svg viewBox="0 0 24 24" width="22" height="22" filter="url(#3d-glass)">
     <circle cx="12" cy="12" r="10" fill="url(#iridescent-grad)"/>
@@ -98,11 +94,9 @@ const NAV_ITEMS = [
   { Icon: IconMarket,      label: 'Marketplace',     to: '/marketplace' },
   { Icon: IconWallet,      label: 'Wallet',          to: '/wallet' },
   { Icon: IconLive,        label: 'LIVE',            to: '/live' },
-  { Icon: IconHealth,      label: 'Health',          to: '/health' },
   { Icon: IconAvatar,      label: 'Avatar',          to: '/avatar' },
   { Icon: IconReserv,      label: 'Reservaciones',   to: '/reservations' },
   { Icon: IconVideo,       label: 'Video Editor',    to: '/video-editor' },
-  { Icon: IconEvents,      label: 'Eventos',         to: '/events' },
   { Icon: IconGamification, label: 'Gamificación',  to: '/gamification' },
   { Icon: IconSettings,    label: 'Ajustes',         to: '/settings' },
 ];
