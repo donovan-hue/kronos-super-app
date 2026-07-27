@@ -96,7 +96,6 @@ const NAV_ITEMS = [
   { Icon: IconLive,        label: 'LIVE',            to: '/live' },
   { Icon: IconAvatar,      label: 'Avatar',          to: '/avatar' },
   { Icon: IconVideo,       label: 'Video Editor',    to: '/video-editor' },
-  { Icon: IconGamification, label: 'Gamificación',  to: '/gamification' },
   { Icon: IconSettings,    label: 'Ajustes',         to: '/settings' },
 ];
 

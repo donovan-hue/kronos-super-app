@@ -47,7 +47,6 @@ const MENU = [
   { id: 'me',     label: 'Perfil',  icon: 'user', children: [
       { label: 'Mi perfil',      icon: 'user',     to: '/profile/me' },
       { label: 'Notificaciones', icon: 'bell',     to: '/notifications' },
-      { label: 'Gamificación',   icon: 'trophy',   to: '/gamification' },
       { label: 'Avatar',         icon: 'avatar',   to: '/avatar' },
       { label: 'Ajustes',        icon: 'gear',     to: '/settings' },
   ] },

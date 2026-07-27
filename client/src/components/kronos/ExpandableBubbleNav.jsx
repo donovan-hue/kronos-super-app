@@ -46,7 +46,6 @@ const BUBBLES = [
     fanDirection: 'up-left',
     subs: [
       { icon: 'eye',      label: 'Mi perfil',    path: '/profile/me' },
-      { icon: 'trophy',   label: 'Gamificación', path: '/gamification' },
       { icon: 'wallet',   label: 'Wallet',       path: '/wallet' },
       { icon: 'ticket',   label: 'Eventos',      path: '/events' },
       { icon: 'settings', label: 'Ajustes',      path: '/settings' },
