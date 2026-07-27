@@ -58,7 +58,6 @@ const MENU = [
   { id: 'market', label: 'Mercado', icon: 'bag', children: [
       { label: 'Tienda',        icon: 'store',    to: '/shop' },
       { label: 'Marketplace',   icon: 'bag',      to: '/marketplace' },
-      { label: 'Wallet',        icon: 'wallet',   to: '/wallet' },
   ] },
   { id: 'create', label: 'Crear',   icon: 'film', children: [
       { label: 'Kairos',     icon: 'script',  to: '/kairos' },

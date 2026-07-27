@@ -49,7 +49,6 @@ export default function BottomNav({ items }) {
 
   const DEFAULT_ITEMS = [
     { icon: 'home',    label: 'Inicio',  to: '/feed' },
-    { icon: 'wallet',  label: 'Wallet',  to: '/wallet' },
     { icon: 'message', label: 'Chat',    to: '/social/chat' },
     { icon: 'bell',    label: 'Alertas', to: '/notifications', badge: unread },
     { icon: 'user',    label: 'Perfil',  to: userId ? `/profile/${userId}` : '/profile/me' },
