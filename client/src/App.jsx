@@ -70,7 +70,6 @@ const Live            = lazy(() => import('./pages/Live'));
 const NotificationsPage = lazy(() => import('./pages/Notifications'));
 const Reservations    = lazy(() => import('./pages/Reservations'));
 const Health          = lazy(() => import('./pages/Health'));
-const AvatarPage      = lazy(() => import('./pages/Avatar'));
 const VideoEditorPage = lazy(() => import('./pages/VideoEditor'));
 const EventsPage      = lazy(() => import('./pages/Events'));
 const GamificationPage = lazy(() => import('./pages/Gamification'));
@@ -151,7 +150,6 @@ function App() {
             <Route path="/communities/:id"       element={<P><CommunityDetail /></P>} />
             <Route path="/reservations"          element={<P><Reservations /></P>} />
             <Route path="/health"                element={<P><Health /></P>} />
-            <Route path="/avatar"                element={<P><AvatarPage /></P>} />
             <Route path="/video-editor"          element={<P><VideoEditorPage /></P>} />
             <Route path="/events"                element={<P><EventsPage /></P>} />
             <Route path="/gamification"          element={<P><GamificationPage /></P>} />
