@@ -71,7 +71,6 @@ const Reservations    = lazy(() => import('./pages/Reservations'));
 const Health          = lazy(() => import('./pages/Health'));
 const VideoEditorPage = lazy(() => import('./pages/VideoEditor'));
 const EventsPage      = lazy(() => import('./pages/Events'));
-const GamificationPage = lazy(() => import('./pages/Gamification'));
 const Privacy         = lazy(() => import('./pages/Privacy'));
 const Terms           = lazy(() => import('./pages/Terms'));
 const Kairos          = lazy(() => import('./pages/Kairos'));
@@ -150,7 +149,6 @@ function App() {
             <Route path="/health"                element={<P><Health /></P>} />
             <Route path="/video-editor"          element={<P><VideoEditorPage /></P>} />
             <Route path="/events"                element={<P><EventsPage /></P>} />
-            <Route path="/gamification"          element={<P><GamificationPage /></P>} />
             <Route path="/kairos"                element={<P><Kairos /></P>} />
             <Route path="/studio"                element={<P><Studio /></P>} />
             <Route path="/subscription/success"  element={<ProtectedRoute><SubscriptionSuccess /></ProtectedRoute>} />
