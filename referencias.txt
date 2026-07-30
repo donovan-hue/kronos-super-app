@@ -1,0 +1,1419 @@
+client/src/App.jsx:54:const ShopModule      = lazy(() => import('./shop/ShopModule'));
+client/src/App.jsx:71:const Marketplace     = lazy(() => import('./pages/Marketplace'));
+client/src/App.jsx:72:const Wallet          = lazy(() => import('./pages/Wallet'));
+client/src/App.jsx:76:const AvatarPage      = lazy(() => import('./pages/Avatar'));
+client/src/App.jsx:149:            <Route path="/shop/*"                element={<P><ShopModule /></P>} />
+client/src/App.jsx:152:            <Route path="/wallet"                element={<P><Wallet /></P>} />
+client/src/App.jsx:157:            <Route path="/marketplace"           element={<P><Marketplace /></P>} />
+client/src/App.jsx:160:            <Route path="/avatar"                element={<P><AvatarPage /></P>} />
+client/src/admin/AdminDashboard.jsx:7:   Estilos inline con glassmorphism — mismos tokens CSS
+client/src/admin/AdminDashboard.jsx:198:  avatar: {
+client/src/admin/AdminDashboard.jsx:518:                      src={u.avatar || 'https://via.placeholder.com/34'}
+client/src/admin/AdminDashboard.jsx:520:                      style={styles.avatar}
+client/src/admin/AdminDashboard.jsx:648:                Tipo: {r.contentType || 'post'} &bull; Reportado por: {r.reportedBy?.username || 'anonimo'} &bull; {fmt(r.createdAt)}
+client/src/components/Auth/OAuthCallback.jsx:8: * El backend redirige a /auth/callback?token=<JWT>&provider=<google|facebook>
+client/src/components/Auth/OAuthCallback.jsx:9: * Este componente guarda el token en localStorage y navega al feed.
+client/src/components/Auth/OAuthCallback.jsx:14:  const { loginWithToken } = useAuth();
+client/src/components/Auth/OAuthCallback.jsx:18:    const token = searchParams.get('token');
+client/src/components/Auth/OAuthCallback.jsx:27:    if (token) {
+client/src/components/Auth/OAuthCallback.jsx:28:      loginWithToken(token);
+client/src/components/Auth/OAuthCallback.jsx:31:      setError('No se recibio un token de autenticacion.');
+client/src/components/Auth/OAuthCallback.jsx:34:  }, [searchParams, navigate, loginWithToken]);
+client/src/components/Auth/ResetPassword.jsx:11:  const token = searchParams.get('token') || '';
+client/src/components/Auth/ResetPassword.jsx:19:  if (!token || !email) {
+client/src/components/Auth/ResetPassword.jsx:50:        body: JSON.stringify({ token, email, password }),
+client/src/components/FollowSuggestions.jsx:14:    const token = localStorage.getItem('token');
+client/src/components/FollowSuggestions.jsx:15:    if (!token) return;
+client/src/components/FollowSuggestions.jsx:17:      headers: { Authorization: `Bearer ${token}` },
+client/src/components/FollowSuggestions.jsx:24:    const token = localStorage.getItem('token');
+client/src/components/FollowSuggestions.jsx:27:        headers: { Authorization: `Bearer ${token}` },
+client/src/components/FollowSuggestions.jsx:51:                src={user.avatar}
+client/src/components/HybridFeed.jsx:198:              src={user?.avatar}
+client/src/components/HybridFeed.jsx:271:                        src={post.author?.avatar}
+client/src/components/MultiMediaPostCreator.jsx:42:          headers: { 'Content-Type': 'multipart/form-data' },
+client/src/components/MultiMediaPostCreator.jsx:107:          src={user?.avatar || 'https://via.placeholder.com/48'}
+client/src/components/Navbar.jsx:38:            className="avatar av-40" style={{ cursor: 'pointer' }}>
+client/src/components/Navbar.jsx:40:              {user?.avatar ? (
+client/src/components/Navbar.jsx:41:                <img src={user.avatar} alt="" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+client/src/components/tokens/RewardTracker.jsx:2:import useTokens from '../../hooks/useTokens';
+client/src/components/tokens/RewardTracker.jsx:6:  const { getCreatorEarnings, loading } = useTokens();
+client/src/components/tokens/RewardTracker.jsx:23:  const formatToken = (value) => {
+client/src/components/tokens/RewardTracker.jsx:32:        <p>Track tokens earned from your content</p>
+client/src/components/tokens/RewardTracker.jsx:51:              <div className="value">{formatToken(earnings.totalEarnings)} KRO</div>
+client/src/components/tokens/RewardTracker.jsx:71:                      <div className="earnings">{formatToken(item.earnings)} KRO</div>
+client/src/components/tokens/StakingDashboard.jsx:2:import useTokens from '../../hooks/useTokens';
+client/src/components/tokens/StakingDashboard.jsx:6:  const { balance, stakes, stakeTokens, claimRewards, loading } = useTokens();
+client/src/components/tokens/StakingDashboard.jsx:40:    const available = parseFloat(balance.tokenBalance);
+client/src/components/tokens/StakingDashboard.jsx:48:      await stakeTokens(amount, parseInt(stakeForm.lockPeriod));
+client/src/components/tokens/StakingDashboard.jsx:70:  const formatToken = (value) => {
+client/src/components/tokens/StakingDashboard.jsx:79:        <p>Earn rewards by staking your KRO tokens</p>
+client/src/components/tokens/StakingDashboard.jsx:85:          <div className="card-value">{formatToken(balance.tokenBalance)} KRO</div>
+client/src/components/tokens/StakingDashboard.jsx:89:          <div className="card-value">{formatToken(balance.stakedTokens)} KRO</div>
+client/src/components/tokens/StakingDashboard.jsx:93:          <div className="card-value">{formatToken(balance.pendingRewards)} KRO</div>
+client/src/components/tokens/StakingDashboard.jsx:102:          Stake Tokens
+client/src/components/tokens/StakingDashboard.jsx:161:              {loading ? 'Processing...' : 'Stake Tokens'}
+client/src/components/tokens/StakingDashboard.jsx:179:                        <span className="value">{formatToken(stake.amount)} KRO</span>
+client/src/components/tokens/TipModal.jsx:9:export default function TipModal({ isOpen, onClose, targetUser, targetId, targetType }) {
+client/src/components/tokens/TipModal.jsx:17:  const token = localStorage.getItem('token');
+client/src/components/tokens/TipModal.jsx:24:      await axios.post(`${API}/tips/send`, {
+client/src/components/tokens/TipModal.jsx:31:      }, { headers: { Authorization: `Bearer ${token}` } });
+client/src/components/tokens/TipModal.jsx:74:                    src={targetUser?.avatar || `https://ui-avatars.com/api/?name=${targetUser?.username}&background=7c3aed&color=fff`}
+client/src/components/tokens/TipModal.jsx:80:                    <p className="text-white/40 text-xs">Recibira tokens KRO</p>
+client/src/components/tokens/TokenLeaderboard.jsx:2:import useTokens from '../../hooks/useTokens';
+client/src/components/tokens/TokenLeaderboard.jsx:3:import './TokenLeaderboard.css';
+client/src/components/tokens/TokenLeaderboard.jsx:5:const TokenLeaderboard = () => {
+client/src/components/tokens/TokenLeaderboard.jsx:6:  const { getLeaderboard } = useTokens();
+client/src/components/tokens/TokenLeaderboard.jsx:27:  const formatToken = (value) => {
+client/src/components/tokens/TokenLeaderboard.jsx:46:    <div className="token-leaderboard">
+client/src/components/tokens/TokenLeaderboard.jsx:48:        <h1>Kronos Token Leaderboard</h1>
+client/src/components/tokens/TokenLeaderboard.jsx:92:                  {formatToken(
+client/src/components/tokens/TokenLeaderboard.jsx:94:                      entry.stakedTokens ||
+client/src/components/tokens/TokenLeaderboard.jsx:95:                      (entry.tokenBalance || '0')
+client/src/components/tokens/TokenLeaderboard.jsx:101:                <div className="amount">{formatToken(entry.tokenBalance)} KRO</div>
+client/src/components/tokens/TokenLeaderboard.jsx:113:export default TokenLeaderboard;
+client/src/components/tokens/TokenTransfer.jsx:2:import useTokens from '../../hooks/useTokens';
+client/src/components/tokens/TokenTransfer.jsx:3:import './TokenTransfer.css';
+client/src/components/tokens/TokenTransfer.jsx:5:const TokenTransfer = () => {
+client/src/components/tokens/TokenTransfer.jsx:6:  const { transfer, loading } = useTokens();
+client/src/components/tokens/TokenTransfer.jsx:38:      await transfer(formData.toUserId, parseFloat(formData.amount));
+client/src/components/tokens/TokenTransfer.jsx:39:      setMessage(`Successfully transferred ${formData.amount} KRO`);
+client/src/components/tokens/TokenTransfer.jsx:42:      setError(err.message || 'Transfer failed');
+client/src/components/tokens/TokenTransfer.jsx:47:    <div className="token-transfer">
+client/src/components/tokens/TokenTransfer.jsx:48:      <div className="transfer-container">
+client/src/components/tokens/TokenTransfer.jsx:49:        <h2>Transfer Tokens</h2>
+client/src/components/tokens/TokenTransfer.jsx:51:        <form onSubmit={handleSubmit} className="transfer-form">
+client/src/components/tokens/TokenTransfer.jsx:84:            {loading ? 'Processing...' : 'Transfer'}
+client/src/components/tokens/TokenTransfer.jsx:88:        <div className="transfer-info">
+client/src/components/tokens/TokenTransfer.jsx:89:          <h3>Transfer Information</h3>
+client/src/components/tokens/TokenTransfer.jsx:91:            <li>Transfers are instant on the Kronos platform</li>
+client/src/components/tokens/TokenTransfer.jsx:92:            <li>You need sufficient balance to complete the transfer</li>
+client/src/components/tokens/TokenTransfer.jsx:93:            <li>All transfers are recorded in your transaction history</li>
+client/src/components/tokens/TokenTransfer.jsx:101:export default TokenTransfer;
+client/src/components/tokens/TokenWallet.jsx:2:import useTokens from '../../hooks/useTokens';
+client/src/components/tokens/TokenWallet.jsx:3:import './TokenWallet.css';
+client/src/components/tokens/TokenWallet.jsx:5:const TokenWallet = () => {
+client/src/components/tokens/TokenWallet.jsx:6:  const { balance, transactions, getBalance, getTransactions, loading } = useTokens();
+client/src/components/tokens/TokenWallet.jsx:14:  const formatToken = (value) => {
+client/src/components/tokens/TokenWallet.jsx:20:    <div className="token-wallet">
+client/src/components/tokens/TokenWallet.jsx:21:      <div className="wallet-header">
+client/src/components/tokens/TokenWallet.jsx:22:        <h1>KRO Wallet</h1>
+client/src/components/tokens/TokenWallet.jsx:23:        <span className="wallet-badge">Kronos Token</span>
+client/src/components/tokens/TokenWallet.jsx:27:        <div className="loading">Loading wallet data...</div>
+client/src/components/tokens/TokenWallet.jsx:33:              <div className="card-value">{formatToken(balance.tokenBalance)} KRO</div>
+client/src/components/tokens/TokenWallet.jsx:37:              <div className="card-label">Staked Tokens</div>
+client/src/components/tokens/TokenWallet.jsx:38:              <div className="card-value">{formatToken(balance.stakedTokens)} KRO</div>
+client/src/components/tokens/TokenWallet.jsx:43:              <div className="card-value">{formatToken(balance.pendingRewards)} KRO</div>
+client/src/components/tokens/TokenWallet.jsx:48:              <div className="card-value">{formatToken(balance.totalEarned)} KRO</div>
+client/src/components/tokens/TokenWallet.jsx:52:          <div className="wallet-tabs">
+client/src/components/tokens/TokenWallet.jsx:69:              <h3>Wallet Summary</h3>
+client/src/components/tokens/TokenWallet.jsx:73:                  <span className="value">{formatToken(balance.unstakedTokens)} KRO</span>
+client/src/components/tokens/TokenWallet.jsx:77:                  <span className="value">{formatToken(balance.stakedTokens)} KRO</span>
+client/src/components/tokens/TokenWallet.jsx:91:                      <div className="tx-amount">{formatToken(tx.amount)} KRO</div>
+client/src/components/tokens/TokenWallet.jsx:110:export default TokenWallet;
+client/src/components/NotificationToast.jsx:14:  tip: 'money',
+client/src/components/NotificationToast.jsx:24:    case 'tip':      return `Recibiste una propina de $${notif.amount || 0}`;
+client/src/components/NotificationToast.jsx:31:  const { user, token } = useAuth();
+client/src/components/NotificationToast.jsx:35:    if (!user || !token) return;
+client/src/components/NotificationToast.jsx:38:      auth: { token },
+client/src/components/NotificationToast.jsx:51:    ['notification', 'like', 'comment', 'follower', 'order', 'tip', 'message'].forEach((ev) => {
+client/src/components/NotificationToast.jsx:59:  }, [user, token]);
+client/src/components/UI/GlassComponents.jsx:231: * GlassAvatar Component
+client/src/components/UI/GlassComponents.jsx:232: * Avatar con glassmorphism
+client/src/components/UI/GlassComponents.jsx:234:export const GlassAvatar = ({
+client/src/components/UI/GlassComponents.jsx:248:    <div className={`glass-avatar ${sizeClasses[size]} ${className}`}>
+client/src/components/UI/GlassComponents.jsx:250:        <img src={src} alt="avatar" />
+client/src/components/UniversalSearch.jsx:183:                        <img src={post.author?.avatar || `https://ui-avatars.com/api/?name=${post.author?.username}&background=random&color=fff&size=32`}
+client/src/components/UniversalSearch.jsx:216:                        <img src={u.avatar || `https://ui-avatars.com/api/?name=${u.username}&background=random&color=fff&size=44`}
+client/src/components/UniversalSearch.jsx:241:                      onClick={() => navigate(`/shop/product/${p._id}`)}>
+client/src/components/kronos/BottomNav.jsx:17:    const token = localStorage.getItem('token');
+client/src/components/kronos/BottomNav.jsx:18:    if (!token) return;
+client/src/components/kronos/BottomNav.jsx:25:          headers: { Authorization: `Bearer ${token}` }
+client/src/components/kronos/BottomNav.jsx:52:    { icon: 'wallet',  label: 'Wallet',  to: '/wallet' },
+client/src/components/kronos/BubbleNav.jsx:49:const IconWallet = () => (
+client/src/components/kronos/BubbleNav.jsx:81:const IconAvatar = () => (
+client/src/components/kronos/DesktopSidebar.jsx:42:const IconWallet = () => (
+client/src/components/kronos/DesktopSidebar.jsx:58:const IconAvatar = () => (
+client/src/components/kronos/DesktopSidebar.jsx:66:const IconShop = () => (
+client/src/components/kronos/DesktopSidebar.jsx:103:  { Icon: IconShop,        label: 'Tienda',          to: '/shop' },
+client/src/components/kronos/DesktopSidebar.jsx:104:  { Icon: IconMarket,      label: 'Marketplace',     to: '/marketplace' },
+client/src/components/kronos/DesktopSidebar.jsx:105:  { Icon: IconWallet,      label: 'Wallet',          to: '/wallet' },
+client/src/components/kronos/DesktopSidebar.jsx:108:  { Icon: IconAvatar,      label: 'Avatar',          to: '/avatar' },
+client/src/components/kronos/DesktopSidebar.jsx:229:              src={user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.username || 'K')}&background=7c3aed&color=fff&size=36`}
+client/src/components/kronos/ExpandableBubbleNav.jsx:27:      { icon: 'bag',   label: 'Tiendas',     path: '/search?type=shops' },
+client/src/components/kronos/ExpandableBubbleNav.jsx:50:      { icon: 'wallet',   label: 'Wallet',       path: '/wallet' },
+client/src/components/kronos/ExpandableBubbleNav.jsx:70:// Esfera de vidrio 3D realista usando múltiples capas CSS
+client/src/components/kronos/Icon.jsx:50:  wallet: <><rect x="3" y="6" width="18" height="13" rx="2.5" /><path d="M16 12h2" /></>,
+client/src/components/kronos/IridescentDefs.jsx:19:          <feComponentTransfer in="blur" result="glow">
+client/src/components/kronos/IridescentDefs.jsx:21:          </feComponentTransfer>
+client/src/components/kronos/RadialMenu.jsx:18:  avatar: <><circle cx="12" cy="8" r="3" /><path d="M6 20a6 6 0 0 1 12 0" /><circle cx="12" cy="12" r="9" /></>,
+client/src/components/kronos/RadialMenu.jsx:25:  wallet: <><rect x="4" y="7" width="16" height="11" rx="2.5" /><path d="M16 12h2" /></>,
+client/src/components/kronos/RadialMenu.jsx:51:      { label: 'Avatar',         icon: 'avatar',   to: '/avatar' },
+client/src/components/kronos/RadialMenu.jsx:60:      { label: 'Tienda',        icon: 'store',    to: '/shop' },
+client/src/components/kronos/RadialMenu.jsx:61:      { label: 'Marketplace',   icon: 'bag',      to: '/marketplace' },
+client/src/components/kronos/RadialMenu.jsx:62:      { label: 'Wallet',        icon: 'wallet',   to: '/wallet' },
+client/src/components/kronos/KronosImage.jsx:8: * - soporte para avatares circulares
+client/src/components/kronos/KronosImage.jsx:55:    ? (fallback || `https://ui-avatars.com/api/?name=${encodeURIComponent(alt || 'K')}&background=7c3aed&color=fff&size=${width || 40}`)
+client/src/components/kronos/Skeleton.jsx:41:export function SkeletonWalletCard() {
+client/src/components/kronos/index.js:5:export { default as Skeleton, SkeletonCard, SkeletonList, SkeletonWalletCard } from './Skeleton';
+client/src/components/security/ActiveSessions.jsx:89:  const token = localStorage.getItem('token');
+client/src/components/security/ActiveSessions.jsx:93:    Authorization: `Bearer ${token}`,
+client/src/components/security/ActiveSessions.jsx:95:  [token]
+client/src/components/security/TwoFactorSetup.jsx:26:  const token = localStorage.getItem('token');
+client/src/components/security/TwoFactorSetup.jsx:27:  const headers = { Authorization: `Bearer ${token}` };
+client/src/components/security/TwoFactorSetup.jsx:60:      await axios.post(`${API}/twofactor/verify-totp`, { secret, token: code, backupCodes }, { headers });
+client/src/components/stories/StoriesBar.jsx:25:            src={author.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=7c3aed&color=fff&size=52`}
+client/src/components/stories/StoriesBar.jsx:151:          src={group.author.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(group.author.firstName || group.author.username)}&background=7c3aed&color=fff&size=40`}
+client/src/components/stories/StoriesBar.jsx:261:      await axios.post(`${API_URL}/ephemeral-stories`, fd, { headers: { 'Content-Type': 'multipart/form-data' } });
+client/src/components/welcome/FeatureBubbles.jsx:6:  { icon: 'bag',     name: 'Shopping',  color: '#c9ced4' },
+client/src/components/welcome/FeatureBubbles.jsx:10:  { icon: 'coin',    name: 'Tokens',    color: '#8b5cf6' },
+client/src/components/welcome/MainBubble.jsx:59:          Experience the future of social, shopping, and food delivery in one revolutionary platform
+client/src/context/AuthContext.jsx:28:  const [token, setToken] = useState(localStorage.getItem('token'));
+client/src/context/AuthContext.jsx:32:  // Configurar axios con token
+client/src/context/AuthContext.jsx:33:  const setupAxios = useCallback((authToken) => {
+client/src/context/AuthContext.jsx:34:    const authorizationHeader = authToken ? `Bearer ${authToken}` : null;
+client/src/context/AuthContext.jsx:46:  const persistSession = useCallback((authToken, authUser) => {
+client/src/context/AuthContext.jsx:47:    localStorage.setItem('token', authToken);
+client/src/context/AuthContext.jsx:48:    setToken(authToken);
+client/src/context/AuthContext.jsx:50:    setupAxios(authToken);
+client/src/context/AuthContext.jsx:60:    persistSession(response.data.token, response.data.user);
+client/src/context/AuthContext.jsx:94:    localStorage.removeItem('token');
+client/src/context/AuthContext.jsx:95:    setToken(null);
+client/src/context/AuthContext.jsx:100:  // loginWithToken — usado por el callback OAuth (Google/Facebook)
+client/src/context/AuthContext.jsx:102:  const loginWithToken = useCallback((authToken) => {
+client/src/context/AuthContext.jsx:103:    localStorage.setItem('token', authToken);
+client/src/context/AuthContext.jsx:104:    setToken(authToken);
+client/src/context/AuthContext.jsx:105:    setupAxios(authToken);
+client/src/context/AuthContext.jsx:106:    // getProfile se ejecutara automaticamente por el efecto que observa `token`
+client/src/context/AuthContext.jsx:116:      // Token inválido/expirado: limpiar la sesión para no quedar con
+client/src/context/AuthContext.jsx:125:  // Inicializar con token guardado
+client/src/context/AuthContext.jsx:127:    if (token) {
+client/src/context/AuthContext.jsx:128:      setupAxios(token);
+client/src/context/AuthContext.jsx:131:  }, [token, setupAxios, getProfile]);
+client/src/context/AuthContext.jsx:135:    token,
+client/src/context/AuthContext.jsx:141:    loginWithToken,
+client/src/context/AuthContext.jsx:143:    isAuthenticated: !!token
+client/src/context/CartContext.jsx:9:function getToken() {
+client/src/context/CartContext.jsx:10:  return localStorage.getItem('token');
+client/src/context/CartContext.jsx:31:    const token = getToken();
+client/src/context/CartContext.jsx:32:    if (!token) return;
+client/src/context/CartContext.jsx:35:      .get(`${API_URL}/cart`, { headers: { Authorization: `Bearer ${token}` } })
+client/src/context/CartContext.jsx:46:    const token = getToken();
+client/src/context/CartContext.jsx:47:    if (!token) return;
+client/src/context/CartContext.jsx:52:        .put(`${API_URL}/cart`, { items }, { headers: { Authorization: `Bearer ${token}` } })
+client/src/context/CartContext.jsx:90:    const token = getToken();
+client/src/context/CartContext.jsx:91:    if (token) {
+client/src/context/CartContext.jsx:93:        .delete(`${API_URL}/cart`, { headers: { Authorization: `Bearer ${token}` } })
+client/src/hooks/useAttention.js:2:import useTokens from './useTokens';
+client/src/hooks/useAttention.js:5:  const { trackAttention } = useTokens();
+client/src/hooks/useAttention.js:58:            tokensEarned: timeSpentSeconds / 60, // 1 token per minute
+client/src/hooks/useDeliveryAI.js:23:          Authorization: `Bearer ${localStorage.getItem('token')}`
+client/src/hooks/useDeliveryAI.js:49:          Authorization: `Bearer ${localStorage.getItem('token')}`
+client/src/hooks/useDeliveryAI.js:78:            Authorization: `Bearer ${localStorage.getItem('token')}`
+client/src/hooks/useDeliveryAI.js:105:          Authorization: `Bearer ${localStorage.getItem('token')}`
+client/src/hooks/useDeliveryAI.js:134:            Authorization: `Bearer ${localStorage.getItem('token')}`
+client/src/hooks/useDeliveryAI.js:157:          Authorization: `Bearer ${localStorage.getItem('token')}`
+client/src/hooks/useDeliveryAI.js:177:            Authorization: `Bearer ${localStorage.getItem('token')}`
+client/src/hooks/useRecommendations.js:12:  const token = localStorage.getItem('token');
+client/src/hooks/useRecommendations.js:13:  const headers = { Authorization: `Bearer ${token}` };
+client/src/hooks/useRecommendations.js:56:    if (token) {
+client/src/hooks/useSubscription.js:16:  customShop: false
+client/src/hooks/useTokens.js:4:const useTokens = () => {
+client/src/hooks/useTokens.js:6:    tokenBalance: '0',
+client/src/hooks/useTokens.js:7:    stakedTokens: '0',
+client/src/hooks/useTokens.js:8:    unstakedTokens: '0',
+client/src/hooks/useTokens.js:23:      const response = await api.get('/tokens/balance');
+client/src/hooks/useTokens.js:33:  // Initialize wallet
+client/src/hooks/useTokens.js:34:  const initializeWallet = useCallback(async () => {
+client/src/hooks/useTokens.js:38:      await api.post('/tokens/wallet/init');
+client/src/hooks/useTokens.js:42:      console.error('Error initializing wallet:', err);
+client/src/hooks/useTokens.js:48:  // Transfer tokens
+client/src/hooks/useTokens.js:49:  const transfer = useCallback(async (toUserId, amount) => {
+client/src/hooks/useTokens.js:53:      const response = await api.post('/tokens/transfer', { toUserId, amount });
+client/src/hooks/useTokens.js:65:  // Stake tokens
+client/src/hooks/useTokens.js:66:  const stakeTokens = useCallback(async (amount, lockPeriod) => {
+client/src/hooks/useTokens.js:70:      const response = await api.post('/tokens/stake', { amount, lockPeriod });
+client/src/hooks/useTokens.js:87:      const response = await api.get('/tokens/stakes');
+client/src/hooks/useTokens.js:102:      const response = await api.post('/tokens/claim-rewards', { stakeId });
+client/src/hooks/useTokens.js:119:      const response = await api.get(`/tokens/transactions?limit=${limit}`);
+client/src/hooks/useTokens.js:134:      const response = await api.get(`/tokens/attention-metrics?limit=${limit}`);
+client/src/hooks/useTokens.js:150:      const response = await api.get(`/tokens/creator-earnings?period=${period}`);
+client/src/hooks/useTokens.js:166:      const response = await api.get(`/tokens/leaderboard?type=${type}&limit=${limit}`);
+client/src/hooks/useTokens.js:180:      const response = await api.post('/tokens/track-attention', {
+client/src/hooks/useTokens.js:200:    initializeWallet,
+client/src/hooks/useTokens.js:201:    transfer,
+client/src/hooks/useTokens.js:202:    stakeTokens,
+client/src/hooks/useTokens.js:213:export default useTokens;
+client/src/pages/Admin/Content.jsx:11:    const token = localStorage.getItem('token');
+client/src/pages/Admin/Content.jsx:12:    await fetch(`/api/admin/posts/${id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } });
+client/src/pages/Admin/Dashboard.jsx:9:  const token = localStorage.getItem('token');
+client/src/pages/Admin/Dashboard.jsx:10:  return fetch(`/api/admin${path}`, { headers: { Authorization: `Bearer ${token}` } }).then((r) => r.json());
+client/src/pages/Admin/Reports.jsx:10:    const token = localStorage.getItem('token');
+client/src/pages/Admin/Reports.jsx:11:    await fetch(`/api/admin/reports/${id}/resolve`, { method: 'PATCH', headers: { Authorization: `Bearer ${token}` } });
+client/src/pages/Admin/Users.jsx:12:    const token = localStorage.getItem('token');
+client/src/pages/Admin/Users.jsx:13:    await fetch(`/api/admin${path}`, { method, headers: { Authorization: `Bearer ${token}` } });
+client/src/pages/Avatar.jsx:32:function AvatarCanvas({ avatar }) {
+client/src/pages/Avatar.jsx:33:  if (!avatar) return null;
+client/src/pages/Avatar.jsx:35:  const bgItem = avatar.equippedItems?.find(e => e.category === 'background');
+client/src/pages/Avatar.jsx:36:  const hairItem = avatar.equippedItems?.find(e => e.category === 'hair');
+client/src/pages/Avatar.jsx:37:  const accessoryItem = avatar.equippedItems?.find(e => e.category === 'accessory');
+client/src/pages/Avatar.jsx:38:  const outfitItem = avatar.equippedItems?.find(e => e.category === 'outfit');
+client/src/pages/Avatar.jsx:39:  const skinItem = avatar.equippedItems?.find(e => e.category === 'skin');
+client/src/pages/Avatar.jsx:41:  const bgColor = bgItem ? '#1a1c1e' : (avatar.backgroundColor || '#1a1c1e');
+client/src/pages/Avatar.jsx:88:        background: avatar.skinColor || '#FDBCB4',
+client/src/pages/Avatar.jsx:118:export default function AvatarPage() {
+client/src/pages/Avatar.jsx:120:  const [activeTab, setActiveTab] = useState('avatar');
+client/src/pages/Avatar.jsx:121:  const [avatar, setAvatar] = useState(null);
+client/src/pages/Avatar.jsx:122:  const [shopItems, setShopItems] = useState([]);
+client/src/pages/Avatar.jsx:123:  const [tokenBalance, setTokenBalance] = useState(0);
+client/src/pages/Avatar.jsx:125:  const [shopLoading, setShopLoading] = useState(false);
+client/src/pages/Avatar.jsx:130:  const token = localStorage.getItem('token');
+client/src/pages/Avatar.jsx:133:    Authorization: `Bearer ${token}`,
+client/src/pages/Avatar.jsx:135:  [token]
+client/src/pages/Avatar.jsx:143:  const fetchAvatar = useCallback(async () => {
+client/src/pages/Avatar.jsx:145:      const { data } = await axios.get(`${API_URL}/avatar`, { headers });
+client/src/pages/Avatar.jsx:146:      setAvatar(data.data);
+client/src/pages/Avatar.jsx:148:      showMsg('Error cargando avatar', true);
+client/src/pages/Avatar.jsx:152:  const fetchTokens = useCallback(async () => {
+client/src/pages/Avatar.jsx:154:      const { data } = await axios.get(`${API_URL}/wallet`, { headers });
+client/src/pages/Avatar.jsx:155:      setTokenBalance(data.cash?.kroTokens ?? data.kroTokens ?? 0);
+client/src/pages/Avatar.jsx:159:  const fetchShop = useCallback(async () => {
+client/src/pages/Avatar.jsx:160:    setShopLoading(true);
+client/src/pages/Avatar.jsx:162:      const { data } = await axios.get(`${API_URL}/avatar/shop`, { headers });
+client/src/pages/Avatar.jsx:163:      setShopItems(data.data || []);
+client/src/pages/Avatar.jsx:167:      setShopLoading(false);
+client/src/pages/Avatar.jsx:174:      await Promise.all([fetchAvatar(), fetchTokens()]);
+client/src/pages/Avatar.jsx:178:  }, [fetchAvatar, fetchTokens]);
+client/src/pages/Avatar.jsx:181:    if (activeTab === 'shop' && shopItems.length === 0) {
+client/src/pages/Avatar.jsx:182:      fetchShop();
+client/src/pages/Avatar.jsx:184:  }, [activeTab, fetchShop, shopItems.length]);
+client/src/pages/Avatar.jsx:189:      const { data } = await axios.post(`${API_URL}/avatar/buy`, { itemId }, { headers });
+client/src/pages/Avatar.jsx:191:      setTokenBalance(data.tokensRemaining);
+client/src/pages/Avatar.jsx:192:      await fetchAvatar();
+client/src/pages/Avatar.jsx:203:      const { data } = await axios.post(`${API_URL}/avatar/equip`, { itemId }, { headers });
+client/src/pages/Avatar.jsx:205:      setAvatar(data.data);
+client/src/pages/Avatar.jsx:216:      const { data } = await axios.post(`${API_URL}/avatar/unequip`, { itemId }, { headers });
+client/src/pages/Avatar.jsx:218:      setAvatar(data.data);
+client/src/pages/Avatar.jsx:227:    if (!avatar) return false;
+client/src/pages/Avatar.jsx:228:    return avatar.ownedItems?.some(
+client/src/pages/Avatar.jsx:234:    if (!avatar) return false;
+client/src/pages/Avatar.jsx:235:    return avatar.equippedItems?.some(
+client/src/pages/Avatar.jsx:241:    ? shopItems
+client/src/pages/Avatar.jsx:242:    : shopItems.filter(item => item.category === filterCategory);
+client/src/pages/Avatar.jsx:295:    tokenBadge: {
+client/src/pages/Avatar.jsx:335:    shopGrid: {
+client/src/pages/Avatar.jsx:415:        <div style={{ color: 'rgba(201,206,212,0.50)', fontSize: 16 }}>Cargando avatar...</div>
+client/src/pages/Avatar.jsx:425:        <h1 style={styles.title}>Mi Avatar</h1>
+client/src/pages/Avatar.jsx:433:        <button style={{ ...styles.tab(activeTab === 'avatar'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6 }} onClick={() => setActiveTab('avatar')}>
+client/src/pages/Avatar.jsx:434:          <Icon name="user" size={14} stroke="currentColor" /> Mi Avatar
+client/src/pages/Avatar.jsx:436:        <button style={{ ...styles.tab(activeTab === 'shop'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6 }} onClick={() => setActiveTab('shop')}>
+client/src/pages/Avatar.jsx:442:        {/* Token balance */}
+client/src/pages/Avatar.jsx:444:          <div style={styles.tokenBadge}>
+client/src/pages/Avatar.jsx:445:            <Icon name="coin" size={14} stroke="currentColor" /> {tokenBalance.toLocaleString()} KRO
+client/src/pages/Avatar.jsx:449:        {/* MY AVATAR TAB */}
+client/src/pages/Avatar.jsx:450:        {activeTab === 'avatar' && (
+client/src/pages/Avatar.jsx:454:                <AvatarCanvas avatar={avatar} />
+client/src/pages/Avatar.jsx:463:            {avatar?.equippedItems?.length === 0 ? (
+client/src/pages/Avatar.jsx:468:              avatar?.equippedItems?.map((e) => {
+client/src/pages/Avatar.jsx:496:            {avatar?.ownedItems?.length > 0 && (
+client/src/pages/Avatar.jsx:499:                {avatar.ownedItems
+client/src/pages/Avatar.jsx:501:                  .filter(item => !avatar.equippedItems?.some(
+client/src/pages/Avatar.jsx:530:        {/* SHOP TAB */}
+client/src/pages/Avatar.jsx:531:        {activeTab === 'shop' && (
+client/src/pages/Avatar.jsx:549:            {shopLoading ? (
+client/src/pages/Avatar.jsx:554:              <div style={styles.shopGrid}>
+client/src/pages/Avatar.jsx:593:                          disabled={loading || tokenBalance < item.price}
+client/src/pages/Avatar.jsx:596:                          {loading ? '...' : tokenBalance < item.price ? 'Sin tokens' : 'Comprar'}
+client/src/pages/Communities.jsx:100:          {community.avatar ? <img src={community.avatar} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <Icon name={cat?.icon || 'globe'} size={24} />}
+client/src/pages/CommunityDetail.jsx:60:      setCommunity(c => ({ ...c, members: [...(c.members || []), { user: { _id: userId, username: user?.username, avatar: user?.avatar, firstName: user?.firstName, lastName: user?.lastName }, role: 'member' }] }));
+client/src/pages/CommunityDetail.jsx:179:                  src={user?.avatar || `https://ui-avatars.com/api/?name=U&background=7c3aed&color=fff&size=36`}
+client/src/pages/CommunityDetail.jsx:213:                          src={post.author?.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(post.author?.username || 'U')}&background=7c3aed&color=fff&size=36`}
+client/src/pages/CommunityDetail.jsx:247:                                src={c.author?.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(c.author?.username || 'U')}&background=7c3aed&color=fff&size=26`}
+client/src/pages/CommunityDetail.jsx:293:                      src={member.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(member.username || 'U')}&background=7c3aed&color=fff&size=44`}
+client/src/pages/Events.jsx:143:          {/* Tipos de boleto */}
+client/src/pages/Events.jsx:146:              <div style={{ fontWeight: 700, fontSize: 14, color: '#c9ced4', display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="ticket" size={14} /> Tipos de boleto</div>
+client/src/pages/Events.jsx:233:              <div style={{ fontSize: 13, color: 'rgba(201,206,212,0.50)', marginBottom: 8, textAlign: 'left' }}>Tipo de boleto:</div>
+client/src/pages/Gamification.jsx:271:                    <img src={entry.user?.avatar || `https://ui-avatars.com/api/?name=${entry.user?.username}&background=random`}
+client/src/pages/Health.jsx:180:  const [tokensEarned, setTokensEarned] = useState(0);
+client/src/pages/Health.jsx:201:        tokensEarned: d.tokensEarned || 0,
+client/src/pages/Health.jsx:203:      setTokensEarned(d.tokensEarned || 0);
+client/src/pages/Health.jsx:227:      const awarded = res.data.tokensAwarded || 0;
+client/src/pages/Health.jsx:229:        setTokensEarned(10);
+client/src/pages/Health.jsx:230:        showToast(`+${awarded} tokens ganados por tu meta de pasos`, 'success');
+client/src/pages/Health.jsx:280:            {/* Token reward banner */}
+client/src/pages/Health.jsx:281:            {(tokensEarned > 0 || log.steps >= 10000) && (
+client/src/pages/Health.jsx:291:                    +10 tokens ganados hoy
+client/src/pages/Kairos.jsx:37:        (zyx ? 'Narrador: Zyx, avatar IA — voz fría, precisa, levemente inquietante; escribe la voz en su registro. ' : 'Narrador: voz humana en off. ') +
+client/src/pages/KronosMockups.jsx:11:  "chat", "communities", "communityDetail", "shop", "marketplace", "wallet",
+client/src/pages/KronosMockups.jsx:12:  "live", "health", "avatar", "videoEditor", "events", "gamification",
+client/src/pages/KronosMockups.jsx:19:  communities: "Comunidades", communityDetail: "Comunidad", shop: "Tienda",
+client/src/pages/KronosMockups.jsx:20:  marketplace: "Marketplace", wallet: "Wallet", live: "Live", health: "Health",
+client/src/pages/KronosMockups.jsx:21:  avatar: "Avatar", videoEditor: "Video Editor", events: "Eventos",
+client/src/pages/KronosMockups.jsx:65:  wallet: <><rect x="3.5" y="6" width="17" height="12.5" rx="3" /><path d="M3.5 9.5h17" /><circle cx="16.5" cy="13.5" r="1.1" /></>,
+client/src/pages/KronosMockups.jsx:107:const Av = ({ size = 40 }) => <div className="avatar" style={{ width: size, height: size }}><Icon n="user" /></div>;
+client/src/pages/KronosMockups.jsx:194:            <div className="avatar" style={{ width: 50, height: 50, border: "2px solid", borderColor: "var(--ks-line-strong)" }}><Icon n="user" /></div>
+client/src/pages/KronosMockups.jsx:294:        <div className="avatar" style={{ width: 64, height: 64, border: "3px solid #060708" }}><Icon n="users" /></div>
+client/src/pages/KronosMockups.jsx:311:function ShopScreen() {
+client/src/pages/KronosMockups.jsx:331:function MarketplaceScreen() {
+client/src/pages/KronosMockups.jsx:334:      <ScreenHead title="Marketplace" icon="plus" />
+client/src/pages/KronosMockups.jsx:351:function WalletScreen() {
+client/src/pages/KronosMockups.jsx:354:      <ScreenHead title="Wallet" icon="clock" />
+client/src/pages/KronosMockups.jsx:418:function AvatarScreen() {
+client/src/pages/KronosMockups.jsx:421:      <ScreenHead title="Avatar" icon="check" />
+client/src/pages/KronosMockups.jsx:423:        <div className="avatar" style={{ width: 130, height: 130, background: "radial-gradient(circle at 34% 30%, #ffffff, #c4c9cf 40%, #46494f 100%)", boxShadow: "0 24px 50px -20px rgba(0,0,0,.9)" }} />
+client/src/pages/KronosMockups.jsx:432:      <button className="btn-metal" style={{ marginTop: 14 }}>GUARDAR AVATAR</button>
+client/src/pages/KronosMockups.jsx:489:            <div className="avatar" style={{ width: 58, height: 58, opacity: i < 4 ? 1 : 0.4 }}><Icon n={b} /></div>
+client/src/pages/KronosMockups.jsx:550:        <div className="avatar" style={{ width: 72, height: 72, border: "3px solid #060708" }}><Icon n="user" /></div>
+client/src/pages/KronosMockups.jsx:575:        {[["users", "Usuarios"], ["cart", "Órdenes"], ["wallet", "Ingresos"], ["bolt", "Activos"]].map(([ic, lb], i) => (
+client/src/pages/KronosMockups.jsx:598:  communities: CommunitiesScreen, communityDetail: CommunityDetailScreen, shop: ShopScreen,
+client/src/pages/KronosMockups.jsx:599:  marketplace: MarketplaceScreen, wallet: WalletScreen, live: LiveScreen, health: HealthScreen,
+client/src/pages/KronosMockups.jsx:600:  avatar: AvatarScreen, videoEditor: VideoEditorScreen, events: EventsScreen,
+client/src/pages/KronosMockups.jsx:663:          <div className="avatar av-40"><Icon n="user" /></div>
+client/src/pages/Live.jsx:458:                      <img src={`https://ui-avatars.com/api/?name=${encodeURIComponent(s.streamerName)}&background=7c3aed&color=fff&size=40`} alt="" style={{ width: 36, height: 36, borderRadius: '50%' }} />
+client/src/pages/Live.jsx:494:                <img src={u.avatar || `https://ui-avatars.com/api/?name=${u.username}&background=random&color=fff&size=40`} alt="" style={{ width: 44, height: 44, borderRadius: '50%', objectFit: 'cover' }} />
+client/src/pages/Marketplace.jsx:457:export default function Marketplace() {
+client/src/pages/Marketplace.jsx:541:          <HoloText size={26} style={{ marginBottom: 4 }}>Marketplace</HoloText>
+client/src/pages/Notifications.jsx:13:  transfer:         { icon: 'money',   color: '#10b981', label: 'Te envió dinero' },
+client/src/pages/Notifications.jsx:32:  const token = localStorage.getItem('token');
+client/src/pages/Notifications.jsx:34:  () => ({ Authorization: `Bearer ${token}` }),
+client/src/pages/Notifications.jsx:35:  [token]
+client/src/pages/Notifications.jsx:132:                    {/* Avatar or icon */}
+client/src/pages/Notifications.jsx:134:                      {sender?.avatar ? (
+client/src/pages/Notifications.jsx:135:                        <img src={sender.avatar} alt="" style={{ width: 44, height: 44, borderRadius: '50%', objectFit: 'cover' }} />
+client/src/pages/Notifications.jsx:141:                      {sender?.avatar && (
+client/src/pages/Privacy.jsx:28:• Dirección IP, tipo de dispositivo, sistema operativo y navegador.
+client/src/pages/Privacy.jsx:89:• Mantener tu sesión activa (token JWT en localStorage).
+client/src/pages/Reservations.jsx:136:              <label style={labelStyle}>Tipo de negocio</label>
+client/src/pages/Settings.jsx:75:    messages: true, transfers: true, communities: false,
+client/src/pages/Settings.jsx:87:    { key: 'transfers',    label: 'Transferencias recibidas',    icon: 'money' },
+client/src/pages/Settings.jsx:257:            Se eliminarán tu cuenta, posts, wallet y todos tus datos. Escribe <strong style={{ color: '#fff' }}>ELIMINAR</strong> para confirmar.
+client/src/pages/Terms.jsx:43:• Vender productos y servicios a través del Marketplace (sujeto a verificación).
+client/src/pages/Terms.jsx:44:• Realizar y recibir pagos de propinas y transferencias de Kronos Tokens.
+client/src/pages/Terms.jsx:46:El uso de la Plataforma es personal y no exclusivo. No puedes sublicenciar ni transferir tu derecho de uso a terceros.`
+client/src/pages/Terms.jsx:135:    id: 'marketplace',
+client/src/pages/Terms.jsx:136:    title: '8. Marketplace y transacciones',
+client/src/pages/Terms.jsx:137:    content: `Kronos opera un marketplace donde usuarios pueden comprar y vender productos.
+client/src/pages/Terms.jsx:142:• Las comisiones del Marketplace se aplican según las tarifas vigentes publicadas en la Plataforma.
+client/src/pages/Terms.jsx:150:Kronos actúa como intermediario, no como vendedor directo. No somos responsables por la calidad, seguridad legal o entrega de productos vendidos por terceros en el Marketplace.`
+client/src/pages/Terms.jsx:157:• Kronos provee el Servicio "tal cual" y "según disponibilidad", sin garantías de ningún tipo.
+client/src/pages/Wallet.jsx:117:      const res = await axios.post(`${API_URL}/wallet/transfer`, {
+client/src/pages/Wallet.jsx:148:                <img src={u.avatar || `https://ui-avatars.com/api/?name=${u.username}&background=random&color=fff&size=40`} alt="" style={{ width: 42, height: 42, borderRadius: '50%', objectFit: 'cover' }} />
+client/src/pages/Wallet.jsx:162:              <img src={selected.avatar || `https://ui-avatars.com/api/?name=${selected.username}&background=random&color=fff&size=40`} alt="" style={{ width: 40, height: 40, borderRadius: '50%' }} />
+client/src/pages/Wallet.jsx:217:      const res = await axios.post(`${API_URL}/wallet/deposit`, { amount: Number(amount) });
+client/src/pages/Wallet.jsx:266:    axios.get(`${API_URL}/wallet/daily-reward`).then(r => setReward(r.data)).catch(() => {});
+client/src/pages/Wallet.jsx:272:      const res = await axios.post(`${API_URL}/wallet/daily-reward`);
+client/src/pages/Wallet.jsx:320:// ── Main Wallet Page ──────────────────────────────────────────────────────────
+client/src/pages/Wallet.jsx:321:export default function Wallet() {
+client/src/pages/Wallet.jsx:325:  const [tab, setTab] = useState('wallet');
+client/src/pages/Wallet.jsx:329:  const fetchWallet = async () => {
+client/src/pages/Wallet.jsx:331:      const [walletRes, cardRes] = await Promise.all([
+client/src/pages/Wallet.jsx:332:        axios.get(`${API_URL}/wallet`),
+client/src/pages/Wallet.jsx:333:        axios.get(`${API_URL}/wallet/card`)
+client/src/pages/Wallet.jsx:335:      setData(walletRes.data);
+client/src/pages/Wallet.jsx:341:  useEffect(() => { fetchWallet(); }, []);
+client/src/pages/Wallet.jsx:350:      const res = await axios.post(`${API_URL}/wallet/card/freeze`);
+client/src/pages/Wallet.jsx:356:  const txIcon = { deposit: 'down', withdrawal: 'up', transfer_in: 'receive', transfer_out: 'send', payment: 'bag', refund: 'refund' };
+client/src/pages/Wallet.jsx:357:  const txColor = { deposit: '#10b981', withdrawal: '#ef4444', transfer_in: '#10b981', transfer_out: '#ef4444', payment: '#f59e0b', refund: '#06b6d4' };
+client/src/pages/Wallet.jsx:369:        <HoloText size={26} style={{ marginBottom: 20 }}>Wallet</HoloText>
+client/src/pages/Wallet.jsx:372:          <div style={{ textAlign: 'center', color: 'rgba(201,206,212,0.50)', padding: 60 }}>Cargando wallet...</div>
+client/src/pages/Wallet.jsx:386:                    {parseFloat(data.kro.tokenBalance || 0).toFixed(0)} KRO
+client/src/pages/Wallet.jsx:388:                  <span style={{ color: 'rgba(201,206,212,0.35)', fontSize: 12 }}> tokens</span>
+client/src/pages/Wallet.jsx:410:              {[{ id: 'wallet', icon: 'chart', label: 'Actividad' }, { id: 'card', icon: 'card', label: 'Tarjeta' }, { id: 'kro', icon: 'star', label: 'KRO' }].map(t => (
+client/src/pages/Wallet.jsx:419:            {tab === 'wallet' && (
+client/src/pages/Wallet.jsx:445:                            {['transfer_in', 'deposit', 'refund'].includes(tx.type) ? '+' : '-'}${tx.amount.toFixed(2)}
+client/src/pages/Wallet.jsx:482:                    <DailyRewardCard onClaimed={fetchWallet} />
+client/src/pages/Wallet.jsx:486:                        { icon: 'star', label: 'Balance KRO', value: `${parseFloat(data.kro.tokenBalance || 0).toFixed(2)} KRO` },
+client/src/pages/Wallet.jsx:487:                        { icon: 'lock', label: 'En staking', value: `${parseFloat(data.kro.stakedTokens || 0).toFixed(2)} KRO` },
+client/src/pages/Wallet.jsx:497:                      <a href="/tokens" style={{ flex: 1, padding: '12px', borderRadius: 14, background: 'linear-gradient(135deg,#a78bfa 0%,#8b5cf6 45%,#6d4bd0 100%)', color: '#fff', border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer', textAlign: 'center', textDecoration: 'none', boxShadow: '0 12px 30px -10px rgba(139,92,246,0.45)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+client/src/pages/Wallet.jsx:505:                    <div>Wallet KRO no inicializada</div>
+client/src/pages/Wallet.jsx:506:                    <button onClick={async () => { await axios.post(`${API_URL}/tokens/wallet/init`); fetchWallet(); }}
+client/src/pages/Wallet.jsx:508:                      Inicializar KRO Wallet
+client/src/pages/Wallet.jsx:518:      {modal === 'send' && <SendModal balance={data?.cash?.balance || 0} onClose={() => setModal(null)} onSuccess={msg => { showToast(msg); fetchWallet(); }} />}
+client/src/pages/Wallet.jsx:519:      {modal === 'deposit' && <DepositModal onClose={() => setModal(null)} onSuccess={msg => { showToast(msg); fetchWallet(); }} />}
+client/src/pages/Welcome.jsx:18:  { label: 'Wallet', desc: 'Pagos P2P entre usuarios', d: <><rect x="4" y="7" width="16" height="11" rx="2.5" /><path d="M16 12h2" /></> },
+client/src/pages/Welcome.jsx:19:  { label: 'Tokens', desc: 'Gana KRO por tu actividad', d: <><circle cx="12" cy="12" r="7" /><path d="M12 8v8M9.5 10h3.5a1.8 1.8 0 0 1 0 3.6H9.5" /></> },
+client/src/pages/Welcome.jsx:24:  { label: 'Marketplace', desc: 'P2P con escrow de seguridad', d: <><path d="M4 9l2-4h12l2 4" /><path d="M5 9v9h14V9" /><path d="M9 13h6" /></> },
+client/src/pages/Welcome.jsx:25:  { label: 'Avatar', desc: 'Personaliza tu avatar 3D', d: <><circle cx="12" cy="9" r="3.2" /><path d="M6 19a6 6 0 0 1 12 0" /></> },
+client/src/pages/Welcome.jsx:26:  { label: 'Health', desc: 'Metas diarias y tokens fitness', d: <><path d="M12 20s-7-4.3-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.7-7 9-7 9z" /></> },
+client/src/registerSW.js:26:    const token = localStorage.getItem('token');
+client/src/registerSW.js:29:      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+client/src/screens.js:27:  const av  = (sz='av-46') => `<span class="avatar ${sz}"><span>${ic('user')}</span></span>`;
+client/src/screens.js:51:  const story = () => `<div style="flex:none;text-align:center"><span class="avatar av-56" style="background:var(--metal-bright)"><span>${ic('user')}</span></span></div>`;
+client/src/screens.js:76:      <span class="avatar" style="width:80px;height:80px"><span>${ic('user')}</span></span>
+client/src/services/api.js:1:// Frontend API service for token operations
+client/src/services/api.js:12:// Add token to requests — clave 'token' (la misma que usa AuthContext)
+client/src/services/api.js:15:    const token = localStorage.getItem('token');
+client/src/services/api.js:16:    if (token) {
+client/src/services/api.js:17:      config.headers.Authorization = `Bearer ${token}`;
+client/src/services/api.js:29:      localStorage.removeItem('token');
+client/src/services/arService.js:283:      this.model.scale.multiplyScalar(1.1);
+client/src/services/arService.js:286:      this.model.scale.multiplyScalar(0.9);
+client/src/shop/Cart.jsx:29:        <h1 className="text-3xl font-bold mb-4">Shopping Cart</h1>
+client/src/shop/Cart.jsx:32:          to="/shop"
+client/src/shop/Cart.jsx:35:          Continue Shopping
+client/src/shop/Cart.jsx:43:      <h1 className="text-3xl font-bold mb-8">Shopping Cart</h1>
+client/src/shop/Cart.jsx:119:            to="/shop/checkout"
+client/src/shop/Cart.jsx:126:            to="/shop"
+client/src/shop/Cart.jsx:129:            Continue Shopping
+client/src/shop/Cart.jsx:133:            to="/shop/my-orders"
+client/src/shop/ProductDetail.jsx:3:import { FaStar, FaShoppingCart } from 'react-icons/fa';
+client/src/shop/ProductDetail.jsx:22:    navigate('/shop/cart');
+client/src/shop/ProductDetail.jsx:134:            <FaShoppingCart /> <span>Add to Cart</span>
+client/src/shop/ProductList.jsx:3:import { FaShoppingCart, FaStar } from 'react-icons/fa';
+client/src/shop/ProductList.jsx:30:                to={`/shop/product/${product._id}`}
+client/src/shop/ProductList.jsx:65:                  <FaShoppingCart />
+client/src/shop/ShopModule.jsx:118:            <button onClick={() => navigate('/shop/my-orders')}
+client/src/shop/ShopModule.jsx:122:            <button onClick={() => navigate('/shop/cart')}
+client/src/shop/ShopModule.jsx:180:        <button onClick={() => navigate('/shop')} style={{ marginTop: 16, padding: '10px 24px', borderRadius: 20, background: HOLO, border: 'none', color: '#fff', fontWeight: 700, cursor: 'pointer' }}>Volver</button>
+client/src/shop/ShopModule.jsx:246:            <button onClick={() => navigate('/shop')} style={{ marginTop: 20, padding: '12px 28px', borderRadius: 20, background: HOLO, border: 'none', color: '#fff', fontWeight: 700, cursor: 'pointer' }}>Explorar tienda</button>
+client/src/shop/ShopModule.jsx:281:              <button onClick={() => navigate('/shop/checkout')}
+client/src/shop/ShopModule.jsx:306:      const token = localStorage.getItem('token');
+client/src/shop/ShopModule.jsx:311:      }, { headers: { Authorization: `Bearer ${token}` } });
+client/src/shop/ShopModule.jsx:324:        <button onClick={() => navigate('/shop')} style={{ padding: '12px 32px', borderRadius: 20, background: HOLO, border: 'none', color: '#fff', fontWeight: 700, cursor: 'pointer', boxShadow: '0 4px 16px rgba(79,172,254,0.3)' }}>
+client/src/shop/ShopModule.jsx:393:        const token = localStorage.getItem('token');
+client/src/shop/ShopModule.jsx:394:        const { data } = await axios.get(`${API_URL}/orders/my-orders`, { headers: { Authorization: `Bearer ${token}` } });
+client/src/shop/ShopModule.jsx:424:            <button onClick={() => navigate('/shop')} style={{ marginTop: 20, padding: '12px 28px', borderRadius: 20, background: HOLO, border: 'none', color: '#fff', fontWeight: 700, cursor: 'pointer' }}>Ir a la tienda</button>
+client/src/shop/ShopModule.jsx:453:export default function ShopModule() {
+client/src/shop/ShopModule.jsx:474:      <Route path="/" element={<ProductList products={products} cart={cart} onAddToCart={addToCart} onViewProduct={p => navigate(`/shop/product/${p._id}`)} />} />
+client/src/social/Chat.jsx:99:            headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${localStorage.getItem('token')}` }
+client/src/social/Chat.jsx:125:            <img src={otherUser.avatar || `https://ui-avatars.com/api/?name=${otherUser.username}&background=random&color=fff&size=40`} alt={otherUser.username} style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover' }} />
+client/src/social/ConversationList.jsx:52:            <img src={u.avatar || `https://ui-avatars.com/api/?name=${u.username}&background=random&color=fff&size=32`} alt="" style={{ width: 32, height: 32, borderRadius: '50%' }} />
+client/src/social/ConversationList.jsx:152:                  <img src={u.avatar || `https://ui-avatars.com/api/?name=${u.username}&background=random&color=fff&size=40`} alt="" style={{ width: 44, height: 44, borderRadius: '50%', objectFit: 'cover' }} />
+client/src/social/ConversationList.jsx:180:                  <img src={chat.avatar || `https://ui-avatars.com/api/?name=${chat.username}&background=random&color=fff&size=40`} alt="" style={{ width: 44, height: 44, borderRadius: '50%', objectFit: 'cover' }} />
+client/src/social/Feed.jsx:28:        headers: { 'Content-Type': 'multipart/form-data' }
+client/src/social/Feed.jsx:45:  const avatarUrl = (name) =>
+client/src/social/Feed.jsx:46:    `https://ui-avatars.com/api/?name=${encodeURIComponent(name || 'User')}&background=random`;
+client/src/social/Feed.jsx:59:              src={user?.avatar || avatarUrl(user?.name || user?.username)}
+client/src/social/Feed.jsx:61:              onError={(e) => { e.target.src = avatarUrl(user?.name || user?.username); }}
+client/src/social/Feed.jsx:159:                    src={post.author?.avatar || avatarUrl(post.author?.name || post.author?.username)}
+client/src/social/Feed.jsx:161:                    onError={(e) => { e.target.src = avatarUrl(post.author?.name || post.author?.username); }}
+client/src/social/GroupChat.jsx:118:                      src={author?.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(author?.username || 'U')}&background=random&color=fff&size=24`}
+client/src/social/GroupChat.jsx:148:                <img src={m.avatar || `https://ui-avatars.com/api/?name=${m.username}&background=random&color=fff&size=32`} alt="" style={{ width: 32, height: 32, borderRadius: '50%', objectFit: 'cover' }} />
+client/src/social/Profile.jsx:183:      {/* Cover + Avatar */}
+client/src/social/Profile.jsx:191:          <img src={profile.avatar} alt={profile.username}
+client/src/web-screens.js:30:  const av  = (sz='av-46') => `<span class="avatar ${sz}"><span>${ic('user')}</span></span>`;
+client/src/web-screens.js:56:  const story = () => `<div style="flex:none;text-align:center"><span class="avatar av-56" style="background:var(--metal-bright)"><span>${ic('user')}</span></span></div>`;
+client/src/web-screens.js:78:          <div class="body"><span class="avatar av-56"><span>${ic('user')}</span></span>${bar('110px','lg')}${bar('70px','sm')}</div>
+client/src/web-screens.js:125:        <span class="avatar av-72" style="width:128px;height:128px"><span>${ic('user')}</span></span>
+client/src/web-screens.js:184:    <div class="page-h"><div><div class="crumb">Marketplace · Stripe</div><h1 class="metal-text">Market</h1></div>
+client/src/web-screens2.js:1:/* ===================== KRONOSPACE · WEB · módulo 2 (Shop · Admin · Utilitarias) ===================== */
+client/src/web-screens2.js:27:  const av  = (sz='av-46') => `<span class="avatar ${sz}"><span><svg viewBox="0 0 24 24" style="${sic};opacity:.55">${G.user}</svg></span></span>`;
+client/src/web-screens2.js:40:  /* ===================== A · CATÁLOGO /shop ===================== */
+client/src/web-screens2.js:46:  const shop = `
+client/src/web-screens2.js:47:  <section class="scrn" id="scr-shop" data-screen="shop" data-screen-label="Shop">
+client/src/web-screens2.js:48:    <div class="page-h"><div><div class="crumb">Marketplace · Stripe</div><h1 class="metal-text">Catálogo</h1></div>
+client/src/web-screens2.js:56:  /* ===================== B · DETALLE /shop/product ===================== */
+client/src/web-screens2.js:62:    <button class="backlink" data-go="shop" style="margin-bottom:24px">${ic('arrow')}Volver al catálogo</button>
+client/src/web-screens2.js:101:  /* ===================== C · CARRITO /shop/cart ===================== */
+client/src/web-screens2.js:109:    <button class="backlink" data-go="shop" style="margin-bottom:24px">${ic('arrow')}Seguir comprando</button>
+client/src/web-screens2.js:110:    <div class="page-h"><div><div class="crumb">Marketplace</div><h1 class="metal-text">Carrito</h1></div></div>
+client/src/web-screens2.js:127:  /* ===================== D · CHECKOUT /shop/checkout ===================== */
+client/src/web-screens2.js:168:  /* ===================== E · MIS PEDIDOS /shop/my-orders ===================== */
+client/src/web-screens2.js:193:    <button class="backlink" data-go="shop" style="margin-bottom:24px">${ic('arrow')}Volver al catálogo</button>
+client/src/web-screens2.js:194:    <div class="page-h"><div><div class="crumb">Marketplace</div><h1 class="metal-text">Mis pedidos</h1></div>
+client/src/web-screens2.js:200:  window.KS_SHOP = shop + product + cart + checkout + orders;
+client/src/web.js:3:  // inyecta todas las pantallas (feed + shop + admin) en el host
+client/src/web.js:5:    window.KS_SCREENS + (window.KS_SHOP||'') + (window.KS_ADMIN||'');
+client/src/web.js:18:  // pantallas tipo overlay (no usan el stage): se muestran encima de todo
+server/__tests__/auth.test.js:22:  // JWT_SECRET necesario para firmar/verificar tokens
+server/__tests__/auth.test.js:58:  it('deberia registrar un nuevo usuario y devolver 201 con token', async () => {
+server/__tests__/auth.test.js:63:    expect(res.body.token).toBeDefined();
+server/__tests__/auth.test.js:64:    expect(typeof res.body.token).toBe('string');
+server/__tests__/auth.test.js:108:    expect(res.body.token).toBeDefined();
+server/__tests__/auth.test.js:109:    expect(typeof res.body.token).toBe('string');
+server/__tests__/auth.test.js:139:  let validToken;
+server/__tests__/auth.test.js:142:    // Registrar y obtener token
+server/__tests__/auth.test.js:144:    validToken = res.body.token;
+server/__tests__/auth.test.js:147:  it('deberia devolver 200 con el perfil del usuario si el token es valido', async () => {
+server/__tests__/auth.test.js:150:      .set('Authorization', `Bearer ${validToken}`);
+server/__tests__/auth.test.js:158:  it('deberia devolver 401 si no se proporciona token', async () => {
+server/__tests__/auth.test.js:165:  it('deberia devolver 401 si el token es invalido o manipulado', async () => {
+server/__tests__/auth.test.js:168:      .set('Authorization', 'Bearer token_invalido_12345');
+server/__tests__/posts.test.js:50:  return { token: res.body.token, userId: res.body.user.id };
+server/__tests__/posts.test.js:53:const postRequest = (token, content = 'Mi primer post de prueba') => {
+server/__tests__/posts.test.js:56:    .set('Authorization', `Bearer ${token}`)
+server/__tests__/posts.test.js:64:    const { token } = await registerUser('p1');
+server/__tests__/posts.test.js:66:    const res = await postRequest(token, 'Hola Kronos!');
+server/__tests__/posts.test.js:78:      .send({ content: 'Post sin token' });
+server/__tests__/posts.test.js:84:    const { token } = await registerUser('p2');
+server/__tests__/posts.test.js:86:    const res = await postRequest(token, 'Post publico');
+server/__tests__/posts.test.js:97:    const { token } = await registerUser('feed1');
+server/__tests__/posts.test.js:100:    await postRequest(token, 'Post para el feed 1');
+server/__tests__/posts.test.js:101:    await postRequest(token, 'Post para el feed 2');
+server/__tests__/posts.test.js:105:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/posts.test.js:114:  it('deberia devolver 401 si no hay token al pedir el feed', async () => {
+server/__tests__/posts.test.js:125:    const { token: authorToken } = await registerUser('like1');
+server/__tests__/posts.test.js:126:    const { token: likerToken } = await registerUser('like2');
+server/__tests__/posts.test.js:128:    const postRes = await postRequest(authorToken, 'Post para likear');
+server/__tests__/posts.test.js:133:      .set('Authorization', `Bearer ${likerToken}`);
+server/__tests__/posts.test.js:141:    const { token } = await registerUser('like3');
+server/__tests__/posts.test.js:143:    const postRes = await postRequest(token, 'Post para doble like');
+server/__tests__/posts.test.js:149:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/posts.test.js:154:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/posts.test.js:161:    const { token } = await registerUser('like4');
+server/__tests__/posts.test.js:166:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/posts.test.js:176:    const { token } = await registerUser('del1');
+server/__tests__/posts.test.js:178:    const postRes = await postRequest(token, 'Post a borrar');
+server/__tests__/posts.test.js:183:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/posts.test.js:191:    const { token: authorToken } = await registerUser('del2');
+server/__tests__/posts.test.js:192:    const { token: otherToken } = await registerUser('del3');
+server/__tests__/posts.test.js:194:    const postRes = await postRequest(authorToken, 'Post de otro usuario');
+server/__tests__/posts.test.js:199:      .set('Authorization', `Bearer ${otherToken}`);
+server/__tests__/posts.test.js:205:  it('deberia devolver 401 al intentar borrar sin token', async () => {
+server/__tests__/posts.test.js:206:    const { token } = await registerUser('del4');
+server/__tests__/posts.test.js:208:    const postRes = await postRequest(token, 'Post sin token delete');
+server/__tests__/subscription.test.js:124:  return { token: res.body.token, userId: res.body.user.id };
+server/__tests__/subscription.test.js:131:    const { token } = await registerUser('rt1');
+server/__tests__/subscription.test.js:134:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/subscription.test.js:142:    const { token, userId } = await registerUser('rt2');
+server/__tests__/subscription.test.js:147:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/subscription.test.js:154:    const { token, userId } = await registerUser('rt3');
+server/__tests__/subscription.test.js:159:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/subscription.test.js:166:    const { token, userId } = await registerUser('rt4');
+server/__tests__/subscription.test.js:171:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/subscription.test.js:181:    const { token } = await registerUser('rf1');
+server/__tests__/subscription.test.js:184:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/subscription.test.js:191:    const { token, userId } = await registerUser('rf2');
+server/__tests__/subscription.test.js:198:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/subscription.test.js:207:  const post = (token, content) =>
+server/__tests__/subscription.test.js:210:      .set('Authorization', `Bearer ${token}`)
+server/__tests__/subscription.test.js:223:    const { token, userId } = await registerUser('pl1');
+server/__tests__/subscription.test.js:226:      const res = await post(token, `Post ${i}`);
+server/__tests__/subscription.test.js:231:    const blocked = await post(token, 'Post 6 (debería bloquearse)');
+server/__tests__/subscription.test.js:238:    const { token, userId } = await registerUser('pl2');
+server/__tests__/subscription.test.js:245:      const res = await post(token, `Pro post ${i}`);
+server/__tests__/subscription.test.js:251:    const { token, userId } = await registerUser('pl3');
+server/__tests__/subscription.test.js:260:    const res = await post(token, 'Primer post de hoy');
+server/__tests__/subscription.test.js:358:    const { token } = await registerUser('co1');
+server/__tests__/subscription.test.js:362:      .set('Authorization', `Bearer ${token}`)
+server/__tests__/subscription.test.js:372:    const { token } = await registerUser('co2');
+server/__tests__/subscription.test.js:376:      .set('Authorization', `Bearer ${token}`)
+server/__tests__/subscription.test.js:382:  it('rechaza sin token', async () => {
+server/__tests__/subscription.test.js:393:    const { token } = await registerUser('st1');
+server/__tests__/subscription.test.js:397:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/subscription.test.js:405:    const { token, userId } = await registerUser('st2');
+server/__tests__/subscription.test.js:410:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/subscription.test.js:420:    const { token, userId } = await registerUser('cn1');
+server/__tests__/subscription.test.js:430:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/subscription.test.js:442:    const { token } = await registerUser('cn2');
+server/__tests__/subscription.test.js:446:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/users.test.js:54:    token: res.body.token,
+server/__tests__/users.test.js:89:    const { token } = await registerUser('block1');
+server/__tests__/users.test.js:94:      .set('Authorization', `Bearer ${token}`)
+server/__tests__/users.test.js:103:    const { token, userId } = await registerUser('block3');
+server/__tests__/users.test.js:107:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/users.test.js:114:    const { token } = await registerUser('block4');
+server/__tests__/users.test.js:120:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/users.test.js:125:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/users.test.js:131:  it('deberia devolver 401 si no hay token al intentar bloquear', async () => {
+server/__tests__/users.test.js:145:    const { token } = await registerUser('blist1');
+server/__tests__/users.test.js:152:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/users.test.js:156:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/users.test.js:160:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/users.test.js:170:    const { token } = await registerUser('blist4');
+server/__tests__/users.test.js:174:      .set('Authorization', `Bearer ${token}`);
+server/__tests__/users.test.js:181:  it('deberia devolver 401 si no hay token al pedir la lista de bloqueados', async () => {
+server/config/passport.js:4:const jwt = require('jsonwebtoken');
+server/config/passport.js:8:const generateToken = (userId) => {
+server/config/passport.js:13:const findOrCreateOAuthUser = async ({ email, firstName, lastName, avatar, provider }) => {
+server/config/passport.js:34:      avatar: avatar || 'https://via.placeholder.com/150',
+server/config/passport.js:56:      async (accessToken, refreshToken, profile, done) => {
+server/config/passport.js:69:            avatar: profile.photos?.[0]?.value || 'https://via.placeholder.com/150',
+server/config/passport.js:73:          const token = generateToken(user._id);
+server/config/passport.js:74:          return done(null, { user, token });
+server/config/passport.js:98:      async (accessToken, refreshToken, profile, done) => {
+server/config/passport.js:109:            avatar: profile.photos?.[0]?.value || 'https://via.placeholder.com/150',
+server/config/passport.js:113:          const token = generateToken(user._id);
+server/config/passport.js:114:          return done(null, { user, token });
+server/config/stripe.js:33:      success_url: `${process.env.CLIENT_URL}/shop/checkout?session_id={CHECKOUT_SESSION_ID}&success=true`,
+server/config/stripe.js:34:      cancel_url: `${process.env.CLIENT_URL}/shop/cart?cancelled=true`,
+server/config/stripe.js:37:        orderType: 'shop',
+server/controllers/adminController.js:115:        .populate('author', 'username avatar')
+server/controllers/adminController.js:190:    const users = await User.find({ _id: { $in: userIds } }).select('username email avatar tier').lean();
+server/controllers/analyticsController.js:23:        .populate('creatorId', '_id username avatar')
+server/controllers/audioController.js:22:    // Whisper requiere un File-like object con nombre y tipo
+server/controllers/audioController.js:45:// ParticipantState: { userId, username, avatar, muted, spatialX, spatialY, joinedAt }
+server/controllers/audioController.js:68:    avatar: req.user.avatar || null,
+server/controllers/authController.js:3:const jwt = require('jsonwebtoken');
+server/controllers/authController.js:57:    // Crear JWT token
+server/controllers/authController.js:58:    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+server/controllers/authController.js:64:      token,
+server/controllers/authController.js:105:    // Crear JWT token
+server/controllers/authController.js:106:    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+server/controllers/authController.js:112:      token,
+server/controllers/authController.js:182:// Forgot password - genera token y envía email
+server/controllers/authController.js:196:    // Generar token seguro
+server/controllers/authController.js:197:    const resetToken = crypto.randomBytes(32).toString('hex');
+server/controllers/authController.js:198:    const hashedToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+server/controllers/authController.js:201:    user.passwordResetToken = hashedToken;
+server/controllers/authController.js:206:    const resetLink = `${CLIENT_URL}/reset-password?token=${resetToken}&email=${email}`;
+server/controllers/authController.js:217:// Reset password — verifica token y guarda nueva contraseña
+server/controllers/authController.js:220:    const { token, email, password } = req.body;
+server/controllers/authController.js:221:    if (!token || !email || !password) {
+server/controllers/authController.js:228:    const hashedToken = crypto.createHash('sha256').update(token).digest('hex');
+server/controllers/authController.js:231:      passwordResetToken: hashedToken,
+server/controllers/authController.js:233:    }).select('+passwordResetToken +passwordResetExpires');
+server/controllers/authController.js:240:    user.passwordResetToken = undefined;
+server/controllers/avatarController.js:1:const AvatarItem = require('../models/AvatarItem');
+server/controllers/avatarController.js:2:const UserAvatar = require('../models/UserAvatar');
+server/controllers/avatarController.js:3:const CashWallet = require('../models/CashWallet');
+server/controllers/avatarController.js:20:    const count = await AvatarItem.countDocuments();
+server/controllers/avatarController.js:22:      await AvatarItem.insertMany(DEFAULT_ITEMS);
+server/controllers/avatarController.js:23:      console.log('✓ Avatar default items seeded');
+server/controllers/avatarController.js:26:    console.error('Failed to seed avatar items:', err.message);
+server/controllers/avatarController.js:32:async function getOrCreateAvatar(userId) {
+server/controllers/avatarController.js:33:  let avatar = await UserAvatar.findOne({ user: userId })
+server/controllers/avatarController.js:36:  if (!avatar) {
+server/controllers/avatarController.js:38:    const defaults = await AvatarItem.find({ isDefault: true });
+server/controllers/avatarController.js:41:    avatar = await UserAvatar.create({ user: userId, equippedItems, ownedItems });
+server/controllers/avatarController.js:42:    avatar = await UserAvatar.findById(avatar._id)
+server/controllers/avatarController.js:46:  return avatar;
+server/controllers/avatarController.js:51:exports.getMyAvatar = async (req, res) => {
+server/controllers/avatarController.js:53:    const avatar = await getOrCreateAvatar(req.user._id);
+server/controllers/avatarController.js:54:    res.json({ success: true, data: avatar });
+server/controllers/avatarController.js:60:exports.getShopItems = async (req, res) => {
+server/controllers/avatarController.js:62:    const items = await AvatarItem.find().sort({ category: 1, price: 1 });
+server/controllers/avatarController.js:74:    const item = await AvatarItem.findById(itemId);
+server/controllers/avatarController.js:77:    const avatar = await getOrCreateAvatar(req.user._id);
+server/controllers/avatarController.js:80:    const alreadyOwned = avatar.ownedItems.some(
+server/controllers/avatarController.js:87:    // Check tokens (use CashWallet.kroTokens)
+server/controllers/avatarController.js:88:    let wallet = await CashWallet.findOne({ user: req.user._id });
+server/controllers/avatarController.js:89:    if (!wallet) {
+server/controllers/avatarController.js:90:      wallet = await CashWallet.create({ user: req.user._id });
+server/controllers/avatarController.js:93:    const currentTokens = wallet.kroTokens || 0;
+server/controllers/avatarController.js:94:    if (currentTokens < item.price) {
+server/controllers/avatarController.js:97:        message: `Tokens insuficientes. Necesitas ${item.price}, tienes ${currentTokens}`
+server/controllers/avatarController.js:101:    // Deduct tokens
+server/controllers/avatarController.js:102:    wallet.kroTokens = currentTokens - item.price;
+server/controllers/avatarController.js:103:    await wallet.save();
+server/controllers/avatarController.js:106:    await UserAvatar.updateOne(
+server/controllers/avatarController.js:114:      tokensRemaining: wallet.kroTokens
+server/controllers/avatarController.js:126:    const item = await AvatarItem.findById(itemId);
+server/controllers/avatarController.js:129:    const avatar = await UserAvatar.findOne({ user: req.user._id }).populate('ownedItems');
+server/controllers/avatarController.js:130:    if (!avatar) return res.status(404).json({ success: false, message: 'Avatar no encontrado' });
+server/controllers/avatarController.js:133:    const owns = avatar.ownedItems.some(
+server/controllers/avatarController.js:141:    const equipped = avatar.equippedItems.filter(e => e.category !== item.category);
+server/controllers/avatarController.js:143:    avatar.equippedItems = equipped;
+server/controllers/avatarController.js:144:    await avatar.save();
+server/controllers/avatarController.js:146:    const updated = await UserAvatar.findById(avatar._id)
+server/controllers/avatarController.js:161:    const avatar = await UserAvatar.findOne({ user: req.user._id });
+server/controllers/avatarController.js:162:    if (!avatar) return res.status(404).json({ success: false, message: 'Avatar no encontrado' });
+server/controllers/avatarController.js:164:    avatar.equippedItems = avatar.equippedItems.filter(
+server/controllers/avatarController.js:167:    await avatar.save();
+server/controllers/avatarController.js:169:    const updated = await UserAvatar.findById(avatar._id)
+server/controllers/communityController.js:40:    await community.populate('creator', 'username firstName lastName avatar');
+server/controllers/communityController.js:56:      .populate('creator', 'username firstName lastName avatar')
+server/controllers/communityController.js:57:      .populate('members.user', 'username firstName lastName avatar')
+server/controllers/communityController.js:73:      .populate('creator', 'username firstName lastName avatar')
+server/controllers/communityController.js:74:      .populate('members.user', 'username firstName lastName avatar')
+server/controllers/communityController.js:75:      .populate('posts.author', 'username firstName lastName avatar')
+server/controllers/communityController.js:76:      .populate('posts.comments.author', 'username firstName lastName avatar');
+server/controllers/communityController.js:92:      // Leave — admins cannot leave (they must transfer ownership first)
+server/controllers/communityController.js:94:        return res.status(400).json({ success: false, message: 'El admin debe transferir ownership antes de salir' });
+server/controllers/communityController.js:151:      .populate('posts.author', 'username firstName lastName avatar');
+server/controllers/communityController.js:227:      .populate('creator', 'username firstName lastName avatar')
+server/controllers/communityController.js:228:      .populate('members.user', 'username firstName lastName avatar')
+server/controllers/ephemeralStoryController.js:31:    await story.populate('author', 'username firstName lastName avatar');
+server/controllers/ephemeralStoryController.js:49:      .populate('author', 'username firstName lastName avatar')
+server/controllers/eventController.js:19:        .populate('organizer', 'username avatar firstName lastName')
+server/controllers/eventController.js:47:      .populate('organizer', 'username avatar firstName lastName isVerified');
+server/controllers/eventController.js:69:      return res.status(400).json({ message: 'Título, fecha y al menos un tipo de boleto son requeridos' });
+server/controllers/eventController.js:86:    await event.populate('organizer', 'username avatar firstName lastName');
+server/controllers/eventController.js:137:    if (!ticketType) return res.status(404).json({ message: 'Tipo de boleto no encontrado' });
+server/controllers/eventController.js:139:      return res.status(400).json({ message: 'No hay boletos disponibles de este tipo' });
+server/controllers/eventController.js:308:      .populate('owner', 'username avatar firstName lastName');
+server/controllers/eventController.js:335:      .populate('owner', 'username avatar firstName lastName email')
+server/controllers/feedController.js:41:      .populate('author', 'username avatar firstName lastName')
+server/controllers/feedController.js:42:      .populate('comments.user', 'username avatar')
+server/controllers/feedController.js:51:      .populate('seller', 'username avatar')
+server/controllers/feedController.js:114:        .populate('author', 'username avatar firstName lastName')
+server/controllers/feedController.js:121:        .populate('seller', 'username avatar')
+server/controllers/feedController.js:129:        .select('_id username avatar firstName lastName bio followers')
+server/controllers/feedController.js:159:        .populate('author', 'username avatar')
+server/controllers/feedController.js:166:        .populate('seller', 'username avatar')
+server/controllers/feedController.js:173:        .select('_id username avatar firstName lastName followers')
+server/controllers/gamificationController.js:40:// Mapa: acción → tipo de racha a actualizar
+server/controllers/gamificationController.js:71:    wallet_used:       ['wallet_user'],
+server/controllers/gamificationController.js:75:    marketplace_sold:  ['trader'],
+server/controllers/gamificationController.js:166:      .populate('user', 'username avatar firstName lastName isVerified');
+server/controllers/groupChatController.js:18:    await group.populate('members', 'username firstName lastName avatar');
+server/controllers/groupChatController.js:28:      .populate('members', 'username firstName lastName avatar')
+server/controllers/groupChatController.js:47:      .populate('author', 'username firstName lastName avatar')
+server/controllers/groupChatController.js:79:    await message.populate('author', 'username firstName lastName avatar');
+server/controllers/groupChatController.js:101:    await group.populate('members', 'username firstName lastName avatar');
+server/controllers/groupChatController.js:125:      .populate('members', 'username firstName lastName avatar')
+server/controllers/groupChatController.js:126:      .populate('admins', 'username firstName lastName avatar')
+server/controllers/groupChatController.js:127:      .populate('creator', 'username firstName lastName avatar');
+server/controllers/healthController.js:51:    const hadEarnedTokens = log ? log.tokensEarned > 0 : false;
+server/controllers/healthController.js:53:    const earnTokens = newSteps >= 10000 && !hadEarnedTokens;
+server/controllers/healthController.js:64:      tokensEarned: earnTokens ? 10 : (log ? log.tokensEarned : 0)
+server/controllers/healthController.js:76:    // Acreditar tokens al wallet del usuario y otorgar XP en gamificación
+server/controllers/healthController.js:77:    if (earnTokens) {
+server/controllers/healthController.js:78:      await User.findByIdAndUpdate(req.user._id, { $inc: { kronosTokens: 10 } });
+server/controllers/healthController.js:83:    res.json({ success: true, data: log, tokensAwarded: earnTokens ? 10 : 0 });
+server/controllers/healthController.js:122:    const totalTokens = logs.reduce((s, l) => s + (l.tokensEarned || 0), 0);
+server/controllers/healthController.js:127:      data: { totalSteps, totalCalories, totalWorkoutMinutes, totalWater, totalTokens, activeDays, periodDays: 30 }
+server/controllers/listingController.js:20:        .populate('seller', 'username firstName lastName avatar')
+server/controllers/listingController.js:37:      .populate('buyer', 'username firstName lastName avatar')
+server/controllers/listingController.js:60:    await listing.populate('seller', 'username firstName lastName avatar');
+server/controllers/listingController.js:70:      .populate('seller', 'username firstName lastName avatar')
+server/controllers/listingController.js:71:      .populate('buyer', 'username firstName lastName avatar')
+server/controllers/listingController.js:98:    await listing.populate('seller', 'username firstName lastName avatar');
+server/controllers/listingController.js:99:    await listing.populate('buyer', 'username firstName lastName avatar');
+server/controllers/listingController.js:123:    // Acreditar al vendedor su parte neta en kronosTokens (wallet virtual)
+server/controllers/listingController.js:126:      $inc: { kronosTokens: sellerNet }
+server/controllers/messageController.js:16:    await message.populate('sender', 'username avatar');
+server/controllers/messageController.js:17:    await message.populate('receiver', 'username avatar');
+server/controllers/messageController.js:40:      .populate('sender', 'username avatar')
+server/controllers/messageController.js:41:      .populate('receiver', 'username avatar')
+server/controllers/multimediaController.js:20:    await post.populate('author', 'username avatar firstName lastName');
+server/controllers/multimediaController.js:94:// Obtener posts con multimedia filtrando por tipo
+server/controllers/multimediaController.js:117:      .populate('author', 'username avatar firstName lastName')
+server/controllers/notificationController.js:8:      .populate('sender', 'username avatar');
+server/controllers/orderController.js:46:      .populate('restaurant', 'username avatar')
+server/controllers/orderController.js:47:      .populate('deliveryPerson', 'username avatar')
+server/controllers/orderController.js:63:      .populate('customer', 'username avatar email')
+server/controllers/orderController.js:64:      .populate('deliveryPerson', 'username avatar')
+server/controllers/orderController.js:167:    const order = await Order.findById(orderId).populate('deliveryPerson', 'username avatar location');
+server/controllers/postController.js:53:    await post.populate('author', 'username avatar firstName lastName');
+server/controllers/postController.js:77:      .populate('author', 'username avatar firstName lastName')
+server/controllers/postController.js:78:      .populate('comments.user', 'username avatar')
+server/controllers/postController.js:112:      .populate('author', 'username avatar firstName lastName')
+server/controllers/postController.js:180:    await post.populate('comments.user', 'username avatar');
+server/controllers/postController.js:254:      .populate('author', 'username avatar firstName lastName')
+server/controllers/productController.js:57:      .populate('seller', 'username avatar')
+server/controllers/productController.js:73:    const product = await Product.findById(req.params.id).populate('seller', 'username avatar');
+server/controllers/reportingController.js:72:      .populate('blockedUser', 'username avatar');
+server/controllers/searchController.js:32:        .select('_id username firstName lastName avatar bio followers')
+server/controllers/searchController.js:45:        .populate('author', 'username avatar')
+server/controllers/searchController.js:59:        .populate('seller', 'username avatar')
+server/controllers/searchController.js:89:      .select('_id username firstName lastName avatar bio followers')
+server/controllers/sessionController.js:9:      .select('-token')
+server/controllers/sessionController.js:52:    // Extraer el token actual del header Authorization
+server/controllers/sessionController.js:53:    const currentToken = req.headers.authorization
+server/controllers/sessionController.js:59:    // Excluir la sesion actual si se tiene el token
+server/controllers/sessionController.js:60:    if (currentToken) {
+server/controllers/sessionController.js:61:      filter.token = { $ne: currentToken };
+server/controllers/storyController.js:42:      .populate('author', 'username avatar');
+server/controllers/storyController.js:61:    ).populate('author', 'username avatar');
+server/controllers/tipController.js:1:const Tip = require('../models/Tip');
+server/controllers/tipController.js:2:const UserWallet = require('../models/UserWallet');
+server/controllers/tipController.js:5:exports.sendTip = async (req, res) => {
+server/controllers/tipController.js:16:      return res.status(400).json({ message: 'You cannot tip yourself' });
+server/controllers/tipController.js:19:    // Check sender wallet balance
+server/controllers/tipController.js:20:    const senderWallet = await UserWallet.findOne({ userId: fromUserId }).session(session);
+server/controllers/tipController.js:21:    if (!senderWallet || senderWallet.balance < amount) {
+server/controllers/tipController.js:26:    await UserWallet.findOneAndUpdate(
+server/controllers/tipController.js:32:    // Credit receiver (create wallet if it doesn't exist)
+server/controllers/tipController.js:33:    await UserWallet.findOneAndUpdate(
+server/controllers/tipController.js:39:    const tip = await Tip.create({
+server/controllers/tipController.js:49:    const populated = await tip.populate([
+server/controllers/tipController.js:50:      { path: 'fromUser', select: 'username avatar' },
+server/controllers/tipController.js:51:      { path: 'toUser', select: 'username avatar' }
+server/controllers/tipController.js:54:    res.status(201).json({ tip: populated, message: `Propina de ${amount} KRO enviada exitosamente` });
+server/controllers/tipController.js:57:    console.error('Error sending tip:', error);
+server/controllers/tipController.js:59:    res.status(500).json({ message: 'Error sending tip' });
+server/controllers/tipController.js:65:exports.getReceivedTips = async (req, res) => {
+server/controllers/tipController.js:68:    const tips = await Tip.find({ toUser: req.user.id })
+server/controllers/tipController.js:69:      .populate('fromUser', 'username avatar')
+server/controllers/tipController.js:76:    const sanitized = tips.map(t => ({
+server/controllers/tipController.js:78:      fromUser: t.anonymous ? { username: 'Anonimo', avatar: null } : t.fromUser
+server/controllers/tipController.js:81:    const total = await Tip.countDocuments({ toUser: req.user.id });
+server/controllers/tipController.js:82:    const totalKRO = await Tip.aggregate([
+server/controllers/tipController.js:87:    res.json({ tips: sanitized, total, totalKRO: totalKRO[0]?.total || 0 });
+server/controllers/tipController.js:89:    console.error('Error fetching received tips:', error);
+server/controllers/tipController.js:90:    res.status(500).json({ message: 'Error fetching tips' });
+server/controllers/tipController.js:94:exports.getSentTips = async (req, res) => {
+server/controllers/tipController.js:97:    const tips = await Tip.find({ fromUser: req.user.id })
+server/controllers/tipController.js:98:      .populate('toUser', 'username avatar')
+server/controllers/tipController.js:104:    res.json({ tips });
+server/controllers/tipController.js:106:    console.error('Error fetching sent tips:', error);
+server/controllers/tipController.js:107:    res.status(500).json({ message: 'Error fetching sent tips' });
+server/controllers/tipController.js:111:exports.getTipsForTarget = async (req, res) => {
+server/controllers/tipController.js:114:    const tips = await Tip.find({ targetId })
+server/controllers/tipController.js:115:      .populate('fromUser', 'username avatar')
+server/controllers/tipController.js:120:    const totalKRO = tips.reduce((sum, t) => sum + t.amount, 0);
+server/controllers/tipController.js:121:    const sanitized = tips.map(t => ({
+server/controllers/tipController.js:123:      fromUser: t.anonymous ? { username: 'Anonimo', avatar: null } : t.fromUser
+server/controllers/tipController.js:126:    res.json({ tips: sanitized, totalKRO, count: tips.length });
+server/controllers/tipController.js:128:    console.error('Error fetching target tips:', error);
+server/controllers/tipController.js:129:    res.status(500).json({ message: 'Error fetching tips' });
+server/controllers/tokenController.js:1:const UserWallet = require('../models/UserWallet');
+server/controllers/tokenController.js:2:const KronosToken = require('../models/KronosToken');
+server/controllers/tokenController.js:5:const tokenService = require('../services/tokenService');
+server/controllers/tokenController.js:8:// Initialize user wallet
+server/controllers/tokenController.js:9:const initializeWallet = async (req, res) => {
+server/controllers/tokenController.js:12:    let wallet = await UserWallet.findOne({ userId });
+server/controllers/tokenController.js:14:    if (wallet) {
+server/controllers/tokenController.js:15:      return res.json({ wallet, message: 'Wallet already exists' });
+server/controllers/tokenController.js:18:    wallet = new UserWallet({
+server/controllers/tokenController.js:20:      tokenBalance: ethers.parseUnits('0', 18),
+server/controllers/tokenController.js:23:    await wallet.save();
+server/controllers/tokenController.js:24:    res.status(201).json(wallet);
+server/controllers/tokenController.js:30:// Get wallet balance
+server/controllers/tokenController.js:34:    const balance = await tokenService.getBalance(userId);
+server/controllers/tokenController.js:41:// Transfer tokens
+server/controllers/tokenController.js:42:const transferTokens = async (req, res) => {
+server/controllers/tokenController.js:51:    const transaction = await tokenService.transferTokens(userId, toUserId, amount);
+server/controllers/tokenController.js:58:// Stake tokens
+server/controllers/tokenController.js:59:const stakeTokens = async (req, res) => {
+server/controllers/tokenController.js:72:    const stake = await tokenService.stakeTokens(userId, amount, lockPeriod);
+server/controllers/tokenController.js:100:    const rewards = await tokenService.claimStakingRewards(userId, stakeId);
+server/controllers/tokenController.js:117:    const metric = await tokenService.trackAttention(
+server/controllers/tokenController.js:135:    const leaderboard = await tokenService.getLeaderboard(type, parseInt(limit));
+server/controllers/tokenController.js:148:    const wallet = await UserWallet.findOne({ userId }).populate({
+server/controllers/tokenController.js:153:    if (!wallet) {
+server/controllers/tokenController.js:154:      return res.status(404).json({ error: 'Wallet not found' });
+server/controllers/tokenController.js:157:    res.json(wallet.transactions);
+server/controllers/tokenController.js:197:      return total + parseFloat(metric.tokensEarned.toString());
+server/controllers/tokenController.js:210:      acc[contentId].earnings += parseFloat(metric.tokensEarned.toString());
+server/controllers/tokenController.js:226:// Get token info
+server/controllers/tokenController.js:227:const getTokenInfo = async (req, res) => {
+server/controllers/tokenController.js:229:    const token = await KronosToken.findOne();    if (!token) {
+server/controllers/tokenController.js:230:      return res.status(404).json({ error: 'Token info not found' });
+server/controllers/tokenController.js:233:      name: token.name,
+server/controllers/tokenController.js:234:      symbol: token.symbol,
+server/controllers/tokenController.js:235:      totalSupply: token.totalSupply.toString(),
+server/controllers/tokenController.js:236:      circulatingSupply: token.circulatingSupply.toString(),
+server/controllers/tokenController.js:237:      burnedSupply: token.burnedSupply.toString(),
+server/controllers/tokenController.js:238:      attentionRate: token.attentionRate,
+server/controllers/tokenController.js:239:      stakingAPY: Object.fromEntries(token.stakingAPY),
+server/controllers/tokenController.js:240:      dailyRewardPool: token.dailyRewardPool.toString(),
+server/controllers/tokenController.js:241:      contractAddress: token.contractAddress,
+server/controllers/tokenController.js:242:      network: token.network,
+server/controllers/tokenController.js:250:  initializeWallet,
+server/controllers/tokenController.js:252:  transferTokens,
+server/controllers/tokenController.js:253:  stakeTokens,
+server/controllers/tokenController.js:261:  getTokenInfo,
+server/controllers/translationController.js:26:    max_tokens: 1000,
+server/controllers/twoFactorController.js:32:    const { secret, token, backupCodes } = req.body;
+server/controllers/twoFactorController.js:34:    const isValid = twoFactorService.verifyTOTPToken(secret, token);
+server/controllers/twoFactorController.js:36:      return res.status(400).json({ success: false, error: 'Invalid token' });
+server/controllers/twoFactorController.js:55:    const { userId, token, isBackupCode, trustDevice, deviceId, deviceName } = req.body;
+server/controllers/twoFactorController.js:65:      isValid = await twoFactorService.verifyBackupCode(userId, token);
+server/controllers/twoFactorController.js:67:      isValid = twoFactorService.verifyTOTPToken(twoFactor.secret, token);
+server/controllers/userBlockController.js:76:        .populate('blockedUser', '_id username avatar firstName lastName')
+server/controllers/userController.js:28:      .populate('followers', '_id username avatar')
+server/controllers/userController.js:29:      .populate('following', '_id username avatar');
+server/controllers/userController.js:55:        avatar: user.avatar,
+server/controllers/userController.js:106:// Actualizar avatar
+server/controllers/userController.js:107:exports.updateAvatar = async (req, res) => {
+server/controllers/userController.js:117:    // Eliminar avatar anterior si existe
+server/controllers/userController.js:118:    if (user.avatar && user.avatar.includes('cloudinary')) {
+server/controllers/userController.js:120:        const publicId = user.avatar.split('/').pop().split('.')[0];
+server/controllers/userController.js:123:        console.error('Error deleting old avatar:', err);
+server/controllers/userController.js:127:    user.avatar = req.file.path;
+server/controllers/userController.js:132:      avatar: user.avatar,
+server/controllers/userController.js:133:      message: 'Avatar updated successfully'
+server/controllers/userController.js:150:      .populate('restaurant', 'username avatar')
+server/controllers/userController.js:168:      .populate('restaurant', 'username avatar')
+server/controllers/userController.js:169:      .populate('deliveryPerson', 'username avatar')
+server/controllers/userController.js:219:      .select('username firstName lastName avatar bio followers')
+server/controllers/videoController.js:53:    ).populate('uploadedBy', 'username avatar');
+server/controllers/videoController.js:86:      .populate('uploadedBy', 'username avatar');
+server/controllers/walletController.js:1:const CashWallet = require('../models/CashWallet');
+server/controllers/walletController.js:4:const UserWallet = require('../models/UserWallet');
+server/controllers/walletController.js:8:async function getOrCreateCashWallet(userId) {
+server/controllers/walletController.js:9:  let wallet = await CashWallet.findOne({ user: userId });
+server/controllers/walletController.js:10:  if (!wallet) {
+server/controllers/walletController.js:11:    wallet = await CashWallet.create({ user: userId, balance: 0 });
+server/controllers/walletController.js:13:  return wallet;
+server/controllers/walletController.js:16:// ── Cash Wallet ───────────────────────────────────────────────────────────────
+server/controllers/walletController.js:18:exports.getWallet = async (req, res) => {
+server/controllers/walletController.js:20:    const cashWallet = await getOrCreateCashWallet(req.user._id);
+server/controllers/walletController.js:21:    await cashWallet.populate('transactions.counterparty', 'username firstName lastName avatar');
+server/controllers/walletController.js:23:    let kroWallet = null;
+server/controllers/walletController.js:25:      kroWallet = await UserWallet.findOne({ userId: req.user._id });
+server/controllers/walletController.js:31:        balance: cashWallet.balance,
+server/controllers/walletController.js:32:        currency: cashWallet.currency,
+server/controllers/walletController.js:33:        isLocked: cashWallet.isLocked,
+server/controllers/walletController.js:34:        kroTokens: cashWallet.kroTokens || 0,
+server/controllers/walletController.js:35:        transactions: cashWallet.transactions.slice(-30).reverse()
+server/controllers/walletController.js:37:      kro: kroWallet ? {
+server/controllers/walletController.js:38:        tokenBalance: kroWallet.tokenBalance?.toString() || '0',
+server/controllers/walletController.js:39:        stakedTokens: kroWallet.stakedTokens?.toString() || '0',
+server/controllers/walletController.js:40:        pendingRewards: kroWallet.pendingRewards?.toString() || '0'
+server/controllers/walletController.js:54:    const wallet = await getOrCreateCashWallet(req.user._id);
+server/controllers/walletController.js:55:    wallet.balance += Number(amount);
+server/controllers/walletController.js:56:    wallet.transactions.push({ type: 'deposit', amount: Number(amount), description: 'Depósito manual' });
+server/controllers/walletController.js:57:    await wallet.save();
+server/controllers/walletController.js:59:    res.json({ success: true, balance: wallet.balance, message: `$${amount} depositados correctamente` });
+server/controllers/walletController.js:65:exports.transfer = async (req, res) => {
+server/controllers/walletController.js:74:    const senderWallet = await getOrCreateCashWallet(req.user._id);
+server/controllers/walletController.js:75:    if (senderWallet.balance < Number(amount)) return res.status(400).json({ success: false, message: 'Saldo insuficiente' });
+server/controllers/walletController.js:76:    if (senderWallet.isLocked) return res.status(403).json({ success: false, message: 'Wallet bloqueada' });
+server/controllers/walletController.js:78:    const recipientWallet = await getOrCreateCashWallet(toUserId);
+server/controllers/walletController.js:79:    const desc = description || `Transferencia a ${recipient.firstName || recipient.username}`;
+server/controllers/walletController.js:81:    senderWallet.balance -= Number(amount);
+server/controllers/walletController.js:82:    senderWallet.transactions.push({ type: 'transfer_out', amount: Number(amount), description: desc, counterparty: toUserId, status: 'completed' });
+server/controllers/walletController.js:84:    recipientWallet.balance += Number(amount);
+server/controllers/walletController.js:85:    recipientWallet.transactions.push({ type: 'transfer_in', amount: Number(amount), description: `Transferencia de ${req.user.firstName || req.user.username}`, counterparty: req.user._id, status: 'completed' });
+server/controllers/walletController.js:87:    await Promise.all([senderWallet.save(), recipientWallet.save()]);
+server/controllers/walletController.js:91:      balance: senderWallet.balance,
+server/controllers/walletController.js:101:    const wallet = await getOrCreateCashWallet(req.user._id);
+server/controllers/walletController.js:102:    await wallet.populate('transactions.counterparty', 'username firstName lastName avatar');
+server/controllers/walletController.js:103:    const txs = wallet.transactions.slice().reverse();
+server/controllers/walletController.js:104:    res.json({ success: true, data: txs, balance: wallet.balance });
+server/controllers/walletController.js:141:    const wallet = await getOrCreateCashWallet(req.user._id);
+server/controllers/walletController.js:143:    const lastClaim = wallet.lastDailyReward ? new Date(wallet.lastDailyReward).getTime() : 0;
+server/controllers/walletController.js:145:    const streakDays = wallet.rewardStreak || 0;
+server/controllers/walletController.js:155:    const wallet = await getOrCreateCashWallet(req.user._id);
+server/controllers/walletController.js:157:    const lastClaim = wallet.lastDailyReward ? new Date(wallet.lastDailyReward).getTime() : 0;
+server/controllers/walletController.js:163:    wallet.rewardStreak = isConsecutive ? (wallet.rewardStreak || 0) + 1 : 1;
+server/controllers/walletController.js:164:    const reward = Math.min(10 + wallet.rewardStreak * 2, 50);
+server/controllers/walletController.js:165:    wallet.kroTokens = (wallet.kroTokens || 0) + reward;
+server/controllers/walletController.js:166:    wallet.lastDailyReward = new Date();
+server/controllers/walletController.js:167:    await wallet.save();
+server/controllers/walletController.js:168:    res.json({ reward, streakDays: wallet.rewardStreak, newBalance: wallet.kroTokens });
+server/final-validation.js:54:// Test 6: Cargar jsonwebtoken
+server/final-validation.js:56:  require('jsonwebtoken');
+server/final-validation.js:57:  successes.push('✅ jsonwebtoken cargado');
+server/final-validation.js:59:  errors.push(`❌ jsonwebtoken: ${e.message}`);
+server/middleware/auth.js:1:const jwt = require('jsonwebtoken');
+server/middleware/auth.js:5:  let token;
+server/middleware/auth.js:8:    token = req.headers.authorization.split(' ')[1];
+server/middleware/auth.js:11:  if (!token) {
+server/middleware/auth.js:16:    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+server/middleware/errorHandler.js:29:  if (err.name === 'JsonWebTokenError') {
+server/middleware/errorHandler.js:31:    message = 'Invalid token';
+server/middleware/errorHandler.js:33:  if (err.name === 'TokenExpiredError') {
+server/middleware/errorHandler.js:35:    message = 'Token expired';
+server/middleware/rateLimit.js:11:exports.walletLimiter = rateLimit({
+server/middleware/web3Auth.js:1:const jwt = require('jsonwebtoken');
+server/middleware/web3Auth.js:5: * Web3 Auth middleware - Verify JWT token and load Web3User
+server/middleware/web3Auth.js:9:  let token;
+server/middleware/web3Auth.js:11:  // Get token from Authorization header
+server/middleware/web3Auth.js:13:    token = req.headers.authorization.split(' ')[1];
+server/middleware/web3Auth.js:16:  // No token provided
+server/middleware/web3Auth.js:17:  if (!token) {
+server/middleware/web3Auth.js:20:      message: 'Not authorized to access this route - no token provided'
+server/middleware/web3Auth.js:25:    // Verify token
+server/middleware/web3Auth.js:26:    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+server/middleware/web3Auth.js:32:        message: 'Invalid token - not a verified Web3 user'
+server/middleware/web3Auth.js:57:      walletAddress: web3User.walletAddress,
+server/middleware/web3Auth.js:65:    if (error.name === 'JsonWebTokenError') {
+server/middleware/web3Auth.js:68:        message: 'Invalid token format'
+server/middleware/web3Auth.js:72:    if (error.name === 'TokenExpiredError') {
+server/middleware/web3Auth.js:75:        message: 'Token has expired'
+server/middleware/web3Auth.js:87: * Verify wallet signature middleware
+server/middleware/web3Auth.js:88: * Validates that a provided signature matches the wallet address
+server/middleware/web3Auth.js:90:const verifyWalletSignature = async (req, res, next) => {
+server/middleware/web3Auth.js:92:    const { walletAddress, signature, message } = req.body;
+server/middleware/web3Auth.js:94:    if (!walletAddress || !signature || !message) {
+server/middleware/web3Auth.js:97:        message: 'Missing required fields: walletAddress, signature, message'
+server/middleware/web3Auth.js:106:    if (recoveredAddress.toLowerCase() !== walletAddress.toLowerCase()) {
+server/middleware/web3Auth.js:114:    req.verifiedWallet = {
+server/middleware/web3Auth.js:122:    console.error('Wallet signature verification error:', error.message);
+server/middleware/web3Auth.js:131: * Check if wallet exists middleware
+server/middleware/web3Auth.js:133:const checkWalletExists = async (req, res, next) => {
+server/middleware/web3Auth.js:135:    const { walletAddress } = req.body;
+server/middleware/web3Auth.js:137:    if (!walletAddress) {
+server/middleware/web3Auth.js:140:        message: 'Wallet address is required'
+server/middleware/web3Auth.js:145:      walletAddress: walletAddress.toLowerCase()
+server/middleware/web3Auth.js:151:        message: 'Wallet not found'
+server/middleware/web3Auth.js:158:    console.error('Check wallet exists error:', error.message);
+server/middleware/web3Auth.js:161:      message: 'Error checking wallet'
+server/middleware/web3Auth.js:167: * Validate wallet address format middleware
+server/middleware/web3Auth.js:169:const validateWalletAddress = (req, res, next) => {
+server/middleware/web3Auth.js:170:  const { walletAddress } = req.body;
+server/middleware/web3Auth.js:172:  if (!walletAddress) {
+server/middleware/web3Auth.js:175:      message: 'Wallet address is required'
+server/middleware/web3Auth.js:179:  if (!/^0x[a-fA-F0-9]{40}$/.test(walletAddress)) {
+server/middleware/web3Auth.js:182:      message: 'Invalid wallet address format. Must be a valid Ethereum address (0x...)'
+server/middleware/web3Auth.js:191:  verifyWalletSignature,
+server/middleware/web3Auth.js:192:  checkWalletExists,
+server/middleware/web3Auth.js:193:  validateWalletAddress
+server/models/ActiveSession.js:10:    token: {
+server/models/AttentionMetrics.js:24:    tokensEarned: {
+server/models/AvatarItem.js:3:const avatarItemSchema = new mongoose.Schema(
+server/models/AvatarItem.js:24:module.exports = mongoose.model('AvatarItem', avatarItemSchema);
+server/models/CashWallet.js:5:    type: { type: String, enum: ['deposit', 'withdrawal', 'transfer_in', 'transfer_out', 'payment', 'refund'], required: true },
+server/models/CashWallet.js:16:const cashWalletSchema = new mongoose.Schema(
+server/models/CashWallet.js:19:  kroTokens: { type: Number, default: 0 },
+server/models/CashWallet.js:30:cashWalletSchema.index({ user: 1 });
+server/models/CashWallet.js:32:module.exports = mongoose.model('CashWallet', cashWalletSchema);
+server/models/Community.js:33:    avatar: { type: String, default: null },
+server/models/Emoji.js:22:    enum: ['social', 'food', 'shop', 'premium', 'animated'],
+server/models/Event.js:4:// ── Tipos de boleto dentro de un evento ──
+server/models/Event.js:40:  qrCode:      { type: String, unique: true },           // token único para el QR
+server/models/Gamification.js:14:  { id: 'wallet_user',     name: 'Wallet User',       emoji: '💳', rarity: 'common',    description: 'Usaste el wallet por primera vez',      xpReward: 50  },
+server/models/Gamification.js:19:  { id: 'trader',          name: 'Trader',            emoji: '🤝', rarity: 'rare',      description: 'Vendiste en el marketplace',             xpReward: 250 },
+server/models/Gamification.js:24:  { id: 'millonario',      name: 'Millonario',        emoji: '💎', rarity: 'epic',      description: 'Acumulaste 10,000 tokens',              xpReward: 800 },
+server/models/GroupConversation.js:7:    avatar: { type: String, default: null },
+server/models/HealthLog.js:39:    tokensEarned: {
+server/models/KronosToken.js:3:const kronosTokenSchema = new mongoose.Schema(
+server/models/KronosToken.js:7:      default: 'Kronos Token',
+server/models/KronosToken.js:69:  { collection: 'kronos_tokens' }
+server/models/KronosToken.js:72:kronosTokenSchema.index({ contractAddress: 1 });
+server/models/KronosToken.js:74:module.exports = mongoose.model('KronosToken', kronosTokenSchema);
+server/models/Notification.js:9:      enum: ['like', 'comment', 'follow', 'message', 'transfer', 'community_invite', 'story_reaction'],
+server/models/Order.js:50:      enum: ['credit_card', 'debit_card', 'cash', 'wallet'],
+server/models/RewardPool.js:31:        tokensPerSecond: Number,
+server/models/Stake.js:5:    walletId: {
+server/models/Stake.js:7:      ref: 'UserWallet',
+server/models/Stake.js:62:stakeSchema.index({ walletId: 1 });
+server/models/Tip.js:3:const tipSchema = new mongoose.Schema({
+server/models/Tip.js:15:tipSchema.index({ toUser: 1, createdAt: -1 });
+server/models/Tip.js:16:tipSchema.index({ fromUser: 1, createdAt: -1 });
+server/models/Tip.js:17:tipSchema.index({ targetId: 1 });
+server/models/Tip.js:19:module.exports = mongoose.model('Tip', tipSchema);
+server/models/Transaction.js:5:    fromWalletId: {
+server/models/Transaction.js:7:      ref: 'UserWallet',
+server/models/Transaction.js:10:    toWalletId: {
+server/models/Transaction.js:12:      ref: 'UserWallet',
+server/models/Transaction.js:21:      enum: ['transfer', 'reward', 'stake', 'unstake', 'burn', 'swap'],
+server/models/Transaction.js:59:transactionSchema.index({ fromWalletId: 1, toWalletId: 1 });
+server/models/User.js:33:    avatar: {
+server/models/User.js:68:    passwordResetToken: {
+server/models/User.js:117:      customShop: { type: Boolean, default: false }
+server/models/User.js:135:    kronosTokens: { type: Number, default: 0, min: 0 }
+server/models/User.js:145:// Asignar avatar por defecto usando UI Avatars si no tiene foto
+server/models/User.js:147:  if (!this.avatar) {
+server/models/User.js:151:    this.avatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random&color=fff&size=150`;
+server/models/UserAvatar.js:3:const userAvatarSchema = new mongoose.Schema(
+server/models/UserAvatar.js:13:        itemId: { type: mongoose.Schema.Types.ObjectId, ref: 'AvatarItem' },
+server/models/UserAvatar.js:18:      { type: mongoose.Schema.Types.ObjectId, ref: 'AvatarItem' }
+server/models/UserAvatar.js:26:module.exports = mongoose.model('UserAvatar', userAvatarSchema);
+server/models/UserWallet.js:3:const userWalletSchema = new mongoose.Schema(
+server/models/UserWallet.js:10:    walletAddress: {
+server/models/UserWallet.js:16:    tokenBalance: {
+server/models/UserWallet.js:20:    stakedTokens: {
+server/models/UserWallet.js:24:    unstakedTokens: {
+server/models/UserWallet.js:73:  { collection: 'user_wallets' }
+server/models/UserWallet.js:76:userWalletSchema.index({ userId: 1 });
+server/models/UserWallet.js:77:userWalletSchema.index({ walletAddress: 1 });
+server/models/UserWallet.js:78:userWalletSchema.index({ createdAt: -1 });
+server/models/UserWallet.js:80:module.exports = mongoose.model('UserWallet', userWalletSchema);
+server/models/Web3User.js:4:  walletAddress: {
+server/agents/builder-alpha.js:26:    writeFile('client/src/components/kronos/Skeleton.jsx', `import React from 'react';\n\nfunction SkeletonBlock({ className = '' }) {\n  return (\n    <div\n      className={\`animate-pulse bg-white/10 rounded-lg \${className}\`}\n      aria-hidden="true"\n    />\n  );\n}\n\nexport function SkeletonCard() {\n  return (\n    <div className="p-4 rounded-2xl border border-white/10 bg-white/5 space-y-3">\n      <div className="flex items-center gap-3">\n        <SkeletonBlock className="w-10 h-10 rounded-full" />\n        <div className="flex-1 space-y-2">\n          <SkeletonBlock className="h-3 w-1/3" />\n          <SkeletonBlock className="h-3 w-1/4" />\n        </div>\n      </div>\n      <SkeletonBlock className="h-32 w-full" />\n      <div className="flex gap-4">\n        <SkeletonBlock className="h-3 w-16" />\n        <SkeletonBlock className="h-3 w-16" />\n      </div>\n    </div>\n  );\n}\n\nexport function SkeletonList({ count = 4 }) {\n  return (\n    <div className="space-y-4">\n      {Array.from({ length: count }).map((_, i) => (\n        <SkeletonCard key={i} />\n      ))}\n    </div>\n  );\n}\n\nexport function SkeletonWalletCard() {\n  return (\n    <div className="p-6 rounded-3xl border border-white/10 bg-gradient-to-br from-purple-900/30 to-blue-900/20 space-y-4">\n      <div className="flex justify-between">\n        <SkeletonBlock className="h-4 w-20" />\n        <SkeletonBlock className="h-4 w-12" />\n      </div>\n      <SkeletonBlock className="h-8 w-40" />\n      <div className="flex gap-3">\n        <SkeletonBlock className="h-10 flex-1 rounded-xl" />\n        <SkeletonBlock className="h-10 flex-1 rounded-xl" />\n      </div>\n    </div>\n  );\n}\n\nexport default SkeletonBlock;\n`);
+server/agents/builder-alpha.js:51:    writeFile('server/models/Notification.js', `const mongoose = require('mongoose');\n\nconst notificationSchema = new mongoose.Schema(\n  {\n    recipient: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },\n    sender: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },\n    type: {\n      type: String,\n      enum: ['like', 'comment', 'follow', 'message', 'transfer', 'community_invite', 'story_reaction'],\n      required: true,\n    },\n    title: { type: String, required: true },\n    body: { type: String, default: '' },\n    link: { type: String, default: '' },\n    read: { type: Boolean, default: false, index: true },\n    meta: { type: mongoose.Schema.Types.Mixed, default: {} },\n  },\n  { timestamps: true }\n);\n\nnotificationSchema.index({ createdAt: 1 }, { expireAfterSeconds: 60 * 60 * 24 * 30 });\n\nmodule.exports = mongoose.model('Notification', notificationSchema);\n`);
+server/agents/builder-alpha.js:52:    writeFile('server/controllers/notificationController.js', `const Notification = require('../models/Notification');\n\nexports.getNotifications = async (req, res) => {\n  try {\n    const notifications = await Notification.find({ recipient: req.user._id })\n      .sort({ createdAt: -1 })\n      .limit(50)\n      .populate('sender', 'username avatar');\n    const unreadCount = await Notification.countDocuments({ recipient: req.user._id, read: false });\n    res.json({ notifications, unreadCount });\n  } catch (err) {\n    res.status(500).json({ message: 'Error al obtener notificaciones' });\n  }\n};\n\nexports.markAllRead = async (req, res) => {\n  try {\n    await Notification.updateMany({ recipient: req.user._id, read: false }, { read: true });\n    res.json({ message: 'Notificaciones marcadas como leídas' });\n  } catch (err) {\n    res.status(500).json({ message: 'Error al actualizar notificaciones' });\n  }\n};\n\nexports.markOneRead = async (req, res) => {\n  try {\n    await Notification.findOneAndUpdate(\n      { _id: req.params.id, recipient: req.user._id },\n      { read: true }\n    );\n    res.json({ message: 'OK' });\n  } catch (err) {\n    res.status(500).json({ message: 'Error al actualizar notificación' });\n  }\n};\n\nexports.createNotification = async ({ recipient, sender, type, title, body = '', link = '', meta = {} }) => {\n  if (recipient?.toString() === sender?.toString()) return;\n  return Notification.create({ recipient, sender, type, title, body, link, meta });\n};\n`);
+server/agents/builder-alpha.js:54:    writeFile('client/src/components/NotificationCenter.jsx', `import React, { useState, useEffect, useCallback } from 'react';\nimport axios from 'axios';\nimport { useNavigate } from 'react-router-dom';\n\nconst API = import.meta.env.VITE_API_URL || 'http://localhost:5000';\n\nexport default function NotificationCenter() {\n  const [open, setOpen] = useState(false);\n  const [notifications, setNotifications] = useState([]);\n  const [unread, setUnread] = useState(0);\n  const navigate = useNavigate();\n\n  const fetchNotifications = useCallback(async () => {\n    try {\n      const token = localStorage.getItem('token');\n      if (!token) return;\n      const { data } = await axios.get(`${API}/api/notifications`, {\n        headers: { Authorization: `Bearer ${token}` },\n      });\n      setNotifications(data.notifications);\n      setUnread(data.unreadCount);\n    } catch {}\n  }, []);\n\n  useEffect(() => {\n    fetchNotifications();\n    const interval = setInterval(fetchNotifications, 30000);\n    return () => clearInterval(interval);\n  }, [fetchNotifications]);\n\n  const markAllRead = async () => {\n    try {\n      const token = localStorage.getItem('token');\n      await axios.put(`${API}/api/notifications/read-all`, {}, {\n        headers: { Authorization: `Bearer ${token}` },\n      });\n      setUnread(0);\n      setNotifications(prev => prev.map(n => ({ ...n, read: true })));\n    } catch {}\n  };\n\n  const handleClick = async (notif) => {\n    if (!notif.read) {\n      const token = localStorage.getItem('token');\n      await axios.put(`${API}/api/notifications/${notif._id}/read`, {}, {\n        headers: { Authorization: `Bearer ${token}` },\n      }).catch(() => {});\n      setNotifications(prev => prev.map(n => (n._id === notif._id ? { ...n, read: true } : n)));\n      setUnread(prev => Math.max(0, prev - 1));\n    }\n    if (notif.link) navigate(notif.link);\n    setOpen(false);\n  };\n\n  return (\n    <div className="relative">\n      <button\n        onClick={() => setOpen(o => !o)}\n        className="relative p-2 rounded-full hover:bg-white/10 transition-colors"\n      >\n        <svg className="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">\n          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />\n        </svg>\n        {unread > 0 && (\n          <span className="absolute -top-0.5 -right-0.5 bg-purple-500 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-bold">\n            {unread > 9 ? '9+' : unread}\n          </span>\n        )}\n      </button>\n      {open && (\n        <>\n          <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />\n          <div className="absolute right-0 top-10 z-50 w-80 max-h-96 overflow-y-auto rounded-2xl border border-white/10 bg-[#0f0f1a]/95 backdrop-blur-xl shadow-2xl">\n            <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">\n              <h3 className="text-sm font-semibold text-white">Notificaciones</h3>\n              {unread > 0 && (\n                <button onClick={markAllRead} className="text-xs text-purple-400 hover:text-purple-300">\n                  Marcar todas\n                </button>\n              )}\n            </div>\n            {notifications.length === 0 ? (\n              <div className="py-12 text-center text-white/30 text-sm">Sin notificaciones</div>\n            ) : (\n              notifications.map(n => (\n                <button\n                  key={n._id}\n                  onClick={() => handleClick(n)}\n                  className={`w-full text-left px-4 py-3 hover:bg-white/5 transition-colors border-b border-white/5 ${!n.read ? 'bg-purple-900/20' : ''}`}\n                >\n                  <p className="text-sm text-white/90 font-medium">{n.title}</p>\n                  {n.body && <p className="text-xs text-white/50 mt-0.5 line-clamp-1">{n.body}</p>}\n                  <p className="text-[10px] text-white/30 mt-1">{new Date(n.createdAt).toLocaleString('es', { dateStyle: 'short', timeStyle: 'short' })}</p>\n                </button>\n              ))\n            )}\n          </div>\n        </>\n      )}\n    </div>\n  );\n}\n`);
+server/agents/builder-alpha.js:67:  'ui-skeleton-wallet': () => {
+server/agents/builder-alpha.js:68:    const walletPath = path.join(ROOT, 'client/src/pages/Wallet.jsx');
+server/agents/builder-alpha.js:69:    if (!fs.existsSync(walletPath)) { log('  Wallet.jsx not found'); return; }
+server/agents/builder-alpha.js:70:    let content = fs.readFileSync(walletPath, 'utf8');
+server/agents/builder-alpha.js:71:    if (content.includes('SkeletonWalletCard')) { log('  Already has skeleton'); return; }
+server/agents/builder-alpha.js:72:    content = content.replace(/import React/, `import { SkeletonWalletCard, SkeletonList } from '../components/kronos';\nimport React`);
+server/agents/builder-alpha.js:73:    content = content.replace(/loading\s*&&\s*<[^>]+>Cargando[^<]*<\/[^>]+>/, `loading && <div style={{padding:'0 16px'}}><SkeletonWalletCard /><SkeletonList count={3} /></div>`);
+server/agents/builder-alpha.js:74:    fs.writeFileSync(walletPath, content);
+server/agents/builder-alpha.js:75:    log('  SkeletonWalletCard applied to Wallet.jsx');
+server/agents/builder-alpha.js:123:  'feat-token-daily-reward': () => {
+server/agents/builder-alpha.js:124:    const walletRoutePath = path.join(ROOT, 'server/routes/wallet.js');
+server/agents/builder-alpha.js:125:    if (fs.existsSync(walletRoutePath)) {
+server/agents/builder-alpha.js:126:      let content = fs.readFileSync(walletRoutePath, 'utf8');
+server/agents/builder-alpha.js:128:        content = content.replace('module.exports = router;', `router.get('/daily-reward', protect, require('../controllers/walletController').getDailyReward);\nrouter.post('/daily-reward', protect, require('../controllers/walletController').claimDailyReward);\n\nmodule.exports = router;`);
+server/agents/builder-alpha.js:129:        fs.writeFileSync(walletRoutePath, content);
+server/agents/builder-alpha.js:130:        log('  Daily reward routes added to wallet router');
+server/agents/builder-alpha.js:133:    const walletCtrlPath = path.join(ROOT, 'server/controllers/walletController.js');
+server/agents/builder-alpha.js:134:    if (fs.existsSync(walletCtrlPath)) {
+server/agents/builder-alpha.js:135:      let content = fs.readFileSync(walletCtrlPath, 'utf8');
+server/agents/builder-alpha.js:137:        const dailyCode = `\nconst MS_PER_DAY = 86400000;\n\nexports.getDailyReward = async (req, res) => {\n  try {\n    const wallet = await getOrCreateCashWallet(req.user._id);\n    const now = Date.now();\n    const lastClaim = wallet.lastDailyReward ? new Date(wallet.lastDailyReward).getTime() : 0;\n    const claimed = (now - lastClaim) < MS_PER_DAY;\n    const streakDays = wallet.rewardStreak || 0;\n    const reward = Math.min(10 + streakDays * 2, 50);\n    res.json({ claimed, streakDays, reward, nextClaimAt: claimed ? lastClaim + MS_PER_DAY : null });\n  } catch (err) {\n    res.status(500).json({ message: err.message });\n  }\n};\n\nexports.claimDailyReward = async (req, res) => {\n  try {\n    const wallet = await getOrCreateCashWallet(req.user._id);\n    const now = Date.now();\n    const lastClaim = wallet.lastDailyReward ? new Date(wallet.lastDailyReward).getTime() : 0;\n    if ((now - lastClaim) < MS_PER_DAY) {\n      return res.status(400).json({ message: 'Ya reclamaste tu recompensa hoy' });\n    }\n    const yesterday = now - MS_PER_DAY * 1.5;\n    const isConsecutive = lastClaim > yesterday;\n    wallet.rewardStreak = isConsecutive ? (wallet.rewardStreak || 0) + 1 : 1;\n    const reward = Math.min(10 + wallet.rewardStreak * 2, 50);\n    wallet.kroTokens = (wallet.kroTokens || 0) + reward;\n    wallet.lastDailyReward = new Date();\n    await wallet.save();\n    res.json({ reward, streakDays: wallet.rewardStreak, newBalance: wallet.kroTokens });\n  } catch (err) {\n    res.status(500).json({ message: err.message });\n  }\n};\n`;
+server/agents/builder-alpha.js:139:        fs.writeFileSync(walletCtrlPath, content);
+server/agents/builder-alpha.js:140:        log('  getDailyReward & claimDailyReward added to walletController');
+server/agents/builder-alpha.js:143:    const walletModelPath = path.join(ROOT, 'server/models/CashWallet.js');
+server/agents/builder-alpha.js:144:    if (fs.existsSync(walletModelPath)) {
+server/agents/builder-alpha.js:145:      let content = fs.readFileSync(walletModelPath, 'utf8');
+server/agents/builder-alpha.js:146:      if (!content.includes('kroTokens')) {
+server/agents/builder-alpha.js:147:        content = content.replace('balance', 'balance').replace(/(\buser:\s*\{[^}]+\})/, `$1,\n  kroTokens: { type: Number, default: 0 },\n  rewardStreak: { type: Number, default: 0 },\n  lastDailyReward: { type: Date, default: null }`);
+server/agents/builder-alpha.js:148:        fs.writeFileSync(walletModelPath, content);
+server/agents/builder-alpha.js:149:        log('  kroTokens, rewardStreak, lastDailyReward added to CashWallet model');
+server/agents/builder-alpha.js:158:function run(options = {}) { const { taskId = null, dryRun = false } = options; log('=== BUILDER ALPHA iniciando ==='); const tasks = loadTasks(); if (tasks.length === 0) { log('No hay tareas en cola. Corre task-master primero.'); return; } let task; if (taskId) { task = tasks.find(t => t.id === taskId); if (!task) { log(`Tarea ${taskId} no encontrada`); return; } } else { task = pickNextTask(tasks); } if (!task) { log('No hay tareas de tipo feature/improvement pendientes.'); return; } log(`Ejecutando tarea: [${task.id}] ${task.title}`); if (dryRun) { log('DRY RUN — no se escriben archivos'); return; } const impl = IMPLEMENTATIONS[task.id]; if (!impl) { log(`  Sin implementación automática para ${task.id}. Marcando como needs_human.`); markTaskStatus(task.id, 'needs_human', 'No hay implementación automática registrada'); return; } try { markTaskStatus(task.id, 'in_progress'); impl(); markTaskStatus(task.id, 'done'); recordCompleted(task); log(`Tarea [${task.id}] COMPLETADA`); } catch (err) { log(`ERROR en tarea [${task.id}]: ${err.message}`); markTaskStatus(task.id, 'error', err.message); } log('=== BUILDER ALPHA finalizado ==='); }
+server/agents/kairos.js:23:  { id: 'auth-jwt', name: 'Autenticación JWT', dep: 'jsonwebtoken', env: ['JWT_SECRET'], code: ['server/routes/auth.js'], critical: true },
+server/agents/kairos.js:28:  { id: 'web3', name: 'Token KRO / Web3 (ethers + Infura)', dep: 'ethers', env: ['INFURA_API_KEY', 'SEPOLIA_RPC_URL', 'KRONOS_TOKEN_ADDRESS'], code: ['server/services/tokenService.js'], critical: false },
+server/agents/kairos.js:50: for (const [key, val] of Object.entries(envExample)) { const isSecret = /KEY|SECRET|TOKEN|URI|PASS|PASSWORD/i.test(key); if (isSecret && PLACEHOLDER_RE.test(val)) { findings.push({ sev: 'info', area: 'env', msg: `${key} en .env.example es un placeholder — recuerda poner el valor real en Render/Vercel (no en Git).`, fixable: false }); } }
+server/agents/kairos.js:66:function auditRouteGuards() { const findings = []; for (const name of ['wallet', 'admin', 'refunds', 'twofactor', 'tips', 'subscription']) { const rel = `server/routes/${name}.js`; const c = read(rel); if (!c) continue; const hasRoutes = /router\.(get|post|put|patch|delete)\s*\(/.test(c); if (hasRoutes && !/protect|requireAdmin|adminAuth|web3Auth|authMiddleware|verifyToken|isAuthenticated/.test(c)) { findings.push({ sev: 'error', area: 'security', msg: `${rel}: ruta sensible SIN middleware de autenticación — cualquiera podría usarla sin iniciar sesión. Agrega "protect" (o el guard que corresponda).`, fixable: false }); } } return findings; }
+server/agents/kairos.js:73:function auditHardening() { const findings = []; const s = read('server/server.js') || ''; const mids = [ { re: /helmet\s*\(/, name: 'helmet', desc: 'cabeceras de seguridad HTTP' }, { re: /mongoSanitize|mongo-sanitize/, name: 'express-mongo-sanitize', desc: 'previene inyección NoSQL' }, { re: /\bxss\s*\(/, name: 'xss-clean', desc: 'previene XSS' }, { re: /rateLimit|Limiter/, name: 'express-rate-limit', desc: 'frena fuerza bruta' } ]; for (const m of mids) if (!m.re.test(s)) findings.push({ sev: 'error', area: 'security', msg: `server.js no aplica ${m.name} (${m.desc}) — protección clave ausente.`, fixable: false }); if (/origin:\s*['"]\*['"]/.test(s) || /['"]Access-Control-Allow-Origin['"]\s*[:,]\s*['"]\*['"]/.test(s)) findings.push({ sev: 'error', area: 'security', msg: `server.js permite CORS desde cualquier origen ('*') — restríngelo a tu dominio.`, fixable: false }); const deps = loadDeps(); if (!deps.server.bcrypt && !deps.server.bcryptjs) findings.push({ sev: 'error', area: 'security', msg: `No hay bcrypt/bcryptjs instalado — verifica que las contraseñas NO se guarden en texto plano.`, fixable: false }); for (const f of prodFiles('server')) { const c = read(f); if (!c) continue; let idx = c.indexOf('jwt.sign('); while (idx !== -1) { const seg = c.slice(idx, idx + 220); if (!/expiresIn|exp\b/.test(seg)) { findings.push({ sev: 'warn', area: 'security', msg: `${f}: jwt.sign sin "expiresIn" — los tokens nunca caducan (si se roban, valen para siempre).`, fixable: false }); break; } idx = c.indexOf('jwt.sign(', idx + 1); } if (/\$where/.test(c)) findings.push({ sev: 'warn', area: 'security', msg: `${f}: usa $where en una consulta — vector de inyección NoSQL, evítalo.`, fixable: false }); if (/res\.[a-z]*\s*\(\s*[^)]*error\.stack/.test(c) || /\.json\(\s*err\s*\)/.test(c)) findings.push({ sev: 'warn', area: 'security', msg: `${f}: parece devolver el error/stack crudo al cliente — filtra detalles internos. Manda un mensaje genérico.`, fixable: false }); } return findings; }
+server/agents/kairos.js:80: const missingCommon = [{ cap: 'Encuestas / polls en posts', hint: 'X, Instagram', proof: null }, { cap: 'Reacciones múltiples (no solo like)', hint: 'Facebook, LinkedIn', proof: null }, { cap: 'Hashtags y temas en tendencia', hint: 'X, Instagram', proof: 'client/src/components/HashtagText.jsx' }, { cap: 'Guardar / colecciones (bookmarks)', hint: 'Instagram, Pinterest', proof: null }, { cap: 'Duetos / remix de video', hint: 'TikTok', proof: null }, { cap: 'Suscripción a creadores (paywall)', hint: 'Patreon, OnlyFans', proof: 'server/routes/subscription.js' }].filter(c => !c.proof || !exists(c.proof));
+server/agents/kairos.js:83: push('# 🧠 KAIROS · Estudio comparativo de KRONOS vs las grandes redes'); push(`_Generado: ${new Date().toISOString()}_`); push(''); push('## 1. Qué tipo de producto es KRONOS'); push('No es "otra red social": es una **super-app** (social + comercio + delivery + wallet cripto/fiat + IA + AR), más cerca del modelo de WeChat que de Instagram. Esa combinación ES tu ventaja: nadie en occidente la tiene junta.'); push(''); push(`## 2. Funciones base que ya tienes (${present.length}/12)`); for (const t of present) push(`- ✅ ${t.cap}  _(como ${t.nets})_`); if (missingStakes.length) { push(''); push('### Funciones base que conviene revisar:'); for (const t of missingStakes) push(`- ⚠️ ${t.cap} — la tienen ${t.nets}. No encontré \\`${t.proof}\\`.`); } push(''); push('## 3. Detalles que otras redes tienen y a ti quizá te falten'); if (missingCommon.length) { for (const c of missingCommon) push(`- 💡 ${c.cap}  _(visto en ${c.hint})_`); } else { push('- ✅ Cubres incluso los extras comunes.'); } push(''); push('## 4. 🚀 Ideas para DESTACAR (apoyadas en lo que ya tienes)'); push('Ordenadas por impacto. Cada una se construye sobre modelos que ya existen en tu código:'); push(''); push(`### 1. Historias interactivas "elige tu aventura"`); push('- **La idea:** Stories ramificadas donde el espectador toca opciones y cambia el final. Ya tienes los nodos y el progreso modelados; falta el editor visual y el reproductor.'); push('- **Por qué resalta:** Ninguna red grande tiene narrativa ramificada nativa. Es contenido que engancha y se comparte solo.'); push('- **Ya tienes la base en:** `server/models/StoryNode.js`, `server/models/StoryProgress.js`'); push(''); push(`### 2. SocialFi: gana KRO por buen contenido + apuesta para impulsar`); push('- **La idea:** Recompensar con tokens KRO las publicaciones de calidad y dejar "stakear" KRO para impulsar un post o a un creador. Ya tienes pool de recompensas, staking y el token.'); push('- **Por qué resalta:** Mezcla economía real con red social — el creador gana de verdad, no solo "likes". WeChat/X tantean esto; tú ya tienes la base cripto.'); push('- **Ya tienes la base en:** `server/models/RewardPool.js`, `server/models/Stake.js`, `server/models/KronosToken.js`'); push(''); push(`### 3. Marketplace social con escrow (compra-venta segura entre usuarios)`); push('- **La idea:** Vender entre usuarios donde el dinero queda retenido (escrow) hasta que el comprador confirma — con reembolsos integrados. Ya tienes listings, refunds y wallet.'); push('- **Por qué resalta:** Facebook Marketplace no protege el pago; aquí la confianza es la función estrella. Diferenciador fuerte.'); push('- **Ya tienes la base en:** `server/models/Listing.js`, `server/models/Refund.js`, `server/models/CashWallet.js`'); push(''); push(`### 4. Estudio de creación con IA dentro de la app`); push('- **La idea:** Pestaña "Crear con IA": genera guiones, imágenes y videos sin salir de KRONOS, ligado a los planes que ya cobras (scripts/media).'); push('- **Por qué resalta:** Ninguna red junta creación con IA + monetización en un mismo flujo.'); push('- **Ya tienes la base en:** `server/routes/ai.js`, `server/services/aiService.js`, `server/config/subscriptionPlans.js`'); push(''); push(`### 5. Capa social en Realidad Aumentada + avatares 3D`); push('- **La idea:** Filtros/objetos AR, probarte items del marketplace en AR, y "drops" AR por ubicación que sueltan KRO al encontrarlos (estilo Pokémon GO).'); push('- **Por qué resalta:** Snapchat tiene AR pero no economía; tú puedes unir AR + token + comercio.'); push('- **Ya tienes la base en:** `server/routes/ar.js`, `server/models/AvatarItem.js`, `server/models/UserAvatar.js`'); push(''); push(`### 6. Move-to-earn: gana KRO por moverte`); push('- **La idea:** Conectar actividad física (pasos/ejercicio) con recompensas en KRO y retos sociales entre amigos. Ya registras salud.'); push('- **Por qué resalta:** StepN demostró que mueve millones; ninguna red social mainstream lo integra. Encaja con tu wallet.'); push('- **Ya tienes la base en:** `server/models/HealthLog.js`, `server/models/RewardPool.js`'); push(''); push(`### 7. Propinas y regalos en vivo con KRO`); push('- **La idea:** Regalar KRO en tiempo real durante salas de audio o video en vivo (como los "bits" de Twitch, pero con valor real y retirable).'); push('- **Por qué resalta:** Monetización directa creador-fan sin intermediario caro. Ya tienes propinas y salas en vivo.'); push('- **Ya tienes la base en:** `server/models/Tip.js`, `server/routes/audio.js`, `server/routes/videos.js`'); push(''); push('## 5. Recomendación de Kairos'); push('Tu mayor diferenciador NO es copiar funciones de otras redes — es **unir lo social con la economía KRO**. Prioriza: (1) SocialFi (ganar/impulsar con KRO), (2) Historias interactivas, (3) Marketplace con escrow. Son únicas y ya tienes los cimientos.'); push(''); const out = lines.join('\n'); console.log('\n' + out + '\n'); if (!options.reportOnly) { const file = path.join(__dirname, 'logs', 'kairos-study.md'); try { fs.mkdirSync(path.dirname(file), { recursive: true }); fs.writeFileSync(file, out); log(`Estudio guardado en ${path.relative(ROOT, file)}`); console.log(`  📄 Estudio guardado en agents/logs/kairos-study.md`); } catch {} } return { present, missingStakes, missingCommon, ideas: [] }; }
+server/agents/pelos.js:24:function detectIssues() { const issues = []; const serverFiles = [ 'server/server.js', 'server/controllers/walletController.js', 'server/controllers/communityController.js', ]; for (const f of serverFiles) { const abs = path.join(ROOT, f); if (!fs.existsSync(abs)) continue; const content = fs.readFileSync(abs, 'utf8'); const matches = content.match(/console\.log\(/g); if (matches && matches.length > 3) issues.push({ type: 'console_leak', file: f, count: matches.length }); }
+server/agents/pelos.js:41:exports.walletLimiter = rateLimit({
+server/agents/pelos.js:57:    const walletRoute = path.join(ROOT, 'server/routes/wallet.js');
+server/agents/pelos.js:58:    if (fs.existsSync(walletRoute)) {
+server/agents/pelos.js:59:      let content = fs.readFileSync(walletRoute, 'utf8');
+server/agents/pelos.js:60:      if (!content.includes('walletLimiter')) {
+server/agents/pelos.js:61:        content = `const { walletLimiter } = require('../middleware/rateLimit');\n` + content;
+server/agents/pelos.js:62:        content = content.replace("router.post('/deposit'", "router.post('/deposit', walletLimiter,").replace("router.post('/transfer'", "router.post('/transfer', walletLimiter,");
+server/agents/pelos.js:63:        fs.writeFileSync(walletRoute, content);
+server/agents/pelos.js:64:        log('  Rate limiter added to wallet routes');
+server/agents/pelos.js:82:    writeFile('server/tests/smoke.test.js', `const request = require('supertest');\nconst mongoose = require('mongoose');\n\nlet app;\nlet authToken;\nconst TEST_USER = {\n  username: 'smoketest_' + Date.now(),\n  email: \\`smoke\\${Date.now()}@test.com\\`,\n  password: 'TestPass123!',\n};\n\nbeforeAll(async () => {\n  process.env.NODE_ENV = 'test';\n  app = require('../server');\n  try {\n    await request(app).post('/api/auth/register').send(TEST_USER);\n    const res = await request(app).post('/api/auth/login').send({ email: TEST_USER.email, password: TEST_USER.password, });\n    authToken = res.body.token;\n  } catch (e) {\n    console.warn('Could not create test user:', e.message);\n  }\n}, 30000);\n\nafterAll(async () => {\n  if (mongoose.connection.readyState !== 0) {\n    await mongoose.connection.close();\n  }\n});\n\ndescribe('Auth endpoints', () => {\n  test('POST /api/auth/login — wrong credentials returns 400/401', async () => {\n    const res = await request(app).post('/api/auth/login').send({ email: 'fake@fake.com', password: 'wrongpass' });\n    expect([400, 401]).toContain(res.statusCode);\n  });\n\n  test('POST /api/auth/login — missing body returns 400', async () => {\n    const res = await request(app).post('/api/auth/login').send({});\n    expect(res.statusCode).toBe(400);\n  });\n});\n\ndescribe('Protected endpoints — no token', () => {\n  test('GET /api/wallet returns 401', async () => {\n    const res = await request(app).get('/api/wallet');\n    expect(res.statusCode).toBe(401);\n  });\n\n  test('GET /api/communities returns 401', async () => {\n    const res = await request(app).get('/api/communities');\n    expect(res.statusCode).toBe(401);\n  });\n\n  test('POST /api/wallet/transfer returns 401', async () => {\n    const res = await request(app).post('/api/wallet/transfer').send({});\n    expect(res.statusCode).toBe(401);\n  });\n});\n\ndescribe('Protected endpoints — with token', () => {\n  test('GET /api/wallet returns 200 when authenticated', async () => {\n    if (!authToken) return;\n    const res = await request(app).get('/api/wallet').set('Authorization', \\`Bearer \\${authToken}\\`);\n    expect(res.statusCode).toBe(200);\n  });\n\n  test('GET /api/communities returns 200 when authenticated', async () => {\n    if (!authToken) return;\n    const res = await request(app).get('/api/communities').set('Authorization', \\`Bearer \\${authToken}\\`);\n    expect(res.statusCode).toBe(200);\n  });\n\n  test('GET /api/notifications returns 200 when authenticated', async () => {\n    if (!authToken) return;\n    const res = await request(app).get('/api/notifications').set('Authorization', \\`Bearer \\${authToken}\\`);\n    expect([200, 404]).toContain(res.statusCode);\n  });\n});\n\ndescribe('Wallet validation', () => {\n  test('POST /api/wallet/transfer — missing amount returns 400', async () => {\n    if (!authToken) return;\n    const res = await request(app).post('/api/wallet/transfer').set('Authorization', \\`Bearer \\${authToken}\\`).send({ to: 'someuser' });\n    expect([400, 422]).toContain(res.statusCode);\n  });\n});`);
+server/agents/pelos.js:98:  'test-wallet-unit': () => { fs.mkdirSync(path.join(ROOT, 'server/tests'), { recursive: true }); writeFile('server/tests/wallet.test.js', `const mongoose = require('mongoose');\n\njest.mock('../models/CashWallet', () => {\n  const mockWallet = {\n    balance: 100,\n    kroTokens: 0,\n    transactions: [],\n    save: jest.fn().mockResolvedValue(true),\n  };\n  return {\n    findOne: jest.fn().mockResolvedValue(mockWallet),\n    create: jest.fn().mockResolvedValue(mockWallet),\n    _mockWallet: mockWallet,\n  };\n});\n\nconst CashWallet = require('../models/CashWallet');\n\ndescribe('Wallet Controller — business logic', () => {\n  let req, res;\n\n  beforeEach(() => {\n    res = {\n      json: jest.fn(),\n      status: jest.fn().mockReturnThis(),\n    };\n    CashWallet._mockWallet.balance = 100;\n    CashWallet._mockWallet.transactions = [];\n    CashWallet._mockWallet.save.mockClear();\n  });\n\n  test('getWallet devuelve balance existente', async () => {\n    req = { user: { _id: new mongoose.Types.ObjectId() } };\n    const { getWallet } = require('../controllers/walletController');\n    await getWallet(req, res);\n    expect(res.json).toHaveBeenCalled();\n  });\n\n  test('deposit con amount negativo retorna 400', async () => {\n    req = { user: { _id: new mongoose.Types.ObjectId() }, body: { amount: -50 } };\n    const { deposit } = require('../controllers/walletController');\n    await deposit(req, res);\n    expect(res.status).toHaveBeenCalledWith(400);\n  });\n\n  test('deposit incrementa el balance', async () => {\n    req = { user: { _id: new mongoose.Types.ObjectId() }, body: { amount: 50 } };\n    CashWallet._mockWallet.balance = 100;\n    const { deposit } = require('../controllers/walletController');\n    await deposit(req, res);\n    expect(CashWallet._mockWallet.save).toHaveBeenCalled();\n  });\n});`); log('  wallet.test.js created'); log('  NOTE: Run "cd server && npm test" to execute'); },
+server/agents/task-master.js:21:    title: 'Agregar skeletons de carga en Feed, Wallet y Communities',
+server/agents/task-master.js:23:    files: ['client/src/pages/Feed.jsx', 'client/src/pages/Wallet.jsx', 'client/src/pages/Communities.jsx', 'client/src/components/kronos/Skeleton.jsx'],
+server/agents/task-master.js:30:    title: 'Empty states con ilustración en Feed, Chat y Wallet',
+server/agents/task-master.js:32:    files: ['client/src/components/kronos/EmptyState.jsx', 'client/src/pages/Feed.jsx', 'client/src/social/ConversationList.jsx', 'client/src/pages/Wallet.jsx'],
+server/agents/task-master.js:41:    files: ['client/src/hooks/useToast.js', 'client/src/pages/Wallet.jsx', 'client/src/pages/Communities.jsx', 'client/src/pages/Live.jsx'],
+server/agents/task-master.js:67:    description: 'Aplicar express-rate-limit en /auth/login, /wallet/transfer y /wallet/deposit para prevenir fuerza bruta y abuso.',
+server/agents/task-master.js:68:    files: ['server/middleware/rateLimit.js', 'server/routes/auth.js', 'server/routes/wallet.js'],
+server/agents/task-master.js:69:    acceptance: ['Login bloqueado tras 10 intentos en 15 min', 'Transfer/deposit bloqueado tras 20 req/min', 'Response 429 con Retry-After header'],
+server/agents/task-master.js:94:    description: 'Panel de notificaciones (likes, comentarios, mensajes, transferencias) con badge de conteo no leídas en Navbar, usando Socket.io ya existente.',
+server/agents/task-master.js:108:    id: 'feat-wallet-qr',
+server/agents/task-master.js:111:    title: 'QR de pago en Wallet',
+server/agents/task-master.js:112:    description: 'Generar un código QR único por usuario para recibir pagos/transferencias sin necesidad de buscar por username.',
+server/agents/task-master.js:113:    files: ['client/src/pages/Wallet.jsx', 'client/src/components/kronos/QRCode.jsx'],
+server/agents/task-master.js:114:    acceptance: ['QR visible en tab "wallet"', 'QR contiene deeplink kronos://pay/<userId>', 'Botón de descargar QR como imagen'],
+server/agents/task-master.js:129:    title: 'Smoke tests para endpoints críticos (wallet, auth, communities)',
+server/agents/task-master.js:130:    description: 'Tests con Jest + supertest que verifiquen que los endpoints críticos responden 200/201 con datos válidos y 401 sin token.',
+server/agents/task-master.js:132:    acceptance: ['npm test en /server pasa sin errores', 'Cubre: POST /auth/login, GET /wallet, POST /wallet/transfer, GET /communities'],
+server/agents/task-master.js:135:    id: 'ui-skeleton-wallet',
+server/agents/task-master.js:138:    title: 'Aplicar SkeletonWalletCard en Wallet mientras carga',
+server/agents/task-master.js:139:    description: 'Usar el componente SkeletonWalletCard ya creado para reemplazar el spinner de carga en la página Wallet.',
+server/agents/task-master.js:140:    files: ['client/src/pages/Wallet.jsx'],
+server/agents/task-master.js:141:    acceptance: ['Skeleton visible en lugar de spinner al cargar la wallet'],
+server/agents/task-master.js:195:    acceptance: ['GET /api/users/suggestions devuelve hasta 5 usuarios', 'Card con avatar, nombre y botón Seguir', 'Se actualiza al seguir a alguien'],
+server/agents/task-master.js:207:    id: 'feat-token-daily-reward',
+server/agents/task-master.js:210:    title: 'Sistema de Daily Rewards en Tokens (check-in diario)',
+server/agents/task-master.js:211:    description: 'Permitir al usuario reclamar tokens una vez por día. Muestra racha de días consecutivos y recompensa escalada.',
+server/agents/task-master.js:212:    files: ['client/src/pages/Wallet.jsx', 'server/controllers/walletController.js', 'server/routes/wallet.js'],
+server/agents/task-master.js:213:    acceptance: ['GET /api/wallet/daily-reward — devuelve { claimed, streakDays, reward }', 'POST /api/wallet/daily-reward — reclama la recompensa del día', 'UI en tab "kro" muestra estado del daily reward y racha'],
+server/agents/task-master.js:252:    id: 'test-wallet-unit',
+server/agents/task-master.js:255:    title: 'Unit tests del walletController (transfer, deposit, getWallet)',
+server/agents/task-master.js:256:    description: 'Tests unitarios con Jest que mockean MongoDB y verifican la lógica de negocio del wallet.',
+server/agents/task-master.js:257:    files: ['server/tests/wallet.test.js'],
+server/agents/task-master.js:258:    acceptance: ['Transfer entre usuarios actualiza ambos balances', 'Deposit incrementa balance', 'Transfer con balance insuficiente retorna 400'],
+server/routes/admin.js:67:      seller = await User.create({ username: 'kronostienda', email: 'tienda@kronos.app', password: hash, firstName: 'Kronos', lastName: 'Tienda', role: 'seller', bio: 'Tienda oficial de ropa Kronos', avatar: 'https://ui-avatars.com/api/?name=Kronos+Tienda&background=7c3aed&color=fff&size=150' });
+server/routes/admin.js:84:      { username: 'tacoselgrito', email: 'tacos@kronos.app', firstName: 'Tacos', lastName: 'El Grito', bio: 'Los mejores tacos 🌮', avatar: 'https://images.unsplash.com/photo-1565299715199-866c917206bb?w=150&q=80', items: [{ name: 'Taco de Pastor', description: 'Carne marinada, piña, cilantro', price: 22, category: 'Tacos', preparationTime: 10 }, { name: 'Taco de Suadero', description: 'Carne de res suave', price: 25, category: 'Tacos', preparationTime: 10 }, { name: 'Quesadillas', description: '2 quesadillas con queso', price: 85, category: 'Quesadillas', preparationTime: 15 }, { name: 'Refresco', description: 'Refresco 355ml', price: 20, category: 'Bebidas', preparationTime: 2 }] },
+server/routes/admin.js:85:      { username: 'pizzastellas', email: 'pizza@kronos.app', firstName: 'Pizzas', lastName: 'Stellas', bio: 'Pizza artesanal al horno de piedra 🍕', avatar: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=150&q=80', items: [{ name: 'Pizza Margarita', description: 'Salsa de tomate, mozzarella, albahaca', price: 149, category: 'Pizzas', preparationTime: 25 }, { name: 'Pizza BBQ Pollo', description: 'Salsa BBQ, pollo, cebolla morada', price: 179, category: 'Pizzas', preparationTime: 25 }, { name: 'Alitas BBQ x6', description: '6 alitas con salsa BBQ', price: 99, category: 'Entradas', preparationTime: 20 }, { name: 'Limonada', description: 'Limonada natural 500ml', price: 35, category: 'Bebidas', preparationTime: 3 }] },
+server/routes/admin.js:86:      { username: 'sushikyoto', email: 'sushi@kronos.app', firstName: 'Sushi', lastName: 'Kyoto', bio: 'Sushi fresco y rolls creativos 🍱', avatar: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=150&q=80', items: [{ name: 'Roll California', description: '8 piezas: cangrejo, aguacate, pepino', price: 129, category: 'Rolls', preparationTime: 20 }, { name: 'Roll Spicy Tuna', description: '8 piezas: atún picante, sriracha', price: 149, category: 'Rolls', preparationTime: 20 }, { name: 'Sashimi Salmón x5', description: '5 piezas de salmón fresco', price: 139, category: 'Sashimi', preparationTime: 15 }, { name: 'Edamame', description: 'Vainas de soya al vapor', price: 55, category: 'Entradas', preparationTime: 10 }] },
+server/routes/admin.js:93:        rest = await User.create({ username: r.username, email: r.email, password: hash, firstName: r.firstName, lastName: r.lastName, bio: r.bio, avatar: r.avatar, role: 'seller' });
+server/routes/auth.js:41:    const { token, user } = req.user;
+server/routes/auth.js:42:    // Redirige al frontend con el token como query param
+server/routes/auth.js:43:    res.redirect(`${CLIENT_URL}/auth/callback?token=${token}&provider=google`);
+server/routes/auth.js:59:    const { token, user } = req.user;
+server/routes/auth.js:60:    res.redirect(`${CLIENT_URL}/auth/callback?token=${token}&provider=facebook`);
+server/routes/avatar.js:4:const ctrl = require('../controllers/avatarController');
+server/routes/avatar.js:6:router.get('/', protect, ctrl.getMyAvatar);
+server/routes/avatar.js:7:router.get('/shop', protect, ctrl.getShopItems);
+server/routes/multimedia.js:28:// Obtener posts por tipo de media
+server/routes/tips.js:4:const { sendTip, getReceivedTips, getSentTips, getTipsForTarget } = require('../controllers/tipController');
+server/routes/tips.js:6:router.post('/send', auth, sendTip);
+server/routes/tips.js:7:router.get('/received', auth, getReceivedTips);
+server/routes/tips.js:8:router.get('/sent', auth, getSentTips);
+server/routes/tips.js:9:router.get('/target/:targetId', getTipsForTarget);
+server/routes/tokens.js:3:const tokenController = require('../controllers/tokenController');
+server/routes/tokens.js:7:// Initialize wallet — requiere usuario Web3 verificado
+server/routes/tokens.js:8:router.post('/wallet/init', web3Protect, tokenController.initializeWallet);
+server/routes/tokens.js:11:router.get('/balance', protect, tokenController.getBalance);
+server/routes/tokens.js:13:// Transfer tokens — requiere usuario Web3 verificado
+server/routes/tokens.js:14:router.post('/transfer', web3Protect, tokenController.transferTokens);
+server/routes/tokens.js:17:router.post('/stake', web3Protect, tokenController.stakeTokens);
+server/routes/tokens.js:18:router.get('/stakes', protect, tokenController.getStakes);
+server/routes/tokens.js:19:router.post('/claim-rewards', web3Protect, tokenController.claimRewards);
+server/routes/tokens.js:22:router.post('/track-attention', protect, tokenController.trackAttention);
+server/routes/tokens.js:23:router.get('/attention-metrics', protect, tokenController.getAttentionMetrics);
+server/routes/tokens.js:26:router.get('/creator-earnings', protect, tokenController.getCreatorEarnings);
+server/routes/tokens.js:29:router.get('/leaderboard', tokenController.getLeaderboard);
+server/routes/tokens.js:32:router.get('/transactions', protect, tokenController.getTransactions);
+server/routes/tokens.js:34:// Token info
+server/routes/tokens.js:35:router.get('/info', tokenController.getTokenInfo);
+server/routes/users.js:7:  updateAvatar,
+server/routes/users.js:58:router.post('/avatar', protect, uploadProfileImage.single('avatar'), updateAvatar);
+server/routes/wallet.js:1:const { walletLimiter } = require('../middleware/rateLimit');
+server/routes/wallet.js:5:const ctrl = require('../controllers/walletController');
+server/routes/wallet.js:7:router.get('/', protect, ctrl.getWallet);
+server/routes/wallet.js:8:router.post('/deposit', walletLimiter, protect, ctrl.deposit);
+server/routes/wallet.js:9:router.post('/transfer', walletLimiter, protect, ctrl.transfer);
+server/routes/wallet.js:14:router.get('/daily-reward', protect, require('../controllers/walletController').getDailyReward);
+server/routes/wallet.js:15:router.post('/daily-reward', protect, require('../controllers/walletController').claimDailyReward);
+server/seedData.js:33:      avatar: 'https://ui-avatars.com/api/?name=Kronos+Tienda&background=7c3aed&color=fff&size=150',
+server/seedData.js:98:        description: 'Vestido corto con estampado galáctico, corte tipo A. Ideal para salir.',
+server/seedData.js:121:      avatar: 'https://images.unsplash.com/photo-1565299715199-866c917206bb?w=150&q=80',
+server/seedData.js:136:      avatar: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=150&q=80',
+server/seedData.js:151:      avatar: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=150&q=80',
+server/seedData.js:173:        avatar: r.avatar,
+server/server-inmemory.js:28:function generateToken() {
+server/server-inmemory.js:83:      const token = generateToken();
+server/server-inmemory.js:87:      sessions[token] = email;
+server/server-inmemory.js:92:        token,
+server/server-inmemory.js:111:      const token = generateToken();
+server/server-inmemory.js:112:      sessions[token] = email;
+server/server-inmemory.js:118:        token,
+server/server-inmemory.js:126:    const token = authHeader.replace('Bearer ', '');
+server/server-inmemory.js:127:    const email = sessions[token];
+server/server-inmemory.js:140:    const token = authHeader.replace('Bearer ', '');
+server/server-inmemory.js:142:    if (sessions[token]) {
+server/server-inmemory.js:143:      delete sessions[token];
+server/server.js:102:  allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
+server/server.js:178:app.use('/api/tokens', require('./routes/tokens')); // Kronos Token
+server/server.js:186:app.use('/api/tips', require('./routes/tips')); // Propinas Directas
+server/server.js:191:app.use('/api/wallet', require('./routes/wallet')); // Wallet
+server/server.js:194:app.use('/api/listings', require('./routes/listings')); // Marketplace P2P con Escrow
+server/server.js:197:app.use('/api/avatar', require('./routes/avatar')); // Avatar 3D Customizable + Tienda
+server/server.js:428:  socket.on('join_audio_room', ({ roomId, userId, username, avatar }) => {
+server/server.js:434:      userId, username, avatar, muted: false, spatialX: 0, spatialY: 0
+server/server.js:482:// Initialize Kronos Token Scheduler
+server/server.js:490:// Seed Avatar default items
+server/server.js:491:const { seedDefaultItems } = require('./controllers/avatarController');
+server/server.js:494:    console.error('Failed to seed avatar items:', err);
+server/server.js:517:          avatar: 'https://ui-avatars.com/api/?name=Kronos+Tienda&background=7c3aed&color=fff&size=150',
+server/server.js:526:        { seller: seller._id, name: 'Vestido Galaxia', description: 'Vestido corto con estampado galáctico, corte tipo A. Ideal para salir.', price: 699, category: 'dresses', images: ['https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=400&q=80'], sizes: [{ size: 'XS', stock: 2 }, { size: 'S', stock: 4 }, { size: 'M', stock: 6 }], colors: ['Azul galaxia', 'Negro'], rating: 4.5, inStock: true },
+server/services/aiService.js:42:        max_tokens: 200,
+server/services/aiService.js:88:      max_tokens: 150,
+server/services/aiService.js:114:      max_tokens: 300,
+server/services/aiService.js:129:      max_tokens: 200,
+server/services/aiService.js:151:      max_tokens: opts.maxTokens || 1000,
+server/services/aiService.js:177:      max_tokens: 800,
+server/services/cacheService.js:12:  session: (token) => `session:${token}`
+server/services/recommendationService.js:102:              { $multiply: [{ $size: { $ifNull: ['$comments', []] } }, 2] }
+server/services/recommendationService.js:121:              { $multiply: ['$recencyScore', 10] },
+server/services/recommendationService.js:122:              { $multiply: ['$engagementScore', 0.5] },
+server/services/recommendationService.js:123:              { $multiply: ['$tagMatch', 4] },
+server/services/recommendationService.js:139:          pipeline: [{ $project: { username: 1, avatar: 1 } }]
+server/services/recommendationService.js:161:      .select('username avatar bio followersCount')
+server/services/recommendationService.js:232:      .populate('seller', 'username avatar')
+server/services/recommendationService.js:238:  // Recommend marketplace listings based on user interest profile
+server/services/recommendationService.js:258:      .populate('seller', 'username avatar')
+server/services/recommendationService.js:281:          viralScore: { $multiply: ['$totalScore', { $size: '$uniqueUsers' }] }
+server/services/recommendationService.js:301:          pipeline: [{ $project: { username: 1, avatar: 1 } }]
+server/services/scheduler.js:2:const tokenService = require('./tokenService');
+server/services/scheduler.js:9:      const result = await tokenService.processAttentionRewards();
+server/services/subscriptionService.js:16:    customShop: false
+server/services/subscriptionService.js:27:    customShop: false
+server/services/subscriptionService.js:38:    customShop: false
+server/services/subscriptionService.js:49:    customShop: true
+server/services/subscriptionService.js:399:      // Aquí solo lo registramos — cada módulo (orders, marketplace) maneja su propio flujo
+server/services/tokenService.js:3:const KronosToken = require('../models/KronosToken');
+server/services/tokenService.js:4:const UserWallet = require('../models/UserWallet');
+server/services/tokenService.js:11:  'function transfer(address to, uint256 amount) public returns (bool)',
+server/services/tokenService.js:16:class TokenService {
+server/services/tokenService.js:26:  this.signer = new ethers.Wallet(this.privateKey, this.provider);
+server/services/tokenService.js:29:  console.log('[BLOCKCHAIN] Desactivado (sin PRIVATE_KEY válida)');
+server/services/tokenService.js:33:  // Initialize token contract on blockchain
+server/services/tokenService.js:34:  async deployTokenContract(name, symbol, totalSupply) {
+server/services/tokenService.js:42:      const token = new KronosToken({
+server/services/tokenService.js:49:      await token.save();
+server/services/tokenService.js:50:      return token;
+server/services/tokenService.js:52:      throw new Error(`Token deployment failed: ${error.message}`);
+server/services/tokenService.js:56:  // Get token balance for wallet
+server/services/tokenService.js:59:      const wallet = await UserWallet.findOne({ userId });
+server/services/tokenService.js:60:      if (!wallet) {
+server/services/tokenService.js:62:          tokenBalance: '0',
+server/services/tokenService.js:63:          stakedTokens: '0',
+server/services/tokenService.js:64:          unstakedTokens: '0',
+server/services/tokenService.js:70:        tokenBalance: wallet.tokenBalance.toString(),
+server/services/tokenService.js:71:        stakedTokens: wallet.stakedTokens.toString(),
+server/services/tokenService.js:72:        unstakedTokens: wallet.unstakedTokens.toString(),
+server/services/tokenService.js:73:        pendingRewards: wallet.pendingRewards.toString(),
+server/services/tokenService.js:74:        totalEarned: wallet.totalEarned.toString(),
+server/services/tokenService.js:81:  // Transfer tokens between users
+server/services/tokenService.js:82:  async transferTokens(fromUserId, toUserId, amount) {
+server/services/tokenService.js:87:      const fromWallet = await UserWallet.findOne({ userId: fromUserId }).session(session);
+server/services/tokenService.js:88:      const toWallet = await UserWallet.findOne({ userId: toUserId }).session(session);
+server/services/tokenService.js:90:      if (!fromWallet || !toWallet) {
+server/services/tokenService.js:91:        throw new Error('Wallet not found');
+server/services/tokenService.js:94:      const transferAmountBI = ethers.parseUnits(amount.toString(), 18);
+server/services/tokenService.js:95:      const fromBalanceBI = ethers.parseUnits(fromWallet.tokenBalance.toString(), 18);
+server/services/tokenService.js:97:      if (fromBalanceBI < transferAmountBI) {
+server/services/tokenService.js:102:      fromWallet.tokenBalance = mongoose.Types.Decimal128.fromString(ethers.formatUnits(fromBalanceBI - transferAmountBI, 18));
+server/services/tokenService.js:103:      toWallet.tokenBalance = mongoose.Types.Decimal128.fromString(ethers.formatUnits(ethers.parseUnits(toWallet.tokenBalance.toString(), 18) + transferAmountBI, 18));
+server/services/tokenService.js:105:      await fromWallet.save({ session });
+server/services/tokenService.js:106:      await toWallet.save({ session });
+server/services/tokenService.js:110:        fromWalletId: fromWallet._id,
+server/services/tokenService.js:111:        toWalletId: toWallet._id,        amount: mongoose.Types.Decimal128.fromString(amount.toString()),
+server/services/tokenService.js:112:        type: 'transfer',
+server/services/tokenService.js:114:        description: `Transfer from ${fromUserId} to ${toUserId}`,
+server/services/tokenService.js:118:      fromWallet.transactions.push(transaction._id);
+server/services/tokenService.js:119:      toWallet.transactions.push(transaction._id);
+server/services/tokenService.js:121:      await fromWallet.save({ session });
+server/services/tokenService.js:122:      await toWallet.save({ session });
+server/services/tokenService.js:129:      throw new Error(`Transfer failed: ${error.message}`);
+server/services/tokenService.js:135:  // Stake tokens
+server/services/tokenService.js:136:  async stakeTokens(userId, amount, lockPeriod) {
+server/services/tokenService.js:141:      const wallet = await UserWallet.findOne({ userId }).session(session);
+server/services/tokenService.js:142:      if (!wallet) {
+server/services/tokenService.js:143:        throw new Error('Wallet not found');
+server/services/tokenService.js:147:      const balanceBI = ethers.parseUnits(wallet.tokenBalance.toString(), 18);
+server/services/tokenService.js:154:      const token = await KronosToken.findOne().session(session);
+server/services/tokenService.js:155:      const apy = token.stakingAPY.get(lockPeriod.toString()) || 5;
+server/services/tokenService.js:163:        walletId: wallet._id,
+server/services/tokenService.js:174:      // Update wallet
+server/services/tokenService.js:175:      wallet.tokenBalance = mongoose.Types.Decimal128.fromString(ethers.formatUnits(balanceBI - stakeAmountBI, 18));
+server/services/tokenService.js:176:      wallet.stakedTokens = mongoose.Types.Decimal128.fromString(ethers.formatUnits(ethers.parseUnits(wallet.stakedTokens.toString(), 18) + stakeAmountBI, 18));
+server/services/tokenService.js:177:      wallet.stakes.push(stake._id);
+server/services/tokenService.js:179:      await wallet.save({ session });
+server/services/tokenService.js:183:        toWalletId: wallet._id,        amount: mongoose.Types.Decimal128.fromString(amount.toString()),
+server/services/tokenService.js:191:      wallet.transactions.push(transaction._id);
+server/services/tokenService.js:192:      await wallet.save({ session });
+server/services/tokenService.js:227:      // Use BigInt math for precision. Multiply by 10000 to handle decimals in APY.
+server/services/tokenService.js:230:      const wallet = await UserWallet.findOne({ _id: stake.walletId }).session(session);
+server/services/tokenService.js:231:      const currentBalanceBI = ethers.parseUnits(wallet.tokenBalance.toString(), 18);
+server/services/tokenService.js:232:      const currentStakedBI = ethers.parseUnits(wallet.stakedTokens.toString(), 18);
+server/services/tokenService.js:233:      const currentEarnedBI = ethers.parseUnits(wallet.totalEarned.toString(), 18);
+server/services/tokenService.js:235:      // Add rewards to wallet
+server/services/tokenService.js:236:      wallet.tokenBalance = mongoose.Types.Decimal128.fromString(ethers.formatUnits(currentBalanceBI + principalBI + rewardAmountBI, 18));
+server/services/tokenService.js:237:      wallet.stakedTokens = mongoose.Types.Decimal128.fromString(ethers.formatUnits(currentStakedBI - principalBI, 18));
+server/services/tokenService.js:238:      wallet.totalEarned = mongoose.Types.Decimal128.fromString(ethers.formatUnits(currentEarnedBI + rewardAmountBI, 18));
+server/services/tokenService.js:245:      await wallet.save({ session });
+server/services/tokenService.js:250:        toWalletId: wallet._id,        amount: mongoose.Types.Decimal128.fromString(ethers.formatUnits(totalClaimedBI, 18)),
+server/services/tokenService.js:258:      wallet.transactions.push(transaction._id);
+server/services/tokenService.js:259:      await wallet.save({ session });
+server/services/tokenService.js:307:      const token = await KronosToken.findOne().session(session);
+server/services/tokenService.js:308:      const totalRewardPool = parseFloat(token.dailyRewardPool.toString());
+server/services/tokenService.js:313:      const tokensPerSecond = totalRewardPool / totalAttentionSeconds;
+server/services/tokenService.js:318:        const creatorReward = data.totalTimeSeconds * tokensPerSecond;
+server/services/tokenService.js:321:        // Update creator wallet
+server/services/tokenService.js:322:        const creatorWallet = await UserWallet.findOne({
+server/services/tokenService.js:326:        if (creatorWallet) {
+server/services/tokenService.js:327:          const currentPendingBI = ethers.parseUnits(creatorWallet.pendingRewards.toString(), 18);
+server/services/tokenService.js:328:          const currentEarnedBI = ethers.parseUnits(creatorWallet.totalEarned.toString(), 18);
+server/services/tokenService.js:331:          creatorWallet.pendingRewards = mongoose.Types.Decimal128.fromString(ethers.formatUnits(currentPendingBI + rewardBI, 18));
+server/services/tokenService.js:332:          creatorWallet.totalEarned = mongoose.Types.Decimal128.fromString(ethers.formatUnits(currentEarnedBI + rewardBI, 18));
+server/services/tokenService.js:334:          await creatorWallet.save({ session });
+server/services/tokenService.js:339:          metric.isRewarded = true;          metric.tokensEarned = mongoose.Types.Decimal128.fromString((metric.timeSpentSeconds * tokensPerSecond).toFixed(18));
+server/services/tokenService.js:366:        leaderboard = await UserWallet.find()
+server/services/tokenService.js:371:        leaderboard = await UserWallet.find()
+server/services/tokenService.js:372:          .sort({ stakedTokens: -1 })
+server/services/tokenService.js:376:        leaderboard = await UserWallet.find()
+server/services/tokenService.js:377:          .sort({ tokenBalance: -1 })
+server/services/tokenService.js:382:      return leaderboard.map((wallet, index) => ({
+server/services/tokenService.js:384:        userId: wallet.userId._id,
+server/services/tokenService.js:385:        username: wallet.userId.username,
+server/services/tokenService.js:386:        [type === 'earners' ? 'totalEarned' : type === 'stakers' ? 'stakedTokens' : 'tokenBalance']:
+server/services/tokenService.js:387:          wallet.totalEarned.toString(),
+server/services/tokenService.js:388:        tokenBalance: wallet.tokenBalance.toString(),
+server/services/tokenService.js:398:      const token = await KronosToken.findOne();
+server/services/tokenService.js:399:      const attentionRate = token.attentionRate; // tokens per minute
+server/services/tokenService.js:401:      const tokensEarned = (timeSpentSeconds / 60) * attentionRate;
+server/services/tokenService.js:407:        timeSpentSeconds,        tokensEarned: mongoose.Types.Decimal128.fromString(tokensEarned.toFixed(18)),
+server/services/tokenService.js:420:module.exports = new TokenService();
+server/services/twoFactorService.js:27:// Verify TOTP token
+server/services/twoFactorService.js:28:exports.verifyTOTPToken = (secret, token) => {
+server/services/twoFactorService.js:33:      token,
+server/tests/smoke.test.js:6:let authToken;
+server/tests/smoke.test.js:53:  authToken = res.body.token;
+server/tests/smoke.test.js:85:describe('Protected endpoints — no token', () => {
+server/tests/smoke.test.js:86:  test('GET /api/wallet returns 401', async () => {
+server/tests/smoke.test.js:87:    const res = await request(app).get('/api/wallet');
+server/tests/smoke.test.js:96:  test('POST /api/wallet/transfer returns 401', async () => {
+server/tests/smoke.test.js:97:    const res = await request(app).post('/api/wallet/transfer').send({});
+server/tests/smoke.test.js:102:describe('Protected endpoints — with token', () => {
+server/tests/smoke.test.js:103:  test('GET /api/wallet returns 200 when authenticated', async () => {
+server/tests/smoke.test.js:104:    if (!authToken) return;
+server/tests/smoke.test.js:106:      .get('/api/wallet')
+server/tests/smoke.test.js:107:      .set('Authorization', `Bearer ${authToken}`);
+server/tests/smoke.test.js:112:    if (!authToken) return;
+server/tests/smoke.test.js:115:      .set('Authorization', `Bearer ${authToken}`);
+server/tests/smoke.test.js:120:    if (!authToken) return;
+server/tests/smoke.test.js:123:      .set('Authorization', `Bearer ${authToken}`);
+server/tests/smoke.test.js:128:describe('Wallet validation', () => {
+server/tests/smoke.test.js:129:  test('POST /api/wallet/transfer — missing amount returns 400', async () => {
+server/tests/smoke.test.js:130:    if (!authToken) return;
+server/tests/smoke.test.js:132:      .post('/api/wallet/transfer')
+server/tests/smoke.test.js:133:      .set('Authorization', `Bearer ${authToken}`)
+server/tests/wallet.test.js:4:jest.mock('../models/CashWallet', () => {
+server/tests/wallet.test.js:5:  const mockWallet = {
+server/tests/wallet.test.js:7:    kroTokens: 0,
+server/tests/wallet.test.js:12:    findOne: jest.fn().mockResolvedValue(mockWallet),
+server/tests/wallet.test.js:13:    create: jest.fn().mockResolvedValue(mockWallet),
+server/tests/wallet.test.js:14:    _mockWallet: mockWallet,
+server/tests/wallet.test.js:18:const CashWallet = require('../models/CashWallet');
+server/tests/wallet.test.js:20:describe('Wallet Controller — business logic', () => {
+server/tests/wallet.test.js:28:    CashWallet._mockWallet.balance = 100;
+server/tests/wallet.test.js:29:    CashWallet._mockWallet.transactions = [];
+server/tests/wallet.test.js:30:    CashWallet._mockWallet.save.mockClear();
+server/tests/wallet.test.js:33:  test('getWallet devuelve balance existente', async () => {
+server/tests/wallet.test.js:35:    const { getWallet } = require('../controllers/walletController');
+server/tests/wallet.test.js:36:    await getWallet(req, res);
+server/tests/wallet.test.js:42:    const { deposit } = require('../controllers/walletController');
+server/tests/wallet.test.js:49:    CashWallet._mockWallet.balance = 100;
+server/tests/wallet.test.js:50:    const { deposit } = require('../controllers/walletController');
+server/tests/wallet.test.js:52:    expect(CashWallet._mockWallet.save).toHaveBeenCalled();

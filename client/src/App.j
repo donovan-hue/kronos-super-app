@@ -1,4 +1,4 @@
-import React, { Component, Suspense, lazy, useContext, useEffect } from 'react';
+
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
@@ -51,6 +51,7 @@ function AppLayout({ children }) {
 
 // Lazy load modules
 const SocialModule    = lazy(() => import('./social/SocialModule'));
+const ShopModule      = lazy(() => import('./shop/ShopModule'));
 const Login           = lazy(() => import('./components/Auth/Login'));
 const Register        = lazy(() => import('./components/Auth/Register'));
 const OAuthCallback   = lazy(() => import('./components/Auth/OAuthCallback'));
@@ -67,9 +68,12 @@ const SubscriptionCancel  = lazy(() => import('./pages/SubscriptionCancel'));
 const Communities     = lazy(() => import('./pages/Communities'));
 const CommunityDetail = lazy(() => import('./pages/CommunityDetail'));
 const Live            = lazy(() => import('./pages/Live'));
+const Marketplace     = lazy(() => import('./pages/Marketplace'));
+const Wallet          = lazy(() => import('./pages/Wallet'));
 const NotificationsPage = lazy(() => import('./pages/Notifications'));
 const Reservations    = lazy(() => import('./pages/Reservations'));
 const Health          = lazy(() => import('./pages/Health'));
+const AvatarPage      = lazy(() => import('./pages/Avatar'));
 const VideoEditorPage = lazy(() => import('./pages/VideoEditor'));
 const EventsPage      = lazy(() => import('./pages/Events'));
 const GamificationPage = lazy(() => import('./pages/Gamification'));
@@ -142,14 +146,18 @@ function App() {
             <Route path="/profile/me"            element={<ProtectedRoute><MyProfileRedirect /></ProtectedRoute>} />
             <Route path="/profile/:userId"       element={<P><UserProfile /></P>} />
             <Route path="/social/*"              element={<P><SocialModule /></P>} />
+            <Route path="/shop/*"                element={<P><ShopModule /></P>} />
             <Route path="/settings"              element={<P><Settings /></P>} />
             <Route path="/settings/:tab"         element={<P><Settings /></P>} />
+            <Route path="/wallet"                element={<P><Wallet /></P>} />
             <Route path="/live"                  element={<P><Live /></P>} />
             <Route path="/notifications"         element={<P><NotificationsPage /></P>} />
             <Route path="/communities"           element={<P><Communities /></P>} />
             <Route path="/communities/:id"       element={<P><CommunityDetail /></P>} />
+            <Route path="/marketplace"           element={<P><Marketplace /></P>} />
             <Route path="/reservations"          element={<P><Reservations /></P>} />
             <Route path="/health"                element={<P><Health /></P>} />
+            <Route path="/avatar"                element={<P><AvatarPage /></P>} />
             <Route path="/video-editor"          element={<P><VideoEditorPage /></P>} />
             <Route path="/events"                element={<P><EventsPage /></P>} />
             <Route path="/gamification"          element={<P><GamificationPage /></P>} />
