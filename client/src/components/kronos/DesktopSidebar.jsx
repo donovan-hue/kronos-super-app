@@ -33,17 +33,6 @@ const IconCommunities = () => (
     <path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z" fill="url(#iridescent-grad)"/>
   </svg>
 );
-const IconMarket = () => (
-  <svg viewBox="0 0 24 24" width="22" height="22" filter="url(#3d-glass)">
-    <rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="url(#iridescent-grad)" strokeWidth="3"/>
-    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="url(#iridescent-grad)"/>
-  </svg>
-);
-const IconWallet = () => (
-  <svg viewBox="0 0 24 24" width="22" height="22" filter="url(#3d-glass)">
-    <path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z" fill="url(#iridescent-grad)"/>
-  </svg>
-);
 const IconLive = () => (
   <svg viewBox="0 0 24 24" width="22" height="22" filter="url(#3d-glass)">
     <rect x="2" y="4" width="20" height="16" rx="4" fill="none" stroke="url(#iridescent-grad)" strokeWidth="2"/>
@@ -53,19 +42,6 @@ const IconLive = () => (
 const IconHealth = () => (
   <svg viewBox="0 0 24 24" width="22" height="22" filter="url(#3d-glass)">
     <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.5 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="url(#iridescent-grad)"/>
-  </svg>
-);
-const IconAvatar = () => (
-  <svg viewBox="0 0 24 24" width="22" height="22" filter="url(#3d-glass)">
-    <circle cx="12" cy="12" r="10" fill="url(#iridescent-grad)"/>
-    <path d="M12 14c-2.33 0-4.31 1.46-5.11 3.5h10.22c-.8-2.04-2.78-3.5-5.11-3.5z" fill="#fff"/>
-    <circle cx="8.5" cy="9.5" r="1.5" fill="#fff"/>
-    <circle cx="15.5" cy="9.5" r="1.5" fill="#fff"/>
-  </svg>
-);
-const IconShop = () => (
-  <svg viewBox="0 0 24 24" width="22" height="22" filter="url(#3d-glass)">
-    <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96C5 16.1 6.9 18 9 18h12v-2H9.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63H19c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0023.45 5H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" fill="url(#iridescent-grad)"/>
   </svg>
 );
 const IconReserv = () => (
@@ -100,12 +76,8 @@ const NAV_ITEMS = [
   { Icon: IconChat,        label: 'Mensajes',        to: '/social/chat' },
   { Icon: IconNotif,       label: 'Notificaciones',  to: '/notifications' },
   { Icon: IconCommunities, label: 'Comunidades',     to: '/communities' },
-  { Icon: IconShop,        label: 'Tienda',          to: '/shop' },
-  { Icon: IconMarket,      label: 'Marketplace',     to: '/marketplace' },
-  { Icon: IconWallet,      label: 'Wallet',          to: '/wallet' },
   { Icon: IconLive,        label: 'LIVE',            to: '/live' },
   { Icon: IconHealth,      label: 'Health',          to: '/health' },
-  { Icon: IconAvatar,      label: 'Avatar',          to: '/avatar' },
   { Icon: IconReserv,      label: 'Reservaciones',   to: '/reservations' },
   { Icon: IconVideo,       label: 'Video Editor',    to: '/video-editor' },
   { Icon: IconEvents,      label: 'Eventos',         to: '/events' },

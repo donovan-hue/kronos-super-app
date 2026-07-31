@@ -24,7 +24,6 @@ const BUBBLES = [
     fanDirection: 'up-left',
     subs: [
       { icon: 'user',  label: 'Personas',    path: '/search?type=people' },
-      { icon: 'bag',   label: 'Tiendas',     path: '/search?type=shops' },
       { icon: 'users', label: 'Comunidades', path: '/communities' },
     ],
   },
@@ -47,7 +46,6 @@ const BUBBLES = [
     subs: [
       { icon: 'eye',      label: 'Mi perfil',    path: '/profile/me' },
       { icon: 'trophy',   label: 'Gamificación', path: '/gamification' },
-      { icon: 'wallet',   label: 'Wallet',       path: '/wallet' },
       { icon: 'ticket',   label: 'Eventos',      path: '/events' },
       { icon: 'settings', label: 'Ajustes',      path: '/settings' },
     ],

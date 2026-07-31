@@ -48,7 +48,6 @@ const MENU = [
       { label: 'Mi perfil',      icon: 'user',     to: '/profile/me' },
       { label: 'Notificaciones', icon: 'bell',     to: '/notifications' },
       { label: 'Gamificación',   icon: 'trophy',   to: '/gamification' },
-      { label: 'Avatar',         icon: 'avatar',   to: '/avatar' },
       { label: 'Ajustes',        icon: 'gear',     to: '/settings' },
   ] },
   { id: 'social', label: 'Social',  icon: 'chat', children: [
@@ -57,9 +56,6 @@ const MENU = [
       { label: 'LIVE',        icon: 'live',  to: '/live' },
   ] },
   { id: 'market', label: 'Mercado', icon: 'bag', children: [
-      { label: 'Tienda',        icon: 'store',    to: '/shop' },
-      { label: 'Marketplace',   icon: 'bag',      to: '/marketplace' },
-      { label: 'Wallet',        icon: 'wallet',   to: '/wallet' },
       { label: 'Reservaciones', icon: 'calendar', to: '/reservations' },
   ] },
   { id: 'create', label: 'Crear',   icon: 'film', children: [
