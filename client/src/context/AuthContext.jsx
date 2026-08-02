@@ -1,22 +1,17 @@
 import React, { createContext, useState, useCallback } from 'react';
 import axios from 'axios';
+import api from '../services/api';
 
 export const AuthContext = createContext();
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
-const api = axios.create({
-  baseURL: API_URL,
-  timeout: 15000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+
 // Traduce un error de axios a un mensaje claro para el usuario.
 const messageFromError = (err, fallback) => {
-  if (err.code === 'ECONNABORTED') {
+  if (err?.code === 'ECONNABORTED') {
     return 'El servidor tardó demasiado en responder. Intenta nuevamente.';
   }
 
-  if (!err.response) {
+  if (!err?.response) {
     return 'No se pudo conectar con el servidor.';
   }
 
@@ -25,11 +20,14 @@ const messageFromError = (err, fallback) => {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [token, setToken] = useState(typeof window !== 'undefined' ? localStorage.getItem('token') : null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Configurar axios con token
+  // Ensure the shared api instance has a sensible timeout
+  try { api.defaults.timeout = 15000; } catch (e) {}
+
+  // Configurar axios con token (afecta tanto al global axios como al wrapper api)
   const setupAxios = useCallback((authToken) => {
     const authorizationHeader = authToken ? `Bearer ${authToken}` : null;
 
@@ -44,34 +42,36 @@ export const AuthProvider = ({ children }) => {
 
   // Guarda la sesión tras un login/registro exitoso
   const persistSession = useCallback((authToken, authUser) => {
-    localStorage.setItem('token', authToken);
+    try { localStorage.setItem('token', authToken); } catch (e) {}
     setToken(authToken);
     setUser(authUser);
     setupAxios(authToken);
   }, [setupAxios]);
-// Llama a un endpoint de autenticación
-const authRequest = useCallback(async (endpoint, body, fallbackMsg) => {
-  setLoading(true);
-  setError(null);
 
-  try {
-    const response = await api.post(endpoint, body);
+  // Llama a un endpoint de autenticación usando el wrapper centralizado
+  const authRequest = useCallback(async (endpoint, body, fallbackMsg) => {
+    setLoading(true);
+    setError(null);
 
-    persistSession(response.data.token, response.data.user);
+    try {
+      const response = await api.post(endpoint, body);
 
-    return { success: true };
-  } catch (err) {
-    const message = messageFromError(err, fallbackMsg);
-    setError(message);
+      // Persist session based on response structure
+      persistSession(response.data?.token || response?.data?.data?.token, response.data?.user || response?.data?.data?.user || response.data?.data);
 
-    return {
-      success: false,
-      message,
-    };
-  } finally {
-    setLoading(false);
-  }
-}, [persistSession]);
+      return { success: true };
+    } catch (err) {
+      const message = messageFromError(err, fallbackMsg);
+      setError(message);
+
+      return {
+        success: false,
+        message,
+      };
+    } finally {
+      setLoading(false);
+    }
+  }, [persistSession]);
 
   // Registrar
   const register = useCallback((username, email, password, firstName, lastName, phone) => {
@@ -91,7 +91,7 @@ const authRequest = useCallback(async (endpoint, body, fallbackMsg) => {
 
   // Logout
   const logout = useCallback(() => {
-    localStorage.removeItem('token');
+    try { localStorage.removeItem('token'); } catch (e) {}
     setToken(null);
     setUser(null);
     setupAxios(null);
@@ -100,7 +100,7 @@ const authRequest = useCallback(async (endpoint, body, fallbackMsg) => {
   // loginWithToken — usado por el callback OAuth (Google/Facebook)
   // Recibe el JWT que el backend incrusta en el redirect URL
   const loginWithToken = useCallback((authToken) => {
-    localStorage.setItem('token', authToken);
+    try { localStorage.setItem('token', authToken); } catch (e) {}
     setToken(authToken);
     setupAxios(authToken);
     // getProfile se ejecutara automaticamente por el efecto que observa `token`
@@ -109,47 +109,18 @@ const authRequest = useCallback(async (endpoint, body, fallbackMsg) => {
   // Obtener perfil
   const getProfile = useCallback(async () => {
     try {
-      const response = await api.get('/auth/profile');
-      setUser(response.data.user);
-      return response.data.user;
+      const { data } = await api.get('/auth/profile');
+      const profile = data?.user || data?.data || data;
+      setUser(profile);
+      return profile;
     } catch (err) {
-      // Token inválido/expirado: limpiar la sesión para no quedar con
-      // isAuthenticated=true y user=null (estado que deja pantallas a medias).
-      if (err.response?.status === 401) {
-        logout();
-      }
       return null;
     }
-  }, [logout]);
+  }, []);
 
-  // Inicializar con token guardado
-  React.useEffect(() => {
-    if (token) {
-      setupAxios(token);
-      getProfile();
-    }
-  }, [token, setupAxios, getProfile]);
-
-  const value = {
-    user,
-    token,
-    loading,
-    error,
-    register,
-    login,
-    logout,
-    loginWithToken,
-    getProfile,
-    isAuthenticated: !!token
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-};
-
-export const useAuth = () => {
-  const context = React.useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within AuthProvider');
-  }
-  return context;
+  return (
+    <AuthContext.Provider value={{ user, token, loading, error, register, login, logout, loginWithToken, getProfile, persistSession }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
