@@ -1,0 +1,11 @@
+{
+    "id": 5,
+    "group": "group-01",
+    "name": "Diseñador del Bus de Eventos y Mensajería (EDA)",
+    "objective": "Implementar y sostener el sistema de arquitectura dirigida por eventos (Event-Driven Architecture) para garantizar la comunicación asíncrona desacoplada.",
+    "tasks": [
+        "Definir los esquemas de eventos globales en el broker de mensajería (Kafka, RabbitMQ o EventBridge).",
+        "Monitorear el flujo de eventos asegurando que no existan cuellos de botella en la entrega.",
+        "Validar el cumplimiento de la semántica de entrega ('al menos una vez' o 'exactamente una vez')."
+    ]
+}

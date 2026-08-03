@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KRONOSPACE — Logotipo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:radial-gradient(135% 105% at 50% 32%, #141517 0%, #0a0a0b 48%, #030304 100%);
+    --text-grad:linear-gradient(180deg,#ffffff 0%,#eef1f4 22%,#a9aeb5 48%,#7c8087 53%,#c6cbd2 70%,#f4f6f8 100%);
+    --mark-glow:drop-shadow(0 2px 3px rgba(0,0,0,.6)) drop-shadow(0 0 7px rgba(186,198,212,.12));
+    --halo:rgba(174,186,200,.12);
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ min-height:100%; }
+  body{
+    font-family:'Manrope', system-ui, sans-serif;
+    background:var(--bg); background-attachment:fixed;
+    color:#e9edf1;
+    -webkit-font-smoothing:antialiased;
+    padding:64px 24px 96px;
+    transition:background .6s ease;
+  }
+  /* campo de estrellas para el ambiente Cósmico */
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:0;
+    transition:opacity .8s ease;
+    background-image:
+      radial-gradient(1.2px 1.2px at 18% 22%, rgba(220,230,240,.9), transparent),
+      radial-gradient(1px 1px at 72% 16%, rgba(200,212,224,.8), transparent),
+      radial-gradient(1.4px 1.4px at 44% 64%, rgba(230,238,246,.85), transparent),
+      radial-gradient(1px 1px at 88% 52%, rgba(190,202,216,.7), transparent),
+      radial-gradient(1.1px 1.1px at 28% 82%, rgba(210,222,234,.8), transparent),
+      radial-gradient(1px 1px at 62% 88%, rgba(200,212,224,.7), transparent),
+      radial-gradient(1.3px 1.3px at 8% 56%, rgba(220,230,240,.75), transparent);
+  }
+  body.cosmos::before{ opacity:.9; }
+  /* grano para evitar banding */
+  body::after{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:80;
+    opacity:.04; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .sheet{ max-width:1120px; margin:0 auto; position:relative; z-index:1; }
+
+  /* ---------- tipografía metálica ---------- */
+  .metal-text{
+    background:var(--text-grad);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    text-shadow:0 1px 0 rgba(0,0,0,.35);
+    transition:none;
+  }
+
+  .wm{ font-family:'Space Grotesk', sans-serif; display:inline-flex; align-items:baseline; line-height:1; }
+  .wm .k{ font-weight:700; }
+  .wm .s{ font-weight:300; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    display:flex; flex-direction:column; align-items:center; text-align:center;
+    padding:54px 24px 60px; margin-bottom:56px;
+    border:1px solid rgba(180,190,200,.08);
+    border-radius:24px;
+    background:
+      radial-gradient(120% 90% at 50% 0%, rgba(180,192,206,.06), transparent 60%),
+      linear-gradient(180deg, rgba(255,255,255,.012), transparent);
+    position:relative; overflow:hidden;
+  }
+  .hero::before{ /* halo */
+    content:""; position:absolute; left:50%; top:34%; width:560px; height:560px;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle, var(--halo), transparent 62%);
+    pointer-events:none;
+  }
+  .lockup{ display:flex; align-items:center; gap:30px; position:relative; }
+  .lockup .mark{ width:116px; height:116px; }
+  .hero-mark{ display:grid; place-items:center; }
+  .hero-mark svg{ width:100%; height:100%; }
+  .lockup .wm{ font-size:62px; letter-spacing:.01em; }
+  .hero .rule{
+    width:340px; max-width:80%; height:1px; margin:30px 0 16px;
+    background:linear-gradient(90deg, transparent, rgba(190,200,212,.45), transparent);
+  }
+  .hero .tag{
+    font-size:12px; letter-spacing:.42em; text-transform:uppercase; color:#7d838b;
+    font-weight:600;
+  }
+  .hero .domain{
+    margin-top:6px; font-size:12px; letter-spacing:.28em; color:#565b62;
+  }
+
+  /* ---------- grid de conceptos ---------- */
+  .section-label{
+    text-align:center; font-size:11px; letter-spacing:.4em; text-transform:uppercase;
+    color:#5e636a; margin-bottom:26px; font-weight:600;
+  }
+  .grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:18px;
+  }
+  .tile{
+    border:1px solid rgba(180,190,200,.09);
+    border-radius:18px; padding:34px 18px 22px;
+    background:linear-gradient(180deg, rgba(255,255,255,.015), rgba(255,255,255,.004));
+    display:flex; flex-direction:column; align-items:center;
+    transition:transform .5s cubic-bezier(.2,1,.3,1), border-color .5s ease, box-shadow .5s ease;
+  }
+  .tile:hover{
+    transform:translateY(-5px);
+    border-color:rgba(190,200,212,.22);
+    box-shadow:0 24px 50px -22px rgba(0,0,0,.9), 0 0 30px rgba(174,186,200,.08);
+  }
+  .tile .mark{ width:96px; height:96px; margin-bottom:22px; }
+  .tile .wm{ font-size:21px; letter-spacing:.02em; }
+  .tile .cap{
+    margin-top:14px; font-size:10px; letter-spacing:.26em; text-transform:uppercase;
+    color:#5e636a;
+  }
+  .tile .num{ color:#878d95; }
+
+  .mark{ display:block; overflow:visible; filter:var(--mark-glow); }
+  .mark path, .mark circle, .mark line, .mark ellipse, .mark polygon{ vector-effect:non-scaling-stroke; }
+
+  /* footer note */
+  .foot{
+    margin-top:54px; text-align:center; font-size:11px; letter-spacing:.24em;
+    text-transform:uppercase; color:#494e54;
+  }
+
+  @media (max-width:860px){
+    .grid{ grid-template-columns:repeat(2,1fr); }
+    .lockup{ flex-direction:column; gap:20px; }
+    .lockup .wm{ font-size:44px; }
+    .lockup .mark{ width:96px; height:96px; }
+  }
+  @media (max-width:480px){
+    .grid{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body style="font-size: 21px">
+
+<!-- ===== Gradientes metálicos compartidos (alta definición) ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="ksV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="16%" stop-color="#e9edf1"/>
+      <stop offset="44%" stop-color="#a4aab1"/>
+      <stop offset="51%" stop-color="#74787f"/>
+      <stop offset="58%" stop-color="#bcc1c8"/>
+      <stop offset="84%" stop-color="#eef0f3"/>
+      <stop offset="100%" stop-color="#c9ced4"/>
+    </linearGradient>
+    <linearGradient id="ksDiag" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stop-color="#fdfefe"/>
+      <stop offset="30%" stop-color="#c2c7ce"/>
+      <stop offset="50%" stop-color="#7a7e85"/>
+      <stop offset="70%" stop-color="#c8cdd3"/>
+      <stop offset="100%" stop-color="#f2f4f6"/>
+    </linearGradient>
+    <radialGradient id="ksSphere" cx="34%" cy="30%" r="80%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="24%" stop-color="#dadfe4"/>
+      <stop offset="58%" stop-color="#878c93"/>
+      <stop offset="100%" stop-color="#34373c"/>
+    </radialGradient>
+    <radialGradient id="ksSphereSm" cx="36%" cy="32%" r="80%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#c4c9cf"/>
+      <stop offset="100%" stop-color="#4a4e54"/>
+    </radialGradient>
+  </defs>
+</svg>
+
+<div class="sheet">
+
+  <!-- ===================== HERO ===================== -->
+  <div class="hero">
+    <div class="lockup">
+      <!-- Símbolo primario (intercambiable vía Tweaks) -->
+      <div class="mark hero-mark" id="heroMark"></div>
+
+      <div class="wm metal-text"><span class="k">KRONO</span><span class="s">SPACE</span></div>
+    </div>
+
+    <div class="rule"></div>
+    <div class="tag metal-text">Time × Space Platform</div>
+    <div class="domain">krono-spase.com</div>
+  </div>
+
+  <!-- ===================== CONCEPTOS ===================== -->
+  <div class="section-label">Cuatro direcciones · plata sobre negro</div>
+
+  <div class="grid">
+
+    <!-- 01 Órbita Crono -->
+    <div class="tile">
+      <svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Concepto Órbita Crono">
+        <ellipse cx="50" cy="50" rx="44" ry="20" fill="none" stroke="url(#ksDiag)" stroke-width="1.6" transform="rotate(-26 50 50)" opacity=".85"/>
+        <circle cx="50" cy="50" r="36" fill="none" stroke="url(#ksV)" stroke-width="2.4"/>
+        <path d="M28 24 A36 36 0 0 1 76 30" fill="none" stroke="#ffffff" stroke-width="1.1" stroke-linecap="round" opacity=".55"/>
+        <circle cx="50" cy="50" r="30.5" fill="none" stroke="url(#ksV)" stroke-width="4" stroke-dasharray="1.5 14.46"/>
+        <line x1="50" y1="50" x2="50" y2="24" stroke="url(#ksV)" stroke-width="3" stroke-linecap="round"/>
+        <line x1="50" y1="50" x2="66" y2="58" stroke="url(#ksV)" stroke-width="2.4" stroke-linecap="round"/>
+        <circle cx="86" cy="38" r="6" fill="url(#ksSphere)"/>
+        <circle cx="50" cy="50" r="4.2" fill="url(#ksSphereSm)"/>
+      </svg>
+      <div class="wm metal-text"><span class="k">KRONO</span><span class="s">SPACE</span></div>
+      <div class="cap"><span class="num">01</span> · Órbita Crono</div>
+    </div>
+
+    <!-- 02 Monograma K -->
+    <div class="tile">
+      <svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Concepto Monograma K">
+        <!-- órbita detrás -->
+        <ellipse cx="50" cy="50" rx="43" ry="22" fill="none" stroke="url(#ksDiag)" stroke-width="1.5" transform="rotate(28 50 50)" opacity=".8"/>
+        <!-- K geométrica met. -->
+        <polygon points="30,18 39,18 39,82 30,82" fill="url(#ksV)"/>
+        <polygon points="41,49 63,20 73,20 49,52" fill="url(#ksDiag)"/>
+        <polygon points="49,48 74,80 64,80 41,51" fill="url(#ksDiag)"/>
+        <!-- catch-light en el stem -->
+        <line x1="31.6" y1="20" x2="31.6" y2="80" stroke="#ffffff" stroke-width="1" opacity=".5" stroke-linecap="round"/>
+        <!-- nodo en órbita -->
+        <circle cx="84" cy="40" r="5" fill="url(#ksSphereSm)"/>
+      </svg>
+      <div class="wm metal-text"><span class="k">KRONO</span><span class="s">SPACE</span></div>
+      <div class="cap"><span class="num">02</span> · Monograma</div>
+    </div>
+
+    <!-- 03 Eclipse -->
+    <div class="tile">
+      <svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Concepto Eclipse">
+        <!-- órbita exterior -->
+        <circle cx="50" cy="50" r="40" fill="none" stroke="url(#ksDiag)" stroke-width="1.4" opacity=".7"/>
+        <!-- disco oscuro -->
+        <circle cx="50" cy="50" r="28" fill="#0a0b0c" stroke="rgba(120,128,138,.25)" stroke-width="1"/>
+        <!-- limbo brillante (eclipse) -->
+        <path d="M50 22 A28 28 0 0 1 50 78" fill="none" stroke="url(#ksV)" stroke-width="5.4" stroke-linecap="round"/>
+        <path d="M50 23 A27 27 0 0 1 64 27" fill="none" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
+        <!-- eje temporal -->
+        <line x1="6" y1="50" x2="22" y2="50" stroke="url(#ksV)" stroke-width="2" stroke-linecap="round"/>
+        <line x1="78" y1="50" x2="94" y2="50" stroke="url(#ksV)" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="50" cy="50" r="3.4" fill="url(#ksSphereSm)"/>
+      </svg>
+      <div class="wm metal-text"><span class="k">KRONO</span><span class="s">SPACE</span></div>
+      <div class="cap"><span class="num">03</span> · Eclipse</div>
+    </div>
+
+    <!-- 04 Órbitas concéntricas -->
+    <div class="tile">
+      <svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Concepto Órbitas concéntricas">
+        <circle cx="50" cy="50" r="40" fill="none" stroke="url(#ksDiag)" stroke-width="1.3" stroke-dasharray="2 5" opacity=".75"/>
+        <circle cx="50" cy="50" r="29" fill="none" stroke="url(#ksV)" stroke-width="1.8"/>
+        <circle cx="50" cy="50" r="18" fill="none" stroke="url(#ksDiag)" stroke-width="1.5" opacity=".85"/>
+        <path d="M30 30 A29 29 0 0 1 70 26" fill="none" stroke="#ffffff" stroke-width="1" stroke-linecap="round" opacity=".5"/>
+        <!-- manecilla -->
+        <line x1="50" y1="50" x2="50" y2="22" stroke="url(#ksV)" stroke-width="2.6" stroke-linecap="round"/>
+        <!-- núcleo -->
+        <circle cx="50" cy="50" r="7.5" fill="url(#ksSphere)"/>
+        <!-- nodos orbitando -->
+        <circle cx="90" cy="50" r="4.6" fill="url(#ksSphereSm)"/>
+        <circle cx="50" cy="21" r="3.4" fill="url(#ksSphereSm)"/>
+        <circle cx="32" cy="68" r="3" fill="url(#ksSphereSm)"/>
+      </svg>
+      <div class="wm metal-text"><span class="k">KRONO</span><span class="s">SPACE</span></div>
+      <div class="cap"><span class="num">04</span> · Órbitas</div>
+    </div>
+
+  </div>
+
+  <div class="foot">Sistema metálico · KRONOSPACE © 2026</div>
+
+</div>
+
+<div id="tweak-root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "finish": "cromo",
+  "ambiente": "vacio",
+  "concepto": "orbita"
+}/*EDITMODE-END*/;
+
+const MARKS = {
+  orbita:`<svg viewBox="0 0 100 100" role="img" aria-label="Órbita Crono">
+    <ellipse cx="50" cy="50" rx="44" ry="20" fill="none" stroke="url(#ksDiag)" stroke-width="1.6" transform="rotate(-26 50 50)" opacity=".85"/>
+    <circle cx="50" cy="50" r="36" fill="none" stroke="url(#ksV)" stroke-width="2.4"/>
+    <path d="M28 24 A36 36 0 0 1 76 30" fill="none" stroke="#ffffff" stroke-width="1.1" stroke-linecap="round" opacity=".55"/>
+    <circle cx="50" cy="50" r="30.5" fill="none" stroke="url(#ksV)" stroke-width="4" stroke-dasharray="1.5 14.46"/>
+    <line x1="50" y1="50" x2="50" y2="24" stroke="url(#ksV)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="50" y1="50" x2="66" y2="58" stroke="url(#ksV)" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="86" cy="38" r="6" fill="url(#ksSphere)"/><circle cx="50" cy="50" r="4.2" fill="url(#ksSphereSm)"/></svg>`,
+  monograma:`<svg viewBox="0 0 100 100" role="img" aria-label="Monograma">
+    <ellipse cx="50" cy="50" rx="43" ry="22" fill="none" stroke="url(#ksDiag)" stroke-width="1.5" transform="rotate(28 50 50)" opacity=".8"/>
+    <polygon points="30,18 39,18 39,82 30,82" fill="url(#ksV)"/>
+    <polygon points="41,49 63,20 73,20 49,52" fill="url(#ksDiag)"/>
+    <polygon points="49,48 74,80 64,80 41,51" fill="url(#ksDiag)"/>
+    <line x1="31.6" y1="20" x2="31.6" y2="80" stroke="#ffffff" stroke-width="1" opacity=".5" stroke-linecap="round"/>
+    <circle cx="84" cy="40" r="5" fill="url(#ksSphereSm)"/></svg>`,
+  eclipse:`<svg viewBox="0 0 100 100" role="img" aria-label="Eclipse">
+    <circle cx="50" cy="50" r="40" fill="none" stroke="url(#ksDiag)" stroke-width="1.4" opacity=".7"/>
+    <circle cx="50" cy="50" r="28" fill="#0a0b0c" stroke="rgba(120,128,138,.25)" stroke-width="1"/>
+    <path d="M50 22 A28 28 0 0 1 50 78" fill="none" stroke="url(#ksV)" stroke-width="5.4" stroke-linecap="round"/>
+    <path d="M50 23 A27 27 0 0 1 64 27" fill="none" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
+    <line x1="6" y1="50" x2="22" y2="50" stroke="url(#ksV)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="78" y1="50" x2="94" y2="50" stroke="url(#ksV)" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="50" cy="50" r="3.4" fill="url(#ksSphereSm)"/></svg>`,
+  orbitas:`<svg viewBox="0 0 100 100" role="img" aria-label="Órbitas">
+    <circle cx="50" cy="50" r="40" fill="none" stroke="url(#ksDiag)" stroke-width="1.3" stroke-dasharray="2 5" opacity=".75"/>
+    <circle cx="50" cy="50" r="29" fill="none" stroke="url(#ksV)" stroke-width="1.8"/>
+    <circle cx="50" cy="50" r="18" fill="none" stroke="url(#ksDiag)" stroke-width="1.5" opacity=".85"/>
+    <path d="M30 30 A29 29 0 0 1 70 26" fill="none" stroke="#ffffff" stroke-width="1" stroke-linecap="round" opacity=".5"/>
+    <line x1="50" y1="50" x2="50" y2="22" stroke="url(#ksV)" stroke-width="2.6" stroke-linecap="round"/>
+    <circle cx="50" cy="50" r="7.5" fill="url(#ksSphere)"/>
+    <circle cx="90" cy="50" r="4.6" fill="url(#ksSphereSm)"/><circle cx="50" cy="21" r="3.4" fill="url(#ksSphereSm)"/>
+    <circle cx="32" cy="68" r="3" fill="url(#ksSphereSm)"/></svg>`
+};
+
+const FINISHES = {
+  platino:{
+    ksV:["#ffffff","#e9edf1","#a4aab1","#74787f","#bcc1c8","#eef0f3","#c9ced4"],
+    ksDiag:["#fdfefe","#c2c7ce","#7a7e85","#c8cdd3","#f2f4f6"],
+    text:"linear-gradient(180deg,#ffffff 0%,#eef1f4 22%,#a9aeb5 48%,#7c8087 53%,#c6cbd2 70%,#f4f6f8 100%)",
+    glow:"drop-shadow(0 2px 3px rgba(0,0,0,.6)) drop-shadow(0 0 7px rgba(186,198,212,.12))"
+  },
+  cromo:{
+    ksV:["#ffffff","#ffffff","#aeb4bb","#34373c","#dfe3e8","#ffffff","#b4b9c0"],
+    ksDiag:["#ffffff","#d6dadf","#43464b","#d6dadf","#ffffff"],
+    text:"linear-gradient(180deg,#ffffff 0%,#ffffff 18%,#9298a0 46%,#3c3f44 52%,#cfd4da 64%,#ffffff 100%)",
+    glow:"drop-shadow(0 2px 4px rgba(0,0,0,.72)) drop-shadow(0 0 13px rgba(205,216,228,.24))"
+  },
+  titanio:{
+    ksV:["#dadfe4","#c3c9d0","#9aa1a9","#7e858d","#aab1b9","#cdd3d9","#b3bac1"],
+    ksDiag:["#d2d7dd","#b0b6bd","#80868d","#b0b6bd","#d2d7dd"],
+    text:"linear-gradient(180deg,#e8ebef 0%,#cdd2d8 26%,#9298a0 52%,#80868d 56%,#b3b9c0 72%,#dfe3e8 100%)",
+    glow:"drop-shadow(0 2px 3px rgba(0,0,0,.5)) drop-shadow(0 0 9px rgba(150,170,190,.14))"
+  },
+  acero:{
+    ksV:["#b9bcc0","#9fa3a8","#717479","#4c4f54","#878b90","#aeb2b7","#8a8e93"],
+    ksDiag:["#b3b7bb","#90949a","#5c6065","#90949a","#b3b7bb"],
+    text:"linear-gradient(180deg,#c6cacf 0%,#aab0b6 26%,#74787e 52%,#54585d 56%,#93979e 72%,#bcc0c5 100%)",
+    glow:"drop-shadow(0 2px 3px rgba(0,0,0,.6)) drop-shadow(0 0 6px rgba(140,150,160,.1))"
+  }
+};
+
+const AMBIENTS = {
+  estudio:{ bg:"radial-gradient(135% 105% at 50% 32%, #141517 0%, #0a0a0b 48%, #030304 100%)", halo:"rgba(174,186,200,.12)", stars:false },
+  vacio:{   bg:"radial-gradient(135% 105% at 50% 32%, #0b0b0c 0%, #050506 46%, #000000 100%)", halo:"rgba(174,186,200,.06)", stars:false },
+  cosmico:{ bg:"radial-gradient(135% 110% at 50% 26%, #10131b 0%, #080a10 50%, #020308 100%)", halo:"rgba(150,180,220,.18)", stars:true }
+};
+
+function setStops(id, colors){
+  const stops = document.querySelectorAll('#'+id+' stop');
+  colors.forEach((c,i)=>{ if(stops[i]) stops[i].setAttribute('stop-color', c); });
+}
+function applyFinish(f){
+  const p = FINISHES[f] || FINISHES.platino;
+  setStops('ksV', p.ksV); setStops('ksDiag', p.ksDiag);
+  const r = document.documentElement.style;
+  r.setProperty('--text-grad', p.text);
+  r.setProperty('--mark-glow', p.glow);
+}
+function applyAmbient(a){
+  const p = AMBIENTS[a] || AMBIENTS.estudio;
+  const r = document.documentElement.style;
+  r.setProperty('--bg', p.bg); r.setProperty('--halo', p.halo);
+  document.body.classList.toggle('cosmos', p.stars);
+}
+function applyConcepto(c){
+  const host = document.getElementById('heroMark');
+  if(host) host.innerHTML = MARKS[c] || MARKS.orbita;
+}
+
+const { useTweaks, TweaksPanel, TweakSection, TweakRadio, TweakSelect } = window;
+
+function App(){
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  React.useEffect(()=>{ applyFinish(t.finish); }, [t.finish]);
+  React.useEffect(()=>{ applyAmbient(t.ambiente); }, [t.ambiente]);
+  React.useEffect(()=>{ applyConcepto(t.concepto); }, [t.concepto]);
+
+  return (
+    <TweaksPanel title="Tweaks">
+      <TweakSection label="Acabado metálico" />
+      <TweakSelect label="Finish" value={t.finish}
+        options={[
+          {value:'platino', label:'Platino pulido'},
+          {value:'cromo',   label:'Cromo espejo'},
+          {value:'titanio', label:'Titanio mate'},
+          {value:'acero',   label:'Acero gunmetal'}
+        ]}
+        onChange={(v)=>setTweak('finish', v)} />
+
+      <TweakSection label="Ambiente" />
+      <TweakRadio label="Fondo" value={t.ambiente}
+        options={[
+          {value:'estudio', label:'Estudio'},
+          {value:'vacio',   label:'Vacío'},
+          {value:'cosmico', label:'Cósmico'}
+        ]}
+        onChange={(v)=>setTweak('ambiente', v)} />
+
+      <TweakSection label="Concepto principal" />
+      <TweakSelect label="Símbolo" value={t.concepto}
+        options={[
+          {value:'orbita',    label:'01 · Órbita Crono'},
+          {value:'monograma', label:'02 · Monograma'},
+          {value:'eclipse',   label:'03 · Eclipse'},
+          {value:'orbitas',   label:'04 · Órbitas'}
+        ]}
+        onChange={(v)=>setTweak('concepto', v)} />
+    </TweaksPanel>
+  );
+}
+
+applyConcepto(TWEAK_DEFAULTS.concepto);
+ReactDOM.createRoot(document.getElementById('tweak-root')).render(<App/>);
+</script>
+
+</body>
+</html>

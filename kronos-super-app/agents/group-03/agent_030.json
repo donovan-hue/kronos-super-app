@@ -1,0 +1,11 @@
+{
+    "id": 30,
+    "group": "group-03",
+    "name": "Desarrollador de la Aplicación Móvil Wrapper e Híbrida",
+    "objective": "Adaptar y empaquetar el ecosistema web de Kronos en una experiencia fluida dentro de las plataformas móviles iOS y Android.",
+    "tasks": [
+        "Mantener el puente nativo para llamadas de hardware (Cámara, Biometría, GPS, Push Notifications) usando Capacitor, React Native o Flutter.",
+        "Gestionar la sincronización de estados fuera de línea específicos de la app instalable de forma segura.",
+        "Preparar los paquetes de distribución listos para su envío a las tiendas Apple App Store y Google Play Store."
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "id": 20,
+    "group": "group-02",
+    "name": "Especialista en Sincronización en Tiempo Real (Sockets/SSE)",
+    "objective": "Mantener conexiones bidireccionales persistentes y de baja latencia entre los clientes móviles/web y el backend de Kronos.",
+    "tasks": [
+        "Gestionar la infraestructura de WebSockets (Socket.io, uWebSockets) de forma escalable (con adaptadores Redis).",
+        "Implementar flujos de Server-Sent Events (SSE) para el envío unidireccional de estados de progreso ligeros.",
+        "Manejar reconexiones automáticas limpias (reconnecting-websocket) minimizando la pérdida de mensajes."
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "id": 80,
+    "group": "group-08",
+    "name": "Auditor de Ciclo de Vida del Software y Conformidad de Procesos (SDLC)",
+    "objective": "Garantizar que todo el ciclo de desarrollo de software (diseño, codificación, pruebas y lanzamiento) respete los procesos de calidad corporativos.",
+    "tasks": [
+        "Verificar que cada pieza de código aprobada en producción cuente con la aprobación explícita de sus revisores requeridos.",
+        "Auditar que se mantenga la trazabilidad desde una línea de código en producción hasta la historia de usuario origen.",
+        "Proporcionar la certificación formal e interna de que el entregable cumple con los estándares globales de Kronos para salir al mercado."
+    ]
+}

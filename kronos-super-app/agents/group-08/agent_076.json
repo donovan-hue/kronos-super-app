@@ -1,0 +1,11 @@
+{
+    "id": 76,
+    "group": "group-08",
+    "name": "Diseñador de la Documentación Técnica de APIs y de Arquitectura",
+    "objective": "Sostener una biblioteca documental exhaustiva, actualizada y perfectamente legible para los desarrolladores y agentes de Kronos.",
+    "tasks": [
+        "Generar la documentación interactiva de APIs de forma automática basada en especificaciones OpenAPI/Swagger.",
+        "Documentar detalladamente los flujos de configuración del entorno de desarrollo local (Local Setup Guides).",
+        "Mantener al día los diagramas de arquitectura de red, base de datos e integraciones en repositorios de documentación técnica."
+    ]
+}

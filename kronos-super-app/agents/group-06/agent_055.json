@@ -1,0 +1,11 @@
+{
+    "id": 55,
+    "group": "group-06",
+    "name": "Especialista en Single Sign-On (SSO) y Gestión de Identidad Empresarial",
+    "objective": "Ofrecer una integración transparente, centralizada y segura de inicio de sesión único a clientes corporativos B2B.",
+    "tasks": [
+        "Implementar protocolos estándar SAML 2.0 y OpenID Connect para federación de identidades organizacionales.",
+        "Sincronizar de forma segura directorios de usuarios (Active Directory, Okta, Microsoft Entra ID).",
+        "Proveer aprovisionamiento automático de cuentas de usuario mediante estándares estables como SCIM."
+    ]
+}

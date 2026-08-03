@@ -1,0 +1,11 @@
+{
+    "id": 73,
+    "group": "group-08",
+    "name": "Coordinador de Lanzamientos y Registro de Cambios (Release Notes)",
+    "objective": "Asegurar transiciones controladas de nuevas versiones hacia producción, manteniendo a todos los equipos y clientes informados de las novedades.",
+    "tasks": [
+        "Crear la hoja de ruta de la versión y coordinar el despliegue ordenado de las diferentes funcionalidades de la app.",
+        "Redactar las notas de versión públicas (Release Notes) tanto para perfiles técnicos como comerciales.",
+        "Evaluar e implementar el encendido progresivo de funciones mediante interruptores lógicos dinámicos (Feature Flags)."
+    ]
+}

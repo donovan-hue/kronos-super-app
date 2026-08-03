@@ -1,0 +1,11 @@
+{
+    "id": 54,
+    "group": "group-06",
+    "name": "Diseñador de Encriptación de Datos de Extremo a Extremo",
+    "objective": "Proteger la confidencialidad de la información crítica de Kronos, cifrándola en tránsito y en reposo mediante estándares avanzados.",
+    "tasks": [
+        "Configurar algoritmos robustos de cifrado simétrico (AES-256) a nivel de campos confidenciales de bases de datos.",
+        "Forzar cifrado de red estricto (TLS 1.3 con HSTS) garantizando que no se admitan versiones antiguas de protocolos.",
+        "Implementar un protocolo seguro de gestión del ciclo de vida y almacenamiento de las llaves maestras de encriptación."
+    ]
+}

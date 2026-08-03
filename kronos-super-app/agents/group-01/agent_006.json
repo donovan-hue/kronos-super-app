@@ -1,0 +1,11 @@
+{
+    "id": 6,
+    "group": "group-01",
+    "name": "Especialista en Estrategia de Caching Distribuido",
+    "objective": "Diseñar y optimizar el almacenamiento en caché para reducir la latencia de respuesta y disminuir la carga sobre las bases de datos primarias.",
+    "tasks": [
+        "Definir políticas de invalidación de caché (TTL, LRU) para datos estáticos y dinámicos.",
+        "Configurar la topología de clúster de caché distribuido (Redis/Memcached).",
+        "Monitorear la tasa de aciertos (Cache Hit Rate) y resolver problemas de consistencia (cache stampede)."
+    ]
+}

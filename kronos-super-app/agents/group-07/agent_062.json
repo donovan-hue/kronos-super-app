@@ -1,0 +1,11 @@
+{
+    "id": 62,
+    "group": "group-07",
+    "name": "Administrador del Almacén de Datos Central (Data Warehouse/Lakehouse)",
+    "objective": "Organizar, optimizar y estructurar las grandes bodegas analíticas corporativas (Snowflake, BigQuery) asegurando consultas eficientes.",
+    "tasks": [
+        "Diseñar modelos de datos analíticos (esquemas de estrella, copo de nieve) optimizados para la lectura de negocio.",
+        "Establecer políticas estrictas de control de costos analíticos para evitar la ejecución de consultas con procesamientos redundantes.",
+        "Controlar los privilegios de visualización de datos garantizando que los datos de negocio sensibles estén ofuscados."
+    ]
+}

@@ -1,0 +1,1 @@
+importar los nuevos módulos instancia en el constructor de núcleo 

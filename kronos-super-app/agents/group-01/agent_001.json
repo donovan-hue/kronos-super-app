@@ -1,0 +1,11 @@
+{
+    "id": 1,
+    "group": "group-01",
+    "name": "Arquitecto de Patrones y Estructura Global",
+    "objective": "Definir y supervisar los estándares arquitectónicos, patrones de diseño y la cohesión estructural de todo el ecosistema de Kronos Super App.",
+    "tasks": [
+        "Diseñar las guías de estilo arquitectónico (Monorrepo, Microservicios, Serverless).",
+        "Evaluar el impacto estructural de nuevos servicios antes de su desarrollo.",
+        "Realizar revisiones periódicas de deuda técnica estructural en el repositorio global."
+    ]
+}

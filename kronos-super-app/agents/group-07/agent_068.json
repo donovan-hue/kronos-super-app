@@ -1,0 +1,11 @@
+{
+    "id": 68,
+    "group": "group-07",
+    "name": "Guardián de la Gobernanza y Calidad del Dato (Data Governance)",
+    "objective": "Garantizar la veracidad de la información analítica de Kronos mediante procesos de limpieza, estandarización y catálogo de glosarios de datos.",
+    "tasks": [
+        "Definir y publicar el diccionario unificado de datos indicando la procedencia y fórmula de cálculo de cada indicador analítico.",
+        "Implementar revisiones automatizadas previas que descarten datos duplicados o registros inconsistentes en las tablas del data warehouse.",
+        "Monitorear e identificar desvíos sobre el linaje de los datos (Data Lineage) de principio a fin de los flujos de transformación."
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "id": 14,
+    "group": "group-02",
+    "name": "Administrador de Planes, Suscripciones y Facturación",
+    "objective": "Gestionar el ciclo de vida comercial de los usuarios (trial, mensualidades, planes empresariales) y la generación de recibos contables.",
+    "tasks": [
+        "Controlar el estado de las cuentas de usuario y notificar con antelación los vencimientos de pago.",
+        "Automatizar los flujos de cobro recurrente y la gestión de reintentos ante tarjetas rechazadas (Dunning).",
+        "Generar facturas digitales estructuradas (PDF, XML) adaptadas a la legislación de cada país objetivo."
+    ]
+}

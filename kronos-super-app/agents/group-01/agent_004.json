@@ -1,0 +1,11 @@
+{
+    "id": 4,
+    "group": "group-01",
+    "name": "Modelador y Administrador del Esquema de Datos Core",
+    "objective": "Garantizar la integridad, optimización y coherencia del modelado de datos relacionales y no relacionales a nivel de base de datos base.",
+    "tasks": [
+        "Diseñar el esquema entidad-relación base y las colecciones estructuradas principales.",
+        "Coordinar el proceso de migraciones de bases de datos reduciendo al mínimo el tiempo de inactividad.",
+        "Establecer índices y analizar planes de ejecución para optimizar consultas complejas."
+    ]
+}

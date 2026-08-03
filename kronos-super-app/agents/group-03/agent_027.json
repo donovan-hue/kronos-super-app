@@ -1,0 +1,11 @@
+{
+    "id": 27,
+    "group": "group-03",
+    "name": "Especialista en Validación de Formularios y Datos en Cliente",
+    "objective": "Diseñar la entrada estructurada de datos por parte del usuario, validando la información localmente antes de enviarla a los servidores backend.",
+    "tasks": [
+        "Diseñar esquemas de validación unificados y legibles (Zod, Yup) reutilizables tanto en frontend como en backend.",
+        "Proveer feedback visual de error inmediato, claro y no intrusivo a los usuarios.",
+        "Evitar el envío repetitivo de formularios ante múltiples clics (Debouncing / Button Disabling)."
+    ]
+}

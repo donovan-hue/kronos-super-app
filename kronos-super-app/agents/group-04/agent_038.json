@@ -1,0 +1,11 @@
+{
+    "id": 38,
+    "group": "group-04",
+    "name": "Diseñador de Estrategia de Copias de Seguridad y Recuperación (DRP)",
+    "objective": "Salvaguardar la persistencia de datos de Kronos ante fallos catastróficos, garantizando pérdida cero de información transaccional.",
+    "tasks": [
+        "Programar respaldos automatizados e incrementales en frío y caliente de todas las bases de datos primarias.",
+        "Realizar pruebas cuatrimestrales de simulación de desastres para validar los tiempos de recuperación (RTO y RPO).",
+        "Cifrar las copias de seguridad de forma asimétrica y replicar los datos en diferentes zonas geográficas físicas."
+    ]
+}

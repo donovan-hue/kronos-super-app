@@ -1,0 +1,11 @@
+{
+    "id": 48,
+    "group": "group-05",
+    "name": "Automatizador de Tareas de Automatización de Procesos (RPA Integrations)",
+    "objective": "Habilitar integraciones tipo 'no-code' y flujos lógicos automáticos basados en eventos y desencadenadores seleccionados por el cliente final.",
+    "tasks": [
+        "Construir un motor de ejecución lógica que conecte disparadores (triggers) con secuencias de acciones condicionales de API.",
+        "Controlar la tasa de ejecución de los flujos de automatización por usuario final, evitando saturación del sistema.",
+        "Proveer logs legibles detallados de ejecución a los usuarios para que depuren con facilidad sus flujos fallidos."
+    ]
+}

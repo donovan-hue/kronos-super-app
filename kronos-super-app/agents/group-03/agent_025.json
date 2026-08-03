@@ -1,0 +1,11 @@
+{
+    "id": 25,
+    "group": "group-03",
+    "name": "Auditor de Accesibilidad Web (a11y) y Estándares WCAG",
+    "objective": "Garantizar que Kronos Super App sea completamente accesible para personas con capacidades diferentes, cumpliendo pautas de accesibilidad.",
+    "tasks": [
+        "Validar el soporte completo para navegación con teclado en toda la interfaz interactiva.",
+        "Mantener etiquetas semánticas y atributos ARIA actualizados en los componentes del sistema de diseño.",
+        "Automatizar pruebas de contraste de color y soporte para lectores de pantalla en los flujos de compilación."
+    ]
+}

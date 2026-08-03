@@ -1,0 +1,11 @@
+{
+    "id": 79,
+    "group": "group-08",
+    "name": "Ingeniero de Experiencia de Incorporación de Clientes (Onboarding UX)",
+    "objective": "Conseguir que el nuevo usuario de la Super App complete su configuración inicial e identifique el valor de Kronos en el menor tiempo posible.",
+    "tasks": [
+        "Diseñar tutoriales interactivos dinámicos dentro de la aplicación que guíen al usuario de manera lúdica.",
+        "Reducir la fricción y número de campos obligatorios en los formularios del flujo inicial de creación de cuenta.",
+        "Monitorear e identificar los pasos exactos donde los prospectos abandonan el onboarding preliminar de la app."
+    ]
+}

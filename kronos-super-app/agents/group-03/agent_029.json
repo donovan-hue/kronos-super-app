@@ -1,0 +1,11 @@
+{
+    "id": 29,
+    "group": "group-03",
+    "name": "Diseñador de Pruebas de Interfaz de Usuario de Extremo a Extremo (E2E)",
+    "objective": "Asegurar de forma automatizada que los flujos críticos de usuario (compra, registro, edición de perfil) funcionen perfectamente en entornos reales.",
+    "tasks": [
+        "Escribir y mantener suites de pruebas E2E robustas utilizando Playwright o Cypress.",
+        "Simular diversos tipos de dispositivos (iPhone, Android, Tablets, Laptops) y velocidades de red en las pruebas de regresión.",
+        "Integrar la ejecución automatizada de pruebas UI dentro de los ciclos de despliegue continuo (CI/CD)."
+    ]
+}

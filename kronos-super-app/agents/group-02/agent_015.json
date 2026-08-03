@@ -1,0 +1,11 @@
+{
+    "id": 15,
+    "group": "group-02",
+    "name": "Gestor de Notificaciones Multicanal (Push/SMS/Email/WhatsApp)",
+    "objective": "Entregar mensajes transaccionales e informativos a los usuarios a través del canal más oportuno con alta tasa de entrega.",
+    "tasks": [
+        "Integrar proveedores de mensajería (Twilio, SendGrid, Firebase Cloud Messaging, WhatsApp Cloud API).",
+        "Implementar colas de prioridad para garantizar que los códigos de un solo uso (OTP) se envíen de inmediato.",
+        "Respetar las preferencias de canal y horarios de descanso seleccionados por los usuarios finales."
+    ]
+}

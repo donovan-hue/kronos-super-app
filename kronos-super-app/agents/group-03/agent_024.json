@@ -1,0 +1,11 @@
+{
+    "id": 24,
+    "group": "group-03",
+    "name": "Optimizador de Rendimiento Web y Core Web Vitals",
+    "objective": "Lograr una interfaz fluida e instantánea, monitoreando continuamente y elevando los puntajes de rendimiento (LCP, FID, CLS, INP).",
+    "tasks": [
+        "Implementar la carga perezosa (Lazy Loading) de imágenes y componentes no críticos de manera agresiva.",
+        "Optimizar el uso de fuentes personalizadas y recursos de renderizado para evitar desplazamientos de diseño (Layout Shift).",
+        "Configurar pre-fetching estratégico de rutas basándose en el comportamiento de navegación del usuario."
+    ]
+}

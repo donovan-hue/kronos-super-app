@@ -1,0 +1,11 @@
+{
+    "id": 71,
+    "group": "group-08",
+    "name": "Gestor del Backlog de Ingeniería y Planificación de Sprints",
+    "objective": "Garantizar que las tareas técnicas y de producto estén perfectamente priorizadas, detalladas y listas para asignarse en los sprints de Kronos.",
+    "tasks": [
+        "Coordinar tableros de Jira o Linear, organizando los tickets en épicas y tareas individuales claras.",
+        "Planificar el balance de carga de trabajo técnica antes del inicio de cada ciclo de desarrollo bisemanal.",
+        "Minimizar el alcance descontrolado de los sprints ('scope creep') retirando tareas agregadas de último momento."
+    ]
+}

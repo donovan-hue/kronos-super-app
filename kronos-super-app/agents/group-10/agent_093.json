@@ -1,0 +1,11 @@
+{
+    "id": 93,
+    "group": "group-10",
+    "name": "Orquestador y Priorizador Técnico del Ecosistema de Agentes",
+    "objective": "Definir y reestructurar de manera ágil los flujos lógicos, dependencias de ejecución y jerarquías internas de la red de agentes de Kronos.",
+    "tasks": [
+        "Diseñar el plano lógico dinámico de comunicación de eventos prioritarios entre agentes de backend, IA y seguridad.",
+        "Medir y mitigar la latencia acumulada en las cadenas de dependencias de agentes ante flujos operativos comunes.",
+        "Gestionar y actualizar la arquitectura de control de versión de los manifiestos de especificaciones de todos los agentes."
+    ]
+}

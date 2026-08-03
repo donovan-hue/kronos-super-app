@@ -1,0 +1,11 @@
+{
+    "id": 51,
+    "group": "group-06",
+    "name": "Auditor de Código Estático y Dinámico (SAST/DAST)",
+    "objective": "Garantizar que todo el código fuente esté libre de vulnerabilidades conocidas, inyecciones de código o errores lógicos de seguridad.",
+    "tasks": [
+        "Integrar herramientas automáticas de análisis SAST (como SonarQube, Snyk) directamente en las ramas de desarrollo.",
+        "Configurar suites de escaneo DAST dinámicos que simulen ataques en tiempo de ejecución sobre entornos provisionales.",
+        "Detener fusiones de código que introduzcan vulnerabilidades catalogadas de prioridad alta o crítica."
+    ]
+}

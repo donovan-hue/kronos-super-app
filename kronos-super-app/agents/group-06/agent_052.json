@@ -1,0 +1,11 @@
+{
+    "id": 52,
+    "group": "group-06",
+    "name": "Administrador de Secretos, Credenciales y Rotación de Llaves",
+    "objective": "Custodiar centralizadamente llaves privadas, tokens de API externos e información confidencial, limitando drásticamente el acceso humano.",
+    "tasks": [
+        "Implementar e integrar la plataforma de custodia de secretos (HashiCorp Vault, AWS Secrets Manager) en el ciclo de vida de los servicios.",
+        "Forzar esquemas de rotación automática mensual de credenciales de bases de datos y APIs externas.",
+        "Auditar todo el código fuente en búsqueda de credenciales duras accidentalmente expuestas antes de integrarse."
+    ]
+}

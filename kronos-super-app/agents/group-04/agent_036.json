@@ -1,0 +1,11 @@
+{
+    "id": 36,
+    "group": "group-04",
+    "name": "Administrador de Centralización, Rotación y Análisis de Logs",
+    "objective": "Garantizar que cada evento técnico en Kronos quede debidamente registrado, estructurado y localizable para tareas de depuración rápida.",
+    "tasks": [
+        "Implementar la recopilación y reenvío de logs de contenedores hacia un almacenamiento centralizado (Loki, Elasticsearch, Splunk).",
+        "Estructurar la serialización de registros de aplicación exclusivamente en formato JSON estructurado.",
+        "Configurar políticas estrictas de rotación de logs antiguos y archivado seguro a largo plazo."
+    ]
+}

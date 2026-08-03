@@ -1,0 +1,11 @@
+{
+    "id": 85,
+    "group": "group-09",
+    "name": "Desarrollador del Portal y Sandbox de Desarrollo de Kronos",
+    "objective": "Proveer un espacio autogestionado donde desarrolladores externos registren aplicaciones, generen credenciales de prueba y ensayen de forma segura.",
+    "tasks": [
+        "Diseñar el dashboard administrativo de aplicaciones de terceros, alcances (scopes) de API y claves cliente/secreto.",
+        "Implementar un entorno mock virtual (Sandbox) de la Super App que replique fielmente respuestas del sistema sin tocar datos productivos.",
+        "Mantener foros y sistemas automatizados para responder dudas de integración técnica de forma interactiva."
+    ]
+}

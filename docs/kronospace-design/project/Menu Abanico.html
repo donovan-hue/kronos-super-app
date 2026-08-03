@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Menú Abanico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    /* tamaños */
+    --sat: 86px;          /* diámetro botón satélite */
+    --home: 100px;        /* diámetro botón central */
+    --ring: 2.5px;        /* grosor del aro metálico */
+    --radius: 188px;      /* radio del abanico (JS lo ajusta) */
+
+    /* sheen metálico del aro */
+    --metal: conic-gradient(from 138deg,
+      #54585d 0%, #c9ced4 11%, #ffffff 19%, #9aa0a7 29%,
+      #686c71 41%, #e9ecf0 54%, #b4b9c0 65%,
+      #f5f7f9 77%, #7e8288 89%, #54585d 100%);
+    --metal-bright: conic-gradient(from 138deg,
+      #6b6f75 0%, #dfe3e8 11%, #ffffff 19%, #aeb4bb 29%,
+      #7a7e83 41%, #f3f5f8 54%, #c6cbd2 65%,
+      #ffffff 77%, #92969c 89%, #6b6f75 100%);
+
+    --label:#aeb4bc;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ height:100%; }
+
+  body{
+    font-family:'Manrope', system-ui, sans-serif;
+    background:
+      radial-gradient(130% 110% at 50% 42%, #141517 0%, #0a0a0b 46%, #040405 100%);
+    color:#fff;
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  /* grano sutil para evitar banding en el negro */
+  body::after{
+    content:"";
+    position:fixed; inset:0; pointer-events:none; z-index:50;
+    opacity:.035; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .stage{
+    position:fixed; inset:0;
+    display:grid; place-items:center;
+  }
+
+  /* halo que aparece detrás del cúmulo al abrir */
+  .menu{
+    position:relative;
+    width:var(--home); height:var(--home);
+    display:grid; place-items:center;
+  }
+  .menu::before{
+    content:"";
+    position:absolute; left:50%; top:50%;
+    width:520px; height:520px;
+    transform:translate(-50%,-50%) scale(.4);
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(176,186,198,.10) 0%, rgba(176,186,198,.04) 38%, transparent 66%);
+    opacity:0; transition:opacity .6s ease, transform .7s cubic-bezier(.16,1,.3,1);
+    pointer-events:none;
+  }
+  .menu.open::before{ opacity:1; transform:translate(-50%,-50%) scale(1); }
+
+  /* ---------- botón base ---------- */
+  .btn{
+    position:absolute; left:50%; top:50%;
+    border:0; padding:var(--ring); cursor:pointer;
+    border-radius:50%;
+    background:var(--metal);
+    box-shadow:
+      0 16px 34px -10px rgba(0,0,0,.85),
+      0 2px 6px rgba(0,0,0,.6),
+      0 0 0 1px rgba(255,255,255,.035);
+    transition:
+      transform .72s cubic-bezier(.2,1.12,.32,1),
+      opacity .5s ease,
+      filter .5s ease,
+      box-shadow .45s ease;
+    will-change:transform, opacity;
+  }
+  .btn:focus-visible{ outline:2px solid #cfd4da; outline-offset:6px; }
+
+  .face{
+    position:relative;
+    width:100%; height:100%;
+    border-radius:50%;
+    display:grid; place-items:center;
+    background:radial-gradient(122% 120% at 32% 22%,
+      #26282b 0%, #17181a 36%, #0b0c0d 72%, #050506 100%);
+    box-shadow:
+      inset 0 1.5px 1.5px rgba(255,255,255,.22),
+      inset 0 -12px 22px rgba(0,0,0,.65),
+      inset 0 0 0 1px rgba(0,0,0,.45);
+  }
+  /* reflejo de cristal superior */
+  .face::before{
+    content:"";
+    position:absolute; left:14%; right:24%; top:9%;
+    height:34%; border-radius:50%;
+    background:linear-gradient(180deg, rgba(255,255,255,.20), rgba(255,255,255,0));
+    filter:blur(1px); pointer-events:none;
+  }
+
+  .btn svg{
+    width:44%; height:44%;
+    fill:none;
+    stroke:url(#silver);
+    stroke-width:1.7;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    filter:drop-shadow(0 1px 1px rgba(0,0,0,.55)) drop-shadow(0 0 2px rgba(220,226,232,.18));
+    overflow:visible;
+  }
+
+  /* etiqueta */
+  .label{
+    position:absolute; left:50%; top:calc(100% + 9px);
+    transform:translateX(-50%);
+    font-size:10.5px; font-weight:600; letter-spacing:.18em;
+    text-transform:uppercase; white-space:nowrap;
+    background:linear-gradient(180deg,#fdfdfe,#cdd2d8 46%,#888d93 100%);
+    -webkit-background-clip:text; background-clip:text;
+    color:transparent;
+    text-shadow:0 1px 1px rgba(0,0,0,.6);
+    opacity:0; transition:opacity .4s ease;
+  }
+  .menu.open .label{ opacity:1; }
+
+  /* ---------- satélites: estado cerrado ---------- */
+  .sat{
+    width:var(--sat); height:var(--sat);
+    transform:translate(-50%,-50%) translate(0,0) scale(.18) rotate(18deg);
+    opacity:0; filter:blur(7px);
+    pointer-events:none;
+    z-index:2;
+  }
+  /* estado abierto -> se reparten en círculo */
+  .menu.open .sat{
+    transform:translate(-50%,-50%) translate(var(--tx), var(--ty)) scale(1) rotate(0deg);
+    opacity:1; filter:blur(0);
+    pointer-events:auto;
+  }
+
+  .sat:hover{
+    box-shadow:
+      0 18px 38px -10px rgba(0,0,0,.85),
+      0 0 22px rgba(190,200,212,.28),
+      0 0 0 1px rgba(255,255,255,.06);
+  }
+  .menu.open .sat:hover{
+    transform:translate(-50%,-50%) translate(var(--tx), var(--ty)) scale(1.075) rotate(0deg);
+  }
+  .sat:active{
+    transform:translate(-50%,-50%) translate(var(--tx), var(--ty)) scale(.96) rotate(0deg) !important;
+  }
+
+  /* ---------- botón central ---------- */
+  .home{
+    width:var(--home); height:var(--home);
+    transform:translate(-50%,-50%) scale(1);
+    z-index:6;
+    box-shadow:
+      0 18px 40px -12px rgba(0,0,0,.9),
+      0 2px 6px rgba(0,0,0,.6),
+      0 0 0 1px rgba(255,255,255,.05),
+      0 0 26px rgba(176,186,198,.16);
+    animation:breathe 4.2s ease-in-out infinite;
+  }
+  .home:hover{ transform:translate(-50%,-50%) scale(1.04); }
+  .home:active{ transform:translate(-50%,-50%) scale(.95); }
+  .home svg{ width:42%; height:42%; transition:transform .6s cubic-bezier(.2,1.1,.3,1); }
+  .menu.open .home{ animation:none; }
+  .menu.open .home svg{ transform:rotate(360deg) scale(.92); }
+  .menu.open .home{
+    background:var(--metal-bright);
+    box-shadow:
+      0 18px 40px -12px rgba(0,0,0,.9),
+      0 0 0 1px rgba(255,255,255,.06),
+      0 0 34px rgba(196,206,218,.30);
+  }
+
+  @keyframes breathe{
+    0%,100%{ box-shadow:0 18px 40px -12px rgba(0,0,0,.9),0 2px 6px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.05),0 0 22px rgba(176,186,198,.12); }
+    50%{     box-shadow:0 18px 40px -12px rgba(0,0,0,.9),0 2px 6px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.05),0 0 40px rgba(176,186,198,.26); }
+  }
+
+  /* pista sutil */
+  .hint{
+    position:fixed; left:50%; bottom:30px; transform:translateX(-50%);
+    font-size:11px; letter-spacing:.22em; text-transform:uppercase;
+    color:#5b6066; transition:opacity .5s ease; pointer-events:none;
+  }
+  .menu.open ~ .hint{ opacity:0; }
+
+  @media (prefers-reduced-motion:reduce){
+    .btn{ transition:opacity .2s ease; }
+    .home{ animation:none; }
+    .menu.open .home svg{ transform:none; }
+  }
+</style>
+</head>
+<body style="font-family: Manrope">
+
+<!-- defs de gradientes metálicos compartidos -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="silver" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="18%" stop-color="#e7eaee"/>
+      <stop offset="46%" stop-color="#9ea4ab"/>
+      <stop offset="52%" stop-color="#787d83"/>
+      <stop offset="60%" stop-color="#bcc1c8"/>
+      <stop offset="82%" stop-color="#eef0f3"/>
+      <stop offset="100%" stop-color="#cdd2d8"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="stage">
+  <nav class="menu" id="menu" aria-label="Menú principal">
+
+    <!-- ===== Satélites ===== -->
+    <!-- Perfil (arriba) -->
+    <button class="btn sat" data-i="0" aria-label="Perfil">
+      <span class="face">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5.4 19.6a6.6 6.6 0 0 1 13.2 0"/></svg>
+      </span>
+      <span class="label">Perfil</span>
+    </button>
+
+    <!-- Mensaje (arriba-derecha) -->
+    <button class="btn sat" data-i="1" aria-label="Mensaje">
+      <span class="face">
+        <svg viewBox="0 0 24 24"><path d="M20 6.5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h1.4v3l3.6-3H18a2 2 0 0 0 2-2Z"/><path d="M8 9.3h8M8 12.4h5"/></svg>
+      </span>
+      <span class="label">Mensaje</span>
+    </button>
+
+    <!-- Notifica (abajo-derecha) -->
+    <button class="btn sat" data-i="2" aria-label="Notificaciones">
+      <span class="face">
+        <svg viewBox="0 0 24 24"><path d="M18 16v-5a6 6 0 0 0-12 0v5l-1.6 2h15.2Z"/><path d="M9.8 19.6a2.4 2.4 0 0 0 4.4 0"/></svg>
+      </span>
+      <span class="label">Notifica</span>
+    </button>
+
+    <!-- Publica (abajo) -->
+    <button class="btn sat" data-i="3" aria-label="Publicar">
+      <span class="face">
+        <svg viewBox="0 0 24 24"><rect x="4.5" y="4.5" width="15" height="15" rx="3.2"/><path d="M12 8.7v6.6M8.7 12h6.6"/></svg>
+      </span>
+      <span class="label">Publica</span>
+    </button>
+
+    <!-- Game (abajo-izquierda) -->
+    <button class="btn sat" data-i="4" aria-label="Juegos">
+      <span class="face">
+        <svg viewBox="0 0 24 24"><path d="M7.5 8h9a3.8 3.8 0 0 1 3.8 4.1l-.4 3.3a2.4 2.4 0 0 1-4.3 1.1L14.4 15H9.6l-1.2 1.5a2.4 2.4 0 0 1-4.3-1.1l-.4-3.3A3.8 3.8 0 0 1 7.5 8Z"/><path d="M7 10.6v2.2M5.9 11.7h2.2"/><circle cx="15.4" cy="11.4" r=".7"/><circle cx="17" cy="13" r=".7"/></svg>
+      </span>
+      <span class="label">Game</span>
+    </button>
+
+    <!-- Market (arriba-izquierda) -->
+    <button class="btn sat" data-i="5" aria-label="Market">
+      <span class="face">
+        <svg viewBox="0 0 24 24"><path d="M3.2 4.5H5.4L7.3 15h9.1l1.7-7.4H6.1"/><circle cx="9" cy="18.6" r="1.3"/><circle cx="16" cy="18.6" r="1.3"/></svg>
+      </span>
+      <span class="label">Market</span>
+    </button>
+
+    <!-- ===== Botón central ===== -->
+    <button class="btn home" id="home" aria-label="Inicio" aria-expanded="false" aria-controls="menu">
+      <span class="face">
+        <svg viewBox="0 0 24 24"><path d="M3.5 11.4 12 4l8.5 7.4"/><path d="M5.6 9.8V20h12.8V9.8"/><path d="M9.8 20v-5.2h4.4V20"/></svg>
+      </span>
+    </button>
+
+  </nav>
+
+  <div class="hint">Toca Inicio</div>
+</div>
+
+<script>
+  const menu = document.getElementById('menu');
+  const home = document.getElementById('home');
+  const sats = [...document.querySelectorAll('.sat')];
+
+  // ángulos: Perfil arriba, y en sentido horario cada 60° (coincide con el boceto)
+  const ANGLES = [-90, -30, 30, 90, 150, 210];
+
+  function layout(){
+    const minDim = Math.min(window.innerWidth, window.innerHeight);
+    // radio adaptable: nunca tan grande que se salga, nunca tan chico que se encime
+    const r = Math.max(132, Math.min(196, minDim / 2 - 96));
+    document.documentElement.style.setProperty('--radius', r + 'px');
+    sats.forEach(s => {
+      const a = ANGLES[+s.dataset.i] * Math.PI / 180;
+      s.style.setProperty('--tx', (Math.cos(a) * r).toFixed(1) + 'px');
+      s.style.setProperty('--ty', (Math.sin(a) * r).toFixed(1) + 'px');
+    });
+  }
+
+  function stagger(open){
+    // animación radial premium con escalonado desde el centro hacia afuera
+    sats.forEach((s, idx) => {
+      const order = open ? idx : (sats.length - 1 - idx);
+      s.style.transitionDelay = (order * 55) + 'ms';
+    });
+  }
+
+  let isOpen = false;
+  function toggle(){
+    isOpen = !isOpen;
+    stagger(isOpen);
+    menu.classList.toggle('open', isOpen);
+    home.setAttribute('aria-expanded', String(isOpen));
+  }
+
+  home.addEventListener('click', toggle);
+
+  // cada satélite: feedback y cierre del abanico al elegir
+  sats.forEach(s => s.addEventListener('click', () => {
+    if(!isOpen) return;
+    // pequeño retardo para que se vea el "active" antes de recoger
+    setTimeout(toggle, 90);
+  }));
+
+  // cerrar con Escape
+  document.addEventListener('keydown', e => { if(e.key === 'Escape' && isOpen) toggle(); });
+
+  layout();
+  window.addEventListener('resize', layout);
+</script>
+</body>
+</html>

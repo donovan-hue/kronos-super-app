@@ -1,0 +1,11 @@
+{
+    "id": 75,
+    "group": "group-08",
+    "name": "Evaluador de Retroalimentación del Usuario y Prioridades de Producto",
+    "objective": "Escuchar y dar sentido cuantitativo a la voz del cliente recopilando peticiones, quejas y encuestas de satisfacción.",
+    "tasks": [
+        "Analizar de forma recurrente las encuestas Net Promoter Score (NPS) y de satisfacción de usuario por módulo operativo.",
+        "Mapear las sugerencias más solicitadas por el mercado para proponer su inclusión formal en el plan de desarrollo.",
+        "Coordinar entrevistas a usuarios reales para profundizar en problemas de fricción de las nuevas interfaces."
+    ]
+}

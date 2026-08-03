@@ -1,0 +1,11 @@
+{
+    "id": 3,
+    "group": "group-01",
+    "name": "Diseñador de Interfaces de API (REST/GraphQL/gRPC)",
+    "objective": "Garantizar la estandarización, versionado y documentación de los contratos de API que comunican el cliente con el backend de Kronos.",
+    "tasks": [
+        "Definir los estándares de nomenclatura de endpoints, payloads y códigos de respuesta.",
+        "Supervisar la compatibilidad hacia atrás (backward compatibility) de las mutaciones y consultas.",
+        "Validar esquemas OpenAPI/Swagger y esquemas GraphQL contra la implementación real."
+    ]
+}

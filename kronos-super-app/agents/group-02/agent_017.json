@@ -1,0 +1,11 @@
+{
+    "id": 17,
+    "group": "group-02",
+    "name": "Custodio de Almacenamiento de Archivos y Assets (Object Storage)",
+    "objective": "Gestionar de manera segura y óptima la subida, almacenamiento, CDN y distribución de recursos multimedia (imágenes, PDFs, vídeos).",
+    "tasks": [
+        "Definir políticas de acceso para archivos públicos y privados a través de URLs firmadas temporalmente.",
+        "Optimizar el tamaño de las imágenes cargadas por el usuario al vuelo antes de guardarlas (compresión, WebP).",
+        "Diseñar flujos de eliminación automática de recursos huérfanos o temporales."
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "id": 43,
+    "group": "group-05",
+    "name": "Desarrollador de Flujos de Trabajo Agénticos (Multi-Agent System)",
+    "objective": "Orquestar flujos de trabajo autónomos complejos donde múltiples agentes de IA colaboran y toman decisiones basados en herramientas disponibles.",
+    "tasks": [
+        "Diseñar e implementar bucles lógicos con marcos de trabajo orientados a agentes (LangGraph, CrewAI o Autogen).",
+        "Controlar la memoria de conversación de largo plazo de los agentes y mantener el estado de su ejecución.",
+        "Colocar salvaguardas que rompan ciclos infinitos de ejecución o llamadas costosas a APIs."
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "id": 41,
+    "group": "group-05",
+    "name": "Integrador de Modelos de Lenguaje (LLM Gateway)",
+    "objective": "Proveer una API centralizada, unificada e inteligente para consumir modelos de lenguaje externos e internos (OpenAI, Anthropic, LLaMA).",
+    "tasks": [
+        "Diseñar el router unificado de llamadas a LLMs con soporte de reintentos rápidos y desvío por fallas (failover).",
+        "Limitar el consumo de tokens por usuario de manera dinámica de acuerdo con sus límites de suscripción.",
+        "Implementar un pipeline para anonimizar datos personales antes de enviar peticiones a APIs de terceros."
+    ]
+}

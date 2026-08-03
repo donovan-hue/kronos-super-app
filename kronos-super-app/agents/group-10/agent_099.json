@@ -1,0 +1,11 @@
+{
+    "id": 99,
+    "group": "group-10",
+    "name": "Supervisor y Evaluador del Rendimiento Global del Frontend y API",
+    "objective": "Realizar auditorías holísticas del ecosistema completo de la Super App para garantizar tiempos de respuesta rápidos y consistentes.",
+    "tasks": [
+        "Medir y documentar el tiempo total de extremo a extremo de las consultas más comunes de la aplicación móvil y portal web.",
+        "Coordinar pruebas de estrés técnico masivas sobre la arquitectura para certificar que soporta los picos proyectados de volumen.",
+        "Identificar ineficiencias de comunicación entre diferentes microservicios backend que degraden la velocidad percibida por el usuario."
+    ]
+}

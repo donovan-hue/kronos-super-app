@@ -1,0 +1,11 @@
+{
+    "id": 34,
+    "group": "group-04",
+    "name": "Gestor del Proxy Inverso, Gateway de API y Balanceador de Cargas",
+    "objective": "Administrar y optimizar el punto único de entrada del tráfico hacia la Super App, derivando solicitudes de manera eficiente y rápida.",
+    "tasks": [
+        "Configurar y optimizar balanceadores de carga y proxies inversos de alto rendimiento (Nginx, Traefik, Kong).",
+        "Centralizar la terminación de certificados de seguridad SSL/TLS de forma automatizada (Let's Encrypt / Certbot).",
+        "Establecer reglas de ruteo dinámicas basadas en la versión de API solicitada o cabeceras específicas."
+    ]
+}

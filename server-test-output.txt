@@ -1,0 +1,1473 @@
+
+> kronos-server@1.0.0 test
+> jest --detectOpenHandles --forceExit --runInBand
+
+FAIL __tests__/subscription.test.js (206.047 s)
+  ● Console
+
+    console.warn
+      Starting the MongoMemoryServer Instance failed, enable debug log for more information. Error:
+       DownloadError: Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+      Status Code is 403 (MongoDB's 404)
+      This means that the requested version-platform combination doesn't exist
+      Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+      List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+          at RedirectableRequest.<anonymous> (/workspaces/kronos-super-app/node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+          at RedirectableRequest.emit (node:events:508:28)
+          at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (/workspaces/kronos-super-app/node_modules/follow-redirects/index.js:424:10)
+          at ClientRequest.RedirectableRequest._onNativeResponse (/workspaces/kronos-super-app/node_modules/follow-redirects/index.js:109:12)
+          at Object.onceWrapper (node:events:623:26)
+          at ClientRequest.emit (node:events:508:28)
+          at HTTPParser.parserOnIncomingClient (node:_http_client:780:27)
+          at HTTPParser.parserOnHeadersComplete (node:_http_common:125:17)
+          at Socket.socketOnData (node:_http_client:615:22)
+          at Socket.emit (node:events:508:28)
+          at Socket.Readable.read (node:internal/streams/readable:784:10)
+          at Socket.read (node:net:785:39)
+          at flow (node:internal/streams/readable:1290:53)
+          at resume_ (node:internal/streams/readable:1269:3)
+          at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+        url: 'https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz',
+        msg: "Status Code is 403 (MongoDB's 404)\n" +
+          "This means that the requested version-platform combination doesn't exist\n" +
+          "Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'\n" +
+          'List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive'
+      }
+
+       7 | // Iniciar mongodb-memory-server antes de todos los tests
+       8 | beforeAll(async () => {
+    >  9 |   mongod = await MongoMemoryServer.create({
+         |            ^
+      10 |     binary: { version: MONGOMS_BINARY_VERSION }
+      11 |   });
+      12 |   const uri = mongod.getUri();
+
+      at ../node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:307:17
+      at MongoMemoryServer.start (../node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:298:5)
+      at MongoMemoryServer.create (../node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:265:5)
+      at Object.<anonymous> (test/setup.js:9:12)
+
+  ● requireTier middleware › bloquea a usuarios free con 403 cuando se exige pro
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● requireTier middleware › bloquea a usuarios free con 403 cuando se exige pro
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● requireTier middleware › deja pasar a usuarios pro cuando se exige pro
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● requireTier middleware › deja pasar a usuarios pro cuando se exige pro
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● requireTier middleware › un usuario pro NO accede a endpoints business-only
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● requireTier middleware › un usuario pro NO accede a endpoints business-only
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● requireTier middleware › business sí accede a endpoints business-only
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● requireTier middleware › business sí accede a endpoints business-only
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● requireFeature middleware › bloquea cuando el flag no está activado
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● requireFeature middleware › bloquea cuando el flag no está activado
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● requireFeature middleware › deja pasar cuando el feature está habilitado
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● requireFeature middleware › deja pasar cuando el feature está habilitado
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● postLimiter middleware › permite hasta 5 posts/día a un usuario free y bloquea el 6º
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● postLimiter middleware › permite hasta 5 posts/día a un usuario free y bloquea el 6º
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● postLimiter middleware › un usuario pro no tiene límite diario
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● postLimiter middleware › un usuario pro no tiene límite diario
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● postLimiter middleware › resetea el contador cuando lastPostReset es de un día anterior
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● postLimiter middleware › resetea el contador cuando lastPostReset es de un día anterior
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● subscriptionService › syncFeatures aplica el set de features según el tier
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● subscriptionService › syncFeatures aplica el set de features según el tier
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● subscriptionService › getSubscription devuelve tier y features del usuario
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● subscriptionService › getSubscription devuelve tier y features del usuario
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● subscriptionService › handleSubscriptionWebhook procesa checkout.session.completed
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● subscriptionService › handleSubscriptionWebhook procesa checkout.session.completed
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● subscriptionService › handleSubscriptionWebhook degrada a free al borrar la suscripción
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● subscriptionService › handleSubscriptionWebhook degrada a free al borrar la suscripción
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● POST /api/subscription/checkout › crea sesión de Stripe Checkout y devuelve URL
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/subscription/checkout › crea sesión de Stripe Checkout y devuelve URL
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● POST /api/subscription/checkout › rechaza tier inválido
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/subscription/checkout › rechaza tier inválido
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● POST /api/subscription/checkout › rechaza sin token
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/subscription/checkout › rechaza sin token
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● GET /api/subscription/status › devuelve tier free por defecto
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● GET /api/subscription/status › devuelve tier free por defecto
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● GET /api/subscription/status › refleja el tier pro tras syncFeatures
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● GET /api/subscription/status › refleja el tier pro tras syncFeatures
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● POST /api/subscription/cancel › marca la suscripción para cancelar al final del periodo
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/subscription/cancel › marca la suscripción para cancelar al final del periodo
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● POST /api/subscription/cancel › falla si no hay suscripción activa
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/subscription/cancel › falla si no hay suscripción activa
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+FAIL __tests__/posts.test.js (110.542 s)
+  ● Console
+
+    console.warn
+      Starting the MongoMemoryServer Instance failed, enable debug log for more information. Error:
+       DownloadError: Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+      Status Code is 403 (MongoDB's 404)
+      This means that the requested version-platform combination doesn't exist
+      Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+      List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+          at RedirectableRequest.<anonymous> (/workspaces/kronos-super-app/node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+          at RedirectableRequest.emit (node:events:508:28)
+          at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (/workspaces/kronos-super-app/node_modules/follow-redirects/index.js:424:10)
+          at ClientRequest.RedirectableRequest._onNativeResponse (/workspaces/kronos-super-app/node_modules/follow-redirects/index.js:109:12)
+          at Object.onceWrapper (node:events:623:26)
+          at ClientRequest.emit (node:events:508:28)
+          at HTTPParser.parserOnIncomingClient (node:_http_client:780:27)
+          at HTTPParser.parserOnHeadersComplete (node:_http_common:125:17)
+          at Socket.socketOnData (node:_http_client:615:22)
+          at Socket.emit (node:events:508:28)
+          at Socket.Readable.read (node:internal/streams/readable:784:10)
+          at Socket.read (node:net:785:39)
+          at flow (node:internal/streams/readable:1290:53)
+          at resume_ (node:internal/streams/readable:1269:3)
+          at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+        url: 'https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz',
+        msg: "Status Code is 403 (MongoDB's 404)\n" +
+          "This means that the requested version-platform combination doesn't exist\n" +
+          "Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'\n" +
+          'List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive'
+      }
+
+       7 | // Iniciar mongodb-memory-server antes de todos los tests
+       8 | beforeAll(async () => {
+    >  9 |   mongod = await MongoMemoryServer.create({
+         |            ^
+      10 |     binary: { version: MONGOMS_BINARY_VERSION }
+      11 |   });
+      12 |   const uri = mongod.getUri();
+
+      at ../node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:307:17
+      at MongoMemoryServer.start (../node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:298:5)
+      at MongoMemoryServer.create (../node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:265:5)
+      at Object.<anonymous> (test/setup.js:9:12)
+
+  ● POST /api/posts › deberia crear un post y devolver 201 si el usuario esta autenticado
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/posts › deberia crear un post y devolver 201 si el usuario esta autenticado
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● POST /api/posts › deberia devolver 401 si se intenta crear un post sin autenticacion
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/posts › deberia devolver 401 si se intenta crear un post sin autenticacion
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● POST /api/posts › deberia crear un post con visibilidad publica por defecto
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/posts › deberia crear un post con visibilidad publica por defecto
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● GET /api/posts/feed › deberia devolver 200 con el feed del usuario autenticado
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● GET /api/posts/feed › deberia devolver 200 con el feed del usuario autenticado
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● GET /api/posts/feed › deberia devolver 401 si no hay token al pedir el feed
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● GET /api/posts/feed › deberia devolver 401 si no hay token al pedir el feed
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● POST /api/posts/:postId/like › deberia dar like a un post y devolver 200
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/posts/:postId/like › deberia dar like a un post y devolver 200
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● POST /api/posts/:postId/like › deberia devolver 400 si el usuario intenta dar like dos veces al mismo post
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/posts/:postId/like › deberia devolver 400 si el usuario intenta dar like dos veces al mismo post
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● POST /api/posts/:postId/like › deberia devolver 404 si el post no existe
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/posts/:postId/like › deberia devolver 404 si el post no existe
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● DELETE /api/posts/:postId › el autor deberia poder borrar su propio post y obtener 200
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● DELETE /api/posts/:postId › el autor deberia poder borrar su propio post y obtener 200
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● DELETE /api/posts/:postId › otro usuario NO deberia poder borrar el post ajeno - devuelve 403
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● DELETE /api/posts/:postId › otro usuario NO deberia poder borrar el post ajeno - devuelve 403
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● DELETE /api/posts/:postId › deberia devolver 401 al intentar borrar sin token
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● DELETE /api/posts/:postId › deberia devolver 401 al intentar borrar sin token
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+FAIL __tests__/auth.test.js (100.349 s)
+  ● Console
+
+    console.warn
+      Starting the MongoMemoryServer Instance failed, enable debug log for more information. Error:
+       DownloadError: Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+      Status Code is 403 (MongoDB's 404)
+      This means that the requested version-platform combination doesn't exist
+      Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+      List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+          at RedirectableRequest.<anonymous> (/workspaces/kronos-super-app/node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+          at RedirectableRequest.emit (node:events:508:28)
+          at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (/workspaces/kronos-super-app/node_modules/follow-redirects/index.js:424:10)
+          at ClientRequest.RedirectableRequest._onNativeResponse (/workspaces/kronos-super-app/node_modules/follow-redirects/index.js:109:12)
+          at Object.onceWrapper (node:events:623:26)
+          at ClientRequest.emit (node:events:508:28)
+          at HTTPParser.parserOnIncomingClient (node:_http_client:780:27)
+          at HTTPParser.parserOnHeadersComplete (node:_http_common:125:17)
+          at Socket.socketOnData (node:_http_client:615:22)
+          at Socket.emit (node:events:508:28)
+          at Socket.Readable.read (node:internal/streams/readable:784:10)
+          at Socket.read (node:net:785:39)
+          at flow (node:internal/streams/readable:1290:53)
+          at resume_ (node:internal/streams/readable:1269:3)
+          at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+        url: 'https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz',
+        msg: "Status Code is 403 (MongoDB's 404)\n" +
+          "This means that the requested version-platform combination doesn't exist\n" +
+          "Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'\n" +
+          'List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive'
+      }
+
+       7 | // Iniciar mongodb-memory-server antes de todos los tests
+       8 | beforeAll(async () => {
+    >  9 |   mongod = await MongoMemoryServer.create({
+         |            ^
+      10 |     binary: { version: MONGOMS_BINARY_VERSION }
+      11 |   });
+      12 |   const uri = mongod.getUri();
+
+      at ../node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:307:17
+      at MongoMemoryServer.start (../node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:298:5)
+      at MongoMemoryServer.create (../node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:265:5)
+      at Object.<anonymous> (test/setup.js:9:12)
+
+  ● POST /api/auth/register › deberia registrar un nuevo usuario y devolver 201 con token
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/auth/register › deberia registrar un nuevo usuario y devolver 201 con token
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● POST /api/auth/register › deberia devolver 400 si el email ya esta registrado
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/auth/register › deberia devolver 400 si el email ya esta registrado
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● POST /api/auth/register › deberia devolver 400 si el username ya esta registrado
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/auth/register › deberia devolver 400 si el username ya esta registrado
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● POST /api/auth/login › deberia devolver 200 con JWT si las credenciales son correctas
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/auth/login › deberia devolver 200 con JWT si las credenciales son correctas
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● POST /api/auth/login › deberia devolver 401 si la password es incorrecta
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/auth/login › deberia devolver 401 si la password es incorrecta
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● POST /api/auth/login › deberia devolver 401 si el email no existe
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/auth/login › deberia devolver 401 si el email no existe
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● POST /api/auth/login › deberia devolver 400 si no se proporciona password
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/auth/login › deberia devolver 400 si no se proporciona password
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● GET /api/auth/profile › deberia devolver 200 con el perfil del usuario si el token es valido
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● GET /api/auth/profile › deberia devolver 200 con el perfil del usuario si el token es valido
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● GET /api/auth/profile › deberia devolver 401 si no se proporciona token
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● GET /api/auth/profile › deberia devolver 401 si no se proporciona token
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● GET /api/auth/profile › deberia devolver 401 si el token es invalido o manipulado
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● GET /api/auth/profile › deberia devolver 401 si el token es invalido o manipulado
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+FAIL __tests__/users.test.js (91.25 s)
+  ● Console
+
+    console.warn
+      Starting the MongoMemoryServer Instance failed, enable debug log for more information. Error:
+       DownloadError: Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+      Status Code is 403 (MongoDB's 404)
+      This means that the requested version-platform combination doesn't exist
+      Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+      List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+          at RedirectableRequest.<anonymous> (/workspaces/kronos-super-app/node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+          at RedirectableRequest.emit (node:events:508:28)
+          at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (/workspaces/kronos-super-app/node_modules/follow-redirects/index.js:424:10)
+          at ClientRequest.RedirectableRequest._onNativeResponse (/workspaces/kronos-super-app/node_modules/follow-redirects/index.js:109:12)
+          at Object.onceWrapper (node:events:623:26)
+          at ClientRequest.emit (node:events:508:28)
+          at HTTPParser.parserOnIncomingClient (node:_http_client:780:27)
+          at HTTPParser.parserOnHeadersComplete (node:_http_common:125:17)
+          at Socket.socketOnData (node:_http_client:615:22)
+          at Socket.emit (node:events:508:28)
+          at Socket.Readable.read (node:internal/streams/readable:784:10)
+          at Socket.read (node:net:785:39)
+          at flow (node:internal/streams/readable:1290:53)
+          at resume_ (node:internal/streams/readable:1269:3)
+          at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+        url: 'https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz',
+        msg: "Status Code is 403 (MongoDB's 404)\n" +
+          "This means that the requested version-platform combination doesn't exist\n" +
+          "Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'\n" +
+          'List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive'
+      }
+
+       7 | // Iniciar mongodb-memory-server antes de todos los tests
+       8 | beforeAll(async () => {
+    >  9 |   mongod = await MongoMemoryServer.create({
+         |            ^
+      10 |     binary: { version: MONGOMS_BINARY_VERSION }
+      11 |   });
+      12 |   const uri = mongod.getUri();
+
+      at ../node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:307:17
+      at MongoMemoryServer.start (../node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:298:5)
+      at MongoMemoryServer.create (../node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:265:5)
+      at Object.<anonymous> (test/setup.js:9:12)
+
+  ● GET /api/users/:userId › deberia devolver el perfil publico de un usuario existente - 200
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● GET /api/users/:userId › deberia devolver el perfil publico de un usuario existente - 200
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● GET /api/users/:userId › deberia devolver 404 si el usuario no existe
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● GET /api/users/:userId › deberia devolver 404 si el usuario no existe
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● POST /api/users/:id/block › deberia bloquear a un usuario y devolver 201 con exito
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/users/:id/block › deberia bloquear a un usuario y devolver 201 con exito
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● POST /api/users/:id/block › deberia devolver 400 si el usuario intenta bloquearse a si mismo
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/users/:id/block › deberia devolver 400 si el usuario intenta bloquearse a si mismo
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● POST /api/users/:id/block › deberia devolver 400 si el usuario ya esta bloqueado
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/users/:id/block › deberia devolver 400 si el usuario ya esta bloqueado
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● POST /api/users/:id/block › deberia devolver 401 si no hay token al intentar bloquear
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● POST /api/users/:id/block › deberia devolver 401 si no hay token al intentar bloquear
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● GET /api/users/blocked › deberia listar los usuarios bloqueados por el usuario autenticado - 200
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● GET /api/users/blocked › deberia listar los usuarios bloqueados por el usuario autenticado - 200
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● GET /api/users/blocked › deberia devolver lista vacia si el usuario no ha bloqueado a nadie
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● GET /api/users/blocked › deberia devolver lista vacia si el usuario no ha bloqueado a nadie
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+  ● GET /api/users/blocked › deberia devolver 401 si no hay token al pedir la lista de bloqueados
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● GET /api/users/blocked › deberia devolver 401 si no hay token al pedir la lista de bloqueados
+
+    MongooseError: Operation `users.deleteMany()` buffering timed out after 10000ms
+
+      at Timeout.<anonymous> (../node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)
+
+FAIL tests/smoke.test.js
+  ● Console
+
+    console.warn
+      Starting the MongoMemoryServer Instance failed, enable debug log for more information. Error:
+       DownloadError: Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+      Status Code is 403 (MongoDB's 404)
+      This means that the requested version-platform combination doesn't exist
+      Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+      List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+          at RedirectableRequest.<anonymous> (/workspaces/kronos-super-app/node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+          at RedirectableRequest.emit (node:events:508:28)
+          at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (/workspaces/kronos-super-app/node_modules/follow-redirects/index.js:424:10)
+          at ClientRequest.RedirectableRequest._onNativeResponse (/workspaces/kronos-super-app/node_modules/follow-redirects/index.js:109:12)
+          at Object.onceWrapper (node:events:623:26)
+          at ClientRequest.emit (node:events:508:28)
+          at HTTPParser.parserOnIncomingClient (node:_http_client:780:27)
+          at HTTPParser.parserOnHeadersComplete (node:_http_common:125:17)
+          at Socket.socketOnData (node:_http_client:615:22)
+          at Socket.emit (node:events:508:28)
+          at Socket.Readable.read (node:internal/streams/readable:784:10)
+          at Socket.read (node:net:785:39)
+          at flow (node:internal/streams/readable:1290:53)
+          at resume_ (node:internal/streams/readable:1269:3)
+          at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+        url: 'https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz',
+        msg: "Status Code is 403 (MongoDB's 404)\n" +
+          "This means that the requested version-platform combination doesn't exist\n" +
+          "Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'\n" +
+          'List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive'
+      }
+
+       7 | // Iniciar mongodb-memory-server antes de todos los tests
+       8 | beforeAll(async () => {
+    >  9 |   mongod = await MongoMemoryServer.create({
+         |            ^
+      10 |     binary: { version: MONGOMS_BINARY_VERSION }
+      11 |   });
+      12 |   const uri = mongod.getUri();
+
+      at ../node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:307:17
+      at MongoMemoryServer.start (../node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:298:5)
+      at MongoMemoryServer.create (../node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:265:5)
+      at Object.<anonymous> (test/setup.js:9:12)
+
+    console.warn
+      Starting the MongoMemoryServer Instance failed, enable debug log for more information. Error:
+       DownloadError: Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+      Status Code is 403 (MongoDB's 404)
+      This means that the requested version-platform combination doesn't exist
+      Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+      List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+          at RedirectableRequest.<anonymous> (/workspaces/kronos-super-app/node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+          at RedirectableRequest.emit (node:events:508:28)
+          at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (/workspaces/kronos-super-app/node_modules/follow-redirects/index.js:424:10)
+          at ClientRequest.RedirectableRequest._onNativeResponse (/workspaces/kronos-super-app/node_modules/follow-redirects/index.js:109:12)
+          at Object.onceWrapper (node:events:623:26)
+          at ClientRequest.emit (node:events:508:28)
+          at HTTPParser.parserOnIncomingClient (node:_http_client:780:27)
+          at HTTPParser.parserOnHeadersComplete (node:_http_common:125:17)
+          at Socket.socketOnData (node:_http_client:615:22)
+          at Socket.emit (node:events:508:28)
+          at Socket.Readable.read (node:internal/streams/readable:784:10)
+          at Socket.read (node:net:785:39)
+          at flow (node:internal/streams/readable:1290:53)
+          at resume_ (node:internal/streams/readable:1269:3)
+          at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+        url: 'https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz',
+        msg: "Status Code is 403 (MongoDB's 404)\n" +
+          "This means that the requested version-platform combination doesn't exist\n" +
+          "Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'\n" +
+          'List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive'
+      }
+
+      35 |   }
+      36 |
+    > 37 |   mongod = await MongoMemoryServer.create({
+         |            ^
+      38 |     binary: { version: MONGOMS_BINARY_VERSION }
+      39 |   });
+      40 |   process.env.MONGODB_URI = mongod.getUri();
+
+      at ../node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:307:17
+      at MongoMemoryServer.start (../node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:298:5)
+      at MongoMemoryServer.create (../node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:265:5)
+      at Object.<anonymous> (tests/smoke.test.js:37:12)
+
+  ● Auth endpoints › POST /api/auth/login — wrong credentials returns 400/401
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● Auth endpoints › POST /api/auth/login — wrong credentials returns 400/401
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● Auth endpoints › POST /api/auth/login — missing body returns 400
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● Auth endpoints › POST /api/auth/login — missing body returns 400
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● Protected endpoints — no token › GET /api/wallet returns 401
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● Protected endpoints — no token › GET /api/wallet returns 401
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● Protected endpoints — no token › GET /api/communities returns 401
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● Protected endpoints — no token › GET /api/communities returns 401
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● Protected endpoints — no token › POST /api/wallet/transfer returns 401
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● Protected endpoints — no token › POST /api/wallet/transfer returns 401
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● Protected endpoints — with token › GET /api/wallet returns 200 when authenticated
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● Protected endpoints — with token › GET /api/wallet returns 200 when authenticated
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● Protected endpoints — with token › GET /api/communities returns 200 when authenticated
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● Protected endpoints — with token › GET /api/communities returns 200 when authenticated
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● Protected endpoints — with token › GET /api/notifications returns 200 when authenticated
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● Protected endpoints — with token › GET /api/notifications returns 200 when authenticated
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● Wallet validation › POST /api/wallet/transfer — missing amount returns 400
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● Wallet validation › POST /api/wallet/transfer — missing amount returns 400
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+FAIL tests/wallet.test.js
+  ● Console
+
+    console.warn
+      Starting the MongoMemoryServer Instance failed, enable debug log for more information. Error:
+       DownloadError: Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+      Status Code is 403 (MongoDB's 404)
+      This means that the requested version-platform combination doesn't exist
+      Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+      List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+          at RedirectableRequest.<anonymous> (/workspaces/kronos-super-app/node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+          at RedirectableRequest.emit (node:events:508:28)
+          at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (/workspaces/kronos-super-app/node_modules/follow-redirects/index.js:424:10)
+          at ClientRequest.RedirectableRequest._onNativeResponse (/workspaces/kronos-super-app/node_modules/follow-redirects/index.js:109:12)
+          at Object.onceWrapper (node:events:623:26)
+          at ClientRequest.emit (node:events:508:28)
+          at HTTPParser.parserOnIncomingClient (node:_http_client:780:27)
+          at HTTPParser.parserOnHeadersComplete (node:_http_common:125:17)
+          at Socket.socketOnData (node:_http_client:615:22)
+          at Socket.emit (node:events:508:28)
+          at Socket.Readable.read (node:internal/streams/readable:784:10)
+          at Socket.read (node:net:785:39)
+          at flow (node:internal/streams/readable:1290:53)
+          at resume_ (node:internal/streams/readable:1269:3)
+          at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+        url: 'https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz',
+        msg: "Status Code is 403 (MongoDB's 404)\n" +
+          "This means that the requested version-platform combination doesn't exist\n" +
+          "Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'\n" +
+          'List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive'
+      }
+
+       7 | // Iniciar mongodb-memory-server antes de todos los tests
+       8 | beforeAll(async () => {
+    >  9 |   mongod = await MongoMemoryServer.create({
+         |            ^
+      10 |     binary: { version: MONGOMS_BINARY_VERSION }
+      11 |   });
+      12 |   const uri = mongod.getUri();
+
+      at ../node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:307:17
+      at MongoMemoryServer.start (../node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:298:5)
+      at MongoMemoryServer.create (../node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:265:5)
+      at Object.<anonymous> (test/setup.js:9:12)
+
+  ● Wallet Controller — business logic › getWallet devuelve balance existente
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● Wallet Controller — business logic › deposit con amount negativo retorna 400
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+  ● Wallet Controller — business logic › deposit incrementa el balance
+
+    Download failed for url "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.12.tgz", Details:
+    Status Code is 403 (MongoDB's 404)
+    This means that the requested version-platform combination doesn't exist
+    Try to use different version 'new MongoMemoryServer({ binary: { version: 'X.Y.Z' } })'
+    List of available versions can be found here: https://www.mongodb.com/download-center/community/releases/archive
+
+      at RedirectableRequest.<anonymous> (../node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:383:17)
+      at RedirectableRequest.Object.<anonymous>.RedirectableRequest._processResponse (../node_modules/follow-redirects/index.js:424:10)
+      at ClientRequest.RedirectableRequest._onNativeResponse (../node_modules/follow-redirects/index.js:109:12)
+
+Test Suites: 6 failed, 6 total
+Tests:       62 failed, 62 total
+Snapshots:   0 total
+Time:        509.673 s, estimated 510 s
+Ran all test suites.

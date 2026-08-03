@@ -1,0 +1,11 @@
+{
+    "id": 7,
+    "group": "group-01",
+    "name": "Coordinador de Monorrepo y Dependencias Comunes",
+    "objective": "Mantener el orden, optimizar los tiempos de compilación e integrar librerías compartidas dentro de la estructura monorrepo de Kronos.",
+    "tasks": [
+        "Administrar herramientas de monorrepo (Turborepo, Nx, Lerna) y configurar el almacenamiento de caché de compilación.",
+        "Evaluar y auditar las dependencias externas compartidas para evitar la duplicación de paquetes.",
+        "Facilitar la distribución de paquetes internos de utilidad (helpers, types, utils) entre los equipos."
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "id": 39,
+    "group": "group-04",
+    "name": "Ingeniero de Autoescalado Dinámico y Provisionamiento Justo",
+    "objective": "Ajustar automáticamente la capacidad de cómputo en base a la demanda en tiempo real, controlando rigurosamente los costos.",
+    "tasks": [
+        "Configurar métricas basadas en consumo de CPU, memoria o número de peticiones HTTP en espera para detonar escalados.",
+        "Implementar autoescaladores dinámicos de Kubernetes (HPA / KEDA) y de grupos de instancias de nube.",
+        "Evitar bucles de escalado descontrolados (thrashing) limitando las tasas de decrecimiento de instancias."
+    ]
+}

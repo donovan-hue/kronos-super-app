@@ -1,0 +1,11 @@
+{
+    "id": 56,
+    "group": "group-06",
+    "name": "Mitigador de Ataques de Denegación de Servicio (DDoS) y Control de Cuotas",
+    "objective": "Proteger la infraestructura de Kronos ante ataques volumétricos masivos de tráfico, garantizando la equidad en el consumo de APIs.",
+    "tasks": [
+        "Diseñar e implementar políticas granulares de Rate Limiting por IP, token de usuario y clave de API.",
+        "Configurar reglas perimetrales automáticas frente a comportamientos obvios de denegación de servicio.",
+        "Monitorear e identificar variaciones drásticas no explicadas del tráfico global entrante a la red de microservicios."
+    ]
+}

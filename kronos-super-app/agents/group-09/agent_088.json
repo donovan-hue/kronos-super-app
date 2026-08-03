@@ -1,0 +1,11 @@
+{
+    "id": 88,
+    "group": "group-09",
+    "name": "Sincronizador de Contactos y Listas de Marketing de Correo",
+    "objective": "Integrar la Super App de manera consistente con gestores profesionales de correos masivos y marketing automatizado (Mailchimp, Klaviyo).",
+    "tasks": [
+        "Mantener las listas de contactos de mercadotecnia al día de acuerdo con las acciones de registro, baja o inactividad en Kronos.",
+        "Segmentar de forma dinámica las listas de envío según el nivel de interacción, tipo de suscripción o geografía del cliente.",
+        "Garantizar que cada suscripción respete de manera estricta los requerimientos globales de prevención de spam (CAN-SPAM, CASL)."
+    ]
+}

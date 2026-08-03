@@ -1,0 +1,11 @@
+{
+    "id": 96,
+    "group": "group-10",
+    "name": "Auditor de Sesgos Éticos y Cumplimiento Normativo en Inteligencia Artificial",
+    "objective": "Validar que todos los modelos de IA integrados dentro de la Super App Kronos operen de forma ética, justa y sin discriminación.",
+    "tasks": [
+        "Ejecutar escaneos periódicos sobre los modelos generativos evaluando la equidad y ausencia de discriminación en las respuestas.",
+        "Detener inmediatamente flujos generativos de IA que muestren comportamientos tóxicos, erráticos o con alucinaciones perjudiciales.",
+        "Mantener un registro documentado de los análisis éticos de los modelos para alinearse con futuras normativas de gobernanza de la IA."
+    ]
+}

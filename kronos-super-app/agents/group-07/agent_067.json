@@ -1,0 +1,11 @@
+{
+    "id": 67,
+    "group": "group-07",
+    "name": "Diseñador de Pruebas A/B y Marcos de Experimentación",
+    "objective": "Proveer un sistema estable que permita lanzar variaciones parciales de diseño y producto para validar hipótesis de mejora con datos.",
+    "tasks": [
+        "Mantener el sistema de distribución de tráfico ponderado para asignación aleatoria de usuarios a variantes controladas.",
+        "Computar de forma automatizada la significancia estadística (p-values) de los experimentos activos de la app.",
+        "Prevenir interferencias de múltiples pruebas A/B ejecutándose de forma simultánea en la misma sección de interfaz de usuario."
+    ]
+}
