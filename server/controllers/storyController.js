@@ -168,7 +168,68 @@ exports.rateStory = async (req, res) => {
       { new: true }
     );
     if (!progress) return res.status(404).json({ success: false, error: 'Story progress not found' });
+
+    const [ratingStats] = await StoryProgress.aggregate([
+      { $match: { storyId: progress.storyId, rating: { $ne: null } } },
+      { $group: { _id: null, average: { $avg: '$rating' }, count: { $sum: 1 } } }
+    ]);
+    await Story.findByIdAndUpdate(storyId, {
+      rating: { average: ratingStats?.average || 0, count: ratingStats?.count || 0 }
+    });
+
     res.json({ success: true, data: progress });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
+  }
+};
+
+exports.getStoryAnalytics = async (req, res) => {
+  try {
+    const { storyId } = req.params;
+    const story = await Story.findById(storyId);
+    if (!story) return res.status(404).json({ success: false, error: 'Story not found' });
+    if (story.author.toString() !== req.user.id) {
+      return res.status(403).json({ success: false, error: 'Unauthorized' });
+    }
+
+    const [summary] = await StoryProgress.aggregate([
+      { $match: { storyId: story._id } },
+      {
+        $group: {
+          _id: null,
+          players: { $sum: 1 },
+          completions: { $sum: { $cond: ['$isCompleted', 1, 0] } },
+          averagePlayTime: { $avg: { $ifNull: ['$totalTimeSpent', 0] } },
+          ratingsCount: { $sum: { $cond: [{ $ne: ['$rating', null] }, 1, 0] } },
+          averageRating: { $avg: '$rating' }
+        }
+      }
+    ]);
+
+    const ratings = await StoryProgress.find({ storyId, rating: { $ne: null } })
+      .select('rating review createdAt userId')
+      .populate('userId', 'username avatar')
+      .sort({ updatedAt: -1 })
+      .limit(50)
+      .lean();
+
+    res.json({
+      success: true,
+      data: {
+        storyId,
+        views: story.stats.views || 0,
+        plays: story.stats.plays || 0,
+        players: summary?.players || 0,
+        completions: summary?.completions || 0,
+        completionRate: summary?.players ? summary.completions / summary.players : 0,
+        averagePlayTime: summary?.averagePlayTime || 0,
+        rating: {
+          average: summary?.averageRating || 0,
+          count: summary?.ratingsCount || 0,
+        },
+        ratings,
+      }
+    });
   } catch (error) {
     res.status(400).json({ success: false, error: error.message });
   }

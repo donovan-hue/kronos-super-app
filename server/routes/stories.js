@@ -21,9 +21,6 @@ router.post('/:storyId/choice', auth, storyController.makeChoice);
 // Ratings & Reviews
 router.post('/:storyId/rate', auth, storyController.rateStory);
 
-// Analytics (handler not implemented — stub)
-router.get('/:storyId/analytics', auth, (req, res) =>
-  res.json({ storyId: req.params.storyId, views: 0, completions: 0, ratings: [] })
-);
+router.get('/:storyId/analytics', auth, storyController.getStoryAnalytics);
 
 module.exports = router;

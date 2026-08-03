@@ -3,7 +3,7 @@ import { useStory } from '../../hooks/useStory';
 import './StoryPlayer.css';
 
 const StoryPlayer = ({ storyId }) => {
-  const { loading, error, story, progress, getStory, startStory, makeChoice } = useStory();
+  const { loading, error, progress, getStory, startStory, makeChoice } = useStory();
   const [currentNode, setCurrentNode] = useState(null);
   const [sessionTime, setSessionTime] = useState(0);
 

@@ -37,7 +37,7 @@ const storyProgressSchema = new mongoose.Schema(
     completedAt: Date,
     endingReached: {
       type: String,
-      enum: ['good', 'bad', 'neutral', 'special'],
+      enum: ['good', 'bad', 'neutral', 'special', null],
       default: null
     },
     totalTimeSpent: Number,

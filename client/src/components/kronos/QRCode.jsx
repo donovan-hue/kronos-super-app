@@ -1,8 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import QRCodeGenerator from 'qrcode';
 
-// Simple QR placeholder — shows the value as text with a visual frame
-// No external dependency needed
 export default function QRCode({ value, size = 180, className = '' }) {
+  const [dataUrl, setDataUrl] = useState('');
+
+  useEffect(() => {
+    let active = true;
+    const content = String(value || '');
+
+    if (!content) {
+      setDataUrl('');
+      return () => { active = false; };
+    }
+
+    QRCodeGenerator.toDataURL(content, {
+      width: Math.max(128, size * 2),
+      margin: 1,
+      errorCorrectionLevel: 'M',
+      color: { dark: '#0a0a14', light: '#ffffff' },
+    })
+      .then((url) => { if (active) setDataUrl(url); })
+      .catch(() => { if (active) setDataUrl(''); });
+
+    return () => { active = false; };
+  }, [size, value]);
+
   return (
     <div
       className={className}
@@ -21,43 +43,17 @@ export default function QRCode({ value, size = 180, className = '' }) {
         boxSizing: 'border-box',
       }}
     >
-      {/* Corner marks */}
-      {[['0','0'],['0','auto'],['auto','0'],['auto','auto']].map(([t,b], i) => (
-        <div key={i} style={{
-          position: 'absolute',
-          top: t === '0' ? 6 : undefined,
-          bottom: b === '0' ? 6 : undefined,
-          left: i % 2 === 0 ? 6 : undefined,
-          right: i % 2 === 1 ? 6 : undefined,
-          width: 18, height: 18,
-          border: '3px solid #0a0a14',
-          borderRadius: 3,
-        }} />
-      ))}
-      {/* Grid pattern */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(7, 1fr)',
-        gap: 2,
-        width: size * 0.55,
-        height: size * 0.55,
-      }}>
-        {Array.from({ length: 49 }, (_, i) => {
-          const row = Math.floor(i / 7);
-          const col = i % 7;
-          const isCorner = (row < 2 && col < 2) || (row < 2 && col > 4) || (row > 4 && col < 2);
-          const hash = (value.charCodeAt(i % value.length) + i * 7 + row * 3) % 3;
-          const filled = isCorner || hash === 0;
-          return (
-            <div key={i} style={{
-              width: '100%',
-              aspectRatio: '1',
-              background: filled ? '#0a0a14' : 'transparent',
-              borderRadius: 1,
-            }} />
-          );
-        })}
-      </div>
+      {dataUrl ? (
+        <img
+          src={dataUrl}
+          alt="Código QR"
+          width={size - 16}
+          height={size - 16}
+          style={{ width: '100%', height: '100%', objectFit: 'contain', imageRendering: 'pixelated' }}
+        />
+      ) : (
+        <span style={{ color: '#0a0a14', fontSize: 12, textAlign: 'center' }}>Generando QR…</span>
+      )}
       <div style={{
         fontSize: Math.max(8, size * 0.06),
         color: '#c9ced4',

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Icon from '../kronos/Icon';
 import './StoryList.css';
@@ -58,7 +59,7 @@ const StoryList = ({ userOnly = false }) => {
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}><Icon name="play" size={13} /> {story.stats.plays}</span>
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}><Icon name="star" size={13} /> {story.rating.average.toFixed(1)}</span>
               </div>
-              <a href={`/story/${story._id}`} className="play-btn">Play Story</a>
+              <Link to={`/story/${story._id}`} className="play-btn">Jugar historia</Link>
             </div>
           ))}
         </div>

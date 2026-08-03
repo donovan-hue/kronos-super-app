@@ -1,5 +1,5 @@
 import React, { Component, Suspense, lazy, useContext, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -77,6 +77,7 @@ const Privacy         = lazy(() => import('./pages/Privacy'));
 const Terms           = lazy(() => import('./pages/Terms'));
 const Kairos          = lazy(() => import('./pages/Kairos'));
 const Studio          = lazy(() => import('./pages/Studio'));
+const StoryPlayer     = lazy(() => import('./components/stories/StoryPlayer'));
 
 const LOADING = (
   <div style={{ minHeight: '100vh', background: '#050506', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -91,6 +92,11 @@ function P({ children }) {
       <AppLayout>{children}</AppLayout>
     </ProtectedRoute>
   );
+}
+
+function StoryPlayerRoute() {
+  const { storyId } = useParams();
+  return <StoryPlayer storyId={storyId} />;
 }
 
 function App() {
@@ -142,6 +148,7 @@ function App() {
             <Route path="/profile/me"            element={<ProtectedRoute><MyProfileRedirect /></ProtectedRoute>} />
             <Route path="/profile/:userId"       element={<P><UserProfile /></P>} />
             <Route path="/social/*"              element={<P><SocialModule /></P>} />
+            <Route path="/story/:storyId"        element={<P><StoryPlayerRoute /></P>} />
             <Route path="/settings"              element={<P><Settings /></P>} />
             <Route path="/settings/:tab"         element={<P><Settings /></P>} />
             <Route path="/live"                  element={<P><Live /></P>} />
