@@ -20,7 +20,7 @@ function OAuthCallback() {
 
     if (err) {
       setError(`Error al autenticar con ${err.replace('_failed', '')}. Intenta de nuevo.`);
-      setTimeout(() => navigate('/login'), 3000);
+      setTimeout(() => navigate('/auth/login'), 3000);
       return;
     }
 
@@ -29,7 +29,7 @@ function OAuthCallback() {
       navigate('/feed', { replace: true });
     } else {
       setError('No se recibio un token de autenticacion.');
-      setTimeout(() => navigate('/login'), 3000);
+      setTimeout(() => navigate('/auth/login'), 3000);
     }
   }, [searchParams, navigate, loginWithToken]);
 

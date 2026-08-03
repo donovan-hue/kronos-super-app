@@ -52,7 +52,7 @@ function ResetPassword() {
       const data = await res.json();
       if (res.ok) {
         setStatus('done');
-        setTimeout(() => navigate('/login'), 2500);
+        setTimeout(() => navigate('/auth/login'), 2500);
       } else {
         setError(data.message || 'Error al restablecer la contraseña');
         setStatus('idle');

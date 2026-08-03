@@ -221,7 +221,7 @@ export default function ExpandableBubbleNav() {
                     cursor: 'pointer',
                   }}
                 >
-                  <GlassSphere size={SUB_SIZE} icon={sub.icon} isOpen={false} onClick={() => {}} />
+                  <GlassSphere size={SUB_SIZE} icon={sub.icon} isOpen={false} onClick={() => { navigate(sub.path); close(); }} />
                 </div>
               );
             })}

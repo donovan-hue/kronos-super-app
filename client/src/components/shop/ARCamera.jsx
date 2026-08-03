@@ -376,7 +376,7 @@ const ARCamera = ({ showDebugInfo = false }) => {
             >
               Allow
             </button>
-            <button className="deny" onClick={() => {}}>
+            <button className="deny" onClick={() => setCameraPermissionGranted(false)}>
               Deny
             </button>
           </div>

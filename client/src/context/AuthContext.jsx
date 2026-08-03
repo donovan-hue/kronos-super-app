@@ -2,10 +2,10 @@ import React, { createContext, useState, useCallback } from 'react';
 import axios from 'axios';
 
 export const AuthContext = createContext();
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_URL = (process.env.REACT_APP_API_URL || 'http://localhost:5000/api').replace(/\/$/, '');
 const api = axios.create({
   baseURL: API_URL,
-  timeout: 15000,
+  timeout: 20000,
   headers: {
     'Content-Type': 'application/json',
   },
