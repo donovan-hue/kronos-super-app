@@ -1,7 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
-
-const API = process.env.REACT_APP_API_URL;
+import api from '../services/api';
 
 export const useRecommendations = () => {
   const [recommendedPosts, setRecommendedPosts] = useState([]);
@@ -9,15 +7,12 @@ export const useRecommendations = () => {
   const [trending, setTrending] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const token = localStorage.getItem('token');
-  const headers = { Authorization: `Bearer ${token}` };
-
   const fetchRecommendedPosts = useCallback(async (page = 0) => {
     setLoading(true);
     try {
-      const { data } = await axios.get(`${API}/recommendations/posts?page=${page}`, { headers });
-      if (page === 0) setRecommendedPosts(data.posts);
-      else setRecommendedPosts(prev => [...prev, ...data.posts]);
+      const { data } = await api.get(`/api/recommendations/posts?page=${page}`);
+      if (page === 0) setRecommendedPosts(data.posts || []);
+      else setRecommendedPosts(prev => [...prev, ...(data.posts || [])]);
     } catch (error) {
       console.error('Error fetching recommended posts:', error);
     } finally {
@@ -27,8 +22,8 @@ export const useRecommendations = () => {
 
   const fetchRecommendedUsers = useCallback(async () => {
     try {
-      const { data } = await axios.get(`${API}/recommendations/users`, { headers });
-      setRecommendedUsers(data.users);
+      const { data } = await api.get('/api/recommendations/users');
+      setRecommendedUsers(data.users || []);
     } catch (error) {
       console.error('Error fetching recommended users:', error);
     }
@@ -36,8 +31,8 @@ export const useRecommendations = () => {
 
   const fetchTrending = useCallback(async () => {
     try {
-      const { data } = await axios.get(`${API}/recommendations/trending`);
-      setTrending(data.posts);
+      const { data } = await api.get('/api/recommendations/trending');
+      setTrending(data.posts || []);
     } catch (error) {
       console.error('Error fetching trending:', error);
     }
@@ -45,7 +40,7 @@ export const useRecommendations = () => {
 
   const trackInteraction = useCallback(async (targetId, targetType, action, dwellTime = 0, tags = []) => {
     try {
-      await axios.post(`${API}/recommendations/track`, { targetId, targetType, action, dwellTime, tags }, { headers });
+      await api.post('/api/recommendations/track', { targetId, targetType, action, dwellTime, tags });
     } catch {
       // Silent — tracking should never break the UI
     }
@@ -53,10 +48,8 @@ export const useRecommendations = () => {
 
   useEffect(() => {
     fetchTrending();
-    if (token) {
-      fetchRecommendedPosts();
-      fetchRecommendedUsers();
-    }
+    fetchRecommendedPosts();
+    fetchRecommendedUsers();
   }, []);
 
   return {

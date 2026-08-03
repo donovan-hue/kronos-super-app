@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 
 const API_BASE = '/api/stories';
 
@@ -13,7 +13,7 @@ export const useStory = () => {
   const getStory = useCallback(async (storyId) => {
     setLoading(true);
     try {
-      const response = await axios.get(`${API_BASE}/${storyId}`);
+      const response = await api.get(`${API_BASE}/${storyId}`);
       setStory(response.data.data.story);
       setNodes(response.data.data.nodes);
       setError(null);
@@ -27,7 +27,7 @@ export const useStory = () => {
   const startStory = useCallback(async (storyId) => {
     setLoading(true);
     try {
-      const response = await axios.post(`${API_BASE}/${storyId}/start`);
+      const response = await api.post(`${API_BASE}/${storyId}/start`);
       setProgress(response.data.data.progress);
       setError(null);
       return response.data.data.node;
@@ -42,7 +42,7 @@ export const useStory = () => {
   const makeChoice = useCallback(async (storyId, choiceIndex, timeSpent = 0) => {
     setLoading(true);
     try {
-      const response = await axios.post(`${API_BASE}/${storyId}/choice`, {
+      const response = await api.post(`${API_BASE}/${storyId}/choice`, {
         choiceIndex,
         timeSpent
       });
@@ -60,7 +60,7 @@ export const useStory = () => {
   const rateStory = useCallback(async (storyId, rating, review = '') => {
     setLoading(true);
     try {
-      await axios.post(`${API_BASE}/${storyId}/rate`, { rating, review });
+      await api.post(`${API_BASE}/${storyId}/rate`, { rating, review });
       setError(null);
       return true;
     } catch (err) {

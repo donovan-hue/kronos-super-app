@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 
 export const useAR = () => {
   const [loading, setLoading] = useState(false);
@@ -12,7 +12,7 @@ export const useAR = () => {
   const getARProduct = useCallback(async (productId) => {
     setLoading(true);
     try {
-      const response = await axios.get(`/api/ar/${productId}`);
+      const response = await api.get(`/api/ar/${productId}`);
       setArProduct(response.data.data);
       setError(null);
     } catch (err) {
@@ -25,7 +25,7 @@ export const useAR = () => {
   const startSession = useCallback(async (productId, deviceInfo) => {
     setLoading(true);
     try {
-      const response = await axios.post(`/api/ar/${productId}/start`, { deviceInfo });
+      const response = await api.post(`/api/ar/${productId}/start`, { deviceInfo });
       setSession(response.data.data);
       setError(null);
       return response.data.data;
@@ -40,7 +40,7 @@ export const useAR = () => {
   const endSession = useCallback(async (sessionId) => {
     setLoading(true);
     try {
-      const response = await axios.post(`/api/ar/${sessionId}/end`);
+      const response = await api.post(`/api/ar/${sessionId}/end`);
       setSession(null);
       setError(null);
       return response.data.data;
@@ -56,7 +56,7 @@ export const useAR = () => {
     try {
       if (!canvasRef.current) return null;
       const imageData = canvasRef.current.toDataURL('image/png');
-      const response = await axios.post(`/api/ar/${sessionId}/screenshot`, {
+      const response = await api.post(`/api/ar/${sessionId}/screenshot`, {
         screenshotUrl: imageData
       });
       return response.data.data;
@@ -69,7 +69,7 @@ export const useAR = () => {
   const submitFeedback = useCallback(async (sessionId, feedback) => {
     setLoading(true);
     try {
-      const response = await axios.post(`/api/ar/${sessionId}/feedback`, feedback);
+      const response = await api.post(`/api/ar/${sessionId}/feedback`, feedback);
       setError(null);
       return response.data.data;
     } catch (err) {
@@ -83,7 +83,7 @@ export const useAR = () => {
   const getUserHistory = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await axios.get('/api/ar/user/history');
+      const response = await api.get('/api/ar/user/history');
       setError(null);
       return response.data.data;
     } catch (err) {
