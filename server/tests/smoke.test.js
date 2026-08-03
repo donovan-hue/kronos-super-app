@@ -1,10 +1,8 @@
 const request = require('supertest');
 const mongoose = require('mongoose');
-const { MongoMemoryServer } = require('mongodb-memory-server');
 
 let app;
 let authToken;
-let mongod;
 
 const createTestUser = () => {
   const suffix = `${Date.now()}_${Math.random().toString(36).slice(2)}`;
@@ -27,17 +25,17 @@ const waitForMongoConnection = async (timeoutMs = 10000) => {
 
 beforeAll(async () => {
   process.env.NODE_ENV = 'test';
-  process.env.JWT_SECRET = 'test_jwt_secret_kronos';
+  process.env.JWT_SECRET = process.env.JWT_SECRET || 'test_jwt_secret_kronos';
 
-  if (mongoose.connection.readyState !== 0) {
-    await mongoose.disconnect();
+  if (mongoose.connection.readyState !== 1 && process.env.MONGODB_URI) {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 10000,
+      socketTimeoutMS: 45000,
+    });
   }
 
-  mongod = await MongoMemoryServer.create();
-  process.env.MONGODB_URI = mongod.getUri();
   const serverModule = require('../server');
   app = serverModule.app;
-
   await waitForMongoConnection();
 }, 30000);
 
@@ -51,15 +49,6 @@ beforeEach(async () => {
   });
 
   authToken = res.body.token;
-});
-
-afterAll(async () => {
-  if (mongoose.connection.readyState !== 0) {
-    await mongoose.connection.close();
-  }
-  if (mongod) {
-    await mongod.stop();
-  }
 });
 
 afterAll(async () => {
@@ -121,7 +110,7 @@ describe('Protected endpoints — with token', () => {
     const res = await request(app)
       .get('/api/notifications')
       .set('Authorization', `Bearer ${authToken}`);
-    expect([200, 404]).toContain(res.statusCode); // 404 if route not registered yet
+    expect([200, 404]).toContain(res.statusCode);
   });
 });
 
